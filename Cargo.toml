@@ -1,12 +1,8 @@
 [package]
 name = "thanix_client"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Christopher Hock <christopher-hock@protonmail.com>"]
 edition = "2021"
-publish = true
-description = "A netbox API client used as reference for the Nazara project. Generated from the schema of https://demo.netbox.dev"
-readme = "README.md"
-license = "MIT"
 
 [lib]
 path = "src/lib.rs"
