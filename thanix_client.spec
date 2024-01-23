@@ -54,4 +54,3 @@ install -m 0755 %{_builddir}/%{name}-%{version}/target/release/%{bin_name} %{bui
 %{_bindir}/%{bin_name}
 %license LICENSE
 %doc README.md
-
