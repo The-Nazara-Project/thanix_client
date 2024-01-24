@@ -827,11 +827,12 @@ dependencies = [
 
 [[package]]
 name = "thanix_client"
-version = "0.3.0"
+version = "0.7.0"
 dependencies = [
  "chrono",
  "reqwest",
  "serde",
+ "serde_json",
  "serde_qs",
 ]
 
