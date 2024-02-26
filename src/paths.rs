@@ -3,7 +3,7 @@
 use crate::util::ThanixClient;
 use crate::types::*;
 use serde_qs;
-use reqwest::Error;
+use reqwest::{Error, blocking::Response};
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CircuitsCircuitTerminationsListQuery {
@@ -101,12 +101,10 @@ pub struct CircuitsCircuitTerminationsListQuery {
 	xconnect_id__nisw: Option<Vec<String>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitTerminationsListResponse {
 	Http200(PaginatedCircuitTerminationList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of circuit termination objects.
 pub fn circuits_circuit_terminations_list(state: &ThanixClient, query: CircuitsCircuitTerminationsListQuery) -> Result<CircuitsCircuitTerminationsListResponse, Error> {
@@ -115,15 +113,13 @@ pub fn circuits_circuit_terminations_list(state: &ThanixClient, query: CircuitsC
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsCircuitTerminationsListResponse::Http200(r#response.json::<PaginatedCircuitTerminationList>()?)) },
-		_ => { Ok(CircuitsCircuitTerminationsListResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitTerminationsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitTerminationsBulkUpdateResponse {
 	Http200(Vec<CircuitTermination>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of circuit termination objects.
 pub fn circuits_circuit_terminations_bulk_update(state: &ThanixClient, body: Vec<CircuitTerminationRequest>) -> Result<CircuitsCircuitTerminationsBulkUpdateResponse, Error> {
@@ -133,15 +129,13 @@ pub fn circuits_circuit_terminations_bulk_update(state: &ThanixClient, body: Vec
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsCircuitTerminationsBulkUpdateResponse::Http200(r#response.json::<Vec<CircuitTermination>>()?)) },
-		_ => { Ok(CircuitsCircuitTerminationsBulkUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitTerminationsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitTerminationsCreateResponse {
 	Http201(CircuitTermination),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of circuit termination objects.
 pub fn circuits_circuit_terminations_create(state: &ThanixClient, body: WritableCircuitTerminationRequest) -> Result<CircuitsCircuitTerminationsCreateResponse, Error> {
@@ -151,15 +145,13 @@ pub fn circuits_circuit_terminations_create(state: &ThanixClient, body: Writable
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(CircuitsCircuitTerminationsCreateResponse::Http201(r#response.json::<CircuitTermination>()?)) },
-		_ => { Ok(CircuitsCircuitTerminationsCreateResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitTerminationsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitTerminationsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of circuit termination objects.
 pub fn circuits_circuit_terminations_bulk_destroy(state: &ThanixClient, body: Vec<CircuitTerminationRequest>) -> Result<CircuitsCircuitTerminationsBulkDestroyResponse, Error> {
@@ -168,15 +160,13 @@ pub fn circuits_circuit_terminations_bulk_destroy(state: &ThanixClient, body: Ve
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(CircuitsCircuitTerminationsBulkDestroyResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitTerminationsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitTerminationsBulkPartialUpdateResponse {
 	Http200(Vec<CircuitTermination>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of circuit termination objects.
 pub fn circuits_circuit_terminations_bulk_partial_update(state: &ThanixClient, body: Vec<CircuitTerminationRequest>) -> Result<CircuitsCircuitTerminationsBulkPartialUpdateResponse, Error> {
@@ -186,15 +176,13 @@ pub fn circuits_circuit_terminations_bulk_partial_update(state: &ThanixClient, b
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsCircuitTerminationsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<CircuitTermination>>()?)) },
-		_ => { Ok(CircuitsCircuitTerminationsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitTerminationsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitTerminationsRetrieveResponse {
 	Http200(CircuitTermination),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a circuit termination object.
 pub fn circuits_circuit_terminations_retrieve(state: &ThanixClient, id: i64) -> Result<CircuitsCircuitTerminationsRetrieveResponse, Error> {
@@ -203,15 +191,13 @@ pub fn circuits_circuit_terminations_retrieve(state: &ThanixClient, id: i64) -> 
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsCircuitTerminationsRetrieveResponse::Http200(r#response.json::<CircuitTermination>()?)) },
-		_ => { Ok(CircuitsCircuitTerminationsRetrieveResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitTerminationsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitTerminationsUpdateResponse {
 	Http200(CircuitTermination),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a circuit termination object.
 pub fn circuits_circuit_terminations_update(state: &ThanixClient, body: WritableCircuitTerminationRequest, id: i64) -> Result<CircuitsCircuitTerminationsUpdateResponse, Error> {
@@ -221,15 +207,13 @@ pub fn circuits_circuit_terminations_update(state: &ThanixClient, body: Writable
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsCircuitTerminationsUpdateResponse::Http200(r#response.json::<CircuitTermination>()?)) },
-		_ => { Ok(CircuitsCircuitTerminationsUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitTerminationsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitTerminationsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a circuit termination object.
 pub fn circuits_circuit_terminations_destroy(state: &ThanixClient, id: i64) -> Result<CircuitsCircuitTerminationsDestroyResponse, Error> {
@@ -237,15 +221,13 @@ pub fn circuits_circuit_terminations_destroy(state: &ThanixClient, id: i64) -> R
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(CircuitsCircuitTerminationsDestroyResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitTerminationsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitTerminationsPartialUpdateResponse {
 	Http200(CircuitTermination),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a circuit termination object.
 pub fn circuits_circuit_terminations_partial_update(state: &ThanixClient, body: PatchedWritableCircuitTerminationRequest, id: i64) -> Result<CircuitsCircuitTerminationsPartialUpdateResponse, Error> {
@@ -255,15 +237,13 @@ pub fn circuits_circuit_terminations_partial_update(state: &ThanixClient, body: 
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsCircuitTerminationsPartialUpdateResponse::Http200(r#response.json::<CircuitTermination>()?)) },
-		_ => { Ok(CircuitsCircuitTerminationsPartialUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitTerminationsPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitTerminationsPathsRetrieveResponse {
 	Http200(CircuitTermination),
-	#[default]
-	None
+	Other(Response)
 }
 /// Return all CablePaths which traverse a given pass-through port.
 pub fn circuits_circuit_terminations_paths_retrieve(state: &ThanixClient, id: i64) -> Result<CircuitsCircuitTerminationsPathsRetrieveResponse, Error> {
@@ -272,7 +252,7 @@ pub fn circuits_circuit_terminations_paths_retrieve(state: &ThanixClient, id: i6
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsCircuitTerminationsPathsRetrieveResponse::Http200(r#response.json::<CircuitTermination>()?)) },
-		_ => { Ok(CircuitsCircuitTerminationsPathsRetrieveResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitTerminationsPathsRetrieveResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -357,12 +337,10 @@ pub struct CircuitsCircuitTypesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitTypesListResponse {
 	Http200(PaginatedCircuitTypeList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of circuit type objects.
 pub fn circuits_circuit_types_list(state: &ThanixClient, query: CircuitsCircuitTypesListQuery) -> Result<CircuitsCircuitTypesListResponse, Error> {
@@ -371,15 +349,13 @@ pub fn circuits_circuit_types_list(state: &ThanixClient, query: CircuitsCircuitT
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsCircuitTypesListResponse::Http200(r#response.json::<PaginatedCircuitTypeList>()?)) },
-		_ => { Ok(CircuitsCircuitTypesListResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitTypesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitTypesBulkUpdateResponse {
 	Http200(Vec<CircuitType>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of circuit type objects.
 pub fn circuits_circuit_types_bulk_update(state: &ThanixClient, body: Vec<CircuitTypeRequest>) -> Result<CircuitsCircuitTypesBulkUpdateResponse, Error> {
@@ -389,15 +365,13 @@ pub fn circuits_circuit_types_bulk_update(state: &ThanixClient, body: Vec<Circui
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsCircuitTypesBulkUpdateResponse::Http200(r#response.json::<Vec<CircuitType>>()?)) },
-		_ => { Ok(CircuitsCircuitTypesBulkUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitTypesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitTypesCreateResponse {
 	Http201(CircuitType),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of circuit type objects.
 pub fn circuits_circuit_types_create(state: &ThanixClient, body: CircuitTypeRequest) -> Result<CircuitsCircuitTypesCreateResponse, Error> {
@@ -407,15 +381,13 @@ pub fn circuits_circuit_types_create(state: &ThanixClient, body: CircuitTypeRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(CircuitsCircuitTypesCreateResponse::Http201(r#response.json::<CircuitType>()?)) },
-		_ => { Ok(CircuitsCircuitTypesCreateResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitTypesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitTypesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of circuit type objects.
 pub fn circuits_circuit_types_bulk_destroy(state: &ThanixClient, body: Vec<CircuitTypeRequest>) -> Result<CircuitsCircuitTypesBulkDestroyResponse, Error> {
@@ -424,15 +396,13 @@ pub fn circuits_circuit_types_bulk_destroy(state: &ThanixClient, body: Vec<Circu
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(CircuitsCircuitTypesBulkDestroyResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitTypesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitTypesBulkPartialUpdateResponse {
 	Http200(Vec<CircuitType>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of circuit type objects.
 pub fn circuits_circuit_types_bulk_partial_update(state: &ThanixClient, body: Vec<CircuitTypeRequest>) -> Result<CircuitsCircuitTypesBulkPartialUpdateResponse, Error> {
@@ -442,15 +412,13 @@ pub fn circuits_circuit_types_bulk_partial_update(state: &ThanixClient, body: Ve
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsCircuitTypesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<CircuitType>>()?)) },
-		_ => { Ok(CircuitsCircuitTypesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitTypesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitTypesRetrieveResponse {
 	Http200(CircuitType),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a circuit type object.
 pub fn circuits_circuit_types_retrieve(state: &ThanixClient, id: i64) -> Result<CircuitsCircuitTypesRetrieveResponse, Error> {
@@ -459,15 +427,13 @@ pub fn circuits_circuit_types_retrieve(state: &ThanixClient, id: i64) -> Result<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsCircuitTypesRetrieveResponse::Http200(r#response.json::<CircuitType>()?)) },
-		_ => { Ok(CircuitsCircuitTypesRetrieveResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitTypesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitTypesUpdateResponse {
 	Http200(CircuitType),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a circuit type object.
 pub fn circuits_circuit_types_update(state: &ThanixClient, body: CircuitTypeRequest, id: i64) -> Result<CircuitsCircuitTypesUpdateResponse, Error> {
@@ -477,15 +443,13 @@ pub fn circuits_circuit_types_update(state: &ThanixClient, body: CircuitTypeRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsCircuitTypesUpdateResponse::Http200(r#response.json::<CircuitType>()?)) },
-		_ => { Ok(CircuitsCircuitTypesUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitTypesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitTypesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a circuit type object.
 pub fn circuits_circuit_types_destroy(state: &ThanixClient, id: i64) -> Result<CircuitsCircuitTypesDestroyResponse, Error> {
@@ -493,15 +457,13 @@ pub fn circuits_circuit_types_destroy(state: &ThanixClient, id: i64) -> Result<C
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(CircuitsCircuitTypesDestroyResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitTypesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitTypesPartialUpdateResponse {
 	Http200(CircuitType),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a circuit type object.
 pub fn circuits_circuit_types_partial_update(state: &ThanixClient, body: PatchedCircuitTypeRequest, id: i64) -> Result<CircuitsCircuitTypesPartialUpdateResponse, Error> {
@@ -511,7 +473,7 @@ pub fn circuits_circuit_types_partial_update(state: &ThanixClient, body: Patched
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsCircuitTypesPartialUpdateResponse::Http200(r#response.json::<CircuitType>()?)) },
-		_ => { Ok(CircuitsCircuitTypesPartialUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitTypesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -673,12 +635,10 @@ pub struct CircuitsCircuitsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitsListResponse {
 	Http200(PaginatedCircuitList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of circuit objects.
 pub fn circuits_circuits_list(state: &ThanixClient, query: CircuitsCircuitsListQuery) -> Result<CircuitsCircuitsListResponse, Error> {
@@ -687,15 +647,13 @@ pub fn circuits_circuits_list(state: &ThanixClient, query: CircuitsCircuitsListQ
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsCircuitsListResponse::Http200(r#response.json::<PaginatedCircuitList>()?)) },
-		_ => { Ok(CircuitsCircuitsListResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitsBulkUpdateResponse {
 	Http200(Vec<Circuit>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of circuit objects.
 pub fn circuits_circuits_bulk_update(state: &ThanixClient, body: Vec<CircuitRequest>) -> Result<CircuitsCircuitsBulkUpdateResponse, Error> {
@@ -705,15 +663,13 @@ pub fn circuits_circuits_bulk_update(state: &ThanixClient, body: Vec<CircuitRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsCircuitsBulkUpdateResponse::Http200(r#response.json::<Vec<Circuit>>()?)) },
-		_ => { Ok(CircuitsCircuitsBulkUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitsCreateResponse {
 	Http201(Circuit),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of circuit objects.
 pub fn circuits_circuits_create(state: &ThanixClient, body: WritableCircuitRequest) -> Result<CircuitsCircuitsCreateResponse, Error> {
@@ -723,15 +679,13 @@ pub fn circuits_circuits_create(state: &ThanixClient, body: WritableCircuitReque
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(CircuitsCircuitsCreateResponse::Http201(r#response.json::<Circuit>()?)) },
-		_ => { Ok(CircuitsCircuitsCreateResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of circuit objects.
 pub fn circuits_circuits_bulk_destroy(state: &ThanixClient, body: Vec<CircuitRequest>) -> Result<CircuitsCircuitsBulkDestroyResponse, Error> {
@@ -740,15 +694,13 @@ pub fn circuits_circuits_bulk_destroy(state: &ThanixClient, body: Vec<CircuitReq
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(CircuitsCircuitsBulkDestroyResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitsBulkPartialUpdateResponse {
 	Http200(Vec<Circuit>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of circuit objects.
 pub fn circuits_circuits_bulk_partial_update(state: &ThanixClient, body: Vec<CircuitRequest>) -> Result<CircuitsCircuitsBulkPartialUpdateResponse, Error> {
@@ -758,15 +710,13 @@ pub fn circuits_circuits_bulk_partial_update(state: &ThanixClient, body: Vec<Cir
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsCircuitsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Circuit>>()?)) },
-		_ => { Ok(CircuitsCircuitsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitsRetrieveResponse {
 	Http200(Circuit),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a circuit object.
 pub fn circuits_circuits_retrieve(state: &ThanixClient, id: i64) -> Result<CircuitsCircuitsRetrieveResponse, Error> {
@@ -775,15 +725,13 @@ pub fn circuits_circuits_retrieve(state: &ThanixClient, id: i64) -> Result<Circu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsCircuitsRetrieveResponse::Http200(r#response.json::<Circuit>()?)) },
-		_ => { Ok(CircuitsCircuitsRetrieveResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitsUpdateResponse {
 	Http200(Circuit),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a circuit object.
 pub fn circuits_circuits_update(state: &ThanixClient, body: WritableCircuitRequest, id: i64) -> Result<CircuitsCircuitsUpdateResponse, Error> {
@@ -793,15 +741,13 @@ pub fn circuits_circuits_update(state: &ThanixClient, body: WritableCircuitReque
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsCircuitsUpdateResponse::Http200(r#response.json::<Circuit>()?)) },
-		_ => { Ok(CircuitsCircuitsUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a circuit object.
 pub fn circuits_circuits_destroy(state: &ThanixClient, id: i64) -> Result<CircuitsCircuitsDestroyResponse, Error> {
@@ -809,15 +755,13 @@ pub fn circuits_circuits_destroy(state: &ThanixClient, id: i64) -> Result<Circui
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(CircuitsCircuitsDestroyResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsCircuitsPartialUpdateResponse {
 	Http200(Circuit),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a circuit object.
 pub fn circuits_circuits_partial_update(state: &ThanixClient, body: PatchedWritableCircuitRequest, id: i64) -> Result<CircuitsCircuitsPartialUpdateResponse, Error> {
@@ -827,7 +771,7 @@ pub fn circuits_circuits_partial_update(state: &ThanixClient, body: PatchedWrita
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsCircuitsPartialUpdateResponse::Http200(r#response.json::<Circuit>()?)) },
-		_ => { Ok(CircuitsCircuitsPartialUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsCircuitsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -909,12 +853,10 @@ pub struct CircuitsProviderAccountsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProviderAccountsListResponse {
 	Http200(PaginatedProviderAccountList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of provider account objects.
 pub fn circuits_provider_accounts_list(state: &ThanixClient, query: CircuitsProviderAccountsListQuery) -> Result<CircuitsProviderAccountsListResponse, Error> {
@@ -923,15 +865,13 @@ pub fn circuits_provider_accounts_list(state: &ThanixClient, query: CircuitsProv
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsProviderAccountsListResponse::Http200(r#response.json::<PaginatedProviderAccountList>()?)) },
-		_ => { Ok(CircuitsProviderAccountsListResponse::None) }
+		r#other_status => { Ok(CircuitsProviderAccountsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProviderAccountsBulkUpdateResponse {
 	Http200(Vec<ProviderAccount>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of provider account objects.
 pub fn circuits_provider_accounts_bulk_update(state: &ThanixClient, body: Vec<ProviderAccountRequest>) -> Result<CircuitsProviderAccountsBulkUpdateResponse, Error> {
@@ -941,15 +881,13 @@ pub fn circuits_provider_accounts_bulk_update(state: &ThanixClient, body: Vec<Pr
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsProviderAccountsBulkUpdateResponse::Http200(r#response.json::<Vec<ProviderAccount>>()?)) },
-		_ => { Ok(CircuitsProviderAccountsBulkUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsProviderAccountsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProviderAccountsCreateResponse {
 	Http201(ProviderAccount),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of provider account objects.
 pub fn circuits_provider_accounts_create(state: &ThanixClient, body: WritableProviderAccountRequest) -> Result<CircuitsProviderAccountsCreateResponse, Error> {
@@ -959,15 +897,13 @@ pub fn circuits_provider_accounts_create(state: &ThanixClient, body: WritablePro
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(CircuitsProviderAccountsCreateResponse::Http201(r#response.json::<ProviderAccount>()?)) },
-		_ => { Ok(CircuitsProviderAccountsCreateResponse::None) }
+		r#other_status => { Ok(CircuitsProviderAccountsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProviderAccountsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of provider account objects.
 pub fn circuits_provider_accounts_bulk_destroy(state: &ThanixClient, body: Vec<ProviderAccountRequest>) -> Result<CircuitsProviderAccountsBulkDestroyResponse, Error> {
@@ -976,15 +912,13 @@ pub fn circuits_provider_accounts_bulk_destroy(state: &ThanixClient, body: Vec<P
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(CircuitsProviderAccountsBulkDestroyResponse::None) }
+		r#other_status => { Ok(CircuitsProviderAccountsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProviderAccountsBulkPartialUpdateResponse {
 	Http200(Vec<ProviderAccount>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of provider account objects.
 pub fn circuits_provider_accounts_bulk_partial_update(state: &ThanixClient, body: Vec<ProviderAccountRequest>) -> Result<CircuitsProviderAccountsBulkPartialUpdateResponse, Error> {
@@ -994,15 +928,13 @@ pub fn circuits_provider_accounts_bulk_partial_update(state: &ThanixClient, body
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsProviderAccountsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ProviderAccount>>()?)) },
-		_ => { Ok(CircuitsProviderAccountsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsProviderAccountsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProviderAccountsRetrieveResponse {
 	Http200(ProviderAccount),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a provider account object.
 pub fn circuits_provider_accounts_retrieve(state: &ThanixClient, id: i64) -> Result<CircuitsProviderAccountsRetrieveResponse, Error> {
@@ -1011,15 +943,13 @@ pub fn circuits_provider_accounts_retrieve(state: &ThanixClient, id: i64) -> Res
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsProviderAccountsRetrieveResponse::Http200(r#response.json::<ProviderAccount>()?)) },
-		_ => { Ok(CircuitsProviderAccountsRetrieveResponse::None) }
+		r#other_status => { Ok(CircuitsProviderAccountsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProviderAccountsUpdateResponse {
 	Http200(ProviderAccount),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a provider account object.
 pub fn circuits_provider_accounts_update(state: &ThanixClient, body: WritableProviderAccountRequest, id: i64) -> Result<CircuitsProviderAccountsUpdateResponse, Error> {
@@ -1029,15 +959,13 @@ pub fn circuits_provider_accounts_update(state: &ThanixClient, body: WritablePro
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsProviderAccountsUpdateResponse::Http200(r#response.json::<ProviderAccount>()?)) },
-		_ => { Ok(CircuitsProviderAccountsUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsProviderAccountsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProviderAccountsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a provider account object.
 pub fn circuits_provider_accounts_destroy(state: &ThanixClient, id: i64) -> Result<CircuitsProviderAccountsDestroyResponse, Error> {
@@ -1045,15 +973,13 @@ pub fn circuits_provider_accounts_destroy(state: &ThanixClient, id: i64) -> Resu
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(CircuitsProviderAccountsDestroyResponse::None) }
+		r#other_status => { Ok(CircuitsProviderAccountsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProviderAccountsPartialUpdateResponse {
 	Http200(ProviderAccount),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a provider account object.
 pub fn circuits_provider_accounts_partial_update(state: &ThanixClient, body: PatchedWritableProviderAccountRequest, id: i64) -> Result<CircuitsProviderAccountsPartialUpdateResponse, Error> {
@@ -1063,7 +989,7 @@ pub fn circuits_provider_accounts_partial_update(state: &ThanixClient, body: Pat
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsProviderAccountsPartialUpdateResponse::Http200(r#response.json::<ProviderAccount>()?)) },
-		_ => { Ok(CircuitsProviderAccountsPartialUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsProviderAccountsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -1145,12 +1071,10 @@ pub struct CircuitsProviderNetworksListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProviderNetworksListResponse {
 	Http200(PaginatedProviderNetworkList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of provider network objects.
 pub fn circuits_provider_networks_list(state: &ThanixClient, query: CircuitsProviderNetworksListQuery) -> Result<CircuitsProviderNetworksListResponse, Error> {
@@ -1159,15 +1083,13 @@ pub fn circuits_provider_networks_list(state: &ThanixClient, query: CircuitsProv
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsProviderNetworksListResponse::Http200(r#response.json::<PaginatedProviderNetworkList>()?)) },
-		_ => { Ok(CircuitsProviderNetworksListResponse::None) }
+		r#other_status => { Ok(CircuitsProviderNetworksListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProviderNetworksBulkUpdateResponse {
 	Http200(Vec<ProviderNetwork>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of provider network objects.
 pub fn circuits_provider_networks_bulk_update(state: &ThanixClient, body: Vec<ProviderNetworkRequest>) -> Result<CircuitsProviderNetworksBulkUpdateResponse, Error> {
@@ -1177,15 +1099,13 @@ pub fn circuits_provider_networks_bulk_update(state: &ThanixClient, body: Vec<Pr
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsProviderNetworksBulkUpdateResponse::Http200(r#response.json::<Vec<ProviderNetwork>>()?)) },
-		_ => { Ok(CircuitsProviderNetworksBulkUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsProviderNetworksBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProviderNetworksCreateResponse {
 	Http201(ProviderNetwork),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of provider network objects.
 pub fn circuits_provider_networks_create(state: &ThanixClient, body: WritableProviderNetworkRequest) -> Result<CircuitsProviderNetworksCreateResponse, Error> {
@@ -1195,15 +1115,13 @@ pub fn circuits_provider_networks_create(state: &ThanixClient, body: WritablePro
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(CircuitsProviderNetworksCreateResponse::Http201(r#response.json::<ProviderNetwork>()?)) },
-		_ => { Ok(CircuitsProviderNetworksCreateResponse::None) }
+		r#other_status => { Ok(CircuitsProviderNetworksCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProviderNetworksBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of provider network objects.
 pub fn circuits_provider_networks_bulk_destroy(state: &ThanixClient, body: Vec<ProviderNetworkRequest>) -> Result<CircuitsProviderNetworksBulkDestroyResponse, Error> {
@@ -1212,15 +1130,13 @@ pub fn circuits_provider_networks_bulk_destroy(state: &ThanixClient, body: Vec<P
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(CircuitsProviderNetworksBulkDestroyResponse::None) }
+		r#other_status => { Ok(CircuitsProviderNetworksBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProviderNetworksBulkPartialUpdateResponse {
 	Http200(Vec<ProviderNetwork>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of provider network objects.
 pub fn circuits_provider_networks_bulk_partial_update(state: &ThanixClient, body: Vec<ProviderNetworkRequest>) -> Result<CircuitsProviderNetworksBulkPartialUpdateResponse, Error> {
@@ -1230,15 +1146,13 @@ pub fn circuits_provider_networks_bulk_partial_update(state: &ThanixClient, body
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsProviderNetworksBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ProviderNetwork>>()?)) },
-		_ => { Ok(CircuitsProviderNetworksBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsProviderNetworksBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProviderNetworksRetrieveResponse {
 	Http200(ProviderNetwork),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a provider network object.
 pub fn circuits_provider_networks_retrieve(state: &ThanixClient, id: i64) -> Result<CircuitsProviderNetworksRetrieveResponse, Error> {
@@ -1247,15 +1161,13 @@ pub fn circuits_provider_networks_retrieve(state: &ThanixClient, id: i64) -> Res
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsProviderNetworksRetrieveResponse::Http200(r#response.json::<ProviderNetwork>()?)) },
-		_ => { Ok(CircuitsProviderNetworksRetrieveResponse::None) }
+		r#other_status => { Ok(CircuitsProviderNetworksRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProviderNetworksUpdateResponse {
 	Http200(ProviderNetwork),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a provider network object.
 pub fn circuits_provider_networks_update(state: &ThanixClient, body: WritableProviderNetworkRequest, id: i64) -> Result<CircuitsProviderNetworksUpdateResponse, Error> {
@@ -1265,15 +1177,13 @@ pub fn circuits_provider_networks_update(state: &ThanixClient, body: WritablePro
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsProviderNetworksUpdateResponse::Http200(r#response.json::<ProviderNetwork>()?)) },
-		_ => { Ok(CircuitsProviderNetworksUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsProviderNetworksUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProviderNetworksDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a provider network object.
 pub fn circuits_provider_networks_destroy(state: &ThanixClient, id: i64) -> Result<CircuitsProviderNetworksDestroyResponse, Error> {
@@ -1281,15 +1191,13 @@ pub fn circuits_provider_networks_destroy(state: &ThanixClient, id: i64) -> Resu
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(CircuitsProviderNetworksDestroyResponse::None) }
+		r#other_status => { Ok(CircuitsProviderNetworksDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProviderNetworksPartialUpdateResponse {
 	Http200(ProviderNetwork),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a provider network object.
 pub fn circuits_provider_networks_partial_update(state: &ThanixClient, body: PatchedWritableProviderNetworkRequest, id: i64) -> Result<CircuitsProviderNetworksPartialUpdateResponse, Error> {
@@ -1299,7 +1207,7 @@ pub fn circuits_provider_networks_partial_update(state: &ThanixClient, body: Pat
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsProviderNetworksPartialUpdateResponse::Http200(r#response.json::<ProviderNetwork>()?)) },
-		_ => { Ok(CircuitsProviderNetworksPartialUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsProviderNetworksPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -1413,12 +1321,10 @@ pub struct CircuitsProvidersListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProvidersListResponse {
 	Http200(PaginatedProviderList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of provider objects.
 pub fn circuits_providers_list(state: &ThanixClient, query: CircuitsProvidersListQuery) -> Result<CircuitsProvidersListResponse, Error> {
@@ -1427,15 +1333,13 @@ pub fn circuits_providers_list(state: &ThanixClient, query: CircuitsProvidersLis
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsProvidersListResponse::Http200(r#response.json::<PaginatedProviderList>()?)) },
-		_ => { Ok(CircuitsProvidersListResponse::None) }
+		r#other_status => { Ok(CircuitsProvidersListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProvidersBulkUpdateResponse {
 	Http200(Vec<Provider>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of provider objects.
 pub fn circuits_providers_bulk_update(state: &ThanixClient, body: Vec<ProviderRequest>) -> Result<CircuitsProvidersBulkUpdateResponse, Error> {
@@ -1445,15 +1349,13 @@ pub fn circuits_providers_bulk_update(state: &ThanixClient, body: Vec<ProviderRe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsProvidersBulkUpdateResponse::Http200(r#response.json::<Vec<Provider>>()?)) },
-		_ => { Ok(CircuitsProvidersBulkUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsProvidersBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProvidersCreateResponse {
 	Http201(Provider),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of provider objects.
 pub fn circuits_providers_create(state: &ThanixClient, body: WritableProviderRequest) -> Result<CircuitsProvidersCreateResponse, Error> {
@@ -1463,15 +1365,13 @@ pub fn circuits_providers_create(state: &ThanixClient, body: WritableProviderReq
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(CircuitsProvidersCreateResponse::Http201(r#response.json::<Provider>()?)) },
-		_ => { Ok(CircuitsProvidersCreateResponse::None) }
+		r#other_status => { Ok(CircuitsProvidersCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProvidersBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of provider objects.
 pub fn circuits_providers_bulk_destroy(state: &ThanixClient, body: Vec<ProviderRequest>) -> Result<CircuitsProvidersBulkDestroyResponse, Error> {
@@ -1480,15 +1380,13 @@ pub fn circuits_providers_bulk_destroy(state: &ThanixClient, body: Vec<ProviderR
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(CircuitsProvidersBulkDestroyResponse::None) }
+		r#other_status => { Ok(CircuitsProvidersBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProvidersBulkPartialUpdateResponse {
 	Http200(Vec<Provider>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of provider objects.
 pub fn circuits_providers_bulk_partial_update(state: &ThanixClient, body: Vec<ProviderRequest>) -> Result<CircuitsProvidersBulkPartialUpdateResponse, Error> {
@@ -1498,15 +1396,13 @@ pub fn circuits_providers_bulk_partial_update(state: &ThanixClient, body: Vec<Pr
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsProvidersBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Provider>>()?)) },
-		_ => { Ok(CircuitsProvidersBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsProvidersBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProvidersRetrieveResponse {
 	Http200(Provider),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a provider object.
 pub fn circuits_providers_retrieve(state: &ThanixClient, id: i64) -> Result<CircuitsProvidersRetrieveResponse, Error> {
@@ -1515,15 +1411,13 @@ pub fn circuits_providers_retrieve(state: &ThanixClient, id: i64) -> Result<Circ
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsProvidersRetrieveResponse::Http200(r#response.json::<Provider>()?)) },
-		_ => { Ok(CircuitsProvidersRetrieveResponse::None) }
+		r#other_status => { Ok(CircuitsProvidersRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProvidersUpdateResponse {
 	Http200(Provider),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a provider object.
 pub fn circuits_providers_update(state: &ThanixClient, body: WritableProviderRequest, id: i64) -> Result<CircuitsProvidersUpdateResponse, Error> {
@@ -1533,15 +1427,13 @@ pub fn circuits_providers_update(state: &ThanixClient, body: WritableProviderReq
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsProvidersUpdateResponse::Http200(r#response.json::<Provider>()?)) },
-		_ => { Ok(CircuitsProvidersUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsProvidersUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProvidersDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a provider object.
 pub fn circuits_providers_destroy(state: &ThanixClient, id: i64) -> Result<CircuitsProvidersDestroyResponse, Error> {
@@ -1549,15 +1441,13 @@ pub fn circuits_providers_destroy(state: &ThanixClient, id: i64) -> Result<Circu
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(CircuitsProvidersDestroyResponse::None) }
+		r#other_status => { Ok(CircuitsProvidersDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CircuitsProvidersPartialUpdateResponse {
 	Http200(Provider),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a provider object.
 pub fn circuits_providers_partial_update(state: &ThanixClient, body: PatchedWritableProviderRequest, id: i64) -> Result<CircuitsProvidersPartialUpdateResponse, Error> {
@@ -1567,7 +1457,7 @@ pub fn circuits_providers_partial_update(state: &ThanixClient, body: PatchedWrit
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CircuitsProvidersPartialUpdateResponse::Http200(r#response.json::<Provider>()?)) },
-		_ => { Ok(CircuitsProvidersPartialUpdateResponse::None) }
+		r#other_status => { Ok(CircuitsProvidersPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -1642,12 +1532,10 @@ pub struct CoreDataFilesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CoreDataFilesListResponse {
 	Http200(PaginatedDataFileList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of data file objects.
 pub fn core_data_files_list(state: &ThanixClient, query: CoreDataFilesListQuery) -> Result<CoreDataFilesListResponse, Error> {
@@ -1656,15 +1544,13 @@ pub fn core_data_files_list(state: &ThanixClient, query: CoreDataFilesListQuery)
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CoreDataFilesListResponse::Http200(r#response.json::<PaginatedDataFileList>()?)) },
-		_ => { Ok(CoreDataFilesListResponse::None) }
+		r#other_status => { Ok(CoreDataFilesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CoreDataFilesRetrieveResponse {
 	Http200(DataFile),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a data file object.
 pub fn core_data_files_retrieve(state: &ThanixClient, id: i64) -> Result<CoreDataFilesRetrieveResponse, Error> {
@@ -1673,7 +1559,7 @@ pub fn core_data_files_retrieve(state: &ThanixClient, id: i64) -> Result<CoreDat
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CoreDataFilesRetrieveResponse::Http200(r#response.json::<DataFile>()?)) },
-		_ => { Ok(CoreDataFilesRetrieveResponse::None) }
+		r#other_status => { Ok(CoreDataFilesRetrieveResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -1741,12 +1627,10 @@ pub struct CoreDataSourcesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CoreDataSourcesListResponse {
 	Http200(PaginatedDataSourceList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of data source objects.
 pub fn core_data_sources_list(state: &ThanixClient, query: CoreDataSourcesListQuery) -> Result<CoreDataSourcesListResponse, Error> {
@@ -1755,15 +1639,13 @@ pub fn core_data_sources_list(state: &ThanixClient, query: CoreDataSourcesListQu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CoreDataSourcesListResponse::Http200(r#response.json::<PaginatedDataSourceList>()?)) },
-		_ => { Ok(CoreDataSourcesListResponse::None) }
+		r#other_status => { Ok(CoreDataSourcesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CoreDataSourcesBulkUpdateResponse {
 	Http200(Vec<DataSource>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of data source objects.
 pub fn core_data_sources_bulk_update(state: &ThanixClient, body: Vec<DataSourceRequest>) -> Result<CoreDataSourcesBulkUpdateResponse, Error> {
@@ -1773,15 +1655,13 @@ pub fn core_data_sources_bulk_update(state: &ThanixClient, body: Vec<DataSourceR
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CoreDataSourcesBulkUpdateResponse::Http200(r#response.json::<Vec<DataSource>>()?)) },
-		_ => { Ok(CoreDataSourcesBulkUpdateResponse::None) }
+		r#other_status => { Ok(CoreDataSourcesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CoreDataSourcesCreateResponse {
 	Http201(DataSource),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of data source objects.
 pub fn core_data_sources_create(state: &ThanixClient, body: WritableDataSourceRequest) -> Result<CoreDataSourcesCreateResponse, Error> {
@@ -1791,15 +1671,13 @@ pub fn core_data_sources_create(state: &ThanixClient, body: WritableDataSourceRe
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(CoreDataSourcesCreateResponse::Http201(r#response.json::<DataSource>()?)) },
-		_ => { Ok(CoreDataSourcesCreateResponse::None) }
+		r#other_status => { Ok(CoreDataSourcesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CoreDataSourcesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of data source objects.
 pub fn core_data_sources_bulk_destroy(state: &ThanixClient, body: Vec<DataSourceRequest>) -> Result<CoreDataSourcesBulkDestroyResponse, Error> {
@@ -1808,15 +1686,13 @@ pub fn core_data_sources_bulk_destroy(state: &ThanixClient, body: Vec<DataSource
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(CoreDataSourcesBulkDestroyResponse::None) }
+		r#other_status => { Ok(CoreDataSourcesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CoreDataSourcesBulkPartialUpdateResponse {
 	Http200(Vec<DataSource>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of data source objects.
 pub fn core_data_sources_bulk_partial_update(state: &ThanixClient, body: Vec<DataSourceRequest>) -> Result<CoreDataSourcesBulkPartialUpdateResponse, Error> {
@@ -1826,15 +1702,13 @@ pub fn core_data_sources_bulk_partial_update(state: &ThanixClient, body: Vec<Dat
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CoreDataSourcesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<DataSource>>()?)) },
-		_ => { Ok(CoreDataSourcesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(CoreDataSourcesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CoreDataSourcesRetrieveResponse {
 	Http200(DataSource),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a data source object.
 pub fn core_data_sources_retrieve(state: &ThanixClient, id: i64) -> Result<CoreDataSourcesRetrieveResponse, Error> {
@@ -1843,15 +1717,13 @@ pub fn core_data_sources_retrieve(state: &ThanixClient, id: i64) -> Result<CoreD
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CoreDataSourcesRetrieveResponse::Http200(r#response.json::<DataSource>()?)) },
-		_ => { Ok(CoreDataSourcesRetrieveResponse::None) }
+		r#other_status => { Ok(CoreDataSourcesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CoreDataSourcesUpdateResponse {
 	Http200(DataSource),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a data source object.
 pub fn core_data_sources_update(state: &ThanixClient, body: WritableDataSourceRequest, id: i64) -> Result<CoreDataSourcesUpdateResponse, Error> {
@@ -1861,15 +1733,13 @@ pub fn core_data_sources_update(state: &ThanixClient, body: WritableDataSourceRe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CoreDataSourcesUpdateResponse::Http200(r#response.json::<DataSource>()?)) },
-		_ => { Ok(CoreDataSourcesUpdateResponse::None) }
+		r#other_status => { Ok(CoreDataSourcesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CoreDataSourcesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a data source object.
 pub fn core_data_sources_destroy(state: &ThanixClient, id: i64) -> Result<CoreDataSourcesDestroyResponse, Error> {
@@ -1877,15 +1747,13 @@ pub fn core_data_sources_destroy(state: &ThanixClient, id: i64) -> Result<CoreDa
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(CoreDataSourcesDestroyResponse::None) }
+		r#other_status => { Ok(CoreDataSourcesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CoreDataSourcesPartialUpdateResponse {
 	Http200(DataSource),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a data source object.
 pub fn core_data_sources_partial_update(state: &ThanixClient, body: PatchedWritableDataSourceRequest, id: i64) -> Result<CoreDataSourcesPartialUpdateResponse, Error> {
@@ -1895,15 +1763,13 @@ pub fn core_data_sources_partial_update(state: &ThanixClient, body: PatchedWrita
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CoreDataSourcesPartialUpdateResponse::Http200(r#response.json::<DataSource>()?)) },
-		_ => { Ok(CoreDataSourcesPartialUpdateResponse::None) }
+		r#other_status => { Ok(CoreDataSourcesPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CoreDataSourcesSyncCreateResponse {
 	Http200(DataSource),
-	#[default]
-	None
+	Other(Response)
 }
 /// Enqueue a job to synchronize the DataSource.
 pub fn core_data_sources_sync_create(state: &ThanixClient, body: WritableDataSourceRequest, id: i64) -> Result<CoreDataSourcesSyncCreateResponse, Error> {
@@ -1913,7 +1779,7 @@ pub fn core_data_sources_sync_create(state: &ThanixClient, body: WritableDataSou
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CoreDataSourcesSyncCreateResponse::Http200(r#response.json::<DataSource>()?)) },
-		_ => { Ok(CoreDataSourcesSyncCreateResponse::None) }
+		r#other_status => { Ok(CoreDataSourcesSyncCreateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -1978,12 +1844,10 @@ pub struct CoreJobsListQuery {
 	user__n: Option<i64>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CoreJobsListResponse {
 	Http200(PaginatedJobList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Retrieve a list of job results
 pub fn core_jobs_list(state: &ThanixClient, query: CoreJobsListQuery) -> Result<CoreJobsListResponse, Error> {
@@ -1992,15 +1856,13 @@ pub fn core_jobs_list(state: &ThanixClient, query: CoreJobsListQuery) -> Result<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CoreJobsListResponse::Http200(r#response.json::<PaginatedJobList>()?)) },
-		_ => { Ok(CoreJobsListResponse::None) }
+		r#other_status => { Ok(CoreJobsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum CoreJobsRetrieveResponse {
 	Http200(Job),
-	#[default]
-	None
+	Other(Response)
 }
 /// Retrieve a list of job results
 pub fn core_jobs_retrieve(state: &ThanixClient, id: i64) -> Result<CoreJobsRetrieveResponse, Error> {
@@ -2009,7 +1871,7 @@ pub fn core_jobs_retrieve(state: &ThanixClient, id: i64) -> Result<CoreJobsRetri
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(CoreJobsRetrieveResponse::Http200(r#response.json::<Job>()?)) },
-		_ => { Ok(CoreJobsRetrieveResponse::None) }
+		r#other_status => { Ok(CoreJobsRetrieveResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -2042,12 +1904,10 @@ pub struct DcimCableTerminationsListQuery {
 	termination_type__n: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimCableTerminationsListResponse {
 	Http200(PaginatedCableTerminationList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of cable termination objects.
 pub fn dcim_cable_terminations_list(state: &ThanixClient, query: DcimCableTerminationsListQuery) -> Result<DcimCableTerminationsListResponse, Error> {
@@ -2056,15 +1916,13 @@ pub fn dcim_cable_terminations_list(state: &ThanixClient, query: DcimCableTermin
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimCableTerminationsListResponse::Http200(r#response.json::<PaginatedCableTerminationList>()?)) },
-		_ => { Ok(DcimCableTerminationsListResponse::None) }
+		r#other_status => { Ok(DcimCableTerminationsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimCableTerminationsBulkUpdateResponse {
 	Http200(Vec<CableTermination>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of cable termination objects.
 pub fn dcim_cable_terminations_bulk_update(state: &ThanixClient, body: Vec<CableTerminationRequest>) -> Result<DcimCableTerminationsBulkUpdateResponse, Error> {
@@ -2074,15 +1932,13 @@ pub fn dcim_cable_terminations_bulk_update(state: &ThanixClient, body: Vec<Cable
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimCableTerminationsBulkUpdateResponse::Http200(r#response.json::<Vec<CableTermination>>()?)) },
-		_ => { Ok(DcimCableTerminationsBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimCableTerminationsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimCableTerminationsCreateResponse {
 	Http201(CableTermination),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of cable termination objects.
 pub fn dcim_cable_terminations_create(state: &ThanixClient, body: CableTerminationRequest) -> Result<DcimCableTerminationsCreateResponse, Error> {
@@ -2092,15 +1948,13 @@ pub fn dcim_cable_terminations_create(state: &ThanixClient, body: CableTerminati
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimCableTerminationsCreateResponse::Http201(r#response.json::<CableTermination>()?)) },
-		_ => { Ok(DcimCableTerminationsCreateResponse::None) }
+		r#other_status => { Ok(DcimCableTerminationsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimCableTerminationsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of cable termination objects.
 pub fn dcim_cable_terminations_bulk_destroy(state: &ThanixClient, body: Vec<CableTerminationRequest>) -> Result<DcimCableTerminationsBulkDestroyResponse, Error> {
@@ -2109,15 +1963,13 @@ pub fn dcim_cable_terminations_bulk_destroy(state: &ThanixClient, body: Vec<Cabl
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimCableTerminationsBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimCableTerminationsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimCableTerminationsBulkPartialUpdateResponse {
 	Http200(Vec<CableTermination>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of cable termination objects.
 pub fn dcim_cable_terminations_bulk_partial_update(state: &ThanixClient, body: Vec<CableTerminationRequest>) -> Result<DcimCableTerminationsBulkPartialUpdateResponse, Error> {
@@ -2127,15 +1979,13 @@ pub fn dcim_cable_terminations_bulk_partial_update(state: &ThanixClient, body: V
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimCableTerminationsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<CableTermination>>()?)) },
-		_ => { Ok(DcimCableTerminationsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimCableTerminationsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimCableTerminationsRetrieveResponse {
 	Http200(CableTermination),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a cable termination object.
 pub fn dcim_cable_terminations_retrieve(state: &ThanixClient, id: i64) -> Result<DcimCableTerminationsRetrieveResponse, Error> {
@@ -2144,15 +1994,13 @@ pub fn dcim_cable_terminations_retrieve(state: &ThanixClient, id: i64) -> Result
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimCableTerminationsRetrieveResponse::Http200(r#response.json::<CableTermination>()?)) },
-		_ => { Ok(DcimCableTerminationsRetrieveResponse::None) }
+		r#other_status => { Ok(DcimCableTerminationsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimCableTerminationsUpdateResponse {
 	Http200(CableTermination),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a cable termination object.
 pub fn dcim_cable_terminations_update(state: &ThanixClient, body: CableTerminationRequest, id: i64) -> Result<DcimCableTerminationsUpdateResponse, Error> {
@@ -2162,15 +2010,13 @@ pub fn dcim_cable_terminations_update(state: &ThanixClient, body: CableTerminati
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimCableTerminationsUpdateResponse::Http200(r#response.json::<CableTermination>()?)) },
-		_ => { Ok(DcimCableTerminationsUpdateResponse::None) }
+		r#other_status => { Ok(DcimCableTerminationsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimCableTerminationsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a cable termination object.
 pub fn dcim_cable_terminations_destroy(state: &ThanixClient, id: i64) -> Result<DcimCableTerminationsDestroyResponse, Error> {
@@ -2178,15 +2024,13 @@ pub fn dcim_cable_terminations_destroy(state: &ThanixClient, id: i64) -> Result<
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimCableTerminationsDestroyResponse::None) }
+		r#other_status => { Ok(DcimCableTerminationsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimCableTerminationsPartialUpdateResponse {
 	Http200(CableTermination),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a cable termination object.
 pub fn dcim_cable_terminations_partial_update(state: &ThanixClient, body: PatchedCableTerminationRequest, id: i64) -> Result<DcimCableTerminationsPartialUpdateResponse, Error> {
@@ -2196,7 +2040,7 @@ pub fn dcim_cable_terminations_partial_update(state: &ThanixClient, body: Patche
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimCableTerminationsPartialUpdateResponse::Http200(r#response.json::<CableTermination>()?)) },
-		_ => { Ok(DcimCableTerminationsPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimCableTerminationsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -2315,12 +2159,10 @@ pub struct DcimCablesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimCablesListResponse {
 	Http200(PaginatedCableList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of cable objects.
 pub fn dcim_cables_list(state: &ThanixClient, query: DcimCablesListQuery) -> Result<DcimCablesListResponse, Error> {
@@ -2329,15 +2171,13 @@ pub fn dcim_cables_list(state: &ThanixClient, query: DcimCablesListQuery) -> Res
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimCablesListResponse::Http200(r#response.json::<PaginatedCableList>()?)) },
-		_ => { Ok(DcimCablesListResponse::None) }
+		r#other_status => { Ok(DcimCablesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimCablesBulkUpdateResponse {
 	Http200(Vec<Cable>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of cable objects.
 pub fn dcim_cables_bulk_update(state: &ThanixClient, body: Vec<CableRequest>) -> Result<DcimCablesBulkUpdateResponse, Error> {
@@ -2347,15 +2187,13 @@ pub fn dcim_cables_bulk_update(state: &ThanixClient, body: Vec<CableRequest>) ->
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimCablesBulkUpdateResponse::Http200(r#response.json::<Vec<Cable>>()?)) },
-		_ => { Ok(DcimCablesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimCablesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimCablesCreateResponse {
 	Http201(Cable),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of cable objects.
 pub fn dcim_cables_create(state: &ThanixClient, body: WritableCableRequest) -> Result<DcimCablesCreateResponse, Error> {
@@ -2365,15 +2203,13 @@ pub fn dcim_cables_create(state: &ThanixClient, body: WritableCableRequest) -> R
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimCablesCreateResponse::Http201(r#response.json::<Cable>()?)) },
-		_ => { Ok(DcimCablesCreateResponse::None) }
+		r#other_status => { Ok(DcimCablesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimCablesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of cable objects.
 pub fn dcim_cables_bulk_destroy(state: &ThanixClient, body: Vec<CableRequest>) -> Result<DcimCablesBulkDestroyResponse, Error> {
@@ -2382,15 +2218,13 @@ pub fn dcim_cables_bulk_destroy(state: &ThanixClient, body: Vec<CableRequest>) -
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimCablesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimCablesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimCablesBulkPartialUpdateResponse {
 	Http200(Vec<Cable>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of cable objects.
 pub fn dcim_cables_bulk_partial_update(state: &ThanixClient, body: Vec<CableRequest>) -> Result<DcimCablesBulkPartialUpdateResponse, Error> {
@@ -2400,15 +2234,13 @@ pub fn dcim_cables_bulk_partial_update(state: &ThanixClient, body: Vec<CableRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimCablesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Cable>>()?)) },
-		_ => { Ok(DcimCablesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimCablesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimCablesRetrieveResponse {
 	Http200(Cable),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a cable object.
 pub fn dcim_cables_retrieve(state: &ThanixClient, id: i64) -> Result<DcimCablesRetrieveResponse, Error> {
@@ -2417,15 +2249,13 @@ pub fn dcim_cables_retrieve(state: &ThanixClient, id: i64) -> Result<DcimCablesR
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimCablesRetrieveResponse::Http200(r#response.json::<Cable>()?)) },
-		_ => { Ok(DcimCablesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimCablesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimCablesUpdateResponse {
 	Http200(Cable),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a cable object.
 pub fn dcim_cables_update(state: &ThanixClient, body: WritableCableRequest, id: i64) -> Result<DcimCablesUpdateResponse, Error> {
@@ -2435,15 +2265,13 @@ pub fn dcim_cables_update(state: &ThanixClient, body: WritableCableRequest, id: 
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimCablesUpdateResponse::Http200(r#response.json::<Cable>()?)) },
-		_ => { Ok(DcimCablesUpdateResponse::None) }
+		r#other_status => { Ok(DcimCablesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimCablesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a cable object.
 pub fn dcim_cables_destroy(state: &ThanixClient, id: i64) -> Result<DcimCablesDestroyResponse, Error> {
@@ -2451,15 +2279,13 @@ pub fn dcim_cables_destroy(state: &ThanixClient, id: i64) -> Result<DcimCablesDe
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimCablesDestroyResponse::None) }
+		r#other_status => { Ok(DcimCablesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimCablesPartialUpdateResponse {
 	Http200(Cable),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a cable object.
 pub fn dcim_cables_partial_update(state: &ThanixClient, body: PatchedWritableCableRequest, id: i64) -> Result<DcimCablesPartialUpdateResponse, Error> {
@@ -2469,7 +2295,7 @@ pub fn dcim_cables_partial_update(state: &ThanixClient, body: PatchedWritableCab
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimCablesPartialUpdateResponse::Http200(r#response.json::<Cable>()?)) },
-		_ => { Ok(DcimCablesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimCablesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -2480,12 +2306,10 @@ pub struct DcimConnectedDeviceListQuery {
 	peer_interface: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConnectedDeviceListResponse {
 	Http200(Vec<Device>),
-	#[default]
-	None
+	Other(Response)
 }
 /// This endpoint allows a user to determine what device (if any) is connected to a given peer device and peer
 /// interface. This is useful in a situation where a device boots with no configuration, but can detect its neighbors
@@ -2499,7 +2323,7 @@ pub fn dcim_connected_device_list(state: &ThanixClient, query: DcimConnectedDevi
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConnectedDeviceListResponse::Http200(r#response.json::<Vec<Device>>()?)) },
-		_ => { Ok(DcimConnectedDeviceListResponse::None) }
+		r#other_status => { Ok(DcimConnectedDeviceListResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -2570,12 +2394,10 @@ pub struct DcimConsolePortTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsolePortTemplatesListResponse {
 	Http200(PaginatedConsolePortTemplateList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of console port template objects.
 pub fn dcim_console_port_templates_list(state: &ThanixClient, query: DcimConsolePortTemplatesListQuery) -> Result<DcimConsolePortTemplatesListResponse, Error> {
@@ -2584,15 +2406,13 @@ pub fn dcim_console_port_templates_list(state: &ThanixClient, query: DcimConsole
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsolePortTemplatesListResponse::Http200(r#response.json::<PaginatedConsolePortTemplateList>()?)) },
-		_ => { Ok(DcimConsolePortTemplatesListResponse::None) }
+		r#other_status => { Ok(DcimConsolePortTemplatesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsolePortTemplatesBulkUpdateResponse {
 	Http200(Vec<ConsolePortTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of console port template objects.
 pub fn dcim_console_port_templates_bulk_update(state: &ThanixClient, body: Vec<ConsolePortTemplateRequest>) -> Result<DcimConsolePortTemplatesBulkUpdateResponse, Error> {
@@ -2602,15 +2422,13 @@ pub fn dcim_console_port_templates_bulk_update(state: &ThanixClient, body: Vec<C
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsolePortTemplatesBulkUpdateResponse::Http200(r#response.json::<Vec<ConsolePortTemplate>>()?)) },
-		_ => { Ok(DcimConsolePortTemplatesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimConsolePortTemplatesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsolePortTemplatesCreateResponse {
 	Http201(ConsolePortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of console port template objects.
 pub fn dcim_console_port_templates_create(state: &ThanixClient, body: WritableConsolePortTemplateRequest) -> Result<DcimConsolePortTemplatesCreateResponse, Error> {
@@ -2620,15 +2438,13 @@ pub fn dcim_console_port_templates_create(state: &ThanixClient, body: WritableCo
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimConsolePortTemplatesCreateResponse::Http201(r#response.json::<ConsolePortTemplate>()?)) },
-		_ => { Ok(DcimConsolePortTemplatesCreateResponse::None) }
+		r#other_status => { Ok(DcimConsolePortTemplatesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsolePortTemplatesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of console port template objects.
 pub fn dcim_console_port_templates_bulk_destroy(state: &ThanixClient, body: Vec<ConsolePortTemplateRequest>) -> Result<DcimConsolePortTemplatesBulkDestroyResponse, Error> {
@@ -2637,15 +2453,13 @@ pub fn dcim_console_port_templates_bulk_destroy(state: &ThanixClient, body: Vec<
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimConsolePortTemplatesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimConsolePortTemplatesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsolePortTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<ConsolePortTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of console port template objects.
 pub fn dcim_console_port_templates_bulk_partial_update(state: &ThanixClient, body: Vec<ConsolePortTemplateRequest>) -> Result<DcimConsolePortTemplatesBulkPartialUpdateResponse, Error> {
@@ -2655,15 +2469,13 @@ pub fn dcim_console_port_templates_bulk_partial_update(state: &ThanixClient, bod
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsolePortTemplatesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ConsolePortTemplate>>()?)) },
-		_ => { Ok(DcimConsolePortTemplatesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimConsolePortTemplatesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsolePortTemplatesRetrieveResponse {
 	Http200(ConsolePortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a console port template object.
 pub fn dcim_console_port_templates_retrieve(state: &ThanixClient, id: i64) -> Result<DcimConsolePortTemplatesRetrieveResponse, Error> {
@@ -2672,15 +2484,13 @@ pub fn dcim_console_port_templates_retrieve(state: &ThanixClient, id: i64) -> Re
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsolePortTemplatesRetrieveResponse::Http200(r#response.json::<ConsolePortTemplate>()?)) },
-		_ => { Ok(DcimConsolePortTemplatesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimConsolePortTemplatesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsolePortTemplatesUpdateResponse {
 	Http200(ConsolePortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a console port template object.
 pub fn dcim_console_port_templates_update(state: &ThanixClient, body: WritableConsolePortTemplateRequest, id: i64) -> Result<DcimConsolePortTemplatesUpdateResponse, Error> {
@@ -2690,15 +2500,13 @@ pub fn dcim_console_port_templates_update(state: &ThanixClient, body: WritableCo
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsolePortTemplatesUpdateResponse::Http200(r#response.json::<ConsolePortTemplate>()?)) },
-		_ => { Ok(DcimConsolePortTemplatesUpdateResponse::None) }
+		r#other_status => { Ok(DcimConsolePortTemplatesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsolePortTemplatesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a console port template object.
 pub fn dcim_console_port_templates_destroy(state: &ThanixClient, id: i64) -> Result<DcimConsolePortTemplatesDestroyResponse, Error> {
@@ -2706,15 +2514,13 @@ pub fn dcim_console_port_templates_destroy(state: &ThanixClient, id: i64) -> Res
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimConsolePortTemplatesDestroyResponse::None) }
+		r#other_status => { Ok(DcimConsolePortTemplatesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsolePortTemplatesPartialUpdateResponse {
 	Http200(ConsolePortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a console port template object.
 pub fn dcim_console_port_templates_partial_update(state: &ThanixClient, body: PatchedWritableConsolePortTemplateRequest, id: i64) -> Result<DcimConsolePortTemplatesPartialUpdateResponse, Error> {
@@ -2724,7 +2530,7 @@ pub fn dcim_console_port_templates_partial_update(state: &ThanixClient, body: Pa
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsolePortTemplatesPartialUpdateResponse::Http200(r#response.json::<ConsolePortTemplate>()?)) },
-		_ => { Ok(DcimConsolePortTemplatesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimConsolePortTemplatesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -2891,12 +2697,10 @@ pub struct DcimConsolePortsListQuery {
 	virtual_chassis_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsolePortsListResponse {
 	Http200(PaginatedConsolePortList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of console port objects.
 pub fn dcim_console_ports_list(state: &ThanixClient, query: DcimConsolePortsListQuery) -> Result<DcimConsolePortsListResponse, Error> {
@@ -2905,15 +2709,13 @@ pub fn dcim_console_ports_list(state: &ThanixClient, query: DcimConsolePortsList
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsolePortsListResponse::Http200(r#response.json::<PaginatedConsolePortList>()?)) },
-		_ => { Ok(DcimConsolePortsListResponse::None) }
+		r#other_status => { Ok(DcimConsolePortsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsolePortsBulkUpdateResponse {
 	Http200(Vec<ConsolePort>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of console port objects.
 pub fn dcim_console_ports_bulk_update(state: &ThanixClient, body: Vec<ConsolePortRequest>) -> Result<DcimConsolePortsBulkUpdateResponse, Error> {
@@ -2923,15 +2725,13 @@ pub fn dcim_console_ports_bulk_update(state: &ThanixClient, body: Vec<ConsolePor
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsolePortsBulkUpdateResponse::Http200(r#response.json::<Vec<ConsolePort>>()?)) },
-		_ => { Ok(DcimConsolePortsBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimConsolePortsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsolePortsCreateResponse {
 	Http201(ConsolePort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of console port objects.
 pub fn dcim_console_ports_create(state: &ThanixClient, body: WritableConsolePortRequest) -> Result<DcimConsolePortsCreateResponse, Error> {
@@ -2941,15 +2741,13 @@ pub fn dcim_console_ports_create(state: &ThanixClient, body: WritableConsolePort
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimConsolePortsCreateResponse::Http201(r#response.json::<ConsolePort>()?)) },
-		_ => { Ok(DcimConsolePortsCreateResponse::None) }
+		r#other_status => { Ok(DcimConsolePortsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsolePortsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of console port objects.
 pub fn dcim_console_ports_bulk_destroy(state: &ThanixClient, body: Vec<ConsolePortRequest>) -> Result<DcimConsolePortsBulkDestroyResponse, Error> {
@@ -2958,15 +2756,13 @@ pub fn dcim_console_ports_bulk_destroy(state: &ThanixClient, body: Vec<ConsolePo
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimConsolePortsBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimConsolePortsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsolePortsBulkPartialUpdateResponse {
 	Http200(Vec<ConsolePort>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of console port objects.
 pub fn dcim_console_ports_bulk_partial_update(state: &ThanixClient, body: Vec<ConsolePortRequest>) -> Result<DcimConsolePortsBulkPartialUpdateResponse, Error> {
@@ -2976,15 +2772,13 @@ pub fn dcim_console_ports_bulk_partial_update(state: &ThanixClient, body: Vec<Co
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsolePortsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ConsolePort>>()?)) },
-		_ => { Ok(DcimConsolePortsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimConsolePortsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsolePortsRetrieveResponse {
 	Http200(ConsolePort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a console port object.
 pub fn dcim_console_ports_retrieve(state: &ThanixClient, id: i64) -> Result<DcimConsolePortsRetrieveResponse, Error> {
@@ -2993,15 +2787,13 @@ pub fn dcim_console_ports_retrieve(state: &ThanixClient, id: i64) -> Result<Dcim
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsolePortsRetrieveResponse::Http200(r#response.json::<ConsolePort>()?)) },
-		_ => { Ok(DcimConsolePortsRetrieveResponse::None) }
+		r#other_status => { Ok(DcimConsolePortsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsolePortsUpdateResponse {
 	Http200(ConsolePort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a console port object.
 pub fn dcim_console_ports_update(state: &ThanixClient, body: WritableConsolePortRequest, id: i64) -> Result<DcimConsolePortsUpdateResponse, Error> {
@@ -3011,15 +2803,13 @@ pub fn dcim_console_ports_update(state: &ThanixClient, body: WritableConsolePort
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsolePortsUpdateResponse::Http200(r#response.json::<ConsolePort>()?)) },
-		_ => { Ok(DcimConsolePortsUpdateResponse::None) }
+		r#other_status => { Ok(DcimConsolePortsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsolePortsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a console port object.
 pub fn dcim_console_ports_destroy(state: &ThanixClient, id: i64) -> Result<DcimConsolePortsDestroyResponse, Error> {
@@ -3027,15 +2817,13 @@ pub fn dcim_console_ports_destroy(state: &ThanixClient, id: i64) -> Result<DcimC
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimConsolePortsDestroyResponse::None) }
+		r#other_status => { Ok(DcimConsolePortsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsolePortsPartialUpdateResponse {
 	Http200(ConsolePort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a console port object.
 pub fn dcim_console_ports_partial_update(state: &ThanixClient, body: PatchedWritableConsolePortRequest, id: i64) -> Result<DcimConsolePortsPartialUpdateResponse, Error> {
@@ -3045,15 +2833,13 @@ pub fn dcim_console_ports_partial_update(state: &ThanixClient, body: PatchedWrit
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsolePortsPartialUpdateResponse::Http200(r#response.json::<ConsolePort>()?)) },
-		_ => { Ok(DcimConsolePortsPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimConsolePortsPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsolePortsTraceRetrieveResponse {
 	Http200(ConsolePort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
 pub fn dcim_console_ports_trace_retrieve(state: &ThanixClient, id: i64) -> Result<DcimConsolePortsTraceRetrieveResponse, Error> {
@@ -3062,7 +2848,7 @@ pub fn dcim_console_ports_trace_retrieve(state: &ThanixClient, id: i64) -> Resul
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsolePortsTraceRetrieveResponse::Http200(r#response.json::<ConsolePort>()?)) },
-		_ => { Ok(DcimConsolePortsTraceRetrieveResponse::None) }
+		r#other_status => { Ok(DcimConsolePortsTraceRetrieveResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -3133,12 +2919,10 @@ pub struct DcimConsoleServerPortTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsoleServerPortTemplatesListResponse {
 	Http200(PaginatedConsoleServerPortTemplateList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of console server port template objects.
 pub fn dcim_console_server_port_templates_list(state: &ThanixClient, query: DcimConsoleServerPortTemplatesListQuery) -> Result<DcimConsoleServerPortTemplatesListResponse, Error> {
@@ -3147,15 +2931,13 @@ pub fn dcim_console_server_port_templates_list(state: &ThanixClient, query: Dcim
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsoleServerPortTemplatesListResponse::Http200(r#response.json::<PaginatedConsoleServerPortTemplateList>()?)) },
-		_ => { Ok(DcimConsoleServerPortTemplatesListResponse::None) }
+		r#other_status => { Ok(DcimConsoleServerPortTemplatesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsoleServerPortTemplatesBulkUpdateResponse {
 	Http200(Vec<ConsoleServerPortTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of console server port template objects.
 pub fn dcim_console_server_port_templates_bulk_update(state: &ThanixClient, body: Vec<ConsoleServerPortTemplateRequest>) -> Result<DcimConsoleServerPortTemplatesBulkUpdateResponse, Error> {
@@ -3165,15 +2947,13 @@ pub fn dcim_console_server_port_templates_bulk_update(state: &ThanixClient, body
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsoleServerPortTemplatesBulkUpdateResponse::Http200(r#response.json::<Vec<ConsoleServerPortTemplate>>()?)) },
-		_ => { Ok(DcimConsoleServerPortTemplatesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimConsoleServerPortTemplatesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsoleServerPortTemplatesCreateResponse {
 	Http201(ConsoleServerPortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of console server port template objects.
 pub fn dcim_console_server_port_templates_create(state: &ThanixClient, body: WritableConsoleServerPortTemplateRequest) -> Result<DcimConsoleServerPortTemplatesCreateResponse, Error> {
@@ -3183,15 +2963,13 @@ pub fn dcim_console_server_port_templates_create(state: &ThanixClient, body: Wri
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimConsoleServerPortTemplatesCreateResponse::Http201(r#response.json::<ConsoleServerPortTemplate>()?)) },
-		_ => { Ok(DcimConsoleServerPortTemplatesCreateResponse::None) }
+		r#other_status => { Ok(DcimConsoleServerPortTemplatesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsoleServerPortTemplatesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of console server port template objects.
 pub fn dcim_console_server_port_templates_bulk_destroy(state: &ThanixClient, body: Vec<ConsoleServerPortTemplateRequest>) -> Result<DcimConsoleServerPortTemplatesBulkDestroyResponse, Error> {
@@ -3200,15 +2978,13 @@ pub fn dcim_console_server_port_templates_bulk_destroy(state: &ThanixClient, bod
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimConsoleServerPortTemplatesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimConsoleServerPortTemplatesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsoleServerPortTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<ConsoleServerPortTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of console server port template objects.
 pub fn dcim_console_server_port_templates_bulk_partial_update(state: &ThanixClient, body: Vec<ConsoleServerPortTemplateRequest>) -> Result<DcimConsoleServerPortTemplatesBulkPartialUpdateResponse, Error> {
@@ -3218,15 +2994,13 @@ pub fn dcim_console_server_port_templates_bulk_partial_update(state: &ThanixClie
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsoleServerPortTemplatesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ConsoleServerPortTemplate>>()?)) },
-		_ => { Ok(DcimConsoleServerPortTemplatesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimConsoleServerPortTemplatesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsoleServerPortTemplatesRetrieveResponse {
 	Http200(ConsoleServerPortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a console server port template object.
 pub fn dcim_console_server_port_templates_retrieve(state: &ThanixClient, id: i64) -> Result<DcimConsoleServerPortTemplatesRetrieveResponse, Error> {
@@ -3235,15 +3009,13 @@ pub fn dcim_console_server_port_templates_retrieve(state: &ThanixClient, id: i64
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsoleServerPortTemplatesRetrieveResponse::Http200(r#response.json::<ConsoleServerPortTemplate>()?)) },
-		_ => { Ok(DcimConsoleServerPortTemplatesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimConsoleServerPortTemplatesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsoleServerPortTemplatesUpdateResponse {
 	Http200(ConsoleServerPortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a console server port template object.
 pub fn dcim_console_server_port_templates_update(state: &ThanixClient, body: WritableConsoleServerPortTemplateRequest, id: i64) -> Result<DcimConsoleServerPortTemplatesUpdateResponse, Error> {
@@ -3253,15 +3025,13 @@ pub fn dcim_console_server_port_templates_update(state: &ThanixClient, body: Wri
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsoleServerPortTemplatesUpdateResponse::Http200(r#response.json::<ConsoleServerPortTemplate>()?)) },
-		_ => { Ok(DcimConsoleServerPortTemplatesUpdateResponse::None) }
+		r#other_status => { Ok(DcimConsoleServerPortTemplatesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsoleServerPortTemplatesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a console server port template object.
 pub fn dcim_console_server_port_templates_destroy(state: &ThanixClient, id: i64) -> Result<DcimConsoleServerPortTemplatesDestroyResponse, Error> {
@@ -3269,15 +3039,13 @@ pub fn dcim_console_server_port_templates_destroy(state: &ThanixClient, id: i64)
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimConsoleServerPortTemplatesDestroyResponse::None) }
+		r#other_status => { Ok(DcimConsoleServerPortTemplatesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsoleServerPortTemplatesPartialUpdateResponse {
 	Http200(ConsoleServerPortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a console server port template object.
 pub fn dcim_console_server_port_templates_partial_update(state: &ThanixClient, body: PatchedWritableConsoleServerPortTemplateRequest, id: i64) -> Result<DcimConsoleServerPortTemplatesPartialUpdateResponse, Error> {
@@ -3287,7 +3055,7 @@ pub fn dcim_console_server_port_templates_partial_update(state: &ThanixClient, b
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsoleServerPortTemplatesPartialUpdateResponse::Http200(r#response.json::<ConsoleServerPortTemplate>()?)) },
-		_ => { Ok(DcimConsoleServerPortTemplatesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimConsoleServerPortTemplatesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -3454,12 +3222,10 @@ pub struct DcimConsoleServerPortsListQuery {
 	virtual_chassis_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsoleServerPortsListResponse {
 	Http200(PaginatedConsoleServerPortList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of console server port objects.
 pub fn dcim_console_server_ports_list(state: &ThanixClient, query: DcimConsoleServerPortsListQuery) -> Result<DcimConsoleServerPortsListResponse, Error> {
@@ -3468,15 +3234,13 @@ pub fn dcim_console_server_ports_list(state: &ThanixClient, query: DcimConsoleSe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsoleServerPortsListResponse::Http200(r#response.json::<PaginatedConsoleServerPortList>()?)) },
-		_ => { Ok(DcimConsoleServerPortsListResponse::None) }
+		r#other_status => { Ok(DcimConsoleServerPortsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsoleServerPortsBulkUpdateResponse {
 	Http200(Vec<ConsoleServerPort>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of console server port objects.
 pub fn dcim_console_server_ports_bulk_update(state: &ThanixClient, body: Vec<ConsoleServerPortRequest>) -> Result<DcimConsoleServerPortsBulkUpdateResponse, Error> {
@@ -3486,15 +3250,13 @@ pub fn dcim_console_server_ports_bulk_update(state: &ThanixClient, body: Vec<Con
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsoleServerPortsBulkUpdateResponse::Http200(r#response.json::<Vec<ConsoleServerPort>>()?)) },
-		_ => { Ok(DcimConsoleServerPortsBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimConsoleServerPortsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsoleServerPortsCreateResponse {
 	Http201(ConsoleServerPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of console server port objects.
 pub fn dcim_console_server_ports_create(state: &ThanixClient, body: WritableConsoleServerPortRequest) -> Result<DcimConsoleServerPortsCreateResponse, Error> {
@@ -3504,15 +3266,13 @@ pub fn dcim_console_server_ports_create(state: &ThanixClient, body: WritableCons
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimConsoleServerPortsCreateResponse::Http201(r#response.json::<ConsoleServerPort>()?)) },
-		_ => { Ok(DcimConsoleServerPortsCreateResponse::None) }
+		r#other_status => { Ok(DcimConsoleServerPortsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsoleServerPortsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of console server port objects.
 pub fn dcim_console_server_ports_bulk_destroy(state: &ThanixClient, body: Vec<ConsoleServerPortRequest>) -> Result<DcimConsoleServerPortsBulkDestroyResponse, Error> {
@@ -3521,15 +3281,13 @@ pub fn dcim_console_server_ports_bulk_destroy(state: &ThanixClient, body: Vec<Co
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimConsoleServerPortsBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimConsoleServerPortsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsoleServerPortsBulkPartialUpdateResponse {
 	Http200(Vec<ConsoleServerPort>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of console server port objects.
 pub fn dcim_console_server_ports_bulk_partial_update(state: &ThanixClient, body: Vec<ConsoleServerPortRequest>) -> Result<DcimConsoleServerPortsBulkPartialUpdateResponse, Error> {
@@ -3539,15 +3297,13 @@ pub fn dcim_console_server_ports_bulk_partial_update(state: &ThanixClient, body:
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsoleServerPortsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ConsoleServerPort>>()?)) },
-		_ => { Ok(DcimConsoleServerPortsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimConsoleServerPortsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsoleServerPortsRetrieveResponse {
 	Http200(ConsoleServerPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a console server port object.
 pub fn dcim_console_server_ports_retrieve(state: &ThanixClient, id: i64) -> Result<DcimConsoleServerPortsRetrieveResponse, Error> {
@@ -3556,15 +3312,13 @@ pub fn dcim_console_server_ports_retrieve(state: &ThanixClient, id: i64) -> Resu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsoleServerPortsRetrieveResponse::Http200(r#response.json::<ConsoleServerPort>()?)) },
-		_ => { Ok(DcimConsoleServerPortsRetrieveResponse::None) }
+		r#other_status => { Ok(DcimConsoleServerPortsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsoleServerPortsUpdateResponse {
 	Http200(ConsoleServerPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a console server port object.
 pub fn dcim_console_server_ports_update(state: &ThanixClient, body: WritableConsoleServerPortRequest, id: i64) -> Result<DcimConsoleServerPortsUpdateResponse, Error> {
@@ -3574,15 +3328,13 @@ pub fn dcim_console_server_ports_update(state: &ThanixClient, body: WritableCons
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsoleServerPortsUpdateResponse::Http200(r#response.json::<ConsoleServerPort>()?)) },
-		_ => { Ok(DcimConsoleServerPortsUpdateResponse::None) }
+		r#other_status => { Ok(DcimConsoleServerPortsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsoleServerPortsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a console server port object.
 pub fn dcim_console_server_ports_destroy(state: &ThanixClient, id: i64) -> Result<DcimConsoleServerPortsDestroyResponse, Error> {
@@ -3590,15 +3342,13 @@ pub fn dcim_console_server_ports_destroy(state: &ThanixClient, id: i64) -> Resul
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimConsoleServerPortsDestroyResponse::None) }
+		r#other_status => { Ok(DcimConsoleServerPortsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsoleServerPortsPartialUpdateResponse {
 	Http200(ConsoleServerPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a console server port object.
 pub fn dcim_console_server_ports_partial_update(state: &ThanixClient, body: PatchedWritableConsoleServerPortRequest, id: i64) -> Result<DcimConsoleServerPortsPartialUpdateResponse, Error> {
@@ -3608,15 +3358,13 @@ pub fn dcim_console_server_ports_partial_update(state: &ThanixClient, body: Patc
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsoleServerPortsPartialUpdateResponse::Http200(r#response.json::<ConsoleServerPort>()?)) },
-		_ => { Ok(DcimConsoleServerPortsPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimConsoleServerPortsPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimConsoleServerPortsTraceRetrieveResponse {
 	Http200(ConsoleServerPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
 pub fn dcim_console_server_ports_trace_retrieve(state: &ThanixClient, id: i64) -> Result<DcimConsoleServerPortsTraceRetrieveResponse, Error> {
@@ -3625,7 +3373,7 @@ pub fn dcim_console_server_ports_trace_retrieve(state: &ThanixClient, id: i64) -
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimConsoleServerPortsTraceRetrieveResponse::Http200(r#response.json::<ConsoleServerPort>()?)) },
-		_ => { Ok(DcimConsoleServerPortsTraceRetrieveResponse::None) }
+		r#other_status => { Ok(DcimConsoleServerPortsTraceRetrieveResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -3690,12 +3438,10 @@ pub struct DcimDeviceBayTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceBayTemplatesListResponse {
 	Http200(PaginatedDeviceBayTemplateList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of device bay template objects.
 pub fn dcim_device_bay_templates_list(state: &ThanixClient, query: DcimDeviceBayTemplatesListQuery) -> Result<DcimDeviceBayTemplatesListResponse, Error> {
@@ -3704,15 +3450,13 @@ pub fn dcim_device_bay_templates_list(state: &ThanixClient, query: DcimDeviceBay
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceBayTemplatesListResponse::Http200(r#response.json::<PaginatedDeviceBayTemplateList>()?)) },
-		_ => { Ok(DcimDeviceBayTemplatesListResponse::None) }
+		r#other_status => { Ok(DcimDeviceBayTemplatesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceBayTemplatesBulkUpdateResponse {
 	Http200(Vec<DeviceBayTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of device bay template objects.
 pub fn dcim_device_bay_templates_bulk_update(state: &ThanixClient, body: Vec<DeviceBayTemplateRequest>) -> Result<DcimDeviceBayTemplatesBulkUpdateResponse, Error> {
@@ -3722,15 +3466,13 @@ pub fn dcim_device_bay_templates_bulk_update(state: &ThanixClient, body: Vec<Dev
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceBayTemplatesBulkUpdateResponse::Http200(r#response.json::<Vec<DeviceBayTemplate>>()?)) },
-		_ => { Ok(DcimDeviceBayTemplatesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimDeviceBayTemplatesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceBayTemplatesCreateResponse {
 	Http201(DeviceBayTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of device bay template objects.
 pub fn dcim_device_bay_templates_create(state: &ThanixClient, body: WritableDeviceBayTemplateRequest) -> Result<DcimDeviceBayTemplatesCreateResponse, Error> {
@@ -3740,15 +3482,13 @@ pub fn dcim_device_bay_templates_create(state: &ThanixClient, body: WritableDevi
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimDeviceBayTemplatesCreateResponse::Http201(r#response.json::<DeviceBayTemplate>()?)) },
-		_ => { Ok(DcimDeviceBayTemplatesCreateResponse::None) }
+		r#other_status => { Ok(DcimDeviceBayTemplatesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceBayTemplatesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of device bay template objects.
 pub fn dcim_device_bay_templates_bulk_destroy(state: &ThanixClient, body: Vec<DeviceBayTemplateRequest>) -> Result<DcimDeviceBayTemplatesBulkDestroyResponse, Error> {
@@ -3757,15 +3497,13 @@ pub fn dcim_device_bay_templates_bulk_destroy(state: &ThanixClient, body: Vec<De
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimDeviceBayTemplatesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimDeviceBayTemplatesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceBayTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<DeviceBayTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of device bay template objects.
 pub fn dcim_device_bay_templates_bulk_partial_update(state: &ThanixClient, body: Vec<DeviceBayTemplateRequest>) -> Result<DcimDeviceBayTemplatesBulkPartialUpdateResponse, Error> {
@@ -3775,15 +3513,13 @@ pub fn dcim_device_bay_templates_bulk_partial_update(state: &ThanixClient, body:
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceBayTemplatesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<DeviceBayTemplate>>()?)) },
-		_ => { Ok(DcimDeviceBayTemplatesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimDeviceBayTemplatesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceBayTemplatesRetrieveResponse {
 	Http200(DeviceBayTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a device bay template object.
 pub fn dcim_device_bay_templates_retrieve(state: &ThanixClient, id: i64) -> Result<DcimDeviceBayTemplatesRetrieveResponse, Error> {
@@ -3792,15 +3528,13 @@ pub fn dcim_device_bay_templates_retrieve(state: &ThanixClient, id: i64) -> Resu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceBayTemplatesRetrieveResponse::Http200(r#response.json::<DeviceBayTemplate>()?)) },
-		_ => { Ok(DcimDeviceBayTemplatesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimDeviceBayTemplatesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceBayTemplatesUpdateResponse {
 	Http200(DeviceBayTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a device bay template object.
 pub fn dcim_device_bay_templates_update(state: &ThanixClient, body: WritableDeviceBayTemplateRequest, id: i64) -> Result<DcimDeviceBayTemplatesUpdateResponse, Error> {
@@ -3810,15 +3544,13 @@ pub fn dcim_device_bay_templates_update(state: &ThanixClient, body: WritableDevi
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceBayTemplatesUpdateResponse::Http200(r#response.json::<DeviceBayTemplate>()?)) },
-		_ => { Ok(DcimDeviceBayTemplatesUpdateResponse::None) }
+		r#other_status => { Ok(DcimDeviceBayTemplatesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceBayTemplatesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a device bay template object.
 pub fn dcim_device_bay_templates_destroy(state: &ThanixClient, id: i64) -> Result<DcimDeviceBayTemplatesDestroyResponse, Error> {
@@ -3826,15 +3558,13 @@ pub fn dcim_device_bay_templates_destroy(state: &ThanixClient, id: i64) -> Resul
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimDeviceBayTemplatesDestroyResponse::None) }
+		r#other_status => { Ok(DcimDeviceBayTemplatesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceBayTemplatesPartialUpdateResponse {
 	Http200(DeviceBayTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a device bay template object.
 pub fn dcim_device_bay_templates_partial_update(state: &ThanixClient, body: PatchedWritableDeviceBayTemplateRequest, id: i64) -> Result<DcimDeviceBayTemplatesPartialUpdateResponse, Error> {
@@ -3844,7 +3574,7 @@ pub fn dcim_device_bay_templates_partial_update(state: &ThanixClient, body: Patc
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceBayTemplatesPartialUpdateResponse::Http200(r#response.json::<DeviceBayTemplate>()?)) },
-		_ => { Ok(DcimDeviceBayTemplatesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimDeviceBayTemplatesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -3998,12 +3728,10 @@ pub struct DcimDeviceBaysListQuery {
 	virtual_chassis_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceBaysListResponse {
 	Http200(PaginatedDeviceBayList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of device bay objects.
 pub fn dcim_device_bays_list(state: &ThanixClient, query: DcimDeviceBaysListQuery) -> Result<DcimDeviceBaysListResponse, Error> {
@@ -4012,15 +3740,13 @@ pub fn dcim_device_bays_list(state: &ThanixClient, query: DcimDeviceBaysListQuer
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceBaysListResponse::Http200(r#response.json::<PaginatedDeviceBayList>()?)) },
-		_ => { Ok(DcimDeviceBaysListResponse::None) }
+		r#other_status => { Ok(DcimDeviceBaysListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceBaysBulkUpdateResponse {
 	Http200(Vec<DeviceBay>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of device bay objects.
 pub fn dcim_device_bays_bulk_update(state: &ThanixClient, body: Vec<DeviceBayRequest>) -> Result<DcimDeviceBaysBulkUpdateResponse, Error> {
@@ -4030,15 +3756,13 @@ pub fn dcim_device_bays_bulk_update(state: &ThanixClient, body: Vec<DeviceBayReq
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceBaysBulkUpdateResponse::Http200(r#response.json::<Vec<DeviceBay>>()?)) },
-		_ => { Ok(DcimDeviceBaysBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimDeviceBaysBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceBaysCreateResponse {
 	Http201(DeviceBay),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of device bay objects.
 pub fn dcim_device_bays_create(state: &ThanixClient, body: WritableDeviceBayRequest) -> Result<DcimDeviceBaysCreateResponse, Error> {
@@ -4048,15 +3772,13 @@ pub fn dcim_device_bays_create(state: &ThanixClient, body: WritableDeviceBayRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimDeviceBaysCreateResponse::Http201(r#response.json::<DeviceBay>()?)) },
-		_ => { Ok(DcimDeviceBaysCreateResponse::None) }
+		r#other_status => { Ok(DcimDeviceBaysCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceBaysBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of device bay objects.
 pub fn dcim_device_bays_bulk_destroy(state: &ThanixClient, body: Vec<DeviceBayRequest>) -> Result<DcimDeviceBaysBulkDestroyResponse, Error> {
@@ -4065,15 +3787,13 @@ pub fn dcim_device_bays_bulk_destroy(state: &ThanixClient, body: Vec<DeviceBayRe
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimDeviceBaysBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimDeviceBaysBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceBaysBulkPartialUpdateResponse {
 	Http200(Vec<DeviceBay>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of device bay objects.
 pub fn dcim_device_bays_bulk_partial_update(state: &ThanixClient, body: Vec<DeviceBayRequest>) -> Result<DcimDeviceBaysBulkPartialUpdateResponse, Error> {
@@ -4083,15 +3803,13 @@ pub fn dcim_device_bays_bulk_partial_update(state: &ThanixClient, body: Vec<Devi
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceBaysBulkPartialUpdateResponse::Http200(r#response.json::<Vec<DeviceBay>>()?)) },
-		_ => { Ok(DcimDeviceBaysBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimDeviceBaysBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceBaysRetrieveResponse {
 	Http200(DeviceBay),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a device bay object.
 pub fn dcim_device_bays_retrieve(state: &ThanixClient, id: i64) -> Result<DcimDeviceBaysRetrieveResponse, Error> {
@@ -4100,15 +3818,13 @@ pub fn dcim_device_bays_retrieve(state: &ThanixClient, id: i64) -> Result<DcimDe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceBaysRetrieveResponse::Http200(r#response.json::<DeviceBay>()?)) },
-		_ => { Ok(DcimDeviceBaysRetrieveResponse::None) }
+		r#other_status => { Ok(DcimDeviceBaysRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceBaysUpdateResponse {
 	Http200(DeviceBay),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a device bay object.
 pub fn dcim_device_bays_update(state: &ThanixClient, body: WritableDeviceBayRequest, id: i64) -> Result<DcimDeviceBaysUpdateResponse, Error> {
@@ -4118,15 +3834,13 @@ pub fn dcim_device_bays_update(state: &ThanixClient, body: WritableDeviceBayRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceBaysUpdateResponse::Http200(r#response.json::<DeviceBay>()?)) },
-		_ => { Ok(DcimDeviceBaysUpdateResponse::None) }
+		r#other_status => { Ok(DcimDeviceBaysUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceBaysDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a device bay object.
 pub fn dcim_device_bays_destroy(state: &ThanixClient, id: i64) -> Result<DcimDeviceBaysDestroyResponse, Error> {
@@ -4134,15 +3848,13 @@ pub fn dcim_device_bays_destroy(state: &ThanixClient, id: i64) -> Result<DcimDev
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimDeviceBaysDestroyResponse::None) }
+		r#other_status => { Ok(DcimDeviceBaysDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceBaysPartialUpdateResponse {
 	Http200(DeviceBay),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a device bay object.
 pub fn dcim_device_bays_partial_update(state: &ThanixClient, body: PatchedWritableDeviceBayRequest, id: i64) -> Result<DcimDeviceBaysPartialUpdateResponse, Error> {
@@ -4152,7 +3864,7 @@ pub fn dcim_device_bays_partial_update(state: &ThanixClient, body: PatchedWritab
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceBaysPartialUpdateResponse::Http200(r#response.json::<DeviceBay>()?)) },
-		_ => { Ok(DcimDeviceBaysPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimDeviceBaysPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -4242,12 +3954,10 @@ pub struct DcimDeviceRolesListQuery {
 	vm_role: Option<bool>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceRolesListResponse {
 	Http200(PaginatedDeviceRoleList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of device role objects.
 pub fn dcim_device_roles_list(state: &ThanixClient, query: DcimDeviceRolesListQuery) -> Result<DcimDeviceRolesListResponse, Error> {
@@ -4256,15 +3966,13 @@ pub fn dcim_device_roles_list(state: &ThanixClient, query: DcimDeviceRolesListQu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceRolesListResponse::Http200(r#response.json::<PaginatedDeviceRoleList>()?)) },
-		_ => { Ok(DcimDeviceRolesListResponse::None) }
+		r#other_status => { Ok(DcimDeviceRolesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceRolesBulkUpdateResponse {
 	Http200(Vec<DeviceRole>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of device role objects.
 pub fn dcim_device_roles_bulk_update(state: &ThanixClient, body: Vec<DeviceRoleRequest>) -> Result<DcimDeviceRolesBulkUpdateResponse, Error> {
@@ -4274,15 +3982,13 @@ pub fn dcim_device_roles_bulk_update(state: &ThanixClient, body: Vec<DeviceRoleR
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceRolesBulkUpdateResponse::Http200(r#response.json::<Vec<DeviceRole>>()?)) },
-		_ => { Ok(DcimDeviceRolesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimDeviceRolesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceRolesCreateResponse {
 	Http201(DeviceRole),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of device role objects.
 pub fn dcim_device_roles_create(state: &ThanixClient, body: WritableDeviceRoleRequest) -> Result<DcimDeviceRolesCreateResponse, Error> {
@@ -4292,15 +3998,13 @@ pub fn dcim_device_roles_create(state: &ThanixClient, body: WritableDeviceRoleRe
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimDeviceRolesCreateResponse::Http201(r#response.json::<DeviceRole>()?)) },
-		_ => { Ok(DcimDeviceRolesCreateResponse::None) }
+		r#other_status => { Ok(DcimDeviceRolesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceRolesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of device role objects.
 pub fn dcim_device_roles_bulk_destroy(state: &ThanixClient, body: Vec<DeviceRoleRequest>) -> Result<DcimDeviceRolesBulkDestroyResponse, Error> {
@@ -4309,15 +4013,13 @@ pub fn dcim_device_roles_bulk_destroy(state: &ThanixClient, body: Vec<DeviceRole
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimDeviceRolesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimDeviceRolesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceRolesBulkPartialUpdateResponse {
 	Http200(Vec<DeviceRole>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of device role objects.
 pub fn dcim_device_roles_bulk_partial_update(state: &ThanixClient, body: Vec<DeviceRoleRequest>) -> Result<DcimDeviceRolesBulkPartialUpdateResponse, Error> {
@@ -4327,15 +4029,13 @@ pub fn dcim_device_roles_bulk_partial_update(state: &ThanixClient, body: Vec<Dev
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceRolesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<DeviceRole>>()?)) },
-		_ => { Ok(DcimDeviceRolesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimDeviceRolesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceRolesRetrieveResponse {
 	Http200(DeviceRole),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a device role object.
 pub fn dcim_device_roles_retrieve(state: &ThanixClient, id: i64) -> Result<DcimDeviceRolesRetrieveResponse, Error> {
@@ -4344,15 +4044,13 @@ pub fn dcim_device_roles_retrieve(state: &ThanixClient, id: i64) -> Result<DcimD
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceRolesRetrieveResponse::Http200(r#response.json::<DeviceRole>()?)) },
-		_ => { Ok(DcimDeviceRolesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimDeviceRolesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceRolesUpdateResponse {
 	Http200(DeviceRole),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a device role object.
 pub fn dcim_device_roles_update(state: &ThanixClient, body: WritableDeviceRoleRequest, id: i64) -> Result<DcimDeviceRolesUpdateResponse, Error> {
@@ -4362,15 +4060,13 @@ pub fn dcim_device_roles_update(state: &ThanixClient, body: WritableDeviceRoleRe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceRolesUpdateResponse::Http200(r#response.json::<DeviceRole>()?)) },
-		_ => { Ok(DcimDeviceRolesUpdateResponse::None) }
+		r#other_status => { Ok(DcimDeviceRolesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceRolesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a device role object.
 pub fn dcim_device_roles_destroy(state: &ThanixClient, id: i64) -> Result<DcimDeviceRolesDestroyResponse, Error> {
@@ -4378,15 +4074,13 @@ pub fn dcim_device_roles_destroy(state: &ThanixClient, id: i64) -> Result<DcimDe
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimDeviceRolesDestroyResponse::None) }
+		r#other_status => { Ok(DcimDeviceRolesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceRolesPartialUpdateResponse {
 	Http200(DeviceRole),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a device role object.
 pub fn dcim_device_roles_partial_update(state: &ThanixClient, body: PatchedWritableDeviceRoleRequest, id: i64) -> Result<DcimDeviceRolesPartialUpdateResponse, Error> {
@@ -4396,7 +4090,7 @@ pub fn dcim_device_roles_partial_update(state: &ThanixClient, body: PatchedWrita
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceRolesPartialUpdateResponse::Http200(r#response.json::<DeviceRole>()?)) },
-		_ => { Ok(DcimDeviceRolesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimDeviceRolesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -4543,12 +4237,10 @@ pub struct DcimDeviceTypesListQuery {
 	weight_unit__n: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceTypesListResponse {
 	Http200(PaginatedDeviceTypeList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of device type objects.
 pub fn dcim_device_types_list(state: &ThanixClient, query: DcimDeviceTypesListQuery) -> Result<DcimDeviceTypesListResponse, Error> {
@@ -4557,15 +4249,13 @@ pub fn dcim_device_types_list(state: &ThanixClient, query: DcimDeviceTypesListQu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceTypesListResponse::Http200(r#response.json::<PaginatedDeviceTypeList>()?)) },
-		_ => { Ok(DcimDeviceTypesListResponse::None) }
+		r#other_status => { Ok(DcimDeviceTypesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceTypesBulkUpdateResponse {
 	Http200(Vec<DeviceType>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of device type objects.
 pub fn dcim_device_types_bulk_update(state: &ThanixClient, body: Vec<DeviceTypeRequest>) -> Result<DcimDeviceTypesBulkUpdateResponse, Error> {
@@ -4575,15 +4265,13 @@ pub fn dcim_device_types_bulk_update(state: &ThanixClient, body: Vec<DeviceTypeR
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceTypesBulkUpdateResponse::Http200(r#response.json::<Vec<DeviceType>>()?)) },
-		_ => { Ok(DcimDeviceTypesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimDeviceTypesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceTypesCreateResponse {
 	Http201(DeviceType),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of device type objects.
 pub fn dcim_device_types_create(state: &ThanixClient, body: WritableDeviceTypeRequest) -> Result<DcimDeviceTypesCreateResponse, Error> {
@@ -4593,15 +4281,13 @@ pub fn dcim_device_types_create(state: &ThanixClient, body: WritableDeviceTypeRe
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimDeviceTypesCreateResponse::Http201(r#response.json::<DeviceType>()?)) },
-		_ => { Ok(DcimDeviceTypesCreateResponse::None) }
+		r#other_status => { Ok(DcimDeviceTypesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceTypesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of device type objects.
 pub fn dcim_device_types_bulk_destroy(state: &ThanixClient, body: Vec<DeviceTypeRequest>) -> Result<DcimDeviceTypesBulkDestroyResponse, Error> {
@@ -4610,15 +4296,13 @@ pub fn dcim_device_types_bulk_destroy(state: &ThanixClient, body: Vec<DeviceType
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimDeviceTypesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimDeviceTypesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceTypesBulkPartialUpdateResponse {
 	Http200(Vec<DeviceType>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of device type objects.
 pub fn dcim_device_types_bulk_partial_update(state: &ThanixClient, body: Vec<DeviceTypeRequest>) -> Result<DcimDeviceTypesBulkPartialUpdateResponse, Error> {
@@ -4628,15 +4312,13 @@ pub fn dcim_device_types_bulk_partial_update(state: &ThanixClient, body: Vec<Dev
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceTypesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<DeviceType>>()?)) },
-		_ => { Ok(DcimDeviceTypesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimDeviceTypesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceTypesRetrieveResponse {
 	Http200(DeviceType),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a device type object.
 pub fn dcim_device_types_retrieve(state: &ThanixClient, id: i64) -> Result<DcimDeviceTypesRetrieveResponse, Error> {
@@ -4645,15 +4327,13 @@ pub fn dcim_device_types_retrieve(state: &ThanixClient, id: i64) -> Result<DcimD
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceTypesRetrieveResponse::Http200(r#response.json::<DeviceType>()?)) },
-		_ => { Ok(DcimDeviceTypesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimDeviceTypesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceTypesUpdateResponse {
 	Http200(DeviceType),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a device type object.
 pub fn dcim_device_types_update(state: &ThanixClient, body: WritableDeviceTypeRequest, id: i64) -> Result<DcimDeviceTypesUpdateResponse, Error> {
@@ -4663,15 +4343,13 @@ pub fn dcim_device_types_update(state: &ThanixClient, body: WritableDeviceTypeRe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceTypesUpdateResponse::Http200(r#response.json::<DeviceType>()?)) },
-		_ => { Ok(DcimDeviceTypesUpdateResponse::None) }
+		r#other_status => { Ok(DcimDeviceTypesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceTypesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a device type object.
 pub fn dcim_device_types_destroy(state: &ThanixClient, id: i64) -> Result<DcimDeviceTypesDestroyResponse, Error> {
@@ -4679,15 +4357,13 @@ pub fn dcim_device_types_destroy(state: &ThanixClient, id: i64) -> Result<DcimDe
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimDeviceTypesDestroyResponse::None) }
+		r#other_status => { Ok(DcimDeviceTypesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDeviceTypesPartialUpdateResponse {
 	Http200(DeviceType),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a device type object.
 pub fn dcim_device_types_partial_update(state: &ThanixClient, body: PatchedWritableDeviceTypeRequest, id: i64) -> Result<DcimDeviceTypesPartialUpdateResponse, Error> {
@@ -4697,7 +4373,7 @@ pub fn dcim_device_types_partial_update(state: &ThanixClient, body: PatchedWrita
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDeviceTypesPartialUpdateResponse::Http200(r#response.json::<DeviceType>()?)) },
-		_ => { Ok(DcimDeviceTypesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimDeviceTypesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -4983,12 +4659,10 @@ pub struct DcimDevicesListQuery {
 	virtual_chassis_member: Option<bool>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDevicesListResponse {
 	Http200(PaginatedDeviceWithConfigContextList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of device objects.
 pub fn dcim_devices_list(state: &ThanixClient, query: DcimDevicesListQuery) -> Result<DcimDevicesListResponse, Error> {
@@ -4997,15 +4671,13 @@ pub fn dcim_devices_list(state: &ThanixClient, query: DcimDevicesListQuery) -> R
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDevicesListResponse::Http200(r#response.json::<PaginatedDeviceWithConfigContextList>()?)) },
-		_ => { Ok(DcimDevicesListResponse::None) }
+		r#other_status => { Ok(DcimDevicesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDevicesBulkUpdateResponse {
 	Http200(Vec<DeviceWithConfigContext>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of device objects.
 pub fn dcim_devices_bulk_update(state: &ThanixClient, body: Vec<DeviceWithConfigContextRequest>) -> Result<DcimDevicesBulkUpdateResponse, Error> {
@@ -5015,15 +4687,13 @@ pub fn dcim_devices_bulk_update(state: &ThanixClient, body: Vec<DeviceWithConfig
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDevicesBulkUpdateResponse::Http200(r#response.json::<Vec<DeviceWithConfigContext>>()?)) },
-		_ => { Ok(DcimDevicesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimDevicesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDevicesCreateResponse {
 	Http201(DeviceWithConfigContext),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of device objects.
 pub fn dcim_devices_create(state: &ThanixClient, body: WritableDeviceWithConfigContextRequest) -> Result<DcimDevicesCreateResponse, Error> {
@@ -5033,15 +4703,13 @@ pub fn dcim_devices_create(state: &ThanixClient, body: WritableDeviceWithConfigC
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimDevicesCreateResponse::Http201(r#response.json::<DeviceWithConfigContext>()?)) },
-		_ => { Ok(DcimDevicesCreateResponse::None) }
+		r#other_status => { Ok(DcimDevicesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDevicesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of device objects.
 pub fn dcim_devices_bulk_destroy(state: &ThanixClient, body: Vec<DeviceWithConfigContextRequest>) -> Result<DcimDevicesBulkDestroyResponse, Error> {
@@ -5050,15 +4718,13 @@ pub fn dcim_devices_bulk_destroy(state: &ThanixClient, body: Vec<DeviceWithConfi
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimDevicesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimDevicesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDevicesBulkPartialUpdateResponse {
 	Http200(Vec<DeviceWithConfigContext>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of device objects.
 pub fn dcim_devices_bulk_partial_update(state: &ThanixClient, body: Vec<DeviceWithConfigContextRequest>) -> Result<DcimDevicesBulkPartialUpdateResponse, Error> {
@@ -5068,15 +4734,13 @@ pub fn dcim_devices_bulk_partial_update(state: &ThanixClient, body: Vec<DeviceWi
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDevicesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<DeviceWithConfigContext>>()?)) },
-		_ => { Ok(DcimDevicesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimDevicesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDevicesRetrieveResponse {
 	Http200(DeviceWithConfigContext),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a device object.
 pub fn dcim_devices_retrieve(state: &ThanixClient, id: i64) -> Result<DcimDevicesRetrieveResponse, Error> {
@@ -5085,15 +4749,13 @@ pub fn dcim_devices_retrieve(state: &ThanixClient, id: i64) -> Result<DcimDevice
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDevicesRetrieveResponse::Http200(r#response.json::<DeviceWithConfigContext>()?)) },
-		_ => { Ok(DcimDevicesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimDevicesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDevicesUpdateResponse {
 	Http200(DeviceWithConfigContext),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a device object.
 pub fn dcim_devices_update(state: &ThanixClient, body: WritableDeviceWithConfigContextRequest, id: i64) -> Result<DcimDevicesUpdateResponse, Error> {
@@ -5103,15 +4765,13 @@ pub fn dcim_devices_update(state: &ThanixClient, body: WritableDeviceWithConfigC
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDevicesUpdateResponse::Http200(r#response.json::<DeviceWithConfigContext>()?)) },
-		_ => { Ok(DcimDevicesUpdateResponse::None) }
+		r#other_status => { Ok(DcimDevicesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDevicesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a device object.
 pub fn dcim_devices_destroy(state: &ThanixClient, id: i64) -> Result<DcimDevicesDestroyResponse, Error> {
@@ -5119,15 +4779,13 @@ pub fn dcim_devices_destroy(state: &ThanixClient, id: i64) -> Result<DcimDevices
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimDevicesDestroyResponse::None) }
+		r#other_status => { Ok(DcimDevicesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDevicesPartialUpdateResponse {
 	Http200(DeviceWithConfigContext),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a device object.
 pub fn dcim_devices_partial_update(state: &ThanixClient, body: PatchedWritableDeviceWithConfigContextRequest, id: i64) -> Result<DcimDevicesPartialUpdateResponse, Error> {
@@ -5137,7 +4795,7 @@ pub fn dcim_devices_partial_update(state: &ThanixClient, body: PatchedWritableDe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDevicesPartialUpdateResponse::Http200(r#response.json::<DeviceWithConfigContext>()?)) },
-		_ => { Ok(DcimDevicesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimDevicesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -5145,12 +4803,10 @@ pub struct DcimDevicesRenderConfigCreateQuery {
 	format: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimDevicesRenderConfigCreateResponse {
 	Http200(DeviceWithConfigContext),
-	#[default]
-	None
+	Other(Response)
 }
 /// Resolve and render the preferred ConfigTemplate for this Device.
 pub fn dcim_devices_render_config_create(state: &ThanixClient, query: DcimDevicesRenderConfigCreateQuery, body: WritableDeviceWithConfigContextRequest, id: i64) -> Result<DcimDevicesRenderConfigCreateResponse, Error> {
@@ -5160,7 +4816,7 @@ pub fn dcim_devices_render_config_create(state: &ThanixClient, query: DcimDevice
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimDevicesRenderConfigCreateResponse::Http200(r#response.json::<DeviceWithConfigContext>()?)) },
-		_ => { Ok(DcimDevicesRenderConfigCreateResponse::None) }
+		r#other_status => { Ok(DcimDevicesRenderConfigCreateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -5242,12 +4898,10 @@ pub struct DcimFrontPortTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimFrontPortTemplatesListResponse {
 	Http200(PaginatedFrontPortTemplateList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of front port template objects.
 pub fn dcim_front_port_templates_list(state: &ThanixClient, query: DcimFrontPortTemplatesListQuery) -> Result<DcimFrontPortTemplatesListResponse, Error> {
@@ -5256,15 +4910,13 @@ pub fn dcim_front_port_templates_list(state: &ThanixClient, query: DcimFrontPort
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimFrontPortTemplatesListResponse::Http200(r#response.json::<PaginatedFrontPortTemplateList>()?)) },
-		_ => { Ok(DcimFrontPortTemplatesListResponse::None) }
+		r#other_status => { Ok(DcimFrontPortTemplatesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimFrontPortTemplatesBulkUpdateResponse {
 	Http200(Vec<FrontPortTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of front port template objects.
 pub fn dcim_front_port_templates_bulk_update(state: &ThanixClient, body: Vec<FrontPortTemplateRequest>) -> Result<DcimFrontPortTemplatesBulkUpdateResponse, Error> {
@@ -5274,15 +4926,13 @@ pub fn dcim_front_port_templates_bulk_update(state: &ThanixClient, body: Vec<Fro
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimFrontPortTemplatesBulkUpdateResponse::Http200(r#response.json::<Vec<FrontPortTemplate>>()?)) },
-		_ => { Ok(DcimFrontPortTemplatesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimFrontPortTemplatesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimFrontPortTemplatesCreateResponse {
 	Http201(FrontPortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of front port template objects.
 pub fn dcim_front_port_templates_create(state: &ThanixClient, body: WritableFrontPortTemplateRequest) -> Result<DcimFrontPortTemplatesCreateResponse, Error> {
@@ -5292,15 +4942,13 @@ pub fn dcim_front_port_templates_create(state: &ThanixClient, body: WritableFron
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimFrontPortTemplatesCreateResponse::Http201(r#response.json::<FrontPortTemplate>()?)) },
-		_ => { Ok(DcimFrontPortTemplatesCreateResponse::None) }
+		r#other_status => { Ok(DcimFrontPortTemplatesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimFrontPortTemplatesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of front port template objects.
 pub fn dcim_front_port_templates_bulk_destroy(state: &ThanixClient, body: Vec<FrontPortTemplateRequest>) -> Result<DcimFrontPortTemplatesBulkDestroyResponse, Error> {
@@ -5309,15 +4957,13 @@ pub fn dcim_front_port_templates_bulk_destroy(state: &ThanixClient, body: Vec<Fr
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimFrontPortTemplatesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimFrontPortTemplatesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimFrontPortTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<FrontPortTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of front port template objects.
 pub fn dcim_front_port_templates_bulk_partial_update(state: &ThanixClient, body: Vec<FrontPortTemplateRequest>) -> Result<DcimFrontPortTemplatesBulkPartialUpdateResponse, Error> {
@@ -5327,15 +4973,13 @@ pub fn dcim_front_port_templates_bulk_partial_update(state: &ThanixClient, body:
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimFrontPortTemplatesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<FrontPortTemplate>>()?)) },
-		_ => { Ok(DcimFrontPortTemplatesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimFrontPortTemplatesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimFrontPortTemplatesRetrieveResponse {
 	Http200(FrontPortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a front port template object.
 pub fn dcim_front_port_templates_retrieve(state: &ThanixClient, id: i64) -> Result<DcimFrontPortTemplatesRetrieveResponse, Error> {
@@ -5344,15 +4988,13 @@ pub fn dcim_front_port_templates_retrieve(state: &ThanixClient, id: i64) -> Resu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimFrontPortTemplatesRetrieveResponse::Http200(r#response.json::<FrontPortTemplate>()?)) },
-		_ => { Ok(DcimFrontPortTemplatesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimFrontPortTemplatesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimFrontPortTemplatesUpdateResponse {
 	Http200(FrontPortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a front port template object.
 pub fn dcim_front_port_templates_update(state: &ThanixClient, body: WritableFrontPortTemplateRequest, id: i64) -> Result<DcimFrontPortTemplatesUpdateResponse, Error> {
@@ -5362,15 +5004,13 @@ pub fn dcim_front_port_templates_update(state: &ThanixClient, body: WritableFron
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimFrontPortTemplatesUpdateResponse::Http200(r#response.json::<FrontPortTemplate>()?)) },
-		_ => { Ok(DcimFrontPortTemplatesUpdateResponse::None) }
+		r#other_status => { Ok(DcimFrontPortTemplatesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimFrontPortTemplatesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a front port template object.
 pub fn dcim_front_port_templates_destroy(state: &ThanixClient, id: i64) -> Result<DcimFrontPortTemplatesDestroyResponse, Error> {
@@ -5378,15 +5018,13 @@ pub fn dcim_front_port_templates_destroy(state: &ThanixClient, id: i64) -> Resul
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimFrontPortTemplatesDestroyResponse::None) }
+		r#other_status => { Ok(DcimFrontPortTemplatesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimFrontPortTemplatesPartialUpdateResponse {
 	Http200(FrontPortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a front port template object.
 pub fn dcim_front_port_templates_partial_update(state: &ThanixClient, body: PatchedWritableFrontPortTemplateRequest, id: i64) -> Result<DcimFrontPortTemplatesPartialUpdateResponse, Error> {
@@ -5396,7 +5034,7 @@ pub fn dcim_front_port_templates_partial_update(state: &ThanixClient, body: Patc
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimFrontPortTemplatesPartialUpdateResponse::Http200(r#response.json::<FrontPortTemplate>()?)) },
-		_ => { Ok(DcimFrontPortTemplatesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimFrontPortTemplatesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -5571,12 +5209,10 @@ pub struct DcimFrontPortsListQuery {
 	virtual_chassis_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimFrontPortsListResponse {
 	Http200(PaginatedFrontPortList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of front port objects.
 pub fn dcim_front_ports_list(state: &ThanixClient, query: DcimFrontPortsListQuery) -> Result<DcimFrontPortsListResponse, Error> {
@@ -5585,15 +5221,13 @@ pub fn dcim_front_ports_list(state: &ThanixClient, query: DcimFrontPortsListQuer
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimFrontPortsListResponse::Http200(r#response.json::<PaginatedFrontPortList>()?)) },
-		_ => { Ok(DcimFrontPortsListResponse::None) }
+		r#other_status => { Ok(DcimFrontPortsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimFrontPortsBulkUpdateResponse {
 	Http200(Vec<FrontPort>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of front port objects.
 pub fn dcim_front_ports_bulk_update(state: &ThanixClient, body: Vec<FrontPortRequest>) -> Result<DcimFrontPortsBulkUpdateResponse, Error> {
@@ -5603,15 +5237,13 @@ pub fn dcim_front_ports_bulk_update(state: &ThanixClient, body: Vec<FrontPortReq
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimFrontPortsBulkUpdateResponse::Http200(r#response.json::<Vec<FrontPort>>()?)) },
-		_ => { Ok(DcimFrontPortsBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimFrontPortsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimFrontPortsCreateResponse {
 	Http201(FrontPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of front port objects.
 pub fn dcim_front_ports_create(state: &ThanixClient, body: WritableFrontPortRequest) -> Result<DcimFrontPortsCreateResponse, Error> {
@@ -5621,15 +5253,13 @@ pub fn dcim_front_ports_create(state: &ThanixClient, body: WritableFrontPortRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimFrontPortsCreateResponse::Http201(r#response.json::<FrontPort>()?)) },
-		_ => { Ok(DcimFrontPortsCreateResponse::None) }
+		r#other_status => { Ok(DcimFrontPortsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimFrontPortsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of front port objects.
 pub fn dcim_front_ports_bulk_destroy(state: &ThanixClient, body: Vec<FrontPortRequest>) -> Result<DcimFrontPortsBulkDestroyResponse, Error> {
@@ -5638,15 +5268,13 @@ pub fn dcim_front_ports_bulk_destroy(state: &ThanixClient, body: Vec<FrontPortRe
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimFrontPortsBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimFrontPortsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimFrontPortsBulkPartialUpdateResponse {
 	Http200(Vec<FrontPort>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of front port objects.
 pub fn dcim_front_ports_bulk_partial_update(state: &ThanixClient, body: Vec<FrontPortRequest>) -> Result<DcimFrontPortsBulkPartialUpdateResponse, Error> {
@@ -5656,15 +5284,13 @@ pub fn dcim_front_ports_bulk_partial_update(state: &ThanixClient, body: Vec<Fron
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimFrontPortsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<FrontPort>>()?)) },
-		_ => { Ok(DcimFrontPortsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimFrontPortsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimFrontPortsRetrieveResponse {
 	Http200(FrontPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a front port object.
 pub fn dcim_front_ports_retrieve(state: &ThanixClient, id: i64) -> Result<DcimFrontPortsRetrieveResponse, Error> {
@@ -5673,15 +5299,13 @@ pub fn dcim_front_ports_retrieve(state: &ThanixClient, id: i64) -> Result<DcimFr
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimFrontPortsRetrieveResponse::Http200(r#response.json::<FrontPort>()?)) },
-		_ => { Ok(DcimFrontPortsRetrieveResponse::None) }
+		r#other_status => { Ok(DcimFrontPortsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimFrontPortsUpdateResponse {
 	Http200(FrontPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a front port object.
 pub fn dcim_front_ports_update(state: &ThanixClient, body: WritableFrontPortRequest, id: i64) -> Result<DcimFrontPortsUpdateResponse, Error> {
@@ -5691,15 +5315,13 @@ pub fn dcim_front_ports_update(state: &ThanixClient, body: WritableFrontPortRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimFrontPortsUpdateResponse::Http200(r#response.json::<FrontPort>()?)) },
-		_ => { Ok(DcimFrontPortsUpdateResponse::None) }
+		r#other_status => { Ok(DcimFrontPortsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimFrontPortsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a front port object.
 pub fn dcim_front_ports_destroy(state: &ThanixClient, id: i64) -> Result<DcimFrontPortsDestroyResponse, Error> {
@@ -5707,15 +5329,13 @@ pub fn dcim_front_ports_destroy(state: &ThanixClient, id: i64) -> Result<DcimFro
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimFrontPortsDestroyResponse::None) }
+		r#other_status => { Ok(DcimFrontPortsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimFrontPortsPartialUpdateResponse {
 	Http200(FrontPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a front port object.
 pub fn dcim_front_ports_partial_update(state: &ThanixClient, body: PatchedWritableFrontPortRequest, id: i64) -> Result<DcimFrontPortsPartialUpdateResponse, Error> {
@@ -5725,15 +5345,13 @@ pub fn dcim_front_ports_partial_update(state: &ThanixClient, body: PatchedWritab
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimFrontPortsPartialUpdateResponse::Http200(r#response.json::<FrontPort>()?)) },
-		_ => { Ok(DcimFrontPortsPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimFrontPortsPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimFrontPortsPathsRetrieveResponse {
 	Http200(FrontPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Return all CablePaths which traverse a given pass-through port.
 pub fn dcim_front_ports_paths_retrieve(state: &ThanixClient, id: i64) -> Result<DcimFrontPortsPathsRetrieveResponse, Error> {
@@ -5742,7 +5360,7 @@ pub fn dcim_front_ports_paths_retrieve(state: &ThanixClient, id: i64) -> Result<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimFrontPortsPathsRetrieveResponse::Http200(r#response.json::<FrontPort>()?)) },
-		_ => { Ok(DcimFrontPortsPathsRetrieveResponse::None) }
+		r#other_status => { Ok(DcimFrontPortsPathsRetrieveResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -5823,12 +5441,10 @@ pub struct DcimInterfaceTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInterfaceTemplatesListResponse {
 	Http200(PaginatedInterfaceTemplateList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of interface template objects.
 pub fn dcim_interface_templates_list(state: &ThanixClient, query: DcimInterfaceTemplatesListQuery) -> Result<DcimInterfaceTemplatesListResponse, Error> {
@@ -5837,15 +5453,13 @@ pub fn dcim_interface_templates_list(state: &ThanixClient, query: DcimInterfaceT
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInterfaceTemplatesListResponse::Http200(r#response.json::<PaginatedInterfaceTemplateList>()?)) },
-		_ => { Ok(DcimInterfaceTemplatesListResponse::None) }
+		r#other_status => { Ok(DcimInterfaceTemplatesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInterfaceTemplatesBulkUpdateResponse {
 	Http200(Vec<InterfaceTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of interface template objects.
 pub fn dcim_interface_templates_bulk_update(state: &ThanixClient, body: Vec<InterfaceTemplateRequest>) -> Result<DcimInterfaceTemplatesBulkUpdateResponse, Error> {
@@ -5855,15 +5469,13 @@ pub fn dcim_interface_templates_bulk_update(state: &ThanixClient, body: Vec<Inte
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInterfaceTemplatesBulkUpdateResponse::Http200(r#response.json::<Vec<InterfaceTemplate>>()?)) },
-		_ => { Ok(DcimInterfaceTemplatesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimInterfaceTemplatesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInterfaceTemplatesCreateResponse {
 	Http201(InterfaceTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of interface template objects.
 pub fn dcim_interface_templates_create(state: &ThanixClient, body: WritableInterfaceTemplateRequest) -> Result<DcimInterfaceTemplatesCreateResponse, Error> {
@@ -5873,15 +5485,13 @@ pub fn dcim_interface_templates_create(state: &ThanixClient, body: WritableInter
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimInterfaceTemplatesCreateResponse::Http201(r#response.json::<InterfaceTemplate>()?)) },
-		_ => { Ok(DcimInterfaceTemplatesCreateResponse::None) }
+		r#other_status => { Ok(DcimInterfaceTemplatesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInterfaceTemplatesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of interface template objects.
 pub fn dcim_interface_templates_bulk_destroy(state: &ThanixClient, body: Vec<InterfaceTemplateRequest>) -> Result<DcimInterfaceTemplatesBulkDestroyResponse, Error> {
@@ -5890,15 +5500,13 @@ pub fn dcim_interface_templates_bulk_destroy(state: &ThanixClient, body: Vec<Int
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimInterfaceTemplatesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimInterfaceTemplatesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInterfaceTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<InterfaceTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of interface template objects.
 pub fn dcim_interface_templates_bulk_partial_update(state: &ThanixClient, body: Vec<InterfaceTemplateRequest>) -> Result<DcimInterfaceTemplatesBulkPartialUpdateResponse, Error> {
@@ -5908,15 +5516,13 @@ pub fn dcim_interface_templates_bulk_partial_update(state: &ThanixClient, body: 
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInterfaceTemplatesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<InterfaceTemplate>>()?)) },
-		_ => { Ok(DcimInterfaceTemplatesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimInterfaceTemplatesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInterfaceTemplatesRetrieveResponse {
 	Http200(InterfaceTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a interface template object.
 pub fn dcim_interface_templates_retrieve(state: &ThanixClient, id: i64) -> Result<DcimInterfaceTemplatesRetrieveResponse, Error> {
@@ -5925,15 +5531,13 @@ pub fn dcim_interface_templates_retrieve(state: &ThanixClient, id: i64) -> Resul
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInterfaceTemplatesRetrieveResponse::Http200(r#response.json::<InterfaceTemplate>()?)) },
-		_ => { Ok(DcimInterfaceTemplatesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimInterfaceTemplatesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInterfaceTemplatesUpdateResponse {
 	Http200(InterfaceTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a interface template object.
 pub fn dcim_interface_templates_update(state: &ThanixClient, body: WritableInterfaceTemplateRequest, id: i64) -> Result<DcimInterfaceTemplatesUpdateResponse, Error> {
@@ -5943,15 +5547,13 @@ pub fn dcim_interface_templates_update(state: &ThanixClient, body: WritableInter
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInterfaceTemplatesUpdateResponse::Http200(r#response.json::<InterfaceTemplate>()?)) },
-		_ => { Ok(DcimInterfaceTemplatesUpdateResponse::None) }
+		r#other_status => { Ok(DcimInterfaceTemplatesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInterfaceTemplatesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a interface template object.
 pub fn dcim_interface_templates_destroy(state: &ThanixClient, id: i64) -> Result<DcimInterfaceTemplatesDestroyResponse, Error> {
@@ -5959,15 +5561,13 @@ pub fn dcim_interface_templates_destroy(state: &ThanixClient, id: i64) -> Result
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimInterfaceTemplatesDestroyResponse::None) }
+		r#other_status => { Ok(DcimInterfaceTemplatesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInterfaceTemplatesPartialUpdateResponse {
 	Http200(InterfaceTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a interface template object.
 pub fn dcim_interface_templates_partial_update(state: &ThanixClient, body: PatchedWritableInterfaceTemplateRequest, id: i64) -> Result<DcimInterfaceTemplatesPartialUpdateResponse, Error> {
@@ -5977,7 +5577,7 @@ pub fn dcim_interface_templates_partial_update(state: &ThanixClient, body: Patch
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInterfaceTemplatesPartialUpdateResponse::Http200(r#response.json::<InterfaceTemplate>()?)) },
-		_ => { Ok(DcimInterfaceTemplatesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimInterfaceTemplatesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -6261,12 +5861,10 @@ pub struct DcimInterfacesListQuery {
 	wwn__nisw: Option<Vec<String>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInterfacesListResponse {
 	Http200(PaginatedInterfaceList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of interface objects.
 pub fn dcim_interfaces_list(state: &ThanixClient, query: DcimInterfacesListQuery) -> Result<DcimInterfacesListResponse, Error> {
@@ -6275,15 +5873,13 @@ pub fn dcim_interfaces_list(state: &ThanixClient, query: DcimInterfacesListQuery
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInterfacesListResponse::Http200(r#response.json::<PaginatedInterfaceList>()?)) },
-		_ => { Ok(DcimInterfacesListResponse::None) }
+		r#other_status => { Ok(DcimInterfacesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInterfacesBulkUpdateResponse {
 	Http200(Vec<Interface>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of interface objects.
 pub fn dcim_interfaces_bulk_update(state: &ThanixClient, body: Vec<InterfaceRequest>) -> Result<DcimInterfacesBulkUpdateResponse, Error> {
@@ -6293,15 +5889,13 @@ pub fn dcim_interfaces_bulk_update(state: &ThanixClient, body: Vec<InterfaceRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInterfacesBulkUpdateResponse::Http200(r#response.json::<Vec<Interface>>()?)) },
-		_ => { Ok(DcimInterfacesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimInterfacesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInterfacesCreateResponse {
 	Http201(Interface),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of interface objects.
 pub fn dcim_interfaces_create(state: &ThanixClient, body: WritableInterfaceRequest) -> Result<DcimInterfacesCreateResponse, Error> {
@@ -6311,15 +5905,13 @@ pub fn dcim_interfaces_create(state: &ThanixClient, body: WritableInterfaceReque
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimInterfacesCreateResponse::Http201(r#response.json::<Interface>()?)) },
-		_ => { Ok(DcimInterfacesCreateResponse::None) }
+		r#other_status => { Ok(DcimInterfacesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInterfacesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of interface objects.
 pub fn dcim_interfaces_bulk_destroy(state: &ThanixClient, body: Vec<InterfaceRequest>) -> Result<DcimInterfacesBulkDestroyResponse, Error> {
@@ -6328,15 +5920,13 @@ pub fn dcim_interfaces_bulk_destroy(state: &ThanixClient, body: Vec<InterfaceReq
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimInterfacesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimInterfacesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInterfacesBulkPartialUpdateResponse {
 	Http200(Vec<Interface>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of interface objects.
 pub fn dcim_interfaces_bulk_partial_update(state: &ThanixClient, body: Vec<InterfaceRequest>) -> Result<DcimInterfacesBulkPartialUpdateResponse, Error> {
@@ -6346,15 +5936,13 @@ pub fn dcim_interfaces_bulk_partial_update(state: &ThanixClient, body: Vec<Inter
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInterfacesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Interface>>()?)) },
-		_ => { Ok(DcimInterfacesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimInterfacesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInterfacesRetrieveResponse {
 	Http200(Interface),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a interface object.
 pub fn dcim_interfaces_retrieve(state: &ThanixClient, id: i64) -> Result<DcimInterfacesRetrieveResponse, Error> {
@@ -6363,15 +5951,13 @@ pub fn dcim_interfaces_retrieve(state: &ThanixClient, id: i64) -> Result<DcimInt
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInterfacesRetrieveResponse::Http200(r#response.json::<Interface>()?)) },
-		_ => { Ok(DcimInterfacesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimInterfacesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInterfacesUpdateResponse {
 	Http200(Interface),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a interface object.
 pub fn dcim_interfaces_update(state: &ThanixClient, body: WritableInterfaceRequest, id: i64) -> Result<DcimInterfacesUpdateResponse, Error> {
@@ -6381,15 +5967,13 @@ pub fn dcim_interfaces_update(state: &ThanixClient, body: WritableInterfaceReque
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInterfacesUpdateResponse::Http200(r#response.json::<Interface>()?)) },
-		_ => { Ok(DcimInterfacesUpdateResponse::None) }
+		r#other_status => { Ok(DcimInterfacesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInterfacesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a interface object.
 pub fn dcim_interfaces_destroy(state: &ThanixClient, id: i64) -> Result<DcimInterfacesDestroyResponse, Error> {
@@ -6397,15 +5981,13 @@ pub fn dcim_interfaces_destroy(state: &ThanixClient, id: i64) -> Result<DcimInte
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimInterfacesDestroyResponse::None) }
+		r#other_status => { Ok(DcimInterfacesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInterfacesPartialUpdateResponse {
 	Http200(Interface),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a interface object.
 pub fn dcim_interfaces_partial_update(state: &ThanixClient, body: PatchedWritableInterfaceRequest, id: i64) -> Result<DcimInterfacesPartialUpdateResponse, Error> {
@@ -6415,15 +5997,13 @@ pub fn dcim_interfaces_partial_update(state: &ThanixClient, body: PatchedWritabl
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInterfacesPartialUpdateResponse::Http200(r#response.json::<Interface>()?)) },
-		_ => { Ok(DcimInterfacesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimInterfacesPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInterfacesTraceRetrieveResponse {
 	Http200(Interface),
-	#[default]
-	None
+	Other(Response)
 }
 /// Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
 pub fn dcim_interfaces_trace_retrieve(state: &ThanixClient, id: i64) -> Result<DcimInterfacesTraceRetrieveResponse, Error> {
@@ -6432,7 +6012,7 @@ pub fn dcim_interfaces_trace_retrieve(state: &ThanixClient, id: i64) -> Result<D
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInterfacesTraceRetrieveResponse::Http200(r#response.json::<Interface>()?)) },
-		_ => { Ok(DcimInterfacesTraceRetrieveResponse::None) }
+		r#other_status => { Ok(DcimInterfacesTraceRetrieveResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -6517,12 +6097,10 @@ pub struct DcimInventoryItemRolesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemRolesListResponse {
 	Http200(PaginatedInventoryItemRoleList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of inventory item role objects.
 pub fn dcim_inventory_item_roles_list(state: &ThanixClient, query: DcimInventoryItemRolesListQuery) -> Result<DcimInventoryItemRolesListResponse, Error> {
@@ -6531,15 +6109,13 @@ pub fn dcim_inventory_item_roles_list(state: &ThanixClient, query: DcimInventory
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInventoryItemRolesListResponse::Http200(r#response.json::<PaginatedInventoryItemRoleList>()?)) },
-		_ => { Ok(DcimInventoryItemRolesListResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemRolesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemRolesBulkUpdateResponse {
 	Http200(Vec<InventoryItemRole>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of inventory item role objects.
 pub fn dcim_inventory_item_roles_bulk_update(state: &ThanixClient, body: Vec<InventoryItemRoleRequest>) -> Result<DcimInventoryItemRolesBulkUpdateResponse, Error> {
@@ -6549,15 +6125,13 @@ pub fn dcim_inventory_item_roles_bulk_update(state: &ThanixClient, body: Vec<Inv
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInventoryItemRolesBulkUpdateResponse::Http200(r#response.json::<Vec<InventoryItemRole>>()?)) },
-		_ => { Ok(DcimInventoryItemRolesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemRolesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemRolesCreateResponse {
 	Http201(InventoryItemRole),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of inventory item role objects.
 pub fn dcim_inventory_item_roles_create(state: &ThanixClient, body: InventoryItemRoleRequest) -> Result<DcimInventoryItemRolesCreateResponse, Error> {
@@ -6567,15 +6141,13 @@ pub fn dcim_inventory_item_roles_create(state: &ThanixClient, body: InventoryIte
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimInventoryItemRolesCreateResponse::Http201(r#response.json::<InventoryItemRole>()?)) },
-		_ => { Ok(DcimInventoryItemRolesCreateResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemRolesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemRolesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of inventory item role objects.
 pub fn dcim_inventory_item_roles_bulk_destroy(state: &ThanixClient, body: Vec<InventoryItemRoleRequest>) -> Result<DcimInventoryItemRolesBulkDestroyResponse, Error> {
@@ -6584,15 +6156,13 @@ pub fn dcim_inventory_item_roles_bulk_destroy(state: &ThanixClient, body: Vec<In
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimInventoryItemRolesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemRolesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemRolesBulkPartialUpdateResponse {
 	Http200(Vec<InventoryItemRole>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of inventory item role objects.
 pub fn dcim_inventory_item_roles_bulk_partial_update(state: &ThanixClient, body: Vec<InventoryItemRoleRequest>) -> Result<DcimInventoryItemRolesBulkPartialUpdateResponse, Error> {
@@ -6602,15 +6172,13 @@ pub fn dcim_inventory_item_roles_bulk_partial_update(state: &ThanixClient, body:
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInventoryItemRolesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<InventoryItemRole>>()?)) },
-		_ => { Ok(DcimInventoryItemRolesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemRolesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemRolesRetrieveResponse {
 	Http200(InventoryItemRole),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a inventory item role object.
 pub fn dcim_inventory_item_roles_retrieve(state: &ThanixClient, id: i64) -> Result<DcimInventoryItemRolesRetrieveResponse, Error> {
@@ -6619,15 +6187,13 @@ pub fn dcim_inventory_item_roles_retrieve(state: &ThanixClient, id: i64) -> Resu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInventoryItemRolesRetrieveResponse::Http200(r#response.json::<InventoryItemRole>()?)) },
-		_ => { Ok(DcimInventoryItemRolesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemRolesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemRolesUpdateResponse {
 	Http200(InventoryItemRole),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a inventory item role object.
 pub fn dcim_inventory_item_roles_update(state: &ThanixClient, body: InventoryItemRoleRequest, id: i64) -> Result<DcimInventoryItemRolesUpdateResponse, Error> {
@@ -6637,15 +6203,13 @@ pub fn dcim_inventory_item_roles_update(state: &ThanixClient, body: InventoryIte
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInventoryItemRolesUpdateResponse::Http200(r#response.json::<InventoryItemRole>()?)) },
-		_ => { Ok(DcimInventoryItemRolesUpdateResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemRolesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemRolesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a inventory item role object.
 pub fn dcim_inventory_item_roles_destroy(state: &ThanixClient, id: i64) -> Result<DcimInventoryItemRolesDestroyResponse, Error> {
@@ -6653,15 +6217,13 @@ pub fn dcim_inventory_item_roles_destroy(state: &ThanixClient, id: i64) -> Resul
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimInventoryItemRolesDestroyResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemRolesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemRolesPartialUpdateResponse {
 	Http200(InventoryItemRole),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a inventory item role object.
 pub fn dcim_inventory_item_roles_partial_update(state: &ThanixClient, body: PatchedInventoryItemRoleRequest, id: i64) -> Result<DcimInventoryItemRolesPartialUpdateResponse, Error> {
@@ -6671,7 +6233,7 @@ pub fn dcim_inventory_item_roles_partial_update(state: &ThanixClient, body: Patc
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInventoryItemRolesPartialUpdateResponse::Http200(r#response.json::<InventoryItemRole>()?)) },
-		_ => { Ok(DcimInventoryItemRolesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemRolesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -6787,12 +6349,10 @@ pub struct DcimInventoryItemTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemTemplatesListResponse {
 	Http200(PaginatedInventoryItemTemplateList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of inventory item template objects.
 pub fn dcim_inventory_item_templates_list(state: &ThanixClient, query: DcimInventoryItemTemplatesListQuery) -> Result<DcimInventoryItemTemplatesListResponse, Error> {
@@ -6801,15 +6361,13 @@ pub fn dcim_inventory_item_templates_list(state: &ThanixClient, query: DcimInven
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInventoryItemTemplatesListResponse::Http200(r#response.json::<PaginatedInventoryItemTemplateList>()?)) },
-		_ => { Ok(DcimInventoryItemTemplatesListResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemTemplatesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemTemplatesBulkUpdateResponse {
 	Http200(Vec<InventoryItemTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of inventory item template objects.
 pub fn dcim_inventory_item_templates_bulk_update(state: &ThanixClient, body: Vec<InventoryItemTemplateRequest>) -> Result<DcimInventoryItemTemplatesBulkUpdateResponse, Error> {
@@ -6819,15 +6377,13 @@ pub fn dcim_inventory_item_templates_bulk_update(state: &ThanixClient, body: Vec
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInventoryItemTemplatesBulkUpdateResponse::Http200(r#response.json::<Vec<InventoryItemTemplate>>()?)) },
-		_ => { Ok(DcimInventoryItemTemplatesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemTemplatesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemTemplatesCreateResponse {
 	Http201(InventoryItemTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of inventory item template objects.
 pub fn dcim_inventory_item_templates_create(state: &ThanixClient, body: WritableInventoryItemTemplateRequest) -> Result<DcimInventoryItemTemplatesCreateResponse, Error> {
@@ -6837,15 +6393,13 @@ pub fn dcim_inventory_item_templates_create(state: &ThanixClient, body: Writable
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimInventoryItemTemplatesCreateResponse::Http201(r#response.json::<InventoryItemTemplate>()?)) },
-		_ => { Ok(DcimInventoryItemTemplatesCreateResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemTemplatesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemTemplatesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of inventory item template objects.
 pub fn dcim_inventory_item_templates_bulk_destroy(state: &ThanixClient, body: Vec<InventoryItemTemplateRequest>) -> Result<DcimInventoryItemTemplatesBulkDestroyResponse, Error> {
@@ -6854,15 +6408,13 @@ pub fn dcim_inventory_item_templates_bulk_destroy(state: &ThanixClient, body: Ve
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimInventoryItemTemplatesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemTemplatesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<InventoryItemTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of inventory item template objects.
 pub fn dcim_inventory_item_templates_bulk_partial_update(state: &ThanixClient, body: Vec<InventoryItemTemplateRequest>) -> Result<DcimInventoryItemTemplatesBulkPartialUpdateResponse, Error> {
@@ -6872,15 +6424,13 @@ pub fn dcim_inventory_item_templates_bulk_partial_update(state: &ThanixClient, b
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInventoryItemTemplatesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<InventoryItemTemplate>>()?)) },
-		_ => { Ok(DcimInventoryItemTemplatesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemTemplatesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemTemplatesRetrieveResponse {
 	Http200(InventoryItemTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a inventory item template object.
 pub fn dcim_inventory_item_templates_retrieve(state: &ThanixClient, id: i64) -> Result<DcimInventoryItemTemplatesRetrieveResponse, Error> {
@@ -6889,15 +6439,13 @@ pub fn dcim_inventory_item_templates_retrieve(state: &ThanixClient, id: i64) -> 
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInventoryItemTemplatesRetrieveResponse::Http200(r#response.json::<InventoryItemTemplate>()?)) },
-		_ => { Ok(DcimInventoryItemTemplatesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemTemplatesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemTemplatesUpdateResponse {
 	Http200(InventoryItemTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a inventory item template object.
 pub fn dcim_inventory_item_templates_update(state: &ThanixClient, body: WritableInventoryItemTemplateRequest, id: i64) -> Result<DcimInventoryItemTemplatesUpdateResponse, Error> {
@@ -6907,15 +6455,13 @@ pub fn dcim_inventory_item_templates_update(state: &ThanixClient, body: Writable
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInventoryItemTemplatesUpdateResponse::Http200(r#response.json::<InventoryItemTemplate>()?)) },
-		_ => { Ok(DcimInventoryItemTemplatesUpdateResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemTemplatesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemTemplatesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a inventory item template object.
 pub fn dcim_inventory_item_templates_destroy(state: &ThanixClient, id: i64) -> Result<DcimInventoryItemTemplatesDestroyResponse, Error> {
@@ -6923,15 +6469,13 @@ pub fn dcim_inventory_item_templates_destroy(state: &ThanixClient, id: i64) -> R
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimInventoryItemTemplatesDestroyResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemTemplatesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemTemplatesPartialUpdateResponse {
 	Http200(InventoryItemTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a inventory item template object.
 pub fn dcim_inventory_item_templates_partial_update(state: &ThanixClient, body: PatchedWritableInventoryItemTemplateRequest, id: i64) -> Result<DcimInventoryItemTemplatesPartialUpdateResponse, Error> {
@@ -6941,7 +6485,7 @@ pub fn dcim_inventory_item_templates_partial_update(state: &ThanixClient, body: 
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInventoryItemTemplatesPartialUpdateResponse::Http200(r#response.json::<InventoryItemTemplate>()?)) },
-		_ => { Ok(DcimInventoryItemTemplatesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemTemplatesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -7139,12 +6683,10 @@ pub struct DcimInventoryItemsListQuery {
 	virtual_chassis_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemsListResponse {
 	Http200(PaginatedInventoryItemList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of inventory item objects.
 pub fn dcim_inventory_items_list(state: &ThanixClient, query: DcimInventoryItemsListQuery) -> Result<DcimInventoryItemsListResponse, Error> {
@@ -7153,15 +6695,13 @@ pub fn dcim_inventory_items_list(state: &ThanixClient, query: DcimInventoryItems
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInventoryItemsListResponse::Http200(r#response.json::<PaginatedInventoryItemList>()?)) },
-		_ => { Ok(DcimInventoryItemsListResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemsBulkUpdateResponse {
 	Http200(Vec<InventoryItem>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of inventory item objects.
 pub fn dcim_inventory_items_bulk_update(state: &ThanixClient, body: Vec<InventoryItemRequest>) -> Result<DcimInventoryItemsBulkUpdateResponse, Error> {
@@ -7171,15 +6711,13 @@ pub fn dcim_inventory_items_bulk_update(state: &ThanixClient, body: Vec<Inventor
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInventoryItemsBulkUpdateResponse::Http200(r#response.json::<Vec<InventoryItem>>()?)) },
-		_ => { Ok(DcimInventoryItemsBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemsCreateResponse {
 	Http201(InventoryItem),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of inventory item objects.
 pub fn dcim_inventory_items_create(state: &ThanixClient, body: WritableInventoryItemRequest) -> Result<DcimInventoryItemsCreateResponse, Error> {
@@ -7189,15 +6727,13 @@ pub fn dcim_inventory_items_create(state: &ThanixClient, body: WritableInventory
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimInventoryItemsCreateResponse::Http201(r#response.json::<InventoryItem>()?)) },
-		_ => { Ok(DcimInventoryItemsCreateResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of inventory item objects.
 pub fn dcim_inventory_items_bulk_destroy(state: &ThanixClient, body: Vec<InventoryItemRequest>) -> Result<DcimInventoryItemsBulkDestroyResponse, Error> {
@@ -7206,15 +6742,13 @@ pub fn dcim_inventory_items_bulk_destroy(state: &ThanixClient, body: Vec<Invento
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimInventoryItemsBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemsBulkPartialUpdateResponse {
 	Http200(Vec<InventoryItem>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of inventory item objects.
 pub fn dcim_inventory_items_bulk_partial_update(state: &ThanixClient, body: Vec<InventoryItemRequest>) -> Result<DcimInventoryItemsBulkPartialUpdateResponse, Error> {
@@ -7224,15 +6758,13 @@ pub fn dcim_inventory_items_bulk_partial_update(state: &ThanixClient, body: Vec<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInventoryItemsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<InventoryItem>>()?)) },
-		_ => { Ok(DcimInventoryItemsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemsRetrieveResponse {
 	Http200(InventoryItem),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a inventory item object.
 pub fn dcim_inventory_items_retrieve(state: &ThanixClient, id: i64) -> Result<DcimInventoryItemsRetrieveResponse, Error> {
@@ -7241,15 +6773,13 @@ pub fn dcim_inventory_items_retrieve(state: &ThanixClient, id: i64) -> Result<Dc
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInventoryItemsRetrieveResponse::Http200(r#response.json::<InventoryItem>()?)) },
-		_ => { Ok(DcimInventoryItemsRetrieveResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemsUpdateResponse {
 	Http200(InventoryItem),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a inventory item object.
 pub fn dcim_inventory_items_update(state: &ThanixClient, body: WritableInventoryItemRequest, id: i64) -> Result<DcimInventoryItemsUpdateResponse, Error> {
@@ -7259,15 +6789,13 @@ pub fn dcim_inventory_items_update(state: &ThanixClient, body: WritableInventory
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInventoryItemsUpdateResponse::Http200(r#response.json::<InventoryItem>()?)) },
-		_ => { Ok(DcimInventoryItemsUpdateResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a inventory item object.
 pub fn dcim_inventory_items_destroy(state: &ThanixClient, id: i64) -> Result<DcimInventoryItemsDestroyResponse, Error> {
@@ -7275,15 +6803,13 @@ pub fn dcim_inventory_items_destroy(state: &ThanixClient, id: i64) -> Result<Dci
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimInventoryItemsDestroyResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimInventoryItemsPartialUpdateResponse {
 	Http200(InventoryItem),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a inventory item object.
 pub fn dcim_inventory_items_partial_update(state: &ThanixClient, body: PatchedWritableInventoryItemRequest, id: i64) -> Result<DcimInventoryItemsPartialUpdateResponse, Error> {
@@ -7293,7 +6819,7 @@ pub fn dcim_inventory_items_partial_update(state: &ThanixClient, body: PatchedWr
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimInventoryItemsPartialUpdateResponse::Http200(r#response.json::<InventoryItem>()?)) },
-		_ => { Ok(DcimInventoryItemsPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimInventoryItemsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -7429,12 +6955,10 @@ pub struct DcimLocationsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimLocationsListResponse {
 	Http200(PaginatedLocationList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of location objects.
 pub fn dcim_locations_list(state: &ThanixClient, query: DcimLocationsListQuery) -> Result<DcimLocationsListResponse, Error> {
@@ -7443,15 +6967,13 @@ pub fn dcim_locations_list(state: &ThanixClient, query: DcimLocationsListQuery) 
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimLocationsListResponse::Http200(r#response.json::<PaginatedLocationList>()?)) },
-		_ => { Ok(DcimLocationsListResponse::None) }
+		r#other_status => { Ok(DcimLocationsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimLocationsBulkUpdateResponse {
 	Http200(Vec<Location>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of location objects.
 pub fn dcim_locations_bulk_update(state: &ThanixClient, body: Vec<LocationRequest>) -> Result<DcimLocationsBulkUpdateResponse, Error> {
@@ -7461,15 +6983,13 @@ pub fn dcim_locations_bulk_update(state: &ThanixClient, body: Vec<LocationReques
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimLocationsBulkUpdateResponse::Http200(r#response.json::<Vec<Location>>()?)) },
-		_ => { Ok(DcimLocationsBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimLocationsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimLocationsCreateResponse {
 	Http201(Location),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of location objects.
 pub fn dcim_locations_create(state: &ThanixClient, body: WritableLocationRequest) -> Result<DcimLocationsCreateResponse, Error> {
@@ -7479,15 +6999,13 @@ pub fn dcim_locations_create(state: &ThanixClient, body: WritableLocationRequest
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimLocationsCreateResponse::Http201(r#response.json::<Location>()?)) },
-		_ => { Ok(DcimLocationsCreateResponse::None) }
+		r#other_status => { Ok(DcimLocationsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimLocationsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of location objects.
 pub fn dcim_locations_bulk_destroy(state: &ThanixClient, body: Vec<LocationRequest>) -> Result<DcimLocationsBulkDestroyResponse, Error> {
@@ -7496,15 +7014,13 @@ pub fn dcim_locations_bulk_destroy(state: &ThanixClient, body: Vec<LocationReque
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimLocationsBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimLocationsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimLocationsBulkPartialUpdateResponse {
 	Http200(Vec<Location>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of location objects.
 pub fn dcim_locations_bulk_partial_update(state: &ThanixClient, body: Vec<LocationRequest>) -> Result<DcimLocationsBulkPartialUpdateResponse, Error> {
@@ -7514,15 +7030,13 @@ pub fn dcim_locations_bulk_partial_update(state: &ThanixClient, body: Vec<Locati
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimLocationsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Location>>()?)) },
-		_ => { Ok(DcimLocationsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimLocationsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimLocationsRetrieveResponse {
 	Http200(Location),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a location object.
 pub fn dcim_locations_retrieve(state: &ThanixClient, id: i64) -> Result<DcimLocationsRetrieveResponse, Error> {
@@ -7531,15 +7045,13 @@ pub fn dcim_locations_retrieve(state: &ThanixClient, id: i64) -> Result<DcimLoca
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimLocationsRetrieveResponse::Http200(r#response.json::<Location>()?)) },
-		_ => { Ok(DcimLocationsRetrieveResponse::None) }
+		r#other_status => { Ok(DcimLocationsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimLocationsUpdateResponse {
 	Http200(Location),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a location object.
 pub fn dcim_locations_update(state: &ThanixClient, body: WritableLocationRequest, id: i64) -> Result<DcimLocationsUpdateResponse, Error> {
@@ -7549,15 +7061,13 @@ pub fn dcim_locations_update(state: &ThanixClient, body: WritableLocationRequest
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimLocationsUpdateResponse::Http200(r#response.json::<Location>()?)) },
-		_ => { Ok(DcimLocationsUpdateResponse::None) }
+		r#other_status => { Ok(DcimLocationsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimLocationsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a location object.
 pub fn dcim_locations_destroy(state: &ThanixClient, id: i64) -> Result<DcimLocationsDestroyResponse, Error> {
@@ -7565,15 +7075,13 @@ pub fn dcim_locations_destroy(state: &ThanixClient, id: i64) -> Result<DcimLocat
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimLocationsDestroyResponse::None) }
+		r#other_status => { Ok(DcimLocationsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimLocationsPartialUpdateResponse {
 	Http200(Location),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a location object.
 pub fn dcim_locations_partial_update(state: &ThanixClient, body: PatchedWritableLocationRequest, id: i64) -> Result<DcimLocationsPartialUpdateResponse, Error> {
@@ -7583,7 +7091,7 @@ pub fn dcim_locations_partial_update(state: &ThanixClient, body: PatchedWritable
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimLocationsPartialUpdateResponse::Http200(r#response.json::<Location>()?)) },
-		_ => { Ok(DcimLocationsPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimLocationsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -7669,12 +7177,10 @@ pub struct DcimManufacturersListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimManufacturersListResponse {
 	Http200(PaginatedManufacturerList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of manufacturer objects.
 pub fn dcim_manufacturers_list(state: &ThanixClient, query: DcimManufacturersListQuery) -> Result<DcimManufacturersListResponse, Error> {
@@ -7683,15 +7189,13 @@ pub fn dcim_manufacturers_list(state: &ThanixClient, query: DcimManufacturersLis
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimManufacturersListResponse::Http200(r#response.json::<PaginatedManufacturerList>()?)) },
-		_ => { Ok(DcimManufacturersListResponse::None) }
+		r#other_status => { Ok(DcimManufacturersListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimManufacturersBulkUpdateResponse {
 	Http200(Vec<Manufacturer>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of manufacturer objects.
 pub fn dcim_manufacturers_bulk_update(state: &ThanixClient, body: Vec<ManufacturerRequest>) -> Result<DcimManufacturersBulkUpdateResponse, Error> {
@@ -7701,15 +7205,13 @@ pub fn dcim_manufacturers_bulk_update(state: &ThanixClient, body: Vec<Manufactur
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimManufacturersBulkUpdateResponse::Http200(r#response.json::<Vec<Manufacturer>>()?)) },
-		_ => { Ok(DcimManufacturersBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimManufacturersBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimManufacturersCreateResponse {
 	Http201(Manufacturer),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of manufacturer objects.
 pub fn dcim_manufacturers_create(state: &ThanixClient, body: ManufacturerRequest) -> Result<DcimManufacturersCreateResponse, Error> {
@@ -7719,15 +7221,13 @@ pub fn dcim_manufacturers_create(state: &ThanixClient, body: ManufacturerRequest
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimManufacturersCreateResponse::Http201(r#response.json::<Manufacturer>()?)) },
-		_ => { Ok(DcimManufacturersCreateResponse::None) }
+		r#other_status => { Ok(DcimManufacturersCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimManufacturersBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of manufacturer objects.
 pub fn dcim_manufacturers_bulk_destroy(state: &ThanixClient, body: Vec<ManufacturerRequest>) -> Result<DcimManufacturersBulkDestroyResponse, Error> {
@@ -7736,15 +7236,13 @@ pub fn dcim_manufacturers_bulk_destroy(state: &ThanixClient, body: Vec<Manufactu
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimManufacturersBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimManufacturersBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimManufacturersBulkPartialUpdateResponse {
 	Http200(Vec<Manufacturer>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of manufacturer objects.
 pub fn dcim_manufacturers_bulk_partial_update(state: &ThanixClient, body: Vec<ManufacturerRequest>) -> Result<DcimManufacturersBulkPartialUpdateResponse, Error> {
@@ -7754,15 +7252,13 @@ pub fn dcim_manufacturers_bulk_partial_update(state: &ThanixClient, body: Vec<Ma
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimManufacturersBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Manufacturer>>()?)) },
-		_ => { Ok(DcimManufacturersBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimManufacturersBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimManufacturersRetrieveResponse {
 	Http200(Manufacturer),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a manufacturer object.
 pub fn dcim_manufacturers_retrieve(state: &ThanixClient, id: i64) -> Result<DcimManufacturersRetrieveResponse, Error> {
@@ -7771,15 +7267,13 @@ pub fn dcim_manufacturers_retrieve(state: &ThanixClient, id: i64) -> Result<Dcim
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimManufacturersRetrieveResponse::Http200(r#response.json::<Manufacturer>()?)) },
-		_ => { Ok(DcimManufacturersRetrieveResponse::None) }
+		r#other_status => { Ok(DcimManufacturersRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimManufacturersUpdateResponse {
 	Http200(Manufacturer),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a manufacturer object.
 pub fn dcim_manufacturers_update(state: &ThanixClient, body: ManufacturerRequest, id: i64) -> Result<DcimManufacturersUpdateResponse, Error> {
@@ -7789,15 +7283,13 @@ pub fn dcim_manufacturers_update(state: &ThanixClient, body: ManufacturerRequest
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimManufacturersUpdateResponse::Http200(r#response.json::<Manufacturer>()?)) },
-		_ => { Ok(DcimManufacturersUpdateResponse::None) }
+		r#other_status => { Ok(DcimManufacturersUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimManufacturersDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a manufacturer object.
 pub fn dcim_manufacturers_destroy(state: &ThanixClient, id: i64) -> Result<DcimManufacturersDestroyResponse, Error> {
@@ -7805,15 +7297,13 @@ pub fn dcim_manufacturers_destroy(state: &ThanixClient, id: i64) -> Result<DcimM
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimManufacturersDestroyResponse::None) }
+		r#other_status => { Ok(DcimManufacturersDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimManufacturersPartialUpdateResponse {
 	Http200(Manufacturer),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a manufacturer object.
 pub fn dcim_manufacturers_partial_update(state: &ThanixClient, body: PatchedManufacturerRequest, id: i64) -> Result<DcimManufacturersPartialUpdateResponse, Error> {
@@ -7823,7 +7313,7 @@ pub fn dcim_manufacturers_partial_update(state: &ThanixClient, body: PatchedManu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimManufacturersPartialUpdateResponse::Http200(r#response.json::<Manufacturer>()?)) },
-		_ => { Ok(DcimManufacturersPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimManufacturersPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -7888,12 +7378,10 @@ pub struct DcimModuleBayTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleBayTemplatesListResponse {
 	Http200(PaginatedModuleBayTemplateList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of module bay template objects.
 pub fn dcim_module_bay_templates_list(state: &ThanixClient, query: DcimModuleBayTemplatesListQuery) -> Result<DcimModuleBayTemplatesListResponse, Error> {
@@ -7902,15 +7390,13 @@ pub fn dcim_module_bay_templates_list(state: &ThanixClient, query: DcimModuleBay
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModuleBayTemplatesListResponse::Http200(r#response.json::<PaginatedModuleBayTemplateList>()?)) },
-		_ => { Ok(DcimModuleBayTemplatesListResponse::None) }
+		r#other_status => { Ok(DcimModuleBayTemplatesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleBayTemplatesBulkUpdateResponse {
 	Http200(Vec<ModuleBayTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of module bay template objects.
 pub fn dcim_module_bay_templates_bulk_update(state: &ThanixClient, body: Vec<ModuleBayTemplateRequest>) -> Result<DcimModuleBayTemplatesBulkUpdateResponse, Error> {
@@ -7920,15 +7406,13 @@ pub fn dcim_module_bay_templates_bulk_update(state: &ThanixClient, body: Vec<Mod
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModuleBayTemplatesBulkUpdateResponse::Http200(r#response.json::<Vec<ModuleBayTemplate>>()?)) },
-		_ => { Ok(DcimModuleBayTemplatesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimModuleBayTemplatesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleBayTemplatesCreateResponse {
 	Http201(ModuleBayTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of module bay template objects.
 pub fn dcim_module_bay_templates_create(state: &ThanixClient, body: WritableModuleBayTemplateRequest) -> Result<DcimModuleBayTemplatesCreateResponse, Error> {
@@ -7938,15 +7422,13 @@ pub fn dcim_module_bay_templates_create(state: &ThanixClient, body: WritableModu
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimModuleBayTemplatesCreateResponse::Http201(r#response.json::<ModuleBayTemplate>()?)) },
-		_ => { Ok(DcimModuleBayTemplatesCreateResponse::None) }
+		r#other_status => { Ok(DcimModuleBayTemplatesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleBayTemplatesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of module bay template objects.
 pub fn dcim_module_bay_templates_bulk_destroy(state: &ThanixClient, body: Vec<ModuleBayTemplateRequest>) -> Result<DcimModuleBayTemplatesBulkDestroyResponse, Error> {
@@ -7955,15 +7437,13 @@ pub fn dcim_module_bay_templates_bulk_destroy(state: &ThanixClient, body: Vec<Mo
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimModuleBayTemplatesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimModuleBayTemplatesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleBayTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<ModuleBayTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of module bay template objects.
 pub fn dcim_module_bay_templates_bulk_partial_update(state: &ThanixClient, body: Vec<ModuleBayTemplateRequest>) -> Result<DcimModuleBayTemplatesBulkPartialUpdateResponse, Error> {
@@ -7973,15 +7453,13 @@ pub fn dcim_module_bay_templates_bulk_partial_update(state: &ThanixClient, body:
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModuleBayTemplatesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ModuleBayTemplate>>()?)) },
-		_ => { Ok(DcimModuleBayTemplatesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimModuleBayTemplatesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleBayTemplatesRetrieveResponse {
 	Http200(ModuleBayTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a module bay template object.
 pub fn dcim_module_bay_templates_retrieve(state: &ThanixClient, id: i64) -> Result<DcimModuleBayTemplatesRetrieveResponse, Error> {
@@ -7990,15 +7468,13 @@ pub fn dcim_module_bay_templates_retrieve(state: &ThanixClient, id: i64) -> Resu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModuleBayTemplatesRetrieveResponse::Http200(r#response.json::<ModuleBayTemplate>()?)) },
-		_ => { Ok(DcimModuleBayTemplatesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimModuleBayTemplatesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleBayTemplatesUpdateResponse {
 	Http200(ModuleBayTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a module bay template object.
 pub fn dcim_module_bay_templates_update(state: &ThanixClient, body: WritableModuleBayTemplateRequest, id: i64) -> Result<DcimModuleBayTemplatesUpdateResponse, Error> {
@@ -8008,15 +7484,13 @@ pub fn dcim_module_bay_templates_update(state: &ThanixClient, body: WritableModu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModuleBayTemplatesUpdateResponse::Http200(r#response.json::<ModuleBayTemplate>()?)) },
-		_ => { Ok(DcimModuleBayTemplatesUpdateResponse::None) }
+		r#other_status => { Ok(DcimModuleBayTemplatesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleBayTemplatesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a module bay template object.
 pub fn dcim_module_bay_templates_destroy(state: &ThanixClient, id: i64) -> Result<DcimModuleBayTemplatesDestroyResponse, Error> {
@@ -8024,15 +7498,13 @@ pub fn dcim_module_bay_templates_destroy(state: &ThanixClient, id: i64) -> Resul
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimModuleBayTemplatesDestroyResponse::None) }
+		r#other_status => { Ok(DcimModuleBayTemplatesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleBayTemplatesPartialUpdateResponse {
 	Http200(ModuleBayTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a module bay template object.
 pub fn dcim_module_bay_templates_partial_update(state: &ThanixClient, body: PatchedWritableModuleBayTemplateRequest, id: i64) -> Result<DcimModuleBayTemplatesPartialUpdateResponse, Error> {
@@ -8042,7 +7514,7 @@ pub fn dcim_module_bay_templates_partial_update(state: &ThanixClient, body: Patc
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModuleBayTemplatesPartialUpdateResponse::Http200(r#response.json::<ModuleBayTemplate>()?)) },
-		_ => { Ok(DcimModuleBayTemplatesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimModuleBayTemplatesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -8196,12 +7668,10 @@ pub struct DcimModuleBaysListQuery {
 	virtual_chassis_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleBaysListResponse {
 	Http200(PaginatedModuleBayList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of module bay objects.
 pub fn dcim_module_bays_list(state: &ThanixClient, query: DcimModuleBaysListQuery) -> Result<DcimModuleBaysListResponse, Error> {
@@ -8210,15 +7680,13 @@ pub fn dcim_module_bays_list(state: &ThanixClient, query: DcimModuleBaysListQuer
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModuleBaysListResponse::Http200(r#response.json::<PaginatedModuleBayList>()?)) },
-		_ => { Ok(DcimModuleBaysListResponse::None) }
+		r#other_status => { Ok(DcimModuleBaysListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleBaysBulkUpdateResponse {
 	Http200(Vec<ModuleBay>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of module bay objects.
 pub fn dcim_module_bays_bulk_update(state: &ThanixClient, body: Vec<ModuleBayRequest>) -> Result<DcimModuleBaysBulkUpdateResponse, Error> {
@@ -8228,15 +7696,13 @@ pub fn dcim_module_bays_bulk_update(state: &ThanixClient, body: Vec<ModuleBayReq
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModuleBaysBulkUpdateResponse::Http200(r#response.json::<Vec<ModuleBay>>()?)) },
-		_ => { Ok(DcimModuleBaysBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimModuleBaysBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleBaysCreateResponse {
 	Http201(ModuleBay),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of module bay objects.
 pub fn dcim_module_bays_create(state: &ThanixClient, body: WritableModuleBayRequest) -> Result<DcimModuleBaysCreateResponse, Error> {
@@ -8246,15 +7712,13 @@ pub fn dcim_module_bays_create(state: &ThanixClient, body: WritableModuleBayRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimModuleBaysCreateResponse::Http201(r#response.json::<ModuleBay>()?)) },
-		_ => { Ok(DcimModuleBaysCreateResponse::None) }
+		r#other_status => { Ok(DcimModuleBaysCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleBaysBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of module bay objects.
 pub fn dcim_module_bays_bulk_destroy(state: &ThanixClient, body: Vec<ModuleBayRequest>) -> Result<DcimModuleBaysBulkDestroyResponse, Error> {
@@ -8263,15 +7727,13 @@ pub fn dcim_module_bays_bulk_destroy(state: &ThanixClient, body: Vec<ModuleBayRe
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimModuleBaysBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimModuleBaysBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleBaysBulkPartialUpdateResponse {
 	Http200(Vec<ModuleBay>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of module bay objects.
 pub fn dcim_module_bays_bulk_partial_update(state: &ThanixClient, body: Vec<ModuleBayRequest>) -> Result<DcimModuleBaysBulkPartialUpdateResponse, Error> {
@@ -8281,15 +7743,13 @@ pub fn dcim_module_bays_bulk_partial_update(state: &ThanixClient, body: Vec<Modu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModuleBaysBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ModuleBay>>()?)) },
-		_ => { Ok(DcimModuleBaysBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimModuleBaysBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleBaysRetrieveResponse {
 	Http200(ModuleBay),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a module bay object.
 pub fn dcim_module_bays_retrieve(state: &ThanixClient, id: i64) -> Result<DcimModuleBaysRetrieveResponse, Error> {
@@ -8298,15 +7758,13 @@ pub fn dcim_module_bays_retrieve(state: &ThanixClient, id: i64) -> Result<DcimMo
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModuleBaysRetrieveResponse::Http200(r#response.json::<ModuleBay>()?)) },
-		_ => { Ok(DcimModuleBaysRetrieveResponse::None) }
+		r#other_status => { Ok(DcimModuleBaysRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleBaysUpdateResponse {
 	Http200(ModuleBay),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a module bay object.
 pub fn dcim_module_bays_update(state: &ThanixClient, body: WritableModuleBayRequest, id: i64) -> Result<DcimModuleBaysUpdateResponse, Error> {
@@ -8316,15 +7774,13 @@ pub fn dcim_module_bays_update(state: &ThanixClient, body: WritableModuleBayRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModuleBaysUpdateResponse::Http200(r#response.json::<ModuleBay>()?)) },
-		_ => { Ok(DcimModuleBaysUpdateResponse::None) }
+		r#other_status => { Ok(DcimModuleBaysUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleBaysDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a module bay object.
 pub fn dcim_module_bays_destroy(state: &ThanixClient, id: i64) -> Result<DcimModuleBaysDestroyResponse, Error> {
@@ -8332,15 +7788,13 @@ pub fn dcim_module_bays_destroy(state: &ThanixClient, id: i64) -> Result<DcimMod
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimModuleBaysDestroyResponse::None) }
+		r#other_status => { Ok(DcimModuleBaysDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleBaysPartialUpdateResponse {
 	Http200(ModuleBay),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a module bay object.
 pub fn dcim_module_bays_partial_update(state: &ThanixClient, body: PatchedWritableModuleBayRequest, id: i64) -> Result<DcimModuleBaysPartialUpdateResponse, Error> {
@@ -8350,7 +7804,7 @@ pub fn dcim_module_bays_partial_update(state: &ThanixClient, body: PatchedWritab
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModuleBaysPartialUpdateResponse::Http200(r#response.json::<ModuleBay>()?)) },
-		_ => { Ok(DcimModuleBaysPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimModuleBaysPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -8453,12 +7907,10 @@ pub struct DcimModuleTypesListQuery {
 	weight_unit__n: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleTypesListResponse {
 	Http200(PaginatedModuleTypeList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of module type objects.
 pub fn dcim_module_types_list(state: &ThanixClient, query: DcimModuleTypesListQuery) -> Result<DcimModuleTypesListResponse, Error> {
@@ -8467,15 +7919,13 @@ pub fn dcim_module_types_list(state: &ThanixClient, query: DcimModuleTypesListQu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModuleTypesListResponse::Http200(r#response.json::<PaginatedModuleTypeList>()?)) },
-		_ => { Ok(DcimModuleTypesListResponse::None) }
+		r#other_status => { Ok(DcimModuleTypesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleTypesBulkUpdateResponse {
 	Http200(Vec<ModuleType>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of module type objects.
 pub fn dcim_module_types_bulk_update(state: &ThanixClient, body: Vec<ModuleTypeRequest>) -> Result<DcimModuleTypesBulkUpdateResponse, Error> {
@@ -8485,15 +7935,13 @@ pub fn dcim_module_types_bulk_update(state: &ThanixClient, body: Vec<ModuleTypeR
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModuleTypesBulkUpdateResponse::Http200(r#response.json::<Vec<ModuleType>>()?)) },
-		_ => { Ok(DcimModuleTypesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimModuleTypesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleTypesCreateResponse {
 	Http201(ModuleType),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of module type objects.
 pub fn dcim_module_types_create(state: &ThanixClient, body: WritableModuleTypeRequest) -> Result<DcimModuleTypesCreateResponse, Error> {
@@ -8503,15 +7951,13 @@ pub fn dcim_module_types_create(state: &ThanixClient, body: WritableModuleTypeRe
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimModuleTypesCreateResponse::Http201(r#response.json::<ModuleType>()?)) },
-		_ => { Ok(DcimModuleTypesCreateResponse::None) }
+		r#other_status => { Ok(DcimModuleTypesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleTypesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of module type objects.
 pub fn dcim_module_types_bulk_destroy(state: &ThanixClient, body: Vec<ModuleTypeRequest>) -> Result<DcimModuleTypesBulkDestroyResponse, Error> {
@@ -8520,15 +7966,13 @@ pub fn dcim_module_types_bulk_destroy(state: &ThanixClient, body: Vec<ModuleType
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimModuleTypesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimModuleTypesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleTypesBulkPartialUpdateResponse {
 	Http200(Vec<ModuleType>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of module type objects.
 pub fn dcim_module_types_bulk_partial_update(state: &ThanixClient, body: Vec<ModuleTypeRequest>) -> Result<DcimModuleTypesBulkPartialUpdateResponse, Error> {
@@ -8538,15 +7982,13 @@ pub fn dcim_module_types_bulk_partial_update(state: &ThanixClient, body: Vec<Mod
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModuleTypesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ModuleType>>()?)) },
-		_ => { Ok(DcimModuleTypesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimModuleTypesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleTypesRetrieveResponse {
 	Http200(ModuleType),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a module type object.
 pub fn dcim_module_types_retrieve(state: &ThanixClient, id: i64) -> Result<DcimModuleTypesRetrieveResponse, Error> {
@@ -8555,15 +7997,13 @@ pub fn dcim_module_types_retrieve(state: &ThanixClient, id: i64) -> Result<DcimM
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModuleTypesRetrieveResponse::Http200(r#response.json::<ModuleType>()?)) },
-		_ => { Ok(DcimModuleTypesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimModuleTypesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleTypesUpdateResponse {
 	Http200(ModuleType),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a module type object.
 pub fn dcim_module_types_update(state: &ThanixClient, body: WritableModuleTypeRequest, id: i64) -> Result<DcimModuleTypesUpdateResponse, Error> {
@@ -8573,15 +8013,13 @@ pub fn dcim_module_types_update(state: &ThanixClient, body: WritableModuleTypeRe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModuleTypesUpdateResponse::Http200(r#response.json::<ModuleType>()?)) },
-		_ => { Ok(DcimModuleTypesUpdateResponse::None) }
+		r#other_status => { Ok(DcimModuleTypesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleTypesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a module type object.
 pub fn dcim_module_types_destroy(state: &ThanixClient, id: i64) -> Result<DcimModuleTypesDestroyResponse, Error> {
@@ -8589,15 +8027,13 @@ pub fn dcim_module_types_destroy(state: &ThanixClient, id: i64) -> Result<DcimMo
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimModuleTypesDestroyResponse::None) }
+		r#other_status => { Ok(DcimModuleTypesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModuleTypesPartialUpdateResponse {
 	Http200(ModuleType),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a module type object.
 pub fn dcim_module_types_partial_update(state: &ThanixClient, body: PatchedWritableModuleTypeRequest, id: i64) -> Result<DcimModuleTypesPartialUpdateResponse, Error> {
@@ -8607,7 +8043,7 @@ pub fn dcim_module_types_partial_update(state: &ThanixClient, body: PatchedWrita
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModuleTypesPartialUpdateResponse::Http200(r#response.json::<ModuleType>()?)) },
-		_ => { Ok(DcimModuleTypesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimModuleTypesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -8707,12 +8143,10 @@ pub struct DcimModulesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModulesListResponse {
 	Http200(PaginatedModuleList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of module objects.
 pub fn dcim_modules_list(state: &ThanixClient, query: DcimModulesListQuery) -> Result<DcimModulesListResponse, Error> {
@@ -8721,15 +8155,13 @@ pub fn dcim_modules_list(state: &ThanixClient, query: DcimModulesListQuery) -> R
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModulesListResponse::Http200(r#response.json::<PaginatedModuleList>()?)) },
-		_ => { Ok(DcimModulesListResponse::None) }
+		r#other_status => { Ok(DcimModulesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModulesBulkUpdateResponse {
 	Http200(Vec<Module>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of module objects.
 pub fn dcim_modules_bulk_update(state: &ThanixClient, body: Vec<ModuleRequest>) -> Result<DcimModulesBulkUpdateResponse, Error> {
@@ -8739,15 +8171,13 @@ pub fn dcim_modules_bulk_update(state: &ThanixClient, body: Vec<ModuleRequest>) 
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModulesBulkUpdateResponse::Http200(r#response.json::<Vec<Module>>()?)) },
-		_ => { Ok(DcimModulesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimModulesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModulesCreateResponse {
 	Http201(Module),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of module objects.
 pub fn dcim_modules_create(state: &ThanixClient, body: WritableModuleRequest) -> Result<DcimModulesCreateResponse, Error> {
@@ -8757,15 +8187,13 @@ pub fn dcim_modules_create(state: &ThanixClient, body: WritableModuleRequest) ->
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimModulesCreateResponse::Http201(r#response.json::<Module>()?)) },
-		_ => { Ok(DcimModulesCreateResponse::None) }
+		r#other_status => { Ok(DcimModulesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModulesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of module objects.
 pub fn dcim_modules_bulk_destroy(state: &ThanixClient, body: Vec<ModuleRequest>) -> Result<DcimModulesBulkDestroyResponse, Error> {
@@ -8774,15 +8202,13 @@ pub fn dcim_modules_bulk_destroy(state: &ThanixClient, body: Vec<ModuleRequest>)
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimModulesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimModulesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModulesBulkPartialUpdateResponse {
 	Http200(Vec<Module>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of module objects.
 pub fn dcim_modules_bulk_partial_update(state: &ThanixClient, body: Vec<ModuleRequest>) -> Result<DcimModulesBulkPartialUpdateResponse, Error> {
@@ -8792,15 +8218,13 @@ pub fn dcim_modules_bulk_partial_update(state: &ThanixClient, body: Vec<ModuleRe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModulesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Module>>()?)) },
-		_ => { Ok(DcimModulesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimModulesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModulesRetrieveResponse {
 	Http200(Module),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a module object.
 pub fn dcim_modules_retrieve(state: &ThanixClient, id: i64) -> Result<DcimModulesRetrieveResponse, Error> {
@@ -8809,15 +8233,13 @@ pub fn dcim_modules_retrieve(state: &ThanixClient, id: i64) -> Result<DcimModule
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModulesRetrieveResponse::Http200(r#response.json::<Module>()?)) },
-		_ => { Ok(DcimModulesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimModulesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModulesUpdateResponse {
 	Http200(Module),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a module object.
 pub fn dcim_modules_update(state: &ThanixClient, body: WritableModuleRequest, id: i64) -> Result<DcimModulesUpdateResponse, Error> {
@@ -8827,15 +8249,13 @@ pub fn dcim_modules_update(state: &ThanixClient, body: WritableModuleRequest, id
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModulesUpdateResponse::Http200(r#response.json::<Module>()?)) },
-		_ => { Ok(DcimModulesUpdateResponse::None) }
+		r#other_status => { Ok(DcimModulesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModulesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a module object.
 pub fn dcim_modules_destroy(state: &ThanixClient, id: i64) -> Result<DcimModulesDestroyResponse, Error> {
@@ -8843,15 +8263,13 @@ pub fn dcim_modules_destroy(state: &ThanixClient, id: i64) -> Result<DcimModules
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimModulesDestroyResponse::None) }
+		r#other_status => { Ok(DcimModulesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimModulesPartialUpdateResponse {
 	Http200(Module),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a module object.
 pub fn dcim_modules_partial_update(state: &ThanixClient, body: PatchedWritableModuleRequest, id: i64) -> Result<DcimModulesPartialUpdateResponse, Error> {
@@ -8861,7 +8279,7 @@ pub fn dcim_modules_partial_update(state: &ThanixClient, body: PatchedWritableMo
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimModulesPartialUpdateResponse::Http200(r#response.json::<Module>()?)) },
-		_ => { Ok(DcimModulesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimModulesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -8947,12 +8365,10 @@ pub struct DcimPlatformsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPlatformsListResponse {
 	Http200(PaginatedPlatformList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of platform objects.
 pub fn dcim_platforms_list(state: &ThanixClient, query: DcimPlatformsListQuery) -> Result<DcimPlatformsListResponse, Error> {
@@ -8961,15 +8377,13 @@ pub fn dcim_platforms_list(state: &ThanixClient, query: DcimPlatformsListQuery) 
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPlatformsListResponse::Http200(r#response.json::<PaginatedPlatformList>()?)) },
-		_ => { Ok(DcimPlatformsListResponse::None) }
+		r#other_status => { Ok(DcimPlatformsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPlatformsBulkUpdateResponse {
 	Http200(Vec<Platform>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of platform objects.
 pub fn dcim_platforms_bulk_update(state: &ThanixClient, body: Vec<PlatformRequest>) -> Result<DcimPlatformsBulkUpdateResponse, Error> {
@@ -8979,15 +8393,13 @@ pub fn dcim_platforms_bulk_update(state: &ThanixClient, body: Vec<PlatformReques
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPlatformsBulkUpdateResponse::Http200(r#response.json::<Vec<Platform>>()?)) },
-		_ => { Ok(DcimPlatformsBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimPlatformsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPlatformsCreateResponse {
 	Http201(Platform),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of platform objects.
 pub fn dcim_platforms_create(state: &ThanixClient, body: WritablePlatformRequest) -> Result<DcimPlatformsCreateResponse, Error> {
@@ -8997,15 +8409,13 @@ pub fn dcim_platforms_create(state: &ThanixClient, body: WritablePlatformRequest
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimPlatformsCreateResponse::Http201(r#response.json::<Platform>()?)) },
-		_ => { Ok(DcimPlatformsCreateResponse::None) }
+		r#other_status => { Ok(DcimPlatformsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPlatformsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of platform objects.
 pub fn dcim_platforms_bulk_destroy(state: &ThanixClient, body: Vec<PlatformRequest>) -> Result<DcimPlatformsBulkDestroyResponse, Error> {
@@ -9014,15 +8424,13 @@ pub fn dcim_platforms_bulk_destroy(state: &ThanixClient, body: Vec<PlatformReque
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimPlatformsBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimPlatformsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPlatformsBulkPartialUpdateResponse {
 	Http200(Vec<Platform>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of platform objects.
 pub fn dcim_platforms_bulk_partial_update(state: &ThanixClient, body: Vec<PlatformRequest>) -> Result<DcimPlatformsBulkPartialUpdateResponse, Error> {
@@ -9032,15 +8440,13 @@ pub fn dcim_platforms_bulk_partial_update(state: &ThanixClient, body: Vec<Platfo
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPlatformsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Platform>>()?)) },
-		_ => { Ok(DcimPlatformsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimPlatformsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPlatformsRetrieveResponse {
 	Http200(Platform),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a platform object.
 pub fn dcim_platforms_retrieve(state: &ThanixClient, id: i64) -> Result<DcimPlatformsRetrieveResponse, Error> {
@@ -9049,15 +8455,13 @@ pub fn dcim_platforms_retrieve(state: &ThanixClient, id: i64) -> Result<DcimPlat
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPlatformsRetrieveResponse::Http200(r#response.json::<Platform>()?)) },
-		_ => { Ok(DcimPlatformsRetrieveResponse::None) }
+		r#other_status => { Ok(DcimPlatformsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPlatformsUpdateResponse {
 	Http200(Platform),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a platform object.
 pub fn dcim_platforms_update(state: &ThanixClient, body: WritablePlatformRequest, id: i64) -> Result<DcimPlatformsUpdateResponse, Error> {
@@ -9067,15 +8471,13 @@ pub fn dcim_platforms_update(state: &ThanixClient, body: WritablePlatformRequest
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPlatformsUpdateResponse::Http200(r#response.json::<Platform>()?)) },
-		_ => { Ok(DcimPlatformsUpdateResponse::None) }
+		r#other_status => { Ok(DcimPlatformsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPlatformsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a platform object.
 pub fn dcim_platforms_destroy(state: &ThanixClient, id: i64) -> Result<DcimPlatformsDestroyResponse, Error> {
@@ -9083,15 +8485,13 @@ pub fn dcim_platforms_destroy(state: &ThanixClient, id: i64) -> Result<DcimPlatf
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimPlatformsDestroyResponse::None) }
+		r#other_status => { Ok(DcimPlatformsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPlatformsPartialUpdateResponse {
 	Http200(Platform),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a platform object.
 pub fn dcim_platforms_partial_update(state: &ThanixClient, body: PatchedWritablePlatformRequest, id: i64) -> Result<DcimPlatformsPartialUpdateResponse, Error> {
@@ -9101,7 +8501,7 @@ pub fn dcim_platforms_partial_update(state: &ThanixClient, body: PatchedWritable
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPlatformsPartialUpdateResponse::Http200(r#response.json::<Platform>()?)) },
-		_ => { Ok(DcimPlatformsPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimPlatformsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -9246,12 +8646,10 @@ pub struct DcimPowerFeedsListQuery {
 	voltage__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerFeedsListResponse {
 	Http200(PaginatedPowerFeedList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of power feed objects.
 pub fn dcim_power_feeds_list(state: &ThanixClient, query: DcimPowerFeedsListQuery) -> Result<DcimPowerFeedsListResponse, Error> {
@@ -9260,15 +8658,13 @@ pub fn dcim_power_feeds_list(state: &ThanixClient, query: DcimPowerFeedsListQuer
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerFeedsListResponse::Http200(r#response.json::<PaginatedPowerFeedList>()?)) },
-		_ => { Ok(DcimPowerFeedsListResponse::None) }
+		r#other_status => { Ok(DcimPowerFeedsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerFeedsBulkUpdateResponse {
 	Http200(Vec<PowerFeed>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of power feed objects.
 pub fn dcim_power_feeds_bulk_update(state: &ThanixClient, body: Vec<PowerFeedRequest>) -> Result<DcimPowerFeedsBulkUpdateResponse, Error> {
@@ -9278,15 +8674,13 @@ pub fn dcim_power_feeds_bulk_update(state: &ThanixClient, body: Vec<PowerFeedReq
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerFeedsBulkUpdateResponse::Http200(r#response.json::<Vec<PowerFeed>>()?)) },
-		_ => { Ok(DcimPowerFeedsBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerFeedsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerFeedsCreateResponse {
 	Http201(PowerFeed),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of power feed objects.
 pub fn dcim_power_feeds_create(state: &ThanixClient, body: WritablePowerFeedRequest) -> Result<DcimPowerFeedsCreateResponse, Error> {
@@ -9296,15 +8690,13 @@ pub fn dcim_power_feeds_create(state: &ThanixClient, body: WritablePowerFeedRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimPowerFeedsCreateResponse::Http201(r#response.json::<PowerFeed>()?)) },
-		_ => { Ok(DcimPowerFeedsCreateResponse::None) }
+		r#other_status => { Ok(DcimPowerFeedsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerFeedsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of power feed objects.
 pub fn dcim_power_feeds_bulk_destroy(state: &ThanixClient, body: Vec<PowerFeedRequest>) -> Result<DcimPowerFeedsBulkDestroyResponse, Error> {
@@ -9313,15 +8705,13 @@ pub fn dcim_power_feeds_bulk_destroy(state: &ThanixClient, body: Vec<PowerFeedRe
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimPowerFeedsBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimPowerFeedsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerFeedsBulkPartialUpdateResponse {
 	Http200(Vec<PowerFeed>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of power feed objects.
 pub fn dcim_power_feeds_bulk_partial_update(state: &ThanixClient, body: Vec<PowerFeedRequest>) -> Result<DcimPowerFeedsBulkPartialUpdateResponse, Error> {
@@ -9331,15 +8721,13 @@ pub fn dcim_power_feeds_bulk_partial_update(state: &ThanixClient, body: Vec<Powe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerFeedsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<PowerFeed>>()?)) },
-		_ => { Ok(DcimPowerFeedsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerFeedsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerFeedsRetrieveResponse {
 	Http200(PowerFeed),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a power feed object.
 pub fn dcim_power_feeds_retrieve(state: &ThanixClient, id: i64) -> Result<DcimPowerFeedsRetrieveResponse, Error> {
@@ -9348,15 +8736,13 @@ pub fn dcim_power_feeds_retrieve(state: &ThanixClient, id: i64) -> Result<DcimPo
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerFeedsRetrieveResponse::Http200(r#response.json::<PowerFeed>()?)) },
-		_ => { Ok(DcimPowerFeedsRetrieveResponse::None) }
+		r#other_status => { Ok(DcimPowerFeedsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerFeedsUpdateResponse {
 	Http200(PowerFeed),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a power feed object.
 pub fn dcim_power_feeds_update(state: &ThanixClient, body: WritablePowerFeedRequest, id: i64) -> Result<DcimPowerFeedsUpdateResponse, Error> {
@@ -9366,15 +8752,13 @@ pub fn dcim_power_feeds_update(state: &ThanixClient, body: WritablePowerFeedRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerFeedsUpdateResponse::Http200(r#response.json::<PowerFeed>()?)) },
-		_ => { Ok(DcimPowerFeedsUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerFeedsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerFeedsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a power feed object.
 pub fn dcim_power_feeds_destroy(state: &ThanixClient, id: i64) -> Result<DcimPowerFeedsDestroyResponse, Error> {
@@ -9382,15 +8766,13 @@ pub fn dcim_power_feeds_destroy(state: &ThanixClient, id: i64) -> Result<DcimPow
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimPowerFeedsDestroyResponse::None) }
+		r#other_status => { Ok(DcimPowerFeedsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerFeedsPartialUpdateResponse {
 	Http200(PowerFeed),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a power feed object.
 pub fn dcim_power_feeds_partial_update(state: &ThanixClient, body: PatchedWritablePowerFeedRequest, id: i64) -> Result<DcimPowerFeedsPartialUpdateResponse, Error> {
@@ -9400,15 +8782,13 @@ pub fn dcim_power_feeds_partial_update(state: &ThanixClient, body: PatchedWritab
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerFeedsPartialUpdateResponse::Http200(r#response.json::<PowerFeed>()?)) },
-		_ => { Ok(DcimPowerFeedsPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerFeedsPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerFeedsTraceRetrieveResponse {
 	Http200(PowerFeed),
-	#[default]
-	None
+	Other(Response)
 }
 /// Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
 pub fn dcim_power_feeds_trace_retrieve(state: &ThanixClient, id: i64) -> Result<DcimPowerFeedsTraceRetrieveResponse, Error> {
@@ -9417,7 +8797,7 @@ pub fn dcim_power_feeds_trace_retrieve(state: &ThanixClient, id: i64) -> Result<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerFeedsTraceRetrieveResponse::Http200(r#response.json::<PowerFeed>()?)) },
-		_ => { Ok(DcimPowerFeedsTraceRetrieveResponse::None) }
+		r#other_status => { Ok(DcimPowerFeedsTraceRetrieveResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -9492,12 +8872,10 @@ pub struct DcimPowerOutletTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerOutletTemplatesListResponse {
 	Http200(PaginatedPowerOutletTemplateList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of power outlet template objects.
 pub fn dcim_power_outlet_templates_list(state: &ThanixClient, query: DcimPowerOutletTemplatesListQuery) -> Result<DcimPowerOutletTemplatesListResponse, Error> {
@@ -9506,15 +8884,13 @@ pub fn dcim_power_outlet_templates_list(state: &ThanixClient, query: DcimPowerOu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerOutletTemplatesListResponse::Http200(r#response.json::<PaginatedPowerOutletTemplateList>()?)) },
-		_ => { Ok(DcimPowerOutletTemplatesListResponse::None) }
+		r#other_status => { Ok(DcimPowerOutletTemplatesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerOutletTemplatesBulkUpdateResponse {
 	Http200(Vec<PowerOutletTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of power outlet template objects.
 pub fn dcim_power_outlet_templates_bulk_update(state: &ThanixClient, body: Vec<PowerOutletTemplateRequest>) -> Result<DcimPowerOutletTemplatesBulkUpdateResponse, Error> {
@@ -9524,15 +8900,13 @@ pub fn dcim_power_outlet_templates_bulk_update(state: &ThanixClient, body: Vec<P
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerOutletTemplatesBulkUpdateResponse::Http200(r#response.json::<Vec<PowerOutletTemplate>>()?)) },
-		_ => { Ok(DcimPowerOutletTemplatesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerOutletTemplatesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerOutletTemplatesCreateResponse {
 	Http201(PowerOutletTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of power outlet template objects.
 pub fn dcim_power_outlet_templates_create(state: &ThanixClient, body: WritablePowerOutletTemplateRequest) -> Result<DcimPowerOutletTemplatesCreateResponse, Error> {
@@ -9542,15 +8916,13 @@ pub fn dcim_power_outlet_templates_create(state: &ThanixClient, body: WritablePo
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimPowerOutletTemplatesCreateResponse::Http201(r#response.json::<PowerOutletTemplate>()?)) },
-		_ => { Ok(DcimPowerOutletTemplatesCreateResponse::None) }
+		r#other_status => { Ok(DcimPowerOutletTemplatesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerOutletTemplatesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of power outlet template objects.
 pub fn dcim_power_outlet_templates_bulk_destroy(state: &ThanixClient, body: Vec<PowerOutletTemplateRequest>) -> Result<DcimPowerOutletTemplatesBulkDestroyResponse, Error> {
@@ -9559,15 +8931,13 @@ pub fn dcim_power_outlet_templates_bulk_destroy(state: &ThanixClient, body: Vec<
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimPowerOutletTemplatesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimPowerOutletTemplatesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerOutletTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<PowerOutletTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of power outlet template objects.
 pub fn dcim_power_outlet_templates_bulk_partial_update(state: &ThanixClient, body: Vec<PowerOutletTemplateRequest>) -> Result<DcimPowerOutletTemplatesBulkPartialUpdateResponse, Error> {
@@ -9577,15 +8947,13 @@ pub fn dcim_power_outlet_templates_bulk_partial_update(state: &ThanixClient, bod
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerOutletTemplatesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<PowerOutletTemplate>>()?)) },
-		_ => { Ok(DcimPowerOutletTemplatesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerOutletTemplatesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerOutletTemplatesRetrieveResponse {
 	Http200(PowerOutletTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a power outlet template object.
 pub fn dcim_power_outlet_templates_retrieve(state: &ThanixClient, id: i64) -> Result<DcimPowerOutletTemplatesRetrieveResponse, Error> {
@@ -9594,15 +8962,13 @@ pub fn dcim_power_outlet_templates_retrieve(state: &ThanixClient, id: i64) -> Re
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerOutletTemplatesRetrieveResponse::Http200(r#response.json::<PowerOutletTemplate>()?)) },
-		_ => { Ok(DcimPowerOutletTemplatesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimPowerOutletTemplatesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerOutletTemplatesUpdateResponse {
 	Http200(PowerOutletTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a power outlet template object.
 pub fn dcim_power_outlet_templates_update(state: &ThanixClient, body: WritablePowerOutletTemplateRequest, id: i64) -> Result<DcimPowerOutletTemplatesUpdateResponse, Error> {
@@ -9612,15 +8978,13 @@ pub fn dcim_power_outlet_templates_update(state: &ThanixClient, body: WritablePo
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerOutletTemplatesUpdateResponse::Http200(r#response.json::<PowerOutletTemplate>()?)) },
-		_ => { Ok(DcimPowerOutletTemplatesUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerOutletTemplatesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerOutletTemplatesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a power outlet template object.
 pub fn dcim_power_outlet_templates_destroy(state: &ThanixClient, id: i64) -> Result<DcimPowerOutletTemplatesDestroyResponse, Error> {
@@ -9628,15 +8992,13 @@ pub fn dcim_power_outlet_templates_destroy(state: &ThanixClient, id: i64) -> Res
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimPowerOutletTemplatesDestroyResponse::None) }
+		r#other_status => { Ok(DcimPowerOutletTemplatesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerOutletTemplatesPartialUpdateResponse {
 	Http200(PowerOutletTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a power outlet template object.
 pub fn dcim_power_outlet_templates_partial_update(state: &ThanixClient, body: PatchedWritablePowerOutletTemplateRequest, id: i64) -> Result<DcimPowerOutletTemplatesPartialUpdateResponse, Error> {
@@ -9646,7 +9008,7 @@ pub fn dcim_power_outlet_templates_partial_update(state: &ThanixClient, body: Pa
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerOutletTemplatesPartialUpdateResponse::Http200(r#response.json::<PowerOutletTemplate>()?)) },
-		_ => { Ok(DcimPowerOutletTemplatesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerOutletTemplatesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -9817,12 +9179,10 @@ pub struct DcimPowerOutletsListQuery {
 	virtual_chassis_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerOutletsListResponse {
 	Http200(PaginatedPowerOutletList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of power outlet objects.
 pub fn dcim_power_outlets_list(state: &ThanixClient, query: DcimPowerOutletsListQuery) -> Result<DcimPowerOutletsListResponse, Error> {
@@ -9831,15 +9191,13 @@ pub fn dcim_power_outlets_list(state: &ThanixClient, query: DcimPowerOutletsList
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerOutletsListResponse::Http200(r#response.json::<PaginatedPowerOutletList>()?)) },
-		_ => { Ok(DcimPowerOutletsListResponse::None) }
+		r#other_status => { Ok(DcimPowerOutletsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerOutletsBulkUpdateResponse {
 	Http200(Vec<PowerOutlet>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of power outlet objects.
 pub fn dcim_power_outlets_bulk_update(state: &ThanixClient, body: Vec<PowerOutletRequest>) -> Result<DcimPowerOutletsBulkUpdateResponse, Error> {
@@ -9849,15 +9207,13 @@ pub fn dcim_power_outlets_bulk_update(state: &ThanixClient, body: Vec<PowerOutle
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerOutletsBulkUpdateResponse::Http200(r#response.json::<Vec<PowerOutlet>>()?)) },
-		_ => { Ok(DcimPowerOutletsBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerOutletsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerOutletsCreateResponse {
 	Http201(PowerOutlet),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of power outlet objects.
 pub fn dcim_power_outlets_create(state: &ThanixClient, body: WritablePowerOutletRequest) -> Result<DcimPowerOutletsCreateResponse, Error> {
@@ -9867,15 +9223,13 @@ pub fn dcim_power_outlets_create(state: &ThanixClient, body: WritablePowerOutlet
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimPowerOutletsCreateResponse::Http201(r#response.json::<PowerOutlet>()?)) },
-		_ => { Ok(DcimPowerOutletsCreateResponse::None) }
+		r#other_status => { Ok(DcimPowerOutletsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerOutletsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of power outlet objects.
 pub fn dcim_power_outlets_bulk_destroy(state: &ThanixClient, body: Vec<PowerOutletRequest>) -> Result<DcimPowerOutletsBulkDestroyResponse, Error> {
@@ -9884,15 +9238,13 @@ pub fn dcim_power_outlets_bulk_destroy(state: &ThanixClient, body: Vec<PowerOutl
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimPowerOutletsBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimPowerOutletsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerOutletsBulkPartialUpdateResponse {
 	Http200(Vec<PowerOutlet>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of power outlet objects.
 pub fn dcim_power_outlets_bulk_partial_update(state: &ThanixClient, body: Vec<PowerOutletRequest>) -> Result<DcimPowerOutletsBulkPartialUpdateResponse, Error> {
@@ -9902,15 +9254,13 @@ pub fn dcim_power_outlets_bulk_partial_update(state: &ThanixClient, body: Vec<Po
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerOutletsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<PowerOutlet>>()?)) },
-		_ => { Ok(DcimPowerOutletsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerOutletsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerOutletsRetrieveResponse {
 	Http200(PowerOutlet),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a power outlet object.
 pub fn dcim_power_outlets_retrieve(state: &ThanixClient, id: i64) -> Result<DcimPowerOutletsRetrieveResponse, Error> {
@@ -9919,15 +9269,13 @@ pub fn dcim_power_outlets_retrieve(state: &ThanixClient, id: i64) -> Result<Dcim
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerOutletsRetrieveResponse::Http200(r#response.json::<PowerOutlet>()?)) },
-		_ => { Ok(DcimPowerOutletsRetrieveResponse::None) }
+		r#other_status => { Ok(DcimPowerOutletsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerOutletsUpdateResponse {
 	Http200(PowerOutlet),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a power outlet object.
 pub fn dcim_power_outlets_update(state: &ThanixClient, body: WritablePowerOutletRequest, id: i64) -> Result<DcimPowerOutletsUpdateResponse, Error> {
@@ -9937,15 +9285,13 @@ pub fn dcim_power_outlets_update(state: &ThanixClient, body: WritablePowerOutlet
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerOutletsUpdateResponse::Http200(r#response.json::<PowerOutlet>()?)) },
-		_ => { Ok(DcimPowerOutletsUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerOutletsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerOutletsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a power outlet object.
 pub fn dcim_power_outlets_destroy(state: &ThanixClient, id: i64) -> Result<DcimPowerOutletsDestroyResponse, Error> {
@@ -9953,15 +9299,13 @@ pub fn dcim_power_outlets_destroy(state: &ThanixClient, id: i64) -> Result<DcimP
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimPowerOutletsDestroyResponse::None) }
+		r#other_status => { Ok(DcimPowerOutletsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerOutletsPartialUpdateResponse {
 	Http200(PowerOutlet),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a power outlet object.
 pub fn dcim_power_outlets_partial_update(state: &ThanixClient, body: PatchedWritablePowerOutletRequest, id: i64) -> Result<DcimPowerOutletsPartialUpdateResponse, Error> {
@@ -9971,15 +9315,13 @@ pub fn dcim_power_outlets_partial_update(state: &ThanixClient, body: PatchedWrit
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerOutletsPartialUpdateResponse::Http200(r#response.json::<PowerOutlet>()?)) },
-		_ => { Ok(DcimPowerOutletsPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerOutletsPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerOutletsTraceRetrieveResponse {
 	Http200(PowerOutlet),
-	#[default]
-	None
+	Other(Response)
 }
 /// Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
 pub fn dcim_power_outlets_trace_retrieve(state: &ThanixClient, id: i64) -> Result<DcimPowerOutletsTraceRetrieveResponse, Error> {
@@ -9988,7 +9330,7 @@ pub fn dcim_power_outlets_trace_retrieve(state: &ThanixClient, id: i64) -> Resul
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerOutletsTraceRetrieveResponse::Http200(r#response.json::<PowerOutlet>()?)) },
-		_ => { Ok(DcimPowerOutletsTraceRetrieveResponse::None) }
+		r#other_status => { Ok(DcimPowerOutletsTraceRetrieveResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -10091,12 +9433,10 @@ pub struct DcimPowerPanelsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPanelsListResponse {
 	Http200(PaginatedPowerPanelList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of power panel objects.
 pub fn dcim_power_panels_list(state: &ThanixClient, query: DcimPowerPanelsListQuery) -> Result<DcimPowerPanelsListResponse, Error> {
@@ -10105,15 +9445,13 @@ pub fn dcim_power_panels_list(state: &ThanixClient, query: DcimPowerPanelsListQu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerPanelsListResponse::Http200(r#response.json::<PaginatedPowerPanelList>()?)) },
-		_ => { Ok(DcimPowerPanelsListResponse::None) }
+		r#other_status => { Ok(DcimPowerPanelsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPanelsBulkUpdateResponse {
 	Http200(Vec<PowerPanel>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of power panel objects.
 pub fn dcim_power_panels_bulk_update(state: &ThanixClient, body: Vec<PowerPanelRequest>) -> Result<DcimPowerPanelsBulkUpdateResponse, Error> {
@@ -10123,15 +9461,13 @@ pub fn dcim_power_panels_bulk_update(state: &ThanixClient, body: Vec<PowerPanelR
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerPanelsBulkUpdateResponse::Http200(r#response.json::<Vec<PowerPanel>>()?)) },
-		_ => { Ok(DcimPowerPanelsBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerPanelsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPanelsCreateResponse {
 	Http201(PowerPanel),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of power panel objects.
 pub fn dcim_power_panels_create(state: &ThanixClient, body: WritablePowerPanelRequest) -> Result<DcimPowerPanelsCreateResponse, Error> {
@@ -10141,15 +9477,13 @@ pub fn dcim_power_panels_create(state: &ThanixClient, body: WritablePowerPanelRe
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimPowerPanelsCreateResponse::Http201(r#response.json::<PowerPanel>()?)) },
-		_ => { Ok(DcimPowerPanelsCreateResponse::None) }
+		r#other_status => { Ok(DcimPowerPanelsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPanelsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of power panel objects.
 pub fn dcim_power_panels_bulk_destroy(state: &ThanixClient, body: Vec<PowerPanelRequest>) -> Result<DcimPowerPanelsBulkDestroyResponse, Error> {
@@ -10158,15 +9492,13 @@ pub fn dcim_power_panels_bulk_destroy(state: &ThanixClient, body: Vec<PowerPanel
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimPowerPanelsBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimPowerPanelsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPanelsBulkPartialUpdateResponse {
 	Http200(Vec<PowerPanel>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of power panel objects.
 pub fn dcim_power_panels_bulk_partial_update(state: &ThanixClient, body: Vec<PowerPanelRequest>) -> Result<DcimPowerPanelsBulkPartialUpdateResponse, Error> {
@@ -10176,15 +9508,13 @@ pub fn dcim_power_panels_bulk_partial_update(state: &ThanixClient, body: Vec<Pow
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerPanelsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<PowerPanel>>()?)) },
-		_ => { Ok(DcimPowerPanelsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerPanelsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPanelsRetrieveResponse {
 	Http200(PowerPanel),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a power panel object.
 pub fn dcim_power_panels_retrieve(state: &ThanixClient, id: i64) -> Result<DcimPowerPanelsRetrieveResponse, Error> {
@@ -10193,15 +9523,13 @@ pub fn dcim_power_panels_retrieve(state: &ThanixClient, id: i64) -> Result<DcimP
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerPanelsRetrieveResponse::Http200(r#response.json::<PowerPanel>()?)) },
-		_ => { Ok(DcimPowerPanelsRetrieveResponse::None) }
+		r#other_status => { Ok(DcimPowerPanelsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPanelsUpdateResponse {
 	Http200(PowerPanel),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a power panel object.
 pub fn dcim_power_panels_update(state: &ThanixClient, body: WritablePowerPanelRequest, id: i64) -> Result<DcimPowerPanelsUpdateResponse, Error> {
@@ -10211,15 +9539,13 @@ pub fn dcim_power_panels_update(state: &ThanixClient, body: WritablePowerPanelRe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerPanelsUpdateResponse::Http200(r#response.json::<PowerPanel>()?)) },
-		_ => { Ok(DcimPowerPanelsUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerPanelsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPanelsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a power panel object.
 pub fn dcim_power_panels_destroy(state: &ThanixClient, id: i64) -> Result<DcimPowerPanelsDestroyResponse, Error> {
@@ -10227,15 +9553,13 @@ pub fn dcim_power_panels_destroy(state: &ThanixClient, id: i64) -> Result<DcimPo
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimPowerPanelsDestroyResponse::None) }
+		r#other_status => { Ok(DcimPowerPanelsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPanelsPartialUpdateResponse {
 	Http200(PowerPanel),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a power panel object.
 pub fn dcim_power_panels_partial_update(state: &ThanixClient, body: PatchedWritablePowerPanelRequest, id: i64) -> Result<DcimPowerPanelsPartialUpdateResponse, Error> {
@@ -10245,7 +9569,7 @@ pub fn dcim_power_panels_partial_update(state: &ThanixClient, body: PatchedWrita
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerPanelsPartialUpdateResponse::Http200(r#response.json::<PowerPanel>()?)) },
-		_ => { Ok(DcimPowerPanelsPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerPanelsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -10330,12 +9654,10 @@ pub struct DcimPowerPortTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPortTemplatesListResponse {
 	Http200(PaginatedPowerPortTemplateList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of power port template objects.
 pub fn dcim_power_port_templates_list(state: &ThanixClient, query: DcimPowerPortTemplatesListQuery) -> Result<DcimPowerPortTemplatesListResponse, Error> {
@@ -10344,15 +9666,13 @@ pub fn dcim_power_port_templates_list(state: &ThanixClient, query: DcimPowerPort
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerPortTemplatesListResponse::Http200(r#response.json::<PaginatedPowerPortTemplateList>()?)) },
-		_ => { Ok(DcimPowerPortTemplatesListResponse::None) }
+		r#other_status => { Ok(DcimPowerPortTemplatesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPortTemplatesBulkUpdateResponse {
 	Http200(Vec<PowerPortTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of power port template objects.
 pub fn dcim_power_port_templates_bulk_update(state: &ThanixClient, body: Vec<PowerPortTemplateRequest>) -> Result<DcimPowerPortTemplatesBulkUpdateResponse, Error> {
@@ -10362,15 +9682,13 @@ pub fn dcim_power_port_templates_bulk_update(state: &ThanixClient, body: Vec<Pow
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerPortTemplatesBulkUpdateResponse::Http200(r#response.json::<Vec<PowerPortTemplate>>()?)) },
-		_ => { Ok(DcimPowerPortTemplatesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerPortTemplatesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPortTemplatesCreateResponse {
 	Http201(PowerPortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of power port template objects.
 pub fn dcim_power_port_templates_create(state: &ThanixClient, body: WritablePowerPortTemplateRequest) -> Result<DcimPowerPortTemplatesCreateResponse, Error> {
@@ -10380,15 +9698,13 @@ pub fn dcim_power_port_templates_create(state: &ThanixClient, body: WritablePowe
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimPowerPortTemplatesCreateResponse::Http201(r#response.json::<PowerPortTemplate>()?)) },
-		_ => { Ok(DcimPowerPortTemplatesCreateResponse::None) }
+		r#other_status => { Ok(DcimPowerPortTemplatesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPortTemplatesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of power port template objects.
 pub fn dcim_power_port_templates_bulk_destroy(state: &ThanixClient, body: Vec<PowerPortTemplateRequest>) -> Result<DcimPowerPortTemplatesBulkDestroyResponse, Error> {
@@ -10397,15 +9713,13 @@ pub fn dcim_power_port_templates_bulk_destroy(state: &ThanixClient, body: Vec<Po
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimPowerPortTemplatesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimPowerPortTemplatesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPortTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<PowerPortTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of power port template objects.
 pub fn dcim_power_port_templates_bulk_partial_update(state: &ThanixClient, body: Vec<PowerPortTemplateRequest>) -> Result<DcimPowerPortTemplatesBulkPartialUpdateResponse, Error> {
@@ -10415,15 +9729,13 @@ pub fn dcim_power_port_templates_bulk_partial_update(state: &ThanixClient, body:
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerPortTemplatesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<PowerPortTemplate>>()?)) },
-		_ => { Ok(DcimPowerPortTemplatesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerPortTemplatesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPortTemplatesRetrieveResponse {
 	Http200(PowerPortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a power port template object.
 pub fn dcim_power_port_templates_retrieve(state: &ThanixClient, id: i64) -> Result<DcimPowerPortTemplatesRetrieveResponse, Error> {
@@ -10432,15 +9744,13 @@ pub fn dcim_power_port_templates_retrieve(state: &ThanixClient, id: i64) -> Resu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerPortTemplatesRetrieveResponse::Http200(r#response.json::<PowerPortTemplate>()?)) },
-		_ => { Ok(DcimPowerPortTemplatesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimPowerPortTemplatesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPortTemplatesUpdateResponse {
 	Http200(PowerPortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a power port template object.
 pub fn dcim_power_port_templates_update(state: &ThanixClient, body: WritablePowerPortTemplateRequest, id: i64) -> Result<DcimPowerPortTemplatesUpdateResponse, Error> {
@@ -10450,15 +9760,13 @@ pub fn dcim_power_port_templates_update(state: &ThanixClient, body: WritablePowe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerPortTemplatesUpdateResponse::Http200(r#response.json::<PowerPortTemplate>()?)) },
-		_ => { Ok(DcimPowerPortTemplatesUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerPortTemplatesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPortTemplatesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a power port template object.
 pub fn dcim_power_port_templates_destroy(state: &ThanixClient, id: i64) -> Result<DcimPowerPortTemplatesDestroyResponse, Error> {
@@ -10466,15 +9774,13 @@ pub fn dcim_power_port_templates_destroy(state: &ThanixClient, id: i64) -> Resul
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimPowerPortTemplatesDestroyResponse::None) }
+		r#other_status => { Ok(DcimPowerPortTemplatesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPortTemplatesPartialUpdateResponse {
 	Http200(PowerPortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a power port template object.
 pub fn dcim_power_port_templates_partial_update(state: &ThanixClient, body: PatchedWritablePowerPortTemplateRequest, id: i64) -> Result<DcimPowerPortTemplatesPartialUpdateResponse, Error> {
@@ -10484,7 +9790,7 @@ pub fn dcim_power_port_templates_partial_update(state: &ThanixClient, body: Patc
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerPortTemplatesPartialUpdateResponse::Http200(r#response.json::<PowerPortTemplate>()?)) },
-		_ => { Ok(DcimPowerPortTemplatesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerPortTemplatesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -10665,12 +9971,10 @@ pub struct DcimPowerPortsListQuery {
 	virtual_chassis_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPortsListResponse {
 	Http200(PaginatedPowerPortList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of power port objects.
 pub fn dcim_power_ports_list(state: &ThanixClient, query: DcimPowerPortsListQuery) -> Result<DcimPowerPortsListResponse, Error> {
@@ -10679,15 +9983,13 @@ pub fn dcim_power_ports_list(state: &ThanixClient, query: DcimPowerPortsListQuer
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerPortsListResponse::Http200(r#response.json::<PaginatedPowerPortList>()?)) },
-		_ => { Ok(DcimPowerPortsListResponse::None) }
+		r#other_status => { Ok(DcimPowerPortsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPortsBulkUpdateResponse {
 	Http200(Vec<PowerPort>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of power port objects.
 pub fn dcim_power_ports_bulk_update(state: &ThanixClient, body: Vec<PowerPortRequest>) -> Result<DcimPowerPortsBulkUpdateResponse, Error> {
@@ -10697,15 +9999,13 @@ pub fn dcim_power_ports_bulk_update(state: &ThanixClient, body: Vec<PowerPortReq
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerPortsBulkUpdateResponse::Http200(r#response.json::<Vec<PowerPort>>()?)) },
-		_ => { Ok(DcimPowerPortsBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerPortsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPortsCreateResponse {
 	Http201(PowerPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of power port objects.
 pub fn dcim_power_ports_create(state: &ThanixClient, body: WritablePowerPortRequest) -> Result<DcimPowerPortsCreateResponse, Error> {
@@ -10715,15 +10015,13 @@ pub fn dcim_power_ports_create(state: &ThanixClient, body: WritablePowerPortRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimPowerPortsCreateResponse::Http201(r#response.json::<PowerPort>()?)) },
-		_ => { Ok(DcimPowerPortsCreateResponse::None) }
+		r#other_status => { Ok(DcimPowerPortsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPortsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of power port objects.
 pub fn dcim_power_ports_bulk_destroy(state: &ThanixClient, body: Vec<PowerPortRequest>) -> Result<DcimPowerPortsBulkDestroyResponse, Error> {
@@ -10732,15 +10030,13 @@ pub fn dcim_power_ports_bulk_destroy(state: &ThanixClient, body: Vec<PowerPortRe
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimPowerPortsBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimPowerPortsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPortsBulkPartialUpdateResponse {
 	Http200(Vec<PowerPort>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of power port objects.
 pub fn dcim_power_ports_bulk_partial_update(state: &ThanixClient, body: Vec<PowerPortRequest>) -> Result<DcimPowerPortsBulkPartialUpdateResponse, Error> {
@@ -10750,15 +10046,13 @@ pub fn dcim_power_ports_bulk_partial_update(state: &ThanixClient, body: Vec<Powe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerPortsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<PowerPort>>()?)) },
-		_ => { Ok(DcimPowerPortsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerPortsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPortsRetrieveResponse {
 	Http200(PowerPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a power port object.
 pub fn dcim_power_ports_retrieve(state: &ThanixClient, id: i64) -> Result<DcimPowerPortsRetrieveResponse, Error> {
@@ -10767,15 +10061,13 @@ pub fn dcim_power_ports_retrieve(state: &ThanixClient, id: i64) -> Result<DcimPo
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerPortsRetrieveResponse::Http200(r#response.json::<PowerPort>()?)) },
-		_ => { Ok(DcimPowerPortsRetrieveResponse::None) }
+		r#other_status => { Ok(DcimPowerPortsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPortsUpdateResponse {
 	Http200(PowerPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a power port object.
 pub fn dcim_power_ports_update(state: &ThanixClient, body: WritablePowerPortRequest, id: i64) -> Result<DcimPowerPortsUpdateResponse, Error> {
@@ -10785,15 +10077,13 @@ pub fn dcim_power_ports_update(state: &ThanixClient, body: WritablePowerPortRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerPortsUpdateResponse::Http200(r#response.json::<PowerPort>()?)) },
-		_ => { Ok(DcimPowerPortsUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerPortsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPortsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a power port object.
 pub fn dcim_power_ports_destroy(state: &ThanixClient, id: i64) -> Result<DcimPowerPortsDestroyResponse, Error> {
@@ -10801,15 +10091,13 @@ pub fn dcim_power_ports_destroy(state: &ThanixClient, id: i64) -> Result<DcimPow
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimPowerPortsDestroyResponse::None) }
+		r#other_status => { Ok(DcimPowerPortsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPortsPartialUpdateResponse {
 	Http200(PowerPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a power port object.
 pub fn dcim_power_ports_partial_update(state: &ThanixClient, body: PatchedWritablePowerPortRequest, id: i64) -> Result<DcimPowerPortsPartialUpdateResponse, Error> {
@@ -10819,15 +10107,13 @@ pub fn dcim_power_ports_partial_update(state: &ThanixClient, body: PatchedWritab
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerPortsPartialUpdateResponse::Http200(r#response.json::<PowerPort>()?)) },
-		_ => { Ok(DcimPowerPortsPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimPowerPortsPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimPowerPortsTraceRetrieveResponse {
 	Http200(PowerPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Trace a complete cable path and return each segment as a three-tuple of (termination, cable, termination).
 pub fn dcim_power_ports_trace_retrieve(state: &ThanixClient, id: i64) -> Result<DcimPowerPortsTraceRetrieveResponse, Error> {
@@ -10836,7 +10122,7 @@ pub fn dcim_power_ports_trace_retrieve(state: &ThanixClient, id: i64) -> Result<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimPowerPortsTraceRetrieveResponse::Http200(r#response.json::<PowerPort>()?)) },
-		_ => { Ok(DcimPowerPortsTraceRetrieveResponse::None) }
+		r#other_status => { Ok(DcimPowerPortsTraceRetrieveResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -10948,12 +10234,10 @@ pub struct DcimRackReservationsListQuery {
 	user_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRackReservationsListResponse {
 	Http200(PaginatedRackReservationList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of rack reservation objects.
 pub fn dcim_rack_reservations_list(state: &ThanixClient, query: DcimRackReservationsListQuery) -> Result<DcimRackReservationsListResponse, Error> {
@@ -10962,15 +10246,13 @@ pub fn dcim_rack_reservations_list(state: &ThanixClient, query: DcimRackReservat
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRackReservationsListResponse::Http200(r#response.json::<PaginatedRackReservationList>()?)) },
-		_ => { Ok(DcimRackReservationsListResponse::None) }
+		r#other_status => { Ok(DcimRackReservationsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRackReservationsBulkUpdateResponse {
 	Http200(Vec<RackReservation>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of rack reservation objects.
 pub fn dcim_rack_reservations_bulk_update(state: &ThanixClient, body: Vec<RackReservationRequest>) -> Result<DcimRackReservationsBulkUpdateResponse, Error> {
@@ -10980,15 +10262,13 @@ pub fn dcim_rack_reservations_bulk_update(state: &ThanixClient, body: Vec<RackRe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRackReservationsBulkUpdateResponse::Http200(r#response.json::<Vec<RackReservation>>()?)) },
-		_ => { Ok(DcimRackReservationsBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimRackReservationsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRackReservationsCreateResponse {
 	Http201(RackReservation),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of rack reservation objects.
 pub fn dcim_rack_reservations_create(state: &ThanixClient, body: WritableRackReservationRequest) -> Result<DcimRackReservationsCreateResponse, Error> {
@@ -10998,15 +10278,13 @@ pub fn dcim_rack_reservations_create(state: &ThanixClient, body: WritableRackRes
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimRackReservationsCreateResponse::Http201(r#response.json::<RackReservation>()?)) },
-		_ => { Ok(DcimRackReservationsCreateResponse::None) }
+		r#other_status => { Ok(DcimRackReservationsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRackReservationsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of rack reservation objects.
 pub fn dcim_rack_reservations_bulk_destroy(state: &ThanixClient, body: Vec<RackReservationRequest>) -> Result<DcimRackReservationsBulkDestroyResponse, Error> {
@@ -11015,15 +10293,13 @@ pub fn dcim_rack_reservations_bulk_destroy(state: &ThanixClient, body: Vec<RackR
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimRackReservationsBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimRackReservationsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRackReservationsBulkPartialUpdateResponse {
 	Http200(Vec<RackReservation>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of rack reservation objects.
 pub fn dcim_rack_reservations_bulk_partial_update(state: &ThanixClient, body: Vec<RackReservationRequest>) -> Result<DcimRackReservationsBulkPartialUpdateResponse, Error> {
@@ -11033,15 +10309,13 @@ pub fn dcim_rack_reservations_bulk_partial_update(state: &ThanixClient, body: Ve
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRackReservationsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<RackReservation>>()?)) },
-		_ => { Ok(DcimRackReservationsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimRackReservationsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRackReservationsRetrieveResponse {
 	Http200(RackReservation),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a rack reservation object.
 pub fn dcim_rack_reservations_retrieve(state: &ThanixClient, id: i64) -> Result<DcimRackReservationsRetrieveResponse, Error> {
@@ -11050,15 +10324,13 @@ pub fn dcim_rack_reservations_retrieve(state: &ThanixClient, id: i64) -> Result<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRackReservationsRetrieveResponse::Http200(r#response.json::<RackReservation>()?)) },
-		_ => { Ok(DcimRackReservationsRetrieveResponse::None) }
+		r#other_status => { Ok(DcimRackReservationsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRackReservationsUpdateResponse {
 	Http200(RackReservation),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a rack reservation object.
 pub fn dcim_rack_reservations_update(state: &ThanixClient, body: WritableRackReservationRequest, id: i64) -> Result<DcimRackReservationsUpdateResponse, Error> {
@@ -11068,15 +10340,13 @@ pub fn dcim_rack_reservations_update(state: &ThanixClient, body: WritableRackRes
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRackReservationsUpdateResponse::Http200(r#response.json::<RackReservation>()?)) },
-		_ => { Ok(DcimRackReservationsUpdateResponse::None) }
+		r#other_status => { Ok(DcimRackReservationsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRackReservationsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a rack reservation object.
 pub fn dcim_rack_reservations_destroy(state: &ThanixClient, id: i64) -> Result<DcimRackReservationsDestroyResponse, Error> {
@@ -11084,15 +10354,13 @@ pub fn dcim_rack_reservations_destroy(state: &ThanixClient, id: i64) -> Result<D
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimRackReservationsDestroyResponse::None) }
+		r#other_status => { Ok(DcimRackReservationsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRackReservationsPartialUpdateResponse {
 	Http200(RackReservation),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a rack reservation object.
 pub fn dcim_rack_reservations_partial_update(state: &ThanixClient, body: PatchedWritableRackReservationRequest, id: i64) -> Result<DcimRackReservationsPartialUpdateResponse, Error> {
@@ -11102,7 +10370,7 @@ pub fn dcim_rack_reservations_partial_update(state: &ThanixClient, body: Patched
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRackReservationsPartialUpdateResponse::Http200(r#response.json::<RackReservation>()?)) },
-		_ => { Ok(DcimRackReservationsPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimRackReservationsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -11187,12 +10455,10 @@ pub struct DcimRackRolesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRackRolesListResponse {
 	Http200(PaginatedRackRoleList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of rack role objects.
 pub fn dcim_rack_roles_list(state: &ThanixClient, query: DcimRackRolesListQuery) -> Result<DcimRackRolesListResponse, Error> {
@@ -11201,15 +10467,13 @@ pub fn dcim_rack_roles_list(state: &ThanixClient, query: DcimRackRolesListQuery)
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRackRolesListResponse::Http200(r#response.json::<PaginatedRackRoleList>()?)) },
-		_ => { Ok(DcimRackRolesListResponse::None) }
+		r#other_status => { Ok(DcimRackRolesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRackRolesBulkUpdateResponse {
 	Http200(Vec<RackRole>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of rack role objects.
 pub fn dcim_rack_roles_bulk_update(state: &ThanixClient, body: Vec<RackRoleRequest>) -> Result<DcimRackRolesBulkUpdateResponse, Error> {
@@ -11219,15 +10483,13 @@ pub fn dcim_rack_roles_bulk_update(state: &ThanixClient, body: Vec<RackRoleReque
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRackRolesBulkUpdateResponse::Http200(r#response.json::<Vec<RackRole>>()?)) },
-		_ => { Ok(DcimRackRolesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimRackRolesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRackRolesCreateResponse {
 	Http201(RackRole),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of rack role objects.
 pub fn dcim_rack_roles_create(state: &ThanixClient, body: RackRoleRequest) -> Result<DcimRackRolesCreateResponse, Error> {
@@ -11237,15 +10499,13 @@ pub fn dcim_rack_roles_create(state: &ThanixClient, body: RackRoleRequest) -> Re
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimRackRolesCreateResponse::Http201(r#response.json::<RackRole>()?)) },
-		_ => { Ok(DcimRackRolesCreateResponse::None) }
+		r#other_status => { Ok(DcimRackRolesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRackRolesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of rack role objects.
 pub fn dcim_rack_roles_bulk_destroy(state: &ThanixClient, body: Vec<RackRoleRequest>) -> Result<DcimRackRolesBulkDestroyResponse, Error> {
@@ -11254,15 +10514,13 @@ pub fn dcim_rack_roles_bulk_destroy(state: &ThanixClient, body: Vec<RackRoleRequ
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimRackRolesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimRackRolesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRackRolesBulkPartialUpdateResponse {
 	Http200(Vec<RackRole>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of rack role objects.
 pub fn dcim_rack_roles_bulk_partial_update(state: &ThanixClient, body: Vec<RackRoleRequest>) -> Result<DcimRackRolesBulkPartialUpdateResponse, Error> {
@@ -11272,15 +10530,13 @@ pub fn dcim_rack_roles_bulk_partial_update(state: &ThanixClient, body: Vec<RackR
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRackRolesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<RackRole>>()?)) },
-		_ => { Ok(DcimRackRolesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimRackRolesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRackRolesRetrieveResponse {
 	Http200(RackRole),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a rack role object.
 pub fn dcim_rack_roles_retrieve(state: &ThanixClient, id: i64) -> Result<DcimRackRolesRetrieveResponse, Error> {
@@ -11289,15 +10545,13 @@ pub fn dcim_rack_roles_retrieve(state: &ThanixClient, id: i64) -> Result<DcimRac
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRackRolesRetrieveResponse::Http200(r#response.json::<RackRole>()?)) },
-		_ => { Ok(DcimRackRolesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimRackRolesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRackRolesUpdateResponse {
 	Http200(RackRole),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a rack role object.
 pub fn dcim_rack_roles_update(state: &ThanixClient, body: RackRoleRequest, id: i64) -> Result<DcimRackRolesUpdateResponse, Error> {
@@ -11307,15 +10561,13 @@ pub fn dcim_rack_roles_update(state: &ThanixClient, body: RackRoleRequest, id: i
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRackRolesUpdateResponse::Http200(r#response.json::<RackRole>()?)) },
-		_ => { Ok(DcimRackRolesUpdateResponse::None) }
+		r#other_status => { Ok(DcimRackRolesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRackRolesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a rack role object.
 pub fn dcim_rack_roles_destroy(state: &ThanixClient, id: i64) -> Result<DcimRackRolesDestroyResponse, Error> {
@@ -11323,15 +10575,13 @@ pub fn dcim_rack_roles_destroy(state: &ThanixClient, id: i64) -> Result<DcimRack
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimRackRolesDestroyResponse::None) }
+		r#other_status => { Ok(DcimRackRolesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRackRolesPartialUpdateResponse {
 	Http200(RackRole),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a rack role object.
 pub fn dcim_rack_roles_partial_update(state: &ThanixClient, body: PatchedRackRoleRequest, id: i64) -> Result<DcimRackRolesPartialUpdateResponse, Error> {
@@ -11341,7 +10591,7 @@ pub fn dcim_rack_roles_partial_update(state: &ThanixClient, body: PatchedRackRol
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRackRolesPartialUpdateResponse::Http200(r#response.json::<RackRole>()?)) },
-		_ => { Ok(DcimRackRolesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimRackRolesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -11567,12 +10817,10 @@ pub struct DcimRacksListQuery {
 	width__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRacksListResponse {
 	Http200(PaginatedRackList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of rack objects.
 pub fn dcim_racks_list(state: &ThanixClient, query: DcimRacksListQuery) -> Result<DcimRacksListResponse, Error> {
@@ -11581,15 +10829,13 @@ pub fn dcim_racks_list(state: &ThanixClient, query: DcimRacksListQuery) -> Resul
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRacksListResponse::Http200(r#response.json::<PaginatedRackList>()?)) },
-		_ => { Ok(DcimRacksListResponse::None) }
+		r#other_status => { Ok(DcimRacksListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRacksBulkUpdateResponse {
 	Http200(Vec<Rack>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of rack objects.
 pub fn dcim_racks_bulk_update(state: &ThanixClient, body: Vec<RackRequest>) -> Result<DcimRacksBulkUpdateResponse, Error> {
@@ -11599,15 +10845,13 @@ pub fn dcim_racks_bulk_update(state: &ThanixClient, body: Vec<RackRequest>) -> R
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRacksBulkUpdateResponse::Http200(r#response.json::<Vec<Rack>>()?)) },
-		_ => { Ok(DcimRacksBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimRacksBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRacksCreateResponse {
 	Http201(Rack),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of rack objects.
 pub fn dcim_racks_create(state: &ThanixClient, body: WritableRackRequest) -> Result<DcimRacksCreateResponse, Error> {
@@ -11617,15 +10861,13 @@ pub fn dcim_racks_create(state: &ThanixClient, body: WritableRackRequest) -> Res
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimRacksCreateResponse::Http201(r#response.json::<Rack>()?)) },
-		_ => { Ok(DcimRacksCreateResponse::None) }
+		r#other_status => { Ok(DcimRacksCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRacksBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of rack objects.
 pub fn dcim_racks_bulk_destroy(state: &ThanixClient, body: Vec<RackRequest>) -> Result<DcimRacksBulkDestroyResponse, Error> {
@@ -11634,15 +10876,13 @@ pub fn dcim_racks_bulk_destroy(state: &ThanixClient, body: Vec<RackRequest>) -> 
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimRacksBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimRacksBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRacksBulkPartialUpdateResponse {
 	Http200(Vec<Rack>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of rack objects.
 pub fn dcim_racks_bulk_partial_update(state: &ThanixClient, body: Vec<RackRequest>) -> Result<DcimRacksBulkPartialUpdateResponse, Error> {
@@ -11652,15 +10892,13 @@ pub fn dcim_racks_bulk_partial_update(state: &ThanixClient, body: Vec<RackReques
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRacksBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Rack>>()?)) },
-		_ => { Ok(DcimRacksBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimRacksBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRacksRetrieveResponse {
 	Http200(Rack),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a rack object.
 pub fn dcim_racks_retrieve(state: &ThanixClient, id: i64) -> Result<DcimRacksRetrieveResponse, Error> {
@@ -11669,15 +10907,13 @@ pub fn dcim_racks_retrieve(state: &ThanixClient, id: i64) -> Result<DcimRacksRet
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRacksRetrieveResponse::Http200(r#response.json::<Rack>()?)) },
-		_ => { Ok(DcimRacksRetrieveResponse::None) }
+		r#other_status => { Ok(DcimRacksRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRacksUpdateResponse {
 	Http200(Rack),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a rack object.
 pub fn dcim_racks_update(state: &ThanixClient, body: WritableRackRequest, id: i64) -> Result<DcimRacksUpdateResponse, Error> {
@@ -11687,15 +10923,13 @@ pub fn dcim_racks_update(state: &ThanixClient, body: WritableRackRequest, id: i6
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRacksUpdateResponse::Http200(r#response.json::<Rack>()?)) },
-		_ => { Ok(DcimRacksUpdateResponse::None) }
+		r#other_status => { Ok(DcimRacksUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRacksDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a rack object.
 pub fn dcim_racks_destroy(state: &ThanixClient, id: i64) -> Result<DcimRacksDestroyResponse, Error> {
@@ -11703,15 +10937,13 @@ pub fn dcim_racks_destroy(state: &ThanixClient, id: i64) -> Result<DcimRacksDest
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimRacksDestroyResponse::None) }
+		r#other_status => { Ok(DcimRacksDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRacksPartialUpdateResponse {
 	Http200(Rack),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a rack object.
 pub fn dcim_racks_partial_update(state: &ThanixClient, body: PatchedWritableRackRequest, id: i64) -> Result<DcimRacksPartialUpdateResponse, Error> {
@@ -11721,15 +10953,13 @@ pub fn dcim_racks_partial_update(state: &ThanixClient, body: PatchedWritableRack
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRacksPartialUpdateResponse::Http200(r#response.json::<Rack>()?)) },
-		_ => { Ok(DcimRacksPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimRacksPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRacksElevationRetrieveResponse {
 	Http200(Rack),
-	#[default]
-	None
+	Other(Response)
 }
 /// Rack elevation representing the list of rack units. Also supports rendering the elevation as an SVG.
 pub fn dcim_racks_elevation_retrieve(state: &ThanixClient, id: i64) -> Result<DcimRacksElevationRetrieveResponse, Error> {
@@ -11738,7 +10968,7 @@ pub fn dcim_racks_elevation_retrieve(state: &ThanixClient, id: i64) -> Result<Dc
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRacksElevationRetrieveResponse::Http200(r#response.json::<Rack>()?)) },
-		_ => { Ok(DcimRacksElevationRetrieveResponse::None) }
+		r#other_status => { Ok(DcimRacksElevationRetrieveResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -11827,12 +11057,10 @@ pub struct DcimRearPortTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRearPortTemplatesListResponse {
 	Http200(PaginatedRearPortTemplateList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of rear port template objects.
 pub fn dcim_rear_port_templates_list(state: &ThanixClient, query: DcimRearPortTemplatesListQuery) -> Result<DcimRearPortTemplatesListResponse, Error> {
@@ -11841,15 +11069,13 @@ pub fn dcim_rear_port_templates_list(state: &ThanixClient, query: DcimRearPortTe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRearPortTemplatesListResponse::Http200(r#response.json::<PaginatedRearPortTemplateList>()?)) },
-		_ => { Ok(DcimRearPortTemplatesListResponse::None) }
+		r#other_status => { Ok(DcimRearPortTemplatesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRearPortTemplatesBulkUpdateResponse {
 	Http200(Vec<RearPortTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of rear port template objects.
 pub fn dcim_rear_port_templates_bulk_update(state: &ThanixClient, body: Vec<RearPortTemplateRequest>) -> Result<DcimRearPortTemplatesBulkUpdateResponse, Error> {
@@ -11859,15 +11085,13 @@ pub fn dcim_rear_port_templates_bulk_update(state: &ThanixClient, body: Vec<Rear
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRearPortTemplatesBulkUpdateResponse::Http200(r#response.json::<Vec<RearPortTemplate>>()?)) },
-		_ => { Ok(DcimRearPortTemplatesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimRearPortTemplatesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRearPortTemplatesCreateResponse {
 	Http201(RearPortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of rear port template objects.
 pub fn dcim_rear_port_templates_create(state: &ThanixClient, body: WritableRearPortTemplateRequest) -> Result<DcimRearPortTemplatesCreateResponse, Error> {
@@ -11877,15 +11101,13 @@ pub fn dcim_rear_port_templates_create(state: &ThanixClient, body: WritableRearP
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimRearPortTemplatesCreateResponse::Http201(r#response.json::<RearPortTemplate>()?)) },
-		_ => { Ok(DcimRearPortTemplatesCreateResponse::None) }
+		r#other_status => { Ok(DcimRearPortTemplatesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRearPortTemplatesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of rear port template objects.
 pub fn dcim_rear_port_templates_bulk_destroy(state: &ThanixClient, body: Vec<RearPortTemplateRequest>) -> Result<DcimRearPortTemplatesBulkDestroyResponse, Error> {
@@ -11894,15 +11116,13 @@ pub fn dcim_rear_port_templates_bulk_destroy(state: &ThanixClient, body: Vec<Rea
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimRearPortTemplatesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimRearPortTemplatesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRearPortTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<RearPortTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of rear port template objects.
 pub fn dcim_rear_port_templates_bulk_partial_update(state: &ThanixClient, body: Vec<RearPortTemplateRequest>) -> Result<DcimRearPortTemplatesBulkPartialUpdateResponse, Error> {
@@ -11912,15 +11132,13 @@ pub fn dcim_rear_port_templates_bulk_partial_update(state: &ThanixClient, body: 
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRearPortTemplatesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<RearPortTemplate>>()?)) },
-		_ => { Ok(DcimRearPortTemplatesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimRearPortTemplatesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRearPortTemplatesRetrieveResponse {
 	Http200(RearPortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a rear port template object.
 pub fn dcim_rear_port_templates_retrieve(state: &ThanixClient, id: i64) -> Result<DcimRearPortTemplatesRetrieveResponse, Error> {
@@ -11929,15 +11147,13 @@ pub fn dcim_rear_port_templates_retrieve(state: &ThanixClient, id: i64) -> Resul
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRearPortTemplatesRetrieveResponse::Http200(r#response.json::<RearPortTemplate>()?)) },
-		_ => { Ok(DcimRearPortTemplatesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimRearPortTemplatesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRearPortTemplatesUpdateResponse {
 	Http200(RearPortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a rear port template object.
 pub fn dcim_rear_port_templates_update(state: &ThanixClient, body: WritableRearPortTemplateRequest, id: i64) -> Result<DcimRearPortTemplatesUpdateResponse, Error> {
@@ -11947,15 +11163,13 @@ pub fn dcim_rear_port_templates_update(state: &ThanixClient, body: WritableRearP
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRearPortTemplatesUpdateResponse::Http200(r#response.json::<RearPortTemplate>()?)) },
-		_ => { Ok(DcimRearPortTemplatesUpdateResponse::None) }
+		r#other_status => { Ok(DcimRearPortTemplatesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRearPortTemplatesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a rear port template object.
 pub fn dcim_rear_port_templates_destroy(state: &ThanixClient, id: i64) -> Result<DcimRearPortTemplatesDestroyResponse, Error> {
@@ -11963,15 +11177,13 @@ pub fn dcim_rear_port_templates_destroy(state: &ThanixClient, id: i64) -> Result
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimRearPortTemplatesDestroyResponse::None) }
+		r#other_status => { Ok(DcimRearPortTemplatesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRearPortTemplatesPartialUpdateResponse {
 	Http200(RearPortTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a rear port template object.
 pub fn dcim_rear_port_templates_partial_update(state: &ThanixClient, body: PatchedWritableRearPortTemplateRequest, id: i64) -> Result<DcimRearPortTemplatesPartialUpdateResponse, Error> {
@@ -11981,7 +11193,7 @@ pub fn dcim_rear_port_templates_partial_update(state: &ThanixClient, body: Patch
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRearPortTemplatesPartialUpdateResponse::Http200(r#response.json::<RearPortTemplate>()?)) },
-		_ => { Ok(DcimRearPortTemplatesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimRearPortTemplatesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -12163,12 +11375,10 @@ pub struct DcimRearPortsListQuery {
 	virtual_chassis_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRearPortsListResponse {
 	Http200(PaginatedRearPortList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of rear port objects.
 pub fn dcim_rear_ports_list(state: &ThanixClient, query: DcimRearPortsListQuery) -> Result<DcimRearPortsListResponse, Error> {
@@ -12177,15 +11387,13 @@ pub fn dcim_rear_ports_list(state: &ThanixClient, query: DcimRearPortsListQuery)
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRearPortsListResponse::Http200(r#response.json::<PaginatedRearPortList>()?)) },
-		_ => { Ok(DcimRearPortsListResponse::None) }
+		r#other_status => { Ok(DcimRearPortsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRearPortsBulkUpdateResponse {
 	Http200(Vec<RearPort>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of rear port objects.
 pub fn dcim_rear_ports_bulk_update(state: &ThanixClient, body: Vec<RearPortRequest>) -> Result<DcimRearPortsBulkUpdateResponse, Error> {
@@ -12195,15 +11403,13 @@ pub fn dcim_rear_ports_bulk_update(state: &ThanixClient, body: Vec<RearPortReque
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRearPortsBulkUpdateResponse::Http200(r#response.json::<Vec<RearPort>>()?)) },
-		_ => { Ok(DcimRearPortsBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimRearPortsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRearPortsCreateResponse {
 	Http201(RearPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of rear port objects.
 pub fn dcim_rear_ports_create(state: &ThanixClient, body: WritableRearPortRequest) -> Result<DcimRearPortsCreateResponse, Error> {
@@ -12213,15 +11419,13 @@ pub fn dcim_rear_ports_create(state: &ThanixClient, body: WritableRearPortReques
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimRearPortsCreateResponse::Http201(r#response.json::<RearPort>()?)) },
-		_ => { Ok(DcimRearPortsCreateResponse::None) }
+		r#other_status => { Ok(DcimRearPortsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRearPortsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of rear port objects.
 pub fn dcim_rear_ports_bulk_destroy(state: &ThanixClient, body: Vec<RearPortRequest>) -> Result<DcimRearPortsBulkDestroyResponse, Error> {
@@ -12230,15 +11434,13 @@ pub fn dcim_rear_ports_bulk_destroy(state: &ThanixClient, body: Vec<RearPortRequ
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimRearPortsBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimRearPortsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRearPortsBulkPartialUpdateResponse {
 	Http200(Vec<RearPort>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of rear port objects.
 pub fn dcim_rear_ports_bulk_partial_update(state: &ThanixClient, body: Vec<RearPortRequest>) -> Result<DcimRearPortsBulkPartialUpdateResponse, Error> {
@@ -12248,15 +11450,13 @@ pub fn dcim_rear_ports_bulk_partial_update(state: &ThanixClient, body: Vec<RearP
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRearPortsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<RearPort>>()?)) },
-		_ => { Ok(DcimRearPortsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimRearPortsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRearPortsRetrieveResponse {
 	Http200(RearPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a rear port object.
 pub fn dcim_rear_ports_retrieve(state: &ThanixClient, id: i64) -> Result<DcimRearPortsRetrieveResponse, Error> {
@@ -12265,15 +11465,13 @@ pub fn dcim_rear_ports_retrieve(state: &ThanixClient, id: i64) -> Result<DcimRea
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRearPortsRetrieveResponse::Http200(r#response.json::<RearPort>()?)) },
-		_ => { Ok(DcimRearPortsRetrieveResponse::None) }
+		r#other_status => { Ok(DcimRearPortsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRearPortsUpdateResponse {
 	Http200(RearPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a rear port object.
 pub fn dcim_rear_ports_update(state: &ThanixClient, body: WritableRearPortRequest, id: i64) -> Result<DcimRearPortsUpdateResponse, Error> {
@@ -12283,15 +11481,13 @@ pub fn dcim_rear_ports_update(state: &ThanixClient, body: WritableRearPortReques
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRearPortsUpdateResponse::Http200(r#response.json::<RearPort>()?)) },
-		_ => { Ok(DcimRearPortsUpdateResponse::None) }
+		r#other_status => { Ok(DcimRearPortsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRearPortsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a rear port object.
 pub fn dcim_rear_ports_destroy(state: &ThanixClient, id: i64) -> Result<DcimRearPortsDestroyResponse, Error> {
@@ -12299,15 +11495,13 @@ pub fn dcim_rear_ports_destroy(state: &ThanixClient, id: i64) -> Result<DcimRear
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimRearPortsDestroyResponse::None) }
+		r#other_status => { Ok(DcimRearPortsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRearPortsPartialUpdateResponse {
 	Http200(RearPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a rear port object.
 pub fn dcim_rear_ports_partial_update(state: &ThanixClient, body: PatchedWritableRearPortRequest, id: i64) -> Result<DcimRearPortsPartialUpdateResponse, Error> {
@@ -12317,15 +11511,13 @@ pub fn dcim_rear_ports_partial_update(state: &ThanixClient, body: PatchedWritabl
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRearPortsPartialUpdateResponse::Http200(r#response.json::<RearPort>()?)) },
-		_ => { Ok(DcimRearPortsPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimRearPortsPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRearPortsPathsRetrieveResponse {
 	Http200(RearPort),
-	#[default]
-	None
+	Other(Response)
 }
 /// Return all CablePaths which traverse a given pass-through port.
 pub fn dcim_rear_ports_paths_retrieve(state: &ThanixClient, id: i64) -> Result<DcimRearPortsPathsRetrieveResponse, Error> {
@@ -12334,7 +11526,7 @@ pub fn dcim_rear_ports_paths_retrieve(state: &ThanixClient, id: i64) -> Result<D
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRearPortsPathsRetrieveResponse::Http200(r#response.json::<RearPort>()?)) },
-		_ => { Ok(DcimRearPortsPathsRetrieveResponse::None) }
+		r#other_status => { Ok(DcimRearPortsPathsRetrieveResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -12428,12 +11620,10 @@ pub struct DcimRegionsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRegionsListResponse {
 	Http200(PaginatedRegionList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of region objects.
 pub fn dcim_regions_list(state: &ThanixClient, query: DcimRegionsListQuery) -> Result<DcimRegionsListResponse, Error> {
@@ -12442,15 +11632,13 @@ pub fn dcim_regions_list(state: &ThanixClient, query: DcimRegionsListQuery) -> R
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRegionsListResponse::Http200(r#response.json::<PaginatedRegionList>()?)) },
-		_ => { Ok(DcimRegionsListResponse::None) }
+		r#other_status => { Ok(DcimRegionsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRegionsBulkUpdateResponse {
 	Http200(Vec<Region>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of region objects.
 pub fn dcim_regions_bulk_update(state: &ThanixClient, body: Vec<RegionRequest>) -> Result<DcimRegionsBulkUpdateResponse, Error> {
@@ -12460,15 +11648,13 @@ pub fn dcim_regions_bulk_update(state: &ThanixClient, body: Vec<RegionRequest>) 
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRegionsBulkUpdateResponse::Http200(r#response.json::<Vec<Region>>()?)) },
-		_ => { Ok(DcimRegionsBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimRegionsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRegionsCreateResponse {
 	Http201(Region),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of region objects.
 pub fn dcim_regions_create(state: &ThanixClient, body: WritableRegionRequest) -> Result<DcimRegionsCreateResponse, Error> {
@@ -12478,15 +11664,13 @@ pub fn dcim_regions_create(state: &ThanixClient, body: WritableRegionRequest) ->
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimRegionsCreateResponse::Http201(r#response.json::<Region>()?)) },
-		_ => { Ok(DcimRegionsCreateResponse::None) }
+		r#other_status => { Ok(DcimRegionsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRegionsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of region objects.
 pub fn dcim_regions_bulk_destroy(state: &ThanixClient, body: Vec<RegionRequest>) -> Result<DcimRegionsBulkDestroyResponse, Error> {
@@ -12495,15 +11679,13 @@ pub fn dcim_regions_bulk_destroy(state: &ThanixClient, body: Vec<RegionRequest>)
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimRegionsBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimRegionsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRegionsBulkPartialUpdateResponse {
 	Http200(Vec<Region>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of region objects.
 pub fn dcim_regions_bulk_partial_update(state: &ThanixClient, body: Vec<RegionRequest>) -> Result<DcimRegionsBulkPartialUpdateResponse, Error> {
@@ -12513,15 +11695,13 @@ pub fn dcim_regions_bulk_partial_update(state: &ThanixClient, body: Vec<RegionRe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRegionsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Region>>()?)) },
-		_ => { Ok(DcimRegionsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimRegionsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRegionsRetrieveResponse {
 	Http200(Region),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a region object.
 pub fn dcim_regions_retrieve(state: &ThanixClient, id: i64) -> Result<DcimRegionsRetrieveResponse, Error> {
@@ -12530,15 +11710,13 @@ pub fn dcim_regions_retrieve(state: &ThanixClient, id: i64) -> Result<DcimRegion
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRegionsRetrieveResponse::Http200(r#response.json::<Region>()?)) },
-		_ => { Ok(DcimRegionsRetrieveResponse::None) }
+		r#other_status => { Ok(DcimRegionsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRegionsUpdateResponse {
 	Http200(Region),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a region object.
 pub fn dcim_regions_update(state: &ThanixClient, body: WritableRegionRequest, id: i64) -> Result<DcimRegionsUpdateResponse, Error> {
@@ -12548,15 +11726,13 @@ pub fn dcim_regions_update(state: &ThanixClient, body: WritableRegionRequest, id
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRegionsUpdateResponse::Http200(r#response.json::<Region>()?)) },
-		_ => { Ok(DcimRegionsUpdateResponse::None) }
+		r#other_status => { Ok(DcimRegionsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRegionsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a region object.
 pub fn dcim_regions_destroy(state: &ThanixClient, id: i64) -> Result<DcimRegionsDestroyResponse, Error> {
@@ -12564,15 +11740,13 @@ pub fn dcim_regions_destroy(state: &ThanixClient, id: i64) -> Result<DcimRegions
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimRegionsDestroyResponse::None) }
+		r#other_status => { Ok(DcimRegionsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimRegionsPartialUpdateResponse {
 	Http200(Region),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a region object.
 pub fn dcim_regions_partial_update(state: &ThanixClient, body: PatchedWritableRegionRequest, id: i64) -> Result<DcimRegionsPartialUpdateResponse, Error> {
@@ -12582,7 +11756,7 @@ pub fn dcim_regions_partial_update(state: &ThanixClient, body: PatchedWritableRe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimRegionsPartialUpdateResponse::Http200(r#response.json::<Region>()?)) },
-		_ => { Ok(DcimRegionsPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimRegionsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -12676,12 +11850,10 @@ pub struct DcimSiteGroupsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimSiteGroupsListResponse {
 	Http200(PaginatedSiteGroupList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of site group objects.
 pub fn dcim_site_groups_list(state: &ThanixClient, query: DcimSiteGroupsListQuery) -> Result<DcimSiteGroupsListResponse, Error> {
@@ -12690,15 +11862,13 @@ pub fn dcim_site_groups_list(state: &ThanixClient, query: DcimSiteGroupsListQuer
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimSiteGroupsListResponse::Http200(r#response.json::<PaginatedSiteGroupList>()?)) },
-		_ => { Ok(DcimSiteGroupsListResponse::None) }
+		r#other_status => { Ok(DcimSiteGroupsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimSiteGroupsBulkUpdateResponse {
 	Http200(Vec<SiteGroup>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of site group objects.
 pub fn dcim_site_groups_bulk_update(state: &ThanixClient, body: Vec<SiteGroupRequest>) -> Result<DcimSiteGroupsBulkUpdateResponse, Error> {
@@ -12708,15 +11878,13 @@ pub fn dcim_site_groups_bulk_update(state: &ThanixClient, body: Vec<SiteGroupReq
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimSiteGroupsBulkUpdateResponse::Http200(r#response.json::<Vec<SiteGroup>>()?)) },
-		_ => { Ok(DcimSiteGroupsBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimSiteGroupsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimSiteGroupsCreateResponse {
 	Http201(SiteGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of site group objects.
 pub fn dcim_site_groups_create(state: &ThanixClient, body: WritableSiteGroupRequest) -> Result<DcimSiteGroupsCreateResponse, Error> {
@@ -12726,15 +11894,13 @@ pub fn dcim_site_groups_create(state: &ThanixClient, body: WritableSiteGroupRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimSiteGroupsCreateResponse::Http201(r#response.json::<SiteGroup>()?)) },
-		_ => { Ok(DcimSiteGroupsCreateResponse::None) }
+		r#other_status => { Ok(DcimSiteGroupsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimSiteGroupsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of site group objects.
 pub fn dcim_site_groups_bulk_destroy(state: &ThanixClient, body: Vec<SiteGroupRequest>) -> Result<DcimSiteGroupsBulkDestroyResponse, Error> {
@@ -12743,15 +11909,13 @@ pub fn dcim_site_groups_bulk_destroy(state: &ThanixClient, body: Vec<SiteGroupRe
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimSiteGroupsBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimSiteGroupsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimSiteGroupsBulkPartialUpdateResponse {
 	Http200(Vec<SiteGroup>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of site group objects.
 pub fn dcim_site_groups_bulk_partial_update(state: &ThanixClient, body: Vec<SiteGroupRequest>) -> Result<DcimSiteGroupsBulkPartialUpdateResponse, Error> {
@@ -12761,15 +11925,13 @@ pub fn dcim_site_groups_bulk_partial_update(state: &ThanixClient, body: Vec<Site
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimSiteGroupsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<SiteGroup>>()?)) },
-		_ => { Ok(DcimSiteGroupsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimSiteGroupsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimSiteGroupsRetrieveResponse {
 	Http200(SiteGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a site group object.
 pub fn dcim_site_groups_retrieve(state: &ThanixClient, id: i64) -> Result<DcimSiteGroupsRetrieveResponse, Error> {
@@ -12778,15 +11940,13 @@ pub fn dcim_site_groups_retrieve(state: &ThanixClient, id: i64) -> Result<DcimSi
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimSiteGroupsRetrieveResponse::Http200(r#response.json::<SiteGroup>()?)) },
-		_ => { Ok(DcimSiteGroupsRetrieveResponse::None) }
+		r#other_status => { Ok(DcimSiteGroupsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimSiteGroupsUpdateResponse {
 	Http200(SiteGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a site group object.
 pub fn dcim_site_groups_update(state: &ThanixClient, body: WritableSiteGroupRequest, id: i64) -> Result<DcimSiteGroupsUpdateResponse, Error> {
@@ -12796,15 +11956,13 @@ pub fn dcim_site_groups_update(state: &ThanixClient, body: WritableSiteGroupRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimSiteGroupsUpdateResponse::Http200(r#response.json::<SiteGroup>()?)) },
-		_ => { Ok(DcimSiteGroupsUpdateResponse::None) }
+		r#other_status => { Ok(DcimSiteGroupsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimSiteGroupsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a site group object.
 pub fn dcim_site_groups_destroy(state: &ThanixClient, id: i64) -> Result<DcimSiteGroupsDestroyResponse, Error> {
@@ -12812,15 +11970,13 @@ pub fn dcim_site_groups_destroy(state: &ThanixClient, id: i64) -> Result<DcimSit
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimSiteGroupsDestroyResponse::None) }
+		r#other_status => { Ok(DcimSiteGroupsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimSiteGroupsPartialUpdateResponse {
 	Http200(SiteGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a site group object.
 pub fn dcim_site_groups_partial_update(state: &ThanixClient, body: PatchedWritableSiteGroupRequest, id: i64) -> Result<DcimSiteGroupsPartialUpdateResponse, Error> {
@@ -12830,7 +11986,7 @@ pub fn dcim_site_groups_partial_update(state: &ThanixClient, body: PatchedWritab
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimSiteGroupsPartialUpdateResponse::Http200(r#response.json::<SiteGroup>()?)) },
-		_ => { Ok(DcimSiteGroupsPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimSiteGroupsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -12983,12 +12139,10 @@ pub struct DcimSitesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimSitesListResponse {
 	Http200(PaginatedSiteList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of site objects.
 pub fn dcim_sites_list(state: &ThanixClient, query: DcimSitesListQuery) -> Result<DcimSitesListResponse, Error> {
@@ -12997,15 +12151,13 @@ pub fn dcim_sites_list(state: &ThanixClient, query: DcimSitesListQuery) -> Resul
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimSitesListResponse::Http200(r#response.json::<PaginatedSiteList>()?)) },
-		_ => { Ok(DcimSitesListResponse::None) }
+		r#other_status => { Ok(DcimSitesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimSitesBulkUpdateResponse {
 	Http200(Vec<Site>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of site objects.
 pub fn dcim_sites_bulk_update(state: &ThanixClient, body: Vec<SiteRequest>) -> Result<DcimSitesBulkUpdateResponse, Error> {
@@ -13015,15 +12167,13 @@ pub fn dcim_sites_bulk_update(state: &ThanixClient, body: Vec<SiteRequest>) -> R
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimSitesBulkUpdateResponse::Http200(r#response.json::<Vec<Site>>()?)) },
-		_ => { Ok(DcimSitesBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimSitesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimSitesCreateResponse {
 	Http201(Site),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of site objects.
 pub fn dcim_sites_create(state: &ThanixClient, body: WritableSiteRequest) -> Result<DcimSitesCreateResponse, Error> {
@@ -13033,15 +12183,13 @@ pub fn dcim_sites_create(state: &ThanixClient, body: WritableSiteRequest) -> Res
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimSitesCreateResponse::Http201(r#response.json::<Site>()?)) },
-		_ => { Ok(DcimSitesCreateResponse::None) }
+		r#other_status => { Ok(DcimSitesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimSitesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of site objects.
 pub fn dcim_sites_bulk_destroy(state: &ThanixClient, body: Vec<SiteRequest>) -> Result<DcimSitesBulkDestroyResponse, Error> {
@@ -13050,15 +12198,13 @@ pub fn dcim_sites_bulk_destroy(state: &ThanixClient, body: Vec<SiteRequest>) -> 
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimSitesBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimSitesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimSitesBulkPartialUpdateResponse {
 	Http200(Vec<Site>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of site objects.
 pub fn dcim_sites_bulk_partial_update(state: &ThanixClient, body: Vec<SiteRequest>) -> Result<DcimSitesBulkPartialUpdateResponse, Error> {
@@ -13068,15 +12214,13 @@ pub fn dcim_sites_bulk_partial_update(state: &ThanixClient, body: Vec<SiteReques
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimSitesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Site>>()?)) },
-		_ => { Ok(DcimSitesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimSitesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimSitesRetrieveResponse {
 	Http200(Site),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a site object.
 pub fn dcim_sites_retrieve(state: &ThanixClient, id: i64) -> Result<DcimSitesRetrieveResponse, Error> {
@@ -13085,15 +12229,13 @@ pub fn dcim_sites_retrieve(state: &ThanixClient, id: i64) -> Result<DcimSitesRet
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimSitesRetrieveResponse::Http200(r#response.json::<Site>()?)) },
-		_ => { Ok(DcimSitesRetrieveResponse::None) }
+		r#other_status => { Ok(DcimSitesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimSitesUpdateResponse {
 	Http200(Site),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a site object.
 pub fn dcim_sites_update(state: &ThanixClient, body: WritableSiteRequest, id: i64) -> Result<DcimSitesUpdateResponse, Error> {
@@ -13103,15 +12245,13 @@ pub fn dcim_sites_update(state: &ThanixClient, body: WritableSiteRequest, id: i6
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimSitesUpdateResponse::Http200(r#response.json::<Site>()?)) },
-		_ => { Ok(DcimSitesUpdateResponse::None) }
+		r#other_status => { Ok(DcimSitesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimSitesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a site object.
 pub fn dcim_sites_destroy(state: &ThanixClient, id: i64) -> Result<DcimSitesDestroyResponse, Error> {
@@ -13119,15 +12259,13 @@ pub fn dcim_sites_destroy(state: &ThanixClient, id: i64) -> Result<DcimSitesDest
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimSitesDestroyResponse::None) }
+		r#other_status => { Ok(DcimSitesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimSitesPartialUpdateResponse {
 	Http200(Site),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a site object.
 pub fn dcim_sites_partial_update(state: &ThanixClient, body: PatchedWritableSiteRequest, id: i64) -> Result<DcimSitesPartialUpdateResponse, Error> {
@@ -13137,7 +12275,7 @@ pub fn dcim_sites_partial_update(state: &ThanixClient, body: PatchedWritableSite
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimSitesPartialUpdateResponse::Http200(r#response.json::<Site>()?)) },
-		_ => { Ok(DcimSitesPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimSitesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -13251,12 +12389,10 @@ pub struct DcimVirtualChassisListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimVirtualChassisListResponse {
 	Http200(PaginatedVirtualChassisList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of virtual chassis objects.
 pub fn dcim_virtual_chassis_list(state: &ThanixClient, query: DcimVirtualChassisListQuery) -> Result<DcimVirtualChassisListResponse, Error> {
@@ -13265,15 +12401,13 @@ pub fn dcim_virtual_chassis_list(state: &ThanixClient, query: DcimVirtualChassis
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimVirtualChassisListResponse::Http200(r#response.json::<PaginatedVirtualChassisList>()?)) },
-		_ => { Ok(DcimVirtualChassisListResponse::None) }
+		r#other_status => { Ok(DcimVirtualChassisListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimVirtualChassisBulkUpdateResponse {
 	Http200(Vec<VirtualChassis>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of virtual chassis objects.
 pub fn dcim_virtual_chassis_bulk_update(state: &ThanixClient, body: Vec<VirtualChassisRequest>) -> Result<DcimVirtualChassisBulkUpdateResponse, Error> {
@@ -13283,15 +12417,13 @@ pub fn dcim_virtual_chassis_bulk_update(state: &ThanixClient, body: Vec<VirtualC
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimVirtualChassisBulkUpdateResponse::Http200(r#response.json::<Vec<VirtualChassis>>()?)) },
-		_ => { Ok(DcimVirtualChassisBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimVirtualChassisBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimVirtualChassisCreateResponse {
 	Http201(VirtualChassis),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of virtual chassis objects.
 pub fn dcim_virtual_chassis_create(state: &ThanixClient, body: WritableVirtualChassisRequest) -> Result<DcimVirtualChassisCreateResponse, Error> {
@@ -13301,15 +12433,13 @@ pub fn dcim_virtual_chassis_create(state: &ThanixClient, body: WritableVirtualCh
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimVirtualChassisCreateResponse::Http201(r#response.json::<VirtualChassis>()?)) },
-		_ => { Ok(DcimVirtualChassisCreateResponse::None) }
+		r#other_status => { Ok(DcimVirtualChassisCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimVirtualChassisBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of virtual chassis objects.
 pub fn dcim_virtual_chassis_bulk_destroy(state: &ThanixClient, body: Vec<VirtualChassisRequest>) -> Result<DcimVirtualChassisBulkDestroyResponse, Error> {
@@ -13318,15 +12448,13 @@ pub fn dcim_virtual_chassis_bulk_destroy(state: &ThanixClient, body: Vec<Virtual
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimVirtualChassisBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimVirtualChassisBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimVirtualChassisBulkPartialUpdateResponse {
 	Http200(Vec<VirtualChassis>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of virtual chassis objects.
 pub fn dcim_virtual_chassis_bulk_partial_update(state: &ThanixClient, body: Vec<VirtualChassisRequest>) -> Result<DcimVirtualChassisBulkPartialUpdateResponse, Error> {
@@ -13336,15 +12464,13 @@ pub fn dcim_virtual_chassis_bulk_partial_update(state: &ThanixClient, body: Vec<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimVirtualChassisBulkPartialUpdateResponse::Http200(r#response.json::<Vec<VirtualChassis>>()?)) },
-		_ => { Ok(DcimVirtualChassisBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimVirtualChassisBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimVirtualChassisRetrieveResponse {
 	Http200(VirtualChassis),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a virtual chassis object.
 pub fn dcim_virtual_chassis_retrieve(state: &ThanixClient, id: i64) -> Result<DcimVirtualChassisRetrieveResponse, Error> {
@@ -13353,15 +12479,13 @@ pub fn dcim_virtual_chassis_retrieve(state: &ThanixClient, id: i64) -> Result<Dc
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimVirtualChassisRetrieveResponse::Http200(r#response.json::<VirtualChassis>()?)) },
-		_ => { Ok(DcimVirtualChassisRetrieveResponse::None) }
+		r#other_status => { Ok(DcimVirtualChassisRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimVirtualChassisUpdateResponse {
 	Http200(VirtualChassis),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a virtual chassis object.
 pub fn dcim_virtual_chassis_update(state: &ThanixClient, body: WritableVirtualChassisRequest, id: i64) -> Result<DcimVirtualChassisUpdateResponse, Error> {
@@ -13371,15 +12495,13 @@ pub fn dcim_virtual_chassis_update(state: &ThanixClient, body: WritableVirtualCh
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimVirtualChassisUpdateResponse::Http200(r#response.json::<VirtualChassis>()?)) },
-		_ => { Ok(DcimVirtualChassisUpdateResponse::None) }
+		r#other_status => { Ok(DcimVirtualChassisUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimVirtualChassisDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a virtual chassis object.
 pub fn dcim_virtual_chassis_destroy(state: &ThanixClient, id: i64) -> Result<DcimVirtualChassisDestroyResponse, Error> {
@@ -13387,15 +12509,13 @@ pub fn dcim_virtual_chassis_destroy(state: &ThanixClient, id: i64) -> Result<Dci
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimVirtualChassisDestroyResponse::None) }
+		r#other_status => { Ok(DcimVirtualChassisDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimVirtualChassisPartialUpdateResponse {
 	Http200(VirtualChassis),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a virtual chassis object.
 pub fn dcim_virtual_chassis_partial_update(state: &ThanixClient, body: PatchedWritableVirtualChassisRequest, id: i64) -> Result<DcimVirtualChassisPartialUpdateResponse, Error> {
@@ -13405,7 +12525,7 @@ pub fn dcim_virtual_chassis_partial_update(state: &ThanixClient, body: PatchedWr
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimVirtualChassisPartialUpdateResponse::Http200(r#response.json::<VirtualChassis>()?)) },
-		_ => { Ok(DcimVirtualChassisPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimVirtualChassisPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -13504,12 +12624,10 @@ pub struct DcimVirtualDeviceContextsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimVirtualDeviceContextsListResponse {
 	Http200(PaginatedVirtualDeviceContextList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of virtual device context objects.
 pub fn dcim_virtual_device_contexts_list(state: &ThanixClient, query: DcimVirtualDeviceContextsListQuery) -> Result<DcimVirtualDeviceContextsListResponse, Error> {
@@ -13518,15 +12636,13 @@ pub fn dcim_virtual_device_contexts_list(state: &ThanixClient, query: DcimVirtua
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimVirtualDeviceContextsListResponse::Http200(r#response.json::<PaginatedVirtualDeviceContextList>()?)) },
-		_ => { Ok(DcimVirtualDeviceContextsListResponse::None) }
+		r#other_status => { Ok(DcimVirtualDeviceContextsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimVirtualDeviceContextsBulkUpdateResponse {
 	Http200(Vec<VirtualDeviceContext>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of virtual device context objects.
 pub fn dcim_virtual_device_contexts_bulk_update(state: &ThanixClient, body: Vec<VirtualDeviceContextRequest>) -> Result<DcimVirtualDeviceContextsBulkUpdateResponse, Error> {
@@ -13536,15 +12652,13 @@ pub fn dcim_virtual_device_contexts_bulk_update(state: &ThanixClient, body: Vec<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimVirtualDeviceContextsBulkUpdateResponse::Http200(r#response.json::<Vec<VirtualDeviceContext>>()?)) },
-		_ => { Ok(DcimVirtualDeviceContextsBulkUpdateResponse::None) }
+		r#other_status => { Ok(DcimVirtualDeviceContextsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimVirtualDeviceContextsCreateResponse {
 	Http201(VirtualDeviceContext),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of virtual device context objects.
 pub fn dcim_virtual_device_contexts_create(state: &ThanixClient, body: WritableVirtualDeviceContextRequest) -> Result<DcimVirtualDeviceContextsCreateResponse, Error> {
@@ -13554,15 +12668,13 @@ pub fn dcim_virtual_device_contexts_create(state: &ThanixClient, body: WritableV
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(DcimVirtualDeviceContextsCreateResponse::Http201(r#response.json::<VirtualDeviceContext>()?)) },
-		_ => { Ok(DcimVirtualDeviceContextsCreateResponse::None) }
+		r#other_status => { Ok(DcimVirtualDeviceContextsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimVirtualDeviceContextsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of virtual device context objects.
 pub fn dcim_virtual_device_contexts_bulk_destroy(state: &ThanixClient, body: Vec<VirtualDeviceContextRequest>) -> Result<DcimVirtualDeviceContextsBulkDestroyResponse, Error> {
@@ -13571,15 +12683,13 @@ pub fn dcim_virtual_device_contexts_bulk_destroy(state: &ThanixClient, body: Vec
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimVirtualDeviceContextsBulkDestroyResponse::None) }
+		r#other_status => { Ok(DcimVirtualDeviceContextsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimVirtualDeviceContextsBulkPartialUpdateResponse {
 	Http200(Vec<VirtualDeviceContext>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of virtual device context objects.
 pub fn dcim_virtual_device_contexts_bulk_partial_update(state: &ThanixClient, body: Vec<VirtualDeviceContextRequest>) -> Result<DcimVirtualDeviceContextsBulkPartialUpdateResponse, Error> {
@@ -13589,15 +12699,13 @@ pub fn dcim_virtual_device_contexts_bulk_partial_update(state: &ThanixClient, bo
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimVirtualDeviceContextsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<VirtualDeviceContext>>()?)) },
-		_ => { Ok(DcimVirtualDeviceContextsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimVirtualDeviceContextsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimVirtualDeviceContextsRetrieveResponse {
 	Http200(VirtualDeviceContext),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a virtual device context object.
 pub fn dcim_virtual_device_contexts_retrieve(state: &ThanixClient, id: i64) -> Result<DcimVirtualDeviceContextsRetrieveResponse, Error> {
@@ -13606,15 +12714,13 @@ pub fn dcim_virtual_device_contexts_retrieve(state: &ThanixClient, id: i64) -> R
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimVirtualDeviceContextsRetrieveResponse::Http200(r#response.json::<VirtualDeviceContext>()?)) },
-		_ => { Ok(DcimVirtualDeviceContextsRetrieveResponse::None) }
+		r#other_status => { Ok(DcimVirtualDeviceContextsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimVirtualDeviceContextsUpdateResponse {
 	Http200(VirtualDeviceContext),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a virtual device context object.
 pub fn dcim_virtual_device_contexts_update(state: &ThanixClient, body: WritableVirtualDeviceContextRequest, id: i64) -> Result<DcimVirtualDeviceContextsUpdateResponse, Error> {
@@ -13624,15 +12730,13 @@ pub fn dcim_virtual_device_contexts_update(state: &ThanixClient, body: WritableV
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimVirtualDeviceContextsUpdateResponse::Http200(r#response.json::<VirtualDeviceContext>()?)) },
-		_ => { Ok(DcimVirtualDeviceContextsUpdateResponse::None) }
+		r#other_status => { Ok(DcimVirtualDeviceContextsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimVirtualDeviceContextsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a virtual device context object.
 pub fn dcim_virtual_device_contexts_destroy(state: &ThanixClient, id: i64) -> Result<DcimVirtualDeviceContextsDestroyResponse, Error> {
@@ -13640,15 +12744,13 @@ pub fn dcim_virtual_device_contexts_destroy(state: &ThanixClient, id: i64) -> Re
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(DcimVirtualDeviceContextsDestroyResponse::None) }
+		r#other_status => { Ok(DcimVirtualDeviceContextsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum DcimVirtualDeviceContextsPartialUpdateResponse {
 	Http200(VirtualDeviceContext),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a virtual device context object.
 pub fn dcim_virtual_device_contexts_partial_update(state: &ThanixClient, body: PatchedWritableVirtualDeviceContextRequest, id: i64) -> Result<DcimVirtualDeviceContextsPartialUpdateResponse, Error> {
@@ -13658,7 +12760,7 @@ pub fn dcim_virtual_device_contexts_partial_update(state: &ThanixClient, body: P
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(DcimVirtualDeviceContextsPartialUpdateResponse::Http200(r#response.json::<VirtualDeviceContext>()?)) },
-		_ => { Ok(DcimVirtualDeviceContextsPartialUpdateResponse::None) }
+		r#other_status => { Ok(DcimVirtualDeviceContextsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -13703,12 +12805,10 @@ pub struct ExtrasBookmarksListQuery {
 	user_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasBookmarksListResponse {
 	Http200(PaginatedBookmarkList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of bookmark objects.
 pub fn extras_bookmarks_list(state: &ThanixClient, query: ExtrasBookmarksListQuery) -> Result<ExtrasBookmarksListResponse, Error> {
@@ -13717,15 +12817,13 @@ pub fn extras_bookmarks_list(state: &ThanixClient, query: ExtrasBookmarksListQue
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasBookmarksListResponse::Http200(r#response.json::<PaginatedBookmarkList>()?)) },
-		_ => { Ok(ExtrasBookmarksListResponse::None) }
+		r#other_status => { Ok(ExtrasBookmarksListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasBookmarksBulkUpdateResponse {
 	Http200(Vec<Bookmark>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of bookmark objects.
 pub fn extras_bookmarks_bulk_update(state: &ThanixClient, body: Vec<BookmarkRequest>) -> Result<ExtrasBookmarksBulkUpdateResponse, Error> {
@@ -13735,15 +12833,13 @@ pub fn extras_bookmarks_bulk_update(state: &ThanixClient, body: Vec<BookmarkRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasBookmarksBulkUpdateResponse::Http200(r#response.json::<Vec<Bookmark>>()?)) },
-		_ => { Ok(ExtrasBookmarksBulkUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasBookmarksBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasBookmarksCreateResponse {
 	Http201(Bookmark),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of bookmark objects.
 pub fn extras_bookmarks_create(state: &ThanixClient, body: WritableBookmarkRequest) -> Result<ExtrasBookmarksCreateResponse, Error> {
@@ -13753,15 +12849,13 @@ pub fn extras_bookmarks_create(state: &ThanixClient, body: WritableBookmarkReque
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(ExtrasBookmarksCreateResponse::Http201(r#response.json::<Bookmark>()?)) },
-		_ => { Ok(ExtrasBookmarksCreateResponse::None) }
+		r#other_status => { Ok(ExtrasBookmarksCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasBookmarksBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of bookmark objects.
 pub fn extras_bookmarks_bulk_destroy(state: &ThanixClient, body: Vec<BookmarkRequest>) -> Result<ExtrasBookmarksBulkDestroyResponse, Error> {
@@ -13770,15 +12864,13 @@ pub fn extras_bookmarks_bulk_destroy(state: &ThanixClient, body: Vec<BookmarkReq
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasBookmarksBulkDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasBookmarksBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasBookmarksBulkPartialUpdateResponse {
 	Http200(Vec<Bookmark>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of bookmark objects.
 pub fn extras_bookmarks_bulk_partial_update(state: &ThanixClient, body: Vec<BookmarkRequest>) -> Result<ExtrasBookmarksBulkPartialUpdateResponse, Error> {
@@ -13788,15 +12880,13 @@ pub fn extras_bookmarks_bulk_partial_update(state: &ThanixClient, body: Vec<Book
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasBookmarksBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Bookmark>>()?)) },
-		_ => { Ok(ExtrasBookmarksBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasBookmarksBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasBookmarksRetrieveResponse {
 	Http200(Bookmark),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a bookmark object.
 pub fn extras_bookmarks_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasBookmarksRetrieveResponse, Error> {
@@ -13805,15 +12895,13 @@ pub fn extras_bookmarks_retrieve(state: &ThanixClient, id: i64) -> Result<Extras
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasBookmarksRetrieveResponse::Http200(r#response.json::<Bookmark>()?)) },
-		_ => { Ok(ExtrasBookmarksRetrieveResponse::None) }
+		r#other_status => { Ok(ExtrasBookmarksRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasBookmarksUpdateResponse {
 	Http200(Bookmark),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a bookmark object.
 pub fn extras_bookmarks_update(state: &ThanixClient, body: WritableBookmarkRequest, id: i64) -> Result<ExtrasBookmarksUpdateResponse, Error> {
@@ -13823,15 +12911,13 @@ pub fn extras_bookmarks_update(state: &ThanixClient, body: WritableBookmarkReque
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasBookmarksUpdateResponse::Http200(r#response.json::<Bookmark>()?)) },
-		_ => { Ok(ExtrasBookmarksUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasBookmarksUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasBookmarksDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a bookmark object.
 pub fn extras_bookmarks_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasBookmarksDestroyResponse, Error> {
@@ -13839,15 +12925,13 @@ pub fn extras_bookmarks_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasB
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasBookmarksDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasBookmarksDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasBookmarksPartialUpdateResponse {
 	Http200(Bookmark),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a bookmark object.
 pub fn extras_bookmarks_partial_update(state: &ThanixClient, body: PatchedWritableBookmarkRequest, id: i64) -> Result<ExtrasBookmarksPartialUpdateResponse, Error> {
@@ -13857,7 +12941,7 @@ pub fn extras_bookmarks_partial_update(state: &ThanixClient, body: PatchedWritab
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasBookmarksPartialUpdateResponse::Http200(r#response.json::<Bookmark>()?)) },
-		_ => { Ok(ExtrasBookmarksPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasBookmarksPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -14030,12 +13114,10 @@ pub struct ExtrasConfigContextsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigContextsListResponse {
 	Http200(PaginatedConfigContextList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of config context objects.
 pub fn extras_config_contexts_list(state: &ThanixClient, query: ExtrasConfigContextsListQuery) -> Result<ExtrasConfigContextsListResponse, Error> {
@@ -14044,15 +13126,13 @@ pub fn extras_config_contexts_list(state: &ThanixClient, query: ExtrasConfigCont
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasConfigContextsListResponse::Http200(r#response.json::<PaginatedConfigContextList>()?)) },
-		_ => { Ok(ExtrasConfigContextsListResponse::None) }
+		r#other_status => { Ok(ExtrasConfigContextsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigContextsBulkUpdateResponse {
 	Http200(Vec<ConfigContext>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of config context objects.
 pub fn extras_config_contexts_bulk_update(state: &ThanixClient, body: Vec<ConfigContextRequest>) -> Result<ExtrasConfigContextsBulkUpdateResponse, Error> {
@@ -14062,15 +13142,13 @@ pub fn extras_config_contexts_bulk_update(state: &ThanixClient, body: Vec<Config
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasConfigContextsBulkUpdateResponse::Http200(r#response.json::<Vec<ConfigContext>>()?)) },
-		_ => { Ok(ExtrasConfigContextsBulkUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasConfigContextsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigContextsCreateResponse {
 	Http201(ConfigContext),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of config context objects.
 pub fn extras_config_contexts_create(state: &ThanixClient, body: WritableConfigContextRequest) -> Result<ExtrasConfigContextsCreateResponse, Error> {
@@ -14080,15 +13158,13 @@ pub fn extras_config_contexts_create(state: &ThanixClient, body: WritableConfigC
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(ExtrasConfigContextsCreateResponse::Http201(r#response.json::<ConfigContext>()?)) },
-		_ => { Ok(ExtrasConfigContextsCreateResponse::None) }
+		r#other_status => { Ok(ExtrasConfigContextsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigContextsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of config context objects.
 pub fn extras_config_contexts_bulk_destroy(state: &ThanixClient, body: Vec<ConfigContextRequest>) -> Result<ExtrasConfigContextsBulkDestroyResponse, Error> {
@@ -14097,15 +13173,13 @@ pub fn extras_config_contexts_bulk_destroy(state: &ThanixClient, body: Vec<Confi
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasConfigContextsBulkDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasConfigContextsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigContextsBulkPartialUpdateResponse {
 	Http200(Vec<ConfigContext>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of config context objects.
 pub fn extras_config_contexts_bulk_partial_update(state: &ThanixClient, body: Vec<ConfigContextRequest>) -> Result<ExtrasConfigContextsBulkPartialUpdateResponse, Error> {
@@ -14115,15 +13189,13 @@ pub fn extras_config_contexts_bulk_partial_update(state: &ThanixClient, body: Ve
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasConfigContextsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ConfigContext>>()?)) },
-		_ => { Ok(ExtrasConfigContextsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasConfigContextsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigContextsRetrieveResponse {
 	Http200(ConfigContext),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a config context object.
 pub fn extras_config_contexts_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasConfigContextsRetrieveResponse, Error> {
@@ -14132,15 +13204,13 @@ pub fn extras_config_contexts_retrieve(state: &ThanixClient, id: i64) -> Result<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasConfigContextsRetrieveResponse::Http200(r#response.json::<ConfigContext>()?)) },
-		_ => { Ok(ExtrasConfigContextsRetrieveResponse::None) }
+		r#other_status => { Ok(ExtrasConfigContextsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigContextsUpdateResponse {
 	Http200(ConfigContext),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a config context object.
 pub fn extras_config_contexts_update(state: &ThanixClient, body: WritableConfigContextRequest, id: i64) -> Result<ExtrasConfigContextsUpdateResponse, Error> {
@@ -14150,15 +13220,13 @@ pub fn extras_config_contexts_update(state: &ThanixClient, body: WritableConfigC
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasConfigContextsUpdateResponse::Http200(r#response.json::<ConfigContext>()?)) },
-		_ => { Ok(ExtrasConfigContextsUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasConfigContextsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigContextsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a config context object.
 pub fn extras_config_contexts_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasConfigContextsDestroyResponse, Error> {
@@ -14166,15 +13234,13 @@ pub fn extras_config_contexts_destroy(state: &ThanixClient, id: i64) -> Result<E
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasConfigContextsDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasConfigContextsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigContextsPartialUpdateResponse {
 	Http200(ConfigContext),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a config context object.
 pub fn extras_config_contexts_partial_update(state: &ThanixClient, body: PatchedWritableConfigContextRequest, id: i64) -> Result<ExtrasConfigContextsPartialUpdateResponse, Error> {
@@ -14184,15 +13250,13 @@ pub fn extras_config_contexts_partial_update(state: &ThanixClient, body: Patched
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasConfigContextsPartialUpdateResponse::Http200(r#response.json::<ConfigContext>()?)) },
-		_ => { Ok(ExtrasConfigContextsPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasConfigContextsPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigContextsSyncCreateResponse {
 	Http200(ConfigContext),
-	#[default]
-	None
+	Other(Response)
 }
 /// Provide a /sync API endpoint to synchronize an object's data from its associated DataFile (if any).
 pub fn extras_config_contexts_sync_create(state: &ThanixClient, body: WritableConfigContextRequest, id: i64) -> Result<ExtrasConfigContextsSyncCreateResponse, Error> {
@@ -14202,7 +13266,7 @@ pub fn extras_config_contexts_sync_create(state: &ThanixClient, body: WritableCo
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasConfigContextsSyncCreateResponse::Http200(r#response.json::<ConfigContext>()?)) },
-		_ => { Ok(ExtrasConfigContextsSyncCreateResponse::None) }
+		r#other_status => { Ok(ExtrasConfigContextsSyncCreateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -14263,12 +13327,10 @@ pub struct ExtrasConfigTemplatesListQuery {
 	tag__n: Option<Vec<String>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigTemplatesListResponse {
 	Http200(PaginatedConfigTemplateList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of config template objects.
 pub fn extras_config_templates_list(state: &ThanixClient, query: ExtrasConfigTemplatesListQuery) -> Result<ExtrasConfigTemplatesListResponse, Error> {
@@ -14277,15 +13339,13 @@ pub fn extras_config_templates_list(state: &ThanixClient, query: ExtrasConfigTem
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasConfigTemplatesListResponse::Http200(r#response.json::<PaginatedConfigTemplateList>()?)) },
-		_ => { Ok(ExtrasConfigTemplatesListResponse::None) }
+		r#other_status => { Ok(ExtrasConfigTemplatesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigTemplatesBulkUpdateResponse {
 	Http200(Vec<ConfigTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of config template objects.
 pub fn extras_config_templates_bulk_update(state: &ThanixClient, body: Vec<ConfigTemplateRequest>) -> Result<ExtrasConfigTemplatesBulkUpdateResponse, Error> {
@@ -14295,15 +13355,13 @@ pub fn extras_config_templates_bulk_update(state: &ThanixClient, body: Vec<Confi
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasConfigTemplatesBulkUpdateResponse::Http200(r#response.json::<Vec<ConfigTemplate>>()?)) },
-		_ => { Ok(ExtrasConfigTemplatesBulkUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasConfigTemplatesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigTemplatesCreateResponse {
 	Http201(ConfigTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of config template objects.
 pub fn extras_config_templates_create(state: &ThanixClient, body: WritableConfigTemplateRequest) -> Result<ExtrasConfigTemplatesCreateResponse, Error> {
@@ -14313,15 +13371,13 @@ pub fn extras_config_templates_create(state: &ThanixClient, body: WritableConfig
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(ExtrasConfigTemplatesCreateResponse::Http201(r#response.json::<ConfigTemplate>()?)) },
-		_ => { Ok(ExtrasConfigTemplatesCreateResponse::None) }
+		r#other_status => { Ok(ExtrasConfigTemplatesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigTemplatesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of config template objects.
 pub fn extras_config_templates_bulk_destroy(state: &ThanixClient, body: Vec<ConfigTemplateRequest>) -> Result<ExtrasConfigTemplatesBulkDestroyResponse, Error> {
@@ -14330,15 +13386,13 @@ pub fn extras_config_templates_bulk_destroy(state: &ThanixClient, body: Vec<Conf
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasConfigTemplatesBulkDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasConfigTemplatesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<ConfigTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of config template objects.
 pub fn extras_config_templates_bulk_partial_update(state: &ThanixClient, body: Vec<ConfigTemplateRequest>) -> Result<ExtrasConfigTemplatesBulkPartialUpdateResponse, Error> {
@@ -14348,15 +13402,13 @@ pub fn extras_config_templates_bulk_partial_update(state: &ThanixClient, body: V
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasConfigTemplatesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ConfigTemplate>>()?)) },
-		_ => { Ok(ExtrasConfigTemplatesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasConfigTemplatesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigTemplatesRetrieveResponse {
 	Http200(ConfigTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a config template object.
 pub fn extras_config_templates_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasConfigTemplatesRetrieveResponse, Error> {
@@ -14365,15 +13417,13 @@ pub fn extras_config_templates_retrieve(state: &ThanixClient, id: i64) -> Result
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasConfigTemplatesRetrieveResponse::Http200(r#response.json::<ConfigTemplate>()?)) },
-		_ => { Ok(ExtrasConfigTemplatesRetrieveResponse::None) }
+		r#other_status => { Ok(ExtrasConfigTemplatesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigTemplatesUpdateResponse {
 	Http200(ConfigTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a config template object.
 pub fn extras_config_templates_update(state: &ThanixClient, body: WritableConfigTemplateRequest, id: i64) -> Result<ExtrasConfigTemplatesUpdateResponse, Error> {
@@ -14383,15 +13433,13 @@ pub fn extras_config_templates_update(state: &ThanixClient, body: WritableConfig
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasConfigTemplatesUpdateResponse::Http200(r#response.json::<ConfigTemplate>()?)) },
-		_ => { Ok(ExtrasConfigTemplatesUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasConfigTemplatesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigTemplatesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a config template object.
 pub fn extras_config_templates_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasConfigTemplatesDestroyResponse, Error> {
@@ -14399,15 +13447,13 @@ pub fn extras_config_templates_destroy(state: &ThanixClient, id: i64) -> Result<
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasConfigTemplatesDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasConfigTemplatesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigTemplatesPartialUpdateResponse {
 	Http200(ConfigTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a config template object.
 pub fn extras_config_templates_partial_update(state: &ThanixClient, body: PatchedWritableConfigTemplateRequest, id: i64) -> Result<ExtrasConfigTemplatesPartialUpdateResponse, Error> {
@@ -14417,7 +13463,7 @@ pub fn extras_config_templates_partial_update(state: &ThanixClient, body: Patche
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasConfigTemplatesPartialUpdateResponse::Http200(r#response.json::<ConfigTemplate>()?)) },
-		_ => { Ok(ExtrasConfigTemplatesPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasConfigTemplatesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -14425,12 +13471,10 @@ pub struct ExtrasConfigTemplatesRenderCreateQuery {
 	format: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigTemplatesRenderCreateResponse {
 	Http200(ConfigTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Render a ConfigTemplate using the context data provided (if any). If the client requests "text/plain" data,
 /// return the raw rendered content, rather than serialized JSON.
@@ -14441,15 +13485,13 @@ pub fn extras_config_templates_render_create(state: &ThanixClient, query: Extras
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasConfigTemplatesRenderCreateResponse::Http200(r#response.json::<ConfigTemplate>()?)) },
-		_ => { Ok(ExtrasConfigTemplatesRenderCreateResponse::None) }
+		r#other_status => { Ok(ExtrasConfigTemplatesRenderCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasConfigTemplatesSyncCreateResponse {
 	Http200(ConfigTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Provide a /sync API endpoint to synchronize an object's data from its associated DataFile (if any).
 pub fn extras_config_templates_sync_create(state: &ThanixClient, body: WritableConfigTemplateRequest, id: i64) -> Result<ExtrasConfigTemplatesSyncCreateResponse, Error> {
@@ -14459,7 +13501,7 @@ pub fn extras_config_templates_sync_create(state: &ThanixClient, body: WritableC
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasConfigTemplatesSyncCreateResponse::Http200(r#response.json::<ConfigTemplate>()?)) },
-		_ => { Ok(ExtrasConfigTemplatesSyncCreateResponse::None) }
+		r#other_status => { Ok(ExtrasConfigTemplatesSyncCreateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -14477,12 +13519,10 @@ pub struct ExtrasContentTypesListQuery {
 	q: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasContentTypesListResponse {
 	Http200(PaginatedContentTypeList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Read-only list of ContentTypes. Limit results to ContentTypes pertinent to NetBox objects.
 pub fn extras_content_types_list(state: &ThanixClient, query: ExtrasContentTypesListQuery) -> Result<ExtrasContentTypesListResponse, Error> {
@@ -14491,15 +13531,13 @@ pub fn extras_content_types_list(state: &ThanixClient, query: ExtrasContentTypes
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasContentTypesListResponse::Http200(r#response.json::<PaginatedContentTypeList>()?)) },
-		_ => { Ok(ExtrasContentTypesListResponse::None) }
+		r#other_status => { Ok(ExtrasContentTypesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasContentTypesRetrieveResponse {
 	Http200(ContentType),
-	#[default]
-	None
+	Other(Response)
 }
 /// Read-only list of ContentTypes. Limit results to ContentTypes pertinent to NetBox objects.
 pub fn extras_content_types_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasContentTypesRetrieveResponse, Error> {
@@ -14508,7 +13546,7 @@ pub fn extras_content_types_retrieve(state: &ThanixClient, id: i64) -> Result<Ex
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasContentTypesRetrieveResponse::Http200(r#response.json::<ContentType>()?)) },
-		_ => { Ok(ExtrasContentTypesRetrieveResponse::None) }
+		r#other_status => { Ok(ExtrasContentTypesRetrieveResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -14558,12 +13596,10 @@ pub struct ExtrasCustomFieldChoiceSetsListQuery {
 	q: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomFieldChoiceSetsListResponse {
 	Http200(PaginatedCustomFieldChoiceSetList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of custom field choice set objects.
 pub fn extras_custom_field_choice_sets_list(state: &ThanixClient, query: ExtrasCustomFieldChoiceSetsListQuery) -> Result<ExtrasCustomFieldChoiceSetsListResponse, Error> {
@@ -14572,15 +13608,13 @@ pub fn extras_custom_field_choice_sets_list(state: &ThanixClient, query: ExtrasC
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasCustomFieldChoiceSetsListResponse::Http200(r#response.json::<PaginatedCustomFieldChoiceSetList>()?)) },
-		_ => { Ok(ExtrasCustomFieldChoiceSetsListResponse::None) }
+		r#other_status => { Ok(ExtrasCustomFieldChoiceSetsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomFieldChoiceSetsBulkUpdateResponse {
 	Http200(Vec<CustomFieldChoiceSet>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of custom field choice set objects.
 pub fn extras_custom_field_choice_sets_bulk_update(state: &ThanixClient, body: Vec<CustomFieldChoiceSetRequest>) -> Result<ExtrasCustomFieldChoiceSetsBulkUpdateResponse, Error> {
@@ -14590,15 +13624,13 @@ pub fn extras_custom_field_choice_sets_bulk_update(state: &ThanixClient, body: V
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasCustomFieldChoiceSetsBulkUpdateResponse::Http200(r#response.json::<Vec<CustomFieldChoiceSet>>()?)) },
-		_ => { Ok(ExtrasCustomFieldChoiceSetsBulkUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasCustomFieldChoiceSetsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomFieldChoiceSetsCreateResponse {
 	Http201(CustomFieldChoiceSet),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of custom field choice set objects.
 pub fn extras_custom_field_choice_sets_create(state: &ThanixClient, body: WritableCustomFieldChoiceSetRequest) -> Result<ExtrasCustomFieldChoiceSetsCreateResponse, Error> {
@@ -14608,15 +13640,13 @@ pub fn extras_custom_field_choice_sets_create(state: &ThanixClient, body: Writab
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(ExtrasCustomFieldChoiceSetsCreateResponse::Http201(r#response.json::<CustomFieldChoiceSet>()?)) },
-		_ => { Ok(ExtrasCustomFieldChoiceSetsCreateResponse::None) }
+		r#other_status => { Ok(ExtrasCustomFieldChoiceSetsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomFieldChoiceSetsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of custom field choice set objects.
 pub fn extras_custom_field_choice_sets_bulk_destroy(state: &ThanixClient, body: Vec<CustomFieldChoiceSetRequest>) -> Result<ExtrasCustomFieldChoiceSetsBulkDestroyResponse, Error> {
@@ -14625,15 +13655,13 @@ pub fn extras_custom_field_choice_sets_bulk_destroy(state: &ThanixClient, body: 
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasCustomFieldChoiceSetsBulkDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasCustomFieldChoiceSetsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomFieldChoiceSetsBulkPartialUpdateResponse {
 	Http200(Vec<CustomFieldChoiceSet>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of custom field choice set objects.
 pub fn extras_custom_field_choice_sets_bulk_partial_update(state: &ThanixClient, body: Vec<CustomFieldChoiceSetRequest>) -> Result<ExtrasCustomFieldChoiceSetsBulkPartialUpdateResponse, Error> {
@@ -14643,15 +13671,13 @@ pub fn extras_custom_field_choice_sets_bulk_partial_update(state: &ThanixClient,
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasCustomFieldChoiceSetsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<CustomFieldChoiceSet>>()?)) },
-		_ => { Ok(ExtrasCustomFieldChoiceSetsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasCustomFieldChoiceSetsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomFieldChoiceSetsRetrieveResponse {
 	Http200(CustomFieldChoiceSet),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a custom field choice set object.
 pub fn extras_custom_field_choice_sets_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasCustomFieldChoiceSetsRetrieveResponse, Error> {
@@ -14660,15 +13686,13 @@ pub fn extras_custom_field_choice_sets_retrieve(state: &ThanixClient, id: i64) -
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasCustomFieldChoiceSetsRetrieveResponse::Http200(r#response.json::<CustomFieldChoiceSet>()?)) },
-		_ => { Ok(ExtrasCustomFieldChoiceSetsRetrieveResponse::None) }
+		r#other_status => { Ok(ExtrasCustomFieldChoiceSetsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomFieldChoiceSetsUpdateResponse {
 	Http200(CustomFieldChoiceSet),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a custom field choice set object.
 pub fn extras_custom_field_choice_sets_update(state: &ThanixClient, body: WritableCustomFieldChoiceSetRequest, id: i64) -> Result<ExtrasCustomFieldChoiceSetsUpdateResponse, Error> {
@@ -14678,15 +13702,13 @@ pub fn extras_custom_field_choice_sets_update(state: &ThanixClient, body: Writab
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasCustomFieldChoiceSetsUpdateResponse::Http200(r#response.json::<CustomFieldChoiceSet>()?)) },
-		_ => { Ok(ExtrasCustomFieldChoiceSetsUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasCustomFieldChoiceSetsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomFieldChoiceSetsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a custom field choice set object.
 pub fn extras_custom_field_choice_sets_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasCustomFieldChoiceSetsDestroyResponse, Error> {
@@ -14694,15 +13716,13 @@ pub fn extras_custom_field_choice_sets_destroy(state: &ThanixClient, id: i64) ->
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasCustomFieldChoiceSetsDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasCustomFieldChoiceSetsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomFieldChoiceSetsPartialUpdateResponse {
 	Http200(CustomFieldChoiceSet),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a custom field choice set object.
 pub fn extras_custom_field_choice_sets_partial_update(state: &ThanixClient, body: PatchedWritableCustomFieldChoiceSetRequest, id: i64) -> Result<ExtrasCustomFieldChoiceSetsPartialUpdateResponse, Error> {
@@ -14712,15 +13732,13 @@ pub fn extras_custom_field_choice_sets_partial_update(state: &ThanixClient, body
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasCustomFieldChoiceSetsPartialUpdateResponse::Http200(r#response.json::<CustomFieldChoiceSet>()?)) },
-		_ => { Ok(ExtrasCustomFieldChoiceSetsPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasCustomFieldChoiceSetsPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomFieldChoiceSetsChoicesRetrieveResponse {
 	Http200(CustomFieldChoiceSet),
-	#[default]
-	None
+	Other(Response)
 }
 /// Provides an endpoint to iterate through each choice in a set.
 pub fn extras_custom_field_choice_sets_choices_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasCustomFieldChoiceSetsChoicesRetrieveResponse, Error> {
@@ -14729,7 +13747,7 @@ pub fn extras_custom_field_choice_sets_choices_retrieve(state: &ThanixClient, id
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasCustomFieldChoiceSetsChoicesRetrieveResponse::Http200(r#response.json::<CustomFieldChoiceSet>()?)) },
-		_ => { Ok(ExtrasCustomFieldChoiceSetsChoicesRetrieveResponse::None) }
+		r#other_status => { Ok(ExtrasCustomFieldChoiceSetsChoicesRetrieveResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -14837,12 +13855,10 @@ pub struct ExtrasCustomFieldsListQuery {
 	weight__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomFieldsListResponse {
 	Http200(PaginatedCustomFieldList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of custom field objects.
 pub fn extras_custom_fields_list(state: &ThanixClient, query: ExtrasCustomFieldsListQuery) -> Result<ExtrasCustomFieldsListResponse, Error> {
@@ -14851,15 +13867,13 @@ pub fn extras_custom_fields_list(state: &ThanixClient, query: ExtrasCustomFields
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasCustomFieldsListResponse::Http200(r#response.json::<PaginatedCustomFieldList>()?)) },
-		_ => { Ok(ExtrasCustomFieldsListResponse::None) }
+		r#other_status => { Ok(ExtrasCustomFieldsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomFieldsBulkUpdateResponse {
 	Http200(Vec<CustomField>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of custom field objects.
 pub fn extras_custom_fields_bulk_update(state: &ThanixClient, body: Vec<CustomFieldRequest>) -> Result<ExtrasCustomFieldsBulkUpdateResponse, Error> {
@@ -14869,15 +13883,13 @@ pub fn extras_custom_fields_bulk_update(state: &ThanixClient, body: Vec<CustomFi
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasCustomFieldsBulkUpdateResponse::Http200(r#response.json::<Vec<CustomField>>()?)) },
-		_ => { Ok(ExtrasCustomFieldsBulkUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasCustomFieldsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomFieldsCreateResponse {
 	Http201(CustomField),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of custom field objects.
 pub fn extras_custom_fields_create(state: &ThanixClient, body: WritableCustomFieldRequest) -> Result<ExtrasCustomFieldsCreateResponse, Error> {
@@ -14887,15 +13899,13 @@ pub fn extras_custom_fields_create(state: &ThanixClient, body: WritableCustomFie
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(ExtrasCustomFieldsCreateResponse::Http201(r#response.json::<CustomField>()?)) },
-		_ => { Ok(ExtrasCustomFieldsCreateResponse::None) }
+		r#other_status => { Ok(ExtrasCustomFieldsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomFieldsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of custom field objects.
 pub fn extras_custom_fields_bulk_destroy(state: &ThanixClient, body: Vec<CustomFieldRequest>) -> Result<ExtrasCustomFieldsBulkDestroyResponse, Error> {
@@ -14904,15 +13914,13 @@ pub fn extras_custom_fields_bulk_destroy(state: &ThanixClient, body: Vec<CustomF
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasCustomFieldsBulkDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasCustomFieldsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomFieldsBulkPartialUpdateResponse {
 	Http200(Vec<CustomField>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of custom field objects.
 pub fn extras_custom_fields_bulk_partial_update(state: &ThanixClient, body: Vec<CustomFieldRequest>) -> Result<ExtrasCustomFieldsBulkPartialUpdateResponse, Error> {
@@ -14922,15 +13930,13 @@ pub fn extras_custom_fields_bulk_partial_update(state: &ThanixClient, body: Vec<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasCustomFieldsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<CustomField>>()?)) },
-		_ => { Ok(ExtrasCustomFieldsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasCustomFieldsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomFieldsRetrieveResponse {
 	Http200(CustomField),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a custom field object.
 pub fn extras_custom_fields_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasCustomFieldsRetrieveResponse, Error> {
@@ -14939,15 +13945,13 @@ pub fn extras_custom_fields_retrieve(state: &ThanixClient, id: i64) -> Result<Ex
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasCustomFieldsRetrieveResponse::Http200(r#response.json::<CustomField>()?)) },
-		_ => { Ok(ExtrasCustomFieldsRetrieveResponse::None) }
+		r#other_status => { Ok(ExtrasCustomFieldsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomFieldsUpdateResponse {
 	Http200(CustomField),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a custom field object.
 pub fn extras_custom_fields_update(state: &ThanixClient, body: WritableCustomFieldRequest, id: i64) -> Result<ExtrasCustomFieldsUpdateResponse, Error> {
@@ -14957,15 +13961,13 @@ pub fn extras_custom_fields_update(state: &ThanixClient, body: WritableCustomFie
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasCustomFieldsUpdateResponse::Http200(r#response.json::<CustomField>()?)) },
-		_ => { Ok(ExtrasCustomFieldsUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasCustomFieldsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomFieldsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a custom field object.
 pub fn extras_custom_fields_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasCustomFieldsDestroyResponse, Error> {
@@ -14973,15 +13975,13 @@ pub fn extras_custom_fields_destroy(state: &ThanixClient, id: i64) -> Result<Ext
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasCustomFieldsDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasCustomFieldsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomFieldsPartialUpdateResponse {
 	Http200(CustomField),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a custom field object.
 pub fn extras_custom_fields_partial_update(state: &ThanixClient, body: PatchedWritableCustomFieldRequest, id: i64) -> Result<ExtrasCustomFieldsPartialUpdateResponse, Error> {
@@ -14991,7 +13991,7 @@ pub fn extras_custom_fields_partial_update(state: &ThanixClient, body: PatchedWr
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasCustomFieldsPartialUpdateResponse::Http200(r#response.json::<CustomField>()?)) },
-		_ => { Ok(ExtrasCustomFieldsPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasCustomFieldsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -15081,12 +14081,10 @@ pub struct ExtrasCustomLinksListQuery {
 	weight__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomLinksListResponse {
 	Http200(PaginatedCustomLinkList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of custom link objects.
 pub fn extras_custom_links_list(state: &ThanixClient, query: ExtrasCustomLinksListQuery) -> Result<ExtrasCustomLinksListResponse, Error> {
@@ -15095,15 +14093,13 @@ pub fn extras_custom_links_list(state: &ThanixClient, query: ExtrasCustomLinksLi
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasCustomLinksListResponse::Http200(r#response.json::<PaginatedCustomLinkList>()?)) },
-		_ => { Ok(ExtrasCustomLinksListResponse::None) }
+		r#other_status => { Ok(ExtrasCustomLinksListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomLinksBulkUpdateResponse {
 	Http200(Vec<CustomLink>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of custom link objects.
 pub fn extras_custom_links_bulk_update(state: &ThanixClient, body: Vec<CustomLinkRequest>) -> Result<ExtrasCustomLinksBulkUpdateResponse, Error> {
@@ -15113,15 +14109,13 @@ pub fn extras_custom_links_bulk_update(state: &ThanixClient, body: Vec<CustomLin
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasCustomLinksBulkUpdateResponse::Http200(r#response.json::<Vec<CustomLink>>()?)) },
-		_ => { Ok(ExtrasCustomLinksBulkUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasCustomLinksBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomLinksCreateResponse {
 	Http201(CustomLink),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of custom link objects.
 pub fn extras_custom_links_create(state: &ThanixClient, body: CustomLinkRequest) -> Result<ExtrasCustomLinksCreateResponse, Error> {
@@ -15131,15 +14125,13 @@ pub fn extras_custom_links_create(state: &ThanixClient, body: CustomLinkRequest)
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(ExtrasCustomLinksCreateResponse::Http201(r#response.json::<CustomLink>()?)) },
-		_ => { Ok(ExtrasCustomLinksCreateResponse::None) }
+		r#other_status => { Ok(ExtrasCustomLinksCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomLinksBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of custom link objects.
 pub fn extras_custom_links_bulk_destroy(state: &ThanixClient, body: Vec<CustomLinkRequest>) -> Result<ExtrasCustomLinksBulkDestroyResponse, Error> {
@@ -15148,15 +14140,13 @@ pub fn extras_custom_links_bulk_destroy(state: &ThanixClient, body: Vec<CustomLi
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasCustomLinksBulkDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasCustomLinksBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomLinksBulkPartialUpdateResponse {
 	Http200(Vec<CustomLink>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of custom link objects.
 pub fn extras_custom_links_bulk_partial_update(state: &ThanixClient, body: Vec<CustomLinkRequest>) -> Result<ExtrasCustomLinksBulkPartialUpdateResponse, Error> {
@@ -15166,15 +14156,13 @@ pub fn extras_custom_links_bulk_partial_update(state: &ThanixClient, body: Vec<C
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasCustomLinksBulkPartialUpdateResponse::Http200(r#response.json::<Vec<CustomLink>>()?)) },
-		_ => { Ok(ExtrasCustomLinksBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasCustomLinksBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomLinksRetrieveResponse {
 	Http200(CustomLink),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a custom link object.
 pub fn extras_custom_links_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasCustomLinksRetrieveResponse, Error> {
@@ -15183,15 +14171,13 @@ pub fn extras_custom_links_retrieve(state: &ThanixClient, id: i64) -> Result<Ext
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasCustomLinksRetrieveResponse::Http200(r#response.json::<CustomLink>()?)) },
-		_ => { Ok(ExtrasCustomLinksRetrieveResponse::None) }
+		r#other_status => { Ok(ExtrasCustomLinksRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomLinksUpdateResponse {
 	Http200(CustomLink),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a custom link object.
 pub fn extras_custom_links_update(state: &ThanixClient, body: CustomLinkRequest, id: i64) -> Result<ExtrasCustomLinksUpdateResponse, Error> {
@@ -15201,15 +14187,13 @@ pub fn extras_custom_links_update(state: &ThanixClient, body: CustomLinkRequest,
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasCustomLinksUpdateResponse::Http200(r#response.json::<CustomLink>()?)) },
-		_ => { Ok(ExtrasCustomLinksUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasCustomLinksUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomLinksDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a custom link object.
 pub fn extras_custom_links_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasCustomLinksDestroyResponse, Error> {
@@ -15217,15 +14201,13 @@ pub fn extras_custom_links_destroy(state: &ThanixClient, id: i64) -> Result<Extr
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasCustomLinksDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasCustomLinksDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasCustomLinksPartialUpdateResponse {
 	Http200(CustomLink),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a custom link object.
 pub fn extras_custom_links_partial_update(state: &ThanixClient, body: PatchedCustomLinkRequest, id: i64) -> Result<ExtrasCustomLinksPartialUpdateResponse, Error> {
@@ -15235,15 +14217,13 @@ pub fn extras_custom_links_partial_update(state: &ThanixClient, body: PatchedCus
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasCustomLinksPartialUpdateResponse::Http200(r#response.json::<CustomLink>()?)) },
-		_ => { Ok(ExtrasCustomLinksPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasCustomLinksPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasDashboardRetrieveResponse {
 	Http200(Dashboard),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of dashboard objects.
 pub fn extras_dashboard_retrieve(state: &ThanixClient) -> Result<ExtrasDashboardRetrieveResponse, Error> {
@@ -15252,15 +14232,13 @@ pub fn extras_dashboard_retrieve(state: &ThanixClient) -> Result<ExtrasDashboard
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasDashboardRetrieveResponse::Http200(r#response.json::<Dashboard>()?)) },
-		_ => { Ok(ExtrasDashboardRetrieveResponse::None) }
+		r#other_status => { Ok(ExtrasDashboardRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasDashboardUpdateResponse {
 	Http200(Dashboard),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of dashboard objects.
 pub fn extras_dashboard_update(state: &ThanixClient, body: DashboardRequest) -> Result<ExtrasDashboardUpdateResponse, Error> {
@@ -15270,15 +14248,13 @@ pub fn extras_dashboard_update(state: &ThanixClient, body: DashboardRequest) -> 
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasDashboardUpdateResponse::Http200(r#response.json::<Dashboard>()?)) },
-		_ => { Ok(ExtrasDashboardUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasDashboardUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasDashboardDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of dashboard objects.
 pub fn extras_dashboard_destroy(state: &ThanixClient) -> Result<ExtrasDashboardDestroyResponse, Error> {
@@ -15286,15 +14262,13 @@ pub fn extras_dashboard_destroy(state: &ThanixClient) -> Result<ExtrasDashboardD
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasDashboardDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasDashboardDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasDashboardPartialUpdateResponse {
 	Http200(Dashboard),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of dashboard objects.
 pub fn extras_dashboard_partial_update(state: &ThanixClient, body: PatchedDashboardRequest) -> Result<ExtrasDashboardPartialUpdateResponse, Error> {
@@ -15304,7 +14278,7 @@ pub fn extras_dashboard_partial_update(state: &ThanixClient, body: PatchedDashbo
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasDashboardPartialUpdateResponse::Http200(r#response.json::<Dashboard>()?)) },
-		_ => { Ok(ExtrasDashboardPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasDashboardPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -15401,12 +14375,10 @@ pub struct ExtrasEventRulesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasEventRulesListResponse {
 	Http200(PaginatedEventRuleList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of event rule objects.
 pub fn extras_event_rules_list(state: &ThanixClient, query: ExtrasEventRulesListQuery) -> Result<ExtrasEventRulesListResponse, Error> {
@@ -15415,15 +14387,13 @@ pub fn extras_event_rules_list(state: &ThanixClient, query: ExtrasEventRulesList
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasEventRulesListResponse::Http200(r#response.json::<PaginatedEventRuleList>()?)) },
-		_ => { Ok(ExtrasEventRulesListResponse::None) }
+		r#other_status => { Ok(ExtrasEventRulesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasEventRulesBulkUpdateResponse {
 	Http200(Vec<EventRule>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of event rule objects.
 pub fn extras_event_rules_bulk_update(state: &ThanixClient, body: Vec<EventRuleRequest>) -> Result<ExtrasEventRulesBulkUpdateResponse, Error> {
@@ -15433,15 +14403,13 @@ pub fn extras_event_rules_bulk_update(state: &ThanixClient, body: Vec<EventRuleR
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasEventRulesBulkUpdateResponse::Http200(r#response.json::<Vec<EventRule>>()?)) },
-		_ => { Ok(ExtrasEventRulesBulkUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasEventRulesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasEventRulesCreateResponse {
 	Http201(EventRule),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of event rule objects.
 pub fn extras_event_rules_create(state: &ThanixClient, body: WritableEventRuleRequest) -> Result<ExtrasEventRulesCreateResponse, Error> {
@@ -15451,15 +14419,13 @@ pub fn extras_event_rules_create(state: &ThanixClient, body: WritableEventRuleRe
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(ExtrasEventRulesCreateResponse::Http201(r#response.json::<EventRule>()?)) },
-		_ => { Ok(ExtrasEventRulesCreateResponse::None) }
+		r#other_status => { Ok(ExtrasEventRulesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasEventRulesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of event rule objects.
 pub fn extras_event_rules_bulk_destroy(state: &ThanixClient, body: Vec<EventRuleRequest>) -> Result<ExtrasEventRulesBulkDestroyResponse, Error> {
@@ -15468,15 +14434,13 @@ pub fn extras_event_rules_bulk_destroy(state: &ThanixClient, body: Vec<EventRule
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasEventRulesBulkDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasEventRulesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasEventRulesBulkPartialUpdateResponse {
 	Http200(Vec<EventRule>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of event rule objects.
 pub fn extras_event_rules_bulk_partial_update(state: &ThanixClient, body: Vec<EventRuleRequest>) -> Result<ExtrasEventRulesBulkPartialUpdateResponse, Error> {
@@ -15486,15 +14450,13 @@ pub fn extras_event_rules_bulk_partial_update(state: &ThanixClient, body: Vec<Ev
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasEventRulesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<EventRule>>()?)) },
-		_ => { Ok(ExtrasEventRulesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasEventRulesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasEventRulesRetrieveResponse {
 	Http200(EventRule),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a event rule object.
 pub fn extras_event_rules_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasEventRulesRetrieveResponse, Error> {
@@ -15503,15 +14465,13 @@ pub fn extras_event_rules_retrieve(state: &ThanixClient, id: i64) -> Result<Extr
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasEventRulesRetrieveResponse::Http200(r#response.json::<EventRule>()?)) },
-		_ => { Ok(ExtrasEventRulesRetrieveResponse::None) }
+		r#other_status => { Ok(ExtrasEventRulesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasEventRulesUpdateResponse {
 	Http200(EventRule),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a event rule object.
 pub fn extras_event_rules_update(state: &ThanixClient, body: WritableEventRuleRequest, id: i64) -> Result<ExtrasEventRulesUpdateResponse, Error> {
@@ -15521,15 +14481,13 @@ pub fn extras_event_rules_update(state: &ThanixClient, body: WritableEventRuleRe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasEventRulesUpdateResponse::Http200(r#response.json::<EventRule>()?)) },
-		_ => { Ok(ExtrasEventRulesUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasEventRulesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasEventRulesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a event rule object.
 pub fn extras_event_rules_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasEventRulesDestroyResponse, Error> {
@@ -15537,15 +14495,13 @@ pub fn extras_event_rules_destroy(state: &ThanixClient, id: i64) -> Result<Extra
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasEventRulesDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasEventRulesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasEventRulesPartialUpdateResponse {
 	Http200(EventRule),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a event rule object.
 pub fn extras_event_rules_partial_update(state: &ThanixClient, body: PatchedWritableEventRuleRequest, id: i64) -> Result<ExtrasEventRulesPartialUpdateResponse, Error> {
@@ -15555,7 +14511,7 @@ pub fn extras_event_rules_partial_update(state: &ThanixClient, body: PatchedWrit
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasEventRulesPartialUpdateResponse::Http200(r#response.json::<EventRule>()?)) },
-		_ => { Ok(ExtrasEventRulesPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasEventRulesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -15631,12 +14587,10 @@ pub struct ExtrasExportTemplatesListQuery {
 	q: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasExportTemplatesListResponse {
 	Http200(PaginatedExportTemplateList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of export template objects.
 pub fn extras_export_templates_list(state: &ThanixClient, query: ExtrasExportTemplatesListQuery) -> Result<ExtrasExportTemplatesListResponse, Error> {
@@ -15645,15 +14599,13 @@ pub fn extras_export_templates_list(state: &ThanixClient, query: ExtrasExportTem
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasExportTemplatesListResponse::Http200(r#response.json::<PaginatedExportTemplateList>()?)) },
-		_ => { Ok(ExtrasExportTemplatesListResponse::None) }
+		r#other_status => { Ok(ExtrasExportTemplatesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasExportTemplatesBulkUpdateResponse {
 	Http200(Vec<ExportTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of export template objects.
 pub fn extras_export_templates_bulk_update(state: &ThanixClient, body: Vec<ExportTemplateRequest>) -> Result<ExtrasExportTemplatesBulkUpdateResponse, Error> {
@@ -15663,15 +14615,13 @@ pub fn extras_export_templates_bulk_update(state: &ThanixClient, body: Vec<Expor
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasExportTemplatesBulkUpdateResponse::Http200(r#response.json::<Vec<ExportTemplate>>()?)) },
-		_ => { Ok(ExtrasExportTemplatesBulkUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasExportTemplatesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasExportTemplatesCreateResponse {
 	Http201(ExportTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of export template objects.
 pub fn extras_export_templates_create(state: &ThanixClient, body: WritableExportTemplateRequest) -> Result<ExtrasExportTemplatesCreateResponse, Error> {
@@ -15681,15 +14631,13 @@ pub fn extras_export_templates_create(state: &ThanixClient, body: WritableExport
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(ExtrasExportTemplatesCreateResponse::Http201(r#response.json::<ExportTemplate>()?)) },
-		_ => { Ok(ExtrasExportTemplatesCreateResponse::None) }
+		r#other_status => { Ok(ExtrasExportTemplatesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasExportTemplatesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of export template objects.
 pub fn extras_export_templates_bulk_destroy(state: &ThanixClient, body: Vec<ExportTemplateRequest>) -> Result<ExtrasExportTemplatesBulkDestroyResponse, Error> {
@@ -15698,15 +14646,13 @@ pub fn extras_export_templates_bulk_destroy(state: &ThanixClient, body: Vec<Expo
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasExportTemplatesBulkDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasExportTemplatesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasExportTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<ExportTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of export template objects.
 pub fn extras_export_templates_bulk_partial_update(state: &ThanixClient, body: Vec<ExportTemplateRequest>) -> Result<ExtrasExportTemplatesBulkPartialUpdateResponse, Error> {
@@ -15716,15 +14662,13 @@ pub fn extras_export_templates_bulk_partial_update(state: &ThanixClient, body: V
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasExportTemplatesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ExportTemplate>>()?)) },
-		_ => { Ok(ExtrasExportTemplatesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasExportTemplatesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasExportTemplatesRetrieveResponse {
 	Http200(ExportTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a export template object.
 pub fn extras_export_templates_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasExportTemplatesRetrieveResponse, Error> {
@@ -15733,15 +14677,13 @@ pub fn extras_export_templates_retrieve(state: &ThanixClient, id: i64) -> Result
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasExportTemplatesRetrieveResponse::Http200(r#response.json::<ExportTemplate>()?)) },
-		_ => { Ok(ExtrasExportTemplatesRetrieveResponse::None) }
+		r#other_status => { Ok(ExtrasExportTemplatesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasExportTemplatesUpdateResponse {
 	Http200(ExportTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a export template object.
 pub fn extras_export_templates_update(state: &ThanixClient, body: WritableExportTemplateRequest, id: i64) -> Result<ExtrasExportTemplatesUpdateResponse, Error> {
@@ -15751,15 +14693,13 @@ pub fn extras_export_templates_update(state: &ThanixClient, body: WritableExport
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasExportTemplatesUpdateResponse::Http200(r#response.json::<ExportTemplate>()?)) },
-		_ => { Ok(ExtrasExportTemplatesUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasExportTemplatesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasExportTemplatesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a export template object.
 pub fn extras_export_templates_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasExportTemplatesDestroyResponse, Error> {
@@ -15767,15 +14707,13 @@ pub fn extras_export_templates_destroy(state: &ThanixClient, id: i64) -> Result<
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasExportTemplatesDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasExportTemplatesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasExportTemplatesPartialUpdateResponse {
 	Http200(ExportTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a export template object.
 pub fn extras_export_templates_partial_update(state: &ThanixClient, body: PatchedWritableExportTemplateRequest, id: i64) -> Result<ExtrasExportTemplatesPartialUpdateResponse, Error> {
@@ -15785,15 +14723,13 @@ pub fn extras_export_templates_partial_update(state: &ThanixClient, body: Patche
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasExportTemplatesPartialUpdateResponse::Http200(r#response.json::<ExportTemplate>()?)) },
-		_ => { Ok(ExtrasExportTemplatesPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasExportTemplatesPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasExportTemplatesSyncCreateResponse {
 	Http200(ExportTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Provide a /sync API endpoint to synchronize an object's data from its associated DataFile (if any).
 pub fn extras_export_templates_sync_create(state: &ThanixClient, body: WritableExportTemplateRequest, id: i64) -> Result<ExtrasExportTemplatesSyncCreateResponse, Error> {
@@ -15803,7 +14739,7 @@ pub fn extras_export_templates_sync_create(state: &ThanixClient, body: WritableE
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasExportTemplatesSyncCreateResponse::Http200(r#response.json::<ExportTemplate>()?)) },
-		_ => { Ok(ExtrasExportTemplatesSyncCreateResponse::None) }
+		r#other_status => { Ok(ExtrasExportTemplatesSyncCreateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -15848,12 +14784,10 @@ pub struct ExtrasImageAttachmentsListQuery {
 	q: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasImageAttachmentsListResponse {
 	Http200(PaginatedImageAttachmentList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of image attachment objects.
 pub fn extras_image_attachments_list(state: &ThanixClient, query: ExtrasImageAttachmentsListQuery) -> Result<ExtrasImageAttachmentsListResponse, Error> {
@@ -15862,15 +14796,13 @@ pub fn extras_image_attachments_list(state: &ThanixClient, query: ExtrasImageAtt
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasImageAttachmentsListResponse::Http200(r#response.json::<PaginatedImageAttachmentList>()?)) },
-		_ => { Ok(ExtrasImageAttachmentsListResponse::None) }
+		r#other_status => { Ok(ExtrasImageAttachmentsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasImageAttachmentsBulkUpdateResponse {
 	Http200(Vec<ImageAttachment>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of image attachment objects.
 pub fn extras_image_attachments_bulk_update(state: &ThanixClient, body: Vec<ImageAttachmentRequest>) -> Result<ExtrasImageAttachmentsBulkUpdateResponse, Error> {
@@ -15880,15 +14812,13 @@ pub fn extras_image_attachments_bulk_update(state: &ThanixClient, body: Vec<Imag
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasImageAttachmentsBulkUpdateResponse::Http200(r#response.json::<Vec<ImageAttachment>>()?)) },
-		_ => { Ok(ExtrasImageAttachmentsBulkUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasImageAttachmentsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasImageAttachmentsCreateResponse {
 	Http201(ImageAttachment),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of image attachment objects.
 pub fn extras_image_attachments_create(state: &ThanixClient, body: ImageAttachmentRequest) -> Result<ExtrasImageAttachmentsCreateResponse, Error> {
@@ -15898,15 +14828,13 @@ pub fn extras_image_attachments_create(state: &ThanixClient, body: ImageAttachme
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(ExtrasImageAttachmentsCreateResponse::Http201(r#response.json::<ImageAttachment>()?)) },
-		_ => { Ok(ExtrasImageAttachmentsCreateResponse::None) }
+		r#other_status => { Ok(ExtrasImageAttachmentsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasImageAttachmentsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of image attachment objects.
 pub fn extras_image_attachments_bulk_destroy(state: &ThanixClient, body: Vec<ImageAttachmentRequest>) -> Result<ExtrasImageAttachmentsBulkDestroyResponse, Error> {
@@ -15915,15 +14843,13 @@ pub fn extras_image_attachments_bulk_destroy(state: &ThanixClient, body: Vec<Ima
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasImageAttachmentsBulkDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasImageAttachmentsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasImageAttachmentsBulkPartialUpdateResponse {
 	Http200(Vec<ImageAttachment>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of image attachment objects.
 pub fn extras_image_attachments_bulk_partial_update(state: &ThanixClient, body: Vec<ImageAttachmentRequest>) -> Result<ExtrasImageAttachmentsBulkPartialUpdateResponse, Error> {
@@ -15933,15 +14859,13 @@ pub fn extras_image_attachments_bulk_partial_update(state: &ThanixClient, body: 
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasImageAttachmentsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ImageAttachment>>()?)) },
-		_ => { Ok(ExtrasImageAttachmentsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasImageAttachmentsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasImageAttachmentsRetrieveResponse {
 	Http200(ImageAttachment),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a image attachment object.
 pub fn extras_image_attachments_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasImageAttachmentsRetrieveResponse, Error> {
@@ -15950,15 +14874,13 @@ pub fn extras_image_attachments_retrieve(state: &ThanixClient, id: i64) -> Resul
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasImageAttachmentsRetrieveResponse::Http200(r#response.json::<ImageAttachment>()?)) },
-		_ => { Ok(ExtrasImageAttachmentsRetrieveResponse::None) }
+		r#other_status => { Ok(ExtrasImageAttachmentsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasImageAttachmentsUpdateResponse {
 	Http200(ImageAttachment),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a image attachment object.
 pub fn extras_image_attachments_update(state: &ThanixClient, body: ImageAttachmentRequest, id: i64) -> Result<ExtrasImageAttachmentsUpdateResponse, Error> {
@@ -15968,15 +14890,13 @@ pub fn extras_image_attachments_update(state: &ThanixClient, body: ImageAttachme
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasImageAttachmentsUpdateResponse::Http200(r#response.json::<ImageAttachment>()?)) },
-		_ => { Ok(ExtrasImageAttachmentsUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasImageAttachmentsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasImageAttachmentsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a image attachment object.
 pub fn extras_image_attachments_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasImageAttachmentsDestroyResponse, Error> {
@@ -15984,15 +14904,13 @@ pub fn extras_image_attachments_destroy(state: &ThanixClient, id: i64) -> Result
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasImageAttachmentsDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasImageAttachmentsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasImageAttachmentsPartialUpdateResponse {
 	Http200(ImageAttachment),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a image attachment object.
 pub fn extras_image_attachments_partial_update(state: &ThanixClient, body: PatchedImageAttachmentRequest, id: i64) -> Result<ExtrasImageAttachmentsPartialUpdateResponse, Error> {
@@ -16002,7 +14920,7 @@ pub fn extras_image_attachments_partial_update(state: &ThanixClient, body: Patch
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasImageAttachmentsPartialUpdateResponse::Http200(r#response.json::<ImageAttachment>()?)) },
-		_ => { Ok(ExtrasImageAttachmentsPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasImageAttachmentsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -16059,12 +14977,10 @@ pub struct ExtrasJournalEntriesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasJournalEntriesListResponse {
 	Http200(PaginatedJournalEntryList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of journal entry objects.
 pub fn extras_journal_entries_list(state: &ThanixClient, query: ExtrasJournalEntriesListQuery) -> Result<ExtrasJournalEntriesListResponse, Error> {
@@ -16073,15 +14989,13 @@ pub fn extras_journal_entries_list(state: &ThanixClient, query: ExtrasJournalEnt
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasJournalEntriesListResponse::Http200(r#response.json::<PaginatedJournalEntryList>()?)) },
-		_ => { Ok(ExtrasJournalEntriesListResponse::None) }
+		r#other_status => { Ok(ExtrasJournalEntriesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasJournalEntriesBulkUpdateResponse {
 	Http200(Vec<JournalEntry>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of journal entry objects.
 pub fn extras_journal_entries_bulk_update(state: &ThanixClient, body: Vec<JournalEntryRequest>) -> Result<ExtrasJournalEntriesBulkUpdateResponse, Error> {
@@ -16091,15 +15005,13 @@ pub fn extras_journal_entries_bulk_update(state: &ThanixClient, body: Vec<Journa
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasJournalEntriesBulkUpdateResponse::Http200(r#response.json::<Vec<JournalEntry>>()?)) },
-		_ => { Ok(ExtrasJournalEntriesBulkUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasJournalEntriesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasJournalEntriesCreateResponse {
 	Http201(JournalEntry),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of journal entry objects.
 pub fn extras_journal_entries_create(state: &ThanixClient, body: WritableJournalEntryRequest) -> Result<ExtrasJournalEntriesCreateResponse, Error> {
@@ -16109,15 +15021,13 @@ pub fn extras_journal_entries_create(state: &ThanixClient, body: WritableJournal
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(ExtrasJournalEntriesCreateResponse::Http201(r#response.json::<JournalEntry>()?)) },
-		_ => { Ok(ExtrasJournalEntriesCreateResponse::None) }
+		r#other_status => { Ok(ExtrasJournalEntriesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasJournalEntriesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of journal entry objects.
 pub fn extras_journal_entries_bulk_destroy(state: &ThanixClient, body: Vec<JournalEntryRequest>) -> Result<ExtrasJournalEntriesBulkDestroyResponse, Error> {
@@ -16126,15 +15036,13 @@ pub fn extras_journal_entries_bulk_destroy(state: &ThanixClient, body: Vec<Journ
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasJournalEntriesBulkDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasJournalEntriesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasJournalEntriesBulkPartialUpdateResponse {
 	Http200(Vec<JournalEntry>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of journal entry objects.
 pub fn extras_journal_entries_bulk_partial_update(state: &ThanixClient, body: Vec<JournalEntryRequest>) -> Result<ExtrasJournalEntriesBulkPartialUpdateResponse, Error> {
@@ -16144,15 +15052,13 @@ pub fn extras_journal_entries_bulk_partial_update(state: &ThanixClient, body: Ve
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasJournalEntriesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<JournalEntry>>()?)) },
-		_ => { Ok(ExtrasJournalEntriesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasJournalEntriesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasJournalEntriesRetrieveResponse {
 	Http200(JournalEntry),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a journal entry object.
 pub fn extras_journal_entries_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasJournalEntriesRetrieveResponse, Error> {
@@ -16161,15 +15067,13 @@ pub fn extras_journal_entries_retrieve(state: &ThanixClient, id: i64) -> Result<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasJournalEntriesRetrieveResponse::Http200(r#response.json::<JournalEntry>()?)) },
-		_ => { Ok(ExtrasJournalEntriesRetrieveResponse::None) }
+		r#other_status => { Ok(ExtrasJournalEntriesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasJournalEntriesUpdateResponse {
 	Http200(JournalEntry),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a journal entry object.
 pub fn extras_journal_entries_update(state: &ThanixClient, body: WritableJournalEntryRequest, id: i64) -> Result<ExtrasJournalEntriesUpdateResponse, Error> {
@@ -16179,15 +15083,13 @@ pub fn extras_journal_entries_update(state: &ThanixClient, body: WritableJournal
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasJournalEntriesUpdateResponse::Http200(r#response.json::<JournalEntry>()?)) },
-		_ => { Ok(ExtrasJournalEntriesUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasJournalEntriesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasJournalEntriesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a journal entry object.
 pub fn extras_journal_entries_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasJournalEntriesDestroyResponse, Error> {
@@ -16195,15 +15097,13 @@ pub fn extras_journal_entries_destroy(state: &ThanixClient, id: i64) -> Result<E
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasJournalEntriesDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasJournalEntriesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasJournalEntriesPartialUpdateResponse {
 	Http200(JournalEntry),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a journal entry object.
 pub fn extras_journal_entries_partial_update(state: &ThanixClient, body: PatchedWritableJournalEntryRequest, id: i64) -> Result<ExtrasJournalEntriesPartialUpdateResponse, Error> {
@@ -16213,7 +15113,7 @@ pub fn extras_journal_entries_partial_update(state: &ThanixClient, body: Patched
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasJournalEntriesPartialUpdateResponse::Http200(r#response.json::<JournalEntry>()?)) },
-		_ => { Ok(ExtrasJournalEntriesPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasJournalEntriesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -16281,12 +15181,10 @@ pub struct ExtrasObjectChangesListQuery {
 	user_name__nisw: Option<Vec<String>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasObjectChangesListResponse {
 	Http200(PaginatedObjectChangeList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Retrieve a list of recent changes.
 pub fn extras_object_changes_list(state: &ThanixClient, query: ExtrasObjectChangesListQuery) -> Result<ExtrasObjectChangesListResponse, Error> {
@@ -16295,15 +15193,13 @@ pub fn extras_object_changes_list(state: &ThanixClient, query: ExtrasObjectChang
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasObjectChangesListResponse::Http200(r#response.json::<PaginatedObjectChangeList>()?)) },
-		_ => { Ok(ExtrasObjectChangesListResponse::None) }
+		r#other_status => { Ok(ExtrasObjectChangesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasObjectChangesRetrieveResponse {
 	Http200(ObjectChange),
-	#[default]
-	None
+	Other(Response)
 }
 /// Retrieve a list of recent changes.
 pub fn extras_object_changes_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasObjectChangesRetrieveResponse, Error> {
@@ -16312,7 +15208,7 @@ pub fn extras_object_changes_retrieve(state: &ThanixClient, id: i64) -> Result<E
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasObjectChangesRetrieveResponse::Http200(r#response.json::<ObjectChange>()?)) },
-		_ => { Ok(ExtrasObjectChangesRetrieveResponse::None) }
+		r#other_status => { Ok(ExtrasObjectChangesRetrieveResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -16402,12 +15298,10 @@ pub struct ExtrasSavedFiltersListQuery {
 	weight__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasSavedFiltersListResponse {
 	Http200(PaginatedSavedFilterList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of saved filter objects.
 pub fn extras_saved_filters_list(state: &ThanixClient, query: ExtrasSavedFiltersListQuery) -> Result<ExtrasSavedFiltersListResponse, Error> {
@@ -16416,15 +15310,13 @@ pub fn extras_saved_filters_list(state: &ThanixClient, query: ExtrasSavedFilters
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasSavedFiltersListResponse::Http200(r#response.json::<PaginatedSavedFilterList>()?)) },
-		_ => { Ok(ExtrasSavedFiltersListResponse::None) }
+		r#other_status => { Ok(ExtrasSavedFiltersListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasSavedFiltersBulkUpdateResponse {
 	Http200(Vec<SavedFilter>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of saved filter objects.
 pub fn extras_saved_filters_bulk_update(state: &ThanixClient, body: Vec<SavedFilterRequest>) -> Result<ExtrasSavedFiltersBulkUpdateResponse, Error> {
@@ -16434,15 +15326,13 @@ pub fn extras_saved_filters_bulk_update(state: &ThanixClient, body: Vec<SavedFil
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasSavedFiltersBulkUpdateResponse::Http200(r#response.json::<Vec<SavedFilter>>()?)) },
-		_ => { Ok(ExtrasSavedFiltersBulkUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasSavedFiltersBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasSavedFiltersCreateResponse {
 	Http201(SavedFilter),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of saved filter objects.
 pub fn extras_saved_filters_create(state: &ThanixClient, body: SavedFilterRequest) -> Result<ExtrasSavedFiltersCreateResponse, Error> {
@@ -16452,15 +15342,13 @@ pub fn extras_saved_filters_create(state: &ThanixClient, body: SavedFilterReques
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(ExtrasSavedFiltersCreateResponse::Http201(r#response.json::<SavedFilter>()?)) },
-		_ => { Ok(ExtrasSavedFiltersCreateResponse::None) }
+		r#other_status => { Ok(ExtrasSavedFiltersCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasSavedFiltersBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of saved filter objects.
 pub fn extras_saved_filters_bulk_destroy(state: &ThanixClient, body: Vec<SavedFilterRequest>) -> Result<ExtrasSavedFiltersBulkDestroyResponse, Error> {
@@ -16469,15 +15357,13 @@ pub fn extras_saved_filters_bulk_destroy(state: &ThanixClient, body: Vec<SavedFi
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasSavedFiltersBulkDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasSavedFiltersBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasSavedFiltersBulkPartialUpdateResponse {
 	Http200(Vec<SavedFilter>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of saved filter objects.
 pub fn extras_saved_filters_bulk_partial_update(state: &ThanixClient, body: Vec<SavedFilterRequest>) -> Result<ExtrasSavedFiltersBulkPartialUpdateResponse, Error> {
@@ -16487,15 +15373,13 @@ pub fn extras_saved_filters_bulk_partial_update(state: &ThanixClient, body: Vec<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasSavedFiltersBulkPartialUpdateResponse::Http200(r#response.json::<Vec<SavedFilter>>()?)) },
-		_ => { Ok(ExtrasSavedFiltersBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasSavedFiltersBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasSavedFiltersRetrieveResponse {
 	Http200(SavedFilter),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a saved filter object.
 pub fn extras_saved_filters_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasSavedFiltersRetrieveResponse, Error> {
@@ -16504,15 +15388,13 @@ pub fn extras_saved_filters_retrieve(state: &ThanixClient, id: i64) -> Result<Ex
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasSavedFiltersRetrieveResponse::Http200(r#response.json::<SavedFilter>()?)) },
-		_ => { Ok(ExtrasSavedFiltersRetrieveResponse::None) }
+		r#other_status => { Ok(ExtrasSavedFiltersRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasSavedFiltersUpdateResponse {
 	Http200(SavedFilter),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a saved filter object.
 pub fn extras_saved_filters_update(state: &ThanixClient, body: SavedFilterRequest, id: i64) -> Result<ExtrasSavedFiltersUpdateResponse, Error> {
@@ -16522,15 +15404,13 @@ pub fn extras_saved_filters_update(state: &ThanixClient, body: SavedFilterReques
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasSavedFiltersUpdateResponse::Http200(r#response.json::<SavedFilter>()?)) },
-		_ => { Ok(ExtrasSavedFiltersUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasSavedFiltersUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasSavedFiltersDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a saved filter object.
 pub fn extras_saved_filters_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasSavedFiltersDestroyResponse, Error> {
@@ -16538,15 +15418,13 @@ pub fn extras_saved_filters_destroy(state: &ThanixClient, id: i64) -> Result<Ext
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasSavedFiltersDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasSavedFiltersDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasSavedFiltersPartialUpdateResponse {
 	Http200(SavedFilter),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a saved filter object.
 pub fn extras_saved_filters_partial_update(state: &ThanixClient, body: PatchedSavedFilterRequest, id: i64) -> Result<ExtrasSavedFiltersPartialUpdateResponse, Error> {
@@ -16556,7 +15434,7 @@ pub fn extras_saved_filters_partial_update(state: &ThanixClient, body: PatchedSa
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasSavedFiltersPartialUpdateResponse::Http200(r#response.json::<SavedFilter>()?)) },
-		_ => { Ok(ExtrasSavedFiltersPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasSavedFiltersPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -16644,12 +15522,10 @@ pub struct ExtrasTagsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasTagsListResponse {
 	Http200(PaginatedTagList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of tag objects.
 pub fn extras_tags_list(state: &ThanixClient, query: ExtrasTagsListQuery) -> Result<ExtrasTagsListResponse, Error> {
@@ -16658,15 +15534,13 @@ pub fn extras_tags_list(state: &ThanixClient, query: ExtrasTagsListQuery) -> Res
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasTagsListResponse::Http200(r#response.json::<PaginatedTagList>()?)) },
-		_ => { Ok(ExtrasTagsListResponse::None) }
+		r#other_status => { Ok(ExtrasTagsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasTagsBulkUpdateResponse {
 	Http200(Vec<Tag>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of tag objects.
 pub fn extras_tags_bulk_update(state: &ThanixClient, body: Vec<TagRequest>) -> Result<ExtrasTagsBulkUpdateResponse, Error> {
@@ -16676,15 +15550,13 @@ pub fn extras_tags_bulk_update(state: &ThanixClient, body: Vec<TagRequest>) -> R
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasTagsBulkUpdateResponse::Http200(r#response.json::<Vec<Tag>>()?)) },
-		_ => { Ok(ExtrasTagsBulkUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasTagsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasTagsCreateResponse {
 	Http201(Tag),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of tag objects.
 pub fn extras_tags_create(state: &ThanixClient, body: TagRequest) -> Result<ExtrasTagsCreateResponse, Error> {
@@ -16694,15 +15566,13 @@ pub fn extras_tags_create(state: &ThanixClient, body: TagRequest) -> Result<Extr
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(ExtrasTagsCreateResponse::Http201(r#response.json::<Tag>()?)) },
-		_ => { Ok(ExtrasTagsCreateResponse::None) }
+		r#other_status => { Ok(ExtrasTagsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasTagsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of tag objects.
 pub fn extras_tags_bulk_destroy(state: &ThanixClient, body: Vec<TagRequest>) -> Result<ExtrasTagsBulkDestroyResponse, Error> {
@@ -16711,15 +15581,13 @@ pub fn extras_tags_bulk_destroy(state: &ThanixClient, body: Vec<TagRequest>) -> 
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasTagsBulkDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasTagsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasTagsBulkPartialUpdateResponse {
 	Http200(Vec<Tag>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of tag objects.
 pub fn extras_tags_bulk_partial_update(state: &ThanixClient, body: Vec<TagRequest>) -> Result<ExtrasTagsBulkPartialUpdateResponse, Error> {
@@ -16729,15 +15597,13 @@ pub fn extras_tags_bulk_partial_update(state: &ThanixClient, body: Vec<TagReques
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasTagsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Tag>>()?)) },
-		_ => { Ok(ExtrasTagsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasTagsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasTagsRetrieveResponse {
 	Http200(Tag),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a tag object.
 pub fn extras_tags_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasTagsRetrieveResponse, Error> {
@@ -16746,15 +15612,13 @@ pub fn extras_tags_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasTagsR
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasTagsRetrieveResponse::Http200(r#response.json::<Tag>()?)) },
-		_ => { Ok(ExtrasTagsRetrieveResponse::None) }
+		r#other_status => { Ok(ExtrasTagsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasTagsUpdateResponse {
 	Http200(Tag),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a tag object.
 pub fn extras_tags_update(state: &ThanixClient, body: TagRequest, id: i64) -> Result<ExtrasTagsUpdateResponse, Error> {
@@ -16764,15 +15628,13 @@ pub fn extras_tags_update(state: &ThanixClient, body: TagRequest, id: i64) -> Re
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasTagsUpdateResponse::Http200(r#response.json::<Tag>()?)) },
-		_ => { Ok(ExtrasTagsUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasTagsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasTagsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a tag object.
 pub fn extras_tags_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasTagsDestroyResponse, Error> {
@@ -16780,15 +15642,13 @@ pub fn extras_tags_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasTagsDe
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasTagsDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasTagsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasTagsPartialUpdateResponse {
 	Http200(Tag),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a tag object.
 pub fn extras_tags_partial_update(state: &ThanixClient, body: PatchedTagRequest, id: i64) -> Result<ExtrasTagsPartialUpdateResponse, Error> {
@@ -16798,7 +15658,7 @@ pub fn extras_tags_partial_update(state: &ThanixClient, body: PatchedTagRequest,
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasTagsPartialUpdateResponse::Http200(r#response.json::<Tag>()?)) },
-		_ => { Ok(ExtrasTagsPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasTagsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -16898,12 +15758,10 @@ pub struct ExtrasWebhooksListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasWebhooksListResponse {
 	Http200(PaginatedWebhookList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of webhook objects.
 pub fn extras_webhooks_list(state: &ThanixClient, query: ExtrasWebhooksListQuery) -> Result<ExtrasWebhooksListResponse, Error> {
@@ -16912,15 +15770,13 @@ pub fn extras_webhooks_list(state: &ThanixClient, query: ExtrasWebhooksListQuery
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasWebhooksListResponse::Http200(r#response.json::<PaginatedWebhookList>()?)) },
-		_ => { Ok(ExtrasWebhooksListResponse::None) }
+		r#other_status => { Ok(ExtrasWebhooksListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasWebhooksBulkUpdateResponse {
 	Http200(Vec<Webhook>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of webhook objects.
 pub fn extras_webhooks_bulk_update(state: &ThanixClient, body: Vec<WebhookRequest>) -> Result<ExtrasWebhooksBulkUpdateResponse, Error> {
@@ -16930,15 +15786,13 @@ pub fn extras_webhooks_bulk_update(state: &ThanixClient, body: Vec<WebhookReques
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasWebhooksBulkUpdateResponse::Http200(r#response.json::<Vec<Webhook>>()?)) },
-		_ => { Ok(ExtrasWebhooksBulkUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasWebhooksBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasWebhooksCreateResponse {
 	Http201(Webhook),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of webhook objects.
 pub fn extras_webhooks_create(state: &ThanixClient, body: WebhookRequest) -> Result<ExtrasWebhooksCreateResponse, Error> {
@@ -16948,15 +15802,13 @@ pub fn extras_webhooks_create(state: &ThanixClient, body: WebhookRequest) -> Res
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(ExtrasWebhooksCreateResponse::Http201(r#response.json::<Webhook>()?)) },
-		_ => { Ok(ExtrasWebhooksCreateResponse::None) }
+		r#other_status => { Ok(ExtrasWebhooksCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasWebhooksBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of webhook objects.
 pub fn extras_webhooks_bulk_destroy(state: &ThanixClient, body: Vec<WebhookRequest>) -> Result<ExtrasWebhooksBulkDestroyResponse, Error> {
@@ -16965,15 +15817,13 @@ pub fn extras_webhooks_bulk_destroy(state: &ThanixClient, body: Vec<WebhookReque
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasWebhooksBulkDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasWebhooksBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasWebhooksBulkPartialUpdateResponse {
 	Http200(Vec<Webhook>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of webhook objects.
 pub fn extras_webhooks_bulk_partial_update(state: &ThanixClient, body: Vec<WebhookRequest>) -> Result<ExtrasWebhooksBulkPartialUpdateResponse, Error> {
@@ -16983,15 +15833,13 @@ pub fn extras_webhooks_bulk_partial_update(state: &ThanixClient, body: Vec<Webho
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasWebhooksBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Webhook>>()?)) },
-		_ => { Ok(ExtrasWebhooksBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasWebhooksBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasWebhooksRetrieveResponse {
 	Http200(Webhook),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a webhook object.
 pub fn extras_webhooks_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasWebhooksRetrieveResponse, Error> {
@@ -17000,15 +15848,13 @@ pub fn extras_webhooks_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasW
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasWebhooksRetrieveResponse::Http200(r#response.json::<Webhook>()?)) },
-		_ => { Ok(ExtrasWebhooksRetrieveResponse::None) }
+		r#other_status => { Ok(ExtrasWebhooksRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasWebhooksUpdateResponse {
 	Http200(Webhook),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a webhook object.
 pub fn extras_webhooks_update(state: &ThanixClient, body: WebhookRequest, id: i64) -> Result<ExtrasWebhooksUpdateResponse, Error> {
@@ -17018,15 +15864,13 @@ pub fn extras_webhooks_update(state: &ThanixClient, body: WebhookRequest, id: i6
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasWebhooksUpdateResponse::Http200(r#response.json::<Webhook>()?)) },
-		_ => { Ok(ExtrasWebhooksUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasWebhooksUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasWebhooksDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a webhook object.
 pub fn extras_webhooks_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasWebhooksDestroyResponse, Error> {
@@ -17034,15 +15878,13 @@ pub fn extras_webhooks_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasWe
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(ExtrasWebhooksDestroyResponse::None) }
+		r#other_status => { Ok(ExtrasWebhooksDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum ExtrasWebhooksPartialUpdateResponse {
 	Http200(Webhook),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a webhook object.
 pub fn extras_webhooks_partial_update(state: &ThanixClient, body: PatchedWebhookRequest, id: i64) -> Result<ExtrasWebhooksPartialUpdateResponse, Error> {
@@ -17052,7 +15894,7 @@ pub fn extras_webhooks_partial_update(state: &ThanixClient, body: PatchedWebhook
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasWebhooksPartialUpdateResponse::Http200(r#response.json::<Webhook>()?)) },
-		_ => { Ok(ExtrasWebhooksPartialUpdateResponse::None) }
+		r#other_status => { Ok(ExtrasWebhooksPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -17138,12 +15980,10 @@ pub struct IpamAggregatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAggregatesListResponse {
 	Http200(PaginatedAggregateList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of aggregate objects.
 pub fn ipam_aggregates_list(state: &ThanixClient, query: IpamAggregatesListQuery) -> Result<IpamAggregatesListResponse, Error> {
@@ -17152,15 +15992,13 @@ pub fn ipam_aggregates_list(state: &ThanixClient, query: IpamAggregatesListQuery
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamAggregatesListResponse::Http200(r#response.json::<PaginatedAggregateList>()?)) },
-		_ => { Ok(IpamAggregatesListResponse::None) }
+		r#other_status => { Ok(IpamAggregatesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAggregatesBulkUpdateResponse {
 	Http200(Vec<Aggregate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of aggregate objects.
 pub fn ipam_aggregates_bulk_update(state: &ThanixClient, body: Vec<AggregateRequest>) -> Result<IpamAggregatesBulkUpdateResponse, Error> {
@@ -17170,15 +16008,13 @@ pub fn ipam_aggregates_bulk_update(state: &ThanixClient, body: Vec<AggregateRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamAggregatesBulkUpdateResponse::Http200(r#response.json::<Vec<Aggregate>>()?)) },
-		_ => { Ok(IpamAggregatesBulkUpdateResponse::None) }
+		r#other_status => { Ok(IpamAggregatesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAggregatesCreateResponse {
 	Http201(Aggregate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of aggregate objects.
 pub fn ipam_aggregates_create(state: &ThanixClient, body: WritableAggregateRequest) -> Result<IpamAggregatesCreateResponse, Error> {
@@ -17188,15 +16024,13 @@ pub fn ipam_aggregates_create(state: &ThanixClient, body: WritableAggregateReque
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamAggregatesCreateResponse::Http201(r#response.json::<Aggregate>()?)) },
-		_ => { Ok(IpamAggregatesCreateResponse::None) }
+		r#other_status => { Ok(IpamAggregatesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAggregatesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of aggregate objects.
 pub fn ipam_aggregates_bulk_destroy(state: &ThanixClient, body: Vec<AggregateRequest>) -> Result<IpamAggregatesBulkDestroyResponse, Error> {
@@ -17205,15 +16039,13 @@ pub fn ipam_aggregates_bulk_destroy(state: &ThanixClient, body: Vec<AggregateReq
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamAggregatesBulkDestroyResponse::None) }
+		r#other_status => { Ok(IpamAggregatesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAggregatesBulkPartialUpdateResponse {
 	Http200(Vec<Aggregate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of aggregate objects.
 pub fn ipam_aggregates_bulk_partial_update(state: &ThanixClient, body: Vec<AggregateRequest>) -> Result<IpamAggregatesBulkPartialUpdateResponse, Error> {
@@ -17223,15 +16055,13 @@ pub fn ipam_aggregates_bulk_partial_update(state: &ThanixClient, body: Vec<Aggre
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamAggregatesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Aggregate>>()?)) },
-		_ => { Ok(IpamAggregatesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamAggregatesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAggregatesRetrieveResponse {
 	Http200(Aggregate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a aggregate object.
 pub fn ipam_aggregates_retrieve(state: &ThanixClient, id: i64) -> Result<IpamAggregatesRetrieveResponse, Error> {
@@ -17240,15 +16070,13 @@ pub fn ipam_aggregates_retrieve(state: &ThanixClient, id: i64) -> Result<IpamAgg
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamAggregatesRetrieveResponse::Http200(r#response.json::<Aggregate>()?)) },
-		_ => { Ok(IpamAggregatesRetrieveResponse::None) }
+		r#other_status => { Ok(IpamAggregatesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAggregatesUpdateResponse {
 	Http200(Aggregate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a aggregate object.
 pub fn ipam_aggregates_update(state: &ThanixClient, body: WritableAggregateRequest, id: i64) -> Result<IpamAggregatesUpdateResponse, Error> {
@@ -17258,15 +16086,13 @@ pub fn ipam_aggregates_update(state: &ThanixClient, body: WritableAggregateReque
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamAggregatesUpdateResponse::Http200(r#response.json::<Aggregate>()?)) },
-		_ => { Ok(IpamAggregatesUpdateResponse::None) }
+		r#other_status => { Ok(IpamAggregatesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAggregatesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a aggregate object.
 pub fn ipam_aggregates_destroy(state: &ThanixClient, id: i64) -> Result<IpamAggregatesDestroyResponse, Error> {
@@ -17274,15 +16100,13 @@ pub fn ipam_aggregates_destroy(state: &ThanixClient, id: i64) -> Result<IpamAggr
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamAggregatesDestroyResponse::None) }
+		r#other_status => { Ok(IpamAggregatesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAggregatesPartialUpdateResponse {
 	Http200(Aggregate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a aggregate object.
 pub fn ipam_aggregates_partial_update(state: &ThanixClient, body: PatchedWritableAggregateRequest, id: i64) -> Result<IpamAggregatesPartialUpdateResponse, Error> {
@@ -17292,7 +16116,7 @@ pub fn ipam_aggregates_partial_update(state: &ThanixClient, body: PatchedWritabl
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamAggregatesPartialUpdateResponse::Http200(r#response.json::<Aggregate>()?)) },
-		_ => { Ok(IpamAggregatesPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamAggregatesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -17393,12 +16217,10 @@ pub struct IpamAsnRangesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnRangesListResponse {
 	Http200(PaginatedASNRangeList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of ASN range objects.
 pub fn ipam_asn_ranges_list(state: &ThanixClient, query: IpamAsnRangesListQuery) -> Result<IpamAsnRangesListResponse, Error> {
@@ -17407,15 +16229,13 @@ pub fn ipam_asn_ranges_list(state: &ThanixClient, query: IpamAsnRangesListQuery)
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamAsnRangesListResponse::Http200(r#response.json::<PaginatedASNRangeList>()?)) },
-		_ => { Ok(IpamAsnRangesListResponse::None) }
+		r#other_status => { Ok(IpamAsnRangesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnRangesBulkUpdateResponse {
 	Http200(Vec<ASNRange>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of ASN range objects.
 pub fn ipam_asn_ranges_bulk_update(state: &ThanixClient, body: Vec<ASNRangeRequest>) -> Result<IpamAsnRangesBulkUpdateResponse, Error> {
@@ -17425,15 +16245,13 @@ pub fn ipam_asn_ranges_bulk_update(state: &ThanixClient, body: Vec<ASNRangeReque
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamAsnRangesBulkUpdateResponse::Http200(r#response.json::<Vec<ASNRange>>()?)) },
-		_ => { Ok(IpamAsnRangesBulkUpdateResponse::None) }
+		r#other_status => { Ok(IpamAsnRangesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnRangesCreateResponse {
 	Http201(ASNRange),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of ASN range objects.
 pub fn ipam_asn_ranges_create(state: &ThanixClient, body: WritableASNRangeRequest) -> Result<IpamAsnRangesCreateResponse, Error> {
@@ -17443,15 +16261,13 @@ pub fn ipam_asn_ranges_create(state: &ThanixClient, body: WritableASNRangeReques
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamAsnRangesCreateResponse::Http201(r#response.json::<ASNRange>()?)) },
-		_ => { Ok(IpamAsnRangesCreateResponse::None) }
+		r#other_status => { Ok(IpamAsnRangesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnRangesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of ASN range objects.
 pub fn ipam_asn_ranges_bulk_destroy(state: &ThanixClient, body: Vec<ASNRangeRequest>) -> Result<IpamAsnRangesBulkDestroyResponse, Error> {
@@ -17460,15 +16276,13 @@ pub fn ipam_asn_ranges_bulk_destroy(state: &ThanixClient, body: Vec<ASNRangeRequ
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamAsnRangesBulkDestroyResponse::None) }
+		r#other_status => { Ok(IpamAsnRangesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnRangesBulkPartialUpdateResponse {
 	Http200(Vec<ASNRange>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of ASN range objects.
 pub fn ipam_asn_ranges_bulk_partial_update(state: &ThanixClient, body: Vec<ASNRangeRequest>) -> Result<IpamAsnRangesBulkPartialUpdateResponse, Error> {
@@ -17478,15 +16292,13 @@ pub fn ipam_asn_ranges_bulk_partial_update(state: &ThanixClient, body: Vec<ASNRa
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamAsnRangesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ASNRange>>()?)) },
-		_ => { Ok(IpamAsnRangesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamAsnRangesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnRangesRetrieveResponse {
 	Http200(ASNRange),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a ASN range object.
 pub fn ipam_asn_ranges_retrieve(state: &ThanixClient, id: i64) -> Result<IpamAsnRangesRetrieveResponse, Error> {
@@ -17495,15 +16307,13 @@ pub fn ipam_asn_ranges_retrieve(state: &ThanixClient, id: i64) -> Result<IpamAsn
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamAsnRangesRetrieveResponse::Http200(r#response.json::<ASNRange>()?)) },
-		_ => { Ok(IpamAsnRangesRetrieveResponse::None) }
+		r#other_status => { Ok(IpamAsnRangesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnRangesUpdateResponse {
 	Http200(ASNRange),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a ASN range object.
 pub fn ipam_asn_ranges_update(state: &ThanixClient, body: WritableASNRangeRequest, id: i64) -> Result<IpamAsnRangesUpdateResponse, Error> {
@@ -17513,15 +16323,13 @@ pub fn ipam_asn_ranges_update(state: &ThanixClient, body: WritableASNRangeReques
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamAsnRangesUpdateResponse::Http200(r#response.json::<ASNRange>()?)) },
-		_ => { Ok(IpamAsnRangesUpdateResponse::None) }
+		r#other_status => { Ok(IpamAsnRangesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnRangesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a ASN range object.
 pub fn ipam_asn_ranges_destroy(state: &ThanixClient, id: i64) -> Result<IpamAsnRangesDestroyResponse, Error> {
@@ -17529,15 +16337,13 @@ pub fn ipam_asn_ranges_destroy(state: &ThanixClient, id: i64) -> Result<IpamAsnR
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamAsnRangesDestroyResponse::None) }
+		r#other_status => { Ok(IpamAsnRangesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnRangesPartialUpdateResponse {
 	Http200(ASNRange),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a ASN range object.
 pub fn ipam_asn_ranges_partial_update(state: &ThanixClient, body: PatchedWritableASNRangeRequest, id: i64) -> Result<IpamAsnRangesPartialUpdateResponse, Error> {
@@ -17547,15 +16353,13 @@ pub fn ipam_asn_ranges_partial_update(state: &ThanixClient, body: PatchedWritabl
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamAsnRangesPartialUpdateResponse::Http200(r#response.json::<ASNRange>()?)) },
-		_ => { Ok(IpamAsnRangesPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamAsnRangesPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnRangesAvailableAsnsListResponse {
 	Http200(Vec<AvailableASN>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a ASN object.
 pub fn ipam_asn_ranges_available_asns_list(state: &ThanixClient, id: i64) -> Result<IpamAsnRangesAvailableAsnsListResponse, Error> {
@@ -17564,15 +16368,13 @@ pub fn ipam_asn_ranges_available_asns_list(state: &ThanixClient, id: i64) -> Res
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamAsnRangesAvailableAsnsListResponse::Http200(r#response.json::<Vec<AvailableASN>>()?)) },
-		_ => { Ok(IpamAsnRangesAvailableAsnsListResponse::None) }
+		r#other_status => { Ok(IpamAsnRangesAvailableAsnsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnRangesAvailableAsnsCreateResponse {
 	Http201(Vec<ASN>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a ASN object.
 pub fn ipam_asn_ranges_available_asns_create(state: &ThanixClient, body: Vec<ASNRequest>, id: i64) -> Result<IpamAsnRangesAvailableAsnsCreateResponse, Error> {
@@ -17582,7 +16384,7 @@ pub fn ipam_asn_ranges_available_asns_create(state: &ThanixClient, body: Vec<ASN
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamAsnRangesAvailableAsnsCreateResponse::Http201(r#response.json::<Vec<ASN>>()?)) },
-		_ => { Ok(IpamAsnRangesAvailableAsnsCreateResponse::None) }
+		r#other_status => { Ok(IpamAsnRangesAvailableAsnsCreateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -17673,12 +16475,10 @@ pub struct IpamAsnsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnsListResponse {
 	Http200(PaginatedASNList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of ASN objects.
 pub fn ipam_asns_list(state: &ThanixClient, query: IpamAsnsListQuery) -> Result<IpamAsnsListResponse, Error> {
@@ -17687,15 +16487,13 @@ pub fn ipam_asns_list(state: &ThanixClient, query: IpamAsnsListQuery) -> Result<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamAsnsListResponse::Http200(r#response.json::<PaginatedASNList>()?)) },
-		_ => { Ok(IpamAsnsListResponse::None) }
+		r#other_status => { Ok(IpamAsnsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnsBulkUpdateResponse {
 	Http200(Vec<ASN>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of ASN objects.
 pub fn ipam_asns_bulk_update(state: &ThanixClient, body: Vec<ASNRequest>) -> Result<IpamAsnsBulkUpdateResponse, Error> {
@@ -17705,15 +16503,13 @@ pub fn ipam_asns_bulk_update(state: &ThanixClient, body: Vec<ASNRequest>) -> Res
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamAsnsBulkUpdateResponse::Http200(r#response.json::<Vec<ASN>>()?)) },
-		_ => { Ok(IpamAsnsBulkUpdateResponse::None) }
+		r#other_status => { Ok(IpamAsnsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnsCreateResponse {
 	Http201(ASN),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of ASN objects.
 pub fn ipam_asns_create(state: &ThanixClient, body: WritableASNRequest) -> Result<IpamAsnsCreateResponse, Error> {
@@ -17723,15 +16519,13 @@ pub fn ipam_asns_create(state: &ThanixClient, body: WritableASNRequest) -> Resul
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamAsnsCreateResponse::Http201(r#response.json::<ASN>()?)) },
-		_ => { Ok(IpamAsnsCreateResponse::None) }
+		r#other_status => { Ok(IpamAsnsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of ASN objects.
 pub fn ipam_asns_bulk_destroy(state: &ThanixClient, body: Vec<ASNRequest>) -> Result<IpamAsnsBulkDestroyResponse, Error> {
@@ -17740,15 +16534,13 @@ pub fn ipam_asns_bulk_destroy(state: &ThanixClient, body: Vec<ASNRequest>) -> Re
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamAsnsBulkDestroyResponse::None) }
+		r#other_status => { Ok(IpamAsnsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnsBulkPartialUpdateResponse {
 	Http200(Vec<ASN>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of ASN objects.
 pub fn ipam_asns_bulk_partial_update(state: &ThanixClient, body: Vec<ASNRequest>) -> Result<IpamAsnsBulkPartialUpdateResponse, Error> {
@@ -17758,15 +16550,13 @@ pub fn ipam_asns_bulk_partial_update(state: &ThanixClient, body: Vec<ASNRequest>
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamAsnsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ASN>>()?)) },
-		_ => { Ok(IpamAsnsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamAsnsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnsRetrieveResponse {
 	Http200(ASN),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a ASN object.
 pub fn ipam_asns_retrieve(state: &ThanixClient, id: i64) -> Result<IpamAsnsRetrieveResponse, Error> {
@@ -17775,15 +16565,13 @@ pub fn ipam_asns_retrieve(state: &ThanixClient, id: i64) -> Result<IpamAsnsRetri
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamAsnsRetrieveResponse::Http200(r#response.json::<ASN>()?)) },
-		_ => { Ok(IpamAsnsRetrieveResponse::None) }
+		r#other_status => { Ok(IpamAsnsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnsUpdateResponse {
 	Http200(ASN),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a ASN object.
 pub fn ipam_asns_update(state: &ThanixClient, body: WritableASNRequest, id: i64) -> Result<IpamAsnsUpdateResponse, Error> {
@@ -17793,15 +16581,13 @@ pub fn ipam_asns_update(state: &ThanixClient, body: WritableASNRequest, id: i64)
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamAsnsUpdateResponse::Http200(r#response.json::<ASN>()?)) },
-		_ => { Ok(IpamAsnsUpdateResponse::None) }
+		r#other_status => { Ok(IpamAsnsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a ASN object.
 pub fn ipam_asns_destroy(state: &ThanixClient, id: i64) -> Result<IpamAsnsDestroyResponse, Error> {
@@ -17809,15 +16595,13 @@ pub fn ipam_asns_destroy(state: &ThanixClient, id: i64) -> Result<IpamAsnsDestro
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamAsnsDestroyResponse::None) }
+		r#other_status => { Ok(IpamAsnsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamAsnsPartialUpdateResponse {
 	Http200(ASN),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a ASN object.
 pub fn ipam_asns_partial_update(state: &ThanixClient, body: PatchedWritableASNRequest, id: i64) -> Result<IpamAsnsPartialUpdateResponse, Error> {
@@ -17827,7 +16611,7 @@ pub fn ipam_asns_partial_update(state: &ThanixClient, body: PatchedWritableASNRe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamAsnsPartialUpdateResponse::Http200(r#response.json::<ASN>()?)) },
-		_ => { Ok(IpamAsnsPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamAsnsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -17888,12 +16672,10 @@ pub struct IpamFhrpGroupAssignmentsListQuery {
 	virtual_machine_id: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamFhrpGroupAssignmentsListResponse {
 	Http200(PaginatedFHRPGroupAssignmentList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of FHRP group assignment objects.
 pub fn ipam_fhrp_group_assignments_list(state: &ThanixClient, query: IpamFhrpGroupAssignmentsListQuery) -> Result<IpamFhrpGroupAssignmentsListResponse, Error> {
@@ -17902,15 +16684,13 @@ pub fn ipam_fhrp_group_assignments_list(state: &ThanixClient, query: IpamFhrpGro
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamFhrpGroupAssignmentsListResponse::Http200(r#response.json::<PaginatedFHRPGroupAssignmentList>()?)) },
-		_ => { Ok(IpamFhrpGroupAssignmentsListResponse::None) }
+		r#other_status => { Ok(IpamFhrpGroupAssignmentsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamFhrpGroupAssignmentsBulkUpdateResponse {
 	Http200(Vec<FHRPGroupAssignment>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of FHRP group assignment objects.
 pub fn ipam_fhrp_group_assignments_bulk_update(state: &ThanixClient, body: Vec<FHRPGroupAssignmentRequest>) -> Result<IpamFhrpGroupAssignmentsBulkUpdateResponse, Error> {
@@ -17920,15 +16700,13 @@ pub fn ipam_fhrp_group_assignments_bulk_update(state: &ThanixClient, body: Vec<F
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamFhrpGroupAssignmentsBulkUpdateResponse::Http200(r#response.json::<Vec<FHRPGroupAssignment>>()?)) },
-		_ => { Ok(IpamFhrpGroupAssignmentsBulkUpdateResponse::None) }
+		r#other_status => { Ok(IpamFhrpGroupAssignmentsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamFhrpGroupAssignmentsCreateResponse {
 	Http201(FHRPGroupAssignment),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of FHRP group assignment objects.
 pub fn ipam_fhrp_group_assignments_create(state: &ThanixClient, body: WritableFHRPGroupAssignmentRequest) -> Result<IpamFhrpGroupAssignmentsCreateResponse, Error> {
@@ -17938,15 +16716,13 @@ pub fn ipam_fhrp_group_assignments_create(state: &ThanixClient, body: WritableFH
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamFhrpGroupAssignmentsCreateResponse::Http201(r#response.json::<FHRPGroupAssignment>()?)) },
-		_ => { Ok(IpamFhrpGroupAssignmentsCreateResponse::None) }
+		r#other_status => { Ok(IpamFhrpGroupAssignmentsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamFhrpGroupAssignmentsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of FHRP group assignment objects.
 pub fn ipam_fhrp_group_assignments_bulk_destroy(state: &ThanixClient, body: Vec<FHRPGroupAssignmentRequest>) -> Result<IpamFhrpGroupAssignmentsBulkDestroyResponse, Error> {
@@ -17955,15 +16731,13 @@ pub fn ipam_fhrp_group_assignments_bulk_destroy(state: &ThanixClient, body: Vec<
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamFhrpGroupAssignmentsBulkDestroyResponse::None) }
+		r#other_status => { Ok(IpamFhrpGroupAssignmentsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamFhrpGroupAssignmentsBulkPartialUpdateResponse {
 	Http200(Vec<FHRPGroupAssignment>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of FHRP group assignment objects.
 pub fn ipam_fhrp_group_assignments_bulk_partial_update(state: &ThanixClient, body: Vec<FHRPGroupAssignmentRequest>) -> Result<IpamFhrpGroupAssignmentsBulkPartialUpdateResponse, Error> {
@@ -17973,15 +16747,13 @@ pub fn ipam_fhrp_group_assignments_bulk_partial_update(state: &ThanixClient, bod
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamFhrpGroupAssignmentsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<FHRPGroupAssignment>>()?)) },
-		_ => { Ok(IpamFhrpGroupAssignmentsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamFhrpGroupAssignmentsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamFhrpGroupAssignmentsRetrieveResponse {
 	Http200(FHRPGroupAssignment),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a FHRP group assignment object.
 pub fn ipam_fhrp_group_assignments_retrieve(state: &ThanixClient, id: i64) -> Result<IpamFhrpGroupAssignmentsRetrieveResponse, Error> {
@@ -17990,15 +16762,13 @@ pub fn ipam_fhrp_group_assignments_retrieve(state: &ThanixClient, id: i64) -> Re
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamFhrpGroupAssignmentsRetrieveResponse::Http200(r#response.json::<FHRPGroupAssignment>()?)) },
-		_ => { Ok(IpamFhrpGroupAssignmentsRetrieveResponse::None) }
+		r#other_status => { Ok(IpamFhrpGroupAssignmentsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamFhrpGroupAssignmentsUpdateResponse {
 	Http200(FHRPGroupAssignment),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a FHRP group assignment object.
 pub fn ipam_fhrp_group_assignments_update(state: &ThanixClient, body: WritableFHRPGroupAssignmentRequest, id: i64) -> Result<IpamFhrpGroupAssignmentsUpdateResponse, Error> {
@@ -18008,15 +16778,13 @@ pub fn ipam_fhrp_group_assignments_update(state: &ThanixClient, body: WritableFH
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamFhrpGroupAssignmentsUpdateResponse::Http200(r#response.json::<FHRPGroupAssignment>()?)) },
-		_ => { Ok(IpamFhrpGroupAssignmentsUpdateResponse::None) }
+		r#other_status => { Ok(IpamFhrpGroupAssignmentsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamFhrpGroupAssignmentsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a FHRP group assignment object.
 pub fn ipam_fhrp_group_assignments_destroy(state: &ThanixClient, id: i64) -> Result<IpamFhrpGroupAssignmentsDestroyResponse, Error> {
@@ -18024,15 +16792,13 @@ pub fn ipam_fhrp_group_assignments_destroy(state: &ThanixClient, id: i64) -> Res
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamFhrpGroupAssignmentsDestroyResponse::None) }
+		r#other_status => { Ok(IpamFhrpGroupAssignmentsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamFhrpGroupAssignmentsPartialUpdateResponse {
 	Http200(FHRPGroupAssignment),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a FHRP group assignment object.
 pub fn ipam_fhrp_group_assignments_partial_update(state: &ThanixClient, body: PatchedWritableFHRPGroupAssignmentRequest, id: i64) -> Result<IpamFhrpGroupAssignmentsPartialUpdateResponse, Error> {
@@ -18042,7 +16808,7 @@ pub fn ipam_fhrp_group_assignments_partial_update(state: &ThanixClient, body: Pa
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamFhrpGroupAssignmentsPartialUpdateResponse::Http200(r#response.json::<FHRPGroupAssignment>()?)) },
-		_ => { Ok(IpamFhrpGroupAssignmentsPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamFhrpGroupAssignmentsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -18128,12 +16894,10 @@ pub struct IpamFhrpGroupsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamFhrpGroupsListResponse {
 	Http200(PaginatedFHRPGroupList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of FHRP group objects.
 pub fn ipam_fhrp_groups_list(state: &ThanixClient, query: IpamFhrpGroupsListQuery) -> Result<IpamFhrpGroupsListResponse, Error> {
@@ -18142,15 +16906,13 @@ pub fn ipam_fhrp_groups_list(state: &ThanixClient, query: IpamFhrpGroupsListQuer
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamFhrpGroupsListResponse::Http200(r#response.json::<PaginatedFHRPGroupList>()?)) },
-		_ => { Ok(IpamFhrpGroupsListResponse::None) }
+		r#other_status => { Ok(IpamFhrpGroupsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamFhrpGroupsBulkUpdateResponse {
 	Http200(Vec<FHRPGroup>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of FHRP group objects.
 pub fn ipam_fhrp_groups_bulk_update(state: &ThanixClient, body: Vec<FHRPGroupRequest>) -> Result<IpamFhrpGroupsBulkUpdateResponse, Error> {
@@ -18160,15 +16922,13 @@ pub fn ipam_fhrp_groups_bulk_update(state: &ThanixClient, body: Vec<FHRPGroupReq
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamFhrpGroupsBulkUpdateResponse::Http200(r#response.json::<Vec<FHRPGroup>>()?)) },
-		_ => { Ok(IpamFhrpGroupsBulkUpdateResponse::None) }
+		r#other_status => { Ok(IpamFhrpGroupsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamFhrpGroupsCreateResponse {
 	Http201(FHRPGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of FHRP group objects.
 pub fn ipam_fhrp_groups_create(state: &ThanixClient, body: FHRPGroupRequest) -> Result<IpamFhrpGroupsCreateResponse, Error> {
@@ -18178,15 +16938,13 @@ pub fn ipam_fhrp_groups_create(state: &ThanixClient, body: FHRPGroupRequest) -> 
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamFhrpGroupsCreateResponse::Http201(r#response.json::<FHRPGroup>()?)) },
-		_ => { Ok(IpamFhrpGroupsCreateResponse::None) }
+		r#other_status => { Ok(IpamFhrpGroupsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamFhrpGroupsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of FHRP group objects.
 pub fn ipam_fhrp_groups_bulk_destroy(state: &ThanixClient, body: Vec<FHRPGroupRequest>) -> Result<IpamFhrpGroupsBulkDestroyResponse, Error> {
@@ -18195,15 +16953,13 @@ pub fn ipam_fhrp_groups_bulk_destroy(state: &ThanixClient, body: Vec<FHRPGroupRe
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamFhrpGroupsBulkDestroyResponse::None) }
+		r#other_status => { Ok(IpamFhrpGroupsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamFhrpGroupsBulkPartialUpdateResponse {
 	Http200(Vec<FHRPGroup>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of FHRP group objects.
 pub fn ipam_fhrp_groups_bulk_partial_update(state: &ThanixClient, body: Vec<FHRPGroupRequest>) -> Result<IpamFhrpGroupsBulkPartialUpdateResponse, Error> {
@@ -18213,15 +16969,13 @@ pub fn ipam_fhrp_groups_bulk_partial_update(state: &ThanixClient, body: Vec<FHRP
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamFhrpGroupsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<FHRPGroup>>()?)) },
-		_ => { Ok(IpamFhrpGroupsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamFhrpGroupsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamFhrpGroupsRetrieveResponse {
 	Http200(FHRPGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a FHRP group object.
 pub fn ipam_fhrp_groups_retrieve(state: &ThanixClient, id: i64) -> Result<IpamFhrpGroupsRetrieveResponse, Error> {
@@ -18230,15 +16984,13 @@ pub fn ipam_fhrp_groups_retrieve(state: &ThanixClient, id: i64) -> Result<IpamFh
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamFhrpGroupsRetrieveResponse::Http200(r#response.json::<FHRPGroup>()?)) },
-		_ => { Ok(IpamFhrpGroupsRetrieveResponse::None) }
+		r#other_status => { Ok(IpamFhrpGroupsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamFhrpGroupsUpdateResponse {
 	Http200(FHRPGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a FHRP group object.
 pub fn ipam_fhrp_groups_update(state: &ThanixClient, body: FHRPGroupRequest, id: i64) -> Result<IpamFhrpGroupsUpdateResponse, Error> {
@@ -18248,15 +17000,13 @@ pub fn ipam_fhrp_groups_update(state: &ThanixClient, body: FHRPGroupRequest, id:
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamFhrpGroupsUpdateResponse::Http200(r#response.json::<FHRPGroup>()?)) },
-		_ => { Ok(IpamFhrpGroupsUpdateResponse::None) }
+		r#other_status => { Ok(IpamFhrpGroupsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamFhrpGroupsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a FHRP group object.
 pub fn ipam_fhrp_groups_destroy(state: &ThanixClient, id: i64) -> Result<IpamFhrpGroupsDestroyResponse, Error> {
@@ -18264,15 +17014,13 @@ pub fn ipam_fhrp_groups_destroy(state: &ThanixClient, id: i64) -> Result<IpamFhr
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamFhrpGroupsDestroyResponse::None) }
+		r#other_status => { Ok(IpamFhrpGroupsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamFhrpGroupsPartialUpdateResponse {
 	Http200(FHRPGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a FHRP group object.
 pub fn ipam_fhrp_groups_partial_update(state: &ThanixClient, body: PatchedFHRPGroupRequest, id: i64) -> Result<IpamFhrpGroupsPartialUpdateResponse, Error> {
@@ -18282,7 +17030,7 @@ pub fn ipam_fhrp_groups_partial_update(state: &ThanixClient, body: PatchedFHRPGr
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamFhrpGroupsPartialUpdateResponse::Http200(r#response.json::<FHRPGroup>()?)) },
-		_ => { Ok(IpamFhrpGroupsPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamFhrpGroupsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -18413,12 +17161,10 @@ pub struct IpamIpAddressesListQuery {
 	vrf_id__n: Option<Vec<Option<i64>>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpAddressesListResponse {
 	Http200(PaginatedIPAddressList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of IP address objects.
 pub fn ipam_ip_addresses_list(state: &ThanixClient, query: IpamIpAddressesListQuery) -> Result<IpamIpAddressesListResponse, Error> {
@@ -18427,15 +17173,13 @@ pub fn ipam_ip_addresses_list(state: &ThanixClient, query: IpamIpAddressesListQu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamIpAddressesListResponse::Http200(r#response.json::<PaginatedIPAddressList>()?)) },
-		_ => { Ok(IpamIpAddressesListResponse::None) }
+		r#other_status => { Ok(IpamIpAddressesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpAddressesBulkUpdateResponse {
 	Http200(Vec<IPAddress>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of IP address objects.
 pub fn ipam_ip_addresses_bulk_update(state: &ThanixClient, body: Vec<IPAddressRequest>) -> Result<IpamIpAddressesBulkUpdateResponse, Error> {
@@ -18445,15 +17189,13 @@ pub fn ipam_ip_addresses_bulk_update(state: &ThanixClient, body: Vec<IPAddressRe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamIpAddressesBulkUpdateResponse::Http200(r#response.json::<Vec<IPAddress>>()?)) },
-		_ => { Ok(IpamIpAddressesBulkUpdateResponse::None) }
+		r#other_status => { Ok(IpamIpAddressesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpAddressesCreateResponse {
 	Http201(IPAddress),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of IP address objects.
 pub fn ipam_ip_addresses_create(state: &ThanixClient, body: WritableIPAddressRequest) -> Result<IpamIpAddressesCreateResponse, Error> {
@@ -18463,15 +17205,13 @@ pub fn ipam_ip_addresses_create(state: &ThanixClient, body: WritableIPAddressReq
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamIpAddressesCreateResponse::Http201(r#response.json::<IPAddress>()?)) },
-		_ => { Ok(IpamIpAddressesCreateResponse::None) }
+		r#other_status => { Ok(IpamIpAddressesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpAddressesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of IP address objects.
 pub fn ipam_ip_addresses_bulk_destroy(state: &ThanixClient, body: Vec<IPAddressRequest>) -> Result<IpamIpAddressesBulkDestroyResponse, Error> {
@@ -18480,15 +17220,13 @@ pub fn ipam_ip_addresses_bulk_destroy(state: &ThanixClient, body: Vec<IPAddressR
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamIpAddressesBulkDestroyResponse::None) }
+		r#other_status => { Ok(IpamIpAddressesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpAddressesBulkPartialUpdateResponse {
 	Http200(Vec<IPAddress>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of IP address objects.
 pub fn ipam_ip_addresses_bulk_partial_update(state: &ThanixClient, body: Vec<IPAddressRequest>) -> Result<IpamIpAddressesBulkPartialUpdateResponse, Error> {
@@ -18498,15 +17236,13 @@ pub fn ipam_ip_addresses_bulk_partial_update(state: &ThanixClient, body: Vec<IPA
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamIpAddressesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<IPAddress>>()?)) },
-		_ => { Ok(IpamIpAddressesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamIpAddressesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpAddressesRetrieveResponse {
 	Http200(IPAddress),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a IP address object.
 pub fn ipam_ip_addresses_retrieve(state: &ThanixClient, id: i64) -> Result<IpamIpAddressesRetrieveResponse, Error> {
@@ -18515,15 +17251,13 @@ pub fn ipam_ip_addresses_retrieve(state: &ThanixClient, id: i64) -> Result<IpamI
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamIpAddressesRetrieveResponse::Http200(r#response.json::<IPAddress>()?)) },
-		_ => { Ok(IpamIpAddressesRetrieveResponse::None) }
+		r#other_status => { Ok(IpamIpAddressesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpAddressesUpdateResponse {
 	Http200(IPAddress),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a IP address object.
 pub fn ipam_ip_addresses_update(state: &ThanixClient, body: WritableIPAddressRequest, id: i64) -> Result<IpamIpAddressesUpdateResponse, Error> {
@@ -18533,15 +17267,13 @@ pub fn ipam_ip_addresses_update(state: &ThanixClient, body: WritableIPAddressReq
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamIpAddressesUpdateResponse::Http200(r#response.json::<IPAddress>()?)) },
-		_ => { Ok(IpamIpAddressesUpdateResponse::None) }
+		r#other_status => { Ok(IpamIpAddressesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpAddressesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a IP address object.
 pub fn ipam_ip_addresses_destroy(state: &ThanixClient, id: i64) -> Result<IpamIpAddressesDestroyResponse, Error> {
@@ -18549,15 +17281,13 @@ pub fn ipam_ip_addresses_destroy(state: &ThanixClient, id: i64) -> Result<IpamIp
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamIpAddressesDestroyResponse::None) }
+		r#other_status => { Ok(IpamIpAddressesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpAddressesPartialUpdateResponse {
 	Http200(IPAddress),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a IP address object.
 pub fn ipam_ip_addresses_partial_update(state: &ThanixClient, body: PatchedWritableIPAddressRequest, id: i64) -> Result<IpamIpAddressesPartialUpdateResponse, Error> {
@@ -18567,7 +17297,7 @@ pub fn ipam_ip_addresses_partial_update(state: &ThanixClient, body: PatchedWrita
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamIpAddressesPartialUpdateResponse::Http200(r#response.json::<IPAddress>()?)) },
-		_ => { Ok(IpamIpAddressesPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamIpAddressesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -18662,12 +17392,10 @@ pub struct IpamIpRangesListQuery {
 	vrf_id__n: Option<Vec<Option<i64>>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpRangesListResponse {
 	Http200(PaginatedIPRangeList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of IP range objects.
 pub fn ipam_ip_ranges_list(state: &ThanixClient, query: IpamIpRangesListQuery) -> Result<IpamIpRangesListResponse, Error> {
@@ -18676,15 +17404,13 @@ pub fn ipam_ip_ranges_list(state: &ThanixClient, query: IpamIpRangesListQuery) -
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamIpRangesListResponse::Http200(r#response.json::<PaginatedIPRangeList>()?)) },
-		_ => { Ok(IpamIpRangesListResponse::None) }
+		r#other_status => { Ok(IpamIpRangesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpRangesBulkUpdateResponse {
 	Http200(Vec<IPRange>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of IP range objects.
 pub fn ipam_ip_ranges_bulk_update(state: &ThanixClient, body: Vec<IPRangeRequest>) -> Result<IpamIpRangesBulkUpdateResponse, Error> {
@@ -18694,15 +17420,13 @@ pub fn ipam_ip_ranges_bulk_update(state: &ThanixClient, body: Vec<IPRangeRequest
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamIpRangesBulkUpdateResponse::Http200(r#response.json::<Vec<IPRange>>()?)) },
-		_ => { Ok(IpamIpRangesBulkUpdateResponse::None) }
+		r#other_status => { Ok(IpamIpRangesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpRangesCreateResponse {
 	Http201(IPRange),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of IP range objects.
 pub fn ipam_ip_ranges_create(state: &ThanixClient, body: WritableIPRangeRequest) -> Result<IpamIpRangesCreateResponse, Error> {
@@ -18712,15 +17436,13 @@ pub fn ipam_ip_ranges_create(state: &ThanixClient, body: WritableIPRangeRequest)
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamIpRangesCreateResponse::Http201(r#response.json::<IPRange>()?)) },
-		_ => { Ok(IpamIpRangesCreateResponse::None) }
+		r#other_status => { Ok(IpamIpRangesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpRangesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of IP range objects.
 pub fn ipam_ip_ranges_bulk_destroy(state: &ThanixClient, body: Vec<IPRangeRequest>) -> Result<IpamIpRangesBulkDestroyResponse, Error> {
@@ -18729,15 +17451,13 @@ pub fn ipam_ip_ranges_bulk_destroy(state: &ThanixClient, body: Vec<IPRangeReques
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamIpRangesBulkDestroyResponse::None) }
+		r#other_status => { Ok(IpamIpRangesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpRangesBulkPartialUpdateResponse {
 	Http200(Vec<IPRange>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of IP range objects.
 pub fn ipam_ip_ranges_bulk_partial_update(state: &ThanixClient, body: Vec<IPRangeRequest>) -> Result<IpamIpRangesBulkPartialUpdateResponse, Error> {
@@ -18747,15 +17467,13 @@ pub fn ipam_ip_ranges_bulk_partial_update(state: &ThanixClient, body: Vec<IPRang
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamIpRangesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<IPRange>>()?)) },
-		_ => { Ok(IpamIpRangesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamIpRangesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpRangesRetrieveResponse {
 	Http200(IPRange),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a IP range object.
 pub fn ipam_ip_ranges_retrieve(state: &ThanixClient, id: i64) -> Result<IpamIpRangesRetrieveResponse, Error> {
@@ -18764,15 +17482,13 @@ pub fn ipam_ip_ranges_retrieve(state: &ThanixClient, id: i64) -> Result<IpamIpRa
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamIpRangesRetrieveResponse::Http200(r#response.json::<IPRange>()?)) },
-		_ => { Ok(IpamIpRangesRetrieveResponse::None) }
+		r#other_status => { Ok(IpamIpRangesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpRangesUpdateResponse {
 	Http200(IPRange),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a IP range object.
 pub fn ipam_ip_ranges_update(state: &ThanixClient, body: WritableIPRangeRequest, id: i64) -> Result<IpamIpRangesUpdateResponse, Error> {
@@ -18782,15 +17498,13 @@ pub fn ipam_ip_ranges_update(state: &ThanixClient, body: WritableIPRangeRequest,
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamIpRangesUpdateResponse::Http200(r#response.json::<IPRange>()?)) },
-		_ => { Ok(IpamIpRangesUpdateResponse::None) }
+		r#other_status => { Ok(IpamIpRangesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpRangesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a IP range object.
 pub fn ipam_ip_ranges_destroy(state: &ThanixClient, id: i64) -> Result<IpamIpRangesDestroyResponse, Error> {
@@ -18798,15 +17512,13 @@ pub fn ipam_ip_ranges_destroy(state: &ThanixClient, id: i64) -> Result<IpamIpRan
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamIpRangesDestroyResponse::None) }
+		r#other_status => { Ok(IpamIpRangesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpRangesPartialUpdateResponse {
 	Http200(IPRange),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a IP range object.
 pub fn ipam_ip_ranges_partial_update(state: &ThanixClient, body: PatchedWritableIPRangeRequest, id: i64) -> Result<IpamIpRangesPartialUpdateResponse, Error> {
@@ -18816,15 +17528,13 @@ pub fn ipam_ip_ranges_partial_update(state: &ThanixClient, body: PatchedWritable
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamIpRangesPartialUpdateResponse::Http200(r#response.json::<IPRange>()?)) },
-		_ => { Ok(IpamIpRangesPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamIpRangesPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpRangesAvailableIpsListResponse {
 	Http200(Vec<AvailableIP>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a IP address object.
 pub fn ipam_ip_ranges_available_ips_list(state: &ThanixClient, id: i64) -> Result<IpamIpRangesAvailableIpsListResponse, Error> {
@@ -18833,15 +17543,13 @@ pub fn ipam_ip_ranges_available_ips_list(state: &ThanixClient, id: i64) -> Resul
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamIpRangesAvailableIpsListResponse::Http200(r#response.json::<Vec<AvailableIP>>()?)) },
-		_ => { Ok(IpamIpRangesAvailableIpsListResponse::None) }
+		r#other_status => { Ok(IpamIpRangesAvailableIpsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamIpRangesAvailableIpsCreateResponse {
 	Http201(Vec<IPAddress>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a IP address object.
 pub fn ipam_ip_ranges_available_ips_create(state: &ThanixClient, body: Vec<IPAddressRequest>, id: i64) -> Result<IpamIpRangesAvailableIpsCreateResponse, Error> {
@@ -18851,7 +17559,7 @@ pub fn ipam_ip_ranges_available_ips_create(state: &ThanixClient, body: Vec<IPAdd
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamIpRangesAvailableIpsCreateResponse::Http201(r#response.json::<Vec<IPAddress>>()?)) },
-		_ => { Ok(IpamIpRangesAvailableIpsCreateResponse::None) }
+		r#other_status => { Ok(IpamIpRangesAvailableIpsCreateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -19010,12 +17718,10 @@ pub struct IpamPrefixesListQuery {
 	within_include: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamPrefixesListResponse {
 	Http200(PaginatedPrefixList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of prefix objects.
 pub fn ipam_prefixes_list(state: &ThanixClient, query: IpamPrefixesListQuery) -> Result<IpamPrefixesListResponse, Error> {
@@ -19024,15 +17730,13 @@ pub fn ipam_prefixes_list(state: &ThanixClient, query: IpamPrefixesListQuery) ->
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamPrefixesListResponse::Http200(r#response.json::<PaginatedPrefixList>()?)) },
-		_ => { Ok(IpamPrefixesListResponse::None) }
+		r#other_status => { Ok(IpamPrefixesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamPrefixesBulkUpdateResponse {
 	Http200(Vec<Prefix>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of prefix objects.
 pub fn ipam_prefixes_bulk_update(state: &ThanixClient, body: Vec<PrefixRequest>) -> Result<IpamPrefixesBulkUpdateResponse, Error> {
@@ -19042,15 +17746,13 @@ pub fn ipam_prefixes_bulk_update(state: &ThanixClient, body: Vec<PrefixRequest>)
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamPrefixesBulkUpdateResponse::Http200(r#response.json::<Vec<Prefix>>()?)) },
-		_ => { Ok(IpamPrefixesBulkUpdateResponse::None) }
+		r#other_status => { Ok(IpamPrefixesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamPrefixesCreateResponse {
 	Http201(Prefix),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of prefix objects.
 pub fn ipam_prefixes_create(state: &ThanixClient, body: WritablePrefixRequest) -> Result<IpamPrefixesCreateResponse, Error> {
@@ -19060,15 +17762,13 @@ pub fn ipam_prefixes_create(state: &ThanixClient, body: WritablePrefixRequest) -
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamPrefixesCreateResponse::Http201(r#response.json::<Prefix>()?)) },
-		_ => { Ok(IpamPrefixesCreateResponse::None) }
+		r#other_status => { Ok(IpamPrefixesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamPrefixesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of prefix objects.
 pub fn ipam_prefixes_bulk_destroy(state: &ThanixClient, body: Vec<PrefixRequest>) -> Result<IpamPrefixesBulkDestroyResponse, Error> {
@@ -19077,15 +17777,13 @@ pub fn ipam_prefixes_bulk_destroy(state: &ThanixClient, body: Vec<PrefixRequest>
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamPrefixesBulkDestroyResponse::None) }
+		r#other_status => { Ok(IpamPrefixesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamPrefixesBulkPartialUpdateResponse {
 	Http200(Vec<Prefix>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of prefix objects.
 pub fn ipam_prefixes_bulk_partial_update(state: &ThanixClient, body: Vec<PrefixRequest>) -> Result<IpamPrefixesBulkPartialUpdateResponse, Error> {
@@ -19095,15 +17793,13 @@ pub fn ipam_prefixes_bulk_partial_update(state: &ThanixClient, body: Vec<PrefixR
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamPrefixesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Prefix>>()?)) },
-		_ => { Ok(IpamPrefixesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamPrefixesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamPrefixesRetrieveResponse {
 	Http200(Prefix),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a prefix object.
 pub fn ipam_prefixes_retrieve(state: &ThanixClient, id: i64) -> Result<IpamPrefixesRetrieveResponse, Error> {
@@ -19112,15 +17808,13 @@ pub fn ipam_prefixes_retrieve(state: &ThanixClient, id: i64) -> Result<IpamPrefi
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamPrefixesRetrieveResponse::Http200(r#response.json::<Prefix>()?)) },
-		_ => { Ok(IpamPrefixesRetrieveResponse::None) }
+		r#other_status => { Ok(IpamPrefixesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamPrefixesUpdateResponse {
 	Http200(Prefix),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a prefix object.
 pub fn ipam_prefixes_update(state: &ThanixClient, body: WritablePrefixRequest, id: i64) -> Result<IpamPrefixesUpdateResponse, Error> {
@@ -19130,15 +17824,13 @@ pub fn ipam_prefixes_update(state: &ThanixClient, body: WritablePrefixRequest, i
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamPrefixesUpdateResponse::Http200(r#response.json::<Prefix>()?)) },
-		_ => { Ok(IpamPrefixesUpdateResponse::None) }
+		r#other_status => { Ok(IpamPrefixesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamPrefixesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a prefix object.
 pub fn ipam_prefixes_destroy(state: &ThanixClient, id: i64) -> Result<IpamPrefixesDestroyResponse, Error> {
@@ -19146,15 +17838,13 @@ pub fn ipam_prefixes_destroy(state: &ThanixClient, id: i64) -> Result<IpamPrefix
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamPrefixesDestroyResponse::None) }
+		r#other_status => { Ok(IpamPrefixesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamPrefixesPartialUpdateResponse {
 	Http200(Prefix),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a prefix object.
 pub fn ipam_prefixes_partial_update(state: &ThanixClient, body: PatchedWritablePrefixRequest, id: i64) -> Result<IpamPrefixesPartialUpdateResponse, Error> {
@@ -19164,15 +17854,13 @@ pub fn ipam_prefixes_partial_update(state: &ThanixClient, body: PatchedWritableP
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamPrefixesPartialUpdateResponse::Http200(r#response.json::<Prefix>()?)) },
-		_ => { Ok(IpamPrefixesPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamPrefixesPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamPrefixesAvailableIpsListResponse {
 	Http200(Vec<AvailableIP>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a IP address object.
 pub fn ipam_prefixes_available_ips_list(state: &ThanixClient, id: i64) -> Result<IpamPrefixesAvailableIpsListResponse, Error> {
@@ -19181,15 +17869,13 @@ pub fn ipam_prefixes_available_ips_list(state: &ThanixClient, id: i64) -> Result
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamPrefixesAvailableIpsListResponse::Http200(r#response.json::<Vec<AvailableIP>>()?)) },
-		_ => { Ok(IpamPrefixesAvailableIpsListResponse::None) }
+		r#other_status => { Ok(IpamPrefixesAvailableIpsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamPrefixesAvailableIpsCreateResponse {
 	Http201(Vec<IPAddress>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a IP address object.
 pub fn ipam_prefixes_available_ips_create(state: &ThanixClient, body: Vec<IPAddressRequest>, id: i64) -> Result<IpamPrefixesAvailableIpsCreateResponse, Error> {
@@ -19199,15 +17885,13 @@ pub fn ipam_prefixes_available_ips_create(state: &ThanixClient, body: Vec<IPAddr
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamPrefixesAvailableIpsCreateResponse::Http201(r#response.json::<Vec<IPAddress>>()?)) },
-		_ => { Ok(IpamPrefixesAvailableIpsCreateResponse::None) }
+		r#other_status => { Ok(IpamPrefixesAvailableIpsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamPrefixesAvailablePrefixesListResponse {
 	Http200(Vec<AvailablePrefix>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a prefix object.
 pub fn ipam_prefixes_available_prefixes_list(state: &ThanixClient, id: i64) -> Result<IpamPrefixesAvailablePrefixesListResponse, Error> {
@@ -19216,15 +17900,13 @@ pub fn ipam_prefixes_available_prefixes_list(state: &ThanixClient, id: i64) -> R
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamPrefixesAvailablePrefixesListResponse::Http200(r#response.json::<Vec<AvailablePrefix>>()?)) },
-		_ => { Ok(IpamPrefixesAvailablePrefixesListResponse::None) }
+		r#other_status => { Ok(IpamPrefixesAvailablePrefixesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamPrefixesAvailablePrefixesCreateResponse {
 	Http201(Vec<Prefix>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a prefix object.
 pub fn ipam_prefixes_available_prefixes_create(state: &ThanixClient, body: Vec<PrefixRequest>, id: i64) -> Result<IpamPrefixesAvailablePrefixesCreateResponse, Error> {
@@ -19234,7 +17916,7 @@ pub fn ipam_prefixes_available_prefixes_create(state: &ThanixClient, body: Vec<P
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamPrefixesAvailablePrefixesCreateResponse::Http201(r#response.json::<Vec<Prefix>>()?)) },
-		_ => { Ok(IpamPrefixesAvailablePrefixesCreateResponse::None) }
+		r#other_status => { Ok(IpamPrefixesAvailablePrefixesCreateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -19309,12 +17991,10 @@ pub struct IpamRirsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRirsListResponse {
 	Http200(PaginatedRIRList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of RIR objects.
 pub fn ipam_rirs_list(state: &ThanixClient, query: IpamRirsListQuery) -> Result<IpamRirsListResponse, Error> {
@@ -19323,15 +18003,13 @@ pub fn ipam_rirs_list(state: &ThanixClient, query: IpamRirsListQuery) -> Result<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamRirsListResponse::Http200(r#response.json::<PaginatedRIRList>()?)) },
-		_ => { Ok(IpamRirsListResponse::None) }
+		r#other_status => { Ok(IpamRirsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRirsBulkUpdateResponse {
 	Http200(Vec<RIR>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of RIR objects.
 pub fn ipam_rirs_bulk_update(state: &ThanixClient, body: Vec<RIRRequest>) -> Result<IpamRirsBulkUpdateResponse, Error> {
@@ -19341,15 +18019,13 @@ pub fn ipam_rirs_bulk_update(state: &ThanixClient, body: Vec<RIRRequest>) -> Res
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamRirsBulkUpdateResponse::Http200(r#response.json::<Vec<RIR>>()?)) },
-		_ => { Ok(IpamRirsBulkUpdateResponse::None) }
+		r#other_status => { Ok(IpamRirsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRirsCreateResponse {
 	Http201(RIR),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of RIR objects.
 pub fn ipam_rirs_create(state: &ThanixClient, body: RIRRequest) -> Result<IpamRirsCreateResponse, Error> {
@@ -19359,15 +18035,13 @@ pub fn ipam_rirs_create(state: &ThanixClient, body: RIRRequest) -> Result<IpamRi
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamRirsCreateResponse::Http201(r#response.json::<RIR>()?)) },
-		_ => { Ok(IpamRirsCreateResponse::None) }
+		r#other_status => { Ok(IpamRirsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRirsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of RIR objects.
 pub fn ipam_rirs_bulk_destroy(state: &ThanixClient, body: Vec<RIRRequest>) -> Result<IpamRirsBulkDestroyResponse, Error> {
@@ -19376,15 +18050,13 @@ pub fn ipam_rirs_bulk_destroy(state: &ThanixClient, body: Vec<RIRRequest>) -> Re
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamRirsBulkDestroyResponse::None) }
+		r#other_status => { Ok(IpamRirsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRirsBulkPartialUpdateResponse {
 	Http200(Vec<RIR>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of RIR objects.
 pub fn ipam_rirs_bulk_partial_update(state: &ThanixClient, body: Vec<RIRRequest>) -> Result<IpamRirsBulkPartialUpdateResponse, Error> {
@@ -19394,15 +18066,13 @@ pub fn ipam_rirs_bulk_partial_update(state: &ThanixClient, body: Vec<RIRRequest>
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamRirsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<RIR>>()?)) },
-		_ => { Ok(IpamRirsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamRirsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRirsRetrieveResponse {
 	Http200(RIR),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a RIR object.
 pub fn ipam_rirs_retrieve(state: &ThanixClient, id: i64) -> Result<IpamRirsRetrieveResponse, Error> {
@@ -19411,15 +18081,13 @@ pub fn ipam_rirs_retrieve(state: &ThanixClient, id: i64) -> Result<IpamRirsRetri
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamRirsRetrieveResponse::Http200(r#response.json::<RIR>()?)) },
-		_ => { Ok(IpamRirsRetrieveResponse::None) }
+		r#other_status => { Ok(IpamRirsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRirsUpdateResponse {
 	Http200(RIR),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a RIR object.
 pub fn ipam_rirs_update(state: &ThanixClient, body: RIRRequest, id: i64) -> Result<IpamRirsUpdateResponse, Error> {
@@ -19429,15 +18097,13 @@ pub fn ipam_rirs_update(state: &ThanixClient, body: RIRRequest, id: i64) -> Resu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamRirsUpdateResponse::Http200(r#response.json::<RIR>()?)) },
-		_ => { Ok(IpamRirsUpdateResponse::None) }
+		r#other_status => { Ok(IpamRirsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRirsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a RIR object.
 pub fn ipam_rirs_destroy(state: &ThanixClient, id: i64) -> Result<IpamRirsDestroyResponse, Error> {
@@ -19445,15 +18111,13 @@ pub fn ipam_rirs_destroy(state: &ThanixClient, id: i64) -> Result<IpamRirsDestro
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamRirsDestroyResponse::None) }
+		r#other_status => { Ok(IpamRirsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRirsPartialUpdateResponse {
 	Http200(RIR),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a RIR object.
 pub fn ipam_rirs_partial_update(state: &ThanixClient, body: PatchedRIRRequest, id: i64) -> Result<IpamRirsPartialUpdateResponse, Error> {
@@ -19463,7 +18127,7 @@ pub fn ipam_rirs_partial_update(state: &ThanixClient, body: PatchedRIRRequest, i
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamRirsPartialUpdateResponse::Http200(r#response.json::<RIR>()?)) },
-		_ => { Ok(IpamRirsPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamRirsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -19537,12 +18201,10 @@ pub struct IpamRolesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRolesListResponse {
 	Http200(PaginatedRoleList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of role objects.
 pub fn ipam_roles_list(state: &ThanixClient, query: IpamRolesListQuery) -> Result<IpamRolesListResponse, Error> {
@@ -19551,15 +18213,13 @@ pub fn ipam_roles_list(state: &ThanixClient, query: IpamRolesListQuery) -> Resul
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamRolesListResponse::Http200(r#response.json::<PaginatedRoleList>()?)) },
-		_ => { Ok(IpamRolesListResponse::None) }
+		r#other_status => { Ok(IpamRolesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRolesBulkUpdateResponse {
 	Http200(Vec<Role>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of role objects.
 pub fn ipam_roles_bulk_update(state: &ThanixClient, body: Vec<RoleRequest>) -> Result<IpamRolesBulkUpdateResponse, Error> {
@@ -19569,15 +18229,13 @@ pub fn ipam_roles_bulk_update(state: &ThanixClient, body: Vec<RoleRequest>) -> R
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamRolesBulkUpdateResponse::Http200(r#response.json::<Vec<Role>>()?)) },
-		_ => { Ok(IpamRolesBulkUpdateResponse::None) }
+		r#other_status => { Ok(IpamRolesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRolesCreateResponse {
 	Http201(Role),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of role objects.
 pub fn ipam_roles_create(state: &ThanixClient, body: RoleRequest) -> Result<IpamRolesCreateResponse, Error> {
@@ -19587,15 +18245,13 @@ pub fn ipam_roles_create(state: &ThanixClient, body: RoleRequest) -> Result<Ipam
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamRolesCreateResponse::Http201(r#response.json::<Role>()?)) },
-		_ => { Ok(IpamRolesCreateResponse::None) }
+		r#other_status => { Ok(IpamRolesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRolesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of role objects.
 pub fn ipam_roles_bulk_destroy(state: &ThanixClient, body: Vec<RoleRequest>) -> Result<IpamRolesBulkDestroyResponse, Error> {
@@ -19604,15 +18260,13 @@ pub fn ipam_roles_bulk_destroy(state: &ThanixClient, body: Vec<RoleRequest>) -> 
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamRolesBulkDestroyResponse::None) }
+		r#other_status => { Ok(IpamRolesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRolesBulkPartialUpdateResponse {
 	Http200(Vec<Role>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of role objects.
 pub fn ipam_roles_bulk_partial_update(state: &ThanixClient, body: Vec<RoleRequest>) -> Result<IpamRolesBulkPartialUpdateResponse, Error> {
@@ -19622,15 +18276,13 @@ pub fn ipam_roles_bulk_partial_update(state: &ThanixClient, body: Vec<RoleReques
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamRolesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Role>>()?)) },
-		_ => { Ok(IpamRolesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamRolesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRolesRetrieveResponse {
 	Http200(Role),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a role object.
 pub fn ipam_roles_retrieve(state: &ThanixClient, id: i64) -> Result<IpamRolesRetrieveResponse, Error> {
@@ -19639,15 +18291,13 @@ pub fn ipam_roles_retrieve(state: &ThanixClient, id: i64) -> Result<IpamRolesRet
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamRolesRetrieveResponse::Http200(r#response.json::<Role>()?)) },
-		_ => { Ok(IpamRolesRetrieveResponse::None) }
+		r#other_status => { Ok(IpamRolesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRolesUpdateResponse {
 	Http200(Role),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a role object.
 pub fn ipam_roles_update(state: &ThanixClient, body: RoleRequest, id: i64) -> Result<IpamRolesUpdateResponse, Error> {
@@ -19657,15 +18307,13 @@ pub fn ipam_roles_update(state: &ThanixClient, body: RoleRequest, id: i64) -> Re
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamRolesUpdateResponse::Http200(r#response.json::<Role>()?)) },
-		_ => { Ok(IpamRolesUpdateResponse::None) }
+		r#other_status => { Ok(IpamRolesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRolesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a role object.
 pub fn ipam_roles_destroy(state: &ThanixClient, id: i64) -> Result<IpamRolesDestroyResponse, Error> {
@@ -19673,15 +18321,13 @@ pub fn ipam_roles_destroy(state: &ThanixClient, id: i64) -> Result<IpamRolesDest
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamRolesDestroyResponse::None) }
+		r#other_status => { Ok(IpamRolesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRolesPartialUpdateResponse {
 	Http200(Role),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a role object.
 pub fn ipam_roles_partial_update(state: &ThanixClient, body: PatchedRoleRequest, id: i64) -> Result<IpamRolesPartialUpdateResponse, Error> {
@@ -19691,7 +18337,7 @@ pub fn ipam_roles_partial_update(state: &ThanixClient, body: PatchedRoleRequest,
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamRolesPartialUpdateResponse::Http200(r#response.json::<Role>()?)) },
-		_ => { Ok(IpamRolesPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamRolesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -19786,12 +18432,10 @@ pub struct IpamRouteTargetsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRouteTargetsListResponse {
 	Http200(PaginatedRouteTargetList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of route target objects.
 pub fn ipam_route_targets_list(state: &ThanixClient, query: IpamRouteTargetsListQuery) -> Result<IpamRouteTargetsListResponse, Error> {
@@ -19800,15 +18444,13 @@ pub fn ipam_route_targets_list(state: &ThanixClient, query: IpamRouteTargetsList
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamRouteTargetsListResponse::Http200(r#response.json::<PaginatedRouteTargetList>()?)) },
-		_ => { Ok(IpamRouteTargetsListResponse::None) }
+		r#other_status => { Ok(IpamRouteTargetsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRouteTargetsBulkUpdateResponse {
 	Http200(Vec<RouteTarget>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of route target objects.
 pub fn ipam_route_targets_bulk_update(state: &ThanixClient, body: Vec<RouteTargetRequest>) -> Result<IpamRouteTargetsBulkUpdateResponse, Error> {
@@ -19818,15 +18460,13 @@ pub fn ipam_route_targets_bulk_update(state: &ThanixClient, body: Vec<RouteTarge
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamRouteTargetsBulkUpdateResponse::Http200(r#response.json::<Vec<RouteTarget>>()?)) },
-		_ => { Ok(IpamRouteTargetsBulkUpdateResponse::None) }
+		r#other_status => { Ok(IpamRouteTargetsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRouteTargetsCreateResponse {
 	Http201(RouteTarget),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of route target objects.
 pub fn ipam_route_targets_create(state: &ThanixClient, body: WritableRouteTargetRequest) -> Result<IpamRouteTargetsCreateResponse, Error> {
@@ -19836,15 +18476,13 @@ pub fn ipam_route_targets_create(state: &ThanixClient, body: WritableRouteTarget
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamRouteTargetsCreateResponse::Http201(r#response.json::<RouteTarget>()?)) },
-		_ => { Ok(IpamRouteTargetsCreateResponse::None) }
+		r#other_status => { Ok(IpamRouteTargetsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRouteTargetsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of route target objects.
 pub fn ipam_route_targets_bulk_destroy(state: &ThanixClient, body: Vec<RouteTargetRequest>) -> Result<IpamRouteTargetsBulkDestroyResponse, Error> {
@@ -19853,15 +18491,13 @@ pub fn ipam_route_targets_bulk_destroy(state: &ThanixClient, body: Vec<RouteTarg
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamRouteTargetsBulkDestroyResponse::None) }
+		r#other_status => { Ok(IpamRouteTargetsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRouteTargetsBulkPartialUpdateResponse {
 	Http200(Vec<RouteTarget>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of route target objects.
 pub fn ipam_route_targets_bulk_partial_update(state: &ThanixClient, body: Vec<RouteTargetRequest>) -> Result<IpamRouteTargetsBulkPartialUpdateResponse, Error> {
@@ -19871,15 +18507,13 @@ pub fn ipam_route_targets_bulk_partial_update(state: &ThanixClient, body: Vec<Ro
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamRouteTargetsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<RouteTarget>>()?)) },
-		_ => { Ok(IpamRouteTargetsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamRouteTargetsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRouteTargetsRetrieveResponse {
 	Http200(RouteTarget),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a route target object.
 pub fn ipam_route_targets_retrieve(state: &ThanixClient, id: i64) -> Result<IpamRouteTargetsRetrieveResponse, Error> {
@@ -19888,15 +18522,13 @@ pub fn ipam_route_targets_retrieve(state: &ThanixClient, id: i64) -> Result<Ipam
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamRouteTargetsRetrieveResponse::Http200(r#response.json::<RouteTarget>()?)) },
-		_ => { Ok(IpamRouteTargetsRetrieveResponse::None) }
+		r#other_status => { Ok(IpamRouteTargetsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRouteTargetsUpdateResponse {
 	Http200(RouteTarget),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a route target object.
 pub fn ipam_route_targets_update(state: &ThanixClient, body: WritableRouteTargetRequest, id: i64) -> Result<IpamRouteTargetsUpdateResponse, Error> {
@@ -19906,15 +18538,13 @@ pub fn ipam_route_targets_update(state: &ThanixClient, body: WritableRouteTarget
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamRouteTargetsUpdateResponse::Http200(r#response.json::<RouteTarget>()?)) },
-		_ => { Ok(IpamRouteTargetsUpdateResponse::None) }
+		r#other_status => { Ok(IpamRouteTargetsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRouteTargetsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a route target object.
 pub fn ipam_route_targets_destroy(state: &ThanixClient, id: i64) -> Result<IpamRouteTargetsDestroyResponse, Error> {
@@ -19922,15 +18552,13 @@ pub fn ipam_route_targets_destroy(state: &ThanixClient, id: i64) -> Result<IpamR
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamRouteTargetsDestroyResponse::None) }
+		r#other_status => { Ok(IpamRouteTargetsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamRouteTargetsPartialUpdateResponse {
 	Http200(RouteTarget),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a route target object.
 pub fn ipam_route_targets_partial_update(state: &ThanixClient, body: PatchedWritableRouteTargetRequest, id: i64) -> Result<IpamRouteTargetsPartialUpdateResponse, Error> {
@@ -19940,7 +18568,7 @@ pub fn ipam_route_targets_partial_update(state: &ThanixClient, body: PatchedWrit
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamRouteTargetsPartialUpdateResponse::Http200(r#response.json::<RouteTarget>()?)) },
-		_ => { Ok(IpamRouteTargetsPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamRouteTargetsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -20006,12 +18634,10 @@ pub struct IpamServiceTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamServiceTemplatesListResponse {
 	Http200(PaginatedServiceTemplateList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of service template objects.
 pub fn ipam_service_templates_list(state: &ThanixClient, query: IpamServiceTemplatesListQuery) -> Result<IpamServiceTemplatesListResponse, Error> {
@@ -20020,15 +18646,13 @@ pub fn ipam_service_templates_list(state: &ThanixClient, query: IpamServiceTempl
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamServiceTemplatesListResponse::Http200(r#response.json::<PaginatedServiceTemplateList>()?)) },
-		_ => { Ok(IpamServiceTemplatesListResponse::None) }
+		r#other_status => { Ok(IpamServiceTemplatesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamServiceTemplatesBulkUpdateResponse {
 	Http200(Vec<ServiceTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of service template objects.
 pub fn ipam_service_templates_bulk_update(state: &ThanixClient, body: Vec<ServiceTemplateRequest>) -> Result<IpamServiceTemplatesBulkUpdateResponse, Error> {
@@ -20038,15 +18662,13 @@ pub fn ipam_service_templates_bulk_update(state: &ThanixClient, body: Vec<Servic
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamServiceTemplatesBulkUpdateResponse::Http200(r#response.json::<Vec<ServiceTemplate>>()?)) },
-		_ => { Ok(IpamServiceTemplatesBulkUpdateResponse::None) }
+		r#other_status => { Ok(IpamServiceTemplatesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamServiceTemplatesCreateResponse {
 	Http201(ServiceTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of service template objects.
 pub fn ipam_service_templates_create(state: &ThanixClient, body: WritableServiceTemplateRequest) -> Result<IpamServiceTemplatesCreateResponse, Error> {
@@ -20056,15 +18678,13 @@ pub fn ipam_service_templates_create(state: &ThanixClient, body: WritableService
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamServiceTemplatesCreateResponse::Http201(r#response.json::<ServiceTemplate>()?)) },
-		_ => { Ok(IpamServiceTemplatesCreateResponse::None) }
+		r#other_status => { Ok(IpamServiceTemplatesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamServiceTemplatesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of service template objects.
 pub fn ipam_service_templates_bulk_destroy(state: &ThanixClient, body: Vec<ServiceTemplateRequest>) -> Result<IpamServiceTemplatesBulkDestroyResponse, Error> {
@@ -20073,15 +18693,13 @@ pub fn ipam_service_templates_bulk_destroy(state: &ThanixClient, body: Vec<Servi
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamServiceTemplatesBulkDestroyResponse::None) }
+		r#other_status => { Ok(IpamServiceTemplatesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamServiceTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<ServiceTemplate>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of service template objects.
 pub fn ipam_service_templates_bulk_partial_update(state: &ThanixClient, body: Vec<ServiceTemplateRequest>) -> Result<IpamServiceTemplatesBulkPartialUpdateResponse, Error> {
@@ -20091,15 +18709,13 @@ pub fn ipam_service_templates_bulk_partial_update(state: &ThanixClient, body: Ve
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamServiceTemplatesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ServiceTemplate>>()?)) },
-		_ => { Ok(IpamServiceTemplatesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamServiceTemplatesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamServiceTemplatesRetrieveResponse {
 	Http200(ServiceTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a service template object.
 pub fn ipam_service_templates_retrieve(state: &ThanixClient, id: i64) -> Result<IpamServiceTemplatesRetrieveResponse, Error> {
@@ -20108,15 +18724,13 @@ pub fn ipam_service_templates_retrieve(state: &ThanixClient, id: i64) -> Result<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamServiceTemplatesRetrieveResponse::Http200(r#response.json::<ServiceTemplate>()?)) },
-		_ => { Ok(IpamServiceTemplatesRetrieveResponse::None) }
+		r#other_status => { Ok(IpamServiceTemplatesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamServiceTemplatesUpdateResponse {
 	Http200(ServiceTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a service template object.
 pub fn ipam_service_templates_update(state: &ThanixClient, body: WritableServiceTemplateRequest, id: i64) -> Result<IpamServiceTemplatesUpdateResponse, Error> {
@@ -20126,15 +18740,13 @@ pub fn ipam_service_templates_update(state: &ThanixClient, body: WritableService
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamServiceTemplatesUpdateResponse::Http200(r#response.json::<ServiceTemplate>()?)) },
-		_ => { Ok(IpamServiceTemplatesUpdateResponse::None) }
+		r#other_status => { Ok(IpamServiceTemplatesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamServiceTemplatesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a service template object.
 pub fn ipam_service_templates_destroy(state: &ThanixClient, id: i64) -> Result<IpamServiceTemplatesDestroyResponse, Error> {
@@ -20142,15 +18754,13 @@ pub fn ipam_service_templates_destroy(state: &ThanixClient, id: i64) -> Result<I
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamServiceTemplatesDestroyResponse::None) }
+		r#other_status => { Ok(IpamServiceTemplatesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamServiceTemplatesPartialUpdateResponse {
 	Http200(ServiceTemplate),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a service template object.
 pub fn ipam_service_templates_partial_update(state: &ThanixClient, body: PatchedWritableServiceTemplateRequest, id: i64) -> Result<IpamServiceTemplatesPartialUpdateResponse, Error> {
@@ -20160,7 +18770,7 @@ pub fn ipam_service_templates_partial_update(state: &ThanixClient, body: Patched
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamServiceTemplatesPartialUpdateResponse::Http200(r#response.json::<ServiceTemplate>()?)) },
-		_ => { Ok(IpamServiceTemplatesPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamServiceTemplatesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -20250,12 +18860,10 @@ pub struct IpamServicesListQuery {
 	virtual_machine_id__n: Option<Vec<Option<i64>>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamServicesListResponse {
 	Http200(PaginatedServiceList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of service objects.
 pub fn ipam_services_list(state: &ThanixClient, query: IpamServicesListQuery) -> Result<IpamServicesListResponse, Error> {
@@ -20264,15 +18872,13 @@ pub fn ipam_services_list(state: &ThanixClient, query: IpamServicesListQuery) ->
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamServicesListResponse::Http200(r#response.json::<PaginatedServiceList>()?)) },
-		_ => { Ok(IpamServicesListResponse::None) }
+		r#other_status => { Ok(IpamServicesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamServicesBulkUpdateResponse {
 	Http200(Vec<Service>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of service objects.
 pub fn ipam_services_bulk_update(state: &ThanixClient, body: Vec<ServiceRequest>) -> Result<IpamServicesBulkUpdateResponse, Error> {
@@ -20282,15 +18888,13 @@ pub fn ipam_services_bulk_update(state: &ThanixClient, body: Vec<ServiceRequest>
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamServicesBulkUpdateResponse::Http200(r#response.json::<Vec<Service>>()?)) },
-		_ => { Ok(IpamServicesBulkUpdateResponse::None) }
+		r#other_status => { Ok(IpamServicesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamServicesCreateResponse {
 	Http201(Service),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of service objects.
 pub fn ipam_services_create(state: &ThanixClient, body: WritableServiceRequest) -> Result<IpamServicesCreateResponse, Error> {
@@ -20300,15 +18904,13 @@ pub fn ipam_services_create(state: &ThanixClient, body: WritableServiceRequest) 
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamServicesCreateResponse::Http201(r#response.json::<Service>()?)) },
-		_ => { Ok(IpamServicesCreateResponse::None) }
+		r#other_status => { Ok(IpamServicesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamServicesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of service objects.
 pub fn ipam_services_bulk_destroy(state: &ThanixClient, body: Vec<ServiceRequest>) -> Result<IpamServicesBulkDestroyResponse, Error> {
@@ -20317,15 +18919,13 @@ pub fn ipam_services_bulk_destroy(state: &ThanixClient, body: Vec<ServiceRequest
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamServicesBulkDestroyResponse::None) }
+		r#other_status => { Ok(IpamServicesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamServicesBulkPartialUpdateResponse {
 	Http200(Vec<Service>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of service objects.
 pub fn ipam_services_bulk_partial_update(state: &ThanixClient, body: Vec<ServiceRequest>) -> Result<IpamServicesBulkPartialUpdateResponse, Error> {
@@ -20335,15 +18935,13 @@ pub fn ipam_services_bulk_partial_update(state: &ThanixClient, body: Vec<Service
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamServicesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Service>>()?)) },
-		_ => { Ok(IpamServicesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamServicesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamServicesRetrieveResponse {
 	Http200(Service),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a service object.
 pub fn ipam_services_retrieve(state: &ThanixClient, id: i64) -> Result<IpamServicesRetrieveResponse, Error> {
@@ -20352,15 +18950,13 @@ pub fn ipam_services_retrieve(state: &ThanixClient, id: i64) -> Result<IpamServi
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamServicesRetrieveResponse::Http200(r#response.json::<Service>()?)) },
-		_ => { Ok(IpamServicesRetrieveResponse::None) }
+		r#other_status => { Ok(IpamServicesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamServicesUpdateResponse {
 	Http200(Service),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a service object.
 pub fn ipam_services_update(state: &ThanixClient, body: WritableServiceRequest, id: i64) -> Result<IpamServicesUpdateResponse, Error> {
@@ -20370,15 +18966,13 @@ pub fn ipam_services_update(state: &ThanixClient, body: WritableServiceRequest, 
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamServicesUpdateResponse::Http200(r#response.json::<Service>()?)) },
-		_ => { Ok(IpamServicesUpdateResponse::None) }
+		r#other_status => { Ok(IpamServicesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamServicesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a service object.
 pub fn ipam_services_destroy(state: &ThanixClient, id: i64) -> Result<IpamServicesDestroyResponse, Error> {
@@ -20386,15 +18980,13 @@ pub fn ipam_services_destroy(state: &ThanixClient, id: i64) -> Result<IpamServic
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamServicesDestroyResponse::None) }
+		r#other_status => { Ok(IpamServicesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamServicesPartialUpdateResponse {
 	Http200(Service),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a service object.
 pub fn ipam_services_partial_update(state: &ThanixClient, body: PatchedWritableServiceRequest, id: i64) -> Result<IpamServicesPartialUpdateResponse, Error> {
@@ -20404,7 +18996,7 @@ pub fn ipam_services_partial_update(state: &ThanixClient, body: PatchedWritableS
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamServicesPartialUpdateResponse::Http200(r#response.json::<Service>()?)) },
-		_ => { Ok(IpamServicesPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamServicesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -20508,12 +19100,10 @@ pub struct IpamVlanGroupsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlanGroupsListResponse {
 	Http200(PaginatedVLANGroupList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of VLAN group objects.
 pub fn ipam_vlan_groups_list(state: &ThanixClient, query: IpamVlanGroupsListQuery) -> Result<IpamVlanGroupsListResponse, Error> {
@@ -20522,15 +19112,13 @@ pub fn ipam_vlan_groups_list(state: &ThanixClient, query: IpamVlanGroupsListQuer
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamVlanGroupsListResponse::Http200(r#response.json::<PaginatedVLANGroupList>()?)) },
-		_ => { Ok(IpamVlanGroupsListResponse::None) }
+		r#other_status => { Ok(IpamVlanGroupsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlanGroupsBulkUpdateResponse {
 	Http200(Vec<VLANGroup>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of VLAN group objects.
 pub fn ipam_vlan_groups_bulk_update(state: &ThanixClient, body: Vec<VLANGroupRequest>) -> Result<IpamVlanGroupsBulkUpdateResponse, Error> {
@@ -20540,15 +19128,13 @@ pub fn ipam_vlan_groups_bulk_update(state: &ThanixClient, body: Vec<VLANGroupReq
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamVlanGroupsBulkUpdateResponse::Http200(r#response.json::<Vec<VLANGroup>>()?)) },
-		_ => { Ok(IpamVlanGroupsBulkUpdateResponse::None) }
+		r#other_status => { Ok(IpamVlanGroupsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlanGroupsCreateResponse {
 	Http201(VLANGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of VLAN group objects.
 pub fn ipam_vlan_groups_create(state: &ThanixClient, body: VLANGroupRequest) -> Result<IpamVlanGroupsCreateResponse, Error> {
@@ -20558,15 +19144,13 @@ pub fn ipam_vlan_groups_create(state: &ThanixClient, body: VLANGroupRequest) -> 
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamVlanGroupsCreateResponse::Http201(r#response.json::<VLANGroup>()?)) },
-		_ => { Ok(IpamVlanGroupsCreateResponse::None) }
+		r#other_status => { Ok(IpamVlanGroupsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlanGroupsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of VLAN group objects.
 pub fn ipam_vlan_groups_bulk_destroy(state: &ThanixClient, body: Vec<VLANGroupRequest>) -> Result<IpamVlanGroupsBulkDestroyResponse, Error> {
@@ -20575,15 +19159,13 @@ pub fn ipam_vlan_groups_bulk_destroy(state: &ThanixClient, body: Vec<VLANGroupRe
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamVlanGroupsBulkDestroyResponse::None) }
+		r#other_status => { Ok(IpamVlanGroupsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlanGroupsBulkPartialUpdateResponse {
 	Http200(Vec<VLANGroup>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of VLAN group objects.
 pub fn ipam_vlan_groups_bulk_partial_update(state: &ThanixClient, body: Vec<VLANGroupRequest>) -> Result<IpamVlanGroupsBulkPartialUpdateResponse, Error> {
@@ -20593,15 +19175,13 @@ pub fn ipam_vlan_groups_bulk_partial_update(state: &ThanixClient, body: Vec<VLAN
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamVlanGroupsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<VLANGroup>>()?)) },
-		_ => { Ok(IpamVlanGroupsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamVlanGroupsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlanGroupsRetrieveResponse {
 	Http200(VLANGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a VLAN group object.
 pub fn ipam_vlan_groups_retrieve(state: &ThanixClient, id: i64) -> Result<IpamVlanGroupsRetrieveResponse, Error> {
@@ -20610,15 +19190,13 @@ pub fn ipam_vlan_groups_retrieve(state: &ThanixClient, id: i64) -> Result<IpamVl
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamVlanGroupsRetrieveResponse::Http200(r#response.json::<VLANGroup>()?)) },
-		_ => { Ok(IpamVlanGroupsRetrieveResponse::None) }
+		r#other_status => { Ok(IpamVlanGroupsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlanGroupsUpdateResponse {
 	Http200(VLANGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a VLAN group object.
 pub fn ipam_vlan_groups_update(state: &ThanixClient, body: VLANGroupRequest, id: i64) -> Result<IpamVlanGroupsUpdateResponse, Error> {
@@ -20628,15 +19206,13 @@ pub fn ipam_vlan_groups_update(state: &ThanixClient, body: VLANGroupRequest, id:
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamVlanGroupsUpdateResponse::Http200(r#response.json::<VLANGroup>()?)) },
-		_ => { Ok(IpamVlanGroupsUpdateResponse::None) }
+		r#other_status => { Ok(IpamVlanGroupsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlanGroupsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a VLAN group object.
 pub fn ipam_vlan_groups_destroy(state: &ThanixClient, id: i64) -> Result<IpamVlanGroupsDestroyResponse, Error> {
@@ -20644,15 +19220,13 @@ pub fn ipam_vlan_groups_destroy(state: &ThanixClient, id: i64) -> Result<IpamVla
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamVlanGroupsDestroyResponse::None) }
+		r#other_status => { Ok(IpamVlanGroupsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlanGroupsPartialUpdateResponse {
 	Http200(VLANGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a VLAN group object.
 pub fn ipam_vlan_groups_partial_update(state: &ThanixClient, body: PatchedVLANGroupRequest, id: i64) -> Result<IpamVlanGroupsPartialUpdateResponse, Error> {
@@ -20662,15 +19236,13 @@ pub fn ipam_vlan_groups_partial_update(state: &ThanixClient, body: PatchedVLANGr
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamVlanGroupsPartialUpdateResponse::Http200(r#response.json::<VLANGroup>()?)) },
-		_ => { Ok(IpamVlanGroupsPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamVlanGroupsPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlanGroupsAvailableVlansListResponse {
 	Http200(Vec<AvailableVLAN>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a VLAN object.
 pub fn ipam_vlan_groups_available_vlans_list(state: &ThanixClient, id: i64) -> Result<IpamVlanGroupsAvailableVlansListResponse, Error> {
@@ -20679,15 +19251,13 @@ pub fn ipam_vlan_groups_available_vlans_list(state: &ThanixClient, id: i64) -> R
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamVlanGroupsAvailableVlansListResponse::Http200(r#response.json::<Vec<AvailableVLAN>>()?)) },
-		_ => { Ok(IpamVlanGroupsAvailableVlansListResponse::None) }
+		r#other_status => { Ok(IpamVlanGroupsAvailableVlansListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlanGroupsAvailableVlansCreateResponse {
 	Http201(Vec<VLAN>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a VLAN object.
 pub fn ipam_vlan_groups_available_vlans_create(state: &ThanixClient, body: Vec<VLANRequest>, id: i64) -> Result<IpamVlanGroupsAvailableVlansCreateResponse, Error> {
@@ -20697,7 +19267,7 @@ pub fn ipam_vlan_groups_available_vlans_create(state: &ThanixClient, body: Vec<V
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamVlanGroupsAvailableVlansCreateResponse::Http201(r#response.json::<Vec<VLAN>>()?)) },
-		_ => { Ok(IpamVlanGroupsAvailableVlansCreateResponse::None) }
+		r#other_status => { Ok(IpamVlanGroupsAvailableVlansCreateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -20838,12 +19408,10 @@ pub struct IpamVlansListQuery {
 	vid__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlansListResponse {
 	Http200(PaginatedVLANList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of VLAN objects.
 pub fn ipam_vlans_list(state: &ThanixClient, query: IpamVlansListQuery) -> Result<IpamVlansListResponse, Error> {
@@ -20852,15 +19420,13 @@ pub fn ipam_vlans_list(state: &ThanixClient, query: IpamVlansListQuery) -> Resul
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamVlansListResponse::Http200(r#response.json::<PaginatedVLANList>()?)) },
-		_ => { Ok(IpamVlansListResponse::None) }
+		r#other_status => { Ok(IpamVlansListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlansBulkUpdateResponse {
 	Http200(Vec<VLAN>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of VLAN objects.
 pub fn ipam_vlans_bulk_update(state: &ThanixClient, body: Vec<VLANRequest>) -> Result<IpamVlansBulkUpdateResponse, Error> {
@@ -20870,15 +19436,13 @@ pub fn ipam_vlans_bulk_update(state: &ThanixClient, body: Vec<VLANRequest>) -> R
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamVlansBulkUpdateResponse::Http200(r#response.json::<Vec<VLAN>>()?)) },
-		_ => { Ok(IpamVlansBulkUpdateResponse::None) }
+		r#other_status => { Ok(IpamVlansBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlansCreateResponse {
 	Http201(VLAN),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of VLAN objects.
 pub fn ipam_vlans_create(state: &ThanixClient, body: WritableVLANRequest) -> Result<IpamVlansCreateResponse, Error> {
@@ -20888,15 +19452,13 @@ pub fn ipam_vlans_create(state: &ThanixClient, body: WritableVLANRequest) -> Res
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamVlansCreateResponse::Http201(r#response.json::<VLAN>()?)) },
-		_ => { Ok(IpamVlansCreateResponse::None) }
+		r#other_status => { Ok(IpamVlansCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlansBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of VLAN objects.
 pub fn ipam_vlans_bulk_destroy(state: &ThanixClient, body: Vec<VLANRequest>) -> Result<IpamVlansBulkDestroyResponse, Error> {
@@ -20905,15 +19467,13 @@ pub fn ipam_vlans_bulk_destroy(state: &ThanixClient, body: Vec<VLANRequest>) -> 
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamVlansBulkDestroyResponse::None) }
+		r#other_status => { Ok(IpamVlansBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlansBulkPartialUpdateResponse {
 	Http200(Vec<VLAN>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of VLAN objects.
 pub fn ipam_vlans_bulk_partial_update(state: &ThanixClient, body: Vec<VLANRequest>) -> Result<IpamVlansBulkPartialUpdateResponse, Error> {
@@ -20923,15 +19483,13 @@ pub fn ipam_vlans_bulk_partial_update(state: &ThanixClient, body: Vec<VLANReques
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamVlansBulkPartialUpdateResponse::Http200(r#response.json::<Vec<VLAN>>()?)) },
-		_ => { Ok(IpamVlansBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamVlansBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlansRetrieveResponse {
 	Http200(VLAN),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a VLAN object.
 pub fn ipam_vlans_retrieve(state: &ThanixClient, id: i64) -> Result<IpamVlansRetrieveResponse, Error> {
@@ -20940,15 +19498,13 @@ pub fn ipam_vlans_retrieve(state: &ThanixClient, id: i64) -> Result<IpamVlansRet
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamVlansRetrieveResponse::Http200(r#response.json::<VLAN>()?)) },
-		_ => { Ok(IpamVlansRetrieveResponse::None) }
+		r#other_status => { Ok(IpamVlansRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlansUpdateResponse {
 	Http200(VLAN),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a VLAN object.
 pub fn ipam_vlans_update(state: &ThanixClient, body: WritableVLANRequest, id: i64) -> Result<IpamVlansUpdateResponse, Error> {
@@ -20958,15 +19514,13 @@ pub fn ipam_vlans_update(state: &ThanixClient, body: WritableVLANRequest, id: i6
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamVlansUpdateResponse::Http200(r#response.json::<VLAN>()?)) },
-		_ => { Ok(IpamVlansUpdateResponse::None) }
+		r#other_status => { Ok(IpamVlansUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlansDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a VLAN object.
 pub fn ipam_vlans_destroy(state: &ThanixClient, id: i64) -> Result<IpamVlansDestroyResponse, Error> {
@@ -20974,15 +19528,13 @@ pub fn ipam_vlans_destroy(state: &ThanixClient, id: i64) -> Result<IpamVlansDest
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamVlansDestroyResponse::None) }
+		r#other_status => { Ok(IpamVlansDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVlansPartialUpdateResponse {
 	Http200(VLAN),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a VLAN object.
 pub fn ipam_vlans_partial_update(state: &ThanixClient, body: PatchedWritableVLANRequest, id: i64) -> Result<IpamVlansPartialUpdateResponse, Error> {
@@ -20992,7 +19544,7 @@ pub fn ipam_vlans_partial_update(state: &ThanixClient, body: PatchedWritableVLAN
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamVlansPartialUpdateResponse::Http200(r#response.json::<VLAN>()?)) },
-		_ => { Ok(IpamVlansPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamVlansPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -21099,12 +19651,10 @@ pub struct IpamVrfsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVrfsListResponse {
 	Http200(PaginatedVRFList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of VRF objects.
 pub fn ipam_vrfs_list(state: &ThanixClient, query: IpamVrfsListQuery) -> Result<IpamVrfsListResponse, Error> {
@@ -21113,15 +19663,13 @@ pub fn ipam_vrfs_list(state: &ThanixClient, query: IpamVrfsListQuery) -> Result<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamVrfsListResponse::Http200(r#response.json::<PaginatedVRFList>()?)) },
-		_ => { Ok(IpamVrfsListResponse::None) }
+		r#other_status => { Ok(IpamVrfsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVrfsBulkUpdateResponse {
 	Http200(Vec<VRF>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of VRF objects.
 pub fn ipam_vrfs_bulk_update(state: &ThanixClient, body: Vec<VRFRequest>) -> Result<IpamVrfsBulkUpdateResponse, Error> {
@@ -21131,15 +19679,13 @@ pub fn ipam_vrfs_bulk_update(state: &ThanixClient, body: Vec<VRFRequest>) -> Res
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamVrfsBulkUpdateResponse::Http200(r#response.json::<Vec<VRF>>()?)) },
-		_ => { Ok(IpamVrfsBulkUpdateResponse::None) }
+		r#other_status => { Ok(IpamVrfsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVrfsCreateResponse {
 	Http201(VRF),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of VRF objects.
 pub fn ipam_vrfs_create(state: &ThanixClient, body: WritableVRFRequest) -> Result<IpamVrfsCreateResponse, Error> {
@@ -21149,15 +19695,13 @@ pub fn ipam_vrfs_create(state: &ThanixClient, body: WritableVRFRequest) -> Resul
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamVrfsCreateResponse::Http201(r#response.json::<VRF>()?)) },
-		_ => { Ok(IpamVrfsCreateResponse::None) }
+		r#other_status => { Ok(IpamVrfsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVrfsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of VRF objects.
 pub fn ipam_vrfs_bulk_destroy(state: &ThanixClient, body: Vec<VRFRequest>) -> Result<IpamVrfsBulkDestroyResponse, Error> {
@@ -21166,15 +19710,13 @@ pub fn ipam_vrfs_bulk_destroy(state: &ThanixClient, body: Vec<VRFRequest>) -> Re
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamVrfsBulkDestroyResponse::None) }
+		r#other_status => { Ok(IpamVrfsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVrfsBulkPartialUpdateResponse {
 	Http200(Vec<VRF>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of VRF objects.
 pub fn ipam_vrfs_bulk_partial_update(state: &ThanixClient, body: Vec<VRFRequest>) -> Result<IpamVrfsBulkPartialUpdateResponse, Error> {
@@ -21184,15 +19726,13 @@ pub fn ipam_vrfs_bulk_partial_update(state: &ThanixClient, body: Vec<VRFRequest>
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamVrfsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<VRF>>()?)) },
-		_ => { Ok(IpamVrfsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamVrfsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVrfsRetrieveResponse {
 	Http200(VRF),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a VRF object.
 pub fn ipam_vrfs_retrieve(state: &ThanixClient, id: i64) -> Result<IpamVrfsRetrieveResponse, Error> {
@@ -21201,15 +19741,13 @@ pub fn ipam_vrfs_retrieve(state: &ThanixClient, id: i64) -> Result<IpamVrfsRetri
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamVrfsRetrieveResponse::Http200(r#response.json::<VRF>()?)) },
-		_ => { Ok(IpamVrfsRetrieveResponse::None) }
+		r#other_status => { Ok(IpamVrfsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVrfsUpdateResponse {
 	Http200(VRF),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a VRF object.
 pub fn ipam_vrfs_update(state: &ThanixClient, body: WritableVRFRequest, id: i64) -> Result<IpamVrfsUpdateResponse, Error> {
@@ -21219,15 +19757,13 @@ pub fn ipam_vrfs_update(state: &ThanixClient, body: WritableVRFRequest, id: i64)
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamVrfsUpdateResponse::Http200(r#response.json::<VRF>()?)) },
-		_ => { Ok(IpamVrfsUpdateResponse::None) }
+		r#other_status => { Ok(IpamVrfsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVrfsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a VRF object.
 pub fn ipam_vrfs_destroy(state: &ThanixClient, id: i64) -> Result<IpamVrfsDestroyResponse, Error> {
@@ -21235,15 +19771,13 @@ pub fn ipam_vrfs_destroy(state: &ThanixClient, id: i64) -> Result<IpamVrfsDestro
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(IpamVrfsDestroyResponse::None) }
+		r#other_status => { Ok(IpamVrfsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum IpamVrfsPartialUpdateResponse {
 	Http200(VRF),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a VRF object.
 pub fn ipam_vrfs_partial_update(state: &ThanixClient, body: PatchedWritableVRFRequest, id: i64) -> Result<IpamVrfsPartialUpdateResponse, Error> {
@@ -21253,7 +19787,7 @@ pub fn ipam_vrfs_partial_update(state: &ThanixClient, body: PatchedWritableVRFRe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(IpamVrfsPartialUpdateResponse::Http200(r#response.json::<VRF>()?)) },
-		_ => { Ok(IpamVrfsPartialUpdateResponse::None) }
+		r#other_status => { Ok(IpamVrfsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -21261,12 +19795,10 @@ pub struct SchemaRetrieveQuery {
 	format: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum SchemaRetrieveResponse {
 	Http200(Option<std::collections::HashMap<String, serde_json::Value>>),
-	#[default]
-	None
+	Other(Response)
 }
 /// OpenApi3 schema for this API. Format can be selected via content negotiation.
 /// 
@@ -21278,15 +19810,13 @@ pub fn schema_retrieve(state: &ThanixClient, query: SchemaRetrieveQuery) -> Resu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(SchemaRetrieveResponse::Http200(r#response.json::<Option<std::collections::HashMap<String, serde_json::Value>>>()?)) },
-		_ => { Ok(SchemaRetrieveResponse::None) }
+		r#other_status => { Ok(SchemaRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum StatusRetrieveResponse {
 	Http200(Option<std::collections::HashMap<String, serde_json::Value>>),
-	#[default]
-	None
+	Other(Response)
 }
 /// A lightweight read-only endpoint for conveying NetBox's current operational status.
 pub fn status_retrieve(state: &ThanixClient) -> Result<StatusRetrieveResponse, Error> {
@@ -21295,7 +19825,7 @@ pub fn status_retrieve(state: &ThanixClient) -> Result<StatusRetrieveResponse, E
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(StatusRetrieveResponse::Http200(r#response.json::<Option<std::collections::HashMap<String, serde_json::Value>>>()?)) },
-		_ => { Ok(StatusRetrieveResponse::None) }
+		r#other_status => { Ok(StatusRetrieveResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -21369,12 +19899,10 @@ pub struct TenancyContactAssignmentsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactAssignmentsListResponse {
 	Http200(PaginatedContactAssignmentList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of contact assignment objects.
 pub fn tenancy_contact_assignments_list(state: &ThanixClient, query: TenancyContactAssignmentsListQuery) -> Result<TenancyContactAssignmentsListResponse, Error> {
@@ -21383,15 +19911,13 @@ pub fn tenancy_contact_assignments_list(state: &ThanixClient, query: TenancyCont
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactAssignmentsListResponse::Http200(r#response.json::<PaginatedContactAssignmentList>()?)) },
-		_ => { Ok(TenancyContactAssignmentsListResponse::None) }
+		r#other_status => { Ok(TenancyContactAssignmentsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactAssignmentsBulkUpdateResponse {
 	Http200(Vec<ContactAssignment>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of contact assignment objects.
 pub fn tenancy_contact_assignments_bulk_update(state: &ThanixClient, body: Vec<ContactAssignmentRequest>) -> Result<TenancyContactAssignmentsBulkUpdateResponse, Error> {
@@ -21401,15 +19927,13 @@ pub fn tenancy_contact_assignments_bulk_update(state: &ThanixClient, body: Vec<C
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactAssignmentsBulkUpdateResponse::Http200(r#response.json::<Vec<ContactAssignment>>()?)) },
-		_ => { Ok(TenancyContactAssignmentsBulkUpdateResponse::None) }
+		r#other_status => { Ok(TenancyContactAssignmentsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactAssignmentsCreateResponse {
 	Http201(ContactAssignment),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of contact assignment objects.
 pub fn tenancy_contact_assignments_create(state: &ThanixClient, body: WritableContactAssignmentRequest) -> Result<TenancyContactAssignmentsCreateResponse, Error> {
@@ -21419,15 +19943,13 @@ pub fn tenancy_contact_assignments_create(state: &ThanixClient, body: WritableCo
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(TenancyContactAssignmentsCreateResponse::Http201(r#response.json::<ContactAssignment>()?)) },
-		_ => { Ok(TenancyContactAssignmentsCreateResponse::None) }
+		r#other_status => { Ok(TenancyContactAssignmentsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactAssignmentsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of contact assignment objects.
 pub fn tenancy_contact_assignments_bulk_destroy(state: &ThanixClient, body: Vec<ContactAssignmentRequest>) -> Result<TenancyContactAssignmentsBulkDestroyResponse, Error> {
@@ -21436,15 +19958,13 @@ pub fn tenancy_contact_assignments_bulk_destroy(state: &ThanixClient, body: Vec<
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(TenancyContactAssignmentsBulkDestroyResponse::None) }
+		r#other_status => { Ok(TenancyContactAssignmentsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactAssignmentsBulkPartialUpdateResponse {
 	Http200(Vec<ContactAssignment>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of contact assignment objects.
 pub fn tenancy_contact_assignments_bulk_partial_update(state: &ThanixClient, body: Vec<ContactAssignmentRequest>) -> Result<TenancyContactAssignmentsBulkPartialUpdateResponse, Error> {
@@ -21454,15 +19974,13 @@ pub fn tenancy_contact_assignments_bulk_partial_update(state: &ThanixClient, bod
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactAssignmentsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ContactAssignment>>()?)) },
-		_ => { Ok(TenancyContactAssignmentsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(TenancyContactAssignmentsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactAssignmentsRetrieveResponse {
 	Http200(ContactAssignment),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a contact assignment object.
 pub fn tenancy_contact_assignments_retrieve(state: &ThanixClient, id: i64) -> Result<TenancyContactAssignmentsRetrieveResponse, Error> {
@@ -21471,15 +19989,13 @@ pub fn tenancy_contact_assignments_retrieve(state: &ThanixClient, id: i64) -> Re
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactAssignmentsRetrieveResponse::Http200(r#response.json::<ContactAssignment>()?)) },
-		_ => { Ok(TenancyContactAssignmentsRetrieveResponse::None) }
+		r#other_status => { Ok(TenancyContactAssignmentsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactAssignmentsUpdateResponse {
 	Http200(ContactAssignment),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a contact assignment object.
 pub fn tenancy_contact_assignments_update(state: &ThanixClient, body: WritableContactAssignmentRequest, id: i64) -> Result<TenancyContactAssignmentsUpdateResponse, Error> {
@@ -21489,15 +20005,13 @@ pub fn tenancy_contact_assignments_update(state: &ThanixClient, body: WritableCo
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactAssignmentsUpdateResponse::Http200(r#response.json::<ContactAssignment>()?)) },
-		_ => { Ok(TenancyContactAssignmentsUpdateResponse::None) }
+		r#other_status => { Ok(TenancyContactAssignmentsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactAssignmentsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a contact assignment object.
 pub fn tenancy_contact_assignments_destroy(state: &ThanixClient, id: i64) -> Result<TenancyContactAssignmentsDestroyResponse, Error> {
@@ -21505,15 +20019,13 @@ pub fn tenancy_contact_assignments_destroy(state: &ThanixClient, id: i64) -> Res
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(TenancyContactAssignmentsDestroyResponse::None) }
+		r#other_status => { Ok(TenancyContactAssignmentsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactAssignmentsPartialUpdateResponse {
 	Http200(ContactAssignment),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a contact assignment object.
 pub fn tenancy_contact_assignments_partial_update(state: &ThanixClient, body: PatchedWritableContactAssignmentRequest, id: i64) -> Result<TenancyContactAssignmentsPartialUpdateResponse, Error> {
@@ -21523,7 +20035,7 @@ pub fn tenancy_contact_assignments_partial_update(state: &ThanixClient, body: Pa
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactAssignmentsPartialUpdateResponse::Http200(r#response.json::<ContactAssignment>()?)) },
-		_ => { Ok(TenancyContactAssignmentsPartialUpdateResponse::None) }
+		r#other_status => { Ok(TenancyContactAssignmentsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -21605,12 +20117,10 @@ pub struct TenancyContactGroupsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactGroupsListResponse {
 	Http200(PaginatedContactGroupList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of contact group objects.
 pub fn tenancy_contact_groups_list(state: &ThanixClient, query: TenancyContactGroupsListQuery) -> Result<TenancyContactGroupsListResponse, Error> {
@@ -21619,15 +20129,13 @@ pub fn tenancy_contact_groups_list(state: &ThanixClient, query: TenancyContactGr
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactGroupsListResponse::Http200(r#response.json::<PaginatedContactGroupList>()?)) },
-		_ => { Ok(TenancyContactGroupsListResponse::None) }
+		r#other_status => { Ok(TenancyContactGroupsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactGroupsBulkUpdateResponse {
 	Http200(Vec<ContactGroup>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of contact group objects.
 pub fn tenancy_contact_groups_bulk_update(state: &ThanixClient, body: Vec<ContactGroupRequest>) -> Result<TenancyContactGroupsBulkUpdateResponse, Error> {
@@ -21637,15 +20145,13 @@ pub fn tenancy_contact_groups_bulk_update(state: &ThanixClient, body: Vec<Contac
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactGroupsBulkUpdateResponse::Http200(r#response.json::<Vec<ContactGroup>>()?)) },
-		_ => { Ok(TenancyContactGroupsBulkUpdateResponse::None) }
+		r#other_status => { Ok(TenancyContactGroupsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactGroupsCreateResponse {
 	Http201(ContactGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of contact group objects.
 pub fn tenancy_contact_groups_create(state: &ThanixClient, body: WritableContactGroupRequest) -> Result<TenancyContactGroupsCreateResponse, Error> {
@@ -21655,15 +20161,13 @@ pub fn tenancy_contact_groups_create(state: &ThanixClient, body: WritableContact
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(TenancyContactGroupsCreateResponse::Http201(r#response.json::<ContactGroup>()?)) },
-		_ => { Ok(TenancyContactGroupsCreateResponse::None) }
+		r#other_status => { Ok(TenancyContactGroupsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactGroupsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of contact group objects.
 pub fn tenancy_contact_groups_bulk_destroy(state: &ThanixClient, body: Vec<ContactGroupRequest>) -> Result<TenancyContactGroupsBulkDestroyResponse, Error> {
@@ -21672,15 +20176,13 @@ pub fn tenancy_contact_groups_bulk_destroy(state: &ThanixClient, body: Vec<Conta
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(TenancyContactGroupsBulkDestroyResponse::None) }
+		r#other_status => { Ok(TenancyContactGroupsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactGroupsBulkPartialUpdateResponse {
 	Http200(Vec<ContactGroup>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of contact group objects.
 pub fn tenancy_contact_groups_bulk_partial_update(state: &ThanixClient, body: Vec<ContactGroupRequest>) -> Result<TenancyContactGroupsBulkPartialUpdateResponse, Error> {
@@ -21690,15 +20192,13 @@ pub fn tenancy_contact_groups_bulk_partial_update(state: &ThanixClient, body: Ve
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactGroupsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ContactGroup>>()?)) },
-		_ => { Ok(TenancyContactGroupsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(TenancyContactGroupsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactGroupsRetrieveResponse {
 	Http200(ContactGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a contact group object.
 pub fn tenancy_contact_groups_retrieve(state: &ThanixClient, id: i64) -> Result<TenancyContactGroupsRetrieveResponse, Error> {
@@ -21707,15 +20207,13 @@ pub fn tenancy_contact_groups_retrieve(state: &ThanixClient, id: i64) -> Result<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactGroupsRetrieveResponse::Http200(r#response.json::<ContactGroup>()?)) },
-		_ => { Ok(TenancyContactGroupsRetrieveResponse::None) }
+		r#other_status => { Ok(TenancyContactGroupsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactGroupsUpdateResponse {
 	Http200(ContactGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a contact group object.
 pub fn tenancy_contact_groups_update(state: &ThanixClient, body: WritableContactGroupRequest, id: i64) -> Result<TenancyContactGroupsUpdateResponse, Error> {
@@ -21725,15 +20223,13 @@ pub fn tenancy_contact_groups_update(state: &ThanixClient, body: WritableContact
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactGroupsUpdateResponse::Http200(r#response.json::<ContactGroup>()?)) },
-		_ => { Ok(TenancyContactGroupsUpdateResponse::None) }
+		r#other_status => { Ok(TenancyContactGroupsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactGroupsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a contact group object.
 pub fn tenancy_contact_groups_destroy(state: &ThanixClient, id: i64) -> Result<TenancyContactGroupsDestroyResponse, Error> {
@@ -21741,15 +20237,13 @@ pub fn tenancy_contact_groups_destroy(state: &ThanixClient, id: i64) -> Result<T
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(TenancyContactGroupsDestroyResponse::None) }
+		r#other_status => { Ok(TenancyContactGroupsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactGroupsPartialUpdateResponse {
 	Http200(ContactGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a contact group object.
 pub fn tenancy_contact_groups_partial_update(state: &ThanixClient, body: PatchedWritableContactGroupRequest, id: i64) -> Result<TenancyContactGroupsPartialUpdateResponse, Error> {
@@ -21759,7 +20253,7 @@ pub fn tenancy_contact_groups_partial_update(state: &ThanixClient, body: Patched
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactGroupsPartialUpdateResponse::Http200(r#response.json::<ContactGroup>()?)) },
-		_ => { Ok(TenancyContactGroupsPartialUpdateResponse::None) }
+		r#other_status => { Ok(TenancyContactGroupsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -21833,12 +20327,10 @@ pub struct TenancyContactRolesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactRolesListResponse {
 	Http200(PaginatedContactRoleList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of contact role objects.
 pub fn tenancy_contact_roles_list(state: &ThanixClient, query: TenancyContactRolesListQuery) -> Result<TenancyContactRolesListResponse, Error> {
@@ -21847,15 +20339,13 @@ pub fn tenancy_contact_roles_list(state: &ThanixClient, query: TenancyContactRol
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactRolesListResponse::Http200(r#response.json::<PaginatedContactRoleList>()?)) },
-		_ => { Ok(TenancyContactRolesListResponse::None) }
+		r#other_status => { Ok(TenancyContactRolesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactRolesBulkUpdateResponse {
 	Http200(Vec<ContactRole>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of contact role objects.
 pub fn tenancy_contact_roles_bulk_update(state: &ThanixClient, body: Vec<ContactRoleRequest>) -> Result<TenancyContactRolesBulkUpdateResponse, Error> {
@@ -21865,15 +20355,13 @@ pub fn tenancy_contact_roles_bulk_update(state: &ThanixClient, body: Vec<Contact
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactRolesBulkUpdateResponse::Http200(r#response.json::<Vec<ContactRole>>()?)) },
-		_ => { Ok(TenancyContactRolesBulkUpdateResponse::None) }
+		r#other_status => { Ok(TenancyContactRolesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactRolesCreateResponse {
 	Http201(ContactRole),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of contact role objects.
 pub fn tenancy_contact_roles_create(state: &ThanixClient, body: ContactRoleRequest) -> Result<TenancyContactRolesCreateResponse, Error> {
@@ -21883,15 +20371,13 @@ pub fn tenancy_contact_roles_create(state: &ThanixClient, body: ContactRoleReque
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(TenancyContactRolesCreateResponse::Http201(r#response.json::<ContactRole>()?)) },
-		_ => { Ok(TenancyContactRolesCreateResponse::None) }
+		r#other_status => { Ok(TenancyContactRolesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactRolesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of contact role objects.
 pub fn tenancy_contact_roles_bulk_destroy(state: &ThanixClient, body: Vec<ContactRoleRequest>) -> Result<TenancyContactRolesBulkDestroyResponse, Error> {
@@ -21900,15 +20386,13 @@ pub fn tenancy_contact_roles_bulk_destroy(state: &ThanixClient, body: Vec<Contac
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(TenancyContactRolesBulkDestroyResponse::None) }
+		r#other_status => { Ok(TenancyContactRolesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactRolesBulkPartialUpdateResponse {
 	Http200(Vec<ContactRole>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of contact role objects.
 pub fn tenancy_contact_roles_bulk_partial_update(state: &ThanixClient, body: Vec<ContactRoleRequest>) -> Result<TenancyContactRolesBulkPartialUpdateResponse, Error> {
@@ -21918,15 +20402,13 @@ pub fn tenancy_contact_roles_bulk_partial_update(state: &ThanixClient, body: Vec
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactRolesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ContactRole>>()?)) },
-		_ => { Ok(TenancyContactRolesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(TenancyContactRolesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactRolesRetrieveResponse {
 	Http200(ContactRole),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a contact role object.
 pub fn tenancy_contact_roles_retrieve(state: &ThanixClient, id: i64) -> Result<TenancyContactRolesRetrieveResponse, Error> {
@@ -21935,15 +20417,13 @@ pub fn tenancy_contact_roles_retrieve(state: &ThanixClient, id: i64) -> Result<T
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactRolesRetrieveResponse::Http200(r#response.json::<ContactRole>()?)) },
-		_ => { Ok(TenancyContactRolesRetrieveResponse::None) }
+		r#other_status => { Ok(TenancyContactRolesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactRolesUpdateResponse {
 	Http200(ContactRole),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a contact role object.
 pub fn tenancy_contact_roles_update(state: &ThanixClient, body: ContactRoleRequest, id: i64) -> Result<TenancyContactRolesUpdateResponse, Error> {
@@ -21953,15 +20433,13 @@ pub fn tenancy_contact_roles_update(state: &ThanixClient, body: ContactRoleReque
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactRolesUpdateResponse::Http200(r#response.json::<ContactRole>()?)) },
-		_ => { Ok(TenancyContactRolesUpdateResponse::None) }
+		r#other_status => { Ok(TenancyContactRolesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactRolesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a contact role object.
 pub fn tenancy_contact_roles_destroy(state: &ThanixClient, id: i64) -> Result<TenancyContactRolesDestroyResponse, Error> {
@@ -21969,15 +20447,13 @@ pub fn tenancy_contact_roles_destroy(state: &ThanixClient, id: i64) -> Result<Te
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(TenancyContactRolesDestroyResponse::None) }
+		r#other_status => { Ok(TenancyContactRolesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactRolesPartialUpdateResponse {
 	Http200(ContactRole),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a contact role object.
 pub fn tenancy_contact_roles_partial_update(state: &ThanixClient, body: PatchedContactRoleRequest, id: i64) -> Result<TenancyContactRolesPartialUpdateResponse, Error> {
@@ -21987,7 +20463,7 @@ pub fn tenancy_contact_roles_partial_update(state: &ThanixClient, body: PatchedC
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactRolesPartialUpdateResponse::Http200(r#response.json::<ContactRole>()?)) },
-		_ => { Ok(TenancyContactRolesPartialUpdateResponse::None) }
+		r#other_status => { Ok(TenancyContactRolesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -22113,12 +20589,10 @@ pub struct TenancyContactsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactsListResponse {
 	Http200(PaginatedContactList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of contact objects.
 pub fn tenancy_contacts_list(state: &ThanixClient, query: TenancyContactsListQuery) -> Result<TenancyContactsListResponse, Error> {
@@ -22127,15 +20601,13 @@ pub fn tenancy_contacts_list(state: &ThanixClient, query: TenancyContactsListQue
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactsListResponse::Http200(r#response.json::<PaginatedContactList>()?)) },
-		_ => { Ok(TenancyContactsListResponse::None) }
+		r#other_status => { Ok(TenancyContactsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactsBulkUpdateResponse {
 	Http200(Vec<Contact>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of contact objects.
 pub fn tenancy_contacts_bulk_update(state: &ThanixClient, body: Vec<ContactRequest>) -> Result<TenancyContactsBulkUpdateResponse, Error> {
@@ -22145,15 +20617,13 @@ pub fn tenancy_contacts_bulk_update(state: &ThanixClient, body: Vec<ContactReque
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactsBulkUpdateResponse::Http200(r#response.json::<Vec<Contact>>()?)) },
-		_ => { Ok(TenancyContactsBulkUpdateResponse::None) }
+		r#other_status => { Ok(TenancyContactsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactsCreateResponse {
 	Http201(Contact),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of contact objects.
 pub fn tenancy_contacts_create(state: &ThanixClient, body: WritableContactRequest) -> Result<TenancyContactsCreateResponse, Error> {
@@ -22163,15 +20633,13 @@ pub fn tenancy_contacts_create(state: &ThanixClient, body: WritableContactReques
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(TenancyContactsCreateResponse::Http201(r#response.json::<Contact>()?)) },
-		_ => { Ok(TenancyContactsCreateResponse::None) }
+		r#other_status => { Ok(TenancyContactsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of contact objects.
 pub fn tenancy_contacts_bulk_destroy(state: &ThanixClient, body: Vec<ContactRequest>) -> Result<TenancyContactsBulkDestroyResponse, Error> {
@@ -22180,15 +20648,13 @@ pub fn tenancy_contacts_bulk_destroy(state: &ThanixClient, body: Vec<ContactRequ
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(TenancyContactsBulkDestroyResponse::None) }
+		r#other_status => { Ok(TenancyContactsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactsBulkPartialUpdateResponse {
 	Http200(Vec<Contact>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of contact objects.
 pub fn tenancy_contacts_bulk_partial_update(state: &ThanixClient, body: Vec<ContactRequest>) -> Result<TenancyContactsBulkPartialUpdateResponse, Error> {
@@ -22198,15 +20664,13 @@ pub fn tenancy_contacts_bulk_partial_update(state: &ThanixClient, body: Vec<Cont
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Contact>>()?)) },
-		_ => { Ok(TenancyContactsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(TenancyContactsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactsRetrieveResponse {
 	Http200(Contact),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a contact object.
 pub fn tenancy_contacts_retrieve(state: &ThanixClient, id: i64) -> Result<TenancyContactsRetrieveResponse, Error> {
@@ -22215,15 +20679,13 @@ pub fn tenancy_contacts_retrieve(state: &ThanixClient, id: i64) -> Result<Tenanc
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactsRetrieveResponse::Http200(r#response.json::<Contact>()?)) },
-		_ => { Ok(TenancyContactsRetrieveResponse::None) }
+		r#other_status => { Ok(TenancyContactsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactsUpdateResponse {
 	Http200(Contact),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a contact object.
 pub fn tenancy_contacts_update(state: &ThanixClient, body: WritableContactRequest, id: i64) -> Result<TenancyContactsUpdateResponse, Error> {
@@ -22233,15 +20695,13 @@ pub fn tenancy_contacts_update(state: &ThanixClient, body: WritableContactReques
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactsUpdateResponse::Http200(r#response.json::<Contact>()?)) },
-		_ => { Ok(TenancyContactsUpdateResponse::None) }
+		r#other_status => { Ok(TenancyContactsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a contact object.
 pub fn tenancy_contacts_destroy(state: &ThanixClient, id: i64) -> Result<TenancyContactsDestroyResponse, Error> {
@@ -22249,15 +20709,13 @@ pub fn tenancy_contacts_destroy(state: &ThanixClient, id: i64) -> Result<Tenancy
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(TenancyContactsDestroyResponse::None) }
+		r#other_status => { Ok(TenancyContactsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyContactsPartialUpdateResponse {
 	Http200(Contact),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a contact object.
 pub fn tenancy_contacts_partial_update(state: &ThanixClient, body: PatchedWritableContactRequest, id: i64) -> Result<TenancyContactsPartialUpdateResponse, Error> {
@@ -22267,7 +20725,7 @@ pub fn tenancy_contacts_partial_update(state: &ThanixClient, body: PatchedWritab
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyContactsPartialUpdateResponse::Http200(r#response.json::<Contact>()?)) },
-		_ => { Ok(TenancyContactsPartialUpdateResponse::None) }
+		r#other_status => { Ok(TenancyContactsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -22349,12 +20807,10 @@ pub struct TenancyTenantGroupsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyTenantGroupsListResponse {
 	Http200(PaginatedTenantGroupList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of tenant group objects.
 pub fn tenancy_tenant_groups_list(state: &ThanixClient, query: TenancyTenantGroupsListQuery) -> Result<TenancyTenantGroupsListResponse, Error> {
@@ -22363,15 +20819,13 @@ pub fn tenancy_tenant_groups_list(state: &ThanixClient, query: TenancyTenantGrou
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyTenantGroupsListResponse::Http200(r#response.json::<PaginatedTenantGroupList>()?)) },
-		_ => { Ok(TenancyTenantGroupsListResponse::None) }
+		r#other_status => { Ok(TenancyTenantGroupsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyTenantGroupsBulkUpdateResponse {
 	Http200(Vec<TenantGroup>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of tenant group objects.
 pub fn tenancy_tenant_groups_bulk_update(state: &ThanixClient, body: Vec<TenantGroupRequest>) -> Result<TenancyTenantGroupsBulkUpdateResponse, Error> {
@@ -22381,15 +20835,13 @@ pub fn tenancy_tenant_groups_bulk_update(state: &ThanixClient, body: Vec<TenantG
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyTenantGroupsBulkUpdateResponse::Http200(r#response.json::<Vec<TenantGroup>>()?)) },
-		_ => { Ok(TenancyTenantGroupsBulkUpdateResponse::None) }
+		r#other_status => { Ok(TenancyTenantGroupsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyTenantGroupsCreateResponse {
 	Http201(TenantGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of tenant group objects.
 pub fn tenancy_tenant_groups_create(state: &ThanixClient, body: WritableTenantGroupRequest) -> Result<TenancyTenantGroupsCreateResponse, Error> {
@@ -22399,15 +20851,13 @@ pub fn tenancy_tenant_groups_create(state: &ThanixClient, body: WritableTenantGr
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(TenancyTenantGroupsCreateResponse::Http201(r#response.json::<TenantGroup>()?)) },
-		_ => { Ok(TenancyTenantGroupsCreateResponse::None) }
+		r#other_status => { Ok(TenancyTenantGroupsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyTenantGroupsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of tenant group objects.
 pub fn tenancy_tenant_groups_bulk_destroy(state: &ThanixClient, body: Vec<TenantGroupRequest>) -> Result<TenancyTenantGroupsBulkDestroyResponse, Error> {
@@ -22416,15 +20866,13 @@ pub fn tenancy_tenant_groups_bulk_destroy(state: &ThanixClient, body: Vec<Tenant
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(TenancyTenantGroupsBulkDestroyResponse::None) }
+		r#other_status => { Ok(TenancyTenantGroupsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyTenantGroupsBulkPartialUpdateResponse {
 	Http200(Vec<TenantGroup>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of tenant group objects.
 pub fn tenancy_tenant_groups_bulk_partial_update(state: &ThanixClient, body: Vec<TenantGroupRequest>) -> Result<TenancyTenantGroupsBulkPartialUpdateResponse, Error> {
@@ -22434,15 +20882,13 @@ pub fn tenancy_tenant_groups_bulk_partial_update(state: &ThanixClient, body: Vec
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyTenantGroupsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<TenantGroup>>()?)) },
-		_ => { Ok(TenancyTenantGroupsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(TenancyTenantGroupsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyTenantGroupsRetrieveResponse {
 	Http200(TenantGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a tenant group object.
 pub fn tenancy_tenant_groups_retrieve(state: &ThanixClient, id: i64) -> Result<TenancyTenantGroupsRetrieveResponse, Error> {
@@ -22451,15 +20897,13 @@ pub fn tenancy_tenant_groups_retrieve(state: &ThanixClient, id: i64) -> Result<T
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyTenantGroupsRetrieveResponse::Http200(r#response.json::<TenantGroup>()?)) },
-		_ => { Ok(TenancyTenantGroupsRetrieveResponse::None) }
+		r#other_status => { Ok(TenancyTenantGroupsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyTenantGroupsUpdateResponse {
 	Http200(TenantGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a tenant group object.
 pub fn tenancy_tenant_groups_update(state: &ThanixClient, body: WritableTenantGroupRequest, id: i64) -> Result<TenancyTenantGroupsUpdateResponse, Error> {
@@ -22469,15 +20913,13 @@ pub fn tenancy_tenant_groups_update(state: &ThanixClient, body: WritableTenantGr
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyTenantGroupsUpdateResponse::Http200(r#response.json::<TenantGroup>()?)) },
-		_ => { Ok(TenancyTenantGroupsUpdateResponse::None) }
+		r#other_status => { Ok(TenancyTenantGroupsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyTenantGroupsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a tenant group object.
 pub fn tenancy_tenant_groups_destroy(state: &ThanixClient, id: i64) -> Result<TenancyTenantGroupsDestroyResponse, Error> {
@@ -22485,15 +20927,13 @@ pub fn tenancy_tenant_groups_destroy(state: &ThanixClient, id: i64) -> Result<Te
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(TenancyTenantGroupsDestroyResponse::None) }
+		r#other_status => { Ok(TenancyTenantGroupsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyTenantGroupsPartialUpdateResponse {
 	Http200(TenantGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a tenant group object.
 pub fn tenancy_tenant_groups_partial_update(state: &ThanixClient, body: PatchedWritableTenantGroupRequest, id: i64) -> Result<TenancyTenantGroupsPartialUpdateResponse, Error> {
@@ -22503,7 +20943,7 @@ pub fn tenancy_tenant_groups_partial_update(state: &ThanixClient, body: PatchedW
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyTenantGroupsPartialUpdateResponse::Http200(r#response.json::<TenantGroup>()?)) },
-		_ => { Ok(TenancyTenantGroupsPartialUpdateResponse::None) }
+		r#other_status => { Ok(TenancyTenantGroupsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -22597,12 +21037,10 @@ pub struct TenancyTenantsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyTenantsListResponse {
 	Http200(PaginatedTenantList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of tenant objects.
 pub fn tenancy_tenants_list(state: &ThanixClient, query: TenancyTenantsListQuery) -> Result<TenancyTenantsListResponse, Error> {
@@ -22611,15 +21049,13 @@ pub fn tenancy_tenants_list(state: &ThanixClient, query: TenancyTenantsListQuery
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyTenantsListResponse::Http200(r#response.json::<PaginatedTenantList>()?)) },
-		_ => { Ok(TenancyTenantsListResponse::None) }
+		r#other_status => { Ok(TenancyTenantsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyTenantsBulkUpdateResponse {
 	Http200(Vec<Tenant>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of tenant objects.
 pub fn tenancy_tenants_bulk_update(state: &ThanixClient, body: Vec<TenantRequest>) -> Result<TenancyTenantsBulkUpdateResponse, Error> {
@@ -22629,15 +21065,13 @@ pub fn tenancy_tenants_bulk_update(state: &ThanixClient, body: Vec<TenantRequest
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyTenantsBulkUpdateResponse::Http200(r#response.json::<Vec<Tenant>>()?)) },
-		_ => { Ok(TenancyTenantsBulkUpdateResponse::None) }
+		r#other_status => { Ok(TenancyTenantsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyTenantsCreateResponse {
 	Http201(Tenant),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of tenant objects.
 pub fn tenancy_tenants_create(state: &ThanixClient, body: WritableTenantRequest) -> Result<TenancyTenantsCreateResponse, Error> {
@@ -22647,15 +21081,13 @@ pub fn tenancy_tenants_create(state: &ThanixClient, body: WritableTenantRequest)
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(TenancyTenantsCreateResponse::Http201(r#response.json::<Tenant>()?)) },
-		_ => { Ok(TenancyTenantsCreateResponse::None) }
+		r#other_status => { Ok(TenancyTenantsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyTenantsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of tenant objects.
 pub fn tenancy_tenants_bulk_destroy(state: &ThanixClient, body: Vec<TenantRequest>) -> Result<TenancyTenantsBulkDestroyResponse, Error> {
@@ -22664,15 +21096,13 @@ pub fn tenancy_tenants_bulk_destroy(state: &ThanixClient, body: Vec<TenantReques
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(TenancyTenantsBulkDestroyResponse::None) }
+		r#other_status => { Ok(TenancyTenantsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyTenantsBulkPartialUpdateResponse {
 	Http200(Vec<Tenant>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of tenant objects.
 pub fn tenancy_tenants_bulk_partial_update(state: &ThanixClient, body: Vec<TenantRequest>) -> Result<TenancyTenantsBulkPartialUpdateResponse, Error> {
@@ -22682,15 +21112,13 @@ pub fn tenancy_tenants_bulk_partial_update(state: &ThanixClient, body: Vec<Tenan
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyTenantsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Tenant>>()?)) },
-		_ => { Ok(TenancyTenantsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(TenancyTenantsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyTenantsRetrieveResponse {
 	Http200(Tenant),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a tenant object.
 pub fn tenancy_tenants_retrieve(state: &ThanixClient, id: i64) -> Result<TenancyTenantsRetrieveResponse, Error> {
@@ -22699,15 +21127,13 @@ pub fn tenancy_tenants_retrieve(state: &ThanixClient, id: i64) -> Result<Tenancy
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyTenantsRetrieveResponse::Http200(r#response.json::<Tenant>()?)) },
-		_ => { Ok(TenancyTenantsRetrieveResponse::None) }
+		r#other_status => { Ok(TenancyTenantsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyTenantsUpdateResponse {
 	Http200(Tenant),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a tenant object.
 pub fn tenancy_tenants_update(state: &ThanixClient, body: WritableTenantRequest, id: i64) -> Result<TenancyTenantsUpdateResponse, Error> {
@@ -22717,15 +21143,13 @@ pub fn tenancy_tenants_update(state: &ThanixClient, body: WritableTenantRequest,
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyTenantsUpdateResponse::Http200(r#response.json::<Tenant>()?)) },
-		_ => { Ok(TenancyTenantsUpdateResponse::None) }
+		r#other_status => { Ok(TenancyTenantsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyTenantsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a tenant object.
 pub fn tenancy_tenants_destroy(state: &ThanixClient, id: i64) -> Result<TenancyTenantsDestroyResponse, Error> {
@@ -22733,15 +21157,13 @@ pub fn tenancy_tenants_destroy(state: &ThanixClient, id: i64) -> Result<TenancyT
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(TenancyTenantsDestroyResponse::None) }
+		r#other_status => { Ok(TenancyTenantsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum TenancyTenantsPartialUpdateResponse {
 	Http200(Tenant),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a tenant object.
 pub fn tenancy_tenants_partial_update(state: &ThanixClient, body: PatchedWritableTenantRequest, id: i64) -> Result<TenancyTenantsPartialUpdateResponse, Error> {
@@ -22751,15 +21173,13 @@ pub fn tenancy_tenants_partial_update(state: &ThanixClient, body: PatchedWritabl
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(TenancyTenantsPartialUpdateResponse::Http200(r#response.json::<Tenant>()?)) },
-		_ => { Ok(TenancyTenantsPartialUpdateResponse::None) }
+		r#other_status => { Ok(TenancyTenantsPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersConfigRetrieveResponse {
 	Http200(Option<std::collections::HashMap<String, serde_json::Value>>),
-	#[default]
-	None
+	Other(Response)
 }
 /// An API endpoint via which a user can update his or her own UserConfig data (but no one else's).
 pub fn users_config_retrieve(state: &ThanixClient) -> Result<UsersConfigRetrieveResponse, Error> {
@@ -22768,7 +21188,7 @@ pub fn users_config_retrieve(state: &ThanixClient) -> Result<UsersConfigRetrieve
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersConfigRetrieveResponse::Http200(r#response.json::<Option<std::collections::HashMap<String, serde_json::Value>>>()?)) },
-		_ => { Ok(UsersConfigRetrieveResponse::None) }
+		r#other_status => { Ok(UsersConfigRetrieveResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -22801,12 +21221,10 @@ pub struct UsersGroupsListQuery {
 	q: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersGroupsListResponse {
 	Http200(PaginatedGroupList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of group objects.
 pub fn users_groups_list(state: &ThanixClient, query: UsersGroupsListQuery) -> Result<UsersGroupsListResponse, Error> {
@@ -22815,15 +21233,13 @@ pub fn users_groups_list(state: &ThanixClient, query: UsersGroupsListQuery) -> R
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersGroupsListResponse::Http200(r#response.json::<PaginatedGroupList>()?)) },
-		_ => { Ok(UsersGroupsListResponse::None) }
+		r#other_status => { Ok(UsersGroupsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersGroupsBulkUpdateResponse {
 	Http200(Vec<Group>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of group objects.
 pub fn users_groups_bulk_update(state: &ThanixClient, body: Vec<GroupRequest>) -> Result<UsersGroupsBulkUpdateResponse, Error> {
@@ -22833,15 +21249,13 @@ pub fn users_groups_bulk_update(state: &ThanixClient, body: Vec<GroupRequest>) -
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersGroupsBulkUpdateResponse::Http200(r#response.json::<Vec<Group>>()?)) },
-		_ => { Ok(UsersGroupsBulkUpdateResponse::None) }
+		r#other_status => { Ok(UsersGroupsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersGroupsCreateResponse {
 	Http201(Group),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of group objects.
 pub fn users_groups_create(state: &ThanixClient, body: GroupRequest) -> Result<UsersGroupsCreateResponse, Error> {
@@ -22851,15 +21265,13 @@ pub fn users_groups_create(state: &ThanixClient, body: GroupRequest) -> Result<U
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(UsersGroupsCreateResponse::Http201(r#response.json::<Group>()?)) },
-		_ => { Ok(UsersGroupsCreateResponse::None) }
+		r#other_status => { Ok(UsersGroupsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersGroupsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of group objects.
 pub fn users_groups_bulk_destroy(state: &ThanixClient, body: Vec<GroupRequest>) -> Result<UsersGroupsBulkDestroyResponse, Error> {
@@ -22868,15 +21280,13 @@ pub fn users_groups_bulk_destroy(state: &ThanixClient, body: Vec<GroupRequest>) 
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(UsersGroupsBulkDestroyResponse::None) }
+		r#other_status => { Ok(UsersGroupsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersGroupsBulkPartialUpdateResponse {
 	Http200(Vec<Group>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of group objects.
 pub fn users_groups_bulk_partial_update(state: &ThanixClient, body: Vec<GroupRequest>) -> Result<UsersGroupsBulkPartialUpdateResponse, Error> {
@@ -22886,15 +21296,13 @@ pub fn users_groups_bulk_partial_update(state: &ThanixClient, body: Vec<GroupReq
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersGroupsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Group>>()?)) },
-		_ => { Ok(UsersGroupsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(UsersGroupsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersGroupsRetrieveResponse {
 	Http200(Group),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a group object.
 pub fn users_groups_retrieve(state: &ThanixClient, id: i64) -> Result<UsersGroupsRetrieveResponse, Error> {
@@ -22903,15 +21311,13 @@ pub fn users_groups_retrieve(state: &ThanixClient, id: i64) -> Result<UsersGroup
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersGroupsRetrieveResponse::Http200(r#response.json::<Group>()?)) },
-		_ => { Ok(UsersGroupsRetrieveResponse::None) }
+		r#other_status => { Ok(UsersGroupsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersGroupsUpdateResponse {
 	Http200(Group),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a group object.
 pub fn users_groups_update(state: &ThanixClient, body: GroupRequest, id: i64) -> Result<UsersGroupsUpdateResponse, Error> {
@@ -22921,15 +21327,13 @@ pub fn users_groups_update(state: &ThanixClient, body: GroupRequest, id: i64) ->
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersGroupsUpdateResponse::Http200(r#response.json::<Group>()?)) },
-		_ => { Ok(UsersGroupsUpdateResponse::None) }
+		r#other_status => { Ok(UsersGroupsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersGroupsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a group object.
 pub fn users_groups_destroy(state: &ThanixClient, id: i64) -> Result<UsersGroupsDestroyResponse, Error> {
@@ -22937,15 +21341,13 @@ pub fn users_groups_destroy(state: &ThanixClient, id: i64) -> Result<UsersGroups
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(UsersGroupsDestroyResponse::None) }
+		r#other_status => { Ok(UsersGroupsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersGroupsPartialUpdateResponse {
 	Http200(Group),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a group object.
 pub fn users_groups_partial_update(state: &ThanixClient, body: PatchedGroupRequest, id: i64) -> Result<UsersGroupsPartialUpdateResponse, Error> {
@@ -22955,7 +21357,7 @@ pub fn users_groups_partial_update(state: &ThanixClient, body: PatchedGroupReque
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersGroupsPartialUpdateResponse::Http200(r#response.json::<Group>()?)) },
-		_ => { Ok(UsersGroupsPartialUpdateResponse::None) }
+		r#other_status => { Ok(UsersGroupsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -23022,12 +21424,10 @@ pub struct UsersPermissionsListQuery {
 	user_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersPermissionsListResponse {
 	Http200(PaginatedObjectPermissionList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of permission objects.
 pub fn users_permissions_list(state: &ThanixClient, query: UsersPermissionsListQuery) -> Result<UsersPermissionsListResponse, Error> {
@@ -23036,15 +21436,13 @@ pub fn users_permissions_list(state: &ThanixClient, query: UsersPermissionsListQ
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersPermissionsListResponse::Http200(r#response.json::<PaginatedObjectPermissionList>()?)) },
-		_ => { Ok(UsersPermissionsListResponse::None) }
+		r#other_status => { Ok(UsersPermissionsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersPermissionsBulkUpdateResponse {
 	Http200(Vec<ObjectPermission>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of permission objects.
 pub fn users_permissions_bulk_update(state: &ThanixClient, body: Vec<ObjectPermissionRequest>) -> Result<UsersPermissionsBulkUpdateResponse, Error> {
@@ -23054,15 +21452,13 @@ pub fn users_permissions_bulk_update(state: &ThanixClient, body: Vec<ObjectPermi
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersPermissionsBulkUpdateResponse::Http200(r#response.json::<Vec<ObjectPermission>>()?)) },
-		_ => { Ok(UsersPermissionsBulkUpdateResponse::None) }
+		r#other_status => { Ok(UsersPermissionsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersPermissionsCreateResponse {
 	Http201(ObjectPermission),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of permission objects.
 pub fn users_permissions_create(state: &ThanixClient, body: WritableObjectPermissionRequest) -> Result<UsersPermissionsCreateResponse, Error> {
@@ -23072,15 +21468,13 @@ pub fn users_permissions_create(state: &ThanixClient, body: WritableObjectPermis
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(UsersPermissionsCreateResponse::Http201(r#response.json::<ObjectPermission>()?)) },
-		_ => { Ok(UsersPermissionsCreateResponse::None) }
+		r#other_status => { Ok(UsersPermissionsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersPermissionsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of permission objects.
 pub fn users_permissions_bulk_destroy(state: &ThanixClient, body: Vec<ObjectPermissionRequest>) -> Result<UsersPermissionsBulkDestroyResponse, Error> {
@@ -23089,15 +21483,13 @@ pub fn users_permissions_bulk_destroy(state: &ThanixClient, body: Vec<ObjectPerm
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(UsersPermissionsBulkDestroyResponse::None) }
+		r#other_status => { Ok(UsersPermissionsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersPermissionsBulkPartialUpdateResponse {
 	Http200(Vec<ObjectPermission>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of permission objects.
 pub fn users_permissions_bulk_partial_update(state: &ThanixClient, body: Vec<ObjectPermissionRequest>) -> Result<UsersPermissionsBulkPartialUpdateResponse, Error> {
@@ -23107,15 +21499,13 @@ pub fn users_permissions_bulk_partial_update(state: &ThanixClient, body: Vec<Obj
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersPermissionsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ObjectPermission>>()?)) },
-		_ => { Ok(UsersPermissionsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(UsersPermissionsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersPermissionsRetrieveResponse {
 	Http200(ObjectPermission),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a permission object.
 pub fn users_permissions_retrieve(state: &ThanixClient, id: i64) -> Result<UsersPermissionsRetrieveResponse, Error> {
@@ -23124,15 +21514,13 @@ pub fn users_permissions_retrieve(state: &ThanixClient, id: i64) -> Result<Users
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersPermissionsRetrieveResponse::Http200(r#response.json::<ObjectPermission>()?)) },
-		_ => { Ok(UsersPermissionsRetrieveResponse::None) }
+		r#other_status => { Ok(UsersPermissionsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersPermissionsUpdateResponse {
 	Http200(ObjectPermission),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a permission object.
 pub fn users_permissions_update(state: &ThanixClient, body: WritableObjectPermissionRequest, id: i64) -> Result<UsersPermissionsUpdateResponse, Error> {
@@ -23142,15 +21530,13 @@ pub fn users_permissions_update(state: &ThanixClient, body: WritableObjectPermis
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersPermissionsUpdateResponse::Http200(r#response.json::<ObjectPermission>()?)) },
-		_ => { Ok(UsersPermissionsUpdateResponse::None) }
+		r#other_status => { Ok(UsersPermissionsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersPermissionsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a permission object.
 pub fn users_permissions_destroy(state: &ThanixClient, id: i64) -> Result<UsersPermissionsDestroyResponse, Error> {
@@ -23158,15 +21544,13 @@ pub fn users_permissions_destroy(state: &ThanixClient, id: i64) -> Result<UsersP
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(UsersPermissionsDestroyResponse::None) }
+		r#other_status => { Ok(UsersPermissionsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersPermissionsPartialUpdateResponse {
 	Http200(ObjectPermission),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a permission object.
 pub fn users_permissions_partial_update(state: &ThanixClient, body: PatchedWritableObjectPermissionRequest, id: i64) -> Result<UsersPermissionsPartialUpdateResponse, Error> {
@@ -23176,7 +21560,7 @@ pub fn users_permissions_partial_update(state: &ThanixClient, body: PatchedWrita
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersPermissionsPartialUpdateResponse::Http200(r#response.json::<ObjectPermission>()?)) },
-		_ => { Ok(UsersPermissionsPartialUpdateResponse::None) }
+		r#other_status => { Ok(UsersPermissionsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -23235,12 +21619,10 @@ pub struct UsersTokensListQuery {
 	write_enabled: Option<bool>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersTokensListResponse {
 	Http200(PaginatedTokenList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of token objects.
 pub fn users_tokens_list(state: &ThanixClient, query: UsersTokensListQuery) -> Result<UsersTokensListResponse, Error> {
@@ -23249,15 +21631,13 @@ pub fn users_tokens_list(state: &ThanixClient, query: UsersTokensListQuery) -> R
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersTokensListResponse::Http200(r#response.json::<PaginatedTokenList>()?)) },
-		_ => { Ok(UsersTokensListResponse::None) }
+		r#other_status => { Ok(UsersTokensListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersTokensBulkUpdateResponse {
 	Http200(Vec<Token>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of token objects.
 pub fn users_tokens_bulk_update(state: &ThanixClient, body: Vec<TokenRequest>) -> Result<UsersTokensBulkUpdateResponse, Error> {
@@ -23267,15 +21647,13 @@ pub fn users_tokens_bulk_update(state: &ThanixClient, body: Vec<TokenRequest>) -
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersTokensBulkUpdateResponse::Http200(r#response.json::<Vec<Token>>()?)) },
-		_ => { Ok(UsersTokensBulkUpdateResponse::None) }
+		r#other_status => { Ok(UsersTokensBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersTokensCreateResponse {
 	Http201(Token),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of token objects.
 pub fn users_tokens_create(state: &ThanixClient, body: WritableTokenRequest) -> Result<UsersTokensCreateResponse, Error> {
@@ -23285,15 +21663,13 @@ pub fn users_tokens_create(state: &ThanixClient, body: WritableTokenRequest) -> 
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(UsersTokensCreateResponse::Http201(r#response.json::<Token>()?)) },
-		_ => { Ok(UsersTokensCreateResponse::None) }
+		r#other_status => { Ok(UsersTokensCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersTokensBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of token objects.
 pub fn users_tokens_bulk_destroy(state: &ThanixClient, body: Vec<TokenRequest>) -> Result<UsersTokensBulkDestroyResponse, Error> {
@@ -23302,15 +21678,13 @@ pub fn users_tokens_bulk_destroy(state: &ThanixClient, body: Vec<TokenRequest>) 
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(UsersTokensBulkDestroyResponse::None) }
+		r#other_status => { Ok(UsersTokensBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersTokensBulkPartialUpdateResponse {
 	Http200(Vec<Token>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of token objects.
 pub fn users_tokens_bulk_partial_update(state: &ThanixClient, body: Vec<TokenRequest>) -> Result<UsersTokensBulkPartialUpdateResponse, Error> {
@@ -23320,15 +21694,13 @@ pub fn users_tokens_bulk_partial_update(state: &ThanixClient, body: Vec<TokenReq
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersTokensBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Token>>()?)) },
-		_ => { Ok(UsersTokensBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(UsersTokensBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersTokensRetrieveResponse {
 	Http200(Token),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a token object.
 pub fn users_tokens_retrieve(state: &ThanixClient, id: i64) -> Result<UsersTokensRetrieveResponse, Error> {
@@ -23337,15 +21709,13 @@ pub fn users_tokens_retrieve(state: &ThanixClient, id: i64) -> Result<UsersToken
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersTokensRetrieveResponse::Http200(r#response.json::<Token>()?)) },
-		_ => { Ok(UsersTokensRetrieveResponse::None) }
+		r#other_status => { Ok(UsersTokensRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersTokensUpdateResponse {
 	Http200(Token),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a token object.
 pub fn users_tokens_update(state: &ThanixClient, body: WritableTokenRequest, id: i64) -> Result<UsersTokensUpdateResponse, Error> {
@@ -23355,15 +21725,13 @@ pub fn users_tokens_update(state: &ThanixClient, body: WritableTokenRequest, id:
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersTokensUpdateResponse::Http200(r#response.json::<Token>()?)) },
-		_ => { Ok(UsersTokensUpdateResponse::None) }
+		r#other_status => { Ok(UsersTokensUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersTokensDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a token object.
 pub fn users_tokens_destroy(state: &ThanixClient, id: i64) -> Result<UsersTokensDestroyResponse, Error> {
@@ -23371,15 +21739,13 @@ pub fn users_tokens_destroy(state: &ThanixClient, id: i64) -> Result<UsersTokens
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(UsersTokensDestroyResponse::None) }
+		r#other_status => { Ok(UsersTokensDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersTokensPartialUpdateResponse {
 	Http200(Token),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a token object.
 pub fn users_tokens_partial_update(state: &ThanixClient, body: PatchedWritableTokenRequest, id: i64) -> Result<UsersTokensPartialUpdateResponse, Error> {
@@ -23389,16 +21755,14 @@ pub fn users_tokens_partial_update(state: &ThanixClient, body: PatchedWritableTo
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersTokensPartialUpdateResponse::Http200(r#response.json::<Token>()?)) },
-		_ => { Ok(UsersTokensPartialUpdateResponse::None) }
+		r#other_status => { Ok(UsersTokensPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersTokensProvisionCreateResponse {
 	Http201(TokenProvision),
 	Http401(Option<std::collections::HashMap<String, serde_json::Value>>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Non-authenticated REST API endpoint via which a user may create a Token.
 pub fn users_tokens_provision_create(state: &ThanixClient, body: TokenProvisionRequest) -> Result<UsersTokensProvisionCreateResponse, Error> {
@@ -23409,7 +21773,7 @@ pub fn users_tokens_provision_create(state: &ThanixClient, body: TokenProvisionR
 	match r#response.status().as_u16() {
 		201 => { Ok(UsersTokensProvisionCreateResponse::Http201(r#response.json::<TokenProvision>()?)) },
 		401 => { Ok(UsersTokensProvisionCreateResponse::Http401(r#response.json::<Option<std::collections::HashMap<String, serde_json::Value>>>()?)) },
-		_ => { Ok(UsersTokensProvisionCreateResponse::None) }
+		r#other_status => { Ok(UsersTokensProvisionCreateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -23486,12 +21850,10 @@ pub struct UsersUsersListQuery {
 	username__nisw: Option<Vec<String>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersUsersListResponse {
 	Http200(PaginatedUserList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of user objects.
 pub fn users_users_list(state: &ThanixClient, query: UsersUsersListQuery) -> Result<UsersUsersListResponse, Error> {
@@ -23500,15 +21862,13 @@ pub fn users_users_list(state: &ThanixClient, query: UsersUsersListQuery) -> Res
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersUsersListResponse::Http200(r#response.json::<PaginatedUserList>()?)) },
-		_ => { Ok(UsersUsersListResponse::None) }
+		r#other_status => { Ok(UsersUsersListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersUsersBulkUpdateResponse {
 	Http200(Vec<User>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of user objects.
 pub fn users_users_bulk_update(state: &ThanixClient, body: Vec<UserRequest>) -> Result<UsersUsersBulkUpdateResponse, Error> {
@@ -23518,15 +21878,13 @@ pub fn users_users_bulk_update(state: &ThanixClient, body: Vec<UserRequest>) -> 
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersUsersBulkUpdateResponse::Http200(r#response.json::<Vec<User>>()?)) },
-		_ => { Ok(UsersUsersBulkUpdateResponse::None) }
+		r#other_status => { Ok(UsersUsersBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersUsersCreateResponse {
 	Http201(User),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of user objects.
 pub fn users_users_create(state: &ThanixClient, body: WritableUserRequest) -> Result<UsersUsersCreateResponse, Error> {
@@ -23536,15 +21894,13 @@ pub fn users_users_create(state: &ThanixClient, body: WritableUserRequest) -> Re
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(UsersUsersCreateResponse::Http201(r#response.json::<User>()?)) },
-		_ => { Ok(UsersUsersCreateResponse::None) }
+		r#other_status => { Ok(UsersUsersCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersUsersBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of user objects.
 pub fn users_users_bulk_destroy(state: &ThanixClient, body: Vec<UserRequest>) -> Result<UsersUsersBulkDestroyResponse, Error> {
@@ -23553,15 +21909,13 @@ pub fn users_users_bulk_destroy(state: &ThanixClient, body: Vec<UserRequest>) ->
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(UsersUsersBulkDestroyResponse::None) }
+		r#other_status => { Ok(UsersUsersBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersUsersBulkPartialUpdateResponse {
 	Http200(Vec<User>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of user objects.
 pub fn users_users_bulk_partial_update(state: &ThanixClient, body: Vec<UserRequest>) -> Result<UsersUsersBulkPartialUpdateResponse, Error> {
@@ -23571,15 +21925,13 @@ pub fn users_users_bulk_partial_update(state: &ThanixClient, body: Vec<UserReque
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersUsersBulkPartialUpdateResponse::Http200(r#response.json::<Vec<User>>()?)) },
-		_ => { Ok(UsersUsersBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(UsersUsersBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersUsersRetrieveResponse {
 	Http200(User),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a user object.
 pub fn users_users_retrieve(state: &ThanixClient, id: i64) -> Result<UsersUsersRetrieveResponse, Error> {
@@ -23588,15 +21940,13 @@ pub fn users_users_retrieve(state: &ThanixClient, id: i64) -> Result<UsersUsersR
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersUsersRetrieveResponse::Http200(r#response.json::<User>()?)) },
-		_ => { Ok(UsersUsersRetrieveResponse::None) }
+		r#other_status => { Ok(UsersUsersRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersUsersUpdateResponse {
 	Http200(User),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a user object.
 pub fn users_users_update(state: &ThanixClient, body: WritableUserRequest, id: i64) -> Result<UsersUsersUpdateResponse, Error> {
@@ -23606,15 +21956,13 @@ pub fn users_users_update(state: &ThanixClient, body: WritableUserRequest, id: i
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersUsersUpdateResponse::Http200(r#response.json::<User>()?)) },
-		_ => { Ok(UsersUsersUpdateResponse::None) }
+		r#other_status => { Ok(UsersUsersUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersUsersDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a user object.
 pub fn users_users_destroy(state: &ThanixClient, id: i64) -> Result<UsersUsersDestroyResponse, Error> {
@@ -23622,15 +21970,13 @@ pub fn users_users_destroy(state: &ThanixClient, id: i64) -> Result<UsersUsersDe
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(UsersUsersDestroyResponse::None) }
+		r#other_status => { Ok(UsersUsersDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum UsersUsersPartialUpdateResponse {
 	Http200(User),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a user object.
 pub fn users_users_partial_update(state: &ThanixClient, body: PatchedWritableUserRequest, id: i64) -> Result<UsersUsersPartialUpdateResponse, Error> {
@@ -23640,7 +21986,7 @@ pub fn users_users_partial_update(state: &ThanixClient, body: PatchedWritableUse
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(UsersUsersPartialUpdateResponse::Http200(r#response.json::<User>()?)) },
-		_ => { Ok(UsersUsersPartialUpdateResponse::None) }
+		r#other_status => { Ok(UsersUsersPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -23726,12 +22072,10 @@ pub struct VirtualizationClusterGroupsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClusterGroupsListResponse {
 	Http200(PaginatedClusterGroupList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of cluster group objects.
 pub fn virtualization_cluster_groups_list(state: &ThanixClient, query: VirtualizationClusterGroupsListQuery) -> Result<VirtualizationClusterGroupsListResponse, Error> {
@@ -23740,15 +22084,13 @@ pub fn virtualization_cluster_groups_list(state: &ThanixClient, query: Virtualiz
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationClusterGroupsListResponse::Http200(r#response.json::<PaginatedClusterGroupList>()?)) },
-		_ => { Ok(VirtualizationClusterGroupsListResponse::None) }
+		r#other_status => { Ok(VirtualizationClusterGroupsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClusterGroupsBulkUpdateResponse {
 	Http200(Vec<ClusterGroup>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of cluster group objects.
 pub fn virtualization_cluster_groups_bulk_update(state: &ThanixClient, body: Vec<ClusterGroupRequest>) -> Result<VirtualizationClusterGroupsBulkUpdateResponse, Error> {
@@ -23758,15 +22100,13 @@ pub fn virtualization_cluster_groups_bulk_update(state: &ThanixClient, body: Vec
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationClusterGroupsBulkUpdateResponse::Http200(r#response.json::<Vec<ClusterGroup>>()?)) },
-		_ => { Ok(VirtualizationClusterGroupsBulkUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationClusterGroupsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClusterGroupsCreateResponse {
 	Http201(ClusterGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of cluster group objects.
 pub fn virtualization_cluster_groups_create(state: &ThanixClient, body: ClusterGroupRequest) -> Result<VirtualizationClusterGroupsCreateResponse, Error> {
@@ -23776,15 +22116,13 @@ pub fn virtualization_cluster_groups_create(state: &ThanixClient, body: ClusterG
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(VirtualizationClusterGroupsCreateResponse::Http201(r#response.json::<ClusterGroup>()?)) },
-		_ => { Ok(VirtualizationClusterGroupsCreateResponse::None) }
+		r#other_status => { Ok(VirtualizationClusterGroupsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClusterGroupsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of cluster group objects.
 pub fn virtualization_cluster_groups_bulk_destroy(state: &ThanixClient, body: Vec<ClusterGroupRequest>) -> Result<VirtualizationClusterGroupsBulkDestroyResponse, Error> {
@@ -23793,15 +22131,13 @@ pub fn virtualization_cluster_groups_bulk_destroy(state: &ThanixClient, body: Ve
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VirtualizationClusterGroupsBulkDestroyResponse::None) }
+		r#other_status => { Ok(VirtualizationClusterGroupsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClusterGroupsBulkPartialUpdateResponse {
 	Http200(Vec<ClusterGroup>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of cluster group objects.
 pub fn virtualization_cluster_groups_bulk_partial_update(state: &ThanixClient, body: Vec<ClusterGroupRequest>) -> Result<VirtualizationClusterGroupsBulkPartialUpdateResponse, Error> {
@@ -23811,15 +22147,13 @@ pub fn virtualization_cluster_groups_bulk_partial_update(state: &ThanixClient, b
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationClusterGroupsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ClusterGroup>>()?)) },
-		_ => { Ok(VirtualizationClusterGroupsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationClusterGroupsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClusterGroupsRetrieveResponse {
 	Http200(ClusterGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a cluster group object.
 pub fn virtualization_cluster_groups_retrieve(state: &ThanixClient, id: i64) -> Result<VirtualizationClusterGroupsRetrieveResponse, Error> {
@@ -23828,15 +22162,13 @@ pub fn virtualization_cluster_groups_retrieve(state: &ThanixClient, id: i64) -> 
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationClusterGroupsRetrieveResponse::Http200(r#response.json::<ClusterGroup>()?)) },
-		_ => { Ok(VirtualizationClusterGroupsRetrieveResponse::None) }
+		r#other_status => { Ok(VirtualizationClusterGroupsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClusterGroupsUpdateResponse {
 	Http200(ClusterGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a cluster group object.
 pub fn virtualization_cluster_groups_update(state: &ThanixClient, body: ClusterGroupRequest, id: i64) -> Result<VirtualizationClusterGroupsUpdateResponse, Error> {
@@ -23846,15 +22178,13 @@ pub fn virtualization_cluster_groups_update(state: &ThanixClient, body: ClusterG
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationClusterGroupsUpdateResponse::Http200(r#response.json::<ClusterGroup>()?)) },
-		_ => { Ok(VirtualizationClusterGroupsUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationClusterGroupsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClusterGroupsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a cluster group object.
 pub fn virtualization_cluster_groups_destroy(state: &ThanixClient, id: i64) -> Result<VirtualizationClusterGroupsDestroyResponse, Error> {
@@ -23862,15 +22192,13 @@ pub fn virtualization_cluster_groups_destroy(state: &ThanixClient, id: i64) -> R
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VirtualizationClusterGroupsDestroyResponse::None) }
+		r#other_status => { Ok(VirtualizationClusterGroupsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClusterGroupsPartialUpdateResponse {
 	Http200(ClusterGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a cluster group object.
 pub fn virtualization_cluster_groups_partial_update(state: &ThanixClient, body: PatchedClusterGroupRequest, id: i64) -> Result<VirtualizationClusterGroupsPartialUpdateResponse, Error> {
@@ -23880,7 +22208,7 @@ pub fn virtualization_cluster_groups_partial_update(state: &ThanixClient, body: 
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationClusterGroupsPartialUpdateResponse::Http200(r#response.json::<ClusterGroup>()?)) },
-		_ => { Ok(VirtualizationClusterGroupsPartialUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationClusterGroupsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -23954,12 +22282,10 @@ pub struct VirtualizationClusterTypesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClusterTypesListResponse {
 	Http200(PaginatedClusterTypeList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of cluster type objects.
 pub fn virtualization_cluster_types_list(state: &ThanixClient, query: VirtualizationClusterTypesListQuery) -> Result<VirtualizationClusterTypesListResponse, Error> {
@@ -23968,15 +22294,13 @@ pub fn virtualization_cluster_types_list(state: &ThanixClient, query: Virtualiza
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationClusterTypesListResponse::Http200(r#response.json::<PaginatedClusterTypeList>()?)) },
-		_ => { Ok(VirtualizationClusterTypesListResponse::None) }
+		r#other_status => { Ok(VirtualizationClusterTypesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClusterTypesBulkUpdateResponse {
 	Http200(Vec<ClusterType>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of cluster type objects.
 pub fn virtualization_cluster_types_bulk_update(state: &ThanixClient, body: Vec<ClusterTypeRequest>) -> Result<VirtualizationClusterTypesBulkUpdateResponse, Error> {
@@ -23986,15 +22310,13 @@ pub fn virtualization_cluster_types_bulk_update(state: &ThanixClient, body: Vec<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationClusterTypesBulkUpdateResponse::Http200(r#response.json::<Vec<ClusterType>>()?)) },
-		_ => { Ok(VirtualizationClusterTypesBulkUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationClusterTypesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClusterTypesCreateResponse {
 	Http201(ClusterType),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of cluster type objects.
 pub fn virtualization_cluster_types_create(state: &ThanixClient, body: ClusterTypeRequest) -> Result<VirtualizationClusterTypesCreateResponse, Error> {
@@ -24004,15 +22326,13 @@ pub fn virtualization_cluster_types_create(state: &ThanixClient, body: ClusterTy
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(VirtualizationClusterTypesCreateResponse::Http201(r#response.json::<ClusterType>()?)) },
-		_ => { Ok(VirtualizationClusterTypesCreateResponse::None) }
+		r#other_status => { Ok(VirtualizationClusterTypesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClusterTypesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of cluster type objects.
 pub fn virtualization_cluster_types_bulk_destroy(state: &ThanixClient, body: Vec<ClusterTypeRequest>) -> Result<VirtualizationClusterTypesBulkDestroyResponse, Error> {
@@ -24021,15 +22341,13 @@ pub fn virtualization_cluster_types_bulk_destroy(state: &ThanixClient, body: Vec
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VirtualizationClusterTypesBulkDestroyResponse::None) }
+		r#other_status => { Ok(VirtualizationClusterTypesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClusterTypesBulkPartialUpdateResponse {
 	Http200(Vec<ClusterType>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of cluster type objects.
 pub fn virtualization_cluster_types_bulk_partial_update(state: &ThanixClient, body: Vec<ClusterTypeRequest>) -> Result<VirtualizationClusterTypesBulkPartialUpdateResponse, Error> {
@@ -24039,15 +22357,13 @@ pub fn virtualization_cluster_types_bulk_partial_update(state: &ThanixClient, bo
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationClusterTypesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ClusterType>>()?)) },
-		_ => { Ok(VirtualizationClusterTypesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationClusterTypesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClusterTypesRetrieveResponse {
 	Http200(ClusterType),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a cluster type object.
 pub fn virtualization_cluster_types_retrieve(state: &ThanixClient, id: i64) -> Result<VirtualizationClusterTypesRetrieveResponse, Error> {
@@ -24056,15 +22372,13 @@ pub fn virtualization_cluster_types_retrieve(state: &ThanixClient, id: i64) -> R
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationClusterTypesRetrieveResponse::Http200(r#response.json::<ClusterType>()?)) },
-		_ => { Ok(VirtualizationClusterTypesRetrieveResponse::None) }
+		r#other_status => { Ok(VirtualizationClusterTypesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClusterTypesUpdateResponse {
 	Http200(ClusterType),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a cluster type object.
 pub fn virtualization_cluster_types_update(state: &ThanixClient, body: ClusterTypeRequest, id: i64) -> Result<VirtualizationClusterTypesUpdateResponse, Error> {
@@ -24074,15 +22388,13 @@ pub fn virtualization_cluster_types_update(state: &ThanixClient, body: ClusterTy
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationClusterTypesUpdateResponse::Http200(r#response.json::<ClusterType>()?)) },
-		_ => { Ok(VirtualizationClusterTypesUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationClusterTypesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClusterTypesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a cluster type object.
 pub fn virtualization_cluster_types_destroy(state: &ThanixClient, id: i64) -> Result<VirtualizationClusterTypesDestroyResponse, Error> {
@@ -24090,15 +22402,13 @@ pub fn virtualization_cluster_types_destroy(state: &ThanixClient, id: i64) -> Re
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VirtualizationClusterTypesDestroyResponse::None) }
+		r#other_status => { Ok(VirtualizationClusterTypesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClusterTypesPartialUpdateResponse {
 	Http200(ClusterType),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a cluster type object.
 pub fn virtualization_cluster_types_partial_update(state: &ThanixClient, body: PatchedClusterTypeRequest, id: i64) -> Result<VirtualizationClusterTypesPartialUpdateResponse, Error> {
@@ -24108,7 +22418,7 @@ pub fn virtualization_cluster_types_partial_update(state: &ThanixClient, body: P
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationClusterTypesPartialUpdateResponse::Http200(r#response.json::<ClusterType>()?)) },
-		_ => { Ok(VirtualizationClusterTypesPartialUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationClusterTypesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -24241,12 +22551,10 @@ pub struct VirtualizationClustersListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClustersListResponse {
 	Http200(PaginatedClusterList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of cluster objects.
 pub fn virtualization_clusters_list(state: &ThanixClient, query: VirtualizationClustersListQuery) -> Result<VirtualizationClustersListResponse, Error> {
@@ -24255,15 +22563,13 @@ pub fn virtualization_clusters_list(state: &ThanixClient, query: VirtualizationC
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationClustersListResponse::Http200(r#response.json::<PaginatedClusterList>()?)) },
-		_ => { Ok(VirtualizationClustersListResponse::None) }
+		r#other_status => { Ok(VirtualizationClustersListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClustersBulkUpdateResponse {
 	Http200(Vec<Cluster>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of cluster objects.
 pub fn virtualization_clusters_bulk_update(state: &ThanixClient, body: Vec<ClusterRequest>) -> Result<VirtualizationClustersBulkUpdateResponse, Error> {
@@ -24273,15 +22579,13 @@ pub fn virtualization_clusters_bulk_update(state: &ThanixClient, body: Vec<Clust
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationClustersBulkUpdateResponse::Http200(r#response.json::<Vec<Cluster>>()?)) },
-		_ => { Ok(VirtualizationClustersBulkUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationClustersBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClustersCreateResponse {
 	Http201(Cluster),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of cluster objects.
 pub fn virtualization_clusters_create(state: &ThanixClient, body: WritableClusterRequest) -> Result<VirtualizationClustersCreateResponse, Error> {
@@ -24291,15 +22595,13 @@ pub fn virtualization_clusters_create(state: &ThanixClient, body: WritableCluste
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(VirtualizationClustersCreateResponse::Http201(r#response.json::<Cluster>()?)) },
-		_ => { Ok(VirtualizationClustersCreateResponse::None) }
+		r#other_status => { Ok(VirtualizationClustersCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClustersBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of cluster objects.
 pub fn virtualization_clusters_bulk_destroy(state: &ThanixClient, body: Vec<ClusterRequest>) -> Result<VirtualizationClustersBulkDestroyResponse, Error> {
@@ -24308,15 +22610,13 @@ pub fn virtualization_clusters_bulk_destroy(state: &ThanixClient, body: Vec<Clus
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VirtualizationClustersBulkDestroyResponse::None) }
+		r#other_status => { Ok(VirtualizationClustersBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClustersBulkPartialUpdateResponse {
 	Http200(Vec<Cluster>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of cluster objects.
 pub fn virtualization_clusters_bulk_partial_update(state: &ThanixClient, body: Vec<ClusterRequest>) -> Result<VirtualizationClustersBulkPartialUpdateResponse, Error> {
@@ -24326,15 +22626,13 @@ pub fn virtualization_clusters_bulk_partial_update(state: &ThanixClient, body: V
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationClustersBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Cluster>>()?)) },
-		_ => { Ok(VirtualizationClustersBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationClustersBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClustersRetrieveResponse {
 	Http200(Cluster),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a cluster object.
 pub fn virtualization_clusters_retrieve(state: &ThanixClient, id: i64) -> Result<VirtualizationClustersRetrieveResponse, Error> {
@@ -24343,15 +22641,13 @@ pub fn virtualization_clusters_retrieve(state: &ThanixClient, id: i64) -> Result
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationClustersRetrieveResponse::Http200(r#response.json::<Cluster>()?)) },
-		_ => { Ok(VirtualizationClustersRetrieveResponse::None) }
+		r#other_status => { Ok(VirtualizationClustersRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClustersUpdateResponse {
 	Http200(Cluster),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a cluster object.
 pub fn virtualization_clusters_update(state: &ThanixClient, body: WritableClusterRequest, id: i64) -> Result<VirtualizationClustersUpdateResponse, Error> {
@@ -24361,15 +22657,13 @@ pub fn virtualization_clusters_update(state: &ThanixClient, body: WritableCluste
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationClustersUpdateResponse::Http200(r#response.json::<Cluster>()?)) },
-		_ => { Ok(VirtualizationClustersUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationClustersUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClustersDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a cluster object.
 pub fn virtualization_clusters_destroy(state: &ThanixClient, id: i64) -> Result<VirtualizationClustersDestroyResponse, Error> {
@@ -24377,15 +22671,13 @@ pub fn virtualization_clusters_destroy(state: &ThanixClient, id: i64) -> Result<
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VirtualizationClustersDestroyResponse::None) }
+		r#other_status => { Ok(VirtualizationClustersDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationClustersPartialUpdateResponse {
 	Http200(Cluster),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a cluster object.
 pub fn virtualization_clusters_partial_update(state: &ThanixClient, body: PatchedWritableClusterRequest, id: i64) -> Result<VirtualizationClustersPartialUpdateResponse, Error> {
@@ -24395,7 +22687,7 @@ pub fn virtualization_clusters_partial_update(state: &ThanixClient, body: Patche
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationClustersPartialUpdateResponse::Http200(r#response.json::<Cluster>()?)) },
-		_ => { Ok(VirtualizationClustersPartialUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationClustersPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -24520,12 +22812,10 @@ pub struct VirtualizationInterfacesListQuery {
 	vrf_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationInterfacesListResponse {
 	Http200(PaginatedVMInterfaceList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of interface objects.
 pub fn virtualization_interfaces_list(state: &ThanixClient, query: VirtualizationInterfacesListQuery) -> Result<VirtualizationInterfacesListResponse, Error> {
@@ -24534,15 +22824,13 @@ pub fn virtualization_interfaces_list(state: &ThanixClient, query: Virtualizatio
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationInterfacesListResponse::Http200(r#response.json::<PaginatedVMInterfaceList>()?)) },
-		_ => { Ok(VirtualizationInterfacesListResponse::None) }
+		r#other_status => { Ok(VirtualizationInterfacesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationInterfacesBulkUpdateResponse {
 	Http200(Vec<VMInterface>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of interface objects.
 pub fn virtualization_interfaces_bulk_update(state: &ThanixClient, body: Vec<VMInterfaceRequest>) -> Result<VirtualizationInterfacesBulkUpdateResponse, Error> {
@@ -24552,15 +22840,13 @@ pub fn virtualization_interfaces_bulk_update(state: &ThanixClient, body: Vec<VMI
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationInterfacesBulkUpdateResponse::Http200(r#response.json::<Vec<VMInterface>>()?)) },
-		_ => { Ok(VirtualizationInterfacesBulkUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationInterfacesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationInterfacesCreateResponse {
 	Http201(VMInterface),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of interface objects.
 pub fn virtualization_interfaces_create(state: &ThanixClient, body: WritableVMInterfaceRequest) -> Result<VirtualizationInterfacesCreateResponse, Error> {
@@ -24570,15 +22856,13 @@ pub fn virtualization_interfaces_create(state: &ThanixClient, body: WritableVMIn
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(VirtualizationInterfacesCreateResponse::Http201(r#response.json::<VMInterface>()?)) },
-		_ => { Ok(VirtualizationInterfacesCreateResponse::None) }
+		r#other_status => { Ok(VirtualizationInterfacesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationInterfacesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of interface objects.
 pub fn virtualization_interfaces_bulk_destroy(state: &ThanixClient, body: Vec<VMInterfaceRequest>) -> Result<VirtualizationInterfacesBulkDestroyResponse, Error> {
@@ -24587,15 +22871,13 @@ pub fn virtualization_interfaces_bulk_destroy(state: &ThanixClient, body: Vec<VM
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VirtualizationInterfacesBulkDestroyResponse::None) }
+		r#other_status => { Ok(VirtualizationInterfacesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationInterfacesBulkPartialUpdateResponse {
 	Http200(Vec<VMInterface>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of interface objects.
 pub fn virtualization_interfaces_bulk_partial_update(state: &ThanixClient, body: Vec<VMInterfaceRequest>) -> Result<VirtualizationInterfacesBulkPartialUpdateResponse, Error> {
@@ -24605,15 +22887,13 @@ pub fn virtualization_interfaces_bulk_partial_update(state: &ThanixClient, body:
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationInterfacesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<VMInterface>>()?)) },
-		_ => { Ok(VirtualizationInterfacesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationInterfacesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationInterfacesRetrieveResponse {
 	Http200(VMInterface),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a interface object.
 pub fn virtualization_interfaces_retrieve(state: &ThanixClient, id: i64) -> Result<VirtualizationInterfacesRetrieveResponse, Error> {
@@ -24622,15 +22902,13 @@ pub fn virtualization_interfaces_retrieve(state: &ThanixClient, id: i64) -> Resu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationInterfacesRetrieveResponse::Http200(r#response.json::<VMInterface>()?)) },
-		_ => { Ok(VirtualizationInterfacesRetrieveResponse::None) }
+		r#other_status => { Ok(VirtualizationInterfacesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationInterfacesUpdateResponse {
 	Http200(VMInterface),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a interface object.
 pub fn virtualization_interfaces_update(state: &ThanixClient, body: WritableVMInterfaceRequest, id: i64) -> Result<VirtualizationInterfacesUpdateResponse, Error> {
@@ -24640,15 +22918,13 @@ pub fn virtualization_interfaces_update(state: &ThanixClient, body: WritableVMIn
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationInterfacesUpdateResponse::Http200(r#response.json::<VMInterface>()?)) },
-		_ => { Ok(VirtualizationInterfacesUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationInterfacesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationInterfacesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a interface object.
 pub fn virtualization_interfaces_destroy(state: &ThanixClient, id: i64) -> Result<VirtualizationInterfacesDestroyResponse, Error> {
@@ -24656,15 +22932,13 @@ pub fn virtualization_interfaces_destroy(state: &ThanixClient, id: i64) -> Resul
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VirtualizationInterfacesDestroyResponse::None) }
+		r#other_status => { Ok(VirtualizationInterfacesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationInterfacesPartialUpdateResponse {
 	Http200(VMInterface),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a interface object.
 pub fn virtualization_interfaces_partial_update(state: &ThanixClient, body: PatchedWritableVMInterfaceRequest, id: i64) -> Result<VirtualizationInterfacesPartialUpdateResponse, Error> {
@@ -24674,7 +22948,7 @@ pub fn virtualization_interfaces_partial_update(state: &ThanixClient, body: Patc
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationInterfacesPartialUpdateResponse::Http200(r#response.json::<VMInterface>()?)) },
-		_ => { Ok(VirtualizationInterfacesPartialUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationInterfacesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -24752,12 +23026,10 @@ pub struct VirtualizationVirtualDisksListQuery {
 	virtual_machine_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationVirtualDisksListResponse {
 	Http200(PaginatedVirtualDiskList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of virtual disk objects.
 pub fn virtualization_virtual_disks_list(state: &ThanixClient, query: VirtualizationVirtualDisksListQuery) -> Result<VirtualizationVirtualDisksListResponse, Error> {
@@ -24766,15 +23038,13 @@ pub fn virtualization_virtual_disks_list(state: &ThanixClient, query: Virtualiza
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationVirtualDisksListResponse::Http200(r#response.json::<PaginatedVirtualDiskList>()?)) },
-		_ => { Ok(VirtualizationVirtualDisksListResponse::None) }
+		r#other_status => { Ok(VirtualizationVirtualDisksListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationVirtualDisksBulkUpdateResponse {
 	Http200(Vec<VirtualDisk>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of virtual disk objects.
 pub fn virtualization_virtual_disks_bulk_update(state: &ThanixClient, body: Vec<VirtualDiskRequest>) -> Result<VirtualizationVirtualDisksBulkUpdateResponse, Error> {
@@ -24784,15 +23054,13 @@ pub fn virtualization_virtual_disks_bulk_update(state: &ThanixClient, body: Vec<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationVirtualDisksBulkUpdateResponse::Http200(r#response.json::<Vec<VirtualDisk>>()?)) },
-		_ => { Ok(VirtualizationVirtualDisksBulkUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationVirtualDisksBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationVirtualDisksCreateResponse {
 	Http201(VirtualDisk),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of virtual disk objects.
 pub fn virtualization_virtual_disks_create(state: &ThanixClient, body: WritableVirtualDiskRequest) -> Result<VirtualizationVirtualDisksCreateResponse, Error> {
@@ -24802,15 +23070,13 @@ pub fn virtualization_virtual_disks_create(state: &ThanixClient, body: WritableV
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(VirtualizationVirtualDisksCreateResponse::Http201(r#response.json::<VirtualDisk>()?)) },
-		_ => { Ok(VirtualizationVirtualDisksCreateResponse::None) }
+		r#other_status => { Ok(VirtualizationVirtualDisksCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationVirtualDisksBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of virtual disk objects.
 pub fn virtualization_virtual_disks_bulk_destroy(state: &ThanixClient, body: Vec<VirtualDiskRequest>) -> Result<VirtualizationVirtualDisksBulkDestroyResponse, Error> {
@@ -24819,15 +23085,13 @@ pub fn virtualization_virtual_disks_bulk_destroy(state: &ThanixClient, body: Vec
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VirtualizationVirtualDisksBulkDestroyResponse::None) }
+		r#other_status => { Ok(VirtualizationVirtualDisksBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationVirtualDisksBulkPartialUpdateResponse {
 	Http200(Vec<VirtualDisk>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of virtual disk objects.
 pub fn virtualization_virtual_disks_bulk_partial_update(state: &ThanixClient, body: Vec<VirtualDiskRequest>) -> Result<VirtualizationVirtualDisksBulkPartialUpdateResponse, Error> {
@@ -24837,15 +23101,13 @@ pub fn virtualization_virtual_disks_bulk_partial_update(state: &ThanixClient, bo
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationVirtualDisksBulkPartialUpdateResponse::Http200(r#response.json::<Vec<VirtualDisk>>()?)) },
-		_ => { Ok(VirtualizationVirtualDisksBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationVirtualDisksBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationVirtualDisksRetrieveResponse {
 	Http200(VirtualDisk),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a virtual disk object.
 pub fn virtualization_virtual_disks_retrieve(state: &ThanixClient, id: i64) -> Result<VirtualizationVirtualDisksRetrieveResponse, Error> {
@@ -24854,15 +23116,13 @@ pub fn virtualization_virtual_disks_retrieve(state: &ThanixClient, id: i64) -> R
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationVirtualDisksRetrieveResponse::Http200(r#response.json::<VirtualDisk>()?)) },
-		_ => { Ok(VirtualizationVirtualDisksRetrieveResponse::None) }
+		r#other_status => { Ok(VirtualizationVirtualDisksRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationVirtualDisksUpdateResponse {
 	Http200(VirtualDisk),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a virtual disk object.
 pub fn virtualization_virtual_disks_update(state: &ThanixClient, body: WritableVirtualDiskRequest, id: i64) -> Result<VirtualizationVirtualDisksUpdateResponse, Error> {
@@ -24872,15 +23132,13 @@ pub fn virtualization_virtual_disks_update(state: &ThanixClient, body: WritableV
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationVirtualDisksUpdateResponse::Http200(r#response.json::<VirtualDisk>()?)) },
-		_ => { Ok(VirtualizationVirtualDisksUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationVirtualDisksUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationVirtualDisksDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a virtual disk object.
 pub fn virtualization_virtual_disks_destroy(state: &ThanixClient, id: i64) -> Result<VirtualizationVirtualDisksDestroyResponse, Error> {
@@ -24888,15 +23146,13 @@ pub fn virtualization_virtual_disks_destroy(state: &ThanixClient, id: i64) -> Re
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VirtualizationVirtualDisksDestroyResponse::None) }
+		r#other_status => { Ok(VirtualizationVirtualDisksDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationVirtualDisksPartialUpdateResponse {
 	Http200(VirtualDisk),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a virtual disk object.
 pub fn virtualization_virtual_disks_partial_update(state: &ThanixClient, body: PatchedWritableVirtualDiskRequest, id: i64) -> Result<VirtualizationVirtualDisksPartialUpdateResponse, Error> {
@@ -24906,7 +23162,7 @@ pub fn virtualization_virtual_disks_partial_update(state: &ThanixClient, body: P
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationVirtualDisksPartialUpdateResponse::Http200(r#response.json::<VirtualDisk>()?)) },
-		_ => { Ok(VirtualizationVirtualDisksPartialUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationVirtualDisksPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -25118,12 +23374,10 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	vcpus__n: Option<Vec<f64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationVirtualMachinesListResponse {
 	Http200(PaginatedVirtualMachineWithConfigContextList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of virtual machine objects.
 pub fn virtualization_virtual_machines_list(state: &ThanixClient, query: VirtualizationVirtualMachinesListQuery) -> Result<VirtualizationVirtualMachinesListResponse, Error> {
@@ -25132,15 +23386,13 @@ pub fn virtualization_virtual_machines_list(state: &ThanixClient, query: Virtual
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationVirtualMachinesListResponse::Http200(r#response.json::<PaginatedVirtualMachineWithConfigContextList>()?)) },
-		_ => { Ok(VirtualizationVirtualMachinesListResponse::None) }
+		r#other_status => { Ok(VirtualizationVirtualMachinesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationVirtualMachinesBulkUpdateResponse {
 	Http200(Vec<VirtualMachineWithConfigContext>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of virtual machine objects.
 pub fn virtualization_virtual_machines_bulk_update(state: &ThanixClient, body: Vec<VirtualMachineWithConfigContextRequest>) -> Result<VirtualizationVirtualMachinesBulkUpdateResponse, Error> {
@@ -25150,15 +23402,13 @@ pub fn virtualization_virtual_machines_bulk_update(state: &ThanixClient, body: V
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationVirtualMachinesBulkUpdateResponse::Http200(r#response.json::<Vec<VirtualMachineWithConfigContext>>()?)) },
-		_ => { Ok(VirtualizationVirtualMachinesBulkUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationVirtualMachinesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationVirtualMachinesCreateResponse {
 	Http201(VirtualMachineWithConfigContext),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of virtual machine objects.
 pub fn virtualization_virtual_machines_create(state: &ThanixClient, body: WritableVirtualMachineWithConfigContextRequest) -> Result<VirtualizationVirtualMachinesCreateResponse, Error> {
@@ -25168,15 +23418,13 @@ pub fn virtualization_virtual_machines_create(state: &ThanixClient, body: Writab
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(VirtualizationVirtualMachinesCreateResponse::Http201(r#response.json::<VirtualMachineWithConfigContext>()?)) },
-		_ => { Ok(VirtualizationVirtualMachinesCreateResponse::None) }
+		r#other_status => { Ok(VirtualizationVirtualMachinesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationVirtualMachinesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of virtual machine objects.
 pub fn virtualization_virtual_machines_bulk_destroy(state: &ThanixClient, body: Vec<VirtualMachineWithConfigContextRequest>) -> Result<VirtualizationVirtualMachinesBulkDestroyResponse, Error> {
@@ -25185,15 +23433,13 @@ pub fn virtualization_virtual_machines_bulk_destroy(state: &ThanixClient, body: 
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VirtualizationVirtualMachinesBulkDestroyResponse::None) }
+		r#other_status => { Ok(VirtualizationVirtualMachinesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationVirtualMachinesBulkPartialUpdateResponse {
 	Http200(Vec<VirtualMachineWithConfigContext>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of virtual machine objects.
 pub fn virtualization_virtual_machines_bulk_partial_update(state: &ThanixClient, body: Vec<VirtualMachineWithConfigContextRequest>) -> Result<VirtualizationVirtualMachinesBulkPartialUpdateResponse, Error> {
@@ -25203,15 +23449,13 @@ pub fn virtualization_virtual_machines_bulk_partial_update(state: &ThanixClient,
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationVirtualMachinesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<VirtualMachineWithConfigContext>>()?)) },
-		_ => { Ok(VirtualizationVirtualMachinesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationVirtualMachinesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationVirtualMachinesRetrieveResponse {
 	Http200(VirtualMachineWithConfigContext),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a virtual machine object.
 pub fn virtualization_virtual_machines_retrieve(state: &ThanixClient, id: i64) -> Result<VirtualizationVirtualMachinesRetrieveResponse, Error> {
@@ -25220,15 +23464,13 @@ pub fn virtualization_virtual_machines_retrieve(state: &ThanixClient, id: i64) -
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationVirtualMachinesRetrieveResponse::Http200(r#response.json::<VirtualMachineWithConfigContext>()?)) },
-		_ => { Ok(VirtualizationVirtualMachinesRetrieveResponse::None) }
+		r#other_status => { Ok(VirtualizationVirtualMachinesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationVirtualMachinesUpdateResponse {
 	Http200(VirtualMachineWithConfigContext),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a virtual machine object.
 pub fn virtualization_virtual_machines_update(state: &ThanixClient, body: WritableVirtualMachineWithConfigContextRequest, id: i64) -> Result<VirtualizationVirtualMachinesUpdateResponse, Error> {
@@ -25238,15 +23480,13 @@ pub fn virtualization_virtual_machines_update(state: &ThanixClient, body: Writab
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationVirtualMachinesUpdateResponse::Http200(r#response.json::<VirtualMachineWithConfigContext>()?)) },
-		_ => { Ok(VirtualizationVirtualMachinesUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationVirtualMachinesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationVirtualMachinesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a virtual machine object.
 pub fn virtualization_virtual_machines_destroy(state: &ThanixClient, id: i64) -> Result<VirtualizationVirtualMachinesDestroyResponse, Error> {
@@ -25254,15 +23494,13 @@ pub fn virtualization_virtual_machines_destroy(state: &ThanixClient, id: i64) ->
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VirtualizationVirtualMachinesDestroyResponse::None) }
+		r#other_status => { Ok(VirtualizationVirtualMachinesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationVirtualMachinesPartialUpdateResponse {
 	Http200(VirtualMachineWithConfigContext),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a virtual machine object.
 pub fn virtualization_virtual_machines_partial_update(state: &ThanixClient, body: PatchedWritableVirtualMachineWithConfigContextRequest, id: i64) -> Result<VirtualizationVirtualMachinesPartialUpdateResponse, Error> {
@@ -25272,7 +23510,7 @@ pub fn virtualization_virtual_machines_partial_update(state: &ThanixClient, body
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationVirtualMachinesPartialUpdateResponse::Http200(r#response.json::<VirtualMachineWithConfigContext>()?)) },
-		_ => { Ok(VirtualizationVirtualMachinesPartialUpdateResponse::None) }
+		r#other_status => { Ok(VirtualizationVirtualMachinesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -25280,12 +23518,10 @@ pub struct VirtualizationVirtualMachinesRenderConfigCreateQuery {
 	format: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VirtualizationVirtualMachinesRenderConfigCreateResponse {
 	Http200(VirtualMachineWithConfigContext),
-	#[default]
-	None
+	Other(Response)
 }
 /// Resolve and render the preferred ConfigTemplate for this Device.
 pub fn virtualization_virtual_machines_render_config_create(state: &ThanixClient, query: VirtualizationVirtualMachinesRenderConfigCreateQuery, body: WritableVirtualMachineWithConfigContextRequest, id: i64) -> Result<VirtualizationVirtualMachinesRenderConfigCreateResponse, Error> {
@@ -25295,7 +23531,7 @@ pub fn virtualization_virtual_machines_render_config_create(state: &ThanixClient
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationVirtualMachinesRenderConfigCreateResponse::Http200(r#response.json::<VirtualMachineWithConfigContext>()?)) },
-		_ => { Ok(VirtualizationVirtualMachinesRenderConfigCreateResponse::None) }
+		r#other_status => { Ok(VirtualizationVirtualMachinesRenderConfigCreateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -25390,12 +23626,10 @@ pub struct VpnIkePoliciesListQuery {
 	version__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIkePoliciesListResponse {
 	Http200(PaginatedIKEPolicyList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of IKE policy objects.
 pub fn vpn_ike_policies_list(state: &ThanixClient, query: VpnIkePoliciesListQuery) -> Result<VpnIkePoliciesListResponse, Error> {
@@ -25404,15 +23638,13 @@ pub fn vpn_ike_policies_list(state: &ThanixClient, query: VpnIkePoliciesListQuer
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIkePoliciesListResponse::Http200(r#response.json::<PaginatedIKEPolicyList>()?)) },
-		_ => { Ok(VpnIkePoliciesListResponse::None) }
+		r#other_status => { Ok(VpnIkePoliciesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIkePoliciesBulkUpdateResponse {
 	Http200(Vec<IKEPolicy>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of IKE policy objects.
 pub fn vpn_ike_policies_bulk_update(state: &ThanixClient, body: Vec<IKEPolicyRequest>) -> Result<VpnIkePoliciesBulkUpdateResponse, Error> {
@@ -25422,15 +23654,13 @@ pub fn vpn_ike_policies_bulk_update(state: &ThanixClient, body: Vec<IKEPolicyReq
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIkePoliciesBulkUpdateResponse::Http200(r#response.json::<Vec<IKEPolicy>>()?)) },
-		_ => { Ok(VpnIkePoliciesBulkUpdateResponse::None) }
+		r#other_status => { Ok(VpnIkePoliciesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIkePoliciesCreateResponse {
 	Http201(IKEPolicy),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of IKE policy objects.
 pub fn vpn_ike_policies_create(state: &ThanixClient, body: WritableIKEPolicyRequest) -> Result<VpnIkePoliciesCreateResponse, Error> {
@@ -25440,15 +23670,13 @@ pub fn vpn_ike_policies_create(state: &ThanixClient, body: WritableIKEPolicyRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(VpnIkePoliciesCreateResponse::Http201(r#response.json::<IKEPolicy>()?)) },
-		_ => { Ok(VpnIkePoliciesCreateResponse::None) }
+		r#other_status => { Ok(VpnIkePoliciesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIkePoliciesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of IKE policy objects.
 pub fn vpn_ike_policies_bulk_destroy(state: &ThanixClient, body: Vec<IKEPolicyRequest>) -> Result<VpnIkePoliciesBulkDestroyResponse, Error> {
@@ -25457,15 +23685,13 @@ pub fn vpn_ike_policies_bulk_destroy(state: &ThanixClient, body: Vec<IKEPolicyRe
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnIkePoliciesBulkDestroyResponse::None) }
+		r#other_status => { Ok(VpnIkePoliciesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIkePoliciesBulkPartialUpdateResponse {
 	Http200(Vec<IKEPolicy>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of IKE policy objects.
 pub fn vpn_ike_policies_bulk_partial_update(state: &ThanixClient, body: Vec<IKEPolicyRequest>) -> Result<VpnIkePoliciesBulkPartialUpdateResponse, Error> {
@@ -25475,15 +23701,13 @@ pub fn vpn_ike_policies_bulk_partial_update(state: &ThanixClient, body: Vec<IKEP
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIkePoliciesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<IKEPolicy>>()?)) },
-		_ => { Ok(VpnIkePoliciesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnIkePoliciesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIkePoliciesRetrieveResponse {
 	Http200(IKEPolicy),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a IKE policy object.
 pub fn vpn_ike_policies_retrieve(state: &ThanixClient, id: i64) -> Result<VpnIkePoliciesRetrieveResponse, Error> {
@@ -25492,15 +23716,13 @@ pub fn vpn_ike_policies_retrieve(state: &ThanixClient, id: i64) -> Result<VpnIke
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIkePoliciesRetrieveResponse::Http200(r#response.json::<IKEPolicy>()?)) },
-		_ => { Ok(VpnIkePoliciesRetrieveResponse::None) }
+		r#other_status => { Ok(VpnIkePoliciesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIkePoliciesUpdateResponse {
 	Http200(IKEPolicy),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a IKE policy object.
 pub fn vpn_ike_policies_update(state: &ThanixClient, body: WritableIKEPolicyRequest, id: i64) -> Result<VpnIkePoliciesUpdateResponse, Error> {
@@ -25510,15 +23732,13 @@ pub fn vpn_ike_policies_update(state: &ThanixClient, body: WritableIKEPolicyRequ
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIkePoliciesUpdateResponse::Http200(r#response.json::<IKEPolicy>()?)) },
-		_ => { Ok(VpnIkePoliciesUpdateResponse::None) }
+		r#other_status => { Ok(VpnIkePoliciesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIkePoliciesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a IKE policy object.
 pub fn vpn_ike_policies_destroy(state: &ThanixClient, id: i64) -> Result<VpnIkePoliciesDestroyResponse, Error> {
@@ -25526,15 +23746,13 @@ pub fn vpn_ike_policies_destroy(state: &ThanixClient, id: i64) -> Result<VpnIkeP
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnIkePoliciesDestroyResponse::None) }
+		r#other_status => { Ok(VpnIkePoliciesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIkePoliciesPartialUpdateResponse {
 	Http200(IKEPolicy),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a IKE policy object.
 pub fn vpn_ike_policies_partial_update(state: &ThanixClient, body: PatchedWritableIKEPolicyRequest, id: i64) -> Result<VpnIkePoliciesPartialUpdateResponse, Error> {
@@ -25544,7 +23762,7 @@ pub fn vpn_ike_policies_partial_update(state: &ThanixClient, body: PatchedWritab
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIkePoliciesPartialUpdateResponse::Http200(r#response.json::<IKEPolicy>()?)) },
-		_ => { Ok(VpnIkePoliciesPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnIkePoliciesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -25624,12 +23842,10 @@ pub struct VpnIkeProposalsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIkeProposalsListResponse {
 	Http200(PaginatedIKEProposalList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of IKE proposal objects.
 pub fn vpn_ike_proposals_list(state: &ThanixClient, query: VpnIkeProposalsListQuery) -> Result<VpnIkeProposalsListResponse, Error> {
@@ -25638,15 +23854,13 @@ pub fn vpn_ike_proposals_list(state: &ThanixClient, query: VpnIkeProposalsListQu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIkeProposalsListResponse::Http200(r#response.json::<PaginatedIKEProposalList>()?)) },
-		_ => { Ok(VpnIkeProposalsListResponse::None) }
+		r#other_status => { Ok(VpnIkeProposalsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIkeProposalsBulkUpdateResponse {
 	Http200(Vec<IKEProposal>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of IKE proposal objects.
 pub fn vpn_ike_proposals_bulk_update(state: &ThanixClient, body: Vec<IKEProposalRequest>) -> Result<VpnIkeProposalsBulkUpdateResponse, Error> {
@@ -25656,15 +23870,13 @@ pub fn vpn_ike_proposals_bulk_update(state: &ThanixClient, body: Vec<IKEProposal
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIkeProposalsBulkUpdateResponse::Http200(r#response.json::<Vec<IKEProposal>>()?)) },
-		_ => { Ok(VpnIkeProposalsBulkUpdateResponse::None) }
+		r#other_status => { Ok(VpnIkeProposalsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIkeProposalsCreateResponse {
 	Http201(IKEProposal),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of IKE proposal objects.
 pub fn vpn_ike_proposals_create(state: &ThanixClient, body: WritableIKEProposalRequest) -> Result<VpnIkeProposalsCreateResponse, Error> {
@@ -25674,15 +23886,13 @@ pub fn vpn_ike_proposals_create(state: &ThanixClient, body: WritableIKEProposalR
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(VpnIkeProposalsCreateResponse::Http201(r#response.json::<IKEProposal>()?)) },
-		_ => { Ok(VpnIkeProposalsCreateResponse::None) }
+		r#other_status => { Ok(VpnIkeProposalsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIkeProposalsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of IKE proposal objects.
 pub fn vpn_ike_proposals_bulk_destroy(state: &ThanixClient, body: Vec<IKEProposalRequest>) -> Result<VpnIkeProposalsBulkDestroyResponse, Error> {
@@ -25691,15 +23901,13 @@ pub fn vpn_ike_proposals_bulk_destroy(state: &ThanixClient, body: Vec<IKEProposa
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnIkeProposalsBulkDestroyResponse::None) }
+		r#other_status => { Ok(VpnIkeProposalsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIkeProposalsBulkPartialUpdateResponse {
 	Http200(Vec<IKEProposal>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of IKE proposal objects.
 pub fn vpn_ike_proposals_bulk_partial_update(state: &ThanixClient, body: Vec<IKEProposalRequest>) -> Result<VpnIkeProposalsBulkPartialUpdateResponse, Error> {
@@ -25709,15 +23917,13 @@ pub fn vpn_ike_proposals_bulk_partial_update(state: &ThanixClient, body: Vec<IKE
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIkeProposalsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<IKEProposal>>()?)) },
-		_ => { Ok(VpnIkeProposalsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnIkeProposalsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIkeProposalsRetrieveResponse {
 	Http200(IKEProposal),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a IKE proposal object.
 pub fn vpn_ike_proposals_retrieve(state: &ThanixClient, id: i64) -> Result<VpnIkeProposalsRetrieveResponse, Error> {
@@ -25726,15 +23932,13 @@ pub fn vpn_ike_proposals_retrieve(state: &ThanixClient, id: i64) -> Result<VpnIk
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIkeProposalsRetrieveResponse::Http200(r#response.json::<IKEProposal>()?)) },
-		_ => { Ok(VpnIkeProposalsRetrieveResponse::None) }
+		r#other_status => { Ok(VpnIkeProposalsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIkeProposalsUpdateResponse {
 	Http200(IKEProposal),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a IKE proposal object.
 pub fn vpn_ike_proposals_update(state: &ThanixClient, body: WritableIKEProposalRequest, id: i64) -> Result<VpnIkeProposalsUpdateResponse, Error> {
@@ -25744,15 +23948,13 @@ pub fn vpn_ike_proposals_update(state: &ThanixClient, body: WritableIKEProposalR
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIkeProposalsUpdateResponse::Http200(r#response.json::<IKEProposal>()?)) },
-		_ => { Ok(VpnIkeProposalsUpdateResponse::None) }
+		r#other_status => { Ok(VpnIkeProposalsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIkeProposalsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a IKE proposal object.
 pub fn vpn_ike_proposals_destroy(state: &ThanixClient, id: i64) -> Result<VpnIkeProposalsDestroyResponse, Error> {
@@ -25760,15 +23962,13 @@ pub fn vpn_ike_proposals_destroy(state: &ThanixClient, id: i64) -> Result<VpnIke
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnIkeProposalsDestroyResponse::None) }
+		r#other_status => { Ok(VpnIkeProposalsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIkeProposalsPartialUpdateResponse {
 	Http200(IKEProposal),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a IKE proposal object.
 pub fn vpn_ike_proposals_partial_update(state: &ThanixClient, body: PatchedWritableIKEProposalRequest, id: i64) -> Result<VpnIkeProposalsPartialUpdateResponse, Error> {
@@ -25778,7 +23978,7 @@ pub fn vpn_ike_proposals_partial_update(state: &ThanixClient, body: PatchedWrita
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIkeProposalsPartialUpdateResponse::Http200(r#response.json::<IKEProposal>()?)) },
-		_ => { Ok(VpnIkeProposalsPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnIkeProposalsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -25863,12 +24063,10 @@ pub struct VpnIpsecPoliciesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecPoliciesListResponse {
 	Http200(PaginatedIPSecPolicyList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of IPSec policy objects.
 pub fn vpn_ipsec_policies_list(state: &ThanixClient, query: VpnIpsecPoliciesListQuery) -> Result<VpnIpsecPoliciesListResponse, Error> {
@@ -25877,15 +24075,13 @@ pub fn vpn_ipsec_policies_list(state: &ThanixClient, query: VpnIpsecPoliciesList
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIpsecPoliciesListResponse::Http200(r#response.json::<PaginatedIPSecPolicyList>()?)) },
-		_ => { Ok(VpnIpsecPoliciesListResponse::None) }
+		r#other_status => { Ok(VpnIpsecPoliciesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecPoliciesBulkUpdateResponse {
 	Http200(Vec<IPSecPolicy>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of IPSec policy objects.
 pub fn vpn_ipsec_policies_bulk_update(state: &ThanixClient, body: Vec<IPSecPolicyRequest>) -> Result<VpnIpsecPoliciesBulkUpdateResponse, Error> {
@@ -25895,15 +24091,13 @@ pub fn vpn_ipsec_policies_bulk_update(state: &ThanixClient, body: Vec<IPSecPolic
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIpsecPoliciesBulkUpdateResponse::Http200(r#response.json::<Vec<IPSecPolicy>>()?)) },
-		_ => { Ok(VpnIpsecPoliciesBulkUpdateResponse::None) }
+		r#other_status => { Ok(VpnIpsecPoliciesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecPoliciesCreateResponse {
 	Http201(IPSecPolicy),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of IPSec policy objects.
 pub fn vpn_ipsec_policies_create(state: &ThanixClient, body: WritableIPSecPolicyRequest) -> Result<VpnIpsecPoliciesCreateResponse, Error> {
@@ -25913,15 +24107,13 @@ pub fn vpn_ipsec_policies_create(state: &ThanixClient, body: WritableIPSecPolicy
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(VpnIpsecPoliciesCreateResponse::Http201(r#response.json::<IPSecPolicy>()?)) },
-		_ => { Ok(VpnIpsecPoliciesCreateResponse::None) }
+		r#other_status => { Ok(VpnIpsecPoliciesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecPoliciesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of IPSec policy objects.
 pub fn vpn_ipsec_policies_bulk_destroy(state: &ThanixClient, body: Vec<IPSecPolicyRequest>) -> Result<VpnIpsecPoliciesBulkDestroyResponse, Error> {
@@ -25930,15 +24122,13 @@ pub fn vpn_ipsec_policies_bulk_destroy(state: &ThanixClient, body: Vec<IPSecPoli
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnIpsecPoliciesBulkDestroyResponse::None) }
+		r#other_status => { Ok(VpnIpsecPoliciesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecPoliciesBulkPartialUpdateResponse {
 	Http200(Vec<IPSecPolicy>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of IPSec policy objects.
 pub fn vpn_ipsec_policies_bulk_partial_update(state: &ThanixClient, body: Vec<IPSecPolicyRequest>) -> Result<VpnIpsecPoliciesBulkPartialUpdateResponse, Error> {
@@ -25948,15 +24138,13 @@ pub fn vpn_ipsec_policies_bulk_partial_update(state: &ThanixClient, body: Vec<IP
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIpsecPoliciesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<IPSecPolicy>>()?)) },
-		_ => { Ok(VpnIpsecPoliciesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnIpsecPoliciesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecPoliciesRetrieveResponse {
 	Http200(IPSecPolicy),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a IPSec policy object.
 pub fn vpn_ipsec_policies_retrieve(state: &ThanixClient, id: i64) -> Result<VpnIpsecPoliciesRetrieveResponse, Error> {
@@ -25965,15 +24153,13 @@ pub fn vpn_ipsec_policies_retrieve(state: &ThanixClient, id: i64) -> Result<VpnI
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIpsecPoliciesRetrieveResponse::Http200(r#response.json::<IPSecPolicy>()?)) },
-		_ => { Ok(VpnIpsecPoliciesRetrieveResponse::None) }
+		r#other_status => { Ok(VpnIpsecPoliciesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecPoliciesUpdateResponse {
 	Http200(IPSecPolicy),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a IPSec policy object.
 pub fn vpn_ipsec_policies_update(state: &ThanixClient, body: WritableIPSecPolicyRequest, id: i64) -> Result<VpnIpsecPoliciesUpdateResponse, Error> {
@@ -25983,15 +24169,13 @@ pub fn vpn_ipsec_policies_update(state: &ThanixClient, body: WritableIPSecPolicy
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIpsecPoliciesUpdateResponse::Http200(r#response.json::<IPSecPolicy>()?)) },
-		_ => { Ok(VpnIpsecPoliciesUpdateResponse::None) }
+		r#other_status => { Ok(VpnIpsecPoliciesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecPoliciesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a IPSec policy object.
 pub fn vpn_ipsec_policies_destroy(state: &ThanixClient, id: i64) -> Result<VpnIpsecPoliciesDestroyResponse, Error> {
@@ -25999,15 +24183,13 @@ pub fn vpn_ipsec_policies_destroy(state: &ThanixClient, id: i64) -> Result<VpnIp
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnIpsecPoliciesDestroyResponse::None) }
+		r#other_status => { Ok(VpnIpsecPoliciesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecPoliciesPartialUpdateResponse {
 	Http200(IPSecPolicy),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a IPSec policy object.
 pub fn vpn_ipsec_policies_partial_update(state: &ThanixClient, body: PatchedWritableIPSecPolicyRequest, id: i64) -> Result<VpnIpsecPoliciesPartialUpdateResponse, Error> {
@@ -26017,7 +24199,7 @@ pub fn vpn_ipsec_policies_partial_update(state: &ThanixClient, body: PatchedWrit
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIpsecPoliciesPartialUpdateResponse::Http200(r#response.json::<IPSecPolicy>()?)) },
-		_ => { Ok(VpnIpsecPoliciesPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnIpsecPoliciesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -26098,12 +24280,10 @@ pub struct VpnIpsecProfilesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecProfilesListResponse {
 	Http200(PaginatedIPSecProfileList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of IPSec profile objects.
 pub fn vpn_ipsec_profiles_list(state: &ThanixClient, query: VpnIpsecProfilesListQuery) -> Result<VpnIpsecProfilesListResponse, Error> {
@@ -26112,15 +24292,13 @@ pub fn vpn_ipsec_profiles_list(state: &ThanixClient, query: VpnIpsecProfilesList
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIpsecProfilesListResponse::Http200(r#response.json::<PaginatedIPSecProfileList>()?)) },
-		_ => { Ok(VpnIpsecProfilesListResponse::None) }
+		r#other_status => { Ok(VpnIpsecProfilesListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecProfilesBulkUpdateResponse {
 	Http200(Vec<IPSecProfile>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of IPSec profile objects.
 pub fn vpn_ipsec_profiles_bulk_update(state: &ThanixClient, body: Vec<IPSecProfileRequest>) -> Result<VpnIpsecProfilesBulkUpdateResponse, Error> {
@@ -26130,15 +24308,13 @@ pub fn vpn_ipsec_profiles_bulk_update(state: &ThanixClient, body: Vec<IPSecProfi
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIpsecProfilesBulkUpdateResponse::Http200(r#response.json::<Vec<IPSecProfile>>()?)) },
-		_ => { Ok(VpnIpsecProfilesBulkUpdateResponse::None) }
+		r#other_status => { Ok(VpnIpsecProfilesBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecProfilesCreateResponse {
 	Http201(IPSecProfile),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of IPSec profile objects.
 pub fn vpn_ipsec_profiles_create(state: &ThanixClient, body: WritableIPSecProfileRequest) -> Result<VpnIpsecProfilesCreateResponse, Error> {
@@ -26148,15 +24324,13 @@ pub fn vpn_ipsec_profiles_create(state: &ThanixClient, body: WritableIPSecProfil
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(VpnIpsecProfilesCreateResponse::Http201(r#response.json::<IPSecProfile>()?)) },
-		_ => { Ok(VpnIpsecProfilesCreateResponse::None) }
+		r#other_status => { Ok(VpnIpsecProfilesCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecProfilesBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of IPSec profile objects.
 pub fn vpn_ipsec_profiles_bulk_destroy(state: &ThanixClient, body: Vec<IPSecProfileRequest>) -> Result<VpnIpsecProfilesBulkDestroyResponse, Error> {
@@ -26165,15 +24339,13 @@ pub fn vpn_ipsec_profiles_bulk_destroy(state: &ThanixClient, body: Vec<IPSecProf
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnIpsecProfilesBulkDestroyResponse::None) }
+		r#other_status => { Ok(VpnIpsecProfilesBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecProfilesBulkPartialUpdateResponse {
 	Http200(Vec<IPSecProfile>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of IPSec profile objects.
 pub fn vpn_ipsec_profiles_bulk_partial_update(state: &ThanixClient, body: Vec<IPSecProfileRequest>) -> Result<VpnIpsecProfilesBulkPartialUpdateResponse, Error> {
@@ -26183,15 +24355,13 @@ pub fn vpn_ipsec_profiles_bulk_partial_update(state: &ThanixClient, body: Vec<IP
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIpsecProfilesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<IPSecProfile>>()?)) },
-		_ => { Ok(VpnIpsecProfilesBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnIpsecProfilesBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecProfilesRetrieveResponse {
 	Http200(IPSecProfile),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a IPSec profile object.
 pub fn vpn_ipsec_profiles_retrieve(state: &ThanixClient, id: i64) -> Result<VpnIpsecProfilesRetrieveResponse, Error> {
@@ -26200,15 +24370,13 @@ pub fn vpn_ipsec_profiles_retrieve(state: &ThanixClient, id: i64) -> Result<VpnI
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIpsecProfilesRetrieveResponse::Http200(r#response.json::<IPSecProfile>()?)) },
-		_ => { Ok(VpnIpsecProfilesRetrieveResponse::None) }
+		r#other_status => { Ok(VpnIpsecProfilesRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecProfilesUpdateResponse {
 	Http200(IPSecProfile),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a IPSec profile object.
 pub fn vpn_ipsec_profiles_update(state: &ThanixClient, body: WritableIPSecProfileRequest, id: i64) -> Result<VpnIpsecProfilesUpdateResponse, Error> {
@@ -26218,15 +24386,13 @@ pub fn vpn_ipsec_profiles_update(state: &ThanixClient, body: WritableIPSecProfil
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIpsecProfilesUpdateResponse::Http200(r#response.json::<IPSecProfile>()?)) },
-		_ => { Ok(VpnIpsecProfilesUpdateResponse::None) }
+		r#other_status => { Ok(VpnIpsecProfilesUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecProfilesDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a IPSec profile object.
 pub fn vpn_ipsec_profiles_destroy(state: &ThanixClient, id: i64) -> Result<VpnIpsecProfilesDestroyResponse, Error> {
@@ -26234,15 +24400,13 @@ pub fn vpn_ipsec_profiles_destroy(state: &ThanixClient, id: i64) -> Result<VpnIp
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnIpsecProfilesDestroyResponse::None) }
+		r#other_status => { Ok(VpnIpsecProfilesDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecProfilesPartialUpdateResponse {
 	Http200(IPSecProfile),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a IPSec profile object.
 pub fn vpn_ipsec_profiles_partial_update(state: &ThanixClient, body: PatchedWritableIPSecProfileRequest, id: i64) -> Result<VpnIpsecProfilesPartialUpdateResponse, Error> {
@@ -26252,7 +24416,7 @@ pub fn vpn_ipsec_profiles_partial_update(state: &ThanixClient, body: PatchedWrit
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIpsecProfilesPartialUpdateResponse::Http200(r#response.json::<IPSecProfile>()?)) },
-		_ => { Ok(VpnIpsecProfilesPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnIpsecProfilesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -26333,12 +24497,10 @@ pub struct VpnIpsecProposalsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecProposalsListResponse {
 	Http200(PaginatedIPSecProposalList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of IPSec proposal objects.
 pub fn vpn_ipsec_proposals_list(state: &ThanixClient, query: VpnIpsecProposalsListQuery) -> Result<VpnIpsecProposalsListResponse, Error> {
@@ -26347,15 +24509,13 @@ pub fn vpn_ipsec_proposals_list(state: &ThanixClient, query: VpnIpsecProposalsLi
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIpsecProposalsListResponse::Http200(r#response.json::<PaginatedIPSecProposalList>()?)) },
-		_ => { Ok(VpnIpsecProposalsListResponse::None) }
+		r#other_status => { Ok(VpnIpsecProposalsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecProposalsBulkUpdateResponse {
 	Http200(Vec<IPSecProposal>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of IPSec proposal objects.
 pub fn vpn_ipsec_proposals_bulk_update(state: &ThanixClient, body: Vec<IPSecProposalRequest>) -> Result<VpnIpsecProposalsBulkUpdateResponse, Error> {
@@ -26365,15 +24525,13 @@ pub fn vpn_ipsec_proposals_bulk_update(state: &ThanixClient, body: Vec<IPSecProp
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIpsecProposalsBulkUpdateResponse::Http200(r#response.json::<Vec<IPSecProposal>>()?)) },
-		_ => { Ok(VpnIpsecProposalsBulkUpdateResponse::None) }
+		r#other_status => { Ok(VpnIpsecProposalsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecProposalsCreateResponse {
 	Http201(IPSecProposal),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of IPSec proposal objects.
 pub fn vpn_ipsec_proposals_create(state: &ThanixClient, body: WritableIPSecProposalRequest) -> Result<VpnIpsecProposalsCreateResponse, Error> {
@@ -26383,15 +24541,13 @@ pub fn vpn_ipsec_proposals_create(state: &ThanixClient, body: WritableIPSecPropo
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(VpnIpsecProposalsCreateResponse::Http201(r#response.json::<IPSecProposal>()?)) },
-		_ => { Ok(VpnIpsecProposalsCreateResponse::None) }
+		r#other_status => { Ok(VpnIpsecProposalsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecProposalsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of IPSec proposal objects.
 pub fn vpn_ipsec_proposals_bulk_destroy(state: &ThanixClient, body: Vec<IPSecProposalRequest>) -> Result<VpnIpsecProposalsBulkDestroyResponse, Error> {
@@ -26400,15 +24556,13 @@ pub fn vpn_ipsec_proposals_bulk_destroy(state: &ThanixClient, body: Vec<IPSecPro
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnIpsecProposalsBulkDestroyResponse::None) }
+		r#other_status => { Ok(VpnIpsecProposalsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecProposalsBulkPartialUpdateResponse {
 	Http200(Vec<IPSecProposal>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of IPSec proposal objects.
 pub fn vpn_ipsec_proposals_bulk_partial_update(state: &ThanixClient, body: Vec<IPSecProposalRequest>) -> Result<VpnIpsecProposalsBulkPartialUpdateResponse, Error> {
@@ -26418,15 +24572,13 @@ pub fn vpn_ipsec_proposals_bulk_partial_update(state: &ThanixClient, body: Vec<I
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIpsecProposalsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<IPSecProposal>>()?)) },
-		_ => { Ok(VpnIpsecProposalsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnIpsecProposalsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecProposalsRetrieveResponse {
 	Http200(IPSecProposal),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a IPSec proposal object.
 pub fn vpn_ipsec_proposals_retrieve(state: &ThanixClient, id: i64) -> Result<VpnIpsecProposalsRetrieveResponse, Error> {
@@ -26435,15 +24587,13 @@ pub fn vpn_ipsec_proposals_retrieve(state: &ThanixClient, id: i64) -> Result<Vpn
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIpsecProposalsRetrieveResponse::Http200(r#response.json::<IPSecProposal>()?)) },
-		_ => { Ok(VpnIpsecProposalsRetrieveResponse::None) }
+		r#other_status => { Ok(VpnIpsecProposalsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecProposalsUpdateResponse {
 	Http200(IPSecProposal),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a IPSec proposal object.
 pub fn vpn_ipsec_proposals_update(state: &ThanixClient, body: WritableIPSecProposalRequest, id: i64) -> Result<VpnIpsecProposalsUpdateResponse, Error> {
@@ -26453,15 +24603,13 @@ pub fn vpn_ipsec_proposals_update(state: &ThanixClient, body: WritableIPSecPropo
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIpsecProposalsUpdateResponse::Http200(r#response.json::<IPSecProposal>()?)) },
-		_ => { Ok(VpnIpsecProposalsUpdateResponse::None) }
+		r#other_status => { Ok(VpnIpsecProposalsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecProposalsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a IPSec proposal object.
 pub fn vpn_ipsec_proposals_destroy(state: &ThanixClient, id: i64) -> Result<VpnIpsecProposalsDestroyResponse, Error> {
@@ -26469,15 +24617,13 @@ pub fn vpn_ipsec_proposals_destroy(state: &ThanixClient, id: i64) -> Result<VpnI
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnIpsecProposalsDestroyResponse::None) }
+		r#other_status => { Ok(VpnIpsecProposalsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnIpsecProposalsPartialUpdateResponse {
 	Http200(IPSecProposal),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a IPSec proposal object.
 pub fn vpn_ipsec_proposals_partial_update(state: &ThanixClient, body: PatchedWritableIPSecProposalRequest, id: i64) -> Result<VpnIpsecProposalsPartialUpdateResponse, Error> {
@@ -26487,7 +24633,7 @@ pub fn vpn_ipsec_proposals_partial_update(state: &ThanixClient, body: PatchedWri
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnIpsecProposalsPartialUpdateResponse::Http200(r#response.json::<IPSecProposal>()?)) },
-		_ => { Ok(VpnIpsecProposalsPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnIpsecProposalsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -26598,12 +24744,10 @@ pub struct VpnL2VpnTerminationsListQuery {
 	vminterface_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnL2VpnTerminationsListResponse {
 	Http200(PaginatedL2VPNTerminationList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of L2VPN termination objects.
 pub fn vpn_l2vpn_terminations_list(state: &ThanixClient, query: VpnL2VpnTerminationsListQuery) -> Result<VpnL2VpnTerminationsListResponse, Error> {
@@ -26612,15 +24756,13 @@ pub fn vpn_l2vpn_terminations_list(state: &ThanixClient, query: VpnL2VpnTerminat
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnL2VpnTerminationsListResponse::Http200(r#response.json::<PaginatedL2VPNTerminationList>()?)) },
-		_ => { Ok(VpnL2VpnTerminationsListResponse::None) }
+		r#other_status => { Ok(VpnL2VpnTerminationsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnL2VpnTerminationsBulkUpdateResponse {
 	Http200(Vec<L2VPNTermination>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of L2VPN termination objects.
 pub fn vpn_l2vpn_terminations_bulk_update(state: &ThanixClient, body: Vec<L2VPNTerminationRequest>) -> Result<VpnL2VpnTerminationsBulkUpdateResponse, Error> {
@@ -26630,15 +24772,13 @@ pub fn vpn_l2vpn_terminations_bulk_update(state: &ThanixClient, body: Vec<L2VPNT
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnL2VpnTerminationsBulkUpdateResponse::Http200(r#response.json::<Vec<L2VPNTermination>>()?)) },
-		_ => { Ok(VpnL2VpnTerminationsBulkUpdateResponse::None) }
+		r#other_status => { Ok(VpnL2VpnTerminationsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnL2VpnTerminationsCreateResponse {
 	Http201(L2VPNTermination),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of L2VPN termination objects.
 pub fn vpn_l2vpn_terminations_create(state: &ThanixClient, body: WritableL2VPNTerminationRequest) -> Result<VpnL2VpnTerminationsCreateResponse, Error> {
@@ -26648,15 +24788,13 @@ pub fn vpn_l2vpn_terminations_create(state: &ThanixClient, body: WritableL2VPNTe
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(VpnL2VpnTerminationsCreateResponse::Http201(r#response.json::<L2VPNTermination>()?)) },
-		_ => { Ok(VpnL2VpnTerminationsCreateResponse::None) }
+		r#other_status => { Ok(VpnL2VpnTerminationsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnL2VpnTerminationsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of L2VPN termination objects.
 pub fn vpn_l2vpn_terminations_bulk_destroy(state: &ThanixClient, body: Vec<L2VPNTerminationRequest>) -> Result<VpnL2VpnTerminationsBulkDestroyResponse, Error> {
@@ -26665,15 +24803,13 @@ pub fn vpn_l2vpn_terminations_bulk_destroy(state: &ThanixClient, body: Vec<L2VPN
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnL2VpnTerminationsBulkDestroyResponse::None) }
+		r#other_status => { Ok(VpnL2VpnTerminationsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnL2VpnTerminationsBulkPartialUpdateResponse {
 	Http200(Vec<L2VPNTermination>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of L2VPN termination objects.
 pub fn vpn_l2vpn_terminations_bulk_partial_update(state: &ThanixClient, body: Vec<L2VPNTerminationRequest>) -> Result<VpnL2VpnTerminationsBulkPartialUpdateResponse, Error> {
@@ -26683,15 +24819,13 @@ pub fn vpn_l2vpn_terminations_bulk_partial_update(state: &ThanixClient, body: Ve
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnL2VpnTerminationsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<L2VPNTermination>>()?)) },
-		_ => { Ok(VpnL2VpnTerminationsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnL2VpnTerminationsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnL2VpnTerminationsRetrieveResponse {
 	Http200(L2VPNTermination),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a L2VPN termination object.
 pub fn vpn_l2vpn_terminations_retrieve(state: &ThanixClient, id: i64) -> Result<VpnL2VpnTerminationsRetrieveResponse, Error> {
@@ -26700,15 +24834,13 @@ pub fn vpn_l2vpn_terminations_retrieve(state: &ThanixClient, id: i64) -> Result<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnL2VpnTerminationsRetrieveResponse::Http200(r#response.json::<L2VPNTermination>()?)) },
-		_ => { Ok(VpnL2VpnTerminationsRetrieveResponse::None) }
+		r#other_status => { Ok(VpnL2VpnTerminationsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnL2VpnTerminationsUpdateResponse {
 	Http200(L2VPNTermination),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a L2VPN termination object.
 pub fn vpn_l2vpn_terminations_update(state: &ThanixClient, body: WritableL2VPNTerminationRequest, id: i64) -> Result<VpnL2VpnTerminationsUpdateResponse, Error> {
@@ -26718,15 +24850,13 @@ pub fn vpn_l2vpn_terminations_update(state: &ThanixClient, body: WritableL2VPNTe
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnL2VpnTerminationsUpdateResponse::Http200(r#response.json::<L2VPNTermination>()?)) },
-		_ => { Ok(VpnL2VpnTerminationsUpdateResponse::None) }
+		r#other_status => { Ok(VpnL2VpnTerminationsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnL2VpnTerminationsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a L2VPN termination object.
 pub fn vpn_l2vpn_terminations_destroy(state: &ThanixClient, id: i64) -> Result<VpnL2VpnTerminationsDestroyResponse, Error> {
@@ -26734,15 +24864,13 @@ pub fn vpn_l2vpn_terminations_destroy(state: &ThanixClient, id: i64) -> Result<V
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnL2VpnTerminationsDestroyResponse::None) }
+		r#other_status => { Ok(VpnL2VpnTerminationsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnL2VpnTerminationsPartialUpdateResponse {
 	Http200(L2VPNTermination),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a L2VPN termination object.
 pub fn vpn_l2vpn_terminations_partial_update(state: &ThanixClient, body: PatchedWritableL2VPNTerminationRequest, id: i64) -> Result<VpnL2VpnTerminationsPartialUpdateResponse, Error> {
@@ -26752,7 +24880,7 @@ pub fn vpn_l2vpn_terminations_partial_update(state: &ThanixClient, body: Patched
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnL2VpnTerminationsPartialUpdateResponse::Http200(r#response.json::<L2VPNTermination>()?)) },
-		_ => { Ok(VpnL2VpnTerminationsPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnL2VpnTerminationsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -26867,12 +24995,10 @@ pub struct VpnL2VpnsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnL2VpnsListResponse {
 	Http200(PaginatedL2VPNList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of L2VPN objects.
 pub fn vpn_l2vpns_list(state: &ThanixClient, query: VpnL2VpnsListQuery) -> Result<VpnL2VpnsListResponse, Error> {
@@ -26881,15 +25007,13 @@ pub fn vpn_l2vpns_list(state: &ThanixClient, query: VpnL2VpnsListQuery) -> Resul
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnL2VpnsListResponse::Http200(r#response.json::<PaginatedL2VPNList>()?)) },
-		_ => { Ok(VpnL2VpnsListResponse::None) }
+		r#other_status => { Ok(VpnL2VpnsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnL2VpnsBulkUpdateResponse {
 	Http200(Vec<L2VPN>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of L2VPN objects.
 pub fn vpn_l2vpns_bulk_update(state: &ThanixClient, body: Vec<L2VPNRequest>) -> Result<VpnL2VpnsBulkUpdateResponse, Error> {
@@ -26899,15 +25023,13 @@ pub fn vpn_l2vpns_bulk_update(state: &ThanixClient, body: Vec<L2VPNRequest>) -> 
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnL2VpnsBulkUpdateResponse::Http200(r#response.json::<Vec<L2VPN>>()?)) },
-		_ => { Ok(VpnL2VpnsBulkUpdateResponse::None) }
+		r#other_status => { Ok(VpnL2VpnsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnL2VpnsCreateResponse {
 	Http201(L2VPN),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of L2VPN objects.
 pub fn vpn_l2vpns_create(state: &ThanixClient, body: WritableL2VPNRequest) -> Result<VpnL2VpnsCreateResponse, Error> {
@@ -26917,15 +25039,13 @@ pub fn vpn_l2vpns_create(state: &ThanixClient, body: WritableL2VPNRequest) -> Re
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(VpnL2VpnsCreateResponse::Http201(r#response.json::<L2VPN>()?)) },
-		_ => { Ok(VpnL2VpnsCreateResponse::None) }
+		r#other_status => { Ok(VpnL2VpnsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnL2VpnsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of L2VPN objects.
 pub fn vpn_l2vpns_bulk_destroy(state: &ThanixClient, body: Vec<L2VPNRequest>) -> Result<VpnL2VpnsBulkDestroyResponse, Error> {
@@ -26934,15 +25054,13 @@ pub fn vpn_l2vpns_bulk_destroy(state: &ThanixClient, body: Vec<L2VPNRequest>) ->
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnL2VpnsBulkDestroyResponse::None) }
+		r#other_status => { Ok(VpnL2VpnsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnL2VpnsBulkPartialUpdateResponse {
 	Http200(Vec<L2VPN>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of L2VPN objects.
 pub fn vpn_l2vpns_bulk_partial_update(state: &ThanixClient, body: Vec<L2VPNRequest>) -> Result<VpnL2VpnsBulkPartialUpdateResponse, Error> {
@@ -26952,15 +25070,13 @@ pub fn vpn_l2vpns_bulk_partial_update(state: &ThanixClient, body: Vec<L2VPNReque
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnL2VpnsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<L2VPN>>()?)) },
-		_ => { Ok(VpnL2VpnsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnL2VpnsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnL2VpnsRetrieveResponse {
 	Http200(L2VPN),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a L2VPN object.
 pub fn vpn_l2vpns_retrieve(state: &ThanixClient, id: i64) -> Result<VpnL2VpnsRetrieveResponse, Error> {
@@ -26969,15 +25085,13 @@ pub fn vpn_l2vpns_retrieve(state: &ThanixClient, id: i64) -> Result<VpnL2VpnsRet
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnL2VpnsRetrieveResponse::Http200(r#response.json::<L2VPN>()?)) },
-		_ => { Ok(VpnL2VpnsRetrieveResponse::None) }
+		r#other_status => { Ok(VpnL2VpnsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnL2VpnsUpdateResponse {
 	Http200(L2VPN),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a L2VPN object.
 pub fn vpn_l2vpns_update(state: &ThanixClient, body: WritableL2VPNRequest, id: i64) -> Result<VpnL2VpnsUpdateResponse, Error> {
@@ -26987,15 +25101,13 @@ pub fn vpn_l2vpns_update(state: &ThanixClient, body: WritableL2VPNRequest, id: i
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnL2VpnsUpdateResponse::Http200(r#response.json::<L2VPN>()?)) },
-		_ => { Ok(VpnL2VpnsUpdateResponse::None) }
+		r#other_status => { Ok(VpnL2VpnsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnL2VpnsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a L2VPN object.
 pub fn vpn_l2vpns_destroy(state: &ThanixClient, id: i64) -> Result<VpnL2VpnsDestroyResponse, Error> {
@@ -27003,15 +25115,13 @@ pub fn vpn_l2vpns_destroy(state: &ThanixClient, id: i64) -> Result<VpnL2VpnsDest
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnL2VpnsDestroyResponse::None) }
+		r#other_status => { Ok(VpnL2VpnsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnL2VpnsPartialUpdateResponse {
 	Http200(L2VPN),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a L2VPN object.
 pub fn vpn_l2vpns_partial_update(state: &ThanixClient, body: PatchedWritableL2VPNRequest, id: i64) -> Result<VpnL2VpnsPartialUpdateResponse, Error> {
@@ -27021,7 +25131,7 @@ pub fn vpn_l2vpns_partial_update(state: &ThanixClient, body: PatchedWritableL2VP
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnL2VpnsPartialUpdateResponse::Http200(r#response.json::<L2VPN>()?)) },
-		_ => { Ok(VpnL2VpnsPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnL2VpnsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -27095,12 +25205,10 @@ pub struct VpnTunnelGroupsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelGroupsListResponse {
 	Http200(PaginatedTunnelGroupList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of tunnel group objects.
 pub fn vpn_tunnel_groups_list(state: &ThanixClient, query: VpnTunnelGroupsListQuery) -> Result<VpnTunnelGroupsListResponse, Error> {
@@ -27109,15 +25217,13 @@ pub fn vpn_tunnel_groups_list(state: &ThanixClient, query: VpnTunnelGroupsListQu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnTunnelGroupsListResponse::Http200(r#response.json::<PaginatedTunnelGroupList>()?)) },
-		_ => { Ok(VpnTunnelGroupsListResponse::None) }
+		r#other_status => { Ok(VpnTunnelGroupsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelGroupsBulkUpdateResponse {
 	Http200(Vec<TunnelGroup>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of tunnel group objects.
 pub fn vpn_tunnel_groups_bulk_update(state: &ThanixClient, body: Vec<TunnelGroupRequest>) -> Result<VpnTunnelGroupsBulkUpdateResponse, Error> {
@@ -27127,15 +25233,13 @@ pub fn vpn_tunnel_groups_bulk_update(state: &ThanixClient, body: Vec<TunnelGroup
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnTunnelGroupsBulkUpdateResponse::Http200(r#response.json::<Vec<TunnelGroup>>()?)) },
-		_ => { Ok(VpnTunnelGroupsBulkUpdateResponse::None) }
+		r#other_status => { Ok(VpnTunnelGroupsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelGroupsCreateResponse {
 	Http201(TunnelGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of tunnel group objects.
 pub fn vpn_tunnel_groups_create(state: &ThanixClient, body: TunnelGroupRequest) -> Result<VpnTunnelGroupsCreateResponse, Error> {
@@ -27145,15 +25249,13 @@ pub fn vpn_tunnel_groups_create(state: &ThanixClient, body: TunnelGroupRequest) 
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(VpnTunnelGroupsCreateResponse::Http201(r#response.json::<TunnelGroup>()?)) },
-		_ => { Ok(VpnTunnelGroupsCreateResponse::None) }
+		r#other_status => { Ok(VpnTunnelGroupsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelGroupsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of tunnel group objects.
 pub fn vpn_tunnel_groups_bulk_destroy(state: &ThanixClient, body: Vec<TunnelGroupRequest>) -> Result<VpnTunnelGroupsBulkDestroyResponse, Error> {
@@ -27162,15 +25264,13 @@ pub fn vpn_tunnel_groups_bulk_destroy(state: &ThanixClient, body: Vec<TunnelGrou
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnTunnelGroupsBulkDestroyResponse::None) }
+		r#other_status => { Ok(VpnTunnelGroupsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelGroupsBulkPartialUpdateResponse {
 	Http200(Vec<TunnelGroup>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of tunnel group objects.
 pub fn vpn_tunnel_groups_bulk_partial_update(state: &ThanixClient, body: Vec<TunnelGroupRequest>) -> Result<VpnTunnelGroupsBulkPartialUpdateResponse, Error> {
@@ -27180,15 +25280,13 @@ pub fn vpn_tunnel_groups_bulk_partial_update(state: &ThanixClient, body: Vec<Tun
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnTunnelGroupsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<TunnelGroup>>()?)) },
-		_ => { Ok(VpnTunnelGroupsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnTunnelGroupsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelGroupsRetrieveResponse {
 	Http200(TunnelGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a tunnel group object.
 pub fn vpn_tunnel_groups_retrieve(state: &ThanixClient, id: i64) -> Result<VpnTunnelGroupsRetrieveResponse, Error> {
@@ -27197,15 +25295,13 @@ pub fn vpn_tunnel_groups_retrieve(state: &ThanixClient, id: i64) -> Result<VpnTu
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnTunnelGroupsRetrieveResponse::Http200(r#response.json::<TunnelGroup>()?)) },
-		_ => { Ok(VpnTunnelGroupsRetrieveResponse::None) }
+		r#other_status => { Ok(VpnTunnelGroupsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelGroupsUpdateResponse {
 	Http200(TunnelGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a tunnel group object.
 pub fn vpn_tunnel_groups_update(state: &ThanixClient, body: TunnelGroupRequest, id: i64) -> Result<VpnTunnelGroupsUpdateResponse, Error> {
@@ -27215,15 +25311,13 @@ pub fn vpn_tunnel_groups_update(state: &ThanixClient, body: TunnelGroupRequest, 
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnTunnelGroupsUpdateResponse::Http200(r#response.json::<TunnelGroup>()?)) },
-		_ => { Ok(VpnTunnelGroupsUpdateResponse::None) }
+		r#other_status => { Ok(VpnTunnelGroupsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelGroupsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a tunnel group object.
 pub fn vpn_tunnel_groups_destroy(state: &ThanixClient, id: i64) -> Result<VpnTunnelGroupsDestroyResponse, Error> {
@@ -27231,15 +25325,13 @@ pub fn vpn_tunnel_groups_destroy(state: &ThanixClient, id: i64) -> Result<VpnTun
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnTunnelGroupsDestroyResponse::None) }
+		r#other_status => { Ok(VpnTunnelGroupsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelGroupsPartialUpdateResponse {
 	Http200(TunnelGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a tunnel group object.
 pub fn vpn_tunnel_groups_partial_update(state: &ThanixClient, body: PatchedTunnelGroupRequest, id: i64) -> Result<VpnTunnelGroupsPartialUpdateResponse, Error> {
@@ -27249,7 +25341,7 @@ pub fn vpn_tunnel_groups_partial_update(state: &ThanixClient, body: PatchedTunne
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnTunnelGroupsPartialUpdateResponse::Http200(r#response.json::<TunnelGroup>()?)) },
-		_ => { Ok(VpnTunnelGroupsPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnTunnelGroupsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -27322,12 +25414,10 @@ pub struct VpnTunnelTerminationsListQuery {
 	vminterface_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelTerminationsListResponse {
 	Http200(PaginatedTunnelTerminationList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of tunnel termination objects.
 pub fn vpn_tunnel_terminations_list(state: &ThanixClient, query: VpnTunnelTerminationsListQuery) -> Result<VpnTunnelTerminationsListResponse, Error> {
@@ -27336,15 +25426,13 @@ pub fn vpn_tunnel_terminations_list(state: &ThanixClient, query: VpnTunnelTermin
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnTunnelTerminationsListResponse::Http200(r#response.json::<PaginatedTunnelTerminationList>()?)) },
-		_ => { Ok(VpnTunnelTerminationsListResponse::None) }
+		r#other_status => { Ok(VpnTunnelTerminationsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelTerminationsBulkUpdateResponse {
 	Http200(Vec<TunnelTermination>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of tunnel termination objects.
 pub fn vpn_tunnel_terminations_bulk_update(state: &ThanixClient, body: Vec<TunnelTerminationRequest>) -> Result<VpnTunnelTerminationsBulkUpdateResponse, Error> {
@@ -27354,15 +25442,13 @@ pub fn vpn_tunnel_terminations_bulk_update(state: &ThanixClient, body: Vec<Tunne
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnTunnelTerminationsBulkUpdateResponse::Http200(r#response.json::<Vec<TunnelTermination>>()?)) },
-		_ => { Ok(VpnTunnelTerminationsBulkUpdateResponse::None) }
+		r#other_status => { Ok(VpnTunnelTerminationsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelTerminationsCreateResponse {
 	Http201(TunnelTermination),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of tunnel termination objects.
 pub fn vpn_tunnel_terminations_create(state: &ThanixClient, body: WritableTunnelTerminationRequest) -> Result<VpnTunnelTerminationsCreateResponse, Error> {
@@ -27372,15 +25458,13 @@ pub fn vpn_tunnel_terminations_create(state: &ThanixClient, body: WritableTunnel
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(VpnTunnelTerminationsCreateResponse::Http201(r#response.json::<TunnelTermination>()?)) },
-		_ => { Ok(VpnTunnelTerminationsCreateResponse::None) }
+		r#other_status => { Ok(VpnTunnelTerminationsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelTerminationsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of tunnel termination objects.
 pub fn vpn_tunnel_terminations_bulk_destroy(state: &ThanixClient, body: Vec<TunnelTerminationRequest>) -> Result<VpnTunnelTerminationsBulkDestroyResponse, Error> {
@@ -27389,15 +25473,13 @@ pub fn vpn_tunnel_terminations_bulk_destroy(state: &ThanixClient, body: Vec<Tunn
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnTunnelTerminationsBulkDestroyResponse::None) }
+		r#other_status => { Ok(VpnTunnelTerminationsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelTerminationsBulkPartialUpdateResponse {
 	Http200(Vec<TunnelTermination>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of tunnel termination objects.
 pub fn vpn_tunnel_terminations_bulk_partial_update(state: &ThanixClient, body: Vec<TunnelTerminationRequest>) -> Result<VpnTunnelTerminationsBulkPartialUpdateResponse, Error> {
@@ -27407,15 +25489,13 @@ pub fn vpn_tunnel_terminations_bulk_partial_update(state: &ThanixClient, body: V
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnTunnelTerminationsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<TunnelTermination>>()?)) },
-		_ => { Ok(VpnTunnelTerminationsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnTunnelTerminationsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelTerminationsRetrieveResponse {
 	Http200(TunnelTermination),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a tunnel termination object.
 pub fn vpn_tunnel_terminations_retrieve(state: &ThanixClient, id: i64) -> Result<VpnTunnelTerminationsRetrieveResponse, Error> {
@@ -27424,15 +25504,13 @@ pub fn vpn_tunnel_terminations_retrieve(state: &ThanixClient, id: i64) -> Result
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnTunnelTerminationsRetrieveResponse::Http200(r#response.json::<TunnelTermination>()?)) },
-		_ => { Ok(VpnTunnelTerminationsRetrieveResponse::None) }
+		r#other_status => { Ok(VpnTunnelTerminationsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelTerminationsUpdateResponse {
 	Http200(TunnelTermination),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a tunnel termination object.
 pub fn vpn_tunnel_terminations_update(state: &ThanixClient, body: WritableTunnelTerminationRequest, id: i64) -> Result<VpnTunnelTerminationsUpdateResponse, Error> {
@@ -27442,15 +25520,13 @@ pub fn vpn_tunnel_terminations_update(state: &ThanixClient, body: WritableTunnel
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnTunnelTerminationsUpdateResponse::Http200(r#response.json::<TunnelTermination>()?)) },
-		_ => { Ok(VpnTunnelTerminationsUpdateResponse::None) }
+		r#other_status => { Ok(VpnTunnelTerminationsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelTerminationsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a tunnel termination object.
 pub fn vpn_tunnel_terminations_destroy(state: &ThanixClient, id: i64) -> Result<VpnTunnelTerminationsDestroyResponse, Error> {
@@ -27458,15 +25534,13 @@ pub fn vpn_tunnel_terminations_destroy(state: &ThanixClient, id: i64) -> Result<
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnTunnelTerminationsDestroyResponse::None) }
+		r#other_status => { Ok(VpnTunnelTerminationsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelTerminationsPartialUpdateResponse {
 	Http200(TunnelTermination),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a tunnel termination object.
 pub fn vpn_tunnel_terminations_partial_update(state: &ThanixClient, body: PatchedWritableTunnelTerminationRequest, id: i64) -> Result<VpnTunnelTerminationsPartialUpdateResponse, Error> {
@@ -27476,7 +25550,7 @@ pub fn vpn_tunnel_terminations_partial_update(state: &ThanixClient, body: Patche
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnTunnelTerminationsPartialUpdateResponse::Http200(r#response.json::<TunnelTermination>()?)) },
-		_ => { Ok(VpnTunnelTerminationsPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnTunnelTerminationsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -27582,12 +25656,10 @@ pub struct VpnTunnelsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelsListResponse {
 	Http200(PaginatedTunnelList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of tunnel objects.
 pub fn vpn_tunnels_list(state: &ThanixClient, query: VpnTunnelsListQuery) -> Result<VpnTunnelsListResponse, Error> {
@@ -27596,15 +25668,13 @@ pub fn vpn_tunnels_list(state: &ThanixClient, query: VpnTunnelsListQuery) -> Res
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnTunnelsListResponse::Http200(r#response.json::<PaginatedTunnelList>()?)) },
-		_ => { Ok(VpnTunnelsListResponse::None) }
+		r#other_status => { Ok(VpnTunnelsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelsBulkUpdateResponse {
 	Http200(Vec<Tunnel>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of tunnel objects.
 pub fn vpn_tunnels_bulk_update(state: &ThanixClient, body: Vec<TunnelRequest>) -> Result<VpnTunnelsBulkUpdateResponse, Error> {
@@ -27614,15 +25684,13 @@ pub fn vpn_tunnels_bulk_update(state: &ThanixClient, body: Vec<TunnelRequest>) -
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnTunnelsBulkUpdateResponse::Http200(r#response.json::<Vec<Tunnel>>()?)) },
-		_ => { Ok(VpnTunnelsBulkUpdateResponse::None) }
+		r#other_status => { Ok(VpnTunnelsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelsCreateResponse {
 	Http201(Tunnel),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of tunnel objects.
 pub fn vpn_tunnels_create(state: &ThanixClient, body: WritableTunnelRequest) -> Result<VpnTunnelsCreateResponse, Error> {
@@ -27632,15 +25700,13 @@ pub fn vpn_tunnels_create(state: &ThanixClient, body: WritableTunnelRequest) -> 
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(VpnTunnelsCreateResponse::Http201(r#response.json::<Tunnel>()?)) },
-		_ => { Ok(VpnTunnelsCreateResponse::None) }
+		r#other_status => { Ok(VpnTunnelsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of tunnel objects.
 pub fn vpn_tunnels_bulk_destroy(state: &ThanixClient, body: Vec<TunnelRequest>) -> Result<VpnTunnelsBulkDestroyResponse, Error> {
@@ -27649,15 +25715,13 @@ pub fn vpn_tunnels_bulk_destroy(state: &ThanixClient, body: Vec<TunnelRequest>) 
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnTunnelsBulkDestroyResponse::None) }
+		r#other_status => { Ok(VpnTunnelsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelsBulkPartialUpdateResponse {
 	Http200(Vec<Tunnel>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of tunnel objects.
 pub fn vpn_tunnels_bulk_partial_update(state: &ThanixClient, body: Vec<TunnelRequest>) -> Result<VpnTunnelsBulkPartialUpdateResponse, Error> {
@@ -27667,15 +25731,13 @@ pub fn vpn_tunnels_bulk_partial_update(state: &ThanixClient, body: Vec<TunnelReq
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnTunnelsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Tunnel>>()?)) },
-		_ => { Ok(VpnTunnelsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnTunnelsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelsRetrieveResponse {
 	Http200(Tunnel),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a tunnel object.
 pub fn vpn_tunnels_retrieve(state: &ThanixClient, id: i64) -> Result<VpnTunnelsRetrieveResponse, Error> {
@@ -27684,15 +25746,13 @@ pub fn vpn_tunnels_retrieve(state: &ThanixClient, id: i64) -> Result<VpnTunnelsR
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnTunnelsRetrieveResponse::Http200(r#response.json::<Tunnel>()?)) },
-		_ => { Ok(VpnTunnelsRetrieveResponse::None) }
+		r#other_status => { Ok(VpnTunnelsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelsUpdateResponse {
 	Http200(Tunnel),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a tunnel object.
 pub fn vpn_tunnels_update(state: &ThanixClient, body: WritableTunnelRequest, id: i64) -> Result<VpnTunnelsUpdateResponse, Error> {
@@ -27702,15 +25762,13 @@ pub fn vpn_tunnels_update(state: &ThanixClient, body: WritableTunnelRequest, id:
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnTunnelsUpdateResponse::Http200(r#response.json::<Tunnel>()?)) },
-		_ => { Ok(VpnTunnelsUpdateResponse::None) }
+		r#other_status => { Ok(VpnTunnelsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a tunnel object.
 pub fn vpn_tunnels_destroy(state: &ThanixClient, id: i64) -> Result<VpnTunnelsDestroyResponse, Error> {
@@ -27718,15 +25776,13 @@ pub fn vpn_tunnels_destroy(state: &ThanixClient, id: i64) -> Result<VpnTunnelsDe
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(VpnTunnelsDestroyResponse::None) }
+		r#other_status => { Ok(VpnTunnelsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum VpnTunnelsPartialUpdateResponse {
 	Http200(Tunnel),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a tunnel object.
 pub fn vpn_tunnels_partial_update(state: &ThanixClient, body: PatchedWritableTunnelRequest, id: i64) -> Result<VpnTunnelsPartialUpdateResponse, Error> {
@@ -27736,7 +25792,7 @@ pub fn vpn_tunnels_partial_update(state: &ThanixClient, body: PatchedWritableTun
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(VpnTunnelsPartialUpdateResponse::Http200(r#response.json::<Tunnel>()?)) },
-		_ => { Ok(VpnTunnelsPartialUpdateResponse::None) }
+		r#other_status => { Ok(VpnTunnelsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -27814,12 +25870,10 @@ pub struct WirelessWirelessLanGroupsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLanGroupsListResponse {
 	Http200(PaginatedWirelessLANGroupList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of wireless LAN group objects.
 pub fn wireless_wireless_lan_groups_list(state: &ThanixClient, query: WirelessWirelessLanGroupsListQuery) -> Result<WirelessWirelessLanGroupsListResponse, Error> {
@@ -27828,15 +25882,13 @@ pub fn wireless_wireless_lan_groups_list(state: &ThanixClient, query: WirelessWi
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(WirelessWirelessLanGroupsListResponse::Http200(r#response.json::<PaginatedWirelessLANGroupList>()?)) },
-		_ => { Ok(WirelessWirelessLanGroupsListResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLanGroupsListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLanGroupsBulkUpdateResponse {
 	Http200(Vec<WirelessLANGroup>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of wireless LAN group objects.
 pub fn wireless_wireless_lan_groups_bulk_update(state: &ThanixClient, body: Vec<WirelessLANGroupRequest>) -> Result<WirelessWirelessLanGroupsBulkUpdateResponse, Error> {
@@ -27846,15 +25898,13 @@ pub fn wireless_wireless_lan_groups_bulk_update(state: &ThanixClient, body: Vec<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(WirelessWirelessLanGroupsBulkUpdateResponse::Http200(r#response.json::<Vec<WirelessLANGroup>>()?)) },
-		_ => { Ok(WirelessWirelessLanGroupsBulkUpdateResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLanGroupsBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLanGroupsCreateResponse {
 	Http201(WirelessLANGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of wireless LAN group objects.
 pub fn wireless_wireless_lan_groups_create(state: &ThanixClient, body: WritableWirelessLANGroupRequest) -> Result<WirelessWirelessLanGroupsCreateResponse, Error> {
@@ -27864,15 +25914,13 @@ pub fn wireless_wireless_lan_groups_create(state: &ThanixClient, body: WritableW
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(WirelessWirelessLanGroupsCreateResponse::Http201(r#response.json::<WirelessLANGroup>()?)) },
-		_ => { Ok(WirelessWirelessLanGroupsCreateResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLanGroupsCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLanGroupsBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of wireless LAN group objects.
 pub fn wireless_wireless_lan_groups_bulk_destroy(state: &ThanixClient, body: Vec<WirelessLANGroupRequest>) -> Result<WirelessWirelessLanGroupsBulkDestroyResponse, Error> {
@@ -27881,15 +25929,13 @@ pub fn wireless_wireless_lan_groups_bulk_destroy(state: &ThanixClient, body: Vec
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(WirelessWirelessLanGroupsBulkDestroyResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLanGroupsBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLanGroupsBulkPartialUpdateResponse {
 	Http200(Vec<WirelessLANGroup>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of wireless LAN group objects.
 pub fn wireless_wireless_lan_groups_bulk_partial_update(state: &ThanixClient, body: Vec<WirelessLANGroupRequest>) -> Result<WirelessWirelessLanGroupsBulkPartialUpdateResponse, Error> {
@@ -27899,15 +25945,13 @@ pub fn wireless_wireless_lan_groups_bulk_partial_update(state: &ThanixClient, bo
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(WirelessWirelessLanGroupsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<WirelessLANGroup>>()?)) },
-		_ => { Ok(WirelessWirelessLanGroupsBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLanGroupsBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLanGroupsRetrieveResponse {
 	Http200(WirelessLANGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a wireless LAN group object.
 pub fn wireless_wireless_lan_groups_retrieve(state: &ThanixClient, id: i64) -> Result<WirelessWirelessLanGroupsRetrieveResponse, Error> {
@@ -27916,15 +25960,13 @@ pub fn wireless_wireless_lan_groups_retrieve(state: &ThanixClient, id: i64) -> R
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(WirelessWirelessLanGroupsRetrieveResponse::Http200(r#response.json::<WirelessLANGroup>()?)) },
-		_ => { Ok(WirelessWirelessLanGroupsRetrieveResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLanGroupsRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLanGroupsUpdateResponse {
 	Http200(WirelessLANGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a wireless LAN group object.
 pub fn wireless_wireless_lan_groups_update(state: &ThanixClient, body: WritableWirelessLANGroupRequest, id: i64) -> Result<WirelessWirelessLanGroupsUpdateResponse, Error> {
@@ -27934,15 +25976,13 @@ pub fn wireless_wireless_lan_groups_update(state: &ThanixClient, body: WritableW
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(WirelessWirelessLanGroupsUpdateResponse::Http200(r#response.json::<WirelessLANGroup>()?)) },
-		_ => { Ok(WirelessWirelessLanGroupsUpdateResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLanGroupsUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLanGroupsDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a wireless LAN group object.
 pub fn wireless_wireless_lan_groups_destroy(state: &ThanixClient, id: i64) -> Result<WirelessWirelessLanGroupsDestroyResponse, Error> {
@@ -27950,15 +25990,13 @@ pub fn wireless_wireless_lan_groups_destroy(state: &ThanixClient, id: i64) -> Re
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(WirelessWirelessLanGroupsDestroyResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLanGroupsDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLanGroupsPartialUpdateResponse {
 	Http200(WirelessLANGroup),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a wireless LAN group object.
 pub fn wireless_wireless_lan_groups_partial_update(state: &ThanixClient, body: PatchedWritableWirelessLANGroupRequest, id: i64) -> Result<WirelessWirelessLanGroupsPartialUpdateResponse, Error> {
@@ -27968,7 +26006,7 @@ pub fn wireless_wireless_lan_groups_partial_update(state: &ThanixClient, body: P
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(WirelessWirelessLanGroupsPartialUpdateResponse::Http200(r#response.json::<WirelessLANGroup>()?)) },
-		_ => { Ok(WirelessWirelessLanGroupsPartialUpdateResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLanGroupsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -28070,12 +26108,10 @@ pub struct WirelessWirelessLansListQuery {
 	vlan_id__n: Option<Vec<Option<i64>>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLansListResponse {
 	Http200(PaginatedWirelessLANList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of wireless LAN objects.
 pub fn wireless_wireless_lans_list(state: &ThanixClient, query: WirelessWirelessLansListQuery) -> Result<WirelessWirelessLansListResponse, Error> {
@@ -28084,15 +26120,13 @@ pub fn wireless_wireless_lans_list(state: &ThanixClient, query: WirelessWireless
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(WirelessWirelessLansListResponse::Http200(r#response.json::<PaginatedWirelessLANList>()?)) },
-		_ => { Ok(WirelessWirelessLansListResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLansListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLansBulkUpdateResponse {
 	Http200(Vec<WirelessLAN>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of wireless LAN objects.
 pub fn wireless_wireless_lans_bulk_update(state: &ThanixClient, body: Vec<WirelessLANRequest>) -> Result<WirelessWirelessLansBulkUpdateResponse, Error> {
@@ -28102,15 +26136,13 @@ pub fn wireless_wireless_lans_bulk_update(state: &ThanixClient, body: Vec<Wirele
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(WirelessWirelessLansBulkUpdateResponse::Http200(r#response.json::<Vec<WirelessLAN>>()?)) },
-		_ => { Ok(WirelessWirelessLansBulkUpdateResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLansBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLansCreateResponse {
 	Http201(WirelessLAN),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of wireless LAN objects.
 pub fn wireless_wireless_lans_create(state: &ThanixClient, body: WritableWirelessLANRequest) -> Result<WirelessWirelessLansCreateResponse, Error> {
@@ -28120,15 +26152,13 @@ pub fn wireless_wireless_lans_create(state: &ThanixClient, body: WritableWireles
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(WirelessWirelessLansCreateResponse::Http201(r#response.json::<WirelessLAN>()?)) },
-		_ => { Ok(WirelessWirelessLansCreateResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLansCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLansBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of wireless LAN objects.
 pub fn wireless_wireless_lans_bulk_destroy(state: &ThanixClient, body: Vec<WirelessLANRequest>) -> Result<WirelessWirelessLansBulkDestroyResponse, Error> {
@@ -28137,15 +26167,13 @@ pub fn wireless_wireless_lans_bulk_destroy(state: &ThanixClient, body: Vec<Wirel
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(WirelessWirelessLansBulkDestroyResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLansBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLansBulkPartialUpdateResponse {
 	Http200(Vec<WirelessLAN>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of wireless LAN objects.
 pub fn wireless_wireless_lans_bulk_partial_update(state: &ThanixClient, body: Vec<WirelessLANRequest>) -> Result<WirelessWirelessLansBulkPartialUpdateResponse, Error> {
@@ -28155,15 +26183,13 @@ pub fn wireless_wireless_lans_bulk_partial_update(state: &ThanixClient, body: Ve
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(WirelessWirelessLansBulkPartialUpdateResponse::Http200(r#response.json::<Vec<WirelessLAN>>()?)) },
-		_ => { Ok(WirelessWirelessLansBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLansBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLansRetrieveResponse {
 	Http200(WirelessLAN),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a wireless LAN object.
 pub fn wireless_wireless_lans_retrieve(state: &ThanixClient, id: i64) -> Result<WirelessWirelessLansRetrieveResponse, Error> {
@@ -28172,15 +26198,13 @@ pub fn wireless_wireless_lans_retrieve(state: &ThanixClient, id: i64) -> Result<
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(WirelessWirelessLansRetrieveResponse::Http200(r#response.json::<WirelessLAN>()?)) },
-		_ => { Ok(WirelessWirelessLansRetrieveResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLansRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLansUpdateResponse {
 	Http200(WirelessLAN),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a wireless LAN object.
 pub fn wireless_wireless_lans_update(state: &ThanixClient, body: WritableWirelessLANRequest, id: i64) -> Result<WirelessWirelessLansUpdateResponse, Error> {
@@ -28190,15 +26214,13 @@ pub fn wireless_wireless_lans_update(state: &ThanixClient, body: WritableWireles
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(WirelessWirelessLansUpdateResponse::Http200(r#response.json::<WirelessLAN>()?)) },
-		_ => { Ok(WirelessWirelessLansUpdateResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLansUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLansDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a wireless LAN object.
 pub fn wireless_wireless_lans_destroy(state: &ThanixClient, id: i64) -> Result<WirelessWirelessLansDestroyResponse, Error> {
@@ -28206,15 +26228,13 @@ pub fn wireless_wireless_lans_destroy(state: &ThanixClient, id: i64) -> Result<W
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(WirelessWirelessLansDestroyResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLansDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLansPartialUpdateResponse {
 	Http200(WirelessLAN),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a wireless LAN object.
 pub fn wireless_wireless_lans_partial_update(state: &ThanixClient, body: PatchedWritableWirelessLANRequest, id: i64) -> Result<WirelessWirelessLansPartialUpdateResponse, Error> {
@@ -28224,7 +26244,7 @@ pub fn wireless_wireless_lans_partial_update(state: &ThanixClient, body: Patched
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(WirelessWirelessLansPartialUpdateResponse::Http200(r#response.json::<WirelessLAN>()?)) },
-		_ => { Ok(WirelessWirelessLansPartialUpdateResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLansPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -28334,12 +26354,10 @@ pub struct WirelessWirelessLinksListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLinksListResponse {
 	Http200(PaginatedWirelessLinkList),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a list of wireless link objects.
 pub fn wireless_wireless_links_list(state: &ThanixClient, query: WirelessWirelessLinksListQuery) -> Result<WirelessWirelessLinksListResponse, Error> {
@@ -28348,15 +26366,13 @@ pub fn wireless_wireless_links_list(state: &ThanixClient, query: WirelessWireles
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(WirelessWirelessLinksListResponse::Http200(r#response.json::<PaginatedWirelessLinkList>()?)) },
-		_ => { Ok(WirelessWirelessLinksListResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLinksListResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLinksBulkUpdateResponse {
 	Http200(Vec<WirelessLink>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a list of wireless link objects.
 pub fn wireless_wireless_links_bulk_update(state: &ThanixClient, body: Vec<WirelessLinkRequest>) -> Result<WirelessWirelessLinksBulkUpdateResponse, Error> {
@@ -28366,15 +26382,13 @@ pub fn wireless_wireless_links_bulk_update(state: &ThanixClient, body: Vec<Wirel
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(WirelessWirelessLinksBulkUpdateResponse::Http200(r#response.json::<Vec<WirelessLink>>()?)) },
-		_ => { Ok(WirelessWirelessLinksBulkUpdateResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLinksBulkUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLinksCreateResponse {
 	Http201(WirelessLink),
-	#[default]
-	None
+	Other(Response)
 }
 /// Post a list of wireless link objects.
 pub fn wireless_wireless_links_create(state: &ThanixClient, body: WritableWirelessLinkRequest) -> Result<WirelessWirelessLinksCreateResponse, Error> {
@@ -28384,15 +26398,13 @@ pub fn wireless_wireless_links_create(state: &ThanixClient, body: WritableWirele
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(WirelessWirelessLinksCreateResponse::Http201(r#response.json::<WirelessLink>()?)) },
-		_ => { Ok(WirelessWirelessLinksCreateResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLinksCreateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLinksBulkDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a list of wireless link objects.
 pub fn wireless_wireless_links_bulk_destroy(state: &ThanixClient, body: Vec<WirelessLinkRequest>) -> Result<WirelessWirelessLinksBulkDestroyResponse, Error> {
@@ -28401,15 +26413,13 @@ pub fn wireless_wireless_links_bulk_destroy(state: &ThanixClient, body: Vec<Wire
 		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(WirelessWirelessLinksBulkDestroyResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLinksBulkDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLinksBulkPartialUpdateResponse {
 	Http200(Vec<WirelessLink>),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a list of wireless link objects.
 pub fn wireless_wireless_links_bulk_partial_update(state: &ThanixClient, body: Vec<WirelessLinkRequest>) -> Result<WirelessWirelessLinksBulkPartialUpdateResponse, Error> {
@@ -28419,15 +26429,13 @@ pub fn wireless_wireless_links_bulk_partial_update(state: &ThanixClient, body: V
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(WirelessWirelessLinksBulkPartialUpdateResponse::Http200(r#response.json::<Vec<WirelessLink>>()?)) },
-		_ => { Ok(WirelessWirelessLinksBulkPartialUpdateResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLinksBulkPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLinksRetrieveResponse {
 	Http200(WirelessLink),
-	#[default]
-	None
+	Other(Response)
 }
 /// Get a wireless link object.
 pub fn wireless_wireless_links_retrieve(state: &ThanixClient, id: i64) -> Result<WirelessWirelessLinksRetrieveResponse, Error> {
@@ -28436,15 +26444,13 @@ pub fn wireless_wireless_links_retrieve(state: &ThanixClient, id: i64) -> Result
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(WirelessWirelessLinksRetrieveResponse::Http200(r#response.json::<WirelessLink>()?)) },
-		_ => { Ok(WirelessWirelessLinksRetrieveResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLinksRetrieveResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLinksUpdateResponse {
 	Http200(WirelessLink),
-	#[default]
-	None
+	Other(Response)
 }
 /// Put a wireless link object.
 pub fn wireless_wireless_links_update(state: &ThanixClient, body: WritableWirelessLinkRequest, id: i64) -> Result<WirelessWirelessLinksUpdateResponse, Error> {
@@ -28454,15 +26460,13 @@ pub fn wireless_wireless_links_update(state: &ThanixClient, body: WritableWirele
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(WirelessWirelessLinksUpdateResponse::Http200(r#response.json::<WirelessLink>()?)) },
-		_ => { Ok(WirelessWirelessLinksUpdateResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLinksUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLinksDestroyResponse {
 	Http204,
-	#[default]
-	None
+	Other(Response)
 }
 /// Delete a wireless link object.
 pub fn wireless_wireless_links_destroy(state: &ThanixClient, id: i64) -> Result<WirelessWirelessLinksDestroyResponse, Error> {
@@ -28470,15 +26474,13 @@ pub fn wireless_wireless_links_destroy(state: &ThanixClient, id: i64) -> Result<
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		_ => { Ok(WirelessWirelessLinksDestroyResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLinksDestroyResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-#[serde(untagged)]
+#[derive(Debug)]
 pub enum WirelessWirelessLinksPartialUpdateResponse {
 	Http200(WirelessLink),
-	#[default]
-	None
+	Other(Response)
 }
 /// Patch a wireless link object.
 pub fn wireless_wireless_links_partial_update(state: &ThanixClient, body: PatchedWritableWirelessLinkRequest, id: i64) -> Result<WirelessWirelessLinksPartialUpdateResponse, Error> {
@@ -28488,6 +26490,6 @@ pub fn wireless_wireless_links_partial_update(state: &ThanixClient, body: Patche
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(WirelessWirelessLinksPartialUpdateResponse::Http200(r#response.json::<WirelessLink>()?)) },
-		_ => { Ok(WirelessWirelessLinksPartialUpdateResponse::None) }
+		r#other_status => { Ok(WirelessWirelessLinksPartialUpdateResponse::Other(r#response)) }
 	}
 }
