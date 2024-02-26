@@ -1,9 +1,11 @@
+#![allow(warnings)]
+
 use crate::util::ThanixClient;
 use crate::types::*;
 use serde_qs;
 use reqwest::Error;
 
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CircuitsCircuitTerminationsListQuery {
 	cable_end: Option<String>,
 	cable_end__n: Option<String>,
@@ -61,9 +63,9 @@ pub struct CircuitsCircuitTerminationsListQuery {
 	port_speed__lte: Option<Vec<i64>>,
 	port_speed__n: Option<Vec<i64>>,
 	/// ProviderNetwork (ID)
-	provider_network_id: Option<Vec<i64>>,
+	provider_network_id: Option<Vec<Option<i64>>>,
 	/// ProviderNetwork (ID)
-	provider_network_id__n: Option<Vec<i64>>,
+	provider_network_id__n: Option<Vec<Option<i64>>>,
 	/// Search
 	q: Option<String>,
 	/// Site (slug)
@@ -71,9 +73,9 @@ pub struct CircuitsCircuitTerminationsListQuery {
 	/// Site (slug)
 	site__n: Option<Vec<String>>,
 	/// Site (ID)
-	site_id: Option<Vec<i64>>,
+	site_id: Option<Vec<Option<i64>>>,
 	/// Site (ID)
-	site_id__n: Option<Vec<i64>>,
+	site_id__n: Option<Vec<Option<i64>>>,
 	tag: Option<Vec<String>>,
 	tag__n: Option<Vec<String>>,
 	term_side: Option<String>,
@@ -99,7 +101,7 @@ pub struct CircuitsCircuitTerminationsListQuery {
 	xconnect_id__nisw: Option<Vec<String>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitTerminationsListResponse {
 	Http200(PaginatedCircuitTerminationList),
@@ -116,7 +118,7 @@ pub fn circuits_circuit_terminations_list(state: &ThanixClient, query: CircuitsC
 		_ => { Ok(CircuitsCircuitTerminationsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitTerminationsBulkUpdateResponse {
 	Http200(Vec<CircuitTermination>),
@@ -134,7 +136,7 @@ pub fn circuits_circuit_terminations_bulk_update(state: &ThanixClient, body: Vec
 		_ => { Ok(CircuitsCircuitTerminationsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitTerminationsCreateResponse {
 	Http201(CircuitTermination),
@@ -152,7 +154,7 @@ pub fn circuits_circuit_terminations_create(state: &ThanixClient, body: Writable
 		_ => { Ok(CircuitsCircuitTerminationsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitTerminationsBulkDestroyResponse {
 	Http204,
@@ -169,7 +171,7 @@ pub fn circuits_circuit_terminations_bulk_destroy(state: &ThanixClient, body: Ve
 		_ => { Ok(CircuitsCircuitTerminationsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitTerminationsBulkPartialUpdateResponse {
 	Http200(Vec<CircuitTermination>),
@@ -187,7 +189,7 @@ pub fn circuits_circuit_terminations_bulk_partial_update(state: &ThanixClient, b
 		_ => { Ok(CircuitsCircuitTerminationsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitTerminationsRetrieveResponse {
 	Http200(CircuitTermination),
@@ -204,7 +206,7 @@ pub fn circuits_circuit_terminations_retrieve(state: &ThanixClient, id: i64) -> 
 		_ => { Ok(CircuitsCircuitTerminationsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitTerminationsUpdateResponse {
 	Http200(CircuitTermination),
@@ -222,7 +224,7 @@ pub fn circuits_circuit_terminations_update(state: &ThanixClient, body: Writable
 		_ => { Ok(CircuitsCircuitTerminationsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitTerminationsDestroyResponse {
 	Http204,
@@ -238,7 +240,7 @@ pub fn circuits_circuit_terminations_destroy(state: &ThanixClient, id: i64) -> R
 		_ => { Ok(CircuitsCircuitTerminationsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitTerminationsPartialUpdateResponse {
 	Http200(CircuitTermination),
@@ -256,7 +258,7 @@ pub fn circuits_circuit_terminations_partial_update(state: &ThanixClient, body: 
 		_ => { Ok(CircuitsCircuitTerminationsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitTerminationsPathsRetrieveResponse {
 	Http200(CircuitTermination),
@@ -273,7 +275,7 @@ pub fn circuits_circuit_terminations_paths_retrieve(state: &ThanixClient, id: i6
 		_ => { Ok(CircuitsCircuitTerminationsPathsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CircuitsCircuitTypesListQuery {
 	color: Option<Vec<String>>,
 	color__empty: Option<bool>,
@@ -355,7 +357,7 @@ pub struct CircuitsCircuitTypesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitTypesListResponse {
 	Http200(PaginatedCircuitTypeList),
@@ -372,7 +374,7 @@ pub fn circuits_circuit_types_list(state: &ThanixClient, query: CircuitsCircuitT
 		_ => { Ok(CircuitsCircuitTypesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitTypesBulkUpdateResponse {
 	Http200(Vec<CircuitType>),
@@ -390,7 +392,7 @@ pub fn circuits_circuit_types_bulk_update(state: &ThanixClient, body: Vec<Circui
 		_ => { Ok(CircuitsCircuitTypesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitTypesCreateResponse {
 	Http201(CircuitType),
@@ -408,7 +410,7 @@ pub fn circuits_circuit_types_create(state: &ThanixClient, body: CircuitTypeRequ
 		_ => { Ok(CircuitsCircuitTypesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitTypesBulkDestroyResponse {
 	Http204,
@@ -425,7 +427,7 @@ pub fn circuits_circuit_types_bulk_destroy(state: &ThanixClient, body: Vec<Circu
 		_ => { Ok(CircuitsCircuitTypesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitTypesBulkPartialUpdateResponse {
 	Http200(Vec<CircuitType>),
@@ -443,7 +445,7 @@ pub fn circuits_circuit_types_bulk_partial_update(state: &ThanixClient, body: Ve
 		_ => { Ok(CircuitsCircuitTypesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitTypesRetrieveResponse {
 	Http200(CircuitType),
@@ -460,7 +462,7 @@ pub fn circuits_circuit_types_retrieve(state: &ThanixClient, id: i64) -> Result<
 		_ => { Ok(CircuitsCircuitTypesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitTypesUpdateResponse {
 	Http200(CircuitType),
@@ -478,7 +480,7 @@ pub fn circuits_circuit_types_update(state: &ThanixClient, body: CircuitTypeRequ
 		_ => { Ok(CircuitsCircuitTypesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitTypesDestroyResponse {
 	Http204,
@@ -494,7 +496,7 @@ pub fn circuits_circuit_types_destroy(state: &ThanixClient, id: i64) -> Result<C
 		_ => { Ok(CircuitsCircuitTypesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitTypesPartialUpdateResponse {
 	Http200(CircuitType),
@@ -512,7 +514,7 @@ pub fn circuits_circuit_types_partial_update(state: &ThanixClient, body: Patched
 		_ => { Ok(CircuitsCircuitTypesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CircuitsCircuitsListQuery {
 	cid: Option<Vec<String>>,
 	cid__empty: Option<bool>,
@@ -650,9 +652,9 @@ pub struct CircuitsCircuitsListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	termination_date: Option<Vec<String>>,
 	termination_date__empty: Option<bool>,
 	termination_date__gt: Option<Vec<String>>,
@@ -671,7 +673,7 @@ pub struct CircuitsCircuitsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitsListResponse {
 	Http200(PaginatedCircuitList),
@@ -688,7 +690,7 @@ pub fn circuits_circuits_list(state: &ThanixClient, query: CircuitsCircuitsListQ
 		_ => { Ok(CircuitsCircuitsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitsBulkUpdateResponse {
 	Http200(Vec<Circuit>),
@@ -706,7 +708,7 @@ pub fn circuits_circuits_bulk_update(state: &ThanixClient, body: Vec<CircuitRequ
 		_ => { Ok(CircuitsCircuitsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitsCreateResponse {
 	Http201(Circuit),
@@ -724,7 +726,7 @@ pub fn circuits_circuits_create(state: &ThanixClient, body: WritableCircuitReque
 		_ => { Ok(CircuitsCircuitsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitsBulkDestroyResponse {
 	Http204,
@@ -741,7 +743,7 @@ pub fn circuits_circuits_bulk_destroy(state: &ThanixClient, body: Vec<CircuitReq
 		_ => { Ok(CircuitsCircuitsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitsBulkPartialUpdateResponse {
 	Http200(Vec<Circuit>),
@@ -759,7 +761,7 @@ pub fn circuits_circuits_bulk_partial_update(state: &ThanixClient, body: Vec<Cir
 		_ => { Ok(CircuitsCircuitsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitsRetrieveResponse {
 	Http200(Circuit),
@@ -776,7 +778,7 @@ pub fn circuits_circuits_retrieve(state: &ThanixClient, id: i64) -> Result<Circu
 		_ => { Ok(CircuitsCircuitsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitsUpdateResponse {
 	Http200(Circuit),
@@ -794,7 +796,7 @@ pub fn circuits_circuits_update(state: &ThanixClient, body: WritableCircuitReque
 		_ => { Ok(CircuitsCircuitsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitsDestroyResponse {
 	Http204,
@@ -810,7 +812,7 @@ pub fn circuits_circuits_destroy(state: &ThanixClient, id: i64) -> Result<Circui
 		_ => { Ok(CircuitsCircuitsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsCircuitsPartialUpdateResponse {
 	Http200(Circuit),
@@ -828,7 +830,7 @@ pub fn circuits_circuits_partial_update(state: &ThanixClient, body: PatchedWrita
 		_ => { Ok(CircuitsCircuitsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CircuitsProviderAccountsListQuery {
 	account: Option<Vec<String>>,
 	account__empty: Option<bool>,
@@ -907,7 +909,7 @@ pub struct CircuitsProviderAccountsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProviderAccountsListResponse {
 	Http200(PaginatedProviderAccountList),
@@ -924,7 +926,7 @@ pub fn circuits_provider_accounts_list(state: &ThanixClient, query: CircuitsProv
 		_ => { Ok(CircuitsProviderAccountsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProviderAccountsBulkUpdateResponse {
 	Http200(Vec<ProviderAccount>),
@@ -942,7 +944,7 @@ pub fn circuits_provider_accounts_bulk_update(state: &ThanixClient, body: Vec<Pr
 		_ => { Ok(CircuitsProviderAccountsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProviderAccountsCreateResponse {
 	Http201(ProviderAccount),
@@ -960,7 +962,7 @@ pub fn circuits_provider_accounts_create(state: &ThanixClient, body: WritablePro
 		_ => { Ok(CircuitsProviderAccountsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProviderAccountsBulkDestroyResponse {
 	Http204,
@@ -977,7 +979,7 @@ pub fn circuits_provider_accounts_bulk_destroy(state: &ThanixClient, body: Vec<P
 		_ => { Ok(CircuitsProviderAccountsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProviderAccountsBulkPartialUpdateResponse {
 	Http200(Vec<ProviderAccount>),
@@ -995,7 +997,7 @@ pub fn circuits_provider_accounts_bulk_partial_update(state: &ThanixClient, body
 		_ => { Ok(CircuitsProviderAccountsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProviderAccountsRetrieveResponse {
 	Http200(ProviderAccount),
@@ -1012,7 +1014,7 @@ pub fn circuits_provider_accounts_retrieve(state: &ThanixClient, id: i64) -> Res
 		_ => { Ok(CircuitsProviderAccountsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProviderAccountsUpdateResponse {
 	Http200(ProviderAccount),
@@ -1030,7 +1032,7 @@ pub fn circuits_provider_accounts_update(state: &ThanixClient, body: WritablePro
 		_ => { Ok(CircuitsProviderAccountsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProviderAccountsDestroyResponse {
 	Http204,
@@ -1046,7 +1048,7 @@ pub fn circuits_provider_accounts_destroy(state: &ThanixClient, id: i64) -> Resu
 		_ => { Ok(CircuitsProviderAccountsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProviderAccountsPartialUpdateResponse {
 	Http200(ProviderAccount),
@@ -1064,7 +1066,7 @@ pub fn circuits_provider_accounts_partial_update(state: &ThanixClient, body: Pat
 		_ => { Ok(CircuitsProviderAccountsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CircuitsProviderNetworksListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -1143,7 +1145,7 @@ pub struct CircuitsProviderNetworksListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProviderNetworksListResponse {
 	Http200(PaginatedProviderNetworkList),
@@ -1160,7 +1162,7 @@ pub fn circuits_provider_networks_list(state: &ThanixClient, query: CircuitsProv
 		_ => { Ok(CircuitsProviderNetworksListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProviderNetworksBulkUpdateResponse {
 	Http200(Vec<ProviderNetwork>),
@@ -1178,7 +1180,7 @@ pub fn circuits_provider_networks_bulk_update(state: &ThanixClient, body: Vec<Pr
 		_ => { Ok(CircuitsProviderNetworksBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProviderNetworksCreateResponse {
 	Http201(ProviderNetwork),
@@ -1196,7 +1198,7 @@ pub fn circuits_provider_networks_create(state: &ThanixClient, body: WritablePro
 		_ => { Ok(CircuitsProviderNetworksCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProviderNetworksBulkDestroyResponse {
 	Http204,
@@ -1213,7 +1215,7 @@ pub fn circuits_provider_networks_bulk_destroy(state: &ThanixClient, body: Vec<P
 		_ => { Ok(CircuitsProviderNetworksBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProviderNetworksBulkPartialUpdateResponse {
 	Http200(Vec<ProviderNetwork>),
@@ -1231,7 +1233,7 @@ pub fn circuits_provider_networks_bulk_partial_update(state: &ThanixClient, body
 		_ => { Ok(CircuitsProviderNetworksBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProviderNetworksRetrieveResponse {
 	Http200(ProviderNetwork),
@@ -1248,7 +1250,7 @@ pub fn circuits_provider_networks_retrieve(state: &ThanixClient, id: i64) -> Res
 		_ => { Ok(CircuitsProviderNetworksRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProviderNetworksUpdateResponse {
 	Http200(ProviderNetwork),
@@ -1266,7 +1268,7 @@ pub fn circuits_provider_networks_update(state: &ThanixClient, body: WritablePro
 		_ => { Ok(CircuitsProviderNetworksUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProviderNetworksDestroyResponse {
 	Http204,
@@ -1282,7 +1284,7 @@ pub fn circuits_provider_networks_destroy(state: &ThanixClient, id: i64) -> Resu
 		_ => { Ok(CircuitsProviderNetworksDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProviderNetworksPartialUpdateResponse {
 	Http200(ProviderNetwork),
@@ -1300,7 +1302,7 @@ pub fn circuits_provider_networks_partial_update(state: &ThanixClient, body: Pat
 		_ => { Ok(CircuitsProviderNetworksPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CircuitsProvidersListQuery {
 	/// ASN (ID)
 	asn_id: Option<Vec<i64>>,
@@ -1411,7 +1413,7 @@ pub struct CircuitsProvidersListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProvidersListResponse {
 	Http200(PaginatedProviderList),
@@ -1428,7 +1430,7 @@ pub fn circuits_providers_list(state: &ThanixClient, query: CircuitsProvidersLis
 		_ => { Ok(CircuitsProvidersListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProvidersBulkUpdateResponse {
 	Http200(Vec<Provider>),
@@ -1446,7 +1448,7 @@ pub fn circuits_providers_bulk_update(state: &ThanixClient, body: Vec<ProviderRe
 		_ => { Ok(CircuitsProvidersBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProvidersCreateResponse {
 	Http201(Provider),
@@ -1464,7 +1466,7 @@ pub fn circuits_providers_create(state: &ThanixClient, body: WritableProviderReq
 		_ => { Ok(CircuitsProvidersCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProvidersBulkDestroyResponse {
 	Http204,
@@ -1481,7 +1483,7 @@ pub fn circuits_providers_bulk_destroy(state: &ThanixClient, body: Vec<ProviderR
 		_ => { Ok(CircuitsProvidersBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProvidersBulkPartialUpdateResponse {
 	Http200(Vec<Provider>),
@@ -1499,7 +1501,7 @@ pub fn circuits_providers_bulk_partial_update(state: &ThanixClient, body: Vec<Pr
 		_ => { Ok(CircuitsProvidersBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProvidersRetrieveResponse {
 	Http200(Provider),
@@ -1516,7 +1518,7 @@ pub fn circuits_providers_retrieve(state: &ThanixClient, id: i64) -> Result<Circ
 		_ => { Ok(CircuitsProvidersRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProvidersUpdateResponse {
 	Http200(Provider),
@@ -1534,7 +1536,7 @@ pub fn circuits_providers_update(state: &ThanixClient, body: WritableProviderReq
 		_ => { Ok(CircuitsProvidersUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProvidersDestroyResponse {
 	Http204,
@@ -1550,7 +1552,7 @@ pub fn circuits_providers_destroy(state: &ThanixClient, id: i64) -> Result<Circu
 		_ => { Ok(CircuitsProvidersDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CircuitsProvidersPartialUpdateResponse {
 	Http200(Provider),
@@ -1568,7 +1570,7 @@ pub fn circuits_providers_partial_update(state: &ThanixClient, body: PatchedWrit
 		_ => { Ok(CircuitsProvidersPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CoreDataFilesListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -1640,7 +1642,7 @@ pub struct CoreDataFilesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CoreDataFilesListResponse {
 	Http200(PaginatedDataFileList),
@@ -1657,7 +1659,7 @@ pub fn core_data_files_list(state: &ThanixClient, query: CoreDataFilesListQuery)
 		_ => { Ok(CoreDataFilesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CoreDataFilesRetrieveResponse {
 	Http200(DataFile),
@@ -1674,7 +1676,7 @@ pub fn core_data_files_retrieve(state: &ThanixClient, id: i64) -> Result<CoreDat
 		_ => { Ok(CoreDataFilesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CoreDataSourcesListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -1739,7 +1741,7 @@ pub struct CoreDataSourcesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CoreDataSourcesListResponse {
 	Http200(PaginatedDataSourceList),
@@ -1756,7 +1758,7 @@ pub fn core_data_sources_list(state: &ThanixClient, query: CoreDataSourcesListQu
 		_ => { Ok(CoreDataSourcesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CoreDataSourcesBulkUpdateResponse {
 	Http200(Vec<DataSource>),
@@ -1774,7 +1776,7 @@ pub fn core_data_sources_bulk_update(state: &ThanixClient, body: Vec<DataSourceR
 		_ => { Ok(CoreDataSourcesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CoreDataSourcesCreateResponse {
 	Http201(DataSource),
@@ -1792,7 +1794,7 @@ pub fn core_data_sources_create(state: &ThanixClient, body: WritableDataSourceRe
 		_ => { Ok(CoreDataSourcesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CoreDataSourcesBulkDestroyResponse {
 	Http204,
@@ -1809,7 +1811,7 @@ pub fn core_data_sources_bulk_destroy(state: &ThanixClient, body: Vec<DataSource
 		_ => { Ok(CoreDataSourcesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CoreDataSourcesBulkPartialUpdateResponse {
 	Http200(Vec<DataSource>),
@@ -1827,7 +1829,7 @@ pub fn core_data_sources_bulk_partial_update(state: &ThanixClient, body: Vec<Dat
 		_ => { Ok(CoreDataSourcesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CoreDataSourcesRetrieveResponse {
 	Http200(DataSource),
@@ -1844,7 +1846,7 @@ pub fn core_data_sources_retrieve(state: &ThanixClient, id: i64) -> Result<CoreD
 		_ => { Ok(CoreDataSourcesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CoreDataSourcesUpdateResponse {
 	Http200(DataSource),
@@ -1862,7 +1864,7 @@ pub fn core_data_sources_update(state: &ThanixClient, body: WritableDataSourceRe
 		_ => { Ok(CoreDataSourcesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CoreDataSourcesDestroyResponse {
 	Http204,
@@ -1878,7 +1880,7 @@ pub fn core_data_sources_destroy(state: &ThanixClient, id: i64) -> Result<CoreDa
 		_ => { Ok(CoreDataSourcesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CoreDataSourcesPartialUpdateResponse {
 	Http200(DataSource),
@@ -1896,7 +1898,7 @@ pub fn core_data_sources_partial_update(state: &ThanixClient, body: PatchedWrita
 		_ => { Ok(CoreDataSourcesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CoreDataSourcesSyncCreateResponse {
 	Http200(DataSource),
@@ -1914,7 +1916,7 @@ pub fn core_data_sources_sync_create(state: &ThanixClient, body: WritableDataSou
 		_ => { Ok(CoreDataSourcesSyncCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CoreJobsListQuery {
 	completed: Option<String>,
 	completed__after: Option<String>,
@@ -1976,7 +1978,7 @@ pub struct CoreJobsListQuery {
 	user__n: Option<i64>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CoreJobsListResponse {
 	Http200(PaginatedJobList),
@@ -1993,7 +1995,7 @@ pub fn core_jobs_list(state: &ThanixClient, query: CoreJobsListQuery) -> Result<
 		_ => { Ok(CoreJobsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum CoreJobsRetrieveResponse {
 	Http200(Job),
@@ -2010,7 +2012,7 @@ pub fn core_jobs_retrieve(state: &ThanixClient, id: i64) -> Result<CoreJobsRetri
 		_ => { Ok(CoreJobsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimCableTerminationsListQuery {
 	cable: Option<i64>,
 	cable__n: Option<i64>,
@@ -2040,7 +2042,7 @@ pub struct DcimCableTerminationsListQuery {
 	termination_type__n: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimCableTerminationsListResponse {
 	Http200(PaginatedCableTerminationList),
@@ -2057,7 +2059,7 @@ pub fn dcim_cable_terminations_list(state: &ThanixClient, query: DcimCableTermin
 		_ => { Ok(DcimCableTerminationsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimCableTerminationsBulkUpdateResponse {
 	Http200(Vec<CableTermination>),
@@ -2075,7 +2077,7 @@ pub fn dcim_cable_terminations_bulk_update(state: &ThanixClient, body: Vec<Cable
 		_ => { Ok(DcimCableTerminationsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimCableTerminationsCreateResponse {
 	Http201(CableTermination),
@@ -2093,7 +2095,7 @@ pub fn dcim_cable_terminations_create(state: &ThanixClient, body: CableTerminati
 		_ => { Ok(DcimCableTerminationsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimCableTerminationsBulkDestroyResponse {
 	Http204,
@@ -2110,7 +2112,7 @@ pub fn dcim_cable_terminations_bulk_destroy(state: &ThanixClient, body: Vec<Cabl
 		_ => { Ok(DcimCableTerminationsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimCableTerminationsBulkPartialUpdateResponse {
 	Http200(Vec<CableTermination>),
@@ -2128,7 +2130,7 @@ pub fn dcim_cable_terminations_bulk_partial_update(state: &ThanixClient, body: V
 		_ => { Ok(DcimCableTerminationsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimCableTerminationsRetrieveResponse {
 	Http200(CableTermination),
@@ -2145,7 +2147,7 @@ pub fn dcim_cable_terminations_retrieve(state: &ThanixClient, id: i64) -> Result
 		_ => { Ok(DcimCableTerminationsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimCableTerminationsUpdateResponse {
 	Http200(CableTermination),
@@ -2163,7 +2165,7 @@ pub fn dcim_cable_terminations_update(state: &ThanixClient, body: CableTerminati
 		_ => { Ok(DcimCableTerminationsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimCableTerminationsDestroyResponse {
 	Http204,
@@ -2179,7 +2181,7 @@ pub fn dcim_cable_terminations_destroy(state: &ThanixClient, id: i64) -> Result<
 		_ => { Ok(DcimCableTerminationsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimCableTerminationsPartialUpdateResponse {
 	Http200(CableTermination),
@@ -2197,7 +2199,7 @@ pub fn dcim_cable_terminations_partial_update(state: &ThanixClient, body: Patche
 		_ => { Ok(DcimCableTerminationsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimCablesListQuery {
 	circuittermination_id: Option<Vec<i64>>,
 	color: Option<Vec<String>>,
@@ -2297,9 +2299,9 @@ pub struct DcimCablesListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	termination_a_id: Option<Vec<i64>>,
 	termination_a_type: Option<String>,
 	termination_a_type__n: Option<String>,
@@ -2313,7 +2315,7 @@ pub struct DcimCablesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimCablesListResponse {
 	Http200(PaginatedCableList),
@@ -2330,7 +2332,7 @@ pub fn dcim_cables_list(state: &ThanixClient, query: DcimCablesListQuery) -> Res
 		_ => { Ok(DcimCablesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimCablesBulkUpdateResponse {
 	Http200(Vec<Cable>),
@@ -2348,7 +2350,7 @@ pub fn dcim_cables_bulk_update(state: &ThanixClient, body: Vec<CableRequest>) ->
 		_ => { Ok(DcimCablesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimCablesCreateResponse {
 	Http201(Cable),
@@ -2366,7 +2368,7 @@ pub fn dcim_cables_create(state: &ThanixClient, body: WritableCableRequest) -> R
 		_ => { Ok(DcimCablesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimCablesBulkDestroyResponse {
 	Http204,
@@ -2383,7 +2385,7 @@ pub fn dcim_cables_bulk_destroy(state: &ThanixClient, body: Vec<CableRequest>) -
 		_ => { Ok(DcimCablesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimCablesBulkPartialUpdateResponse {
 	Http200(Vec<Cable>),
@@ -2401,7 +2403,7 @@ pub fn dcim_cables_bulk_partial_update(state: &ThanixClient, body: Vec<CableRequ
 		_ => { Ok(DcimCablesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimCablesRetrieveResponse {
 	Http200(Cable),
@@ -2418,7 +2420,7 @@ pub fn dcim_cables_retrieve(state: &ThanixClient, id: i64) -> Result<DcimCablesR
 		_ => { Ok(DcimCablesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimCablesUpdateResponse {
 	Http200(Cable),
@@ -2436,7 +2438,7 @@ pub fn dcim_cables_update(state: &ThanixClient, body: WritableCableRequest, id: 
 		_ => { Ok(DcimCablesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimCablesDestroyResponse {
 	Http204,
@@ -2452,7 +2454,7 @@ pub fn dcim_cables_destroy(state: &ThanixClient, id: i64) -> Result<DcimCablesDe
 		_ => { Ok(DcimCablesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimCablesPartialUpdateResponse {
 	Http200(Cable),
@@ -2470,7 +2472,7 @@ pub fn dcim_cables_partial_update(state: &ThanixClient, body: PatchedWritableCab
 		_ => { Ok(DcimCablesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimConnectedDeviceListQuery {
 	/// The name of the peer device
 	peer_device: Option<String>,
@@ -2478,7 +2480,7 @@ pub struct DcimConnectedDeviceListQuery {
 	peer_interface: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConnectedDeviceListResponse {
 	Http200(Vec<Device>),
@@ -2500,7 +2502,7 @@ pub fn dcim_connected_device_list(state: &ThanixClient, query: DcimConnectedDevi
 		_ => { Ok(DcimConnectedDeviceListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimConsolePortTemplatesListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -2522,9 +2524,9 @@ pub struct DcimConsolePortTemplatesListQuery {
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
 	/// Device type (ID)
-	devicetype_id: Option<Vec<i64>>,
+	devicetype_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
-	devicetype_id__n: Option<Vec<i64>>,
+	devicetype_id__n: Option<Vec<Option<i64>>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -2543,9 +2545,9 @@ pub struct DcimConsolePortTemplatesListQuery {
 	limit: Option<i64>,
 	modified_by_request: Option<String>,
 	/// Module type (ID)
-	moduletype_id: Option<Vec<i64>>,
+	moduletype_id: Option<Vec<Option<i64>>>,
 	/// Module type (ID)
-	moduletype_id__n: Option<Vec<i64>>,
+	moduletype_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -2568,7 +2570,7 @@ pub struct DcimConsolePortTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsolePortTemplatesListResponse {
 	Http200(PaginatedConsolePortTemplateList),
@@ -2585,7 +2587,7 @@ pub fn dcim_console_port_templates_list(state: &ThanixClient, query: DcimConsole
 		_ => { Ok(DcimConsolePortTemplatesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsolePortTemplatesBulkUpdateResponse {
 	Http200(Vec<ConsolePortTemplate>),
@@ -2603,7 +2605,7 @@ pub fn dcim_console_port_templates_bulk_update(state: &ThanixClient, body: Vec<C
 		_ => { Ok(DcimConsolePortTemplatesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsolePortTemplatesCreateResponse {
 	Http201(ConsolePortTemplate),
@@ -2621,7 +2623,7 @@ pub fn dcim_console_port_templates_create(state: &ThanixClient, body: WritableCo
 		_ => { Ok(DcimConsolePortTemplatesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsolePortTemplatesBulkDestroyResponse {
 	Http204,
@@ -2638,7 +2640,7 @@ pub fn dcim_console_port_templates_bulk_destroy(state: &ThanixClient, body: Vec<
 		_ => { Ok(DcimConsolePortTemplatesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsolePortTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<ConsolePortTemplate>),
@@ -2656,7 +2658,7 @@ pub fn dcim_console_port_templates_bulk_partial_update(state: &ThanixClient, bod
 		_ => { Ok(DcimConsolePortTemplatesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsolePortTemplatesRetrieveResponse {
 	Http200(ConsolePortTemplate),
@@ -2673,7 +2675,7 @@ pub fn dcim_console_port_templates_retrieve(state: &ThanixClient, id: i64) -> Re
 		_ => { Ok(DcimConsolePortTemplatesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsolePortTemplatesUpdateResponse {
 	Http200(ConsolePortTemplate),
@@ -2691,7 +2693,7 @@ pub fn dcim_console_port_templates_update(state: &ThanixClient, body: WritableCo
 		_ => { Ok(DcimConsolePortTemplatesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsolePortTemplatesDestroyResponse {
 	Http204,
@@ -2707,7 +2709,7 @@ pub fn dcim_console_port_templates_destroy(state: &ThanixClient, id: i64) -> Res
 		_ => { Ok(DcimConsolePortTemplatesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsolePortTemplatesPartialUpdateResponse {
 	Http200(ConsolePortTemplate),
@@ -2725,7 +2727,7 @@ pub fn dcim_console_port_templates_partial_update(state: &ThanixClient, body: Pa
 		_ => { Ok(DcimConsolePortTemplatesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimConsolePortsListQuery {
 	cable_end: Option<String>,
 	cable_end__n: Option<String>,
@@ -2811,9 +2813,9 @@ pub struct DcimConsolePortsListQuery {
 	location_id__n: Option<Vec<i64>>,
 	modified_by_request: Option<String>,
 	/// Module (ID)
-	module_id: Option<Vec<i64>>,
+	module_id: Option<Vec<Option<i64>>>,
 	/// Module (ID)
-	module_id__n: Option<Vec<i64>>,
+	module_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -2889,7 +2891,7 @@ pub struct DcimConsolePortsListQuery {
 	virtual_chassis_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsolePortsListResponse {
 	Http200(PaginatedConsolePortList),
@@ -2906,7 +2908,7 @@ pub fn dcim_console_ports_list(state: &ThanixClient, query: DcimConsolePortsList
 		_ => { Ok(DcimConsolePortsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsolePortsBulkUpdateResponse {
 	Http200(Vec<ConsolePort>),
@@ -2924,7 +2926,7 @@ pub fn dcim_console_ports_bulk_update(state: &ThanixClient, body: Vec<ConsolePor
 		_ => { Ok(DcimConsolePortsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsolePortsCreateResponse {
 	Http201(ConsolePort),
@@ -2942,7 +2944,7 @@ pub fn dcim_console_ports_create(state: &ThanixClient, body: WritableConsolePort
 		_ => { Ok(DcimConsolePortsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsolePortsBulkDestroyResponse {
 	Http204,
@@ -2959,7 +2961,7 @@ pub fn dcim_console_ports_bulk_destroy(state: &ThanixClient, body: Vec<ConsolePo
 		_ => { Ok(DcimConsolePortsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsolePortsBulkPartialUpdateResponse {
 	Http200(Vec<ConsolePort>),
@@ -2977,7 +2979,7 @@ pub fn dcim_console_ports_bulk_partial_update(state: &ThanixClient, body: Vec<Co
 		_ => { Ok(DcimConsolePortsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsolePortsRetrieveResponse {
 	Http200(ConsolePort),
@@ -2994,7 +2996,7 @@ pub fn dcim_console_ports_retrieve(state: &ThanixClient, id: i64) -> Result<Dcim
 		_ => { Ok(DcimConsolePortsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsolePortsUpdateResponse {
 	Http200(ConsolePort),
@@ -3012,7 +3014,7 @@ pub fn dcim_console_ports_update(state: &ThanixClient, body: WritableConsolePort
 		_ => { Ok(DcimConsolePortsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsolePortsDestroyResponse {
 	Http204,
@@ -3028,7 +3030,7 @@ pub fn dcim_console_ports_destroy(state: &ThanixClient, id: i64) -> Result<DcimC
 		_ => { Ok(DcimConsolePortsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsolePortsPartialUpdateResponse {
 	Http200(ConsolePort),
@@ -3046,7 +3048,7 @@ pub fn dcim_console_ports_partial_update(state: &ThanixClient, body: PatchedWrit
 		_ => { Ok(DcimConsolePortsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsolePortsTraceRetrieveResponse {
 	Http200(ConsolePort),
@@ -3063,7 +3065,7 @@ pub fn dcim_console_ports_trace_retrieve(state: &ThanixClient, id: i64) -> Resul
 		_ => { Ok(DcimConsolePortsTraceRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimConsoleServerPortTemplatesListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -3085,9 +3087,9 @@ pub struct DcimConsoleServerPortTemplatesListQuery {
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
 	/// Device type (ID)
-	devicetype_id: Option<Vec<i64>>,
+	devicetype_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
-	devicetype_id__n: Option<Vec<i64>>,
+	devicetype_id__n: Option<Vec<Option<i64>>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -3106,9 +3108,9 @@ pub struct DcimConsoleServerPortTemplatesListQuery {
 	limit: Option<i64>,
 	modified_by_request: Option<String>,
 	/// Module type (ID)
-	moduletype_id: Option<Vec<i64>>,
+	moduletype_id: Option<Vec<Option<i64>>>,
 	/// Module type (ID)
-	moduletype_id__n: Option<Vec<i64>>,
+	moduletype_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -3131,7 +3133,7 @@ pub struct DcimConsoleServerPortTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsoleServerPortTemplatesListResponse {
 	Http200(PaginatedConsoleServerPortTemplateList),
@@ -3148,7 +3150,7 @@ pub fn dcim_console_server_port_templates_list(state: &ThanixClient, query: Dcim
 		_ => { Ok(DcimConsoleServerPortTemplatesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsoleServerPortTemplatesBulkUpdateResponse {
 	Http200(Vec<ConsoleServerPortTemplate>),
@@ -3166,7 +3168,7 @@ pub fn dcim_console_server_port_templates_bulk_update(state: &ThanixClient, body
 		_ => { Ok(DcimConsoleServerPortTemplatesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsoleServerPortTemplatesCreateResponse {
 	Http201(ConsoleServerPortTemplate),
@@ -3184,7 +3186,7 @@ pub fn dcim_console_server_port_templates_create(state: &ThanixClient, body: Wri
 		_ => { Ok(DcimConsoleServerPortTemplatesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsoleServerPortTemplatesBulkDestroyResponse {
 	Http204,
@@ -3201,7 +3203,7 @@ pub fn dcim_console_server_port_templates_bulk_destroy(state: &ThanixClient, bod
 		_ => { Ok(DcimConsoleServerPortTemplatesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsoleServerPortTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<ConsoleServerPortTemplate>),
@@ -3219,7 +3221,7 @@ pub fn dcim_console_server_port_templates_bulk_partial_update(state: &ThanixClie
 		_ => { Ok(DcimConsoleServerPortTemplatesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsoleServerPortTemplatesRetrieveResponse {
 	Http200(ConsoleServerPortTemplate),
@@ -3236,7 +3238,7 @@ pub fn dcim_console_server_port_templates_retrieve(state: &ThanixClient, id: i64
 		_ => { Ok(DcimConsoleServerPortTemplatesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsoleServerPortTemplatesUpdateResponse {
 	Http200(ConsoleServerPortTemplate),
@@ -3254,7 +3256,7 @@ pub fn dcim_console_server_port_templates_update(state: &ThanixClient, body: Wri
 		_ => { Ok(DcimConsoleServerPortTemplatesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsoleServerPortTemplatesDestroyResponse {
 	Http204,
@@ -3270,7 +3272,7 @@ pub fn dcim_console_server_port_templates_destroy(state: &ThanixClient, id: i64)
 		_ => { Ok(DcimConsoleServerPortTemplatesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsoleServerPortTemplatesPartialUpdateResponse {
 	Http200(ConsoleServerPortTemplate),
@@ -3288,7 +3290,7 @@ pub fn dcim_console_server_port_templates_partial_update(state: &ThanixClient, b
 		_ => { Ok(DcimConsoleServerPortTemplatesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimConsoleServerPortsListQuery {
 	cable_end: Option<String>,
 	cable_end__n: Option<String>,
@@ -3374,9 +3376,9 @@ pub struct DcimConsoleServerPortsListQuery {
 	location_id__n: Option<Vec<i64>>,
 	modified_by_request: Option<String>,
 	/// Module (ID)
-	module_id: Option<Vec<i64>>,
+	module_id: Option<Vec<Option<i64>>>,
 	/// Module (ID)
-	module_id__n: Option<Vec<i64>>,
+	module_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -3452,7 +3454,7 @@ pub struct DcimConsoleServerPortsListQuery {
 	virtual_chassis_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsoleServerPortsListResponse {
 	Http200(PaginatedConsoleServerPortList),
@@ -3469,7 +3471,7 @@ pub fn dcim_console_server_ports_list(state: &ThanixClient, query: DcimConsoleSe
 		_ => { Ok(DcimConsoleServerPortsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsoleServerPortsBulkUpdateResponse {
 	Http200(Vec<ConsoleServerPort>),
@@ -3487,7 +3489,7 @@ pub fn dcim_console_server_ports_bulk_update(state: &ThanixClient, body: Vec<Con
 		_ => { Ok(DcimConsoleServerPortsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsoleServerPortsCreateResponse {
 	Http201(ConsoleServerPort),
@@ -3505,7 +3507,7 @@ pub fn dcim_console_server_ports_create(state: &ThanixClient, body: WritableCons
 		_ => { Ok(DcimConsoleServerPortsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsoleServerPortsBulkDestroyResponse {
 	Http204,
@@ -3522,7 +3524,7 @@ pub fn dcim_console_server_ports_bulk_destroy(state: &ThanixClient, body: Vec<Co
 		_ => { Ok(DcimConsoleServerPortsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsoleServerPortsBulkPartialUpdateResponse {
 	Http200(Vec<ConsoleServerPort>),
@@ -3540,7 +3542,7 @@ pub fn dcim_console_server_ports_bulk_partial_update(state: &ThanixClient, body:
 		_ => { Ok(DcimConsoleServerPortsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsoleServerPortsRetrieveResponse {
 	Http200(ConsoleServerPort),
@@ -3557,7 +3559,7 @@ pub fn dcim_console_server_ports_retrieve(state: &ThanixClient, id: i64) -> Resu
 		_ => { Ok(DcimConsoleServerPortsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsoleServerPortsUpdateResponse {
 	Http200(ConsoleServerPort),
@@ -3575,7 +3577,7 @@ pub fn dcim_console_server_ports_update(state: &ThanixClient, body: WritableCons
 		_ => { Ok(DcimConsoleServerPortsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsoleServerPortsDestroyResponse {
 	Http204,
@@ -3591,7 +3593,7 @@ pub fn dcim_console_server_ports_destroy(state: &ThanixClient, id: i64) -> Resul
 		_ => { Ok(DcimConsoleServerPortsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsoleServerPortsPartialUpdateResponse {
 	Http200(ConsoleServerPort),
@@ -3609,7 +3611,7 @@ pub fn dcim_console_server_ports_partial_update(state: &ThanixClient, body: Patc
 		_ => { Ok(DcimConsoleServerPortsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimConsoleServerPortsTraceRetrieveResponse {
 	Http200(ConsoleServerPort),
@@ -3626,7 +3628,7 @@ pub fn dcim_console_server_ports_trace_retrieve(state: &ThanixClient, id: i64) -
 		_ => { Ok(DcimConsoleServerPortsTraceRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimDeviceBayTemplatesListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -3688,7 +3690,7 @@ pub struct DcimDeviceBayTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceBayTemplatesListResponse {
 	Http200(PaginatedDeviceBayTemplateList),
@@ -3705,7 +3707,7 @@ pub fn dcim_device_bay_templates_list(state: &ThanixClient, query: DcimDeviceBay
 		_ => { Ok(DcimDeviceBayTemplatesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceBayTemplatesBulkUpdateResponse {
 	Http200(Vec<DeviceBayTemplate>),
@@ -3723,7 +3725,7 @@ pub fn dcim_device_bay_templates_bulk_update(state: &ThanixClient, body: Vec<Dev
 		_ => { Ok(DcimDeviceBayTemplatesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceBayTemplatesCreateResponse {
 	Http201(DeviceBayTemplate),
@@ -3741,7 +3743,7 @@ pub fn dcim_device_bay_templates_create(state: &ThanixClient, body: WritableDevi
 		_ => { Ok(DcimDeviceBayTemplatesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceBayTemplatesBulkDestroyResponse {
 	Http204,
@@ -3758,7 +3760,7 @@ pub fn dcim_device_bay_templates_bulk_destroy(state: &ThanixClient, body: Vec<De
 		_ => { Ok(DcimDeviceBayTemplatesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceBayTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<DeviceBayTemplate>),
@@ -3776,7 +3778,7 @@ pub fn dcim_device_bay_templates_bulk_partial_update(state: &ThanixClient, body:
 		_ => { Ok(DcimDeviceBayTemplatesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceBayTemplatesRetrieveResponse {
 	Http200(DeviceBayTemplate),
@@ -3793,7 +3795,7 @@ pub fn dcim_device_bay_templates_retrieve(state: &ThanixClient, id: i64) -> Resu
 		_ => { Ok(DcimDeviceBayTemplatesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceBayTemplatesUpdateResponse {
 	Http200(DeviceBayTemplate),
@@ -3811,7 +3813,7 @@ pub fn dcim_device_bay_templates_update(state: &ThanixClient, body: WritableDevi
 		_ => { Ok(DcimDeviceBayTemplatesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceBayTemplatesDestroyResponse {
 	Http204,
@@ -3827,7 +3829,7 @@ pub fn dcim_device_bay_templates_destroy(state: &ThanixClient, id: i64) -> Resul
 		_ => { Ok(DcimDeviceBayTemplatesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceBayTemplatesPartialUpdateResponse {
 	Http200(DeviceBayTemplate),
@@ -3845,7 +3847,7 @@ pub fn dcim_device_bay_templates_partial_update(state: &ThanixClient, body: Patc
 		_ => { Ok(DcimDeviceBayTemplatesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimDeviceBaysListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -3996,7 +3998,7 @@ pub struct DcimDeviceBaysListQuery {
 	virtual_chassis_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceBaysListResponse {
 	Http200(PaginatedDeviceBayList),
@@ -4013,7 +4015,7 @@ pub fn dcim_device_bays_list(state: &ThanixClient, query: DcimDeviceBaysListQuer
 		_ => { Ok(DcimDeviceBaysListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceBaysBulkUpdateResponse {
 	Http200(Vec<DeviceBay>),
@@ -4031,7 +4033,7 @@ pub fn dcim_device_bays_bulk_update(state: &ThanixClient, body: Vec<DeviceBayReq
 		_ => { Ok(DcimDeviceBaysBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceBaysCreateResponse {
 	Http201(DeviceBay),
@@ -4049,7 +4051,7 @@ pub fn dcim_device_bays_create(state: &ThanixClient, body: WritableDeviceBayRequ
 		_ => { Ok(DcimDeviceBaysCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceBaysBulkDestroyResponse {
 	Http204,
@@ -4066,7 +4068,7 @@ pub fn dcim_device_bays_bulk_destroy(state: &ThanixClient, body: Vec<DeviceBayRe
 		_ => { Ok(DcimDeviceBaysBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceBaysBulkPartialUpdateResponse {
 	Http200(Vec<DeviceBay>),
@@ -4084,7 +4086,7 @@ pub fn dcim_device_bays_bulk_partial_update(state: &ThanixClient, body: Vec<Devi
 		_ => { Ok(DcimDeviceBaysBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceBaysRetrieveResponse {
 	Http200(DeviceBay),
@@ -4101,7 +4103,7 @@ pub fn dcim_device_bays_retrieve(state: &ThanixClient, id: i64) -> Result<DcimDe
 		_ => { Ok(DcimDeviceBaysRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceBaysUpdateResponse {
 	Http200(DeviceBay),
@@ -4119,7 +4121,7 @@ pub fn dcim_device_bays_update(state: &ThanixClient, body: WritableDeviceBayRequ
 		_ => { Ok(DcimDeviceBaysUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceBaysDestroyResponse {
 	Http204,
@@ -4135,7 +4137,7 @@ pub fn dcim_device_bays_destroy(state: &ThanixClient, id: i64) -> Result<DcimDev
 		_ => { Ok(DcimDeviceBaysDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceBaysPartialUpdateResponse {
 	Http200(DeviceBay),
@@ -4153,7 +4155,7 @@ pub fn dcim_device_bays_partial_update(state: &ThanixClient, body: PatchedWritab
 		_ => { Ok(DcimDeviceBaysPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimDeviceRolesListQuery {
 	color: Option<Vec<String>>,
 	color__empty: Option<bool>,
@@ -4167,9 +4169,9 @@ pub struct DcimDeviceRolesListQuery {
 	color__niew: Option<Vec<String>>,
 	color__nisw: Option<Vec<String>>,
 	/// Config template (ID)
-	config_template_id: Option<Vec<i64>>,
+	config_template_id: Option<Vec<Option<i64>>>,
 	/// Config template (ID)
-	config_template_id__n: Option<Vec<i64>>,
+	config_template_id__n: Option<Vec<Option<i64>>>,
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
 	created__gt: Option<Vec<String>>,
@@ -4240,7 +4242,7 @@ pub struct DcimDeviceRolesListQuery {
 	vm_role: Option<bool>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceRolesListResponse {
 	Http200(PaginatedDeviceRoleList),
@@ -4257,7 +4259,7 @@ pub fn dcim_device_roles_list(state: &ThanixClient, query: DcimDeviceRolesListQu
 		_ => { Ok(DcimDeviceRolesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceRolesBulkUpdateResponse {
 	Http200(Vec<DeviceRole>),
@@ -4275,7 +4277,7 @@ pub fn dcim_device_roles_bulk_update(state: &ThanixClient, body: Vec<DeviceRoleR
 		_ => { Ok(DcimDeviceRolesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceRolesCreateResponse {
 	Http201(DeviceRole),
@@ -4293,7 +4295,7 @@ pub fn dcim_device_roles_create(state: &ThanixClient, body: WritableDeviceRoleRe
 		_ => { Ok(DcimDeviceRolesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceRolesBulkDestroyResponse {
 	Http204,
@@ -4310,7 +4312,7 @@ pub fn dcim_device_roles_bulk_destroy(state: &ThanixClient, body: Vec<DeviceRole
 		_ => { Ok(DcimDeviceRolesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceRolesBulkPartialUpdateResponse {
 	Http200(Vec<DeviceRole>),
@@ -4328,7 +4330,7 @@ pub fn dcim_device_roles_bulk_partial_update(state: &ThanixClient, body: Vec<Dev
 		_ => { Ok(DcimDeviceRolesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceRolesRetrieveResponse {
 	Http200(DeviceRole),
@@ -4345,7 +4347,7 @@ pub fn dcim_device_roles_retrieve(state: &ThanixClient, id: i64) -> Result<DcimD
 		_ => { Ok(DcimDeviceRolesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceRolesUpdateResponse {
 	Http200(DeviceRole),
@@ -4363,7 +4365,7 @@ pub fn dcim_device_roles_update(state: &ThanixClient, body: WritableDeviceRoleRe
 		_ => { Ok(DcimDeviceRolesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceRolesDestroyResponse {
 	Http204,
@@ -4379,7 +4381,7 @@ pub fn dcim_device_roles_destroy(state: &ThanixClient, id: i64) -> Result<DcimDe
 		_ => { Ok(DcimDeviceRolesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceRolesPartialUpdateResponse {
 	Http200(DeviceRole),
@@ -4397,7 +4399,7 @@ pub fn dcim_device_roles_partial_update(state: &ThanixClient, body: PatchedWrita
 		_ => { Ok(DcimDeviceRolesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimDeviceTypesListQuery {
 	airflow: Option<String>,
 	airflow__n: Option<String>,
@@ -4418,9 +4420,9 @@ pub struct DcimDeviceTypesListQuery {
 	/// Default platform (slug)
 	default_platform__n: Option<Vec<String>>,
 	/// Default platform (ID)
-	default_platform_id: Option<Vec<i64>>,
+	default_platform_id: Option<Vec<Option<i64>>>,
 	/// Default platform (ID)
-	default_platform_id__n: Option<Vec<i64>>,
+	default_platform_id__n: Option<Vec<Option<i64>>>,
 	description: Option<Vec<String>>,
 	description__empty: Option<bool>,
 	description__ic: Option<Vec<String>>,
@@ -4541,7 +4543,7 @@ pub struct DcimDeviceTypesListQuery {
 	weight_unit__n: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceTypesListResponse {
 	Http200(PaginatedDeviceTypeList),
@@ -4558,7 +4560,7 @@ pub fn dcim_device_types_list(state: &ThanixClient, query: DcimDeviceTypesListQu
 		_ => { Ok(DcimDeviceTypesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceTypesBulkUpdateResponse {
 	Http200(Vec<DeviceType>),
@@ -4576,7 +4578,7 @@ pub fn dcim_device_types_bulk_update(state: &ThanixClient, body: Vec<DeviceTypeR
 		_ => { Ok(DcimDeviceTypesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceTypesCreateResponse {
 	Http201(DeviceType),
@@ -4594,7 +4596,7 @@ pub fn dcim_device_types_create(state: &ThanixClient, body: WritableDeviceTypeRe
 		_ => { Ok(DcimDeviceTypesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceTypesBulkDestroyResponse {
 	Http204,
@@ -4611,7 +4613,7 @@ pub fn dcim_device_types_bulk_destroy(state: &ThanixClient, body: Vec<DeviceType
 		_ => { Ok(DcimDeviceTypesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceTypesBulkPartialUpdateResponse {
 	Http200(Vec<DeviceType>),
@@ -4629,7 +4631,7 @@ pub fn dcim_device_types_bulk_partial_update(state: &ThanixClient, body: Vec<Dev
 		_ => { Ok(DcimDeviceTypesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceTypesRetrieveResponse {
 	Http200(DeviceType),
@@ -4646,7 +4648,7 @@ pub fn dcim_device_types_retrieve(state: &ThanixClient, id: i64) -> Result<DcimD
 		_ => { Ok(DcimDeviceTypesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceTypesUpdateResponse {
 	Http200(DeviceType),
@@ -4664,7 +4666,7 @@ pub fn dcim_device_types_update(state: &ThanixClient, body: WritableDeviceTypeRe
 		_ => { Ok(DcimDeviceTypesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceTypesDestroyResponse {
 	Http204,
@@ -4680,7 +4682,7 @@ pub fn dcim_device_types_destroy(state: &ThanixClient, id: i64) -> Result<DcimDe
 		_ => { Ok(DcimDeviceTypesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDeviceTypesPartialUpdateResponse {
 	Http200(DeviceType),
@@ -4698,7 +4700,7 @@ pub fn dcim_device_types_partial_update(state: &ThanixClient, body: PatchedWrita
 		_ => { Ok(DcimDeviceTypesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimDevicesListQuery {
 	airflow: Option<String>,
 	airflow__n: Option<String>,
@@ -4714,13 +4716,13 @@ pub struct DcimDevicesListQuery {
 	asset_tag__niew: Option<Vec<String>>,
 	asset_tag__nisw: Option<Vec<String>>,
 	/// VM cluster (ID)
-	cluster_id: Option<Vec<i64>>,
+	cluster_id: Option<Vec<Option<i64>>>,
 	/// VM cluster (ID)
-	cluster_id__n: Option<Vec<i64>>,
+	cluster_id__n: Option<Vec<Option<i64>>>,
 	/// Config template (ID)
-	config_template_id: Option<Vec<i64>>,
+	config_template_id: Option<Vec<Option<i64>>>,
 	/// Config template (ID)
-	config_template_id__n: Option<Vec<i64>>,
+	config_template_id__n: Option<Vec<Option<i64>>>,
 	/// Has console ports
 	console_ports: Option<bool>,
 	/// Has console server ports
@@ -4867,9 +4869,9 @@ pub struct DcimDevicesListQuery {
 	/// Platform (slug)
 	platform__n: Option<Vec<String>>,
 	/// Platform (ID)
-	platform_id: Option<Vec<i64>>,
+	platform_id: Option<Vec<Option<i64>>>,
 	/// Platform (ID)
-	platform_id__n: Option<Vec<i64>>,
+	platform_id__n: Option<Vec<Option<i64>>>,
 	position: Option<Vec<f64>>,
 	position__empty: Option<bool>,
 	position__gt: Option<Vec<f64>>,
@@ -4955,9 +4957,9 @@ pub struct DcimDevicesListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	updated_by_request: Option<String>,
 	vc_position: Option<Vec<i64>>,
 	vc_position__empty: Option<bool>,
@@ -4981,7 +4983,7 @@ pub struct DcimDevicesListQuery {
 	virtual_chassis_member: Option<bool>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDevicesListResponse {
 	Http200(PaginatedDeviceWithConfigContextList),
@@ -4998,7 +5000,7 @@ pub fn dcim_devices_list(state: &ThanixClient, query: DcimDevicesListQuery) -> R
 		_ => { Ok(DcimDevicesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDevicesBulkUpdateResponse {
 	Http200(Vec<DeviceWithConfigContext>),
@@ -5016,7 +5018,7 @@ pub fn dcim_devices_bulk_update(state: &ThanixClient, body: Vec<DeviceWithConfig
 		_ => { Ok(DcimDevicesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDevicesCreateResponse {
 	Http201(DeviceWithConfigContext),
@@ -5034,7 +5036,7 @@ pub fn dcim_devices_create(state: &ThanixClient, body: WritableDeviceWithConfigC
 		_ => { Ok(DcimDevicesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDevicesBulkDestroyResponse {
 	Http204,
@@ -5051,7 +5053,7 @@ pub fn dcim_devices_bulk_destroy(state: &ThanixClient, body: Vec<DeviceWithConfi
 		_ => { Ok(DcimDevicesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDevicesBulkPartialUpdateResponse {
 	Http200(Vec<DeviceWithConfigContext>),
@@ -5069,7 +5071,7 @@ pub fn dcim_devices_bulk_partial_update(state: &ThanixClient, body: Vec<DeviceWi
 		_ => { Ok(DcimDevicesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDevicesRetrieveResponse {
 	Http200(DeviceWithConfigContext),
@@ -5086,7 +5088,7 @@ pub fn dcim_devices_retrieve(state: &ThanixClient, id: i64) -> Result<DcimDevice
 		_ => { Ok(DcimDevicesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDevicesUpdateResponse {
 	Http200(DeviceWithConfigContext),
@@ -5104,7 +5106,7 @@ pub fn dcim_devices_update(state: &ThanixClient, body: WritableDeviceWithConfigC
 		_ => { Ok(DcimDevicesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDevicesDestroyResponse {
 	Http204,
@@ -5120,7 +5122,7 @@ pub fn dcim_devices_destroy(state: &ThanixClient, id: i64) -> Result<DcimDevices
 		_ => { Ok(DcimDevicesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDevicesPartialUpdateResponse {
 	Http200(DeviceWithConfigContext),
@@ -5138,12 +5140,12 @@ pub fn dcim_devices_partial_update(state: &ThanixClient, body: PatchedWritableDe
 		_ => { Ok(DcimDevicesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimDevicesRenderConfigCreateQuery {
 	format: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimDevicesRenderConfigCreateResponse {
 	Http200(DeviceWithConfigContext),
@@ -5161,7 +5163,7 @@ pub fn dcim_devices_render_config_create(state: &ThanixClient, query: DcimDevice
 		_ => { Ok(DcimDevicesRenderConfigCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimFrontPortTemplatesListQuery {
 	color: Option<Vec<String>>,
 	color__empty: Option<bool>,
@@ -5194,9 +5196,9 @@ pub struct DcimFrontPortTemplatesListQuery {
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
 	/// Device type (ID)
-	devicetype_id: Option<Vec<i64>>,
+	devicetype_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
-	devicetype_id__n: Option<Vec<i64>>,
+	devicetype_id__n: Option<Vec<Option<i64>>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -5215,9 +5217,9 @@ pub struct DcimFrontPortTemplatesListQuery {
 	limit: Option<i64>,
 	modified_by_request: Option<String>,
 	/// Module type (ID)
-	moduletype_id: Option<Vec<i64>>,
+	moduletype_id: Option<Vec<Option<i64>>>,
 	/// Module type (ID)
-	moduletype_id__n: Option<Vec<i64>>,
+	moduletype_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -5240,7 +5242,7 @@ pub struct DcimFrontPortTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimFrontPortTemplatesListResponse {
 	Http200(PaginatedFrontPortTemplateList),
@@ -5257,7 +5259,7 @@ pub fn dcim_front_port_templates_list(state: &ThanixClient, query: DcimFrontPort
 		_ => { Ok(DcimFrontPortTemplatesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimFrontPortTemplatesBulkUpdateResponse {
 	Http200(Vec<FrontPortTemplate>),
@@ -5275,7 +5277,7 @@ pub fn dcim_front_port_templates_bulk_update(state: &ThanixClient, body: Vec<Fro
 		_ => { Ok(DcimFrontPortTemplatesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimFrontPortTemplatesCreateResponse {
 	Http201(FrontPortTemplate),
@@ -5293,7 +5295,7 @@ pub fn dcim_front_port_templates_create(state: &ThanixClient, body: WritableFron
 		_ => { Ok(DcimFrontPortTemplatesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimFrontPortTemplatesBulkDestroyResponse {
 	Http204,
@@ -5310,7 +5312,7 @@ pub fn dcim_front_port_templates_bulk_destroy(state: &ThanixClient, body: Vec<Fr
 		_ => { Ok(DcimFrontPortTemplatesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimFrontPortTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<FrontPortTemplate>),
@@ -5328,7 +5330,7 @@ pub fn dcim_front_port_templates_bulk_partial_update(state: &ThanixClient, body:
 		_ => { Ok(DcimFrontPortTemplatesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimFrontPortTemplatesRetrieveResponse {
 	Http200(FrontPortTemplate),
@@ -5345,7 +5347,7 @@ pub fn dcim_front_port_templates_retrieve(state: &ThanixClient, id: i64) -> Resu
 		_ => { Ok(DcimFrontPortTemplatesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimFrontPortTemplatesUpdateResponse {
 	Http200(FrontPortTemplate),
@@ -5363,7 +5365,7 @@ pub fn dcim_front_port_templates_update(state: &ThanixClient, body: WritableFron
 		_ => { Ok(DcimFrontPortTemplatesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimFrontPortTemplatesDestroyResponse {
 	Http204,
@@ -5379,7 +5381,7 @@ pub fn dcim_front_port_templates_destroy(state: &ThanixClient, id: i64) -> Resul
 		_ => { Ok(DcimFrontPortTemplatesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimFrontPortTemplatesPartialUpdateResponse {
 	Http200(FrontPortTemplate),
@@ -5397,7 +5399,7 @@ pub fn dcim_front_port_templates_partial_update(state: &ThanixClient, body: Patc
 		_ => { Ok(DcimFrontPortTemplatesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimFrontPortsListQuery {
 	cable_end: Option<String>,
 	cable_end__n: Option<String>,
@@ -5493,9 +5495,9 @@ pub struct DcimFrontPortsListQuery {
 	location_id__n: Option<Vec<i64>>,
 	modified_by_request: Option<String>,
 	/// Module (ID)
-	module_id: Option<Vec<i64>>,
+	module_id: Option<Vec<Option<i64>>>,
 	/// Module (ID)
-	module_id__n: Option<Vec<i64>>,
+	module_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -5569,7 +5571,7 @@ pub struct DcimFrontPortsListQuery {
 	virtual_chassis_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimFrontPortsListResponse {
 	Http200(PaginatedFrontPortList),
@@ -5586,7 +5588,7 @@ pub fn dcim_front_ports_list(state: &ThanixClient, query: DcimFrontPortsListQuer
 		_ => { Ok(DcimFrontPortsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimFrontPortsBulkUpdateResponse {
 	Http200(Vec<FrontPort>),
@@ -5604,7 +5606,7 @@ pub fn dcim_front_ports_bulk_update(state: &ThanixClient, body: Vec<FrontPortReq
 		_ => { Ok(DcimFrontPortsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimFrontPortsCreateResponse {
 	Http201(FrontPort),
@@ -5622,7 +5624,7 @@ pub fn dcim_front_ports_create(state: &ThanixClient, body: WritableFrontPortRequ
 		_ => { Ok(DcimFrontPortsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimFrontPortsBulkDestroyResponse {
 	Http204,
@@ -5639,7 +5641,7 @@ pub fn dcim_front_ports_bulk_destroy(state: &ThanixClient, body: Vec<FrontPortRe
 		_ => { Ok(DcimFrontPortsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimFrontPortsBulkPartialUpdateResponse {
 	Http200(Vec<FrontPort>),
@@ -5657,7 +5659,7 @@ pub fn dcim_front_ports_bulk_partial_update(state: &ThanixClient, body: Vec<Fron
 		_ => { Ok(DcimFrontPortsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimFrontPortsRetrieveResponse {
 	Http200(FrontPort),
@@ -5674,7 +5676,7 @@ pub fn dcim_front_ports_retrieve(state: &ThanixClient, id: i64) -> Result<DcimFr
 		_ => { Ok(DcimFrontPortsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimFrontPortsUpdateResponse {
 	Http200(FrontPort),
@@ -5692,7 +5694,7 @@ pub fn dcim_front_ports_update(state: &ThanixClient, body: WritableFrontPortRequ
 		_ => { Ok(DcimFrontPortsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimFrontPortsDestroyResponse {
 	Http204,
@@ -5708,7 +5710,7 @@ pub fn dcim_front_ports_destroy(state: &ThanixClient, id: i64) -> Result<DcimFro
 		_ => { Ok(DcimFrontPortsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimFrontPortsPartialUpdateResponse {
 	Http200(FrontPort),
@@ -5726,7 +5728,7 @@ pub fn dcim_front_ports_partial_update(state: &ThanixClient, body: PatchedWritab
 		_ => { Ok(DcimFrontPortsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimFrontPortsPathsRetrieveResponse {
 	Http200(FrontPort),
@@ -5743,7 +5745,7 @@ pub fn dcim_front_ports_paths_retrieve(state: &ThanixClient, id: i64) -> Result<
 		_ => { Ok(DcimFrontPortsPathsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimInterfaceTemplatesListQuery {
 	bridge_id: Option<Vec<i64>>,
 	bridge_id__n: Option<Vec<i64>>,
@@ -5767,9 +5769,9 @@ pub struct DcimInterfaceTemplatesListQuery {
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
 	/// Device type (ID)
-	devicetype_id: Option<Vec<i64>>,
+	devicetype_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
-	devicetype_id__n: Option<Vec<i64>>,
+	devicetype_id__n: Option<Vec<Option<i64>>>,
 	enabled: Option<bool>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
@@ -5790,9 +5792,9 @@ pub struct DcimInterfaceTemplatesListQuery {
 	mgmt_only: Option<bool>,
 	modified_by_request: Option<String>,
 	/// Module type (ID)
-	moduletype_id: Option<Vec<i64>>,
+	moduletype_id: Option<Vec<Option<i64>>>,
 	/// Module type (ID)
-	moduletype_id__n: Option<Vec<i64>>,
+	moduletype_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -5821,7 +5823,7 @@ pub struct DcimInterfaceTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInterfaceTemplatesListResponse {
 	Http200(PaginatedInterfaceTemplateList),
@@ -5838,7 +5840,7 @@ pub fn dcim_interface_templates_list(state: &ThanixClient, query: DcimInterfaceT
 		_ => { Ok(DcimInterfaceTemplatesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInterfaceTemplatesBulkUpdateResponse {
 	Http200(Vec<InterfaceTemplate>),
@@ -5856,7 +5858,7 @@ pub fn dcim_interface_templates_bulk_update(state: &ThanixClient, body: Vec<Inte
 		_ => { Ok(DcimInterfaceTemplatesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInterfaceTemplatesCreateResponse {
 	Http201(InterfaceTemplate),
@@ -5874,7 +5876,7 @@ pub fn dcim_interface_templates_create(state: &ThanixClient, body: WritableInter
 		_ => { Ok(DcimInterfaceTemplatesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInterfaceTemplatesBulkDestroyResponse {
 	Http204,
@@ -5891,7 +5893,7 @@ pub fn dcim_interface_templates_bulk_destroy(state: &ThanixClient, body: Vec<Int
 		_ => { Ok(DcimInterfaceTemplatesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInterfaceTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<InterfaceTemplate>),
@@ -5909,7 +5911,7 @@ pub fn dcim_interface_templates_bulk_partial_update(state: &ThanixClient, body: 
 		_ => { Ok(DcimInterfaceTemplatesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInterfaceTemplatesRetrieveResponse {
 	Http200(InterfaceTemplate),
@@ -5926,7 +5928,7 @@ pub fn dcim_interface_templates_retrieve(state: &ThanixClient, id: i64) -> Resul
 		_ => { Ok(DcimInterfaceTemplatesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInterfaceTemplatesUpdateResponse {
 	Http200(InterfaceTemplate),
@@ -5944,7 +5946,7 @@ pub fn dcim_interface_templates_update(state: &ThanixClient, body: WritableInter
 		_ => { Ok(DcimInterfaceTemplatesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInterfaceTemplatesDestroyResponse {
 	Http204,
@@ -5960,7 +5962,7 @@ pub fn dcim_interface_templates_destroy(state: &ThanixClient, id: i64) -> Result
 		_ => { Ok(DcimInterfaceTemplatesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInterfaceTemplatesPartialUpdateResponse {
 	Http200(InterfaceTemplate),
@@ -5978,7 +5980,7 @@ pub fn dcim_interface_templates_partial_update(state: &ThanixClient, body: Patch
 		_ => { Ok(DcimInterfaceTemplatesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimInterfacesListQuery {
 	/// Bridged interface (ID)
 	bridge_id: Option<Vec<i64>>,
@@ -6044,9 +6046,9 @@ pub struct DcimInterfacesListQuery {
 	/// Kind of interface
 	kind: Option<String>,
 	/// L2VPN
-	l2vpn: Option<Vec<i64>>,
+	l2vpn: Option<Vec<Option<i64>>>,
 	/// L2VPN
-	l2vpn__n: Option<Vec<i64>>,
+	l2vpn__n: Option<Vec<Option<i64>>>,
 	/// L2VPN (ID)
 	l2vpn_id: Option<Vec<i64>>,
 	/// L2VPN (ID)
@@ -6100,9 +6102,9 @@ pub struct DcimInterfacesListQuery {
 	mode__n: Option<String>,
 	modified_by_request: Option<String>,
 	/// Module (ID)
-	module_id: Option<Vec<i64>>,
+	module_id: Option<Vec<Option<i64>>>,
 	/// Module (ID)
-	module_id__n: Option<Vec<i64>>,
+	module_id__n: Option<Vec<Option<i64>>>,
 	mtu: Option<Vec<i64>>,
 	mtu__empty: Option<bool>,
 	mtu__gt: Option<Vec<i64>>,
@@ -6222,9 +6224,9 @@ pub struct DcimInterfacesListQuery {
 	/// Virtual Device Context
 	vdc_id__n: Option<Vec<i64>>,
 	/// Virtual Device Context (Identifier)
-	vdc_identifier: Option<Vec<u16>>,
+	vdc_identifier: Option<Vec<Option<u16>>>,
 	/// Virtual Device Context (Identifier)
-	vdc_identifier__n: Option<Vec<u16>>,
+	vdc_identifier__n: Option<Vec<Option<u16>>>,
 	/// Virtual Chassis
 	virtual_chassis: Option<Vec<String>>,
 	/// Virtual Chassis
@@ -6259,7 +6261,7 @@ pub struct DcimInterfacesListQuery {
 	wwn__nisw: Option<Vec<String>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInterfacesListResponse {
 	Http200(PaginatedInterfaceList),
@@ -6276,7 +6278,7 @@ pub fn dcim_interfaces_list(state: &ThanixClient, query: DcimInterfacesListQuery
 		_ => { Ok(DcimInterfacesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInterfacesBulkUpdateResponse {
 	Http200(Vec<Interface>),
@@ -6294,7 +6296,7 @@ pub fn dcim_interfaces_bulk_update(state: &ThanixClient, body: Vec<InterfaceRequ
 		_ => { Ok(DcimInterfacesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInterfacesCreateResponse {
 	Http201(Interface),
@@ -6312,7 +6314,7 @@ pub fn dcim_interfaces_create(state: &ThanixClient, body: WritableInterfaceReque
 		_ => { Ok(DcimInterfacesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInterfacesBulkDestroyResponse {
 	Http204,
@@ -6329,7 +6331,7 @@ pub fn dcim_interfaces_bulk_destroy(state: &ThanixClient, body: Vec<InterfaceReq
 		_ => { Ok(DcimInterfacesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInterfacesBulkPartialUpdateResponse {
 	Http200(Vec<Interface>),
@@ -6347,7 +6349,7 @@ pub fn dcim_interfaces_bulk_partial_update(state: &ThanixClient, body: Vec<Inter
 		_ => { Ok(DcimInterfacesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInterfacesRetrieveResponse {
 	Http200(Interface),
@@ -6364,7 +6366,7 @@ pub fn dcim_interfaces_retrieve(state: &ThanixClient, id: i64) -> Result<DcimInt
 		_ => { Ok(DcimInterfacesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInterfacesUpdateResponse {
 	Http200(Interface),
@@ -6382,7 +6384,7 @@ pub fn dcim_interfaces_update(state: &ThanixClient, body: WritableInterfaceReque
 		_ => { Ok(DcimInterfacesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInterfacesDestroyResponse {
 	Http204,
@@ -6398,7 +6400,7 @@ pub fn dcim_interfaces_destroy(state: &ThanixClient, id: i64) -> Result<DcimInte
 		_ => { Ok(DcimInterfacesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInterfacesPartialUpdateResponse {
 	Http200(Interface),
@@ -6416,7 +6418,7 @@ pub fn dcim_interfaces_partial_update(state: &ThanixClient, body: PatchedWritabl
 		_ => { Ok(DcimInterfacesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInterfacesTraceRetrieveResponse {
 	Http200(Interface),
@@ -6433,7 +6435,7 @@ pub fn dcim_interfaces_trace_retrieve(state: &ThanixClient, id: i64) -> Result<D
 		_ => { Ok(DcimInterfacesTraceRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimInventoryItemRolesListQuery {
 	color: Option<Vec<String>>,
 	color__empty: Option<bool>,
@@ -6515,7 +6517,7 @@ pub struct DcimInventoryItemRolesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemRolesListResponse {
 	Http200(PaginatedInventoryItemRoleList),
@@ -6532,7 +6534,7 @@ pub fn dcim_inventory_item_roles_list(state: &ThanixClient, query: DcimInventory
 		_ => { Ok(DcimInventoryItemRolesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemRolesBulkUpdateResponse {
 	Http200(Vec<InventoryItemRole>),
@@ -6550,7 +6552,7 @@ pub fn dcim_inventory_item_roles_bulk_update(state: &ThanixClient, body: Vec<Inv
 		_ => { Ok(DcimInventoryItemRolesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemRolesCreateResponse {
 	Http201(InventoryItemRole),
@@ -6568,7 +6570,7 @@ pub fn dcim_inventory_item_roles_create(state: &ThanixClient, body: InventoryIte
 		_ => { Ok(DcimInventoryItemRolesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemRolesBulkDestroyResponse {
 	Http204,
@@ -6585,7 +6587,7 @@ pub fn dcim_inventory_item_roles_bulk_destroy(state: &ThanixClient, body: Vec<In
 		_ => { Ok(DcimInventoryItemRolesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemRolesBulkPartialUpdateResponse {
 	Http200(Vec<InventoryItemRole>),
@@ -6603,7 +6605,7 @@ pub fn dcim_inventory_item_roles_bulk_partial_update(state: &ThanixClient, body:
 		_ => { Ok(DcimInventoryItemRolesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemRolesRetrieveResponse {
 	Http200(InventoryItemRole),
@@ -6620,7 +6622,7 @@ pub fn dcim_inventory_item_roles_retrieve(state: &ThanixClient, id: i64) -> Resu
 		_ => { Ok(DcimInventoryItemRolesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemRolesUpdateResponse {
 	Http200(InventoryItemRole),
@@ -6638,7 +6640,7 @@ pub fn dcim_inventory_item_roles_update(state: &ThanixClient, body: InventoryIte
 		_ => { Ok(DcimInventoryItemRolesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemRolesDestroyResponse {
 	Http204,
@@ -6654,7 +6656,7 @@ pub fn dcim_inventory_item_roles_destroy(state: &ThanixClient, id: i64) -> Resul
 		_ => { Ok(DcimInventoryItemRolesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemRolesPartialUpdateResponse {
 	Http200(InventoryItemRole),
@@ -6672,7 +6674,7 @@ pub fn dcim_inventory_item_roles_partial_update(state: &ThanixClient, body: Patc
 		_ => { Ok(DcimInventoryItemRolesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimInventoryItemTemplatesListQuery {
 	component_id: Option<Vec<i64>>,
 	component_id__empty: Option<Vec<i64>>,
@@ -6738,9 +6740,9 @@ pub struct DcimInventoryItemTemplatesListQuery {
 	/// Manufacturer (slug)
 	manufacturer__n: Option<Vec<String>>,
 	/// Manufacturer (ID)
-	manufacturer_id: Option<Vec<i64>>,
+	manufacturer_id: Option<Vec<Option<i64>>>,
 	/// Manufacturer (ID)
-	manufacturer_id__n: Option<Vec<i64>>,
+	manufacturer_id__n: Option<Vec<Option<i64>>>,
 	modified_by_request: Option<String>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
@@ -6758,9 +6760,9 @@ pub struct DcimInventoryItemTemplatesListQuery {
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
 	/// Parent inventory item (ID)
-	parent_id: Option<Vec<i64>>,
+	parent_id: Option<Vec<Option<i64>>>,
 	/// Parent inventory item (ID)
-	parent_id__n: Option<Vec<i64>>,
+	parent_id__n: Option<Vec<Option<i64>>>,
 	part_id: Option<Vec<String>>,
 	part_id__empty: Option<bool>,
 	part_id__ic: Option<Vec<String>>,
@@ -6779,13 +6781,13 @@ pub struct DcimInventoryItemTemplatesListQuery {
 	/// Role (slug)
 	role__n: Option<Vec<String>>,
 	/// Role (ID)
-	role_id: Option<Vec<i64>>,
+	role_id: Option<Vec<Option<i64>>>,
 	/// Role (ID)
-	role_id__n: Option<Vec<i64>>,
+	role_id__n: Option<Vec<Option<i64>>>,
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemTemplatesListResponse {
 	Http200(PaginatedInventoryItemTemplateList),
@@ -6802,7 +6804,7 @@ pub fn dcim_inventory_item_templates_list(state: &ThanixClient, query: DcimInven
 		_ => { Ok(DcimInventoryItemTemplatesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemTemplatesBulkUpdateResponse {
 	Http200(Vec<InventoryItemTemplate>),
@@ -6820,7 +6822,7 @@ pub fn dcim_inventory_item_templates_bulk_update(state: &ThanixClient, body: Vec
 		_ => { Ok(DcimInventoryItemTemplatesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemTemplatesCreateResponse {
 	Http201(InventoryItemTemplate),
@@ -6838,7 +6840,7 @@ pub fn dcim_inventory_item_templates_create(state: &ThanixClient, body: Writable
 		_ => { Ok(DcimInventoryItemTemplatesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemTemplatesBulkDestroyResponse {
 	Http204,
@@ -6855,7 +6857,7 @@ pub fn dcim_inventory_item_templates_bulk_destroy(state: &ThanixClient, body: Ve
 		_ => { Ok(DcimInventoryItemTemplatesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<InventoryItemTemplate>),
@@ -6873,7 +6875,7 @@ pub fn dcim_inventory_item_templates_bulk_partial_update(state: &ThanixClient, b
 		_ => { Ok(DcimInventoryItemTemplatesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemTemplatesRetrieveResponse {
 	Http200(InventoryItemTemplate),
@@ -6890,7 +6892,7 @@ pub fn dcim_inventory_item_templates_retrieve(state: &ThanixClient, id: i64) -> 
 		_ => { Ok(DcimInventoryItemTemplatesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemTemplatesUpdateResponse {
 	Http200(InventoryItemTemplate),
@@ -6908,7 +6910,7 @@ pub fn dcim_inventory_item_templates_update(state: &ThanixClient, body: Writable
 		_ => { Ok(DcimInventoryItemTemplatesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemTemplatesDestroyResponse {
 	Http204,
@@ -6924,7 +6926,7 @@ pub fn dcim_inventory_item_templates_destroy(state: &ThanixClient, id: i64) -> R
 		_ => { Ok(DcimInventoryItemTemplatesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemTemplatesPartialUpdateResponse {
 	Http200(InventoryItemTemplate),
@@ -6942,7 +6944,7 @@ pub fn dcim_inventory_item_templates_partial_update(state: &ThanixClient, body: 
 		_ => { Ok(DcimInventoryItemTemplatesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimInventoryItemsListQuery {
 	asset_tag: Option<Vec<String>>,
 	asset_tag__empty: Option<bool>,
@@ -7037,9 +7039,9 @@ pub struct DcimInventoryItemsListQuery {
 	/// Manufacturer (slug)
 	manufacturer__n: Option<Vec<String>>,
 	/// Manufacturer (ID)
-	manufacturer_id: Option<Vec<i64>>,
+	manufacturer_id: Option<Vec<Option<i64>>>,
 	/// Manufacturer (ID)
-	manufacturer_id__n: Option<Vec<i64>>,
+	manufacturer_id__n: Option<Vec<Option<i64>>>,
 	modified_by_request: Option<String>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
@@ -7057,9 +7059,9 @@ pub struct DcimInventoryItemsListQuery {
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
 	/// Parent inventory item (ID)
-	parent_id: Option<Vec<i64>>,
+	parent_id: Option<Vec<Option<i64>>>,
 	/// Parent inventory item (ID)
-	parent_id__n: Option<Vec<i64>>,
+	parent_id__n: Option<Vec<Option<i64>>>,
 	part_id: Option<Vec<String>>,
 	part_id__empty: Option<bool>,
 	part_id__ic: Option<Vec<String>>,
@@ -7094,9 +7096,9 @@ pub struct DcimInventoryItemsListQuery {
 	/// Role (slug)
 	role__n: Option<Vec<String>>,
 	/// Role (ID)
-	role_id: Option<Vec<i64>>,
+	role_id: Option<Vec<Option<i64>>>,
 	/// Role (ID)
-	role_id__n: Option<Vec<i64>>,
+	role_id__n: Option<Vec<Option<i64>>>,
 	serial: Option<Vec<String>>,
 	serial__empty: Option<bool>,
 	serial__ic: Option<Vec<String>>,
@@ -7137,7 +7139,7 @@ pub struct DcimInventoryItemsListQuery {
 	virtual_chassis_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemsListResponse {
 	Http200(PaginatedInventoryItemList),
@@ -7154,7 +7156,7 @@ pub fn dcim_inventory_items_list(state: &ThanixClient, query: DcimInventoryItems
 		_ => { Ok(DcimInventoryItemsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemsBulkUpdateResponse {
 	Http200(Vec<InventoryItem>),
@@ -7172,7 +7174,7 @@ pub fn dcim_inventory_items_bulk_update(state: &ThanixClient, body: Vec<Inventor
 		_ => { Ok(DcimInventoryItemsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemsCreateResponse {
 	Http201(InventoryItem),
@@ -7190,7 +7192,7 @@ pub fn dcim_inventory_items_create(state: &ThanixClient, body: WritableInventory
 		_ => { Ok(DcimInventoryItemsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemsBulkDestroyResponse {
 	Http204,
@@ -7207,7 +7209,7 @@ pub fn dcim_inventory_items_bulk_destroy(state: &ThanixClient, body: Vec<Invento
 		_ => { Ok(DcimInventoryItemsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemsBulkPartialUpdateResponse {
 	Http200(Vec<InventoryItem>),
@@ -7225,7 +7227,7 @@ pub fn dcim_inventory_items_bulk_partial_update(state: &ThanixClient, body: Vec<
 		_ => { Ok(DcimInventoryItemsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemsRetrieveResponse {
 	Http200(InventoryItem),
@@ -7242,7 +7244,7 @@ pub fn dcim_inventory_items_retrieve(state: &ThanixClient, id: i64) -> Result<Dc
 		_ => { Ok(DcimInventoryItemsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemsUpdateResponse {
 	Http200(InventoryItem),
@@ -7260,7 +7262,7 @@ pub fn dcim_inventory_items_update(state: &ThanixClient, body: WritableInventory
 		_ => { Ok(DcimInventoryItemsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemsDestroyResponse {
 	Http204,
@@ -7276,7 +7278,7 @@ pub fn dcim_inventory_items_destroy(state: &ThanixClient, id: i64) -> Result<Dci
 		_ => { Ok(DcimInventoryItemsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimInventoryItemsPartialUpdateResponse {
 	Http200(InventoryItem),
@@ -7294,7 +7296,7 @@ pub fn dcim_inventory_items_partial_update(state: &ThanixClient, body: PatchedWr
 		_ => { Ok(DcimInventoryItemsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimLocationsListQuery {
 	/// Contact
 	contact: Option<Vec<i64>>,
@@ -7421,13 +7423,13 @@ pub struct DcimLocationsListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimLocationsListResponse {
 	Http200(PaginatedLocationList),
@@ -7444,7 +7446,7 @@ pub fn dcim_locations_list(state: &ThanixClient, query: DcimLocationsListQuery) 
 		_ => { Ok(DcimLocationsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimLocationsBulkUpdateResponse {
 	Http200(Vec<Location>),
@@ -7462,7 +7464,7 @@ pub fn dcim_locations_bulk_update(state: &ThanixClient, body: Vec<LocationReques
 		_ => { Ok(DcimLocationsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimLocationsCreateResponse {
 	Http201(Location),
@@ -7480,7 +7482,7 @@ pub fn dcim_locations_create(state: &ThanixClient, body: WritableLocationRequest
 		_ => { Ok(DcimLocationsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimLocationsBulkDestroyResponse {
 	Http204,
@@ -7497,7 +7499,7 @@ pub fn dcim_locations_bulk_destroy(state: &ThanixClient, body: Vec<LocationReque
 		_ => { Ok(DcimLocationsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimLocationsBulkPartialUpdateResponse {
 	Http200(Vec<Location>),
@@ -7515,7 +7517,7 @@ pub fn dcim_locations_bulk_partial_update(state: &ThanixClient, body: Vec<Locati
 		_ => { Ok(DcimLocationsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimLocationsRetrieveResponse {
 	Http200(Location),
@@ -7532,7 +7534,7 @@ pub fn dcim_locations_retrieve(state: &ThanixClient, id: i64) -> Result<DcimLoca
 		_ => { Ok(DcimLocationsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimLocationsUpdateResponse {
 	Http200(Location),
@@ -7550,7 +7552,7 @@ pub fn dcim_locations_update(state: &ThanixClient, body: WritableLocationRequest
 		_ => { Ok(DcimLocationsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimLocationsDestroyResponse {
 	Http204,
@@ -7566,7 +7568,7 @@ pub fn dcim_locations_destroy(state: &ThanixClient, id: i64) -> Result<DcimLocat
 		_ => { Ok(DcimLocationsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimLocationsPartialUpdateResponse {
 	Http200(Location),
@@ -7584,7 +7586,7 @@ pub fn dcim_locations_partial_update(state: &ThanixClient, body: PatchedWritable
 		_ => { Ok(DcimLocationsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimManufacturersListQuery {
 	/// Contact
 	contact: Option<Vec<i64>>,
@@ -7667,7 +7669,7 @@ pub struct DcimManufacturersListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimManufacturersListResponse {
 	Http200(PaginatedManufacturerList),
@@ -7684,7 +7686,7 @@ pub fn dcim_manufacturers_list(state: &ThanixClient, query: DcimManufacturersLis
 		_ => { Ok(DcimManufacturersListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimManufacturersBulkUpdateResponse {
 	Http200(Vec<Manufacturer>),
@@ -7702,7 +7704,7 @@ pub fn dcim_manufacturers_bulk_update(state: &ThanixClient, body: Vec<Manufactur
 		_ => { Ok(DcimManufacturersBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimManufacturersCreateResponse {
 	Http201(Manufacturer),
@@ -7720,7 +7722,7 @@ pub fn dcim_manufacturers_create(state: &ThanixClient, body: ManufacturerRequest
 		_ => { Ok(DcimManufacturersCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimManufacturersBulkDestroyResponse {
 	Http204,
@@ -7737,7 +7739,7 @@ pub fn dcim_manufacturers_bulk_destroy(state: &ThanixClient, body: Vec<Manufactu
 		_ => { Ok(DcimManufacturersBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimManufacturersBulkPartialUpdateResponse {
 	Http200(Vec<Manufacturer>),
@@ -7755,7 +7757,7 @@ pub fn dcim_manufacturers_bulk_partial_update(state: &ThanixClient, body: Vec<Ma
 		_ => { Ok(DcimManufacturersBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimManufacturersRetrieveResponse {
 	Http200(Manufacturer),
@@ -7772,7 +7774,7 @@ pub fn dcim_manufacturers_retrieve(state: &ThanixClient, id: i64) -> Result<Dcim
 		_ => { Ok(DcimManufacturersRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimManufacturersUpdateResponse {
 	Http200(Manufacturer),
@@ -7790,7 +7792,7 @@ pub fn dcim_manufacturers_update(state: &ThanixClient, body: ManufacturerRequest
 		_ => { Ok(DcimManufacturersUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimManufacturersDestroyResponse {
 	Http204,
@@ -7806,7 +7808,7 @@ pub fn dcim_manufacturers_destroy(state: &ThanixClient, id: i64) -> Result<DcimM
 		_ => { Ok(DcimManufacturersDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimManufacturersPartialUpdateResponse {
 	Http200(Manufacturer),
@@ -7824,7 +7826,7 @@ pub fn dcim_manufacturers_partial_update(state: &ThanixClient, body: PatchedManu
 		_ => { Ok(DcimManufacturersPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimModuleBayTemplatesListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -7886,7 +7888,7 @@ pub struct DcimModuleBayTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleBayTemplatesListResponse {
 	Http200(PaginatedModuleBayTemplateList),
@@ -7903,7 +7905,7 @@ pub fn dcim_module_bay_templates_list(state: &ThanixClient, query: DcimModuleBay
 		_ => { Ok(DcimModuleBayTemplatesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleBayTemplatesBulkUpdateResponse {
 	Http200(Vec<ModuleBayTemplate>),
@@ -7921,7 +7923,7 @@ pub fn dcim_module_bay_templates_bulk_update(state: &ThanixClient, body: Vec<Mod
 		_ => { Ok(DcimModuleBayTemplatesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleBayTemplatesCreateResponse {
 	Http201(ModuleBayTemplate),
@@ -7939,7 +7941,7 @@ pub fn dcim_module_bay_templates_create(state: &ThanixClient, body: WritableModu
 		_ => { Ok(DcimModuleBayTemplatesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleBayTemplatesBulkDestroyResponse {
 	Http204,
@@ -7956,7 +7958,7 @@ pub fn dcim_module_bay_templates_bulk_destroy(state: &ThanixClient, body: Vec<Mo
 		_ => { Ok(DcimModuleBayTemplatesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleBayTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<ModuleBayTemplate>),
@@ -7974,7 +7976,7 @@ pub fn dcim_module_bay_templates_bulk_partial_update(state: &ThanixClient, body:
 		_ => { Ok(DcimModuleBayTemplatesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleBayTemplatesRetrieveResponse {
 	Http200(ModuleBayTemplate),
@@ -7991,7 +7993,7 @@ pub fn dcim_module_bay_templates_retrieve(state: &ThanixClient, id: i64) -> Resu
 		_ => { Ok(DcimModuleBayTemplatesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleBayTemplatesUpdateResponse {
 	Http200(ModuleBayTemplate),
@@ -8009,7 +8011,7 @@ pub fn dcim_module_bay_templates_update(state: &ThanixClient, body: WritableModu
 		_ => { Ok(DcimModuleBayTemplatesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleBayTemplatesDestroyResponse {
 	Http204,
@@ -8025,7 +8027,7 @@ pub fn dcim_module_bay_templates_destroy(state: &ThanixClient, id: i64) -> Resul
 		_ => { Ok(DcimModuleBayTemplatesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleBayTemplatesPartialUpdateResponse {
 	Http200(ModuleBayTemplate),
@@ -8043,7 +8045,7 @@ pub fn dcim_module_bay_templates_partial_update(state: &ThanixClient, body: Patc
 		_ => { Ok(DcimModuleBayTemplatesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimModuleBaysListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -8194,7 +8196,7 @@ pub struct DcimModuleBaysListQuery {
 	virtual_chassis_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleBaysListResponse {
 	Http200(PaginatedModuleBayList),
@@ -8211,7 +8213,7 @@ pub fn dcim_module_bays_list(state: &ThanixClient, query: DcimModuleBaysListQuer
 		_ => { Ok(DcimModuleBaysListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleBaysBulkUpdateResponse {
 	Http200(Vec<ModuleBay>),
@@ -8229,7 +8231,7 @@ pub fn dcim_module_bays_bulk_update(state: &ThanixClient, body: Vec<ModuleBayReq
 		_ => { Ok(DcimModuleBaysBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleBaysCreateResponse {
 	Http201(ModuleBay),
@@ -8247,7 +8249,7 @@ pub fn dcim_module_bays_create(state: &ThanixClient, body: WritableModuleBayRequ
 		_ => { Ok(DcimModuleBaysCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleBaysBulkDestroyResponse {
 	Http204,
@@ -8264,7 +8266,7 @@ pub fn dcim_module_bays_bulk_destroy(state: &ThanixClient, body: Vec<ModuleBayRe
 		_ => { Ok(DcimModuleBaysBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleBaysBulkPartialUpdateResponse {
 	Http200(Vec<ModuleBay>),
@@ -8282,7 +8284,7 @@ pub fn dcim_module_bays_bulk_partial_update(state: &ThanixClient, body: Vec<Modu
 		_ => { Ok(DcimModuleBaysBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleBaysRetrieveResponse {
 	Http200(ModuleBay),
@@ -8299,7 +8301,7 @@ pub fn dcim_module_bays_retrieve(state: &ThanixClient, id: i64) -> Result<DcimMo
 		_ => { Ok(DcimModuleBaysRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleBaysUpdateResponse {
 	Http200(ModuleBay),
@@ -8317,7 +8319,7 @@ pub fn dcim_module_bays_update(state: &ThanixClient, body: WritableModuleBayRequ
 		_ => { Ok(DcimModuleBaysUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleBaysDestroyResponse {
 	Http204,
@@ -8333,7 +8335,7 @@ pub fn dcim_module_bays_destroy(state: &ThanixClient, id: i64) -> Result<DcimMod
 		_ => { Ok(DcimModuleBaysDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleBaysPartialUpdateResponse {
 	Http200(ModuleBay),
@@ -8351,7 +8353,7 @@ pub fn dcim_module_bays_partial_update(state: &ThanixClient, body: PatchedWritab
 		_ => { Ok(DcimModuleBaysPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimModuleTypesListQuery {
 	/// Has console ports
 	console_ports: Option<bool>,
@@ -8451,7 +8453,7 @@ pub struct DcimModuleTypesListQuery {
 	weight_unit__n: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleTypesListResponse {
 	Http200(PaginatedModuleTypeList),
@@ -8468,7 +8470,7 @@ pub fn dcim_module_types_list(state: &ThanixClient, query: DcimModuleTypesListQu
 		_ => { Ok(DcimModuleTypesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleTypesBulkUpdateResponse {
 	Http200(Vec<ModuleType>),
@@ -8486,7 +8488,7 @@ pub fn dcim_module_types_bulk_update(state: &ThanixClient, body: Vec<ModuleTypeR
 		_ => { Ok(DcimModuleTypesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleTypesCreateResponse {
 	Http201(ModuleType),
@@ -8504,7 +8506,7 @@ pub fn dcim_module_types_create(state: &ThanixClient, body: WritableModuleTypeRe
 		_ => { Ok(DcimModuleTypesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleTypesBulkDestroyResponse {
 	Http204,
@@ -8521,7 +8523,7 @@ pub fn dcim_module_types_bulk_destroy(state: &ThanixClient, body: Vec<ModuleType
 		_ => { Ok(DcimModuleTypesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleTypesBulkPartialUpdateResponse {
 	Http200(Vec<ModuleType>),
@@ -8539,7 +8541,7 @@ pub fn dcim_module_types_bulk_partial_update(state: &ThanixClient, body: Vec<Mod
 		_ => { Ok(DcimModuleTypesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleTypesRetrieveResponse {
 	Http200(ModuleType),
@@ -8556,7 +8558,7 @@ pub fn dcim_module_types_retrieve(state: &ThanixClient, id: i64) -> Result<DcimM
 		_ => { Ok(DcimModuleTypesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleTypesUpdateResponse {
 	Http200(ModuleType),
@@ -8574,7 +8576,7 @@ pub fn dcim_module_types_update(state: &ThanixClient, body: WritableModuleTypeRe
 		_ => { Ok(DcimModuleTypesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleTypesDestroyResponse {
 	Http204,
@@ -8590,7 +8592,7 @@ pub fn dcim_module_types_destroy(state: &ThanixClient, id: i64) -> Result<DcimMo
 		_ => { Ok(DcimModuleTypesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModuleTypesPartialUpdateResponse {
 	Http200(ModuleType),
@@ -8608,7 +8610,7 @@ pub fn dcim_module_types_partial_update(state: &ThanixClient, body: PatchedWrita
 		_ => { Ok(DcimModuleTypesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimModulesListQuery {
 	asset_tag: Option<Vec<String>>,
 	asset_tag__empty: Option<bool>,
@@ -8705,7 +8707,7 @@ pub struct DcimModulesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModulesListResponse {
 	Http200(PaginatedModuleList),
@@ -8722,7 +8724,7 @@ pub fn dcim_modules_list(state: &ThanixClient, query: DcimModulesListQuery) -> R
 		_ => { Ok(DcimModulesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModulesBulkUpdateResponse {
 	Http200(Vec<Module>),
@@ -8740,7 +8742,7 @@ pub fn dcim_modules_bulk_update(state: &ThanixClient, body: Vec<ModuleRequest>) 
 		_ => { Ok(DcimModulesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModulesCreateResponse {
 	Http201(Module),
@@ -8758,7 +8760,7 @@ pub fn dcim_modules_create(state: &ThanixClient, body: WritableModuleRequest) ->
 		_ => { Ok(DcimModulesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModulesBulkDestroyResponse {
 	Http204,
@@ -8775,7 +8777,7 @@ pub fn dcim_modules_bulk_destroy(state: &ThanixClient, body: Vec<ModuleRequest>)
 		_ => { Ok(DcimModulesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModulesBulkPartialUpdateResponse {
 	Http200(Vec<Module>),
@@ -8793,7 +8795,7 @@ pub fn dcim_modules_bulk_partial_update(state: &ThanixClient, body: Vec<ModuleRe
 		_ => { Ok(DcimModulesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModulesRetrieveResponse {
 	Http200(Module),
@@ -8810,7 +8812,7 @@ pub fn dcim_modules_retrieve(state: &ThanixClient, id: i64) -> Result<DcimModule
 		_ => { Ok(DcimModulesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModulesUpdateResponse {
 	Http200(Module),
@@ -8828,7 +8830,7 @@ pub fn dcim_modules_update(state: &ThanixClient, body: WritableModuleRequest, id
 		_ => { Ok(DcimModulesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModulesDestroyResponse {
 	Http204,
@@ -8844,7 +8846,7 @@ pub fn dcim_modules_destroy(state: &ThanixClient, id: i64) -> Result<DcimModules
 		_ => { Ok(DcimModulesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimModulesPartialUpdateResponse {
 	Http200(Module),
@@ -8862,12 +8864,12 @@ pub fn dcim_modules_partial_update(state: &ThanixClient, body: PatchedWritableMo
 		_ => { Ok(DcimModulesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimPlatformsListQuery {
 	/// Config template (ID)
-	config_template_id: Option<Vec<i64>>,
+	config_template_id: Option<Vec<Option<i64>>>,
 	/// Config template (ID)
-	config_template_id__n: Option<Vec<i64>>,
+	config_template_id__n: Option<Vec<Option<i64>>>,
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
 	created__gt: Option<Vec<String>>,
@@ -8945,7 +8947,7 @@ pub struct DcimPlatformsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPlatformsListResponse {
 	Http200(PaginatedPlatformList),
@@ -8962,7 +8964,7 @@ pub fn dcim_platforms_list(state: &ThanixClient, query: DcimPlatformsListQuery) 
 		_ => { Ok(DcimPlatformsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPlatformsBulkUpdateResponse {
 	Http200(Vec<Platform>),
@@ -8980,7 +8982,7 @@ pub fn dcim_platforms_bulk_update(state: &ThanixClient, body: Vec<PlatformReques
 		_ => { Ok(DcimPlatformsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPlatformsCreateResponse {
 	Http201(Platform),
@@ -8998,7 +9000,7 @@ pub fn dcim_platforms_create(state: &ThanixClient, body: WritablePlatformRequest
 		_ => { Ok(DcimPlatformsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPlatformsBulkDestroyResponse {
 	Http204,
@@ -9015,7 +9017,7 @@ pub fn dcim_platforms_bulk_destroy(state: &ThanixClient, body: Vec<PlatformReque
 		_ => { Ok(DcimPlatformsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPlatformsBulkPartialUpdateResponse {
 	Http200(Vec<Platform>),
@@ -9033,7 +9035,7 @@ pub fn dcim_platforms_bulk_partial_update(state: &ThanixClient, body: Vec<Platfo
 		_ => { Ok(DcimPlatformsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPlatformsRetrieveResponse {
 	Http200(Platform),
@@ -9050,7 +9052,7 @@ pub fn dcim_platforms_retrieve(state: &ThanixClient, id: i64) -> Result<DcimPlat
 		_ => { Ok(DcimPlatformsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPlatformsUpdateResponse {
 	Http200(Platform),
@@ -9068,7 +9070,7 @@ pub fn dcim_platforms_update(state: &ThanixClient, body: WritablePlatformRequest
 		_ => { Ok(DcimPlatformsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPlatformsDestroyResponse {
 	Http204,
@@ -9084,7 +9086,7 @@ pub fn dcim_platforms_destroy(state: &ThanixClient, id: i64) -> Result<DcimPlatf
 		_ => { Ok(DcimPlatformsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPlatformsPartialUpdateResponse {
 	Http200(Platform),
@@ -9102,7 +9104,7 @@ pub fn dcim_platforms_partial_update(state: &ThanixClient, body: PatchedWritable
 		_ => { Ok(DcimPlatformsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimPowerFeedsListQuery {
 	amperage: Option<Vec<i64>>,
 	amperage__empty: Option<bool>,
@@ -9229,9 +9231,9 @@ pub struct DcimPowerFeedsListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	r#type: Option<String>,
 	type__n: Option<String>,
 	updated_by_request: Option<String>,
@@ -9244,7 +9246,7 @@ pub struct DcimPowerFeedsListQuery {
 	voltage__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerFeedsListResponse {
 	Http200(PaginatedPowerFeedList),
@@ -9261,7 +9263,7 @@ pub fn dcim_power_feeds_list(state: &ThanixClient, query: DcimPowerFeedsListQuer
 		_ => { Ok(DcimPowerFeedsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerFeedsBulkUpdateResponse {
 	Http200(Vec<PowerFeed>),
@@ -9279,7 +9281,7 @@ pub fn dcim_power_feeds_bulk_update(state: &ThanixClient, body: Vec<PowerFeedReq
 		_ => { Ok(DcimPowerFeedsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerFeedsCreateResponse {
 	Http201(PowerFeed),
@@ -9297,7 +9299,7 @@ pub fn dcim_power_feeds_create(state: &ThanixClient, body: WritablePowerFeedRequ
 		_ => { Ok(DcimPowerFeedsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerFeedsBulkDestroyResponse {
 	Http204,
@@ -9314,7 +9316,7 @@ pub fn dcim_power_feeds_bulk_destroy(state: &ThanixClient, body: Vec<PowerFeedRe
 		_ => { Ok(DcimPowerFeedsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerFeedsBulkPartialUpdateResponse {
 	Http200(Vec<PowerFeed>),
@@ -9332,7 +9334,7 @@ pub fn dcim_power_feeds_bulk_partial_update(state: &ThanixClient, body: Vec<Powe
 		_ => { Ok(DcimPowerFeedsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerFeedsRetrieveResponse {
 	Http200(PowerFeed),
@@ -9349,7 +9351,7 @@ pub fn dcim_power_feeds_retrieve(state: &ThanixClient, id: i64) -> Result<DcimPo
 		_ => { Ok(DcimPowerFeedsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerFeedsUpdateResponse {
 	Http200(PowerFeed),
@@ -9367,7 +9369,7 @@ pub fn dcim_power_feeds_update(state: &ThanixClient, body: WritablePowerFeedRequ
 		_ => { Ok(DcimPowerFeedsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerFeedsDestroyResponse {
 	Http204,
@@ -9383,7 +9385,7 @@ pub fn dcim_power_feeds_destroy(state: &ThanixClient, id: i64) -> Result<DcimPow
 		_ => { Ok(DcimPowerFeedsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerFeedsPartialUpdateResponse {
 	Http200(PowerFeed),
@@ -9401,7 +9403,7 @@ pub fn dcim_power_feeds_partial_update(state: &ThanixClient, body: PatchedWritab
 		_ => { Ok(DcimPowerFeedsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerFeedsTraceRetrieveResponse {
 	Http200(PowerFeed),
@@ -9418,7 +9420,7 @@ pub fn dcim_power_feeds_trace_retrieve(state: &ThanixClient, id: i64) -> Result<
 		_ => { Ok(DcimPowerFeedsTraceRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimPowerOutletTemplatesListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -9440,9 +9442,9 @@ pub struct DcimPowerOutletTemplatesListQuery {
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
 	/// Device type (ID)
-	devicetype_id: Option<Vec<i64>>,
+	devicetype_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
-	devicetype_id__n: Option<Vec<i64>>,
+	devicetype_id__n: Option<Vec<Option<i64>>>,
 	/// Phase (for three-phase feeds)
 	feed_leg: Option<Vec<String>>,
 	/// Phase (for three-phase feeds)
@@ -9465,9 +9467,9 @@ pub struct DcimPowerOutletTemplatesListQuery {
 	limit: Option<i64>,
 	modified_by_request: Option<String>,
 	/// Module type (ID)
-	moduletype_id: Option<Vec<i64>>,
+	moduletype_id: Option<Vec<Option<i64>>>,
 	/// Module type (ID)
-	moduletype_id__n: Option<Vec<i64>>,
+	moduletype_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -9490,7 +9492,7 @@ pub struct DcimPowerOutletTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerOutletTemplatesListResponse {
 	Http200(PaginatedPowerOutletTemplateList),
@@ -9507,7 +9509,7 @@ pub fn dcim_power_outlet_templates_list(state: &ThanixClient, query: DcimPowerOu
 		_ => { Ok(DcimPowerOutletTemplatesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerOutletTemplatesBulkUpdateResponse {
 	Http200(Vec<PowerOutletTemplate>),
@@ -9525,7 +9527,7 @@ pub fn dcim_power_outlet_templates_bulk_update(state: &ThanixClient, body: Vec<P
 		_ => { Ok(DcimPowerOutletTemplatesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerOutletTemplatesCreateResponse {
 	Http201(PowerOutletTemplate),
@@ -9543,7 +9545,7 @@ pub fn dcim_power_outlet_templates_create(state: &ThanixClient, body: WritablePo
 		_ => { Ok(DcimPowerOutletTemplatesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerOutletTemplatesBulkDestroyResponse {
 	Http204,
@@ -9560,7 +9562,7 @@ pub fn dcim_power_outlet_templates_bulk_destroy(state: &ThanixClient, body: Vec<
 		_ => { Ok(DcimPowerOutletTemplatesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerOutletTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<PowerOutletTemplate>),
@@ -9578,7 +9580,7 @@ pub fn dcim_power_outlet_templates_bulk_partial_update(state: &ThanixClient, bod
 		_ => { Ok(DcimPowerOutletTemplatesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerOutletTemplatesRetrieveResponse {
 	Http200(PowerOutletTemplate),
@@ -9595,7 +9597,7 @@ pub fn dcim_power_outlet_templates_retrieve(state: &ThanixClient, id: i64) -> Re
 		_ => { Ok(DcimPowerOutletTemplatesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerOutletTemplatesUpdateResponse {
 	Http200(PowerOutletTemplate),
@@ -9613,7 +9615,7 @@ pub fn dcim_power_outlet_templates_update(state: &ThanixClient, body: WritablePo
 		_ => { Ok(DcimPowerOutletTemplatesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerOutletTemplatesDestroyResponse {
 	Http204,
@@ -9629,7 +9631,7 @@ pub fn dcim_power_outlet_templates_destroy(state: &ThanixClient, id: i64) -> Res
 		_ => { Ok(DcimPowerOutletTemplatesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerOutletTemplatesPartialUpdateResponse {
 	Http200(PowerOutletTemplate),
@@ -9647,7 +9649,7 @@ pub fn dcim_power_outlet_templates_partial_update(state: &ThanixClient, body: Pa
 		_ => { Ok(DcimPowerOutletTemplatesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimPowerOutletsListQuery {
 	cable_end: Option<String>,
 	cable_end__n: Option<String>,
@@ -9737,9 +9739,9 @@ pub struct DcimPowerOutletsListQuery {
 	location_id__n: Option<Vec<i64>>,
 	modified_by_request: Option<String>,
 	/// Module (ID)
-	module_id: Option<Vec<i64>>,
+	module_id: Option<Vec<Option<i64>>>,
 	/// Module (ID)
-	module_id__n: Option<Vec<i64>>,
+	module_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -9815,7 +9817,7 @@ pub struct DcimPowerOutletsListQuery {
 	virtual_chassis_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerOutletsListResponse {
 	Http200(PaginatedPowerOutletList),
@@ -9832,7 +9834,7 @@ pub fn dcim_power_outlets_list(state: &ThanixClient, query: DcimPowerOutletsList
 		_ => { Ok(DcimPowerOutletsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerOutletsBulkUpdateResponse {
 	Http200(Vec<PowerOutlet>),
@@ -9850,7 +9852,7 @@ pub fn dcim_power_outlets_bulk_update(state: &ThanixClient, body: Vec<PowerOutle
 		_ => { Ok(DcimPowerOutletsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerOutletsCreateResponse {
 	Http201(PowerOutlet),
@@ -9868,7 +9870,7 @@ pub fn dcim_power_outlets_create(state: &ThanixClient, body: WritablePowerOutlet
 		_ => { Ok(DcimPowerOutletsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerOutletsBulkDestroyResponse {
 	Http204,
@@ -9885,7 +9887,7 @@ pub fn dcim_power_outlets_bulk_destroy(state: &ThanixClient, body: Vec<PowerOutl
 		_ => { Ok(DcimPowerOutletsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerOutletsBulkPartialUpdateResponse {
 	Http200(Vec<PowerOutlet>),
@@ -9903,7 +9905,7 @@ pub fn dcim_power_outlets_bulk_partial_update(state: &ThanixClient, body: Vec<Po
 		_ => { Ok(DcimPowerOutletsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerOutletsRetrieveResponse {
 	Http200(PowerOutlet),
@@ -9920,7 +9922,7 @@ pub fn dcim_power_outlets_retrieve(state: &ThanixClient, id: i64) -> Result<Dcim
 		_ => { Ok(DcimPowerOutletsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerOutletsUpdateResponse {
 	Http200(PowerOutlet),
@@ -9938,7 +9940,7 @@ pub fn dcim_power_outlets_update(state: &ThanixClient, body: WritablePowerOutlet
 		_ => { Ok(DcimPowerOutletsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerOutletsDestroyResponse {
 	Http204,
@@ -9954,7 +9956,7 @@ pub fn dcim_power_outlets_destroy(state: &ThanixClient, id: i64) -> Result<DcimP
 		_ => { Ok(DcimPowerOutletsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerOutletsPartialUpdateResponse {
 	Http200(PowerOutlet),
@@ -9972,7 +9974,7 @@ pub fn dcim_power_outlets_partial_update(state: &ThanixClient, body: PatchedWrit
 		_ => { Ok(DcimPowerOutletsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerOutletsTraceRetrieveResponse {
 	Http200(PowerOutlet),
@@ -9989,7 +9991,7 @@ pub fn dcim_power_outlets_trace_retrieve(state: &ThanixClient, id: i64) -> Resul
 		_ => { Ok(DcimPowerOutletsTraceRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimPowerPanelsListQuery {
 	/// Contact
 	contact: Option<Vec<i64>>,
@@ -10089,7 +10091,7 @@ pub struct DcimPowerPanelsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPanelsListResponse {
 	Http200(PaginatedPowerPanelList),
@@ -10106,7 +10108,7 @@ pub fn dcim_power_panels_list(state: &ThanixClient, query: DcimPowerPanelsListQu
 		_ => { Ok(DcimPowerPanelsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPanelsBulkUpdateResponse {
 	Http200(Vec<PowerPanel>),
@@ -10124,7 +10126,7 @@ pub fn dcim_power_panels_bulk_update(state: &ThanixClient, body: Vec<PowerPanelR
 		_ => { Ok(DcimPowerPanelsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPanelsCreateResponse {
 	Http201(PowerPanel),
@@ -10142,7 +10144,7 @@ pub fn dcim_power_panels_create(state: &ThanixClient, body: WritablePowerPanelRe
 		_ => { Ok(DcimPowerPanelsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPanelsBulkDestroyResponse {
 	Http204,
@@ -10159,7 +10161,7 @@ pub fn dcim_power_panels_bulk_destroy(state: &ThanixClient, body: Vec<PowerPanel
 		_ => { Ok(DcimPowerPanelsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPanelsBulkPartialUpdateResponse {
 	Http200(Vec<PowerPanel>),
@@ -10177,7 +10179,7 @@ pub fn dcim_power_panels_bulk_partial_update(state: &ThanixClient, body: Vec<Pow
 		_ => { Ok(DcimPowerPanelsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPanelsRetrieveResponse {
 	Http200(PowerPanel),
@@ -10194,7 +10196,7 @@ pub fn dcim_power_panels_retrieve(state: &ThanixClient, id: i64) -> Result<DcimP
 		_ => { Ok(DcimPowerPanelsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPanelsUpdateResponse {
 	Http200(PowerPanel),
@@ -10212,7 +10214,7 @@ pub fn dcim_power_panels_update(state: &ThanixClient, body: WritablePowerPanelRe
 		_ => { Ok(DcimPowerPanelsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPanelsDestroyResponse {
 	Http204,
@@ -10228,7 +10230,7 @@ pub fn dcim_power_panels_destroy(state: &ThanixClient, id: i64) -> Result<DcimPo
 		_ => { Ok(DcimPowerPanelsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPanelsPartialUpdateResponse {
 	Http200(PowerPanel),
@@ -10246,7 +10248,7 @@ pub fn dcim_power_panels_partial_update(state: &ThanixClient, body: PatchedWrita
 		_ => { Ok(DcimPowerPanelsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimPowerPortTemplatesListQuery {
 	allocated_draw: Option<Vec<i64>>,
 	allocated_draw__empty: Option<bool>,
@@ -10275,9 +10277,9 @@ pub struct DcimPowerPortTemplatesListQuery {
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
 	/// Device type (ID)
-	devicetype_id: Option<Vec<i64>>,
+	devicetype_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
-	devicetype_id__n: Option<Vec<i64>>,
+	devicetype_id__n: Option<Vec<Option<i64>>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -10303,9 +10305,9 @@ pub struct DcimPowerPortTemplatesListQuery {
 	maximum_draw__n: Option<Vec<i64>>,
 	modified_by_request: Option<String>,
 	/// Module type (ID)
-	moduletype_id: Option<Vec<i64>>,
+	moduletype_id: Option<Vec<Option<i64>>>,
 	/// Module type (ID)
-	moduletype_id__n: Option<Vec<i64>>,
+	moduletype_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -10328,7 +10330,7 @@ pub struct DcimPowerPortTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPortTemplatesListResponse {
 	Http200(PaginatedPowerPortTemplateList),
@@ -10345,7 +10347,7 @@ pub fn dcim_power_port_templates_list(state: &ThanixClient, query: DcimPowerPort
 		_ => { Ok(DcimPowerPortTemplatesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPortTemplatesBulkUpdateResponse {
 	Http200(Vec<PowerPortTemplate>),
@@ -10363,7 +10365,7 @@ pub fn dcim_power_port_templates_bulk_update(state: &ThanixClient, body: Vec<Pow
 		_ => { Ok(DcimPowerPortTemplatesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPortTemplatesCreateResponse {
 	Http201(PowerPortTemplate),
@@ -10381,7 +10383,7 @@ pub fn dcim_power_port_templates_create(state: &ThanixClient, body: WritablePowe
 		_ => { Ok(DcimPowerPortTemplatesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPortTemplatesBulkDestroyResponse {
 	Http204,
@@ -10398,7 +10400,7 @@ pub fn dcim_power_port_templates_bulk_destroy(state: &ThanixClient, body: Vec<Po
 		_ => { Ok(DcimPowerPortTemplatesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPortTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<PowerPortTemplate>),
@@ -10416,7 +10418,7 @@ pub fn dcim_power_port_templates_bulk_partial_update(state: &ThanixClient, body:
 		_ => { Ok(DcimPowerPortTemplatesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPortTemplatesRetrieveResponse {
 	Http200(PowerPortTemplate),
@@ -10433,7 +10435,7 @@ pub fn dcim_power_port_templates_retrieve(state: &ThanixClient, id: i64) -> Resu
 		_ => { Ok(DcimPowerPortTemplatesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPortTemplatesUpdateResponse {
 	Http200(PowerPortTemplate),
@@ -10451,7 +10453,7 @@ pub fn dcim_power_port_templates_update(state: &ThanixClient, body: WritablePowe
 		_ => { Ok(DcimPowerPortTemplatesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPortTemplatesDestroyResponse {
 	Http204,
@@ -10467,7 +10469,7 @@ pub fn dcim_power_port_templates_destroy(state: &ThanixClient, id: i64) -> Resul
 		_ => { Ok(DcimPowerPortTemplatesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPortTemplatesPartialUpdateResponse {
 	Http200(PowerPortTemplate),
@@ -10485,7 +10487,7 @@ pub fn dcim_power_port_templates_partial_update(state: &ThanixClient, body: Patc
 		_ => { Ok(DcimPowerPortTemplatesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimPowerPortsListQuery {
 	allocated_draw: Option<Vec<i64>>,
 	allocated_draw__empty: Option<bool>,
@@ -10585,9 +10587,9 @@ pub struct DcimPowerPortsListQuery {
 	maximum_draw__n: Option<Vec<i64>>,
 	modified_by_request: Option<String>,
 	/// Module (ID)
-	module_id: Option<Vec<i64>>,
+	module_id: Option<Vec<Option<i64>>>,
 	/// Module (ID)
-	module_id__n: Option<Vec<i64>>,
+	module_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -10663,7 +10665,7 @@ pub struct DcimPowerPortsListQuery {
 	virtual_chassis_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPortsListResponse {
 	Http200(PaginatedPowerPortList),
@@ -10680,7 +10682,7 @@ pub fn dcim_power_ports_list(state: &ThanixClient, query: DcimPowerPortsListQuer
 		_ => { Ok(DcimPowerPortsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPortsBulkUpdateResponse {
 	Http200(Vec<PowerPort>),
@@ -10698,7 +10700,7 @@ pub fn dcim_power_ports_bulk_update(state: &ThanixClient, body: Vec<PowerPortReq
 		_ => { Ok(DcimPowerPortsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPortsCreateResponse {
 	Http201(PowerPort),
@@ -10716,7 +10718,7 @@ pub fn dcim_power_ports_create(state: &ThanixClient, body: WritablePowerPortRequ
 		_ => { Ok(DcimPowerPortsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPortsBulkDestroyResponse {
 	Http204,
@@ -10733,7 +10735,7 @@ pub fn dcim_power_ports_bulk_destroy(state: &ThanixClient, body: Vec<PowerPortRe
 		_ => { Ok(DcimPowerPortsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPortsBulkPartialUpdateResponse {
 	Http200(Vec<PowerPort>),
@@ -10751,7 +10753,7 @@ pub fn dcim_power_ports_bulk_partial_update(state: &ThanixClient, body: Vec<Powe
 		_ => { Ok(DcimPowerPortsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPortsRetrieveResponse {
 	Http200(PowerPort),
@@ -10768,7 +10770,7 @@ pub fn dcim_power_ports_retrieve(state: &ThanixClient, id: i64) -> Result<DcimPo
 		_ => { Ok(DcimPowerPortsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPortsUpdateResponse {
 	Http200(PowerPort),
@@ -10786,7 +10788,7 @@ pub fn dcim_power_ports_update(state: &ThanixClient, body: WritablePowerPortRequ
 		_ => { Ok(DcimPowerPortsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPortsDestroyResponse {
 	Http204,
@@ -10802,7 +10804,7 @@ pub fn dcim_power_ports_destroy(state: &ThanixClient, id: i64) -> Result<DcimPow
 		_ => { Ok(DcimPowerPortsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPortsPartialUpdateResponse {
 	Http200(PowerPort),
@@ -10820,7 +10822,7 @@ pub fn dcim_power_ports_partial_update(state: &ThanixClient, body: PatchedWritab
 		_ => { Ok(DcimPowerPortsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimPowerPortsTraceRetrieveResponse {
 	Http200(PowerPort),
@@ -10837,7 +10839,7 @@ pub fn dcim_power_ports_trace_retrieve(state: &ThanixClient, id: i64) -> Result<
 		_ => { Ok(DcimPowerPortsTraceRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimRackReservationsListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -10932,9 +10934,9 @@ pub struct DcimRackReservationsListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	updated_by_request: Option<String>,
 	/// User (name)
 	user: Option<Vec<String>>,
@@ -10946,7 +10948,7 @@ pub struct DcimRackReservationsListQuery {
 	user_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRackReservationsListResponse {
 	Http200(PaginatedRackReservationList),
@@ -10963,7 +10965,7 @@ pub fn dcim_rack_reservations_list(state: &ThanixClient, query: DcimRackReservat
 		_ => { Ok(DcimRackReservationsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRackReservationsBulkUpdateResponse {
 	Http200(Vec<RackReservation>),
@@ -10981,7 +10983,7 @@ pub fn dcim_rack_reservations_bulk_update(state: &ThanixClient, body: Vec<RackRe
 		_ => { Ok(DcimRackReservationsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRackReservationsCreateResponse {
 	Http201(RackReservation),
@@ -10999,7 +11001,7 @@ pub fn dcim_rack_reservations_create(state: &ThanixClient, body: WritableRackRes
 		_ => { Ok(DcimRackReservationsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRackReservationsBulkDestroyResponse {
 	Http204,
@@ -11016,7 +11018,7 @@ pub fn dcim_rack_reservations_bulk_destroy(state: &ThanixClient, body: Vec<RackR
 		_ => { Ok(DcimRackReservationsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRackReservationsBulkPartialUpdateResponse {
 	Http200(Vec<RackReservation>),
@@ -11034,7 +11036,7 @@ pub fn dcim_rack_reservations_bulk_partial_update(state: &ThanixClient, body: Ve
 		_ => { Ok(DcimRackReservationsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRackReservationsRetrieveResponse {
 	Http200(RackReservation),
@@ -11051,7 +11053,7 @@ pub fn dcim_rack_reservations_retrieve(state: &ThanixClient, id: i64) -> Result<
 		_ => { Ok(DcimRackReservationsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRackReservationsUpdateResponse {
 	Http200(RackReservation),
@@ -11069,7 +11071,7 @@ pub fn dcim_rack_reservations_update(state: &ThanixClient, body: WritableRackRes
 		_ => { Ok(DcimRackReservationsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRackReservationsDestroyResponse {
 	Http204,
@@ -11085,7 +11087,7 @@ pub fn dcim_rack_reservations_destroy(state: &ThanixClient, id: i64) -> Result<D
 		_ => { Ok(DcimRackReservationsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRackReservationsPartialUpdateResponse {
 	Http200(RackReservation),
@@ -11103,7 +11105,7 @@ pub fn dcim_rack_reservations_partial_update(state: &ThanixClient, body: Patched
 		_ => { Ok(DcimRackReservationsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimRackRolesListQuery {
 	color: Option<Vec<String>>,
 	color__empty: Option<bool>,
@@ -11185,7 +11187,7 @@ pub struct DcimRackRolesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRackRolesListResponse {
 	Http200(PaginatedRackRoleList),
@@ -11202,7 +11204,7 @@ pub fn dcim_rack_roles_list(state: &ThanixClient, query: DcimRackRolesListQuery)
 		_ => { Ok(DcimRackRolesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRackRolesBulkUpdateResponse {
 	Http200(Vec<RackRole>),
@@ -11220,7 +11222,7 @@ pub fn dcim_rack_roles_bulk_update(state: &ThanixClient, body: Vec<RackRoleReque
 		_ => { Ok(DcimRackRolesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRackRolesCreateResponse {
 	Http201(RackRole),
@@ -11238,7 +11240,7 @@ pub fn dcim_rack_roles_create(state: &ThanixClient, body: RackRoleRequest) -> Re
 		_ => { Ok(DcimRackRolesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRackRolesBulkDestroyResponse {
 	Http204,
@@ -11255,7 +11257,7 @@ pub fn dcim_rack_roles_bulk_destroy(state: &ThanixClient, body: Vec<RackRoleRequ
 		_ => { Ok(DcimRackRolesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRackRolesBulkPartialUpdateResponse {
 	Http200(Vec<RackRole>),
@@ -11273,7 +11275,7 @@ pub fn dcim_rack_roles_bulk_partial_update(state: &ThanixClient, body: Vec<RackR
 		_ => { Ok(DcimRackRolesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRackRolesRetrieveResponse {
 	Http200(RackRole),
@@ -11290,7 +11292,7 @@ pub fn dcim_rack_roles_retrieve(state: &ThanixClient, id: i64) -> Result<DcimRac
 		_ => { Ok(DcimRackRolesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRackRolesUpdateResponse {
 	Http200(RackRole),
@@ -11308,7 +11310,7 @@ pub fn dcim_rack_roles_update(state: &ThanixClient, body: RackRoleRequest, id: i
 		_ => { Ok(DcimRackRolesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRackRolesDestroyResponse {
 	Http204,
@@ -11324,7 +11326,7 @@ pub fn dcim_rack_roles_destroy(state: &ThanixClient, id: i64) -> Result<DcimRack
 		_ => { Ok(DcimRackRolesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRackRolesPartialUpdateResponse {
 	Http200(RackRole),
@@ -11342,7 +11344,7 @@ pub fn dcim_rack_roles_partial_update(state: &ThanixClient, body: PatchedRackRol
 		_ => { Ok(DcimRackRolesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimRacksListQuery {
 	asset_tag: Option<Vec<String>>,
 	asset_tag__empty: Option<bool>,
@@ -11483,9 +11485,9 @@ pub struct DcimRacksListQuery {
 	/// Role (slug)
 	role__n: Option<Vec<String>>,
 	/// Role (ID)
-	role_id: Option<Vec<i64>>,
+	role_id: Option<Vec<Option<i64>>>,
 	/// Role (ID)
-	role_id__n: Option<Vec<i64>>,
+	role_id__n: Option<Vec<Option<i64>>>,
 	serial: Option<Vec<String>>,
 	serial__empty: Option<bool>,
 	serial__ic: Option<Vec<String>>,
@@ -11537,9 +11539,9 @@ pub struct DcimRacksListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	r#type: Option<Vec<String>>,
 	type__n: Option<Vec<String>>,
 	u_height: Option<Vec<i64>>,
@@ -11565,7 +11567,7 @@ pub struct DcimRacksListQuery {
 	width__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRacksListResponse {
 	Http200(PaginatedRackList),
@@ -11582,7 +11584,7 @@ pub fn dcim_racks_list(state: &ThanixClient, query: DcimRacksListQuery) -> Resul
 		_ => { Ok(DcimRacksListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRacksBulkUpdateResponse {
 	Http200(Vec<Rack>),
@@ -11600,7 +11602,7 @@ pub fn dcim_racks_bulk_update(state: &ThanixClient, body: Vec<RackRequest>) -> R
 		_ => { Ok(DcimRacksBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRacksCreateResponse {
 	Http201(Rack),
@@ -11618,7 +11620,7 @@ pub fn dcim_racks_create(state: &ThanixClient, body: WritableRackRequest) -> Res
 		_ => { Ok(DcimRacksCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRacksBulkDestroyResponse {
 	Http204,
@@ -11635,7 +11637,7 @@ pub fn dcim_racks_bulk_destroy(state: &ThanixClient, body: Vec<RackRequest>) -> 
 		_ => { Ok(DcimRacksBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRacksBulkPartialUpdateResponse {
 	Http200(Vec<Rack>),
@@ -11653,7 +11655,7 @@ pub fn dcim_racks_bulk_partial_update(state: &ThanixClient, body: Vec<RackReques
 		_ => { Ok(DcimRacksBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRacksRetrieveResponse {
 	Http200(Rack),
@@ -11670,7 +11672,7 @@ pub fn dcim_racks_retrieve(state: &ThanixClient, id: i64) -> Result<DcimRacksRet
 		_ => { Ok(DcimRacksRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRacksUpdateResponse {
 	Http200(Rack),
@@ -11688,7 +11690,7 @@ pub fn dcim_racks_update(state: &ThanixClient, body: WritableRackRequest, id: i6
 		_ => { Ok(DcimRacksUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRacksDestroyResponse {
 	Http204,
@@ -11704,7 +11706,7 @@ pub fn dcim_racks_destroy(state: &ThanixClient, id: i64) -> Result<DcimRacksDest
 		_ => { Ok(DcimRacksDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRacksPartialUpdateResponse {
 	Http200(Rack),
@@ -11722,7 +11724,7 @@ pub fn dcim_racks_partial_update(state: &ThanixClient, body: PatchedWritableRack
 		_ => { Ok(DcimRacksPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRacksElevationRetrieveResponse {
 	Http200(Rack),
@@ -11739,7 +11741,7 @@ pub fn dcim_racks_elevation_retrieve(state: &ThanixClient, id: i64) -> Result<Dc
 		_ => { Ok(DcimRacksElevationRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimRearPortTemplatesListQuery {
 	color: Option<Vec<String>>,
 	color__empty: Option<bool>,
@@ -11772,9 +11774,9 @@ pub struct DcimRearPortTemplatesListQuery {
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
 	/// Device type (ID)
-	devicetype_id: Option<Vec<i64>>,
+	devicetype_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
-	devicetype_id__n: Option<Vec<i64>>,
+	devicetype_id__n: Option<Vec<Option<i64>>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -11793,9 +11795,9 @@ pub struct DcimRearPortTemplatesListQuery {
 	limit: Option<i64>,
 	modified_by_request: Option<String>,
 	/// Module type (ID)
-	moduletype_id: Option<Vec<i64>>,
+	moduletype_id: Option<Vec<Option<i64>>>,
 	/// Module type (ID)
-	moduletype_id__n: Option<Vec<i64>>,
+	moduletype_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -11825,7 +11827,7 @@ pub struct DcimRearPortTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRearPortTemplatesListResponse {
 	Http200(PaginatedRearPortTemplateList),
@@ -11842,7 +11844,7 @@ pub fn dcim_rear_port_templates_list(state: &ThanixClient, query: DcimRearPortTe
 		_ => { Ok(DcimRearPortTemplatesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRearPortTemplatesBulkUpdateResponse {
 	Http200(Vec<RearPortTemplate>),
@@ -11860,7 +11862,7 @@ pub fn dcim_rear_port_templates_bulk_update(state: &ThanixClient, body: Vec<Rear
 		_ => { Ok(DcimRearPortTemplatesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRearPortTemplatesCreateResponse {
 	Http201(RearPortTemplate),
@@ -11878,7 +11880,7 @@ pub fn dcim_rear_port_templates_create(state: &ThanixClient, body: WritableRearP
 		_ => { Ok(DcimRearPortTemplatesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRearPortTemplatesBulkDestroyResponse {
 	Http204,
@@ -11895,7 +11897,7 @@ pub fn dcim_rear_port_templates_bulk_destroy(state: &ThanixClient, body: Vec<Rea
 		_ => { Ok(DcimRearPortTemplatesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRearPortTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<RearPortTemplate>),
@@ -11913,7 +11915,7 @@ pub fn dcim_rear_port_templates_bulk_partial_update(state: &ThanixClient, body: 
 		_ => { Ok(DcimRearPortTemplatesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRearPortTemplatesRetrieveResponse {
 	Http200(RearPortTemplate),
@@ -11930,7 +11932,7 @@ pub fn dcim_rear_port_templates_retrieve(state: &ThanixClient, id: i64) -> Resul
 		_ => { Ok(DcimRearPortTemplatesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRearPortTemplatesUpdateResponse {
 	Http200(RearPortTemplate),
@@ -11948,7 +11950,7 @@ pub fn dcim_rear_port_templates_update(state: &ThanixClient, body: WritableRearP
 		_ => { Ok(DcimRearPortTemplatesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRearPortTemplatesDestroyResponse {
 	Http204,
@@ -11964,7 +11966,7 @@ pub fn dcim_rear_port_templates_destroy(state: &ThanixClient, id: i64) -> Result
 		_ => { Ok(DcimRearPortTemplatesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRearPortTemplatesPartialUpdateResponse {
 	Http200(RearPortTemplate),
@@ -11982,7 +11984,7 @@ pub fn dcim_rear_port_templates_partial_update(state: &ThanixClient, body: Patch
 		_ => { Ok(DcimRearPortTemplatesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimRearPortsListQuery {
 	cable_end: Option<String>,
 	cable_end__n: Option<String>,
@@ -12078,9 +12080,9 @@ pub struct DcimRearPortsListQuery {
 	location_id__n: Option<Vec<i64>>,
 	modified_by_request: Option<String>,
 	/// Module (ID)
-	module_id: Option<Vec<i64>>,
+	module_id: Option<Vec<Option<i64>>>,
 	/// Module (ID)
-	module_id__n: Option<Vec<i64>>,
+	module_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -12161,7 +12163,7 @@ pub struct DcimRearPortsListQuery {
 	virtual_chassis_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRearPortsListResponse {
 	Http200(PaginatedRearPortList),
@@ -12178,7 +12180,7 @@ pub fn dcim_rear_ports_list(state: &ThanixClient, query: DcimRearPortsListQuery)
 		_ => { Ok(DcimRearPortsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRearPortsBulkUpdateResponse {
 	Http200(Vec<RearPort>),
@@ -12196,7 +12198,7 @@ pub fn dcim_rear_ports_bulk_update(state: &ThanixClient, body: Vec<RearPortReque
 		_ => { Ok(DcimRearPortsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRearPortsCreateResponse {
 	Http201(RearPort),
@@ -12214,7 +12216,7 @@ pub fn dcim_rear_ports_create(state: &ThanixClient, body: WritableRearPortReques
 		_ => { Ok(DcimRearPortsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRearPortsBulkDestroyResponse {
 	Http204,
@@ -12231,7 +12233,7 @@ pub fn dcim_rear_ports_bulk_destroy(state: &ThanixClient, body: Vec<RearPortRequ
 		_ => { Ok(DcimRearPortsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRearPortsBulkPartialUpdateResponse {
 	Http200(Vec<RearPort>),
@@ -12249,7 +12251,7 @@ pub fn dcim_rear_ports_bulk_partial_update(state: &ThanixClient, body: Vec<RearP
 		_ => { Ok(DcimRearPortsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRearPortsRetrieveResponse {
 	Http200(RearPort),
@@ -12266,7 +12268,7 @@ pub fn dcim_rear_ports_retrieve(state: &ThanixClient, id: i64) -> Result<DcimRea
 		_ => { Ok(DcimRearPortsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRearPortsUpdateResponse {
 	Http200(RearPort),
@@ -12284,7 +12286,7 @@ pub fn dcim_rear_ports_update(state: &ThanixClient, body: WritableRearPortReques
 		_ => { Ok(DcimRearPortsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRearPortsDestroyResponse {
 	Http204,
@@ -12300,7 +12302,7 @@ pub fn dcim_rear_ports_destroy(state: &ThanixClient, id: i64) -> Result<DcimRear
 		_ => { Ok(DcimRearPortsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRearPortsPartialUpdateResponse {
 	Http200(RearPort),
@@ -12318,7 +12320,7 @@ pub fn dcim_rear_ports_partial_update(state: &ThanixClient, body: PatchedWritabl
 		_ => { Ok(DcimRearPortsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRearPortsPathsRetrieveResponse {
 	Http200(RearPort),
@@ -12335,7 +12337,7 @@ pub fn dcim_rear_ports_paths_retrieve(state: &ThanixClient, id: i64) -> Result<D
 		_ => { Ok(DcimRearPortsPathsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimRegionsListQuery {
 	/// Contact
 	contact: Option<Vec<i64>>,
@@ -12405,9 +12407,9 @@ pub struct DcimRegionsListQuery {
 	/// Parent region (slug)
 	parent__n: Option<Vec<String>>,
 	/// Parent region (ID)
-	parent_id: Option<Vec<i64>>,
+	parent_id: Option<Vec<Option<i64>>>,
 	/// Parent region (ID)
-	parent_id__n: Option<Vec<i64>>,
+	parent_id__n: Option<Vec<Option<i64>>>,
 	/// Search
 	q: Option<String>,
 	slug: Option<Vec<String>>,
@@ -12426,7 +12428,7 @@ pub struct DcimRegionsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRegionsListResponse {
 	Http200(PaginatedRegionList),
@@ -12443,7 +12445,7 @@ pub fn dcim_regions_list(state: &ThanixClient, query: DcimRegionsListQuery) -> R
 		_ => { Ok(DcimRegionsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRegionsBulkUpdateResponse {
 	Http200(Vec<Region>),
@@ -12461,7 +12463,7 @@ pub fn dcim_regions_bulk_update(state: &ThanixClient, body: Vec<RegionRequest>) 
 		_ => { Ok(DcimRegionsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRegionsCreateResponse {
 	Http201(Region),
@@ -12479,7 +12481,7 @@ pub fn dcim_regions_create(state: &ThanixClient, body: WritableRegionRequest) ->
 		_ => { Ok(DcimRegionsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRegionsBulkDestroyResponse {
 	Http204,
@@ -12496,7 +12498,7 @@ pub fn dcim_regions_bulk_destroy(state: &ThanixClient, body: Vec<RegionRequest>)
 		_ => { Ok(DcimRegionsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRegionsBulkPartialUpdateResponse {
 	Http200(Vec<Region>),
@@ -12514,7 +12516,7 @@ pub fn dcim_regions_bulk_partial_update(state: &ThanixClient, body: Vec<RegionRe
 		_ => { Ok(DcimRegionsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRegionsRetrieveResponse {
 	Http200(Region),
@@ -12531,7 +12533,7 @@ pub fn dcim_regions_retrieve(state: &ThanixClient, id: i64) -> Result<DcimRegion
 		_ => { Ok(DcimRegionsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRegionsUpdateResponse {
 	Http200(Region),
@@ -12549,7 +12551,7 @@ pub fn dcim_regions_update(state: &ThanixClient, body: WritableRegionRequest, id
 		_ => { Ok(DcimRegionsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRegionsDestroyResponse {
 	Http204,
@@ -12565,7 +12567,7 @@ pub fn dcim_regions_destroy(state: &ThanixClient, id: i64) -> Result<DcimRegions
 		_ => { Ok(DcimRegionsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimRegionsPartialUpdateResponse {
 	Http200(Region),
@@ -12583,7 +12585,7 @@ pub fn dcim_regions_partial_update(state: &ThanixClient, body: PatchedWritableRe
 		_ => { Ok(DcimRegionsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimSiteGroupsListQuery {
 	/// Contact
 	contact: Option<Vec<i64>>,
@@ -12653,9 +12655,9 @@ pub struct DcimSiteGroupsListQuery {
 	/// Parent site group (slug)
 	parent__n: Option<Vec<String>>,
 	/// Parent site group (ID)
-	parent_id: Option<Vec<i64>>,
+	parent_id: Option<Vec<Option<i64>>>,
 	/// Parent site group (ID)
-	parent_id__n: Option<Vec<i64>>,
+	parent_id__n: Option<Vec<Option<i64>>>,
 	/// Search
 	q: Option<String>,
 	slug: Option<Vec<String>>,
@@ -12674,7 +12676,7 @@ pub struct DcimSiteGroupsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimSiteGroupsListResponse {
 	Http200(PaginatedSiteGroupList),
@@ -12691,7 +12693,7 @@ pub fn dcim_site_groups_list(state: &ThanixClient, query: DcimSiteGroupsListQuer
 		_ => { Ok(DcimSiteGroupsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimSiteGroupsBulkUpdateResponse {
 	Http200(Vec<SiteGroup>),
@@ -12709,7 +12711,7 @@ pub fn dcim_site_groups_bulk_update(state: &ThanixClient, body: Vec<SiteGroupReq
 		_ => { Ok(DcimSiteGroupsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimSiteGroupsCreateResponse {
 	Http201(SiteGroup),
@@ -12727,7 +12729,7 @@ pub fn dcim_site_groups_create(state: &ThanixClient, body: WritableSiteGroupRequ
 		_ => { Ok(DcimSiteGroupsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimSiteGroupsBulkDestroyResponse {
 	Http204,
@@ -12744,7 +12746,7 @@ pub fn dcim_site_groups_bulk_destroy(state: &ThanixClient, body: Vec<SiteGroupRe
 		_ => { Ok(DcimSiteGroupsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimSiteGroupsBulkPartialUpdateResponse {
 	Http200(Vec<SiteGroup>),
@@ -12762,7 +12764,7 @@ pub fn dcim_site_groups_bulk_partial_update(state: &ThanixClient, body: Vec<Site
 		_ => { Ok(DcimSiteGroupsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimSiteGroupsRetrieveResponse {
 	Http200(SiteGroup),
@@ -12779,7 +12781,7 @@ pub fn dcim_site_groups_retrieve(state: &ThanixClient, id: i64) -> Result<DcimSi
 		_ => { Ok(DcimSiteGroupsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimSiteGroupsUpdateResponse {
 	Http200(SiteGroup),
@@ -12797,7 +12799,7 @@ pub fn dcim_site_groups_update(state: &ThanixClient, body: WritableSiteGroupRequ
 		_ => { Ok(DcimSiteGroupsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimSiteGroupsDestroyResponse {
 	Http204,
@@ -12813,7 +12815,7 @@ pub fn dcim_site_groups_destroy(state: &ThanixClient, id: i64) -> Result<DcimSit
 		_ => { Ok(DcimSiteGroupsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimSiteGroupsPartialUpdateResponse {
 	Http200(SiteGroup),
@@ -12831,7 +12833,7 @@ pub fn dcim_site_groups_partial_update(state: &ThanixClient, body: PatchedWritab
 		_ => { Ok(DcimSiteGroupsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimSitesListQuery {
 	/// AS (ID)
 	asn: Option<Vec<u32>>,
@@ -12975,13 +12977,13 @@ pub struct DcimSitesListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimSitesListResponse {
 	Http200(PaginatedSiteList),
@@ -12998,7 +13000,7 @@ pub fn dcim_sites_list(state: &ThanixClient, query: DcimSitesListQuery) -> Resul
 		_ => { Ok(DcimSitesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimSitesBulkUpdateResponse {
 	Http200(Vec<Site>),
@@ -13016,7 +13018,7 @@ pub fn dcim_sites_bulk_update(state: &ThanixClient, body: Vec<SiteRequest>) -> R
 		_ => { Ok(DcimSitesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimSitesCreateResponse {
 	Http201(Site),
@@ -13034,7 +13036,7 @@ pub fn dcim_sites_create(state: &ThanixClient, body: WritableSiteRequest) -> Res
 		_ => { Ok(DcimSitesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimSitesBulkDestroyResponse {
 	Http204,
@@ -13051,7 +13053,7 @@ pub fn dcim_sites_bulk_destroy(state: &ThanixClient, body: Vec<SiteRequest>) -> 
 		_ => { Ok(DcimSitesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimSitesBulkPartialUpdateResponse {
 	Http200(Vec<Site>),
@@ -13069,7 +13071,7 @@ pub fn dcim_sites_bulk_partial_update(state: &ThanixClient, body: Vec<SiteReques
 		_ => { Ok(DcimSitesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimSitesRetrieveResponse {
 	Http200(Site),
@@ -13086,7 +13088,7 @@ pub fn dcim_sites_retrieve(state: &ThanixClient, id: i64) -> Result<DcimSitesRet
 		_ => { Ok(DcimSitesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimSitesUpdateResponse {
 	Http200(Site),
@@ -13104,7 +13106,7 @@ pub fn dcim_sites_update(state: &ThanixClient, body: WritableSiteRequest, id: i6
 		_ => { Ok(DcimSitesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimSitesDestroyResponse {
 	Http204,
@@ -13120,7 +13122,7 @@ pub fn dcim_sites_destroy(state: &ThanixClient, id: i64) -> Result<DcimSitesDest
 		_ => { Ok(DcimSitesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimSitesPartialUpdateResponse {
 	Http200(Site),
@@ -13138,7 +13140,7 @@ pub fn dcim_sites_partial_update(state: &ThanixClient, body: PatchedWritableSite
 		_ => { Ok(DcimSitesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimVirtualChassisListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -13191,9 +13193,9 @@ pub struct DcimVirtualChassisListQuery {
 	/// Master (name)
 	master__n: Option<Vec<Option<String>>>,
 	/// Master (ID)
-	master_id: Option<Vec<i64>>,
+	master_id: Option<Vec<Option<i64>>>,
 	/// Master (ID)
-	master_id__n: Option<Vec<i64>>,
+	master_id__n: Option<Vec<Option<i64>>>,
 	modified_by_request: Option<String>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
@@ -13249,7 +13251,7 @@ pub struct DcimVirtualChassisListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimVirtualChassisListResponse {
 	Http200(PaginatedVirtualChassisList),
@@ -13266,7 +13268,7 @@ pub fn dcim_virtual_chassis_list(state: &ThanixClient, query: DcimVirtualChassis
 		_ => { Ok(DcimVirtualChassisListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimVirtualChassisBulkUpdateResponse {
 	Http200(Vec<VirtualChassis>),
@@ -13284,7 +13286,7 @@ pub fn dcim_virtual_chassis_bulk_update(state: &ThanixClient, body: Vec<VirtualC
 		_ => { Ok(DcimVirtualChassisBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimVirtualChassisCreateResponse {
 	Http201(VirtualChassis),
@@ -13302,7 +13304,7 @@ pub fn dcim_virtual_chassis_create(state: &ThanixClient, body: WritableVirtualCh
 		_ => { Ok(DcimVirtualChassisCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimVirtualChassisBulkDestroyResponse {
 	Http204,
@@ -13319,7 +13321,7 @@ pub fn dcim_virtual_chassis_bulk_destroy(state: &ThanixClient, body: Vec<Virtual
 		_ => { Ok(DcimVirtualChassisBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimVirtualChassisBulkPartialUpdateResponse {
 	Http200(Vec<VirtualChassis>),
@@ -13337,7 +13339,7 @@ pub fn dcim_virtual_chassis_bulk_partial_update(state: &ThanixClient, body: Vec<
 		_ => { Ok(DcimVirtualChassisBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimVirtualChassisRetrieveResponse {
 	Http200(VirtualChassis),
@@ -13354,7 +13356,7 @@ pub fn dcim_virtual_chassis_retrieve(state: &ThanixClient, id: i64) -> Result<Dc
 		_ => { Ok(DcimVirtualChassisRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimVirtualChassisUpdateResponse {
 	Http200(VirtualChassis),
@@ -13372,7 +13374,7 @@ pub fn dcim_virtual_chassis_update(state: &ThanixClient, body: WritableVirtualCh
 		_ => { Ok(DcimVirtualChassisUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimVirtualChassisDestroyResponse {
 	Http204,
@@ -13388,7 +13390,7 @@ pub fn dcim_virtual_chassis_destroy(state: &ThanixClient, id: i64) -> Result<Dci
 		_ => { Ok(DcimVirtualChassisDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimVirtualChassisPartialUpdateResponse {
 	Http200(VirtualChassis),
@@ -13406,7 +13408,7 @@ pub fn dcim_virtual_chassis_partial_update(state: &ThanixClient, body: PatchedWr
 		_ => { Ok(DcimVirtualChassisPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimVirtualDeviceContextsListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -13496,13 +13498,13 @@ pub struct DcimVirtualDeviceContextsListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimVirtualDeviceContextsListResponse {
 	Http200(PaginatedVirtualDeviceContextList),
@@ -13519,7 +13521,7 @@ pub fn dcim_virtual_device_contexts_list(state: &ThanixClient, query: DcimVirtua
 		_ => { Ok(DcimVirtualDeviceContextsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimVirtualDeviceContextsBulkUpdateResponse {
 	Http200(Vec<VirtualDeviceContext>),
@@ -13537,7 +13539,7 @@ pub fn dcim_virtual_device_contexts_bulk_update(state: &ThanixClient, body: Vec<
 		_ => { Ok(DcimVirtualDeviceContextsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimVirtualDeviceContextsCreateResponse {
 	Http201(VirtualDeviceContext),
@@ -13555,7 +13557,7 @@ pub fn dcim_virtual_device_contexts_create(state: &ThanixClient, body: WritableV
 		_ => { Ok(DcimVirtualDeviceContextsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimVirtualDeviceContextsBulkDestroyResponse {
 	Http204,
@@ -13572,7 +13574,7 @@ pub fn dcim_virtual_device_contexts_bulk_destroy(state: &ThanixClient, body: Vec
 		_ => { Ok(DcimVirtualDeviceContextsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimVirtualDeviceContextsBulkPartialUpdateResponse {
 	Http200(Vec<VirtualDeviceContext>),
@@ -13590,7 +13592,7 @@ pub fn dcim_virtual_device_contexts_bulk_partial_update(state: &ThanixClient, bo
 		_ => { Ok(DcimVirtualDeviceContextsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimVirtualDeviceContextsRetrieveResponse {
 	Http200(VirtualDeviceContext),
@@ -13607,7 +13609,7 @@ pub fn dcim_virtual_device_contexts_retrieve(state: &ThanixClient, id: i64) -> R
 		_ => { Ok(DcimVirtualDeviceContextsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimVirtualDeviceContextsUpdateResponse {
 	Http200(VirtualDeviceContext),
@@ -13625,7 +13627,7 @@ pub fn dcim_virtual_device_contexts_update(state: &ThanixClient, body: WritableV
 		_ => { Ok(DcimVirtualDeviceContextsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimVirtualDeviceContextsDestroyResponse {
 	Http204,
@@ -13641,7 +13643,7 @@ pub fn dcim_virtual_device_contexts_destroy(state: &ThanixClient, id: i64) -> Re
 		_ => { Ok(DcimVirtualDeviceContextsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum DcimVirtualDeviceContextsPartialUpdateResponse {
 	Http200(VirtualDeviceContext),
@@ -13659,7 +13661,7 @@ pub fn dcim_virtual_device_contexts_partial_update(state: &ThanixClient, body: P
 		_ => { Ok(DcimVirtualDeviceContextsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasBookmarksListQuery {
 	created: Option<String>,
 	id: Option<Vec<i64>>,
@@ -13701,7 +13703,7 @@ pub struct ExtrasBookmarksListQuery {
 	user_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasBookmarksListResponse {
 	Http200(PaginatedBookmarkList),
@@ -13718,7 +13720,7 @@ pub fn extras_bookmarks_list(state: &ThanixClient, query: ExtrasBookmarksListQue
 		_ => { Ok(ExtrasBookmarksListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasBookmarksBulkUpdateResponse {
 	Http200(Vec<Bookmark>),
@@ -13736,7 +13738,7 @@ pub fn extras_bookmarks_bulk_update(state: &ThanixClient, body: Vec<BookmarkRequ
 		_ => { Ok(ExtrasBookmarksBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasBookmarksCreateResponse {
 	Http201(Bookmark),
@@ -13754,7 +13756,7 @@ pub fn extras_bookmarks_create(state: &ThanixClient, body: WritableBookmarkReque
 		_ => { Ok(ExtrasBookmarksCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasBookmarksBulkDestroyResponse {
 	Http204,
@@ -13771,7 +13773,7 @@ pub fn extras_bookmarks_bulk_destroy(state: &ThanixClient, body: Vec<BookmarkReq
 		_ => { Ok(ExtrasBookmarksBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasBookmarksBulkPartialUpdateResponse {
 	Http200(Vec<Bookmark>),
@@ -13789,7 +13791,7 @@ pub fn extras_bookmarks_bulk_partial_update(state: &ThanixClient, body: Vec<Book
 		_ => { Ok(ExtrasBookmarksBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasBookmarksRetrieveResponse {
 	Http200(Bookmark),
@@ -13806,7 +13808,7 @@ pub fn extras_bookmarks_retrieve(state: &ThanixClient, id: i64) -> Result<Extras
 		_ => { Ok(ExtrasBookmarksRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasBookmarksUpdateResponse {
 	Http200(Bookmark),
@@ -13824,7 +13826,7 @@ pub fn extras_bookmarks_update(state: &ThanixClient, body: WritableBookmarkReque
 		_ => { Ok(ExtrasBookmarksUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasBookmarksDestroyResponse {
 	Http204,
@@ -13840,7 +13842,7 @@ pub fn extras_bookmarks_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasB
 		_ => { Ok(ExtrasBookmarksDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasBookmarksPartialUpdateResponse {
 	Http200(Bookmark),
@@ -13858,7 +13860,7 @@ pub fn extras_bookmarks_partial_update(state: &ThanixClient, body: PatchedWritab
 		_ => { Ok(ExtrasBookmarksPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasConfigContextsListQuery {
 	/// Cluster group (slug)
 	cluster_group: Option<Vec<String>>,
@@ -13889,13 +13891,13 @@ pub struct ExtrasConfigContextsListQuery {
 	created__n: Option<Vec<String>>,
 	created_by_request: Option<String>,
 	/// Data file (ID)
-	data_file_id: Option<Vec<i64>>,
+	data_file_id: Option<Vec<Option<i64>>>,
 	/// Data file (ID)
-	data_file_id__n: Option<Vec<i64>>,
+	data_file_id__n: Option<Vec<Option<i64>>>,
 	/// Data source (ID)
-	data_source_id: Option<Vec<i64>>,
+	data_source_id: Option<Vec<Option<i64>>>,
 	/// Data source (ID)
-	data_source_id__n: Option<Vec<i64>>,
+	data_source_id__n: Option<Vec<Option<i64>>>,
 	data_synced: Option<Vec<String>>,
 	data_synced__empty: Option<bool>,
 	data_synced__gt: Option<Vec<String>>,
@@ -14028,7 +14030,7 @@ pub struct ExtrasConfigContextsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigContextsListResponse {
 	Http200(PaginatedConfigContextList),
@@ -14045,7 +14047,7 @@ pub fn extras_config_contexts_list(state: &ThanixClient, query: ExtrasConfigCont
 		_ => { Ok(ExtrasConfigContextsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigContextsBulkUpdateResponse {
 	Http200(Vec<ConfigContext>),
@@ -14063,7 +14065,7 @@ pub fn extras_config_contexts_bulk_update(state: &ThanixClient, body: Vec<Config
 		_ => { Ok(ExtrasConfigContextsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigContextsCreateResponse {
 	Http201(ConfigContext),
@@ -14081,7 +14083,7 @@ pub fn extras_config_contexts_create(state: &ThanixClient, body: WritableConfigC
 		_ => { Ok(ExtrasConfigContextsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigContextsBulkDestroyResponse {
 	Http204,
@@ -14098,7 +14100,7 @@ pub fn extras_config_contexts_bulk_destroy(state: &ThanixClient, body: Vec<Confi
 		_ => { Ok(ExtrasConfigContextsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigContextsBulkPartialUpdateResponse {
 	Http200(Vec<ConfigContext>),
@@ -14116,7 +14118,7 @@ pub fn extras_config_contexts_bulk_partial_update(state: &ThanixClient, body: Ve
 		_ => { Ok(ExtrasConfigContextsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigContextsRetrieveResponse {
 	Http200(ConfigContext),
@@ -14133,7 +14135,7 @@ pub fn extras_config_contexts_retrieve(state: &ThanixClient, id: i64) -> Result<
 		_ => { Ok(ExtrasConfigContextsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigContextsUpdateResponse {
 	Http200(ConfigContext),
@@ -14151,7 +14153,7 @@ pub fn extras_config_contexts_update(state: &ThanixClient, body: WritableConfigC
 		_ => { Ok(ExtrasConfigContextsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigContextsDestroyResponse {
 	Http204,
@@ -14167,7 +14169,7 @@ pub fn extras_config_contexts_destroy(state: &ThanixClient, id: i64) -> Result<E
 		_ => { Ok(ExtrasConfigContextsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigContextsPartialUpdateResponse {
 	Http200(ConfigContext),
@@ -14185,7 +14187,7 @@ pub fn extras_config_contexts_partial_update(state: &ThanixClient, body: Patched
 		_ => { Ok(ExtrasConfigContextsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigContextsSyncCreateResponse {
 	Http200(ConfigContext),
@@ -14203,16 +14205,16 @@ pub fn extras_config_contexts_sync_create(state: &ThanixClient, body: WritableCo
 		_ => { Ok(ExtrasConfigContextsSyncCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasConfigTemplatesListQuery {
 	/// Data file (ID)
-	data_file_id: Option<Vec<i64>>,
+	data_file_id: Option<Vec<Option<i64>>>,
 	/// Data file (ID)
-	data_file_id__n: Option<Vec<i64>>,
+	data_file_id__n: Option<Vec<Option<i64>>>,
 	/// Data source (ID)
-	data_source_id: Option<Vec<i64>>,
+	data_source_id: Option<Vec<Option<i64>>>,
 	/// Data source (ID)
-	data_source_id__n: Option<Vec<i64>>,
+	data_source_id__n: Option<Vec<Option<i64>>>,
 	data_synced: Option<Vec<String>>,
 	data_synced__empty: Option<bool>,
 	data_synced__gt: Option<Vec<String>>,
@@ -14261,7 +14263,7 @@ pub struct ExtrasConfigTemplatesListQuery {
 	tag__n: Option<Vec<String>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigTemplatesListResponse {
 	Http200(PaginatedConfigTemplateList),
@@ -14278,7 +14280,7 @@ pub fn extras_config_templates_list(state: &ThanixClient, query: ExtrasConfigTem
 		_ => { Ok(ExtrasConfigTemplatesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigTemplatesBulkUpdateResponse {
 	Http200(Vec<ConfigTemplate>),
@@ -14296,7 +14298,7 @@ pub fn extras_config_templates_bulk_update(state: &ThanixClient, body: Vec<Confi
 		_ => { Ok(ExtrasConfigTemplatesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigTemplatesCreateResponse {
 	Http201(ConfigTemplate),
@@ -14314,7 +14316,7 @@ pub fn extras_config_templates_create(state: &ThanixClient, body: WritableConfig
 		_ => { Ok(ExtrasConfigTemplatesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigTemplatesBulkDestroyResponse {
 	Http204,
@@ -14331,7 +14333,7 @@ pub fn extras_config_templates_bulk_destroy(state: &ThanixClient, body: Vec<Conf
 		_ => { Ok(ExtrasConfigTemplatesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<ConfigTemplate>),
@@ -14349,7 +14351,7 @@ pub fn extras_config_templates_bulk_partial_update(state: &ThanixClient, body: V
 		_ => { Ok(ExtrasConfigTemplatesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigTemplatesRetrieveResponse {
 	Http200(ConfigTemplate),
@@ -14366,7 +14368,7 @@ pub fn extras_config_templates_retrieve(state: &ThanixClient, id: i64) -> Result
 		_ => { Ok(ExtrasConfigTemplatesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigTemplatesUpdateResponse {
 	Http200(ConfigTemplate),
@@ -14384,7 +14386,7 @@ pub fn extras_config_templates_update(state: &ThanixClient, body: WritableConfig
 		_ => { Ok(ExtrasConfigTemplatesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigTemplatesDestroyResponse {
 	Http204,
@@ -14400,7 +14402,7 @@ pub fn extras_config_templates_destroy(state: &ThanixClient, id: i64) -> Result<
 		_ => { Ok(ExtrasConfigTemplatesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigTemplatesPartialUpdateResponse {
 	Http200(ConfigTemplate),
@@ -14418,12 +14420,12 @@ pub fn extras_config_templates_partial_update(state: &ThanixClient, body: Patche
 		_ => { Ok(ExtrasConfigTemplatesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasConfigTemplatesRenderCreateQuery {
 	format: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigTemplatesRenderCreateResponse {
 	Http200(ConfigTemplate),
@@ -14442,7 +14444,7 @@ pub fn extras_config_templates_render_create(state: &ThanixClient, query: Extras
 		_ => { Ok(ExtrasConfigTemplatesRenderCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasConfigTemplatesSyncCreateResponse {
 	Http200(ConfigTemplate),
@@ -14460,7 +14462,7 @@ pub fn extras_config_templates_sync_create(state: &ThanixClient, body: WritableC
 		_ => { Ok(ExtrasConfigTemplatesSyncCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasContentTypesListQuery {
 	app_label: Option<String>,
 	id: Option<i64>,
@@ -14475,7 +14477,7 @@ pub struct ExtrasContentTypesListQuery {
 	q: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasContentTypesListResponse {
 	Http200(PaginatedContentTypeList),
@@ -14492,7 +14494,7 @@ pub fn extras_content_types_list(state: &ThanixClient, query: ExtrasContentTypes
 		_ => { Ok(ExtrasContentTypesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasContentTypesRetrieveResponse {
 	Http200(ContentType),
@@ -14509,7 +14511,7 @@ pub fn extras_content_types_retrieve(state: &ThanixClient, id: i64) -> Result<Ex
 		_ => { Ok(ExtrasContentTypesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasCustomFieldChoiceSetsListQuery {
 	/// Base set of predefined choices (optional)
 	base_choices: Option<String>,
@@ -14556,7 +14558,7 @@ pub struct ExtrasCustomFieldChoiceSetsListQuery {
 	q: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomFieldChoiceSetsListResponse {
 	Http200(PaginatedCustomFieldChoiceSetList),
@@ -14573,7 +14575,7 @@ pub fn extras_custom_field_choice_sets_list(state: &ThanixClient, query: ExtrasC
 		_ => { Ok(ExtrasCustomFieldChoiceSetsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomFieldChoiceSetsBulkUpdateResponse {
 	Http200(Vec<CustomFieldChoiceSet>),
@@ -14591,7 +14593,7 @@ pub fn extras_custom_field_choice_sets_bulk_update(state: &ThanixClient, body: V
 		_ => { Ok(ExtrasCustomFieldChoiceSetsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomFieldChoiceSetsCreateResponse {
 	Http201(CustomFieldChoiceSet),
@@ -14609,7 +14611,7 @@ pub fn extras_custom_field_choice_sets_create(state: &ThanixClient, body: Writab
 		_ => { Ok(ExtrasCustomFieldChoiceSetsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomFieldChoiceSetsBulkDestroyResponse {
 	Http204,
@@ -14626,7 +14628,7 @@ pub fn extras_custom_field_choice_sets_bulk_destroy(state: &ThanixClient, body: 
 		_ => { Ok(ExtrasCustomFieldChoiceSetsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomFieldChoiceSetsBulkPartialUpdateResponse {
 	Http200(Vec<CustomFieldChoiceSet>),
@@ -14644,7 +14646,7 @@ pub fn extras_custom_field_choice_sets_bulk_partial_update(state: &ThanixClient,
 		_ => { Ok(ExtrasCustomFieldChoiceSetsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomFieldChoiceSetsRetrieveResponse {
 	Http200(CustomFieldChoiceSet),
@@ -14661,7 +14663,7 @@ pub fn extras_custom_field_choice_sets_retrieve(state: &ThanixClient, id: i64) -
 		_ => { Ok(ExtrasCustomFieldChoiceSetsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomFieldChoiceSetsUpdateResponse {
 	Http200(CustomFieldChoiceSet),
@@ -14679,7 +14681,7 @@ pub fn extras_custom_field_choice_sets_update(state: &ThanixClient, body: Writab
 		_ => { Ok(ExtrasCustomFieldChoiceSetsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomFieldChoiceSetsDestroyResponse {
 	Http204,
@@ -14695,7 +14697,7 @@ pub fn extras_custom_field_choice_sets_destroy(state: &ThanixClient, id: i64) ->
 		_ => { Ok(ExtrasCustomFieldChoiceSetsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomFieldChoiceSetsPartialUpdateResponse {
 	Http200(CustomFieldChoiceSet),
@@ -14713,7 +14715,7 @@ pub fn extras_custom_field_choice_sets_partial_update(state: &ThanixClient, body
 		_ => { Ok(ExtrasCustomFieldChoiceSetsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomFieldChoiceSetsChoicesRetrieveResponse {
 	Http200(CustomFieldChoiceSet),
@@ -14730,12 +14732,12 @@ pub fn extras_custom_field_choice_sets_choices_retrieve(state: &ThanixClient, id
 		_ => { Ok(ExtrasCustomFieldChoiceSetsChoicesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasCustomFieldsListQuery {
 	choice_set: Option<Vec<String>>,
 	choice_set__n: Option<Vec<String>>,
-	choice_set_id: Option<Vec<i64>>,
-	choice_set_id__n: Option<Vec<i64>>,
+	choice_set_id: Option<Vec<Option<i64>>>,
+	choice_set_id__n: Option<Vec<Option<i64>>>,
 	content_type_id: Option<Vec<i64>>,
 	content_type_id__empty: Option<Vec<i64>>,
 	content_type_id__gt: Option<Vec<i64>>,
@@ -14835,7 +14837,7 @@ pub struct ExtrasCustomFieldsListQuery {
 	weight__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomFieldsListResponse {
 	Http200(PaginatedCustomFieldList),
@@ -14852,7 +14854,7 @@ pub fn extras_custom_fields_list(state: &ThanixClient, query: ExtrasCustomFields
 		_ => { Ok(ExtrasCustomFieldsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomFieldsBulkUpdateResponse {
 	Http200(Vec<CustomField>),
@@ -14870,7 +14872,7 @@ pub fn extras_custom_fields_bulk_update(state: &ThanixClient, body: Vec<CustomFi
 		_ => { Ok(ExtrasCustomFieldsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomFieldsCreateResponse {
 	Http201(CustomField),
@@ -14888,7 +14890,7 @@ pub fn extras_custom_fields_create(state: &ThanixClient, body: WritableCustomFie
 		_ => { Ok(ExtrasCustomFieldsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomFieldsBulkDestroyResponse {
 	Http204,
@@ -14905,7 +14907,7 @@ pub fn extras_custom_fields_bulk_destroy(state: &ThanixClient, body: Vec<CustomF
 		_ => { Ok(ExtrasCustomFieldsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomFieldsBulkPartialUpdateResponse {
 	Http200(Vec<CustomField>),
@@ -14923,7 +14925,7 @@ pub fn extras_custom_fields_bulk_partial_update(state: &ThanixClient, body: Vec<
 		_ => { Ok(ExtrasCustomFieldsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomFieldsRetrieveResponse {
 	Http200(CustomField),
@@ -14940,7 +14942,7 @@ pub fn extras_custom_fields_retrieve(state: &ThanixClient, id: i64) -> Result<Ex
 		_ => { Ok(ExtrasCustomFieldsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomFieldsUpdateResponse {
 	Http200(CustomField),
@@ -14958,7 +14960,7 @@ pub fn extras_custom_fields_update(state: &ThanixClient, body: WritableCustomFie
 		_ => { Ok(ExtrasCustomFieldsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomFieldsDestroyResponse {
 	Http204,
@@ -14974,7 +14976,7 @@ pub fn extras_custom_fields_destroy(state: &ThanixClient, id: i64) -> Result<Ext
 		_ => { Ok(ExtrasCustomFieldsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomFieldsPartialUpdateResponse {
 	Http200(CustomField),
@@ -14992,7 +14994,7 @@ pub fn extras_custom_fields_partial_update(state: &ThanixClient, body: PatchedWr
 		_ => { Ok(ExtrasCustomFieldsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasCustomLinksListQuery {
 	content_type_id: Option<Vec<i64>>,
 	content_type_id__empty: Option<Vec<i64>>,
@@ -15079,7 +15081,7 @@ pub struct ExtrasCustomLinksListQuery {
 	weight__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomLinksListResponse {
 	Http200(PaginatedCustomLinkList),
@@ -15096,7 +15098,7 @@ pub fn extras_custom_links_list(state: &ThanixClient, query: ExtrasCustomLinksLi
 		_ => { Ok(ExtrasCustomLinksListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomLinksBulkUpdateResponse {
 	Http200(Vec<CustomLink>),
@@ -15114,7 +15116,7 @@ pub fn extras_custom_links_bulk_update(state: &ThanixClient, body: Vec<CustomLin
 		_ => { Ok(ExtrasCustomLinksBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomLinksCreateResponse {
 	Http201(CustomLink),
@@ -15132,7 +15134,7 @@ pub fn extras_custom_links_create(state: &ThanixClient, body: CustomLinkRequest)
 		_ => { Ok(ExtrasCustomLinksCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomLinksBulkDestroyResponse {
 	Http204,
@@ -15149,7 +15151,7 @@ pub fn extras_custom_links_bulk_destroy(state: &ThanixClient, body: Vec<CustomLi
 		_ => { Ok(ExtrasCustomLinksBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomLinksBulkPartialUpdateResponse {
 	Http200(Vec<CustomLink>),
@@ -15167,7 +15169,7 @@ pub fn extras_custom_links_bulk_partial_update(state: &ThanixClient, body: Vec<C
 		_ => { Ok(ExtrasCustomLinksBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomLinksRetrieveResponse {
 	Http200(CustomLink),
@@ -15184,7 +15186,7 @@ pub fn extras_custom_links_retrieve(state: &ThanixClient, id: i64) -> Result<Ext
 		_ => { Ok(ExtrasCustomLinksRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomLinksUpdateResponse {
 	Http200(CustomLink),
@@ -15202,7 +15204,7 @@ pub fn extras_custom_links_update(state: &ThanixClient, body: CustomLinkRequest,
 		_ => { Ok(ExtrasCustomLinksUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomLinksDestroyResponse {
 	Http204,
@@ -15218,7 +15220,7 @@ pub fn extras_custom_links_destroy(state: &ThanixClient, id: i64) -> Result<Extr
 		_ => { Ok(ExtrasCustomLinksDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasCustomLinksPartialUpdateResponse {
 	Http200(CustomLink),
@@ -15236,7 +15238,7 @@ pub fn extras_custom_links_partial_update(state: &ThanixClient, body: PatchedCus
 		_ => { Ok(ExtrasCustomLinksPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasDashboardRetrieveResponse {
 	Http200(Dashboard),
@@ -15253,7 +15255,7 @@ pub fn extras_dashboard_retrieve(state: &ThanixClient) -> Result<ExtrasDashboard
 		_ => { Ok(ExtrasDashboardRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasDashboardUpdateResponse {
 	Http200(Dashboard),
@@ -15271,7 +15273,7 @@ pub fn extras_dashboard_update(state: &ThanixClient, body: DashboardRequest) -> 
 		_ => { Ok(ExtrasDashboardUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasDashboardDestroyResponse {
 	Http204,
@@ -15287,7 +15289,7 @@ pub fn extras_dashboard_destroy(state: &ThanixClient) -> Result<ExtrasDashboardD
 		_ => { Ok(ExtrasDashboardDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasDashboardPartialUpdateResponse {
 	Http200(Dashboard),
@@ -15305,7 +15307,7 @@ pub fn extras_dashboard_partial_update(state: &ThanixClient, body: PatchedDashbo
 		_ => { Ok(ExtrasDashboardPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasEventRulesListQuery {
 	action_object_id: Option<Vec<i64>>,
 	action_object_id__empty: Option<Vec<i64>>,
@@ -15399,7 +15401,7 @@ pub struct ExtrasEventRulesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasEventRulesListResponse {
 	Http200(PaginatedEventRuleList),
@@ -15416,7 +15418,7 @@ pub fn extras_event_rules_list(state: &ThanixClient, query: ExtrasEventRulesList
 		_ => { Ok(ExtrasEventRulesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasEventRulesBulkUpdateResponse {
 	Http200(Vec<EventRule>),
@@ -15434,7 +15436,7 @@ pub fn extras_event_rules_bulk_update(state: &ThanixClient, body: Vec<EventRuleR
 		_ => { Ok(ExtrasEventRulesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasEventRulesCreateResponse {
 	Http201(EventRule),
@@ -15452,7 +15454,7 @@ pub fn extras_event_rules_create(state: &ThanixClient, body: WritableEventRuleRe
 		_ => { Ok(ExtrasEventRulesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasEventRulesBulkDestroyResponse {
 	Http204,
@@ -15469,7 +15471,7 @@ pub fn extras_event_rules_bulk_destroy(state: &ThanixClient, body: Vec<EventRule
 		_ => { Ok(ExtrasEventRulesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasEventRulesBulkPartialUpdateResponse {
 	Http200(Vec<EventRule>),
@@ -15487,7 +15489,7 @@ pub fn extras_event_rules_bulk_partial_update(state: &ThanixClient, body: Vec<Ev
 		_ => { Ok(ExtrasEventRulesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasEventRulesRetrieveResponse {
 	Http200(EventRule),
@@ -15504,7 +15506,7 @@ pub fn extras_event_rules_retrieve(state: &ThanixClient, id: i64) -> Result<Extr
 		_ => { Ok(ExtrasEventRulesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasEventRulesUpdateResponse {
 	Http200(EventRule),
@@ -15522,7 +15524,7 @@ pub fn extras_event_rules_update(state: &ThanixClient, body: WritableEventRuleRe
 		_ => { Ok(ExtrasEventRulesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasEventRulesDestroyResponse {
 	Http204,
@@ -15538,7 +15540,7 @@ pub fn extras_event_rules_destroy(state: &ThanixClient, id: i64) -> Result<Extra
 		_ => { Ok(ExtrasEventRulesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasEventRulesPartialUpdateResponse {
 	Http200(EventRule),
@@ -15556,7 +15558,7 @@ pub fn extras_event_rules_partial_update(state: &ThanixClient, body: PatchedWrit
 		_ => { Ok(ExtrasEventRulesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasExportTemplatesListQuery {
 	content_type_id: Option<Vec<i64>>,
 	content_type_id__empty: Option<Vec<i64>>,
@@ -15576,13 +15578,13 @@ pub struct ExtrasExportTemplatesListQuery {
 	content_types__niew: Option<String>,
 	content_types__nisw: Option<String>,
 	/// Data file (ID)
-	data_file_id: Option<Vec<i64>>,
+	data_file_id: Option<Vec<Option<i64>>>,
 	/// Data file (ID)
-	data_file_id__n: Option<Vec<i64>>,
+	data_file_id__n: Option<Vec<Option<i64>>>,
 	/// Data source (ID)
-	data_source_id: Option<Vec<i64>>,
+	data_source_id: Option<Vec<Option<i64>>>,
 	/// Data source (ID)
-	data_source_id__n: Option<Vec<i64>>,
+	data_source_id__n: Option<Vec<Option<i64>>>,
 	data_synced: Option<Vec<String>>,
 	data_synced__empty: Option<bool>,
 	data_synced__gt: Option<Vec<String>>,
@@ -15629,7 +15631,7 @@ pub struct ExtrasExportTemplatesListQuery {
 	q: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasExportTemplatesListResponse {
 	Http200(PaginatedExportTemplateList),
@@ -15646,7 +15648,7 @@ pub fn extras_export_templates_list(state: &ThanixClient, query: ExtrasExportTem
 		_ => { Ok(ExtrasExportTemplatesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasExportTemplatesBulkUpdateResponse {
 	Http200(Vec<ExportTemplate>),
@@ -15664,7 +15666,7 @@ pub fn extras_export_templates_bulk_update(state: &ThanixClient, body: Vec<Expor
 		_ => { Ok(ExtrasExportTemplatesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasExportTemplatesCreateResponse {
 	Http201(ExportTemplate),
@@ -15682,7 +15684,7 @@ pub fn extras_export_templates_create(state: &ThanixClient, body: WritableExport
 		_ => { Ok(ExtrasExportTemplatesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasExportTemplatesBulkDestroyResponse {
 	Http204,
@@ -15699,7 +15701,7 @@ pub fn extras_export_templates_bulk_destroy(state: &ThanixClient, body: Vec<Expo
 		_ => { Ok(ExtrasExportTemplatesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasExportTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<ExportTemplate>),
@@ -15717,7 +15719,7 @@ pub fn extras_export_templates_bulk_partial_update(state: &ThanixClient, body: V
 		_ => { Ok(ExtrasExportTemplatesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasExportTemplatesRetrieveResponse {
 	Http200(ExportTemplate),
@@ -15734,7 +15736,7 @@ pub fn extras_export_templates_retrieve(state: &ThanixClient, id: i64) -> Result
 		_ => { Ok(ExtrasExportTemplatesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasExportTemplatesUpdateResponse {
 	Http200(ExportTemplate),
@@ -15752,7 +15754,7 @@ pub fn extras_export_templates_update(state: &ThanixClient, body: WritableExport
 		_ => { Ok(ExtrasExportTemplatesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasExportTemplatesDestroyResponse {
 	Http204,
@@ -15768,7 +15770,7 @@ pub fn extras_export_templates_destroy(state: &ThanixClient, id: i64) -> Result<
 		_ => { Ok(ExtrasExportTemplatesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasExportTemplatesPartialUpdateResponse {
 	Http200(ExportTemplate),
@@ -15786,7 +15788,7 @@ pub fn extras_export_templates_partial_update(state: &ThanixClient, body: Patche
 		_ => { Ok(ExtrasExportTemplatesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasExportTemplatesSyncCreateResponse {
 	Http200(ExportTemplate),
@@ -15804,7 +15806,7 @@ pub fn extras_export_templates_sync_create(state: &ThanixClient, body: WritableE
 		_ => { Ok(ExtrasExportTemplatesSyncCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasImageAttachmentsListQuery {
 	content_type: Option<String>,
 	content_type__n: Option<String>,
@@ -15846,7 +15848,7 @@ pub struct ExtrasImageAttachmentsListQuery {
 	q: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasImageAttachmentsListResponse {
 	Http200(PaginatedImageAttachmentList),
@@ -15863,7 +15865,7 @@ pub fn extras_image_attachments_list(state: &ThanixClient, query: ExtrasImageAtt
 		_ => { Ok(ExtrasImageAttachmentsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasImageAttachmentsBulkUpdateResponse {
 	Http200(Vec<ImageAttachment>),
@@ -15881,7 +15883,7 @@ pub fn extras_image_attachments_bulk_update(state: &ThanixClient, body: Vec<Imag
 		_ => { Ok(ExtrasImageAttachmentsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasImageAttachmentsCreateResponse {
 	Http201(ImageAttachment),
@@ -15899,7 +15901,7 @@ pub fn extras_image_attachments_create(state: &ThanixClient, body: ImageAttachme
 		_ => { Ok(ExtrasImageAttachmentsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasImageAttachmentsBulkDestroyResponse {
 	Http204,
@@ -15916,7 +15918,7 @@ pub fn extras_image_attachments_bulk_destroy(state: &ThanixClient, body: Vec<Ima
 		_ => { Ok(ExtrasImageAttachmentsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasImageAttachmentsBulkPartialUpdateResponse {
 	Http200(Vec<ImageAttachment>),
@@ -15934,7 +15936,7 @@ pub fn extras_image_attachments_bulk_partial_update(state: &ThanixClient, body: 
 		_ => { Ok(ExtrasImageAttachmentsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasImageAttachmentsRetrieveResponse {
 	Http200(ImageAttachment),
@@ -15951,7 +15953,7 @@ pub fn extras_image_attachments_retrieve(state: &ThanixClient, id: i64) -> Resul
 		_ => { Ok(ExtrasImageAttachmentsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasImageAttachmentsUpdateResponse {
 	Http200(ImageAttachment),
@@ -15969,7 +15971,7 @@ pub fn extras_image_attachments_update(state: &ThanixClient, body: ImageAttachme
 		_ => { Ok(ExtrasImageAttachmentsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasImageAttachmentsDestroyResponse {
 	Http204,
@@ -15985,7 +15987,7 @@ pub fn extras_image_attachments_destroy(state: &ThanixClient, id: i64) -> Result
 		_ => { Ok(ExtrasImageAttachmentsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasImageAttachmentsPartialUpdateResponse {
 	Http200(ImageAttachment),
@@ -16003,7 +16005,7 @@ pub fn extras_image_attachments_partial_update(state: &ThanixClient, body: Patch
 		_ => { Ok(ExtrasImageAttachmentsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasJournalEntriesListQuery {
 	assigned_object_id: Option<Vec<i64>>,
 	assigned_object_id__empty: Option<bool>,
@@ -16023,9 +16025,9 @@ pub struct ExtrasJournalEntriesListQuery {
 	/// User (name)
 	created_by__n: Option<Vec<String>>,
 	/// User (ID)
-	created_by_id: Option<Vec<i64>>,
+	created_by_id: Option<Vec<Option<i64>>>,
 	/// User (ID)
-	created_by_id__n: Option<Vec<i64>>,
+	created_by_id__n: Option<Vec<Option<i64>>>,
 	created_by_request: Option<String>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
@@ -16057,7 +16059,7 @@ pub struct ExtrasJournalEntriesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasJournalEntriesListResponse {
 	Http200(PaginatedJournalEntryList),
@@ -16074,7 +16076,7 @@ pub fn extras_journal_entries_list(state: &ThanixClient, query: ExtrasJournalEnt
 		_ => { Ok(ExtrasJournalEntriesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasJournalEntriesBulkUpdateResponse {
 	Http200(Vec<JournalEntry>),
@@ -16092,7 +16094,7 @@ pub fn extras_journal_entries_bulk_update(state: &ThanixClient, body: Vec<Journa
 		_ => { Ok(ExtrasJournalEntriesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasJournalEntriesCreateResponse {
 	Http201(JournalEntry),
@@ -16110,7 +16112,7 @@ pub fn extras_journal_entries_create(state: &ThanixClient, body: WritableJournal
 		_ => { Ok(ExtrasJournalEntriesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasJournalEntriesBulkDestroyResponse {
 	Http204,
@@ -16127,7 +16129,7 @@ pub fn extras_journal_entries_bulk_destroy(state: &ThanixClient, body: Vec<Journ
 		_ => { Ok(ExtrasJournalEntriesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasJournalEntriesBulkPartialUpdateResponse {
 	Http200(Vec<JournalEntry>),
@@ -16145,7 +16147,7 @@ pub fn extras_journal_entries_bulk_partial_update(state: &ThanixClient, body: Ve
 		_ => { Ok(ExtrasJournalEntriesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasJournalEntriesRetrieveResponse {
 	Http200(JournalEntry),
@@ -16162,7 +16164,7 @@ pub fn extras_journal_entries_retrieve(state: &ThanixClient, id: i64) -> Result<
 		_ => { Ok(ExtrasJournalEntriesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasJournalEntriesUpdateResponse {
 	Http200(JournalEntry),
@@ -16180,7 +16182,7 @@ pub fn extras_journal_entries_update(state: &ThanixClient, body: WritableJournal
 		_ => { Ok(ExtrasJournalEntriesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasJournalEntriesDestroyResponse {
 	Http204,
@@ -16196,7 +16198,7 @@ pub fn extras_journal_entries_destroy(state: &ThanixClient, id: i64) -> Result<E
 		_ => { Ok(ExtrasJournalEntriesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasJournalEntriesPartialUpdateResponse {
 	Http200(JournalEntry),
@@ -16214,7 +16216,7 @@ pub fn extras_journal_entries_partial_update(state: &ThanixClient, body: Patched
 		_ => { Ok(ExtrasJournalEntriesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasObjectChangesListQuery {
 	action: Option<String>,
 	action__n: Option<String>,
@@ -16263,9 +16265,9 @@ pub struct ExtrasObjectChangesListQuery {
 	/// User name
 	user__n: Option<Vec<String>>,
 	/// User (ID)
-	user_id: Option<Vec<i64>>,
+	user_id: Option<Vec<Option<i64>>>,
 	/// User (ID)
-	user_id__n: Option<Vec<i64>>,
+	user_id__n: Option<Vec<Option<i64>>>,
 	user_name: Option<Vec<String>>,
 	user_name__empty: Option<bool>,
 	user_name__ic: Option<Vec<String>>,
@@ -16279,7 +16281,7 @@ pub struct ExtrasObjectChangesListQuery {
 	user_name__nisw: Option<Vec<String>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasObjectChangesListResponse {
 	Http200(PaginatedObjectChangeList),
@@ -16296,7 +16298,7 @@ pub fn extras_object_changes_list(state: &ThanixClient, query: ExtrasObjectChang
 		_ => { Ok(ExtrasObjectChangesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasObjectChangesRetrieveResponse {
 	Http200(ObjectChange),
@@ -16313,7 +16315,7 @@ pub fn extras_object_changes_retrieve(state: &ThanixClient, id: i64) -> Result<E
 		_ => { Ok(ExtrasObjectChangesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasSavedFiltersListQuery {
 	content_type_id: Option<Vec<i64>>,
 	content_type_id__empty: Option<Vec<i64>>,
@@ -16388,9 +16390,9 @@ pub struct ExtrasSavedFiltersListQuery {
 	/// User (name)
 	user__n: Option<Vec<String>>,
 	/// User (ID)
-	user_id: Option<Vec<i64>>,
+	user_id: Option<Vec<Option<i64>>>,
 	/// User (ID)
-	user_id__n: Option<Vec<i64>>,
+	user_id__n: Option<Vec<Option<i64>>>,
 	weight: Option<Vec<i64>>,
 	weight__empty: Option<bool>,
 	weight__gt: Option<Vec<i64>>,
@@ -16400,7 +16402,7 @@ pub struct ExtrasSavedFiltersListQuery {
 	weight__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasSavedFiltersListResponse {
 	Http200(PaginatedSavedFilterList),
@@ -16417,7 +16419,7 @@ pub fn extras_saved_filters_list(state: &ThanixClient, query: ExtrasSavedFilters
 		_ => { Ok(ExtrasSavedFiltersListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasSavedFiltersBulkUpdateResponse {
 	Http200(Vec<SavedFilter>),
@@ -16435,7 +16437,7 @@ pub fn extras_saved_filters_bulk_update(state: &ThanixClient, body: Vec<SavedFil
 		_ => { Ok(ExtrasSavedFiltersBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasSavedFiltersCreateResponse {
 	Http201(SavedFilter),
@@ -16453,7 +16455,7 @@ pub fn extras_saved_filters_create(state: &ThanixClient, body: SavedFilterReques
 		_ => { Ok(ExtrasSavedFiltersCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasSavedFiltersBulkDestroyResponse {
 	Http204,
@@ -16470,7 +16472,7 @@ pub fn extras_saved_filters_bulk_destroy(state: &ThanixClient, body: Vec<SavedFi
 		_ => { Ok(ExtrasSavedFiltersBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasSavedFiltersBulkPartialUpdateResponse {
 	Http200(Vec<SavedFilter>),
@@ -16488,7 +16490,7 @@ pub fn extras_saved_filters_bulk_partial_update(state: &ThanixClient, body: Vec<
 		_ => { Ok(ExtrasSavedFiltersBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasSavedFiltersRetrieveResponse {
 	Http200(SavedFilter),
@@ -16505,7 +16507,7 @@ pub fn extras_saved_filters_retrieve(state: &ThanixClient, id: i64) -> Result<Ex
 		_ => { Ok(ExtrasSavedFiltersRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasSavedFiltersUpdateResponse {
 	Http200(SavedFilter),
@@ -16523,7 +16525,7 @@ pub fn extras_saved_filters_update(state: &ThanixClient, body: SavedFilterReques
 		_ => { Ok(ExtrasSavedFiltersUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasSavedFiltersDestroyResponse {
 	Http204,
@@ -16539,7 +16541,7 @@ pub fn extras_saved_filters_destroy(state: &ThanixClient, id: i64) -> Result<Ext
 		_ => { Ok(ExtrasSavedFiltersDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasSavedFiltersPartialUpdateResponse {
 	Http200(SavedFilter),
@@ -16557,7 +16559,7 @@ pub fn extras_saved_filters_partial_update(state: &ThanixClient, body: PatchedSa
 		_ => { Ok(ExtrasSavedFiltersPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasTagsListQuery {
 	color: Option<Vec<String>>,
 	color__empty: Option<bool>,
@@ -16642,7 +16644,7 @@ pub struct ExtrasTagsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasTagsListResponse {
 	Http200(PaginatedTagList),
@@ -16659,7 +16661,7 @@ pub fn extras_tags_list(state: &ThanixClient, query: ExtrasTagsListQuery) -> Res
 		_ => { Ok(ExtrasTagsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasTagsBulkUpdateResponse {
 	Http200(Vec<Tag>),
@@ -16677,7 +16679,7 @@ pub fn extras_tags_bulk_update(state: &ThanixClient, body: Vec<TagRequest>) -> R
 		_ => { Ok(ExtrasTagsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasTagsCreateResponse {
 	Http201(Tag),
@@ -16695,7 +16697,7 @@ pub fn extras_tags_create(state: &ThanixClient, body: TagRequest) -> Result<Extr
 		_ => { Ok(ExtrasTagsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasTagsBulkDestroyResponse {
 	Http204,
@@ -16712,7 +16714,7 @@ pub fn extras_tags_bulk_destroy(state: &ThanixClient, body: Vec<TagRequest>) -> 
 		_ => { Ok(ExtrasTagsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasTagsBulkPartialUpdateResponse {
 	Http200(Vec<Tag>),
@@ -16730,7 +16732,7 @@ pub fn extras_tags_bulk_partial_update(state: &ThanixClient, body: Vec<TagReques
 		_ => { Ok(ExtrasTagsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasTagsRetrieveResponse {
 	Http200(Tag),
@@ -16747,7 +16749,7 @@ pub fn extras_tags_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasTagsR
 		_ => { Ok(ExtrasTagsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasTagsUpdateResponse {
 	Http200(Tag),
@@ -16765,7 +16767,7 @@ pub fn extras_tags_update(state: &ThanixClient, body: TagRequest, id: i64) -> Re
 		_ => { Ok(ExtrasTagsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasTagsDestroyResponse {
 	Http204,
@@ -16781,7 +16783,7 @@ pub fn extras_tags_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasTagsDe
 		_ => { Ok(ExtrasTagsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasTagsPartialUpdateResponse {
 	Http200(Tag),
@@ -16799,7 +16801,7 @@ pub fn extras_tags_partial_update(state: &ThanixClient, body: PatchedTagRequest,
 		_ => { Ok(ExtrasTagsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasWebhooksListQuery {
 	ca_file_path: Option<Vec<String>>,
 	ca_file_path__empty: Option<bool>,
@@ -16896,7 +16898,7 @@ pub struct ExtrasWebhooksListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasWebhooksListResponse {
 	Http200(PaginatedWebhookList),
@@ -16913,7 +16915,7 @@ pub fn extras_webhooks_list(state: &ThanixClient, query: ExtrasWebhooksListQuery
 		_ => { Ok(ExtrasWebhooksListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasWebhooksBulkUpdateResponse {
 	Http200(Vec<Webhook>),
@@ -16931,7 +16933,7 @@ pub fn extras_webhooks_bulk_update(state: &ThanixClient, body: Vec<WebhookReques
 		_ => { Ok(ExtrasWebhooksBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasWebhooksCreateResponse {
 	Http201(Webhook),
@@ -16949,7 +16951,7 @@ pub fn extras_webhooks_create(state: &ThanixClient, body: WebhookRequest) -> Res
 		_ => { Ok(ExtrasWebhooksCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasWebhooksBulkDestroyResponse {
 	Http204,
@@ -16966,7 +16968,7 @@ pub fn extras_webhooks_bulk_destroy(state: &ThanixClient, body: Vec<WebhookReque
 		_ => { Ok(ExtrasWebhooksBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasWebhooksBulkPartialUpdateResponse {
 	Http200(Vec<Webhook>),
@@ -16984,7 +16986,7 @@ pub fn extras_webhooks_bulk_partial_update(state: &ThanixClient, body: Vec<Webho
 		_ => { Ok(ExtrasWebhooksBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasWebhooksRetrieveResponse {
 	Http200(Webhook),
@@ -17001,7 +17003,7 @@ pub fn extras_webhooks_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasW
 		_ => { Ok(ExtrasWebhooksRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasWebhooksUpdateResponse {
 	Http200(Webhook),
@@ -17019,7 +17021,7 @@ pub fn extras_webhooks_update(state: &ThanixClient, body: WebhookRequest, id: i6
 		_ => { Ok(ExtrasWebhooksUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasWebhooksDestroyResponse {
 	Http204,
@@ -17035,7 +17037,7 @@ pub fn extras_webhooks_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasWe
 		_ => { Ok(ExtrasWebhooksDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum ExtrasWebhooksPartialUpdateResponse {
 	Http200(Webhook),
@@ -17053,7 +17055,7 @@ pub fn extras_webhooks_partial_update(state: &ThanixClient, body: PatchedWebhook
 		_ => { Ok(ExtrasWebhooksPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IpamAggregatesListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -17130,13 +17132,13 @@ pub struct IpamAggregatesListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAggregatesListResponse {
 	Http200(PaginatedAggregateList),
@@ -17153,7 +17155,7 @@ pub fn ipam_aggregates_list(state: &ThanixClient, query: IpamAggregatesListQuery
 		_ => { Ok(IpamAggregatesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAggregatesBulkUpdateResponse {
 	Http200(Vec<Aggregate>),
@@ -17171,7 +17173,7 @@ pub fn ipam_aggregates_bulk_update(state: &ThanixClient, body: Vec<AggregateRequ
 		_ => { Ok(IpamAggregatesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAggregatesCreateResponse {
 	Http201(Aggregate),
@@ -17189,7 +17191,7 @@ pub fn ipam_aggregates_create(state: &ThanixClient, body: WritableAggregateReque
 		_ => { Ok(IpamAggregatesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAggregatesBulkDestroyResponse {
 	Http204,
@@ -17206,7 +17208,7 @@ pub fn ipam_aggregates_bulk_destroy(state: &ThanixClient, body: Vec<AggregateReq
 		_ => { Ok(IpamAggregatesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAggregatesBulkPartialUpdateResponse {
 	Http200(Vec<Aggregate>),
@@ -17224,7 +17226,7 @@ pub fn ipam_aggregates_bulk_partial_update(state: &ThanixClient, body: Vec<Aggre
 		_ => { Ok(IpamAggregatesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAggregatesRetrieveResponse {
 	Http200(Aggregate),
@@ -17241,7 +17243,7 @@ pub fn ipam_aggregates_retrieve(state: &ThanixClient, id: i64) -> Result<IpamAgg
 		_ => { Ok(IpamAggregatesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAggregatesUpdateResponse {
 	Http200(Aggregate),
@@ -17259,7 +17261,7 @@ pub fn ipam_aggregates_update(state: &ThanixClient, body: WritableAggregateReque
 		_ => { Ok(IpamAggregatesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAggregatesDestroyResponse {
 	Http204,
@@ -17275,7 +17277,7 @@ pub fn ipam_aggregates_destroy(state: &ThanixClient, id: i64) -> Result<IpamAggr
 		_ => { Ok(IpamAggregatesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAggregatesPartialUpdateResponse {
 	Http200(Aggregate),
@@ -17293,7 +17295,7 @@ pub fn ipam_aggregates_partial_update(state: &ThanixClient, body: PatchedWritabl
 		_ => { Ok(IpamAggregatesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IpamAsnRangesListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -17385,13 +17387,13 @@ pub struct IpamAsnRangesListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnRangesListResponse {
 	Http200(PaginatedASNRangeList),
@@ -17408,7 +17410,7 @@ pub fn ipam_asn_ranges_list(state: &ThanixClient, query: IpamAsnRangesListQuery)
 		_ => { Ok(IpamAsnRangesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnRangesBulkUpdateResponse {
 	Http200(Vec<ASNRange>),
@@ -17426,7 +17428,7 @@ pub fn ipam_asn_ranges_bulk_update(state: &ThanixClient, body: Vec<ASNRangeReque
 		_ => { Ok(IpamAsnRangesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnRangesCreateResponse {
 	Http201(ASNRange),
@@ -17444,7 +17446,7 @@ pub fn ipam_asn_ranges_create(state: &ThanixClient, body: WritableASNRangeReques
 		_ => { Ok(IpamAsnRangesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnRangesBulkDestroyResponse {
 	Http204,
@@ -17461,7 +17463,7 @@ pub fn ipam_asn_ranges_bulk_destroy(state: &ThanixClient, body: Vec<ASNRangeRequ
 		_ => { Ok(IpamAsnRangesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnRangesBulkPartialUpdateResponse {
 	Http200(Vec<ASNRange>),
@@ -17479,7 +17481,7 @@ pub fn ipam_asn_ranges_bulk_partial_update(state: &ThanixClient, body: Vec<ASNRa
 		_ => { Ok(IpamAsnRangesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnRangesRetrieveResponse {
 	Http200(ASNRange),
@@ -17496,7 +17498,7 @@ pub fn ipam_asn_ranges_retrieve(state: &ThanixClient, id: i64) -> Result<IpamAsn
 		_ => { Ok(IpamAsnRangesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnRangesUpdateResponse {
 	Http200(ASNRange),
@@ -17514,7 +17516,7 @@ pub fn ipam_asn_ranges_update(state: &ThanixClient, body: WritableASNRangeReques
 		_ => { Ok(IpamAsnRangesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnRangesDestroyResponse {
 	Http204,
@@ -17530,7 +17532,7 @@ pub fn ipam_asn_ranges_destroy(state: &ThanixClient, id: i64) -> Result<IpamAsnR
 		_ => { Ok(IpamAsnRangesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnRangesPartialUpdateResponse {
 	Http200(ASNRange),
@@ -17548,7 +17550,7 @@ pub fn ipam_asn_ranges_partial_update(state: &ThanixClient, body: PatchedWritabl
 		_ => { Ok(IpamAsnRangesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnRangesAvailableAsnsListResponse {
 	Http200(Vec<AvailableASN>),
@@ -17565,7 +17567,7 @@ pub fn ipam_asn_ranges_available_asns_list(state: &ThanixClient, id: i64) -> Res
 		_ => { Ok(IpamAsnRangesAvailableAsnsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnRangesAvailableAsnsCreateResponse {
 	Http201(Vec<ASN>),
@@ -17583,7 +17585,7 @@ pub fn ipam_asn_ranges_available_asns_create(state: &ThanixClient, body: Vec<ASN
 		_ => { Ok(IpamAsnRangesAvailableAsnsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IpamAsnsListQuery {
 	asn: Option<Vec<i64>>,
 	asn__empty: Option<bool>,
@@ -17665,13 +17667,13 @@ pub struct IpamAsnsListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnsListResponse {
 	Http200(PaginatedASNList),
@@ -17688,7 +17690,7 @@ pub fn ipam_asns_list(state: &ThanixClient, query: IpamAsnsListQuery) -> Result<
 		_ => { Ok(IpamAsnsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnsBulkUpdateResponse {
 	Http200(Vec<ASN>),
@@ -17706,7 +17708,7 @@ pub fn ipam_asns_bulk_update(state: &ThanixClient, body: Vec<ASNRequest>) -> Res
 		_ => { Ok(IpamAsnsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnsCreateResponse {
 	Http201(ASN),
@@ -17724,7 +17726,7 @@ pub fn ipam_asns_create(state: &ThanixClient, body: WritableASNRequest) -> Resul
 		_ => { Ok(IpamAsnsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnsBulkDestroyResponse {
 	Http204,
@@ -17741,7 +17743,7 @@ pub fn ipam_asns_bulk_destroy(state: &ThanixClient, body: Vec<ASNRequest>) -> Re
 		_ => { Ok(IpamAsnsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnsBulkPartialUpdateResponse {
 	Http200(Vec<ASN>),
@@ -17759,7 +17761,7 @@ pub fn ipam_asns_bulk_partial_update(state: &ThanixClient, body: Vec<ASNRequest>
 		_ => { Ok(IpamAsnsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnsRetrieveResponse {
 	Http200(ASN),
@@ -17776,7 +17778,7 @@ pub fn ipam_asns_retrieve(state: &ThanixClient, id: i64) -> Result<IpamAsnsRetri
 		_ => { Ok(IpamAsnsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnsUpdateResponse {
 	Http200(ASN),
@@ -17794,7 +17796,7 @@ pub fn ipam_asns_update(state: &ThanixClient, body: WritableASNRequest, id: i64)
 		_ => { Ok(IpamAsnsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnsDestroyResponse {
 	Http204,
@@ -17810,7 +17812,7 @@ pub fn ipam_asns_destroy(state: &ThanixClient, id: i64) -> Result<IpamAsnsDestro
 		_ => { Ok(IpamAsnsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamAsnsPartialUpdateResponse {
 	Http200(ASN),
@@ -17828,7 +17830,7 @@ pub fn ipam_asns_partial_update(state: &ThanixClient, body: PatchedWritableASNRe
 		_ => { Ok(IpamAsnsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IpamFhrpGroupAssignmentsListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -17886,7 +17888,7 @@ pub struct IpamFhrpGroupAssignmentsListQuery {
 	virtual_machine_id: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamFhrpGroupAssignmentsListResponse {
 	Http200(PaginatedFHRPGroupAssignmentList),
@@ -17903,7 +17905,7 @@ pub fn ipam_fhrp_group_assignments_list(state: &ThanixClient, query: IpamFhrpGro
 		_ => { Ok(IpamFhrpGroupAssignmentsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamFhrpGroupAssignmentsBulkUpdateResponse {
 	Http200(Vec<FHRPGroupAssignment>),
@@ -17921,7 +17923,7 @@ pub fn ipam_fhrp_group_assignments_bulk_update(state: &ThanixClient, body: Vec<F
 		_ => { Ok(IpamFhrpGroupAssignmentsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamFhrpGroupAssignmentsCreateResponse {
 	Http201(FHRPGroupAssignment),
@@ -17939,7 +17941,7 @@ pub fn ipam_fhrp_group_assignments_create(state: &ThanixClient, body: WritableFH
 		_ => { Ok(IpamFhrpGroupAssignmentsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamFhrpGroupAssignmentsBulkDestroyResponse {
 	Http204,
@@ -17956,7 +17958,7 @@ pub fn ipam_fhrp_group_assignments_bulk_destroy(state: &ThanixClient, body: Vec<
 		_ => { Ok(IpamFhrpGroupAssignmentsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamFhrpGroupAssignmentsBulkPartialUpdateResponse {
 	Http200(Vec<FHRPGroupAssignment>),
@@ -17974,7 +17976,7 @@ pub fn ipam_fhrp_group_assignments_bulk_partial_update(state: &ThanixClient, bod
 		_ => { Ok(IpamFhrpGroupAssignmentsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamFhrpGroupAssignmentsRetrieveResponse {
 	Http200(FHRPGroupAssignment),
@@ -17991,7 +17993,7 @@ pub fn ipam_fhrp_group_assignments_retrieve(state: &ThanixClient, id: i64) -> Re
 		_ => { Ok(IpamFhrpGroupAssignmentsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamFhrpGroupAssignmentsUpdateResponse {
 	Http200(FHRPGroupAssignment),
@@ -18009,7 +18011,7 @@ pub fn ipam_fhrp_group_assignments_update(state: &ThanixClient, body: WritableFH
 		_ => { Ok(IpamFhrpGroupAssignmentsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamFhrpGroupAssignmentsDestroyResponse {
 	Http204,
@@ -18025,7 +18027,7 @@ pub fn ipam_fhrp_group_assignments_destroy(state: &ThanixClient, id: i64) -> Res
 		_ => { Ok(IpamFhrpGroupAssignmentsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamFhrpGroupAssignmentsPartialUpdateResponse {
 	Http200(FHRPGroupAssignment),
@@ -18043,7 +18045,7 @@ pub fn ipam_fhrp_group_assignments_partial_update(state: &ThanixClient, body: Pa
 		_ => { Ok(IpamFhrpGroupAssignmentsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IpamFhrpGroupsListQuery {
 	auth_key: Option<Vec<String>>,
 	auth_key__empty: Option<bool>,
@@ -18126,7 +18128,7 @@ pub struct IpamFhrpGroupsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamFhrpGroupsListResponse {
 	Http200(PaginatedFHRPGroupList),
@@ -18143,7 +18145,7 @@ pub fn ipam_fhrp_groups_list(state: &ThanixClient, query: IpamFhrpGroupsListQuer
 		_ => { Ok(IpamFhrpGroupsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamFhrpGroupsBulkUpdateResponse {
 	Http200(Vec<FHRPGroup>),
@@ -18161,7 +18163,7 @@ pub fn ipam_fhrp_groups_bulk_update(state: &ThanixClient, body: Vec<FHRPGroupReq
 		_ => { Ok(IpamFhrpGroupsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamFhrpGroupsCreateResponse {
 	Http201(FHRPGroup),
@@ -18179,7 +18181,7 @@ pub fn ipam_fhrp_groups_create(state: &ThanixClient, body: FHRPGroupRequest) -> 
 		_ => { Ok(IpamFhrpGroupsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamFhrpGroupsBulkDestroyResponse {
 	Http204,
@@ -18196,7 +18198,7 @@ pub fn ipam_fhrp_groups_bulk_destroy(state: &ThanixClient, body: Vec<FHRPGroupRe
 		_ => { Ok(IpamFhrpGroupsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamFhrpGroupsBulkPartialUpdateResponse {
 	Http200(Vec<FHRPGroup>),
@@ -18214,7 +18216,7 @@ pub fn ipam_fhrp_groups_bulk_partial_update(state: &ThanixClient, body: Vec<FHRP
 		_ => { Ok(IpamFhrpGroupsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamFhrpGroupsRetrieveResponse {
 	Http200(FHRPGroup),
@@ -18231,7 +18233,7 @@ pub fn ipam_fhrp_groups_retrieve(state: &ThanixClient, id: i64) -> Result<IpamFh
 		_ => { Ok(IpamFhrpGroupsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamFhrpGroupsUpdateResponse {
 	Http200(FHRPGroup),
@@ -18249,7 +18251,7 @@ pub fn ipam_fhrp_groups_update(state: &ThanixClient, body: FHRPGroupRequest, id:
 		_ => { Ok(IpamFhrpGroupsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamFhrpGroupsDestroyResponse {
 	Http204,
@@ -18265,7 +18267,7 @@ pub fn ipam_fhrp_groups_destroy(state: &ThanixClient, id: i64) -> Result<IpamFhr
 		_ => { Ok(IpamFhrpGroupsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamFhrpGroupsPartialUpdateResponse {
 	Http200(FHRPGroup),
@@ -18283,7 +18285,7 @@ pub fn ipam_fhrp_groups_partial_update(state: &ThanixClient, body: PatchedFHRPGr
 		_ => { Ok(IpamFhrpGroupsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IpamIpAddressesListQuery {
 	address: Option<Vec<String>>,
 	/// Is assigned
@@ -18387,9 +18389,9 @@ pub struct IpamIpAddressesListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	updated_by_request: Option<String>,
 	virtual_machine: Option<Vec<String>>,
 	virtual_machine_id: Option<Vec<i64>>,
@@ -18406,12 +18408,12 @@ pub struct IpamIpAddressesListQuery {
 	/// VRF (RD)
 	vrf__n: Option<Vec<Option<String>>>,
 	/// VRF
-	vrf_id: Option<Vec<i64>>,
+	vrf_id: Option<Vec<Option<i64>>>,
 	/// VRF
-	vrf_id__n: Option<Vec<i64>>,
+	vrf_id__n: Option<Vec<Option<i64>>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpAddressesListResponse {
 	Http200(PaginatedIPAddressList),
@@ -18428,7 +18430,7 @@ pub fn ipam_ip_addresses_list(state: &ThanixClient, query: IpamIpAddressesListQu
 		_ => { Ok(IpamIpAddressesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpAddressesBulkUpdateResponse {
 	Http200(Vec<IPAddress>),
@@ -18446,7 +18448,7 @@ pub fn ipam_ip_addresses_bulk_update(state: &ThanixClient, body: Vec<IPAddressRe
 		_ => { Ok(IpamIpAddressesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpAddressesCreateResponse {
 	Http201(IPAddress),
@@ -18464,7 +18466,7 @@ pub fn ipam_ip_addresses_create(state: &ThanixClient, body: WritableIPAddressReq
 		_ => { Ok(IpamIpAddressesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpAddressesBulkDestroyResponse {
 	Http204,
@@ -18481,7 +18483,7 @@ pub fn ipam_ip_addresses_bulk_destroy(state: &ThanixClient, body: Vec<IPAddressR
 		_ => { Ok(IpamIpAddressesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpAddressesBulkPartialUpdateResponse {
 	Http200(Vec<IPAddress>),
@@ -18499,7 +18501,7 @@ pub fn ipam_ip_addresses_bulk_partial_update(state: &ThanixClient, body: Vec<IPA
 		_ => { Ok(IpamIpAddressesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpAddressesRetrieveResponse {
 	Http200(IPAddress),
@@ -18516,7 +18518,7 @@ pub fn ipam_ip_addresses_retrieve(state: &ThanixClient, id: i64) -> Result<IpamI
 		_ => { Ok(IpamIpAddressesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpAddressesUpdateResponse {
 	Http200(IPAddress),
@@ -18534,7 +18536,7 @@ pub fn ipam_ip_addresses_update(state: &ThanixClient, body: WritableIPAddressReq
 		_ => { Ok(IpamIpAddressesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpAddressesDestroyResponse {
 	Http204,
@@ -18550,7 +18552,7 @@ pub fn ipam_ip_addresses_destroy(state: &ThanixClient, id: i64) -> Result<IpamIp
 		_ => { Ok(IpamIpAddressesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpAddressesPartialUpdateResponse {
 	Http200(IPAddress),
@@ -18568,7 +18570,7 @@ pub fn ipam_ip_addresses_partial_update(state: &ThanixClient, body: PatchedWrita
 		_ => { Ok(IpamIpAddressesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IpamIpRangesListQuery {
 	/// Ranges which contain this prefix or IP
 	contains: Option<String>,
@@ -18623,9 +18625,9 @@ pub struct IpamIpRangesListQuery {
 	/// Role (slug)
 	role__n: Option<Vec<String>>,
 	/// Role (ID)
-	role_id: Option<Vec<i64>>,
+	role_id: Option<Vec<Option<i64>>>,
 	/// Role (ID)
-	role_id__n: Option<Vec<i64>>,
+	role_id__n: Option<Vec<Option<i64>>>,
 	start_address: Option<Vec<String>>,
 	/// Operational status of this range
 	status: Option<Vec<String>>,
@@ -18646,21 +18648,21 @@ pub struct IpamIpRangesListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	updated_by_request: Option<String>,
 	/// VRF (RD)
 	vrf: Option<Vec<Option<String>>>,
 	/// VRF (RD)
 	vrf__n: Option<Vec<Option<String>>>,
 	/// VRF
-	vrf_id: Option<Vec<i64>>,
+	vrf_id: Option<Vec<Option<i64>>>,
 	/// VRF
-	vrf_id__n: Option<Vec<i64>>,
+	vrf_id__n: Option<Vec<Option<i64>>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpRangesListResponse {
 	Http200(PaginatedIPRangeList),
@@ -18677,7 +18679,7 @@ pub fn ipam_ip_ranges_list(state: &ThanixClient, query: IpamIpRangesListQuery) -
 		_ => { Ok(IpamIpRangesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpRangesBulkUpdateResponse {
 	Http200(Vec<IPRange>),
@@ -18695,7 +18697,7 @@ pub fn ipam_ip_ranges_bulk_update(state: &ThanixClient, body: Vec<IPRangeRequest
 		_ => { Ok(IpamIpRangesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpRangesCreateResponse {
 	Http201(IPRange),
@@ -18713,7 +18715,7 @@ pub fn ipam_ip_ranges_create(state: &ThanixClient, body: WritableIPRangeRequest)
 		_ => { Ok(IpamIpRangesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpRangesBulkDestroyResponse {
 	Http204,
@@ -18730,7 +18732,7 @@ pub fn ipam_ip_ranges_bulk_destroy(state: &ThanixClient, body: Vec<IPRangeReques
 		_ => { Ok(IpamIpRangesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpRangesBulkPartialUpdateResponse {
 	Http200(Vec<IPRange>),
@@ -18748,7 +18750,7 @@ pub fn ipam_ip_ranges_bulk_partial_update(state: &ThanixClient, body: Vec<IPRang
 		_ => { Ok(IpamIpRangesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpRangesRetrieveResponse {
 	Http200(IPRange),
@@ -18765,7 +18767,7 @@ pub fn ipam_ip_ranges_retrieve(state: &ThanixClient, id: i64) -> Result<IpamIpRa
 		_ => { Ok(IpamIpRangesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpRangesUpdateResponse {
 	Http200(IPRange),
@@ -18783,7 +18785,7 @@ pub fn ipam_ip_ranges_update(state: &ThanixClient, body: WritableIPRangeRequest,
 		_ => { Ok(IpamIpRangesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpRangesDestroyResponse {
 	Http204,
@@ -18799,7 +18801,7 @@ pub fn ipam_ip_ranges_destroy(state: &ThanixClient, id: i64) -> Result<IpamIpRan
 		_ => { Ok(IpamIpRangesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpRangesPartialUpdateResponse {
 	Http200(IPRange),
@@ -18817,7 +18819,7 @@ pub fn ipam_ip_ranges_partial_update(state: &ThanixClient, body: PatchedWritable
 		_ => { Ok(IpamIpRangesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpRangesAvailableIpsListResponse {
 	Http200(Vec<AvailableIP>),
@@ -18834,7 +18836,7 @@ pub fn ipam_ip_ranges_available_ips_list(state: &ThanixClient, id: i64) -> Resul
 		_ => { Ok(IpamIpRangesAvailableIpsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamIpRangesAvailableIpsCreateResponse {
 	Http201(Vec<IPAddress>),
@@ -18852,7 +18854,7 @@ pub fn ipam_ip_ranges_available_ips_create(state: &ThanixClient, body: Vec<IPAdd
 		_ => { Ok(IpamIpRangesAvailableIpsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IpamPrefixesListQuery {
 	children: Option<Vec<i64>>,
 	children__empty: Option<Vec<i64>>,
@@ -18934,9 +18936,9 @@ pub struct IpamPrefixesListQuery {
 	/// Role (slug)
 	role__n: Option<Vec<String>>,
 	/// Role (ID)
-	role_id: Option<Vec<i64>>,
+	role_id: Option<Vec<Option<i64>>>,
 	/// Role (ID)
-	role_id__n: Option<Vec<i64>>,
+	role_id__n: Option<Vec<Option<i64>>>,
 	/// Site (slug)
 	site: Option<Vec<String>>,
 	/// Site (slug)
@@ -18950,9 +18952,9 @@ pub struct IpamPrefixesListQuery {
 	/// Site group (ID)
 	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
-	site_id: Option<Vec<i64>>,
+	site_id: Option<Vec<Option<i64>>>,
 	/// Site (ID)
-	site_id__n: Option<Vec<i64>>,
+	site_id__n: Option<Vec<Option<i64>>>,
 	/// Operational status of this prefix
 	status: Option<Vec<String>>,
 	/// Operational status of this prefix
@@ -18972,14 +18974,14 @@ pub struct IpamPrefixesListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	updated_by_request: Option<String>,
 	/// VLAN (ID)
-	vlan_id: Option<Vec<i64>>,
+	vlan_id: Option<Vec<Option<i64>>>,
 	/// VLAN (ID)
-	vlan_id__n: Option<Vec<i64>>,
+	vlan_id__n: Option<Vec<Option<i64>>>,
 	/// VLAN number (1-4094)
 	vlan_vid: Option<i64>,
 	/// VLAN number (1-4094)
@@ -18999,16 +19001,16 @@ pub struct IpamPrefixesListQuery {
 	/// VRF (RD)
 	vrf__n: Option<Vec<Option<String>>>,
 	/// VRF
-	vrf_id: Option<Vec<i64>>,
+	vrf_id: Option<Vec<Option<i64>>>,
 	/// VRF
-	vrf_id__n: Option<Vec<i64>>,
+	vrf_id__n: Option<Vec<Option<i64>>>,
 	/// Within prefix
 	within: Option<String>,
 	/// Within and including prefix
 	within_include: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamPrefixesListResponse {
 	Http200(PaginatedPrefixList),
@@ -19025,7 +19027,7 @@ pub fn ipam_prefixes_list(state: &ThanixClient, query: IpamPrefixesListQuery) ->
 		_ => { Ok(IpamPrefixesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamPrefixesBulkUpdateResponse {
 	Http200(Vec<Prefix>),
@@ -19043,7 +19045,7 @@ pub fn ipam_prefixes_bulk_update(state: &ThanixClient, body: Vec<PrefixRequest>)
 		_ => { Ok(IpamPrefixesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamPrefixesCreateResponse {
 	Http201(Prefix),
@@ -19061,7 +19063,7 @@ pub fn ipam_prefixes_create(state: &ThanixClient, body: WritablePrefixRequest) -
 		_ => { Ok(IpamPrefixesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamPrefixesBulkDestroyResponse {
 	Http204,
@@ -19078,7 +19080,7 @@ pub fn ipam_prefixes_bulk_destroy(state: &ThanixClient, body: Vec<PrefixRequest>
 		_ => { Ok(IpamPrefixesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamPrefixesBulkPartialUpdateResponse {
 	Http200(Vec<Prefix>),
@@ -19096,7 +19098,7 @@ pub fn ipam_prefixes_bulk_partial_update(state: &ThanixClient, body: Vec<PrefixR
 		_ => { Ok(IpamPrefixesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamPrefixesRetrieveResponse {
 	Http200(Prefix),
@@ -19113,7 +19115,7 @@ pub fn ipam_prefixes_retrieve(state: &ThanixClient, id: i64) -> Result<IpamPrefi
 		_ => { Ok(IpamPrefixesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamPrefixesUpdateResponse {
 	Http200(Prefix),
@@ -19131,7 +19133,7 @@ pub fn ipam_prefixes_update(state: &ThanixClient, body: WritablePrefixRequest, i
 		_ => { Ok(IpamPrefixesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamPrefixesDestroyResponse {
 	Http204,
@@ -19147,7 +19149,7 @@ pub fn ipam_prefixes_destroy(state: &ThanixClient, id: i64) -> Result<IpamPrefix
 		_ => { Ok(IpamPrefixesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamPrefixesPartialUpdateResponse {
 	Http200(Prefix),
@@ -19165,7 +19167,7 @@ pub fn ipam_prefixes_partial_update(state: &ThanixClient, body: PatchedWritableP
 		_ => { Ok(IpamPrefixesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamPrefixesAvailableIpsListResponse {
 	Http200(Vec<AvailableIP>),
@@ -19182,7 +19184,7 @@ pub fn ipam_prefixes_available_ips_list(state: &ThanixClient, id: i64) -> Result
 		_ => { Ok(IpamPrefixesAvailableIpsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamPrefixesAvailableIpsCreateResponse {
 	Http201(Vec<IPAddress>),
@@ -19200,7 +19202,7 @@ pub fn ipam_prefixes_available_ips_create(state: &ThanixClient, body: Vec<IPAddr
 		_ => { Ok(IpamPrefixesAvailableIpsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamPrefixesAvailablePrefixesListResponse {
 	Http200(Vec<AvailablePrefix>),
@@ -19217,7 +19219,7 @@ pub fn ipam_prefixes_available_prefixes_list(state: &ThanixClient, id: i64) -> R
 		_ => { Ok(IpamPrefixesAvailablePrefixesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamPrefixesAvailablePrefixesCreateResponse {
 	Http201(Vec<Prefix>),
@@ -19235,7 +19237,7 @@ pub fn ipam_prefixes_available_prefixes_create(state: &ThanixClient, body: Vec<P
 		_ => { Ok(IpamPrefixesAvailablePrefixesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IpamRirsListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -19307,7 +19309,7 @@ pub struct IpamRirsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRirsListResponse {
 	Http200(PaginatedRIRList),
@@ -19324,7 +19326,7 @@ pub fn ipam_rirs_list(state: &ThanixClient, query: IpamRirsListQuery) -> Result<
 		_ => { Ok(IpamRirsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRirsBulkUpdateResponse {
 	Http200(Vec<RIR>),
@@ -19342,7 +19344,7 @@ pub fn ipam_rirs_bulk_update(state: &ThanixClient, body: Vec<RIRRequest>) -> Res
 		_ => { Ok(IpamRirsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRirsCreateResponse {
 	Http201(RIR),
@@ -19360,7 +19362,7 @@ pub fn ipam_rirs_create(state: &ThanixClient, body: RIRRequest) -> Result<IpamRi
 		_ => { Ok(IpamRirsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRirsBulkDestroyResponse {
 	Http204,
@@ -19377,7 +19379,7 @@ pub fn ipam_rirs_bulk_destroy(state: &ThanixClient, body: Vec<RIRRequest>) -> Re
 		_ => { Ok(IpamRirsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRirsBulkPartialUpdateResponse {
 	Http200(Vec<RIR>),
@@ -19395,7 +19397,7 @@ pub fn ipam_rirs_bulk_partial_update(state: &ThanixClient, body: Vec<RIRRequest>
 		_ => { Ok(IpamRirsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRirsRetrieveResponse {
 	Http200(RIR),
@@ -19412,7 +19414,7 @@ pub fn ipam_rirs_retrieve(state: &ThanixClient, id: i64) -> Result<IpamRirsRetri
 		_ => { Ok(IpamRirsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRirsUpdateResponse {
 	Http200(RIR),
@@ -19430,7 +19432,7 @@ pub fn ipam_rirs_update(state: &ThanixClient, body: RIRRequest, id: i64) -> Resu
 		_ => { Ok(IpamRirsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRirsDestroyResponse {
 	Http204,
@@ -19446,7 +19448,7 @@ pub fn ipam_rirs_destroy(state: &ThanixClient, id: i64) -> Result<IpamRirsDestro
 		_ => { Ok(IpamRirsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRirsPartialUpdateResponse {
 	Http200(RIR),
@@ -19464,7 +19466,7 @@ pub fn ipam_rirs_partial_update(state: &ThanixClient, body: PatchedRIRRequest, i
 		_ => { Ok(IpamRirsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IpamRolesListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -19535,7 +19537,7 @@ pub struct IpamRolesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRolesListResponse {
 	Http200(PaginatedRoleList),
@@ -19552,7 +19554,7 @@ pub fn ipam_roles_list(state: &ThanixClient, query: IpamRolesListQuery) -> Resul
 		_ => { Ok(IpamRolesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRolesBulkUpdateResponse {
 	Http200(Vec<Role>),
@@ -19570,7 +19572,7 @@ pub fn ipam_roles_bulk_update(state: &ThanixClient, body: Vec<RoleRequest>) -> R
 		_ => { Ok(IpamRolesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRolesCreateResponse {
 	Http201(Role),
@@ -19588,7 +19590,7 @@ pub fn ipam_roles_create(state: &ThanixClient, body: RoleRequest) -> Result<Ipam
 		_ => { Ok(IpamRolesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRolesBulkDestroyResponse {
 	Http204,
@@ -19605,7 +19607,7 @@ pub fn ipam_roles_bulk_destroy(state: &ThanixClient, body: Vec<RoleRequest>) -> 
 		_ => { Ok(IpamRolesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRolesBulkPartialUpdateResponse {
 	Http200(Vec<Role>),
@@ -19623,7 +19625,7 @@ pub fn ipam_roles_bulk_partial_update(state: &ThanixClient, body: Vec<RoleReques
 		_ => { Ok(IpamRolesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRolesRetrieveResponse {
 	Http200(Role),
@@ -19640,7 +19642,7 @@ pub fn ipam_roles_retrieve(state: &ThanixClient, id: i64) -> Result<IpamRolesRet
 		_ => { Ok(IpamRolesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRolesUpdateResponse {
 	Http200(Role),
@@ -19658,7 +19660,7 @@ pub fn ipam_roles_update(state: &ThanixClient, body: RoleRequest, id: i64) -> Re
 		_ => { Ok(IpamRolesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRolesDestroyResponse {
 	Http204,
@@ -19674,7 +19676,7 @@ pub fn ipam_roles_destroy(state: &ThanixClient, id: i64) -> Result<IpamRolesDest
 		_ => { Ok(IpamRolesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRolesPartialUpdateResponse {
 	Http200(Role),
@@ -19692,7 +19694,7 @@ pub fn ipam_roles_partial_update(state: &ThanixClient, body: PatchedRoleRequest,
 		_ => { Ok(IpamRolesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IpamRouteTargetsListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -19778,13 +19780,13 @@ pub struct IpamRouteTargetsListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRouteTargetsListResponse {
 	Http200(PaginatedRouteTargetList),
@@ -19801,7 +19803,7 @@ pub fn ipam_route_targets_list(state: &ThanixClient, query: IpamRouteTargetsList
 		_ => { Ok(IpamRouteTargetsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRouteTargetsBulkUpdateResponse {
 	Http200(Vec<RouteTarget>),
@@ -19819,7 +19821,7 @@ pub fn ipam_route_targets_bulk_update(state: &ThanixClient, body: Vec<RouteTarge
 		_ => { Ok(IpamRouteTargetsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRouteTargetsCreateResponse {
 	Http201(RouteTarget),
@@ -19837,7 +19839,7 @@ pub fn ipam_route_targets_create(state: &ThanixClient, body: WritableRouteTarget
 		_ => { Ok(IpamRouteTargetsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRouteTargetsBulkDestroyResponse {
 	Http204,
@@ -19854,7 +19856,7 @@ pub fn ipam_route_targets_bulk_destroy(state: &ThanixClient, body: Vec<RouteTarg
 		_ => { Ok(IpamRouteTargetsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRouteTargetsBulkPartialUpdateResponse {
 	Http200(Vec<RouteTarget>),
@@ -19872,7 +19874,7 @@ pub fn ipam_route_targets_bulk_partial_update(state: &ThanixClient, body: Vec<Ro
 		_ => { Ok(IpamRouteTargetsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRouteTargetsRetrieveResponse {
 	Http200(RouteTarget),
@@ -19889,7 +19891,7 @@ pub fn ipam_route_targets_retrieve(state: &ThanixClient, id: i64) -> Result<Ipam
 		_ => { Ok(IpamRouteTargetsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRouteTargetsUpdateResponse {
 	Http200(RouteTarget),
@@ -19907,7 +19909,7 @@ pub fn ipam_route_targets_update(state: &ThanixClient, body: WritableRouteTarget
 		_ => { Ok(IpamRouteTargetsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRouteTargetsDestroyResponse {
 	Http204,
@@ -19923,7 +19925,7 @@ pub fn ipam_route_targets_destroy(state: &ThanixClient, id: i64) -> Result<IpamR
 		_ => { Ok(IpamRouteTargetsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamRouteTargetsPartialUpdateResponse {
 	Http200(RouteTarget),
@@ -19941,7 +19943,7 @@ pub fn ipam_route_targets_partial_update(state: &ThanixClient, body: PatchedWrit
 		_ => { Ok(IpamRouteTargetsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IpamServiceTemplatesListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -20004,7 +20006,7 @@ pub struct IpamServiceTemplatesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamServiceTemplatesListResponse {
 	Http200(PaginatedServiceTemplateList),
@@ -20021,7 +20023,7 @@ pub fn ipam_service_templates_list(state: &ThanixClient, query: IpamServiceTempl
 		_ => { Ok(IpamServiceTemplatesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamServiceTemplatesBulkUpdateResponse {
 	Http200(Vec<ServiceTemplate>),
@@ -20039,7 +20041,7 @@ pub fn ipam_service_templates_bulk_update(state: &ThanixClient, body: Vec<Servic
 		_ => { Ok(IpamServiceTemplatesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamServiceTemplatesCreateResponse {
 	Http201(ServiceTemplate),
@@ -20057,7 +20059,7 @@ pub fn ipam_service_templates_create(state: &ThanixClient, body: WritableService
 		_ => { Ok(IpamServiceTemplatesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamServiceTemplatesBulkDestroyResponse {
 	Http204,
@@ -20074,7 +20076,7 @@ pub fn ipam_service_templates_bulk_destroy(state: &ThanixClient, body: Vec<Servi
 		_ => { Ok(IpamServiceTemplatesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamServiceTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<ServiceTemplate>),
@@ -20092,7 +20094,7 @@ pub fn ipam_service_templates_bulk_partial_update(state: &ThanixClient, body: Ve
 		_ => { Ok(IpamServiceTemplatesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamServiceTemplatesRetrieveResponse {
 	Http200(ServiceTemplate),
@@ -20109,7 +20111,7 @@ pub fn ipam_service_templates_retrieve(state: &ThanixClient, id: i64) -> Result<
 		_ => { Ok(IpamServiceTemplatesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamServiceTemplatesUpdateResponse {
 	Http200(ServiceTemplate),
@@ -20127,7 +20129,7 @@ pub fn ipam_service_templates_update(state: &ThanixClient, body: WritableService
 		_ => { Ok(IpamServiceTemplatesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamServiceTemplatesDestroyResponse {
 	Http204,
@@ -20143,7 +20145,7 @@ pub fn ipam_service_templates_destroy(state: &ThanixClient, id: i64) -> Result<I
 		_ => { Ok(IpamServiceTemplatesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamServiceTemplatesPartialUpdateResponse {
 	Http200(ServiceTemplate),
@@ -20161,7 +20163,7 @@ pub fn ipam_service_templates_partial_update(state: &ThanixClient, body: Patched
 		_ => { Ok(IpamServiceTemplatesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IpamServicesListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -20187,9 +20189,9 @@ pub struct IpamServicesListQuery {
 	/// Device (name)
 	device__n: Option<Vec<Option<String>>>,
 	/// Device (ID)
-	device_id: Option<Vec<i64>>,
+	device_id: Option<Vec<Option<i64>>>,
 	/// Device (ID)
-	device_id__n: Option<Vec<i64>>,
+	device_id__n: Option<Vec<Option<i64>>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -20243,12 +20245,12 @@ pub struct IpamServicesListQuery {
 	/// Virtual machine (name)
 	virtual_machine__n: Option<Vec<String>>,
 	/// Virtual machine (ID)
-	virtual_machine_id: Option<Vec<i64>>,
+	virtual_machine_id: Option<Vec<Option<i64>>>,
 	/// Virtual machine (ID)
-	virtual_machine_id__n: Option<Vec<i64>>,
+	virtual_machine_id__n: Option<Vec<Option<i64>>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamServicesListResponse {
 	Http200(PaginatedServiceList),
@@ -20265,7 +20267,7 @@ pub fn ipam_services_list(state: &ThanixClient, query: IpamServicesListQuery) ->
 		_ => { Ok(IpamServicesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamServicesBulkUpdateResponse {
 	Http200(Vec<Service>),
@@ -20283,7 +20285,7 @@ pub fn ipam_services_bulk_update(state: &ThanixClient, body: Vec<ServiceRequest>
 		_ => { Ok(IpamServicesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamServicesCreateResponse {
 	Http201(Service),
@@ -20301,7 +20303,7 @@ pub fn ipam_services_create(state: &ThanixClient, body: WritableServiceRequest) 
 		_ => { Ok(IpamServicesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamServicesBulkDestroyResponse {
 	Http204,
@@ -20318,7 +20320,7 @@ pub fn ipam_services_bulk_destroy(state: &ThanixClient, body: Vec<ServiceRequest
 		_ => { Ok(IpamServicesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamServicesBulkPartialUpdateResponse {
 	Http200(Vec<Service>),
@@ -20336,7 +20338,7 @@ pub fn ipam_services_bulk_partial_update(state: &ThanixClient, body: Vec<Service
 		_ => { Ok(IpamServicesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamServicesRetrieveResponse {
 	Http200(Service),
@@ -20353,7 +20355,7 @@ pub fn ipam_services_retrieve(state: &ThanixClient, id: i64) -> Result<IpamServi
 		_ => { Ok(IpamServicesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamServicesUpdateResponse {
 	Http200(Service),
@@ -20371,7 +20373,7 @@ pub fn ipam_services_update(state: &ThanixClient, body: WritableServiceRequest, 
 		_ => { Ok(IpamServicesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamServicesDestroyResponse {
 	Http204,
@@ -20387,7 +20389,7 @@ pub fn ipam_services_destroy(state: &ThanixClient, id: i64) -> Result<IpamServic
 		_ => { Ok(IpamServicesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamServicesPartialUpdateResponse {
 	Http200(Service),
@@ -20405,7 +20407,7 @@ pub fn ipam_services_partial_update(state: &ThanixClient, body: PatchedWritableS
 		_ => { Ok(IpamServicesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IpamVlanGroupsListQuery {
 	cluster: Option<i64>,
 	clustergroup: Option<f64>,
@@ -20506,7 +20508,7 @@ pub struct IpamVlanGroupsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlanGroupsListResponse {
 	Http200(PaginatedVLANGroupList),
@@ -20523,7 +20525,7 @@ pub fn ipam_vlan_groups_list(state: &ThanixClient, query: IpamVlanGroupsListQuer
 		_ => { Ok(IpamVlanGroupsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlanGroupsBulkUpdateResponse {
 	Http200(Vec<VLANGroup>),
@@ -20541,7 +20543,7 @@ pub fn ipam_vlan_groups_bulk_update(state: &ThanixClient, body: Vec<VLANGroupReq
 		_ => { Ok(IpamVlanGroupsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlanGroupsCreateResponse {
 	Http201(VLANGroup),
@@ -20559,7 +20561,7 @@ pub fn ipam_vlan_groups_create(state: &ThanixClient, body: VLANGroupRequest) -> 
 		_ => { Ok(IpamVlanGroupsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlanGroupsBulkDestroyResponse {
 	Http204,
@@ -20576,7 +20578,7 @@ pub fn ipam_vlan_groups_bulk_destroy(state: &ThanixClient, body: Vec<VLANGroupRe
 		_ => { Ok(IpamVlanGroupsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlanGroupsBulkPartialUpdateResponse {
 	Http200(Vec<VLANGroup>),
@@ -20594,7 +20596,7 @@ pub fn ipam_vlan_groups_bulk_partial_update(state: &ThanixClient, body: Vec<VLAN
 		_ => { Ok(IpamVlanGroupsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlanGroupsRetrieveResponse {
 	Http200(VLANGroup),
@@ -20611,7 +20613,7 @@ pub fn ipam_vlan_groups_retrieve(state: &ThanixClient, id: i64) -> Result<IpamVl
 		_ => { Ok(IpamVlanGroupsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlanGroupsUpdateResponse {
 	Http200(VLANGroup),
@@ -20629,7 +20631,7 @@ pub fn ipam_vlan_groups_update(state: &ThanixClient, body: VLANGroupRequest, id:
 		_ => { Ok(IpamVlanGroupsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlanGroupsDestroyResponse {
 	Http204,
@@ -20645,7 +20647,7 @@ pub fn ipam_vlan_groups_destroy(state: &ThanixClient, id: i64) -> Result<IpamVla
 		_ => { Ok(IpamVlanGroupsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlanGroupsPartialUpdateResponse {
 	Http200(VLANGroup),
@@ -20663,7 +20665,7 @@ pub fn ipam_vlan_groups_partial_update(state: &ThanixClient, body: PatchedVLANGr
 		_ => { Ok(IpamVlanGroupsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlanGroupsAvailableVlansListResponse {
 	Http200(Vec<AvailableVLAN>),
@@ -20680,7 +20682,7 @@ pub fn ipam_vlan_groups_available_vlans_list(state: &ThanixClient, id: i64) -> R
 		_ => { Ok(IpamVlanGroupsAvailableVlansListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlanGroupsAvailableVlansCreateResponse {
 	Http201(Vec<VLAN>),
@@ -20698,7 +20700,7 @@ pub fn ipam_vlan_groups_available_vlans_create(state: &ThanixClient, body: Vec<V
 		_ => { Ok(IpamVlanGroupsAvailableVlansCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IpamVlansListQuery {
 	available_at_site: Option<String>,
 	available_on_device: Option<String>,
@@ -20727,9 +20729,9 @@ pub struct IpamVlansListQuery {
 	/// Group
 	group__n: Option<Vec<String>>,
 	/// Group (ID)
-	group_id: Option<Vec<i64>>,
+	group_id: Option<Vec<Option<i64>>>,
 	/// Group (ID)
-	group_id__n: Option<Vec<i64>>,
+	group_id__n: Option<Vec<Option<i64>>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -20738,9 +20740,9 @@ pub struct IpamVlansListQuery {
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
 	/// L2VPN
-	l2vpn: Option<Vec<i64>>,
+	l2vpn: Option<Vec<Option<i64>>>,
 	/// L2VPN
-	l2vpn__n: Option<Vec<i64>>,
+	l2vpn__n: Option<Vec<Option<i64>>>,
 	/// L2VPN (ID)
 	l2vpn_id: Option<Vec<i64>>,
 	/// L2VPN (ID)
@@ -20785,9 +20787,9 @@ pub struct IpamVlansListQuery {
 	/// Role (slug)
 	role__n: Option<Vec<String>>,
 	/// Role (ID)
-	role_id: Option<Vec<i64>>,
+	role_id: Option<Vec<Option<i64>>>,
 	/// Role (ID)
-	role_id__n: Option<Vec<i64>>,
+	role_id__n: Option<Vec<Option<i64>>>,
 	/// Site (slug)
 	site: Option<Vec<String>>,
 	/// Site (slug)
@@ -20801,9 +20803,9 @@ pub struct IpamVlansListQuery {
 	/// Site group (ID)
 	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
-	site_id: Option<Vec<i64>>,
+	site_id: Option<Vec<Option<i64>>>,
 	/// Site (ID)
-	site_id__n: Option<Vec<i64>>,
+	site_id__n: Option<Vec<Option<i64>>>,
 	/// Operational status of this VLAN
 	status: Option<Vec<String>>,
 	/// Operational status of this VLAN
@@ -20823,9 +20825,9 @@ pub struct IpamVlansListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	updated_by_request: Option<String>,
 	vid: Option<Vec<i64>>,
 	vid__empty: Option<bool>,
@@ -20836,7 +20838,7 @@ pub struct IpamVlansListQuery {
 	vid__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlansListResponse {
 	Http200(PaginatedVLANList),
@@ -20853,7 +20855,7 @@ pub fn ipam_vlans_list(state: &ThanixClient, query: IpamVlansListQuery) -> Resul
 		_ => { Ok(IpamVlansListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlansBulkUpdateResponse {
 	Http200(Vec<VLAN>),
@@ -20871,7 +20873,7 @@ pub fn ipam_vlans_bulk_update(state: &ThanixClient, body: Vec<VLANRequest>) -> R
 		_ => { Ok(IpamVlansBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlansCreateResponse {
 	Http201(VLAN),
@@ -20889,7 +20891,7 @@ pub fn ipam_vlans_create(state: &ThanixClient, body: WritableVLANRequest) -> Res
 		_ => { Ok(IpamVlansCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlansBulkDestroyResponse {
 	Http204,
@@ -20906,7 +20908,7 @@ pub fn ipam_vlans_bulk_destroy(state: &ThanixClient, body: Vec<VLANRequest>) -> 
 		_ => { Ok(IpamVlansBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlansBulkPartialUpdateResponse {
 	Http200(Vec<VLAN>),
@@ -20924,7 +20926,7 @@ pub fn ipam_vlans_bulk_partial_update(state: &ThanixClient, body: Vec<VLANReques
 		_ => { Ok(IpamVlansBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlansRetrieveResponse {
 	Http200(VLAN),
@@ -20941,7 +20943,7 @@ pub fn ipam_vlans_retrieve(state: &ThanixClient, id: i64) -> Result<IpamVlansRet
 		_ => { Ok(IpamVlansRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlansUpdateResponse {
 	Http200(VLAN),
@@ -20959,7 +20961,7 @@ pub fn ipam_vlans_update(state: &ThanixClient, body: WritableVLANRequest, id: i6
 		_ => { Ok(IpamVlansUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlansDestroyResponse {
 	Http204,
@@ -20975,7 +20977,7 @@ pub fn ipam_vlans_destroy(state: &ThanixClient, id: i64) -> Result<IpamVlansDest
 		_ => { Ok(IpamVlansDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVlansPartialUpdateResponse {
 	Http200(VLAN),
@@ -20993,7 +20995,7 @@ pub fn ipam_vlans_partial_update(state: &ThanixClient, body: PatchedWritableVLAN
 		_ => { Ok(IpamVlansPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IpamVrfsListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -21091,13 +21093,13 @@ pub struct IpamVrfsListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVrfsListResponse {
 	Http200(PaginatedVRFList),
@@ -21114,7 +21116,7 @@ pub fn ipam_vrfs_list(state: &ThanixClient, query: IpamVrfsListQuery) -> Result<
 		_ => { Ok(IpamVrfsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVrfsBulkUpdateResponse {
 	Http200(Vec<VRF>),
@@ -21132,7 +21134,7 @@ pub fn ipam_vrfs_bulk_update(state: &ThanixClient, body: Vec<VRFRequest>) -> Res
 		_ => { Ok(IpamVrfsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVrfsCreateResponse {
 	Http201(VRF),
@@ -21150,7 +21152,7 @@ pub fn ipam_vrfs_create(state: &ThanixClient, body: WritableVRFRequest) -> Resul
 		_ => { Ok(IpamVrfsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVrfsBulkDestroyResponse {
 	Http204,
@@ -21167,7 +21169,7 @@ pub fn ipam_vrfs_bulk_destroy(state: &ThanixClient, body: Vec<VRFRequest>) -> Re
 		_ => { Ok(IpamVrfsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVrfsBulkPartialUpdateResponse {
 	Http200(Vec<VRF>),
@@ -21185,7 +21187,7 @@ pub fn ipam_vrfs_bulk_partial_update(state: &ThanixClient, body: Vec<VRFRequest>
 		_ => { Ok(IpamVrfsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVrfsRetrieveResponse {
 	Http200(VRF),
@@ -21202,7 +21204,7 @@ pub fn ipam_vrfs_retrieve(state: &ThanixClient, id: i64) -> Result<IpamVrfsRetri
 		_ => { Ok(IpamVrfsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVrfsUpdateResponse {
 	Http200(VRF),
@@ -21220,7 +21222,7 @@ pub fn ipam_vrfs_update(state: &ThanixClient, body: WritableVRFRequest, id: i64)
 		_ => { Ok(IpamVrfsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVrfsDestroyResponse {
 	Http204,
@@ -21236,7 +21238,7 @@ pub fn ipam_vrfs_destroy(state: &ThanixClient, id: i64) -> Result<IpamVrfsDestro
 		_ => { Ok(IpamVrfsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum IpamVrfsPartialUpdateResponse {
 	Http200(VRF),
@@ -21254,15 +21256,15 @@ pub fn ipam_vrfs_partial_update(state: &ThanixClient, body: PatchedWritableVRFRe
 		_ => { Ok(IpamVrfsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct SchemaRetrieveQuery {
 	format: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum SchemaRetrieveResponse {
-	Http200(String),
+	Http200(Option<std::collections::HashMap<String, serde_json::Value>>),
 	#[default]
 	None
 }
@@ -21275,14 +21277,14 @@ pub fn schema_retrieve(state: &ThanixClient, query: SchemaRetrieveQuery) -> Resu
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		200 => { Ok(SchemaRetrieveResponse::Http200(r#response.json::<String>()?)) },
+		200 => { Ok(SchemaRetrieveResponse::Http200(r#response.json::<Option<std::collections::HashMap<String, serde_json::Value>>>()?)) },
 		_ => { Ok(SchemaRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum StatusRetrieveResponse {
-	Http200(String),
+	Http200(Option<std::collections::HashMap<String, serde_json::Value>>),
 	#[default]
 	None
 }
@@ -21292,11 +21294,11 @@ pub fn status_retrieve(state: &ThanixClient) -> Result<StatusRetrieveResponse, E
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		200 => { Ok(StatusRetrieveResponse::Http200(r#response.json::<String>()?)) },
+		200 => { Ok(StatusRetrieveResponse::Http200(r#response.json::<Option<std::collections::HashMap<String, serde_json::Value>>>()?)) },
 		_ => { Ok(StatusRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct TenancyContactAssignmentsListQuery {
 	/// Contact (ID)
 	contact_id: Option<Vec<i64>>,
@@ -21367,7 +21369,7 @@ pub struct TenancyContactAssignmentsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactAssignmentsListResponse {
 	Http200(PaginatedContactAssignmentList),
@@ -21384,7 +21386,7 @@ pub fn tenancy_contact_assignments_list(state: &ThanixClient, query: TenancyCont
 		_ => { Ok(TenancyContactAssignmentsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactAssignmentsBulkUpdateResponse {
 	Http200(Vec<ContactAssignment>),
@@ -21402,7 +21404,7 @@ pub fn tenancy_contact_assignments_bulk_update(state: &ThanixClient, body: Vec<C
 		_ => { Ok(TenancyContactAssignmentsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactAssignmentsCreateResponse {
 	Http201(ContactAssignment),
@@ -21420,7 +21422,7 @@ pub fn tenancy_contact_assignments_create(state: &ThanixClient, body: WritableCo
 		_ => { Ok(TenancyContactAssignmentsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactAssignmentsBulkDestroyResponse {
 	Http204,
@@ -21437,7 +21439,7 @@ pub fn tenancy_contact_assignments_bulk_destroy(state: &ThanixClient, body: Vec<
 		_ => { Ok(TenancyContactAssignmentsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactAssignmentsBulkPartialUpdateResponse {
 	Http200(Vec<ContactAssignment>),
@@ -21455,7 +21457,7 @@ pub fn tenancy_contact_assignments_bulk_partial_update(state: &ThanixClient, bod
 		_ => { Ok(TenancyContactAssignmentsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactAssignmentsRetrieveResponse {
 	Http200(ContactAssignment),
@@ -21472,7 +21474,7 @@ pub fn tenancy_contact_assignments_retrieve(state: &ThanixClient, id: i64) -> Re
 		_ => { Ok(TenancyContactAssignmentsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactAssignmentsUpdateResponse {
 	Http200(ContactAssignment),
@@ -21490,7 +21492,7 @@ pub fn tenancy_contact_assignments_update(state: &ThanixClient, body: WritableCo
 		_ => { Ok(TenancyContactAssignmentsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactAssignmentsDestroyResponse {
 	Http204,
@@ -21506,7 +21508,7 @@ pub fn tenancy_contact_assignments_destroy(state: &ThanixClient, id: i64) -> Res
 		_ => { Ok(TenancyContactAssignmentsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactAssignmentsPartialUpdateResponse {
 	Http200(ContactAssignment),
@@ -21524,7 +21526,7 @@ pub fn tenancy_contact_assignments_partial_update(state: &ThanixClient, body: Pa
 		_ => { Ok(TenancyContactAssignmentsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct TenancyContactGroupsListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -21582,9 +21584,9 @@ pub struct TenancyContactGroupsListQuery {
 	/// Contact group (slug)
 	parent__n: Option<Vec<String>>,
 	/// Contact group (ID)
-	parent_id: Option<Vec<i64>>,
+	parent_id: Option<Vec<Option<i64>>>,
 	/// Contact group (ID)
-	parent_id__n: Option<Vec<i64>>,
+	parent_id__n: Option<Vec<Option<i64>>>,
 	/// Search
 	q: Option<String>,
 	slug: Option<Vec<String>>,
@@ -21603,7 +21605,7 @@ pub struct TenancyContactGroupsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactGroupsListResponse {
 	Http200(PaginatedContactGroupList),
@@ -21620,7 +21622,7 @@ pub fn tenancy_contact_groups_list(state: &ThanixClient, query: TenancyContactGr
 		_ => { Ok(TenancyContactGroupsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactGroupsBulkUpdateResponse {
 	Http200(Vec<ContactGroup>),
@@ -21638,7 +21640,7 @@ pub fn tenancy_contact_groups_bulk_update(state: &ThanixClient, body: Vec<Contac
 		_ => { Ok(TenancyContactGroupsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactGroupsCreateResponse {
 	Http201(ContactGroup),
@@ -21656,7 +21658,7 @@ pub fn tenancy_contact_groups_create(state: &ThanixClient, body: WritableContact
 		_ => { Ok(TenancyContactGroupsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactGroupsBulkDestroyResponse {
 	Http204,
@@ -21673,7 +21675,7 @@ pub fn tenancy_contact_groups_bulk_destroy(state: &ThanixClient, body: Vec<Conta
 		_ => { Ok(TenancyContactGroupsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactGroupsBulkPartialUpdateResponse {
 	Http200(Vec<ContactGroup>),
@@ -21691,7 +21693,7 @@ pub fn tenancy_contact_groups_bulk_partial_update(state: &ThanixClient, body: Ve
 		_ => { Ok(TenancyContactGroupsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactGroupsRetrieveResponse {
 	Http200(ContactGroup),
@@ -21708,7 +21710,7 @@ pub fn tenancy_contact_groups_retrieve(state: &ThanixClient, id: i64) -> Result<
 		_ => { Ok(TenancyContactGroupsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactGroupsUpdateResponse {
 	Http200(ContactGroup),
@@ -21726,7 +21728,7 @@ pub fn tenancy_contact_groups_update(state: &ThanixClient, body: WritableContact
 		_ => { Ok(TenancyContactGroupsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactGroupsDestroyResponse {
 	Http204,
@@ -21742,7 +21744,7 @@ pub fn tenancy_contact_groups_destroy(state: &ThanixClient, id: i64) -> Result<T
 		_ => { Ok(TenancyContactGroupsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactGroupsPartialUpdateResponse {
 	Http200(ContactGroup),
@@ -21760,7 +21762,7 @@ pub fn tenancy_contact_groups_partial_update(state: &ThanixClient, body: Patched
 		_ => { Ok(TenancyContactGroupsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct TenancyContactRolesListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -21831,7 +21833,7 @@ pub struct TenancyContactRolesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactRolesListResponse {
 	Http200(PaginatedContactRoleList),
@@ -21848,7 +21850,7 @@ pub fn tenancy_contact_roles_list(state: &ThanixClient, query: TenancyContactRol
 		_ => { Ok(TenancyContactRolesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactRolesBulkUpdateResponse {
 	Http200(Vec<ContactRole>),
@@ -21866,7 +21868,7 @@ pub fn tenancy_contact_roles_bulk_update(state: &ThanixClient, body: Vec<Contact
 		_ => { Ok(TenancyContactRolesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactRolesCreateResponse {
 	Http201(ContactRole),
@@ -21884,7 +21886,7 @@ pub fn tenancy_contact_roles_create(state: &ThanixClient, body: ContactRoleReque
 		_ => { Ok(TenancyContactRolesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactRolesBulkDestroyResponse {
 	Http204,
@@ -21901,7 +21903,7 @@ pub fn tenancy_contact_roles_bulk_destroy(state: &ThanixClient, body: Vec<Contac
 		_ => { Ok(TenancyContactRolesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactRolesBulkPartialUpdateResponse {
 	Http200(Vec<ContactRole>),
@@ -21919,7 +21921,7 @@ pub fn tenancy_contact_roles_bulk_partial_update(state: &ThanixClient, body: Vec
 		_ => { Ok(TenancyContactRolesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactRolesRetrieveResponse {
 	Http200(ContactRole),
@@ -21936,7 +21938,7 @@ pub fn tenancy_contact_roles_retrieve(state: &ThanixClient, id: i64) -> Result<T
 		_ => { Ok(TenancyContactRolesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactRolesUpdateResponse {
 	Http200(ContactRole),
@@ -21954,7 +21956,7 @@ pub fn tenancy_contact_roles_update(state: &ThanixClient, body: ContactRoleReque
 		_ => { Ok(TenancyContactRolesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactRolesDestroyResponse {
 	Http204,
@@ -21970,7 +21972,7 @@ pub fn tenancy_contact_roles_destroy(state: &ThanixClient, id: i64) -> Result<Te
 		_ => { Ok(TenancyContactRolesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactRolesPartialUpdateResponse {
 	Http200(ContactRole),
@@ -21988,7 +21990,7 @@ pub fn tenancy_contact_roles_partial_update(state: &ThanixClient, body: PatchedC
 		_ => { Ok(TenancyContactRolesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct TenancyContactsListQuery {
 	address: Option<Vec<String>>,
 	address__empty: Option<bool>,
@@ -22111,7 +22113,7 @@ pub struct TenancyContactsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactsListResponse {
 	Http200(PaginatedContactList),
@@ -22128,7 +22130,7 @@ pub fn tenancy_contacts_list(state: &ThanixClient, query: TenancyContactsListQue
 		_ => { Ok(TenancyContactsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactsBulkUpdateResponse {
 	Http200(Vec<Contact>),
@@ -22146,7 +22148,7 @@ pub fn tenancy_contacts_bulk_update(state: &ThanixClient, body: Vec<ContactReque
 		_ => { Ok(TenancyContactsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactsCreateResponse {
 	Http201(Contact),
@@ -22164,7 +22166,7 @@ pub fn tenancy_contacts_create(state: &ThanixClient, body: WritableContactReques
 		_ => { Ok(TenancyContactsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactsBulkDestroyResponse {
 	Http204,
@@ -22181,7 +22183,7 @@ pub fn tenancy_contacts_bulk_destroy(state: &ThanixClient, body: Vec<ContactRequ
 		_ => { Ok(TenancyContactsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactsBulkPartialUpdateResponse {
 	Http200(Vec<Contact>),
@@ -22199,7 +22201,7 @@ pub fn tenancy_contacts_bulk_partial_update(state: &ThanixClient, body: Vec<Cont
 		_ => { Ok(TenancyContactsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactsRetrieveResponse {
 	Http200(Contact),
@@ -22216,7 +22218,7 @@ pub fn tenancy_contacts_retrieve(state: &ThanixClient, id: i64) -> Result<Tenanc
 		_ => { Ok(TenancyContactsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactsUpdateResponse {
 	Http200(Contact),
@@ -22234,7 +22236,7 @@ pub fn tenancy_contacts_update(state: &ThanixClient, body: WritableContactReques
 		_ => { Ok(TenancyContactsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactsDestroyResponse {
 	Http204,
@@ -22250,7 +22252,7 @@ pub fn tenancy_contacts_destroy(state: &ThanixClient, id: i64) -> Result<Tenancy
 		_ => { Ok(TenancyContactsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyContactsPartialUpdateResponse {
 	Http200(Contact),
@@ -22268,7 +22270,7 @@ pub fn tenancy_contacts_partial_update(state: &ThanixClient, body: PatchedWritab
 		_ => { Ok(TenancyContactsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct TenancyTenantGroupsListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -22326,9 +22328,9 @@ pub struct TenancyTenantGroupsListQuery {
 	/// Tenant group (slug)
 	parent__n: Option<Vec<String>>,
 	/// Tenant group (ID)
-	parent_id: Option<Vec<i64>>,
+	parent_id: Option<Vec<Option<i64>>>,
 	/// Tenant group (ID)
-	parent_id__n: Option<Vec<i64>>,
+	parent_id__n: Option<Vec<Option<i64>>>,
 	/// Search
 	q: Option<String>,
 	slug: Option<Vec<String>>,
@@ -22347,7 +22349,7 @@ pub struct TenancyTenantGroupsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyTenantGroupsListResponse {
 	Http200(PaginatedTenantGroupList),
@@ -22364,7 +22366,7 @@ pub fn tenancy_tenant_groups_list(state: &ThanixClient, query: TenancyTenantGrou
 		_ => { Ok(TenancyTenantGroupsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyTenantGroupsBulkUpdateResponse {
 	Http200(Vec<TenantGroup>),
@@ -22382,7 +22384,7 @@ pub fn tenancy_tenant_groups_bulk_update(state: &ThanixClient, body: Vec<TenantG
 		_ => { Ok(TenancyTenantGroupsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyTenantGroupsCreateResponse {
 	Http201(TenantGroup),
@@ -22400,7 +22402,7 @@ pub fn tenancy_tenant_groups_create(state: &ThanixClient, body: WritableTenantGr
 		_ => { Ok(TenancyTenantGroupsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyTenantGroupsBulkDestroyResponse {
 	Http204,
@@ -22417,7 +22419,7 @@ pub fn tenancy_tenant_groups_bulk_destroy(state: &ThanixClient, body: Vec<Tenant
 		_ => { Ok(TenancyTenantGroupsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyTenantGroupsBulkPartialUpdateResponse {
 	Http200(Vec<TenantGroup>),
@@ -22435,7 +22437,7 @@ pub fn tenancy_tenant_groups_bulk_partial_update(state: &ThanixClient, body: Vec
 		_ => { Ok(TenancyTenantGroupsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyTenantGroupsRetrieveResponse {
 	Http200(TenantGroup),
@@ -22452,7 +22454,7 @@ pub fn tenancy_tenant_groups_retrieve(state: &ThanixClient, id: i64) -> Result<T
 		_ => { Ok(TenancyTenantGroupsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyTenantGroupsUpdateResponse {
 	Http200(TenantGroup),
@@ -22470,7 +22472,7 @@ pub fn tenancy_tenant_groups_update(state: &ThanixClient, body: WritableTenantGr
 		_ => { Ok(TenancyTenantGroupsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyTenantGroupsDestroyResponse {
 	Http204,
@@ -22486,7 +22488,7 @@ pub fn tenancy_tenant_groups_destroy(state: &ThanixClient, id: i64) -> Result<Te
 		_ => { Ok(TenancyTenantGroupsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyTenantGroupsPartialUpdateResponse {
 	Http200(TenantGroup),
@@ -22504,7 +22506,7 @@ pub fn tenancy_tenant_groups_partial_update(state: &ThanixClient, body: PatchedW
 		_ => { Ok(TenancyTenantGroupsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct TenancyTenantsListQuery {
 	/// Contact
 	contact: Option<Vec<i64>>,
@@ -22595,7 +22597,7 @@ pub struct TenancyTenantsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyTenantsListResponse {
 	Http200(PaginatedTenantList),
@@ -22612,7 +22614,7 @@ pub fn tenancy_tenants_list(state: &ThanixClient, query: TenancyTenantsListQuery
 		_ => { Ok(TenancyTenantsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyTenantsBulkUpdateResponse {
 	Http200(Vec<Tenant>),
@@ -22630,7 +22632,7 @@ pub fn tenancy_tenants_bulk_update(state: &ThanixClient, body: Vec<TenantRequest
 		_ => { Ok(TenancyTenantsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyTenantsCreateResponse {
 	Http201(Tenant),
@@ -22648,7 +22650,7 @@ pub fn tenancy_tenants_create(state: &ThanixClient, body: WritableTenantRequest)
 		_ => { Ok(TenancyTenantsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyTenantsBulkDestroyResponse {
 	Http204,
@@ -22665,7 +22667,7 @@ pub fn tenancy_tenants_bulk_destroy(state: &ThanixClient, body: Vec<TenantReques
 		_ => { Ok(TenancyTenantsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyTenantsBulkPartialUpdateResponse {
 	Http200(Vec<Tenant>),
@@ -22683,7 +22685,7 @@ pub fn tenancy_tenants_bulk_partial_update(state: &ThanixClient, body: Vec<Tenan
 		_ => { Ok(TenancyTenantsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyTenantsRetrieveResponse {
 	Http200(Tenant),
@@ -22700,7 +22702,7 @@ pub fn tenancy_tenants_retrieve(state: &ThanixClient, id: i64) -> Result<Tenancy
 		_ => { Ok(TenancyTenantsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyTenantsUpdateResponse {
 	Http200(Tenant),
@@ -22718,7 +22720,7 @@ pub fn tenancy_tenants_update(state: &ThanixClient, body: WritableTenantRequest,
 		_ => { Ok(TenancyTenantsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyTenantsDestroyResponse {
 	Http204,
@@ -22734,7 +22736,7 @@ pub fn tenancy_tenants_destroy(state: &ThanixClient, id: i64) -> Result<TenancyT
 		_ => { Ok(TenancyTenantsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum TenancyTenantsPartialUpdateResponse {
 	Http200(Tenant),
@@ -22752,10 +22754,10 @@ pub fn tenancy_tenants_partial_update(state: &ThanixClient, body: PatchedWritabl
 		_ => { Ok(TenancyTenantsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersConfigRetrieveResponse {
-	Http200(String),
+	Http200(Option<std::collections::HashMap<String, serde_json::Value>>),
 	#[default]
 	None
 }
@@ -22765,11 +22767,11 @@ pub fn users_config_retrieve(state: &ThanixClient) -> Result<UsersConfigRetrieve
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		200 => { Ok(UsersConfigRetrieveResponse::Http200(r#response.json::<String>()?)) },
+		200 => { Ok(UsersConfigRetrieveResponse::Http200(r#response.json::<Option<std::collections::HashMap<String, serde_json::Value>>>()?)) },
 		_ => { Ok(UsersConfigRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct UsersGroupsListQuery {
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
@@ -22799,7 +22801,7 @@ pub struct UsersGroupsListQuery {
 	q: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersGroupsListResponse {
 	Http200(PaginatedGroupList),
@@ -22816,7 +22818,7 @@ pub fn users_groups_list(state: &ThanixClient, query: UsersGroupsListQuery) -> R
 		_ => { Ok(UsersGroupsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersGroupsBulkUpdateResponse {
 	Http200(Vec<Group>),
@@ -22834,7 +22836,7 @@ pub fn users_groups_bulk_update(state: &ThanixClient, body: Vec<GroupRequest>) -
 		_ => { Ok(UsersGroupsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersGroupsCreateResponse {
 	Http201(Group),
@@ -22852,7 +22854,7 @@ pub fn users_groups_create(state: &ThanixClient, body: GroupRequest) -> Result<U
 		_ => { Ok(UsersGroupsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersGroupsBulkDestroyResponse {
 	Http204,
@@ -22869,7 +22871,7 @@ pub fn users_groups_bulk_destroy(state: &ThanixClient, body: Vec<GroupRequest>) 
 		_ => { Ok(UsersGroupsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersGroupsBulkPartialUpdateResponse {
 	Http200(Vec<Group>),
@@ -22887,7 +22889,7 @@ pub fn users_groups_bulk_partial_update(state: &ThanixClient, body: Vec<GroupReq
 		_ => { Ok(UsersGroupsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersGroupsRetrieveResponse {
 	Http200(Group),
@@ -22904,7 +22906,7 @@ pub fn users_groups_retrieve(state: &ThanixClient, id: i64) -> Result<UsersGroup
 		_ => { Ok(UsersGroupsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersGroupsUpdateResponse {
 	Http200(Group),
@@ -22922,7 +22924,7 @@ pub fn users_groups_update(state: &ThanixClient, body: GroupRequest, id: i64) ->
 		_ => { Ok(UsersGroupsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersGroupsDestroyResponse {
 	Http204,
@@ -22938,7 +22940,7 @@ pub fn users_groups_destroy(state: &ThanixClient, id: i64) -> Result<UsersGroups
 		_ => { Ok(UsersGroupsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersGroupsPartialUpdateResponse {
 	Http200(Group),
@@ -22956,7 +22958,7 @@ pub fn users_groups_partial_update(state: &ThanixClient, body: PatchedGroupReque
 		_ => { Ok(UsersGroupsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct UsersPermissionsListQuery {
 	can_add: Option<bool>,
 	can_change: Option<bool>,
@@ -23020,7 +23022,7 @@ pub struct UsersPermissionsListQuery {
 	user_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersPermissionsListResponse {
 	Http200(PaginatedObjectPermissionList),
@@ -23037,7 +23039,7 @@ pub fn users_permissions_list(state: &ThanixClient, query: UsersPermissionsListQ
 		_ => { Ok(UsersPermissionsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersPermissionsBulkUpdateResponse {
 	Http200(Vec<ObjectPermission>),
@@ -23055,7 +23057,7 @@ pub fn users_permissions_bulk_update(state: &ThanixClient, body: Vec<ObjectPermi
 		_ => { Ok(UsersPermissionsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersPermissionsCreateResponse {
 	Http201(ObjectPermission),
@@ -23073,7 +23075,7 @@ pub fn users_permissions_create(state: &ThanixClient, body: WritableObjectPermis
 		_ => { Ok(UsersPermissionsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersPermissionsBulkDestroyResponse {
 	Http204,
@@ -23090,7 +23092,7 @@ pub fn users_permissions_bulk_destroy(state: &ThanixClient, body: Vec<ObjectPerm
 		_ => { Ok(UsersPermissionsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersPermissionsBulkPartialUpdateResponse {
 	Http200(Vec<ObjectPermission>),
@@ -23108,7 +23110,7 @@ pub fn users_permissions_bulk_partial_update(state: &ThanixClient, body: Vec<Obj
 		_ => { Ok(UsersPermissionsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersPermissionsRetrieveResponse {
 	Http200(ObjectPermission),
@@ -23125,7 +23127,7 @@ pub fn users_permissions_retrieve(state: &ThanixClient, id: i64) -> Result<Users
 		_ => { Ok(UsersPermissionsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersPermissionsUpdateResponse {
 	Http200(ObjectPermission),
@@ -23143,7 +23145,7 @@ pub fn users_permissions_update(state: &ThanixClient, body: WritableObjectPermis
 		_ => { Ok(UsersPermissionsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersPermissionsDestroyResponse {
 	Http204,
@@ -23159,7 +23161,7 @@ pub fn users_permissions_destroy(state: &ThanixClient, id: i64) -> Result<UsersP
 		_ => { Ok(UsersPermissionsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersPermissionsPartialUpdateResponse {
 	Http200(ObjectPermission),
@@ -23177,7 +23179,7 @@ pub fn users_permissions_partial_update(state: &ThanixClient, body: PatchedWrita
 		_ => { Ok(UsersPermissionsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct UsersTokensListQuery {
 	created: Option<String>,
 	created__gte: Option<String>,
@@ -23233,7 +23235,7 @@ pub struct UsersTokensListQuery {
 	write_enabled: Option<bool>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersTokensListResponse {
 	Http200(PaginatedTokenList),
@@ -23250,7 +23252,7 @@ pub fn users_tokens_list(state: &ThanixClient, query: UsersTokensListQuery) -> R
 		_ => { Ok(UsersTokensListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersTokensBulkUpdateResponse {
 	Http200(Vec<Token>),
@@ -23268,7 +23270,7 @@ pub fn users_tokens_bulk_update(state: &ThanixClient, body: Vec<TokenRequest>) -
 		_ => { Ok(UsersTokensBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersTokensCreateResponse {
 	Http201(Token),
@@ -23286,7 +23288,7 @@ pub fn users_tokens_create(state: &ThanixClient, body: WritableTokenRequest) -> 
 		_ => { Ok(UsersTokensCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersTokensBulkDestroyResponse {
 	Http204,
@@ -23303,7 +23305,7 @@ pub fn users_tokens_bulk_destroy(state: &ThanixClient, body: Vec<TokenRequest>) 
 		_ => { Ok(UsersTokensBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersTokensBulkPartialUpdateResponse {
 	Http200(Vec<Token>),
@@ -23321,7 +23323,7 @@ pub fn users_tokens_bulk_partial_update(state: &ThanixClient, body: Vec<TokenReq
 		_ => { Ok(UsersTokensBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersTokensRetrieveResponse {
 	Http200(Token),
@@ -23338,7 +23340,7 @@ pub fn users_tokens_retrieve(state: &ThanixClient, id: i64) -> Result<UsersToken
 		_ => { Ok(UsersTokensRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersTokensUpdateResponse {
 	Http200(Token),
@@ -23356,7 +23358,7 @@ pub fn users_tokens_update(state: &ThanixClient, body: WritableTokenRequest, id:
 		_ => { Ok(UsersTokensUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersTokensDestroyResponse {
 	Http204,
@@ -23372,7 +23374,7 @@ pub fn users_tokens_destroy(state: &ThanixClient, id: i64) -> Result<UsersTokens
 		_ => { Ok(UsersTokensDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersTokensPartialUpdateResponse {
 	Http200(Token),
@@ -23390,11 +23392,11 @@ pub fn users_tokens_partial_update(state: &ThanixClient, body: PatchedWritableTo
 		_ => { Ok(UsersTokensPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersTokensProvisionCreateResponse {
 	Http201(TokenProvision),
-	Http401(String),
+	Http401(Option<std::collections::HashMap<String, serde_json::Value>>),
 	#[default]
 	None
 }
@@ -23406,11 +23408,11 @@ pub fn users_tokens_provision_create(state: &ThanixClient, body: TokenProvisionR
 		.send()?;
 	match r#response.status().as_u16() {
 		201 => { Ok(UsersTokensProvisionCreateResponse::Http201(r#response.json::<TokenProvision>()?)) },
-		401 => { Ok(UsersTokensProvisionCreateResponse::Http401(r#response.json::<String>()?)) },
+		401 => { Ok(UsersTokensProvisionCreateResponse::Http401(r#response.json::<Option<std::collections::HashMap<String, serde_json::Value>>>()?)) },
 		_ => { Ok(UsersTokensProvisionCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct UsersUsersListQuery {
 	email: Option<Vec<String>>,
 	email__empty: Option<bool>,
@@ -23484,7 +23486,7 @@ pub struct UsersUsersListQuery {
 	username__nisw: Option<Vec<String>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersUsersListResponse {
 	Http200(PaginatedUserList),
@@ -23501,7 +23503,7 @@ pub fn users_users_list(state: &ThanixClient, query: UsersUsersListQuery) -> Res
 		_ => { Ok(UsersUsersListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersUsersBulkUpdateResponse {
 	Http200(Vec<User>),
@@ -23519,7 +23521,7 @@ pub fn users_users_bulk_update(state: &ThanixClient, body: Vec<UserRequest>) -> 
 		_ => { Ok(UsersUsersBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersUsersCreateResponse {
 	Http201(User),
@@ -23537,7 +23539,7 @@ pub fn users_users_create(state: &ThanixClient, body: WritableUserRequest) -> Re
 		_ => { Ok(UsersUsersCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersUsersBulkDestroyResponse {
 	Http204,
@@ -23554,7 +23556,7 @@ pub fn users_users_bulk_destroy(state: &ThanixClient, body: Vec<UserRequest>) ->
 		_ => { Ok(UsersUsersBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersUsersBulkPartialUpdateResponse {
 	Http200(Vec<User>),
@@ -23572,7 +23574,7 @@ pub fn users_users_bulk_partial_update(state: &ThanixClient, body: Vec<UserReque
 		_ => { Ok(UsersUsersBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersUsersRetrieveResponse {
 	Http200(User),
@@ -23589,7 +23591,7 @@ pub fn users_users_retrieve(state: &ThanixClient, id: i64) -> Result<UsersUsersR
 		_ => { Ok(UsersUsersRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersUsersUpdateResponse {
 	Http200(User),
@@ -23607,7 +23609,7 @@ pub fn users_users_update(state: &ThanixClient, body: WritableUserRequest, id: i
 		_ => { Ok(UsersUsersUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersUsersDestroyResponse {
 	Http204,
@@ -23623,7 +23625,7 @@ pub fn users_users_destroy(state: &ThanixClient, id: i64) -> Result<UsersUsersDe
 		_ => { Ok(UsersUsersDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum UsersUsersPartialUpdateResponse {
 	Http200(User),
@@ -23641,7 +23643,7 @@ pub fn users_users_partial_update(state: &ThanixClient, body: PatchedWritableUse
 		_ => { Ok(UsersUsersPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VirtualizationClusterGroupsListQuery {
 	/// Contact
 	contact: Option<Vec<i64>>,
@@ -23724,7 +23726,7 @@ pub struct VirtualizationClusterGroupsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClusterGroupsListResponse {
 	Http200(PaginatedClusterGroupList),
@@ -23741,7 +23743,7 @@ pub fn virtualization_cluster_groups_list(state: &ThanixClient, query: Virtualiz
 		_ => { Ok(VirtualizationClusterGroupsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClusterGroupsBulkUpdateResponse {
 	Http200(Vec<ClusterGroup>),
@@ -23759,7 +23761,7 @@ pub fn virtualization_cluster_groups_bulk_update(state: &ThanixClient, body: Vec
 		_ => { Ok(VirtualizationClusterGroupsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClusterGroupsCreateResponse {
 	Http201(ClusterGroup),
@@ -23777,7 +23779,7 @@ pub fn virtualization_cluster_groups_create(state: &ThanixClient, body: ClusterG
 		_ => { Ok(VirtualizationClusterGroupsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClusterGroupsBulkDestroyResponse {
 	Http204,
@@ -23794,7 +23796,7 @@ pub fn virtualization_cluster_groups_bulk_destroy(state: &ThanixClient, body: Ve
 		_ => { Ok(VirtualizationClusterGroupsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClusterGroupsBulkPartialUpdateResponse {
 	Http200(Vec<ClusterGroup>),
@@ -23812,7 +23814,7 @@ pub fn virtualization_cluster_groups_bulk_partial_update(state: &ThanixClient, b
 		_ => { Ok(VirtualizationClusterGroupsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClusterGroupsRetrieveResponse {
 	Http200(ClusterGroup),
@@ -23829,7 +23831,7 @@ pub fn virtualization_cluster_groups_retrieve(state: &ThanixClient, id: i64) -> 
 		_ => { Ok(VirtualizationClusterGroupsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClusterGroupsUpdateResponse {
 	Http200(ClusterGroup),
@@ -23847,7 +23849,7 @@ pub fn virtualization_cluster_groups_update(state: &ThanixClient, body: ClusterG
 		_ => { Ok(VirtualizationClusterGroupsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClusterGroupsDestroyResponse {
 	Http204,
@@ -23863,7 +23865,7 @@ pub fn virtualization_cluster_groups_destroy(state: &ThanixClient, id: i64) -> R
 		_ => { Ok(VirtualizationClusterGroupsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClusterGroupsPartialUpdateResponse {
 	Http200(ClusterGroup),
@@ -23881,7 +23883,7 @@ pub fn virtualization_cluster_groups_partial_update(state: &ThanixClient, body: 
 		_ => { Ok(VirtualizationClusterGroupsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VirtualizationClusterTypesListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -23952,7 +23954,7 @@ pub struct VirtualizationClusterTypesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClusterTypesListResponse {
 	Http200(PaginatedClusterTypeList),
@@ -23969,7 +23971,7 @@ pub fn virtualization_cluster_types_list(state: &ThanixClient, query: Virtualiza
 		_ => { Ok(VirtualizationClusterTypesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClusterTypesBulkUpdateResponse {
 	Http200(Vec<ClusterType>),
@@ -23987,7 +23989,7 @@ pub fn virtualization_cluster_types_bulk_update(state: &ThanixClient, body: Vec<
 		_ => { Ok(VirtualizationClusterTypesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClusterTypesCreateResponse {
 	Http201(ClusterType),
@@ -24005,7 +24007,7 @@ pub fn virtualization_cluster_types_create(state: &ThanixClient, body: ClusterTy
 		_ => { Ok(VirtualizationClusterTypesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClusterTypesBulkDestroyResponse {
 	Http204,
@@ -24022,7 +24024,7 @@ pub fn virtualization_cluster_types_bulk_destroy(state: &ThanixClient, body: Vec
 		_ => { Ok(VirtualizationClusterTypesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClusterTypesBulkPartialUpdateResponse {
 	Http200(Vec<ClusterType>),
@@ -24040,7 +24042,7 @@ pub fn virtualization_cluster_types_bulk_partial_update(state: &ThanixClient, bo
 		_ => { Ok(VirtualizationClusterTypesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClusterTypesRetrieveResponse {
 	Http200(ClusterType),
@@ -24057,7 +24059,7 @@ pub fn virtualization_cluster_types_retrieve(state: &ThanixClient, id: i64) -> R
 		_ => { Ok(VirtualizationClusterTypesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClusterTypesUpdateResponse {
 	Http200(ClusterType),
@@ -24075,7 +24077,7 @@ pub fn virtualization_cluster_types_update(state: &ThanixClient, body: ClusterTy
 		_ => { Ok(VirtualizationClusterTypesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClusterTypesDestroyResponse {
 	Http204,
@@ -24091,7 +24093,7 @@ pub fn virtualization_cluster_types_destroy(state: &ThanixClient, id: i64) -> Re
 		_ => { Ok(VirtualizationClusterTypesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClusterTypesPartialUpdateResponse {
 	Http200(ClusterType),
@@ -24109,7 +24111,7 @@ pub fn virtualization_cluster_types_partial_update(state: &ThanixClient, body: P
 		_ => { Ok(VirtualizationClusterTypesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VirtualizationClustersListQuery {
 	/// Contact
 	contact: Option<Vec<i64>>,
@@ -24147,9 +24149,9 @@ pub struct VirtualizationClustersListQuery {
 	/// Parent group (slug)
 	group__n: Option<Vec<String>>,
 	/// Parent group (ID)
-	group_id: Option<Vec<i64>>,
+	group_id: Option<Vec<Option<i64>>>,
 	/// Parent group (ID)
-	group_id__n: Option<Vec<i64>>,
+	group_id__n: Option<Vec<Option<i64>>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -24205,9 +24207,9 @@ pub struct VirtualizationClustersListQuery {
 	/// Site group (ID)
 	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
-	site_id: Option<Vec<i64>>,
+	site_id: Option<Vec<Option<i64>>>,
 	/// Site (ID)
-	site_id__n: Option<Vec<i64>>,
+	site_id__n: Option<Vec<Option<i64>>>,
 	status: Option<Vec<String>>,
 	status__n: Option<Vec<String>>,
 	tag: Option<Vec<String>>,
@@ -24225,9 +24227,9 @@ pub struct VirtualizationClustersListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	/// Cluster type (slug)
 	r#type: Option<Vec<String>>,
 	/// Cluster type (slug)
@@ -24239,7 +24241,7 @@ pub struct VirtualizationClustersListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClustersListResponse {
 	Http200(PaginatedClusterList),
@@ -24256,7 +24258,7 @@ pub fn virtualization_clusters_list(state: &ThanixClient, query: VirtualizationC
 		_ => { Ok(VirtualizationClustersListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClustersBulkUpdateResponse {
 	Http200(Vec<Cluster>),
@@ -24274,7 +24276,7 @@ pub fn virtualization_clusters_bulk_update(state: &ThanixClient, body: Vec<Clust
 		_ => { Ok(VirtualizationClustersBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClustersCreateResponse {
 	Http201(Cluster),
@@ -24292,7 +24294,7 @@ pub fn virtualization_clusters_create(state: &ThanixClient, body: WritableCluste
 		_ => { Ok(VirtualizationClustersCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClustersBulkDestroyResponse {
 	Http204,
@@ -24309,7 +24311,7 @@ pub fn virtualization_clusters_bulk_destroy(state: &ThanixClient, body: Vec<Clus
 		_ => { Ok(VirtualizationClustersBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClustersBulkPartialUpdateResponse {
 	Http200(Vec<Cluster>),
@@ -24327,7 +24329,7 @@ pub fn virtualization_clusters_bulk_partial_update(state: &ThanixClient, body: V
 		_ => { Ok(VirtualizationClustersBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClustersRetrieveResponse {
 	Http200(Cluster),
@@ -24344,7 +24346,7 @@ pub fn virtualization_clusters_retrieve(state: &ThanixClient, id: i64) -> Result
 		_ => { Ok(VirtualizationClustersRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClustersUpdateResponse {
 	Http200(Cluster),
@@ -24362,7 +24364,7 @@ pub fn virtualization_clusters_update(state: &ThanixClient, body: WritableCluste
 		_ => { Ok(VirtualizationClustersUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClustersDestroyResponse {
 	Http204,
@@ -24378,7 +24380,7 @@ pub fn virtualization_clusters_destroy(state: &ThanixClient, id: i64) -> Result<
 		_ => { Ok(VirtualizationClustersDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationClustersPartialUpdateResponse {
 	Http200(Cluster),
@@ -24396,7 +24398,7 @@ pub fn virtualization_clusters_partial_update(state: &ThanixClient, body: Patche
 		_ => { Ok(VirtualizationClustersPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VirtualizationInterfacesListQuery {
 	/// Bridged interface (ID)
 	bridge_id: Option<Vec<i64>>,
@@ -24438,9 +24440,9 @@ pub struct VirtualizationInterfacesListQuery {
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
 	/// L2VPN
-	l2vpn: Option<Vec<i64>>,
+	l2vpn: Option<Vec<Option<i64>>>,
 	/// L2VPN
-	l2vpn__n: Option<Vec<i64>>,
+	l2vpn__n: Option<Vec<Option<i64>>>,
 	/// L2VPN (ID)
 	l2vpn_id: Option<Vec<i64>>,
 	/// L2VPN (ID)
@@ -24518,7 +24520,7 @@ pub struct VirtualizationInterfacesListQuery {
 	vrf_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationInterfacesListResponse {
 	Http200(PaginatedVMInterfaceList),
@@ -24535,7 +24537,7 @@ pub fn virtualization_interfaces_list(state: &ThanixClient, query: Virtualizatio
 		_ => { Ok(VirtualizationInterfacesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationInterfacesBulkUpdateResponse {
 	Http200(Vec<VMInterface>),
@@ -24553,7 +24555,7 @@ pub fn virtualization_interfaces_bulk_update(state: &ThanixClient, body: Vec<VMI
 		_ => { Ok(VirtualizationInterfacesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationInterfacesCreateResponse {
 	Http201(VMInterface),
@@ -24571,7 +24573,7 @@ pub fn virtualization_interfaces_create(state: &ThanixClient, body: WritableVMIn
 		_ => { Ok(VirtualizationInterfacesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationInterfacesBulkDestroyResponse {
 	Http204,
@@ -24588,7 +24590,7 @@ pub fn virtualization_interfaces_bulk_destroy(state: &ThanixClient, body: Vec<VM
 		_ => { Ok(VirtualizationInterfacesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationInterfacesBulkPartialUpdateResponse {
 	Http200(Vec<VMInterface>),
@@ -24606,7 +24608,7 @@ pub fn virtualization_interfaces_bulk_partial_update(state: &ThanixClient, body:
 		_ => { Ok(VirtualizationInterfacesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationInterfacesRetrieveResponse {
 	Http200(VMInterface),
@@ -24623,7 +24625,7 @@ pub fn virtualization_interfaces_retrieve(state: &ThanixClient, id: i64) -> Resu
 		_ => { Ok(VirtualizationInterfacesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationInterfacesUpdateResponse {
 	Http200(VMInterface),
@@ -24641,7 +24643,7 @@ pub fn virtualization_interfaces_update(state: &ThanixClient, body: WritableVMIn
 		_ => { Ok(VirtualizationInterfacesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationInterfacesDestroyResponse {
 	Http204,
@@ -24657,7 +24659,7 @@ pub fn virtualization_interfaces_destroy(state: &ThanixClient, id: i64) -> Resul
 		_ => { Ok(VirtualizationInterfacesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationInterfacesPartialUpdateResponse {
 	Http200(VMInterface),
@@ -24675,7 +24677,7 @@ pub fn virtualization_interfaces_partial_update(state: &ThanixClient, body: Patc
 		_ => { Ok(VirtualizationInterfacesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VirtualizationVirtualDisksListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -24750,7 +24752,7 @@ pub struct VirtualizationVirtualDisksListQuery {
 	virtual_machine_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationVirtualDisksListResponse {
 	Http200(PaginatedVirtualDiskList),
@@ -24767,7 +24769,7 @@ pub fn virtualization_virtual_disks_list(state: &ThanixClient, query: Virtualiza
 		_ => { Ok(VirtualizationVirtualDisksListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationVirtualDisksBulkUpdateResponse {
 	Http200(Vec<VirtualDisk>),
@@ -24785,7 +24787,7 @@ pub fn virtualization_virtual_disks_bulk_update(state: &ThanixClient, body: Vec<
 		_ => { Ok(VirtualizationVirtualDisksBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationVirtualDisksCreateResponse {
 	Http201(VirtualDisk),
@@ -24803,7 +24805,7 @@ pub fn virtualization_virtual_disks_create(state: &ThanixClient, body: WritableV
 		_ => { Ok(VirtualizationVirtualDisksCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationVirtualDisksBulkDestroyResponse {
 	Http204,
@@ -24820,7 +24822,7 @@ pub fn virtualization_virtual_disks_bulk_destroy(state: &ThanixClient, body: Vec
 		_ => { Ok(VirtualizationVirtualDisksBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationVirtualDisksBulkPartialUpdateResponse {
 	Http200(Vec<VirtualDisk>),
@@ -24838,7 +24840,7 @@ pub fn virtualization_virtual_disks_bulk_partial_update(state: &ThanixClient, bo
 		_ => { Ok(VirtualizationVirtualDisksBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationVirtualDisksRetrieveResponse {
 	Http200(VirtualDisk),
@@ -24855,7 +24857,7 @@ pub fn virtualization_virtual_disks_retrieve(state: &ThanixClient, id: i64) -> R
 		_ => { Ok(VirtualizationVirtualDisksRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationVirtualDisksUpdateResponse {
 	Http200(VirtualDisk),
@@ -24873,7 +24875,7 @@ pub fn virtualization_virtual_disks_update(state: &ThanixClient, body: WritableV
 		_ => { Ok(VirtualizationVirtualDisksUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationVirtualDisksDestroyResponse {
 	Http204,
@@ -24889,7 +24891,7 @@ pub fn virtualization_virtual_disks_destroy(state: &ThanixClient, id: i64) -> Re
 		_ => { Ok(VirtualizationVirtualDisksDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationVirtualDisksPartialUpdateResponse {
 	Http200(VirtualDisk),
@@ -24907,7 +24909,7 @@ pub fn virtualization_virtual_disks_partial_update(state: &ThanixClient, body: P
 		_ => { Ok(VirtualizationVirtualDisksPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VirtualizationVirtualMachinesListQuery {
 	/// Cluster
 	cluster: Option<Vec<String>>,
@@ -24922,9 +24924,9 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	/// Cluster group (ID)
 	cluster_group_id__n: Option<Vec<i64>>,
 	/// Cluster (ID)
-	cluster_id: Option<Vec<i64>>,
+	cluster_id: Option<Vec<Option<i64>>>,
 	/// Cluster (ID)
-	cluster_id__n: Option<Vec<i64>>,
+	cluster_id__n: Option<Vec<Option<i64>>>,
 	/// Cluster type (slug)
 	cluster_type: Option<Vec<String>>,
 	/// Cluster type (slug)
@@ -24934,9 +24936,9 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	/// Cluster type (ID)
 	cluster_type_id__n: Option<Vec<i64>>,
 	/// Config template (ID)
-	config_template_id: Option<Vec<i64>>,
+	config_template_id: Option<Vec<Option<i64>>>,
 	/// Config template (ID)
-	config_template_id__n: Option<Vec<i64>>,
+	config_template_id__n: Option<Vec<Option<i64>>>,
 	/// Contact
 	contact: Option<Vec<i64>>,
 	/// Contact
@@ -24973,9 +24975,9 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	/// Device
 	device__n: Option<Vec<Option<String>>>,
 	/// Device (ID)
-	device_id: Option<Vec<i64>>,
+	device_id: Option<Vec<Option<i64>>>,
 	/// Device (ID)
-	device_id__n: Option<Vec<i64>>,
+	device_id__n: Option<Vec<Option<i64>>>,
 	disk: Option<Vec<i64>>,
 	disk__empty: Option<bool>,
 	disk__gt: Option<Vec<i64>>,
@@ -25041,9 +25043,9 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	/// Platform (slug)
 	platform__n: Option<Vec<String>>,
 	/// Platform (ID)
-	platform_id: Option<Vec<i64>>,
+	platform_id: Option<Vec<Option<i64>>>,
 	/// Platform (ID)
-	platform_id__n: Option<Vec<i64>>,
+	platform_id__n: Option<Vec<Option<i64>>>,
 	/// Primary IPv4 (ID)
 	primary_ip4_id: Option<Vec<i64>>,
 	/// Primary IPv4 (ID)
@@ -25067,9 +25069,9 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	/// Role (slug)
 	role__n: Option<Vec<String>>,
 	/// Role (ID)
-	role_id: Option<Vec<i64>>,
+	role_id: Option<Vec<Option<i64>>>,
 	/// Role (ID)
-	role_id__n: Option<Vec<i64>>,
+	role_id__n: Option<Vec<Option<i64>>>,
 	/// Site (slug)
 	site: Option<Vec<String>>,
 	/// Site (slug)
@@ -25083,9 +25085,9 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	/// Site group (ID)
 	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
-	site_id: Option<Vec<i64>>,
+	site_id: Option<Vec<Option<i64>>>,
 	/// Site (ID)
-	site_id__n: Option<Vec<i64>>,
+	site_id__n: Option<Vec<Option<i64>>>,
 	status: Option<Vec<String>>,
 	status__n: Option<Vec<String>>,
 	tag: Option<Vec<String>>,
@@ -25103,9 +25105,9 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	updated_by_request: Option<String>,
 	vcpus: Option<Vec<f64>>,
 	vcpus__empty: Option<bool>,
@@ -25116,7 +25118,7 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	vcpus__n: Option<Vec<f64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationVirtualMachinesListResponse {
 	Http200(PaginatedVirtualMachineWithConfigContextList),
@@ -25133,7 +25135,7 @@ pub fn virtualization_virtual_machines_list(state: &ThanixClient, query: Virtual
 		_ => { Ok(VirtualizationVirtualMachinesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationVirtualMachinesBulkUpdateResponse {
 	Http200(Vec<VirtualMachineWithConfigContext>),
@@ -25151,7 +25153,7 @@ pub fn virtualization_virtual_machines_bulk_update(state: &ThanixClient, body: V
 		_ => { Ok(VirtualizationVirtualMachinesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationVirtualMachinesCreateResponse {
 	Http201(VirtualMachineWithConfigContext),
@@ -25169,7 +25171,7 @@ pub fn virtualization_virtual_machines_create(state: &ThanixClient, body: Writab
 		_ => { Ok(VirtualizationVirtualMachinesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationVirtualMachinesBulkDestroyResponse {
 	Http204,
@@ -25186,7 +25188,7 @@ pub fn virtualization_virtual_machines_bulk_destroy(state: &ThanixClient, body: 
 		_ => { Ok(VirtualizationVirtualMachinesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationVirtualMachinesBulkPartialUpdateResponse {
 	Http200(Vec<VirtualMachineWithConfigContext>),
@@ -25204,7 +25206,7 @@ pub fn virtualization_virtual_machines_bulk_partial_update(state: &ThanixClient,
 		_ => { Ok(VirtualizationVirtualMachinesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationVirtualMachinesRetrieveResponse {
 	Http200(VirtualMachineWithConfigContext),
@@ -25221,7 +25223,7 @@ pub fn virtualization_virtual_machines_retrieve(state: &ThanixClient, id: i64) -
 		_ => { Ok(VirtualizationVirtualMachinesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationVirtualMachinesUpdateResponse {
 	Http200(VirtualMachineWithConfigContext),
@@ -25239,7 +25241,7 @@ pub fn virtualization_virtual_machines_update(state: &ThanixClient, body: Writab
 		_ => { Ok(VirtualizationVirtualMachinesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationVirtualMachinesDestroyResponse {
 	Http204,
@@ -25255,7 +25257,7 @@ pub fn virtualization_virtual_machines_destroy(state: &ThanixClient, id: i64) ->
 		_ => { Ok(VirtualizationVirtualMachinesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationVirtualMachinesPartialUpdateResponse {
 	Http200(VirtualMachineWithConfigContext),
@@ -25273,12 +25275,12 @@ pub fn virtualization_virtual_machines_partial_update(state: &ThanixClient, body
 		_ => { Ok(VirtualizationVirtualMachinesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VirtualizationVirtualMachinesRenderConfigCreateQuery {
 	format: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VirtualizationVirtualMachinesRenderConfigCreateResponse {
 	Http200(VirtualMachineWithConfigContext),
@@ -25296,7 +25298,7 @@ pub fn virtualization_virtual_machines_render_config_create(state: &ThanixClient
 		_ => { Ok(VirtualizationVirtualMachinesRenderConfigCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VpnIkePoliciesListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -25388,7 +25390,7 @@ pub struct VpnIkePoliciesListQuery {
 	version__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIkePoliciesListResponse {
 	Http200(PaginatedIKEPolicyList),
@@ -25405,7 +25407,7 @@ pub fn vpn_ike_policies_list(state: &ThanixClient, query: VpnIkePoliciesListQuer
 		_ => { Ok(VpnIkePoliciesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIkePoliciesBulkUpdateResponse {
 	Http200(Vec<IKEPolicy>),
@@ -25423,7 +25425,7 @@ pub fn vpn_ike_policies_bulk_update(state: &ThanixClient, body: Vec<IKEPolicyReq
 		_ => { Ok(VpnIkePoliciesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIkePoliciesCreateResponse {
 	Http201(IKEPolicy),
@@ -25441,7 +25443,7 @@ pub fn vpn_ike_policies_create(state: &ThanixClient, body: WritableIKEPolicyRequ
 		_ => { Ok(VpnIkePoliciesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIkePoliciesBulkDestroyResponse {
 	Http204,
@@ -25458,7 +25460,7 @@ pub fn vpn_ike_policies_bulk_destroy(state: &ThanixClient, body: Vec<IKEPolicyRe
 		_ => { Ok(VpnIkePoliciesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIkePoliciesBulkPartialUpdateResponse {
 	Http200(Vec<IKEPolicy>),
@@ -25476,7 +25478,7 @@ pub fn vpn_ike_policies_bulk_partial_update(state: &ThanixClient, body: Vec<IKEP
 		_ => { Ok(VpnIkePoliciesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIkePoliciesRetrieveResponse {
 	Http200(IKEPolicy),
@@ -25493,7 +25495,7 @@ pub fn vpn_ike_policies_retrieve(state: &ThanixClient, id: i64) -> Result<VpnIke
 		_ => { Ok(VpnIkePoliciesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIkePoliciesUpdateResponse {
 	Http200(IKEPolicy),
@@ -25511,7 +25513,7 @@ pub fn vpn_ike_policies_update(state: &ThanixClient, body: WritableIKEPolicyRequ
 		_ => { Ok(VpnIkePoliciesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIkePoliciesDestroyResponse {
 	Http204,
@@ -25527,7 +25529,7 @@ pub fn vpn_ike_policies_destroy(state: &ThanixClient, id: i64) -> Result<VpnIkeP
 		_ => { Ok(VpnIkePoliciesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIkePoliciesPartialUpdateResponse {
 	Http200(IKEPolicy),
@@ -25545,7 +25547,7 @@ pub fn vpn_ike_policies_partial_update(state: &ThanixClient, body: PatchedWritab
 		_ => { Ok(VpnIkePoliciesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VpnIkeProposalsListQuery {
 	authentication_algorithm: Option<Vec<String>>,
 	authentication_algorithm__n: Option<Vec<String>>,
@@ -25622,7 +25624,7 @@ pub struct VpnIkeProposalsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIkeProposalsListResponse {
 	Http200(PaginatedIKEProposalList),
@@ -25639,7 +25641,7 @@ pub fn vpn_ike_proposals_list(state: &ThanixClient, query: VpnIkeProposalsListQu
 		_ => { Ok(VpnIkeProposalsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIkeProposalsBulkUpdateResponse {
 	Http200(Vec<IKEProposal>),
@@ -25657,7 +25659,7 @@ pub fn vpn_ike_proposals_bulk_update(state: &ThanixClient, body: Vec<IKEProposal
 		_ => { Ok(VpnIkeProposalsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIkeProposalsCreateResponse {
 	Http201(IKEProposal),
@@ -25675,7 +25677,7 @@ pub fn vpn_ike_proposals_create(state: &ThanixClient, body: WritableIKEProposalR
 		_ => { Ok(VpnIkeProposalsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIkeProposalsBulkDestroyResponse {
 	Http204,
@@ -25692,7 +25694,7 @@ pub fn vpn_ike_proposals_bulk_destroy(state: &ThanixClient, body: Vec<IKEProposa
 		_ => { Ok(VpnIkeProposalsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIkeProposalsBulkPartialUpdateResponse {
 	Http200(Vec<IKEProposal>),
@@ -25710,7 +25712,7 @@ pub fn vpn_ike_proposals_bulk_partial_update(state: &ThanixClient, body: Vec<IKE
 		_ => { Ok(VpnIkeProposalsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIkeProposalsRetrieveResponse {
 	Http200(IKEProposal),
@@ -25727,7 +25729,7 @@ pub fn vpn_ike_proposals_retrieve(state: &ThanixClient, id: i64) -> Result<VpnIk
 		_ => { Ok(VpnIkeProposalsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIkeProposalsUpdateResponse {
 	Http200(IKEProposal),
@@ -25745,7 +25747,7 @@ pub fn vpn_ike_proposals_update(state: &ThanixClient, body: WritableIKEProposalR
 		_ => { Ok(VpnIkeProposalsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIkeProposalsDestroyResponse {
 	Http204,
@@ -25761,7 +25763,7 @@ pub fn vpn_ike_proposals_destroy(state: &ThanixClient, id: i64) -> Result<VpnIke
 		_ => { Ok(VpnIkeProposalsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIkeProposalsPartialUpdateResponse {
 	Http200(IKEProposal),
@@ -25779,7 +25781,7 @@ pub fn vpn_ike_proposals_partial_update(state: &ThanixClient, body: PatchedWrita
 		_ => { Ok(VpnIkeProposalsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VpnIpsecPoliciesListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -25833,9 +25835,9 @@ pub struct VpnIpsecPoliciesListQuery {
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
 	/// Diffie-Hellman group for Perfect Forward Secrecy
-	pfs_group: Option<Vec<i64>>,
+	pfs_group: Option<Vec<Option<i64>>>,
 	/// Diffie-Hellman group for Perfect Forward Secrecy
-	pfs_group__n: Option<Vec<i64>>,
+	pfs_group__n: Option<Vec<Option<i64>>>,
 	proposal: Option<Vec<String>>,
 	proposal__empty: Option<bool>,
 	proposal__ic: Option<Vec<String>>,
@@ -25861,7 +25863,7 @@ pub struct VpnIpsecPoliciesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecPoliciesListResponse {
 	Http200(PaginatedIPSecPolicyList),
@@ -25878,7 +25880,7 @@ pub fn vpn_ipsec_policies_list(state: &ThanixClient, query: VpnIpsecPoliciesList
 		_ => { Ok(VpnIpsecPoliciesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecPoliciesBulkUpdateResponse {
 	Http200(Vec<IPSecPolicy>),
@@ -25896,7 +25898,7 @@ pub fn vpn_ipsec_policies_bulk_update(state: &ThanixClient, body: Vec<IPSecPolic
 		_ => { Ok(VpnIpsecPoliciesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecPoliciesCreateResponse {
 	Http201(IPSecPolicy),
@@ -25914,7 +25916,7 @@ pub fn vpn_ipsec_policies_create(state: &ThanixClient, body: WritableIPSecPolicy
 		_ => { Ok(VpnIpsecPoliciesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecPoliciesBulkDestroyResponse {
 	Http204,
@@ -25931,7 +25933,7 @@ pub fn vpn_ipsec_policies_bulk_destroy(state: &ThanixClient, body: Vec<IPSecPoli
 		_ => { Ok(VpnIpsecPoliciesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecPoliciesBulkPartialUpdateResponse {
 	Http200(Vec<IPSecPolicy>),
@@ -25949,7 +25951,7 @@ pub fn vpn_ipsec_policies_bulk_partial_update(state: &ThanixClient, body: Vec<IP
 		_ => { Ok(VpnIpsecPoliciesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecPoliciesRetrieveResponse {
 	Http200(IPSecPolicy),
@@ -25966,7 +25968,7 @@ pub fn vpn_ipsec_policies_retrieve(state: &ThanixClient, id: i64) -> Result<VpnI
 		_ => { Ok(VpnIpsecPoliciesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecPoliciesUpdateResponse {
 	Http200(IPSecPolicy),
@@ -25984,7 +25986,7 @@ pub fn vpn_ipsec_policies_update(state: &ThanixClient, body: WritableIPSecPolicy
 		_ => { Ok(VpnIpsecPoliciesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecPoliciesDestroyResponse {
 	Http204,
@@ -26000,7 +26002,7 @@ pub fn vpn_ipsec_policies_destroy(state: &ThanixClient, id: i64) -> Result<VpnIp
 		_ => { Ok(VpnIpsecPoliciesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecPoliciesPartialUpdateResponse {
 	Http200(IPSecPolicy),
@@ -26018,7 +26020,7 @@ pub fn vpn_ipsec_policies_partial_update(state: &ThanixClient, body: PatchedWrit
 		_ => { Ok(VpnIpsecPoliciesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VpnIpsecProfilesListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -26096,7 +26098,7 @@ pub struct VpnIpsecProfilesListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecProfilesListResponse {
 	Http200(PaginatedIPSecProfileList),
@@ -26113,7 +26115,7 @@ pub fn vpn_ipsec_profiles_list(state: &ThanixClient, query: VpnIpsecProfilesList
 		_ => { Ok(VpnIpsecProfilesListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecProfilesBulkUpdateResponse {
 	Http200(Vec<IPSecProfile>),
@@ -26131,7 +26133,7 @@ pub fn vpn_ipsec_profiles_bulk_update(state: &ThanixClient, body: Vec<IPSecProfi
 		_ => { Ok(VpnIpsecProfilesBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecProfilesCreateResponse {
 	Http201(IPSecProfile),
@@ -26149,7 +26151,7 @@ pub fn vpn_ipsec_profiles_create(state: &ThanixClient, body: WritableIPSecProfil
 		_ => { Ok(VpnIpsecProfilesCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecProfilesBulkDestroyResponse {
 	Http204,
@@ -26166,7 +26168,7 @@ pub fn vpn_ipsec_profiles_bulk_destroy(state: &ThanixClient, body: Vec<IPSecProf
 		_ => { Ok(VpnIpsecProfilesBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecProfilesBulkPartialUpdateResponse {
 	Http200(Vec<IPSecProfile>),
@@ -26184,7 +26186,7 @@ pub fn vpn_ipsec_profiles_bulk_partial_update(state: &ThanixClient, body: Vec<IP
 		_ => { Ok(VpnIpsecProfilesBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecProfilesRetrieveResponse {
 	Http200(IPSecProfile),
@@ -26201,7 +26203,7 @@ pub fn vpn_ipsec_profiles_retrieve(state: &ThanixClient, id: i64) -> Result<VpnI
 		_ => { Ok(VpnIpsecProfilesRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecProfilesUpdateResponse {
 	Http200(IPSecProfile),
@@ -26219,7 +26221,7 @@ pub fn vpn_ipsec_profiles_update(state: &ThanixClient, body: WritableIPSecProfil
 		_ => { Ok(VpnIpsecProfilesUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecProfilesDestroyResponse {
 	Http204,
@@ -26235,7 +26237,7 @@ pub fn vpn_ipsec_profiles_destroy(state: &ThanixClient, id: i64) -> Result<VpnIp
 		_ => { Ok(VpnIpsecProfilesDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecProfilesPartialUpdateResponse {
 	Http200(IPSecProfile),
@@ -26253,7 +26255,7 @@ pub fn vpn_ipsec_profiles_partial_update(state: &ThanixClient, body: PatchedWrit
 		_ => { Ok(VpnIpsecProfilesPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VpnIpsecProposalsListQuery {
 	authentication_algorithm: Option<Vec<String>>,
 	authentication_algorithm__n: Option<Vec<String>>,
@@ -26331,7 +26333,7 @@ pub struct VpnIpsecProposalsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecProposalsListResponse {
 	Http200(PaginatedIPSecProposalList),
@@ -26348,7 +26350,7 @@ pub fn vpn_ipsec_proposals_list(state: &ThanixClient, query: VpnIpsecProposalsLi
 		_ => { Ok(VpnIpsecProposalsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecProposalsBulkUpdateResponse {
 	Http200(Vec<IPSecProposal>),
@@ -26366,7 +26368,7 @@ pub fn vpn_ipsec_proposals_bulk_update(state: &ThanixClient, body: Vec<IPSecProp
 		_ => { Ok(VpnIpsecProposalsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecProposalsCreateResponse {
 	Http201(IPSecProposal),
@@ -26384,7 +26386,7 @@ pub fn vpn_ipsec_proposals_create(state: &ThanixClient, body: WritableIPSecPropo
 		_ => { Ok(VpnIpsecProposalsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecProposalsBulkDestroyResponse {
 	Http204,
@@ -26401,7 +26403,7 @@ pub fn vpn_ipsec_proposals_bulk_destroy(state: &ThanixClient, body: Vec<IPSecPro
 		_ => { Ok(VpnIpsecProposalsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecProposalsBulkPartialUpdateResponse {
 	Http200(Vec<IPSecProposal>),
@@ -26419,7 +26421,7 @@ pub fn vpn_ipsec_proposals_bulk_partial_update(state: &ThanixClient, body: Vec<I
 		_ => { Ok(VpnIpsecProposalsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecProposalsRetrieveResponse {
 	Http200(IPSecProposal),
@@ -26436,7 +26438,7 @@ pub fn vpn_ipsec_proposals_retrieve(state: &ThanixClient, id: i64) -> Result<Vpn
 		_ => { Ok(VpnIpsecProposalsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecProposalsUpdateResponse {
 	Http200(IPSecProposal),
@@ -26454,7 +26456,7 @@ pub fn vpn_ipsec_proposals_update(state: &ThanixClient, body: WritableIPSecPropo
 		_ => { Ok(VpnIpsecProposalsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecProposalsDestroyResponse {
 	Http204,
@@ -26470,7 +26472,7 @@ pub fn vpn_ipsec_proposals_destroy(state: &ThanixClient, id: i64) -> Result<VpnI
 		_ => { Ok(VpnIpsecProposalsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnIpsecProposalsPartialUpdateResponse {
 	Http200(IPSecProposal),
@@ -26488,7 +26490,7 @@ pub fn vpn_ipsec_proposals_partial_update(state: &ThanixClient, body: PatchedWri
 		_ => { Ok(VpnIpsecProposalsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VpnL2VpnTerminationsListQuery {
 	assigned_object_type: Option<String>,
 	assigned_object_type__n: Option<String>,
@@ -26596,7 +26598,7 @@ pub struct VpnL2VpnTerminationsListQuery {
 	vminterface_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnL2VpnTerminationsListResponse {
 	Http200(PaginatedL2VPNTerminationList),
@@ -26613,7 +26615,7 @@ pub fn vpn_l2vpn_terminations_list(state: &ThanixClient, query: VpnL2VpnTerminat
 		_ => { Ok(VpnL2VpnTerminationsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnL2VpnTerminationsBulkUpdateResponse {
 	Http200(Vec<L2VPNTermination>),
@@ -26631,7 +26633,7 @@ pub fn vpn_l2vpn_terminations_bulk_update(state: &ThanixClient, body: Vec<L2VPNT
 		_ => { Ok(VpnL2VpnTerminationsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnL2VpnTerminationsCreateResponse {
 	Http201(L2VPNTermination),
@@ -26649,7 +26651,7 @@ pub fn vpn_l2vpn_terminations_create(state: &ThanixClient, body: WritableL2VPNTe
 		_ => { Ok(VpnL2VpnTerminationsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnL2VpnTerminationsBulkDestroyResponse {
 	Http204,
@@ -26666,7 +26668,7 @@ pub fn vpn_l2vpn_terminations_bulk_destroy(state: &ThanixClient, body: Vec<L2VPN
 		_ => { Ok(VpnL2VpnTerminationsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnL2VpnTerminationsBulkPartialUpdateResponse {
 	Http200(Vec<L2VPNTermination>),
@@ -26684,7 +26686,7 @@ pub fn vpn_l2vpn_terminations_bulk_partial_update(state: &ThanixClient, body: Ve
 		_ => { Ok(VpnL2VpnTerminationsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnL2VpnTerminationsRetrieveResponse {
 	Http200(L2VPNTermination),
@@ -26701,7 +26703,7 @@ pub fn vpn_l2vpn_terminations_retrieve(state: &ThanixClient, id: i64) -> Result<
 		_ => { Ok(VpnL2VpnTerminationsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnL2VpnTerminationsUpdateResponse {
 	Http200(L2VPNTermination),
@@ -26719,7 +26721,7 @@ pub fn vpn_l2vpn_terminations_update(state: &ThanixClient, body: WritableL2VPNTe
 		_ => { Ok(VpnL2VpnTerminationsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnL2VpnTerminationsDestroyResponse {
 	Http204,
@@ -26735,7 +26737,7 @@ pub fn vpn_l2vpn_terminations_destroy(state: &ThanixClient, id: i64) -> Result<V
 		_ => { Ok(VpnL2VpnTerminationsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnL2VpnTerminationsPartialUpdateResponse {
 	Http200(L2VPNTermination),
@@ -26753,7 +26755,7 @@ pub fn vpn_l2vpn_terminations_partial_update(state: &ThanixClient, body: Patched
 		_ => { Ok(VpnL2VpnTerminationsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VpnL2VpnsListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -26857,15 +26859,15 @@ pub struct VpnL2VpnsListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	r#type: Option<Vec<String>>,
 	type__n: Option<Vec<String>>,
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnL2VpnsListResponse {
 	Http200(PaginatedL2VPNList),
@@ -26882,7 +26884,7 @@ pub fn vpn_l2vpns_list(state: &ThanixClient, query: VpnL2VpnsListQuery) -> Resul
 		_ => { Ok(VpnL2VpnsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnL2VpnsBulkUpdateResponse {
 	Http200(Vec<L2VPN>),
@@ -26900,7 +26902,7 @@ pub fn vpn_l2vpns_bulk_update(state: &ThanixClient, body: Vec<L2VPNRequest>) -> 
 		_ => { Ok(VpnL2VpnsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnL2VpnsCreateResponse {
 	Http201(L2VPN),
@@ -26918,7 +26920,7 @@ pub fn vpn_l2vpns_create(state: &ThanixClient, body: WritableL2VPNRequest) -> Re
 		_ => { Ok(VpnL2VpnsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnL2VpnsBulkDestroyResponse {
 	Http204,
@@ -26935,7 +26937,7 @@ pub fn vpn_l2vpns_bulk_destroy(state: &ThanixClient, body: Vec<L2VPNRequest>) ->
 		_ => { Ok(VpnL2VpnsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnL2VpnsBulkPartialUpdateResponse {
 	Http200(Vec<L2VPN>),
@@ -26953,7 +26955,7 @@ pub fn vpn_l2vpns_bulk_partial_update(state: &ThanixClient, body: Vec<L2VPNReque
 		_ => { Ok(VpnL2VpnsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnL2VpnsRetrieveResponse {
 	Http200(L2VPN),
@@ -26970,7 +26972,7 @@ pub fn vpn_l2vpns_retrieve(state: &ThanixClient, id: i64) -> Result<VpnL2VpnsRet
 		_ => { Ok(VpnL2VpnsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnL2VpnsUpdateResponse {
 	Http200(L2VPN),
@@ -26988,7 +26990,7 @@ pub fn vpn_l2vpns_update(state: &ThanixClient, body: WritableL2VPNRequest, id: i
 		_ => { Ok(VpnL2VpnsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnL2VpnsDestroyResponse {
 	Http204,
@@ -27004,7 +27006,7 @@ pub fn vpn_l2vpns_destroy(state: &ThanixClient, id: i64) -> Result<VpnL2VpnsDest
 		_ => { Ok(VpnL2VpnsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnL2VpnsPartialUpdateResponse {
 	Http200(L2VPN),
@@ -27022,7 +27024,7 @@ pub fn vpn_l2vpns_partial_update(state: &ThanixClient, body: PatchedWritableL2VP
 		_ => { Ok(VpnL2VpnsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VpnTunnelGroupsListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -27093,7 +27095,7 @@ pub struct VpnTunnelGroupsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelGroupsListResponse {
 	Http200(PaginatedTunnelGroupList),
@@ -27110,7 +27112,7 @@ pub fn vpn_tunnel_groups_list(state: &ThanixClient, query: VpnTunnelGroupsListQu
 		_ => { Ok(VpnTunnelGroupsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelGroupsBulkUpdateResponse {
 	Http200(Vec<TunnelGroup>),
@@ -27128,7 +27130,7 @@ pub fn vpn_tunnel_groups_bulk_update(state: &ThanixClient, body: Vec<TunnelGroup
 		_ => { Ok(VpnTunnelGroupsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelGroupsCreateResponse {
 	Http201(TunnelGroup),
@@ -27146,7 +27148,7 @@ pub fn vpn_tunnel_groups_create(state: &ThanixClient, body: TunnelGroupRequest) 
 		_ => { Ok(VpnTunnelGroupsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelGroupsBulkDestroyResponse {
 	Http204,
@@ -27163,7 +27165,7 @@ pub fn vpn_tunnel_groups_bulk_destroy(state: &ThanixClient, body: Vec<TunnelGrou
 		_ => { Ok(VpnTunnelGroupsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelGroupsBulkPartialUpdateResponse {
 	Http200(Vec<TunnelGroup>),
@@ -27181,7 +27183,7 @@ pub fn vpn_tunnel_groups_bulk_partial_update(state: &ThanixClient, body: Vec<Tun
 		_ => { Ok(VpnTunnelGroupsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelGroupsRetrieveResponse {
 	Http200(TunnelGroup),
@@ -27198,7 +27200,7 @@ pub fn vpn_tunnel_groups_retrieve(state: &ThanixClient, id: i64) -> Result<VpnTu
 		_ => { Ok(VpnTunnelGroupsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelGroupsUpdateResponse {
 	Http200(TunnelGroup),
@@ -27216,7 +27218,7 @@ pub fn vpn_tunnel_groups_update(state: &ThanixClient, body: TunnelGroupRequest, 
 		_ => { Ok(VpnTunnelGroupsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelGroupsDestroyResponse {
 	Http204,
@@ -27232,7 +27234,7 @@ pub fn vpn_tunnel_groups_destroy(state: &ThanixClient, id: i64) -> Result<VpnTun
 		_ => { Ok(VpnTunnelGroupsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelGroupsPartialUpdateResponse {
 	Http200(TunnelGroup),
@@ -27250,7 +27252,7 @@ pub fn vpn_tunnel_groups_partial_update(state: &ThanixClient, body: PatchedTunne
 		_ => { Ok(VpnTunnelGroupsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VpnTunnelTerminationsListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -27320,7 +27322,7 @@ pub struct VpnTunnelTerminationsListQuery {
 	vminterface_id__n: Option<Vec<i64>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelTerminationsListResponse {
 	Http200(PaginatedTunnelTerminationList),
@@ -27337,7 +27339,7 @@ pub fn vpn_tunnel_terminations_list(state: &ThanixClient, query: VpnTunnelTermin
 		_ => { Ok(VpnTunnelTerminationsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelTerminationsBulkUpdateResponse {
 	Http200(Vec<TunnelTermination>),
@@ -27355,7 +27357,7 @@ pub fn vpn_tunnel_terminations_bulk_update(state: &ThanixClient, body: Vec<Tunne
 		_ => { Ok(VpnTunnelTerminationsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelTerminationsCreateResponse {
 	Http201(TunnelTermination),
@@ -27373,7 +27375,7 @@ pub fn vpn_tunnel_terminations_create(state: &ThanixClient, body: WritableTunnel
 		_ => { Ok(VpnTunnelTerminationsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelTerminationsBulkDestroyResponse {
 	Http204,
@@ -27390,7 +27392,7 @@ pub fn vpn_tunnel_terminations_bulk_destroy(state: &ThanixClient, body: Vec<Tunn
 		_ => { Ok(VpnTunnelTerminationsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelTerminationsBulkPartialUpdateResponse {
 	Http200(Vec<TunnelTermination>),
@@ -27408,7 +27410,7 @@ pub fn vpn_tunnel_terminations_bulk_partial_update(state: &ThanixClient, body: V
 		_ => { Ok(VpnTunnelTerminationsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelTerminationsRetrieveResponse {
 	Http200(TunnelTermination),
@@ -27425,7 +27427,7 @@ pub fn vpn_tunnel_terminations_retrieve(state: &ThanixClient, id: i64) -> Result
 		_ => { Ok(VpnTunnelTerminationsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelTerminationsUpdateResponse {
 	Http200(TunnelTermination),
@@ -27443,7 +27445,7 @@ pub fn vpn_tunnel_terminations_update(state: &ThanixClient, body: WritableTunnel
 		_ => { Ok(VpnTunnelTerminationsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelTerminationsDestroyResponse {
 	Http204,
@@ -27459,7 +27461,7 @@ pub fn vpn_tunnel_terminations_destroy(state: &ThanixClient, id: i64) -> Result<
 		_ => { Ok(VpnTunnelTerminationsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelTerminationsPartialUpdateResponse {
 	Http200(TunnelTermination),
@@ -27477,7 +27479,7 @@ pub fn vpn_tunnel_terminations_partial_update(state: &ThanixClient, body: Patche
 		_ => { Ok(VpnTunnelTerminationsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VpnTunnelsListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -27505,9 +27507,9 @@ pub struct VpnTunnelsListQuery {
 	/// Tunnel group (slug)
 	group__n: Option<Vec<String>>,
 	/// Tunnel group (ID)
-	group_id: Option<Vec<i64>>,
+	group_id: Option<Vec<Option<i64>>>,
 	/// Tunnel group (ID)
-	group_id__n: Option<Vec<i64>>,
+	group_id__n: Option<Vec<Option<i64>>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -27520,9 +27522,9 @@ pub struct VpnTunnelsListQuery {
 	/// IPSec profile (name)
 	ipsec_profile__n: Option<Vec<String>>,
 	/// IPSec profile (ID)
-	ipsec_profile_id: Option<Vec<i64>>,
+	ipsec_profile_id: Option<Vec<Option<i64>>>,
 	/// IPSec profile (ID)
-	ipsec_profile_id__n: Option<Vec<i64>>,
+	ipsec_profile_id__n: Option<Vec<Option<i64>>>,
 	last_updated: Option<Vec<String>>,
 	last_updated__empty: Option<Vec<String>>,
 	last_updated__gt: Option<Vec<String>>,
@@ -27567,9 +27569,9 @@ pub struct VpnTunnelsListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	tunnel_id: Option<Vec<i64>>,
 	tunnel_id__empty: Option<bool>,
 	tunnel_id__gt: Option<Vec<i64>>,
@@ -27580,7 +27582,7 @@ pub struct VpnTunnelsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelsListResponse {
 	Http200(PaginatedTunnelList),
@@ -27597,7 +27599,7 @@ pub fn vpn_tunnels_list(state: &ThanixClient, query: VpnTunnelsListQuery) -> Res
 		_ => { Ok(VpnTunnelsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelsBulkUpdateResponse {
 	Http200(Vec<Tunnel>),
@@ -27615,7 +27617,7 @@ pub fn vpn_tunnels_bulk_update(state: &ThanixClient, body: Vec<TunnelRequest>) -
 		_ => { Ok(VpnTunnelsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelsCreateResponse {
 	Http201(Tunnel),
@@ -27633,7 +27635,7 @@ pub fn vpn_tunnels_create(state: &ThanixClient, body: WritableTunnelRequest) -> 
 		_ => { Ok(VpnTunnelsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelsBulkDestroyResponse {
 	Http204,
@@ -27650,7 +27652,7 @@ pub fn vpn_tunnels_bulk_destroy(state: &ThanixClient, body: Vec<TunnelRequest>) 
 		_ => { Ok(VpnTunnelsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelsBulkPartialUpdateResponse {
 	Http200(Vec<Tunnel>),
@@ -27668,7 +27670,7 @@ pub fn vpn_tunnels_bulk_partial_update(state: &ThanixClient, body: Vec<TunnelReq
 		_ => { Ok(VpnTunnelsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelsRetrieveResponse {
 	Http200(Tunnel),
@@ -27685,7 +27687,7 @@ pub fn vpn_tunnels_retrieve(state: &ThanixClient, id: i64) -> Result<VpnTunnelsR
 		_ => { Ok(VpnTunnelsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelsUpdateResponse {
 	Http200(Tunnel),
@@ -27703,7 +27705,7 @@ pub fn vpn_tunnels_update(state: &ThanixClient, body: WritableTunnelRequest, id:
 		_ => { Ok(VpnTunnelsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelsDestroyResponse {
 	Http204,
@@ -27719,7 +27721,7 @@ pub fn vpn_tunnels_destroy(state: &ThanixClient, id: i64) -> Result<VpnTunnelsDe
 		_ => { Ok(VpnTunnelsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum VpnTunnelsPartialUpdateResponse {
 	Http200(Tunnel),
@@ -27737,7 +27739,7 @@ pub fn vpn_tunnels_partial_update(state: &ThanixClient, body: PatchedWritableTun
 		_ => { Ok(VpnTunnelsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WirelessWirelessLanGroupsListQuery {
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
@@ -27792,8 +27794,8 @@ pub struct WirelessWirelessLanGroupsListQuery {
 	ordering: Option<String>,
 	parent: Option<Vec<String>>,
 	parent__n: Option<Vec<String>>,
-	parent_id: Option<Vec<i64>>,
-	parent_id__n: Option<Vec<i64>>,
+	parent_id: Option<Vec<Option<i64>>>,
+	parent_id__n: Option<Vec<Option<i64>>>,
 	/// Search
 	q: Option<String>,
 	slug: Option<Vec<String>>,
@@ -27812,7 +27814,7 @@ pub struct WirelessWirelessLanGroupsListQuery {
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLanGroupsListResponse {
 	Http200(PaginatedWirelessLANGroupList),
@@ -27829,7 +27831,7 @@ pub fn wireless_wireless_lan_groups_list(state: &ThanixClient, query: WirelessWi
 		_ => { Ok(WirelessWirelessLanGroupsListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLanGroupsBulkUpdateResponse {
 	Http200(Vec<WirelessLANGroup>),
@@ -27847,7 +27849,7 @@ pub fn wireless_wireless_lan_groups_bulk_update(state: &ThanixClient, body: Vec<
 		_ => { Ok(WirelessWirelessLanGroupsBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLanGroupsCreateResponse {
 	Http201(WirelessLANGroup),
@@ -27865,7 +27867,7 @@ pub fn wireless_wireless_lan_groups_create(state: &ThanixClient, body: WritableW
 		_ => { Ok(WirelessWirelessLanGroupsCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLanGroupsBulkDestroyResponse {
 	Http204,
@@ -27882,7 +27884,7 @@ pub fn wireless_wireless_lan_groups_bulk_destroy(state: &ThanixClient, body: Vec
 		_ => { Ok(WirelessWirelessLanGroupsBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLanGroupsBulkPartialUpdateResponse {
 	Http200(Vec<WirelessLANGroup>),
@@ -27900,7 +27902,7 @@ pub fn wireless_wireless_lan_groups_bulk_partial_update(state: &ThanixClient, bo
 		_ => { Ok(WirelessWirelessLanGroupsBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLanGroupsRetrieveResponse {
 	Http200(WirelessLANGroup),
@@ -27917,7 +27919,7 @@ pub fn wireless_wireless_lan_groups_retrieve(state: &ThanixClient, id: i64) -> R
 		_ => { Ok(WirelessWirelessLanGroupsRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLanGroupsUpdateResponse {
 	Http200(WirelessLANGroup),
@@ -27935,7 +27937,7 @@ pub fn wireless_wireless_lan_groups_update(state: &ThanixClient, body: WritableW
 		_ => { Ok(WirelessWirelessLanGroupsUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLanGroupsDestroyResponse {
 	Http204,
@@ -27951,7 +27953,7 @@ pub fn wireless_wireless_lan_groups_destroy(state: &ThanixClient, id: i64) -> Re
 		_ => { Ok(WirelessWirelessLanGroupsDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLanGroupsPartialUpdateResponse {
 	Http200(WirelessLANGroup),
@@ -27969,7 +27971,7 @@ pub fn wireless_wireless_lan_groups_partial_update(state: &ThanixClient, body: P
 		_ => { Ok(WirelessWirelessLanGroupsPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WirelessWirelessLansListQuery {
 	auth_cipher: Option<Vec<String>>,
 	auth_cipher__n: Option<Vec<String>>,
@@ -28060,15 +28062,15 @@ pub struct WirelessWirelessLansListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	updated_by_request: Option<String>,
-	vlan_id: Option<Vec<i64>>,
-	vlan_id__n: Option<Vec<i64>>,
+	vlan_id: Option<Vec<Option<i64>>>,
+	vlan_id__n: Option<Vec<Option<i64>>>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLansListResponse {
 	Http200(PaginatedWirelessLANList),
@@ -28085,7 +28087,7 @@ pub fn wireless_wireless_lans_list(state: &ThanixClient, query: WirelessWireless
 		_ => { Ok(WirelessWirelessLansListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLansBulkUpdateResponse {
 	Http200(Vec<WirelessLAN>),
@@ -28103,7 +28105,7 @@ pub fn wireless_wireless_lans_bulk_update(state: &ThanixClient, body: Vec<Wirele
 		_ => { Ok(WirelessWirelessLansBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLansCreateResponse {
 	Http201(WirelessLAN),
@@ -28121,7 +28123,7 @@ pub fn wireless_wireless_lans_create(state: &ThanixClient, body: WritableWireles
 		_ => { Ok(WirelessWirelessLansCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLansBulkDestroyResponse {
 	Http204,
@@ -28138,7 +28140,7 @@ pub fn wireless_wireless_lans_bulk_destroy(state: &ThanixClient, body: Vec<Wirel
 		_ => { Ok(WirelessWirelessLansBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLansBulkPartialUpdateResponse {
 	Http200(Vec<WirelessLAN>),
@@ -28156,7 +28158,7 @@ pub fn wireless_wireless_lans_bulk_partial_update(state: &ThanixClient, body: Ve
 		_ => { Ok(WirelessWirelessLansBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLansRetrieveResponse {
 	Http200(WirelessLAN),
@@ -28173,7 +28175,7 @@ pub fn wireless_wireless_lans_retrieve(state: &ThanixClient, id: i64) -> Result<
 		_ => { Ok(WirelessWirelessLansRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLansUpdateResponse {
 	Http200(WirelessLAN),
@@ -28191,7 +28193,7 @@ pub fn wireless_wireless_lans_update(state: &ThanixClient, body: WritableWireles
 		_ => { Ok(WirelessWirelessLansUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLansDestroyResponse {
 	Http204,
@@ -28207,7 +28209,7 @@ pub fn wireless_wireless_lans_destroy(state: &ThanixClient, id: i64) -> Result<W
 		_ => { Ok(WirelessWirelessLansDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLansPartialUpdateResponse {
 	Http200(WirelessLAN),
@@ -28225,7 +28227,7 @@ pub fn wireless_wireless_lans_partial_update(state: &ThanixClient, body: Patched
 		_ => { Ok(WirelessWirelessLansPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WirelessWirelessLinksListQuery {
 	auth_cipher: Option<Vec<String>>,
 	auth_cipher__n: Option<Vec<String>>,
@@ -28326,13 +28328,13 @@ pub struct WirelessWirelessLinksListQuery {
 	/// Tenant Group (ID)
 	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
-	tenant_id: Option<Vec<i64>>,
+	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
-	tenant_id__n: Option<Vec<i64>>,
+	tenant_id__n: Option<Vec<Option<i64>>>,
 	updated_by_request: Option<String>,
 
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLinksListResponse {
 	Http200(PaginatedWirelessLinkList),
@@ -28349,7 +28351,7 @@ pub fn wireless_wireless_links_list(state: &ThanixClient, query: WirelessWireles
 		_ => { Ok(WirelessWirelessLinksListResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLinksBulkUpdateResponse {
 	Http200(Vec<WirelessLink>),
@@ -28367,7 +28369,7 @@ pub fn wireless_wireless_links_bulk_update(state: &ThanixClient, body: Vec<Wirel
 		_ => { Ok(WirelessWirelessLinksBulkUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLinksCreateResponse {
 	Http201(WirelessLink),
@@ -28385,7 +28387,7 @@ pub fn wireless_wireless_links_create(state: &ThanixClient, body: WritableWirele
 		_ => { Ok(WirelessWirelessLinksCreateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLinksBulkDestroyResponse {
 	Http204,
@@ -28402,7 +28404,7 @@ pub fn wireless_wireless_links_bulk_destroy(state: &ThanixClient, body: Vec<Wire
 		_ => { Ok(WirelessWirelessLinksBulkDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLinksBulkPartialUpdateResponse {
 	Http200(Vec<WirelessLink>),
@@ -28420,7 +28422,7 @@ pub fn wireless_wireless_links_bulk_partial_update(state: &ThanixClient, body: V
 		_ => { Ok(WirelessWirelessLinksBulkPartialUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLinksRetrieveResponse {
 	Http200(WirelessLink),
@@ -28437,7 +28439,7 @@ pub fn wireless_wireless_links_retrieve(state: &ThanixClient, id: i64) -> Result
 		_ => { Ok(WirelessWirelessLinksRetrieveResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLinksUpdateResponse {
 	Http200(WirelessLink),
@@ -28455,7 +28457,7 @@ pub fn wireless_wireless_links_update(state: &ThanixClient, body: WritableWirele
 		_ => { Ok(WirelessWirelessLinksUpdateResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLinksDestroyResponse {
 	Http204,
@@ -28471,7 +28473,7 @@ pub fn wireless_wireless_links_destroy(state: &ThanixClient, id: i64) -> Result<
 		_ => { Ok(WirelessWirelessLinksDestroyResponse::None) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 #[serde(untagged)]
 pub enum WirelessWirelessLinksPartialUpdateResponse {
 	Http200(WirelessLink),
