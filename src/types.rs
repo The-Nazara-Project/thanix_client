@@ -5,8 +5,8 @@ pub struct ASN {
 	pub display: String,
 	/// 16- or 32-bit autonomous system number
 	pub asn: u32,
-	pub rir: Option<Option<NestedRIR>>,
-	pub tenant: Option<Option<NestedTenant>>,
+	pub rir: Option<NestedRIR>,
+	pub tenant: Option<NestedTenant>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
@@ -26,7 +26,7 @@ pub struct ASNRange {
 	pub rir: NestedRIR,
 	pub start: u32,
 	pub end: u32,
-	pub tenant: Option<Option<NestedTenant>>,
+	pub tenant: Option<NestedTenant>,
 	pub description: String,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -41,7 +41,7 @@ pub struct ASNRangeRequest {
 	pub rir: NestedRIRRequest,
 	pub start: u32,
 	pub end: u32,
-	pub tenant: Option<Option<NestedTenantRequest>>,
+	pub tenant: Option<NestedTenantRequest>,
 	pub description: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -50,8 +50,8 @@ pub struct ASNRangeRequest {
 pub struct ASNRequest {
 	/// 16- or 32-bit autonomous system number
 	pub asn: u32,
-	pub rir: Option<Option<NestedRIRRequest>>,
-	pub tenant: Option<Option<NestedTenantRequest>>,
+	pub rir: Option<NestedRIRRequest>,
+	pub tenant: Option<NestedTenantRequest>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -65,7 +65,7 @@ pub struct Aggregate {
 	pub family: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub prefix: String,
 	pub rir: NestedRIR,
-	pub tenant: Option<Option<NestedTenant>>,
+	pub tenant: Option<NestedTenant>,
 	pub date_added: Option<String>,
 	pub description: String,
 	pub comments: String,
@@ -78,7 +78,7 @@ pub struct Aggregate {
 pub struct AggregateRequest {
 	pub prefix: String,
 	pub rir: NestedRIRRequest,
-	pub tenant: Option<Option<NestedTenantRequest>>,
+	pub tenant: Option<NestedTenantRequest>,
 	pub date_added: Option<String>,
 	pub description: String,
 	pub comments: String,
@@ -157,11 +157,11 @@ pub struct Cable {
 	pub a_terminations: Vec<GenericObject>,
 	pub b_terminations: Vec<GenericObject>,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub tenant: Option<Option<NestedTenant>>,
+	pub tenant: Option<NestedTenant>,
 	pub label: String,
 	pub color: String,
 	pub length: Option<f64>,
-	pub length_unit: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	pub length_unit: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
@@ -201,7 +201,7 @@ pub struct CableRequest {
 	/// * `planned` - Planned
 	/// * `decommissioning` - Decommissioning
 	pub status: String,
-	pub tenant: Option<Option<NestedTenantRequest>>,
+	pub tenant: Option<NestedTenantRequest>,
 	pub label: String,
 	pub color: String,
 	pub length: Option<f64>,
@@ -249,17 +249,17 @@ pub struct Circuit {
 	/// Unique circuit ID
 	pub cid: String,
 	pub provider: NestedProvider,
-	pub provider_account: Option<Option<NestedProviderAccount>>,
+	pub provider_account: Option<NestedProviderAccount>,
 	pub r#type: NestedCircuitType,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub tenant: Option<Option<NestedTenant>>,
+	pub tenant: Option<NestedTenant>,
 	pub install_date: Option<String>,
 	pub termination_date: Option<String>,
 	/// Committed rate
 	pub commit_rate: Option<u32>,
 	pub description: String,
-	pub termination_a: Option<Option<CircuitCircuitTermination>>,
-	pub termination_z: Option<Option<CircuitCircuitTermination>>,
+	pub termination_a: Option<CircuitCircuitTermination>,
+	pub termination_z: Option<CircuitCircuitTermination>,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -271,8 +271,8 @@ pub struct CircuitCircuitTermination {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub site: Option<Option<NestedSite>>,
-	pub provider_network: Option<Option<NestedProviderNetwork>>,
+	pub site: Option<NestedSite>,
+	pub provider_network: Option<NestedProviderNetwork>,
 	/// Physical circuit speed
 	pub port_speed: Option<u32>,
 	/// Upstream speed, if different from port speed
@@ -283,8 +283,8 @@ pub struct CircuitCircuitTermination {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CircuitCircuitTerminationRequest {
-	pub site: Option<Option<NestedSiteRequest>>,
-	pub provider_network: Option<Option<NestedProviderNetworkRequest>>,
+	pub site: Option<NestedSiteRequest>,
+	pub provider_network: Option<NestedProviderNetworkRequest>,
 	/// Physical circuit speed
 	pub port_speed: Option<u32>,
 	/// Upstream speed, if different from port speed
@@ -298,7 +298,7 @@ pub struct CircuitRequest {
 	/// Unique circuit ID
 	pub cid: String,
 	pub provider: NestedProviderRequest,
-	pub provider_account: Option<Option<NestedProviderAccountRequest>>,
+	pub provider_account: Option<NestedProviderAccountRequest>,
 	pub r#type: NestedCircuitTypeRequest,
 	/// * `planned` - Planned
 	/// * `provisioning` - Provisioning
@@ -307,7 +307,7 @@ pub struct CircuitRequest {
 	/// * `deprovisioning` - Deprovisioning
 	/// * `decommissioned` - Decommissioned
 	pub status: String,
-	pub tenant: Option<Option<NestedTenantRequest>>,
+	pub tenant: Option<NestedTenantRequest>,
 	pub install_date: Option<String>,
 	pub termination_date: Option<String>,
 	/// Committed rate
@@ -326,8 +326,8 @@ pub struct CircuitTermination {
 	/// * `A` - A
 	/// * `Z` - Z
 	pub term_side: String,
-	pub site: Option<Option<NestedSite>>,
-	pub provider_network: Option<Option<NestedProviderNetwork>>,
+	pub site: Option<NestedSite>,
+	pub provider_network: Option<NestedProviderNetwork>,
 	/// Physical circuit speed
 	pub port_speed: Option<u32>,
 	/// Upstream speed, if different from port speed
@@ -339,7 +339,7 @@ pub struct CircuitTermination {
 	pub description: String,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
-	pub cable: Option<Option<NestedCable>>,
+	pub cable: Option<NestedCable>,
 	pub cable_end: String,
 	pub link_peers: Vec<serde_json::Value>,
 	/// Return the type of the peer link terminations, or None.
@@ -356,8 +356,8 @@ pub struct CircuitTerminationRequest {
 	/// * `A` - A
 	/// * `Z` - Z
 	pub term_side: String,
-	pub site: Option<Option<NestedSiteRequest>>,
-	pub provider_network: Option<Option<NestedProviderNetworkRequest>>,
+	pub site: Option<NestedSiteRequest>,
+	pub provider_network: Option<NestedProviderNetworkRequest>,
 	/// Physical circuit speed
 	pub port_speed: Option<u32>,
 	/// Upstream speed, if different from port speed
@@ -403,10 +403,10 @@ pub struct Cluster {
 	pub display: String,
 	pub name: String,
 	pub r#type: NestedClusterType,
-	pub group: Option<Option<NestedClusterGroup>>,
+	pub group: Option<NestedClusterGroup>,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub tenant: Option<Option<NestedTenant>>,
-	pub site: Option<Option<NestedSite>>,
+	pub tenant: Option<NestedTenant>,
+	pub site: Option<NestedSite>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
@@ -442,15 +442,15 @@ pub struct ClusterGroupRequest {
 pub struct ClusterRequest {
 	pub name: String,
 	pub r#type: NestedClusterTypeRequest,
-	pub group: Option<Option<NestedClusterGroupRequest>>,
+	pub group: Option<NestedClusterGroupRequest>,
 	/// * `planned` - Planned
 	/// * `staging` - Staging
 	/// * `active` - Active
 	/// * `decommissioning` - Decommissioning
 	/// * `offline` - Offline
 	pub status: String,
-	pub tenant: Option<Option<NestedTenantRequest>>,
-	pub site: Option<Option<NestedSiteRequest>>,
+	pub tenant: Option<NestedTenantRequest>,
+	pub site: Option<NestedSiteRequest>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -580,16 +580,16 @@ pub struct ConsolePort {
 	pub url: String,
 	pub display: String,
 	pub device: NestedDevice,
-	pub module: Option<Option<ComponentNestedModule>>,
+	pub module: Option<ComponentNestedModule>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
 	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub speed: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	pub speed: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub description: String,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
-	pub cable: Option<Option<NestedCable>>,
+	pub cable: Option<NestedCable>,
 	pub cable_end: String,
 	pub link_peers: Vec<serde_json::Value>,
 	/// Return the type of the peer link terminations, or None.
@@ -606,7 +606,7 @@ pub struct ConsolePort {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ConsolePortRequest {
 	pub device: NestedDeviceRequest,
-	pub module: Option<Option<ComponentNestedModuleRequest>>,
+	pub module: Option<ComponentNestedModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -646,8 +646,8 @@ pub struct ConsolePortTemplate {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device_type: Option<Option<NestedDeviceType>>,
-	pub module_type: Option<Option<NestedModuleType>>,
+	pub device_type: Option<NestedDeviceType>,
+	pub module_type: Option<NestedModuleType>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -659,8 +659,8 @@ pub struct ConsolePortTemplate {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ConsolePortTemplateRequest {
-	pub device_type: Option<Option<NestedDeviceTypeRequest>>,
-	pub module_type: Option<Option<NestedModuleTypeRequest>>,
+	pub device_type: Option<NestedDeviceTypeRequest>,
+	pub module_type: Option<NestedModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -689,16 +689,16 @@ pub struct ConsoleServerPort {
 	pub url: String,
 	pub display: String,
 	pub device: NestedDevice,
-	pub module: Option<Option<ComponentNestedModule>>,
+	pub module: Option<ComponentNestedModule>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
 	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub speed: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	pub speed: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub description: String,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
-	pub cable: Option<Option<NestedCable>>,
+	pub cable: Option<NestedCable>,
 	pub cable_end: String,
 	pub link_peers: Vec<serde_json::Value>,
 	/// Return the type of the peer link terminations, or None.
@@ -715,7 +715,7 @@ pub struct ConsoleServerPort {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ConsoleServerPortRequest {
 	pub device: NestedDeviceRequest,
-	pub module: Option<Option<ComponentNestedModuleRequest>>,
+	pub module: Option<ComponentNestedModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -755,8 +755,8 @@ pub struct ConsoleServerPortTemplate {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device_type: Option<Option<NestedDeviceType>>,
-	pub module_type: Option<Option<NestedModuleType>>,
+	pub device_type: Option<NestedDeviceType>,
+	pub module_type: Option<NestedModuleType>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -768,8 +768,8 @@ pub struct ConsoleServerPortTemplate {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ConsoleServerPortTemplateRequest {
-	pub device_type: Option<Option<NestedDeviceTypeRequest>>,
-	pub module_type: Option<Option<NestedModuleTypeRequest>>,
+	pub device_type: Option<NestedDeviceTypeRequest>,
+	pub module_type: Option<NestedModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -797,7 +797,7 @@ pub struct Contact {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub group: Option<Option<NestedContactGroup>>,
+	pub group: Option<NestedContactGroup>,
 	pub name: String,
 	pub title: String,
 	pub phone: String,
@@ -820,7 +820,7 @@ pub struct ContactAssignment {
 	pub object_id: u64,
 	pub object: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub contact: NestedContact,
-	pub role: Option<Option<NestedContactRole>>,
+	pub role: Option<NestedContactRole>,
 	pub priority: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -832,7 +832,7 @@ pub struct ContactAssignmentRequest {
 	pub content_type: String,
 	pub object_id: u64,
 	pub contact: NestedContactRequest,
-	pub role: Option<Option<NestedContactRoleRequest>>,
+	pub role: Option<NestedContactRoleRequest>,
 	/// * `primary` - Primary
 	/// * `secondary` - Secondary
 	/// * `tertiary` - Tertiary
@@ -848,7 +848,7 @@ pub struct ContactGroup {
 	pub display: String,
 	pub name: String,
 	pub slug: String,
-	pub parent: Option<Option<NestedContactGroup>>,
+	pub parent: Option<NestedContactGroup>,
 	pub description: String,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -861,14 +861,14 @@ pub struct ContactGroup {
 pub struct ContactGroupRequest {
 	pub name: String,
 	pub slug: String,
-	pub parent: Option<Option<NestedContactGroupRequest>>,
+	pub parent: Option<NestedContactGroupRequest>,
 	pub description: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ContactRequest {
-	pub group: Option<Option<NestedContactGroupRequest>>,
+	pub group: Option<NestedContactGroupRequest>,
 	pub name: String,
 	pub title: String,
 	pub phone: String,
@@ -944,7 +944,7 @@ pub struct CustomField {
 	pub validation_maximum: Option<i64>,
 	/// Regular expression to enforce on text field values. Use ^ and $ to force matching of entire string. For example, <code>^[A-Z]{3}$</code> will limit values to exactly three uppercase letters.
 	pub validation_regex: String,
-	pub choice_set: Option<Option<NestedCustomFieldChoiceSet>>,
+	pub choice_set: Option<NestedCustomFieldChoiceSet>,
 	pub created: Option<String>,
 	pub last_updated: Option<String>,
 }
@@ -1028,7 +1028,7 @@ pub struct CustomFieldRequest {
 	pub validation_maximum: Option<i64>,
 	/// Regular expression to enforce on text field values. Use ^ and $ to force matching of entire string. For example, <code>^[A-Z]{3}$</code> will limit values to exactly three uppercase letters.
 	pub validation_regex: String,
-	pub choice_set: Option<Option<NestedCustomFieldChoiceSetRequest>>,
+	pub choice_set: Option<NestedCustomFieldChoiceSetRequest>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CustomLink {
@@ -1171,15 +1171,15 @@ pub struct Device {
 	pub role: NestedDeviceRole,
 	/// Deprecated in v3.6 in favor of `role`.
 	pub device_role: Option<NestedDeviceRole>,
-	pub tenant: Option<Option<NestedTenant>>,
-	pub platform: Option<Option<NestedPlatform>>,
+	pub tenant: Option<NestedTenant>,
+	pub platform: Option<NestedPlatform>,
 	/// Chassis serial number, assigned by the manufacturer
 	pub serial: String,
 	/// A unique tag used to identify this device
 	pub asset_tag: Option<String>,
 	pub site: NestedSite,
-	pub location: Option<Option<NestedLocation>>,
-	pub rack: Option<Option<NestedRack>>,
+	pub location: Option<NestedLocation>,
+	pub rack: Option<NestedRack>,
 	pub position: Option<f64>,
 	pub face: Option<std::collections::HashMap<String, serde_json::Value>>,
 	/// GPS coordinate in decimal format (xx.yyyyyy)
@@ -1190,17 +1190,17 @@ pub struct Device {
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub airflow: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub primary_ip: Option<NestedIPAddress>,
-	pub primary_ip4: Option<Option<NestedIPAddress>>,
-	pub primary_ip6: Option<Option<NestedIPAddress>>,
-	pub oob_ip: Option<Option<NestedIPAddress>>,
-	pub cluster: Option<Option<NestedCluster>>,
-	pub virtual_chassis: Option<Option<NestedVirtualChassis>>,
+	pub primary_ip4: Option<NestedIPAddress>,
+	pub primary_ip6: Option<NestedIPAddress>,
+	pub oob_ip: Option<NestedIPAddress>,
+	pub cluster: Option<NestedCluster>,
+	pub virtual_chassis: Option<NestedVirtualChassis>,
 	pub vc_position: Option<u8>,
 	/// Virtual chassis master election priority
 	pub vc_priority: Option<u8>,
 	pub description: String,
 	pub comments: String,
-	pub config_template: Option<Option<NestedConfigTemplate>>,
+	pub config_template: Option<NestedConfigTemplate>,
 	/// Local config context data takes precedence over source contexts in the final rendered config context
 	pub local_context_data: Option<serde_json::Value>,
 	pub tags: Vec<NestedTag>,
@@ -1228,7 +1228,7 @@ pub struct DeviceBay {
 	/// Physical label
 	pub label: String,
 	pub description: String,
-	pub installed_device: Option<Option<NestedDevice>>,
+	pub installed_device: Option<NestedDevice>,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub created: Option<String>,
@@ -1241,7 +1241,7 @@ pub struct DeviceBayRequest {
 	/// Physical label
 	pub label: String,
 	pub description: String,
-	pub installed_device: Option<Option<NestedDeviceRequest>>,
+	pub installed_device: Option<NestedDeviceRequest>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -1278,7 +1278,7 @@ pub struct DeviceRole {
 	pub color: String,
 	/// Virtual machines may be assigned to this role
 	pub vm_role: bool,
-	pub config_template: Option<Option<NestedConfigTemplate>>,
+	pub config_template: Option<NestedConfigTemplate>,
 	pub description: String,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -1294,7 +1294,7 @@ pub struct DeviceRoleRequest {
 	pub color: String,
 	/// Virtual machines may be assigned to this role
 	pub vm_role: bool,
-	pub config_template: Option<Option<NestedConfigTemplateRequest>>,
+	pub config_template: Option<NestedConfigTemplateRequest>,
 	pub description: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -1305,7 +1305,7 @@ pub struct DeviceType {
 	pub url: String,
 	pub display: String,
 	pub manufacturer: NestedManufacturer,
-	pub default_platform: Option<Option<NestedPlatform>>,
+	pub default_platform: Option<NestedPlatform>,
 	pub model: String,
 	pub slug: String,
 	/// Discrete part number (optional)
@@ -1315,10 +1315,10 @@ pub struct DeviceType {
 	pub exclude_from_utilization: bool,
 	/// Device consumes both front and rear rack faces.
 	pub is_full_depth: bool,
-	pub subdevice_role: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
-	pub airflow: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	pub subdevice_role: Option<std::collections::HashMap<String, serde_json::Value>>,
+	pub airflow: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub weight: Option<f64>,
-	pub weight_unit: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	pub weight_unit: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub front_image: String,
 	pub rear_image: String,
 	pub description: String,
@@ -1342,7 +1342,7 @@ pub struct DeviceType {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DeviceTypeRequest {
 	pub manufacturer: NestedManufacturerRequest,
-	pub default_platform: Option<Option<NestedPlatformRequest>>,
+	pub default_platform: Option<NestedPlatformRequest>,
 	pub model: String,
 	pub slug: String,
 	/// Discrete part number (optional)
@@ -1386,15 +1386,15 @@ pub struct DeviceWithConfigContext {
 	pub role: NestedDeviceRole,
 	/// Deprecated in v3.6 in favor of `role`.
 	pub device_role: Option<NestedDeviceRole>,
-	pub tenant: Option<Option<NestedTenant>>,
-	pub platform: Option<Option<NestedPlatform>>,
+	pub tenant: Option<NestedTenant>,
+	pub platform: Option<NestedPlatform>,
 	/// Chassis serial number, assigned by the manufacturer
 	pub serial: String,
 	/// A unique tag used to identify this device
 	pub asset_tag: Option<String>,
 	pub site: NestedSite,
-	pub location: Option<Option<NestedLocation>>,
-	pub rack: Option<Option<NestedRack>>,
+	pub location: Option<NestedLocation>,
+	pub rack: Option<NestedRack>,
 	pub position: Option<f64>,
 	pub face: Option<std::collections::HashMap<String, serde_json::Value>>,
 	/// GPS coordinate in decimal format (xx.yyyyyy)
@@ -1405,17 +1405,17 @@ pub struct DeviceWithConfigContext {
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub airflow: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub primary_ip: Option<NestedIPAddress>,
-	pub primary_ip4: Option<Option<NestedIPAddress>>,
-	pub primary_ip6: Option<Option<NestedIPAddress>>,
-	pub oob_ip: Option<Option<NestedIPAddress>>,
-	pub cluster: Option<Option<NestedCluster>>,
-	pub virtual_chassis: Option<Option<NestedVirtualChassis>>,
+	pub primary_ip4: Option<NestedIPAddress>,
+	pub primary_ip6: Option<NestedIPAddress>,
+	pub oob_ip: Option<NestedIPAddress>,
+	pub cluster: Option<NestedCluster>,
+	pub virtual_chassis: Option<NestedVirtualChassis>,
 	pub vc_position: Option<u8>,
 	/// Virtual chassis master election priority
 	pub vc_priority: Option<u8>,
 	pub description: String,
 	pub comments: String,
-	pub config_template: Option<Option<NestedConfigTemplate>>,
+	pub config_template: Option<NestedConfigTemplate>,
 	pub config_context: Option<serde_json::Value>,
 	/// Local config context data takes precedence over source contexts in the final rendered config context
 	pub local_context_data: Option<serde_json::Value>,
@@ -1439,15 +1439,15 @@ pub struct DeviceWithConfigContextRequest {
 	pub name: Option<String>,
 	pub device_type: NestedDeviceTypeRequest,
 	pub role: NestedDeviceRoleRequest,
-	pub tenant: Option<Option<NestedTenantRequest>>,
-	pub platform: Option<Option<NestedPlatformRequest>>,
+	pub tenant: Option<NestedTenantRequest>,
+	pub platform: Option<NestedPlatformRequest>,
 	/// Chassis serial number, assigned by the manufacturer
 	pub serial: String,
 	/// A unique tag used to identify this device
 	pub asset_tag: Option<String>,
 	pub site: NestedSiteRequest,
-	pub location: Option<Option<NestedLocationRequest>>,
-	pub rack: Option<Option<NestedRackRequest>>,
+	pub location: Option<NestedLocationRequest>,
+	pub rack: Option<NestedRackRequest>,
 	pub position: Option<f64>,
 	/// * `front` - Front
 	/// * `rear` - Rear
@@ -1472,17 +1472,17 @@ pub struct DeviceWithConfigContextRequest {
 	/// * `passive` - Passive
 	/// * `mixed` - Mixed
 	pub airflow: String,
-	pub primary_ip4: Option<Option<NestedIPAddressRequest>>,
-	pub primary_ip6: Option<Option<NestedIPAddressRequest>>,
-	pub oob_ip: Option<Option<NestedIPAddressRequest>>,
-	pub cluster: Option<Option<NestedClusterRequest>>,
-	pub virtual_chassis: Option<Option<NestedVirtualChassisRequest>>,
+	pub primary_ip4: Option<NestedIPAddressRequest>,
+	pub primary_ip6: Option<NestedIPAddressRequest>,
+	pub oob_ip: Option<NestedIPAddressRequest>,
+	pub cluster: Option<NestedClusterRequest>,
+	pub virtual_chassis: Option<NestedVirtualChassisRequest>,
 	pub vc_position: Option<u8>,
 	/// Virtual chassis master election priority
 	pub vc_priority: Option<u8>,
 	pub description: String,
 	pub comments: String,
-	pub config_template: Option<Option<NestedConfigTemplateRequest>>,
+	pub config_template: Option<NestedConfigTemplateRequest>,
 	/// Local config context data takes precedence over source contexts in the final rendered config context
 	pub local_context_data: Option<serde_json::Value>,
 	pub tags: Vec<NestedTagRequest>,
@@ -1657,7 +1657,7 @@ pub struct FrontPort {
 	pub url: String,
 	pub display: String,
 	pub device: NestedDevice,
-	pub module: Option<Option<ComponentNestedModule>>,
+	pub module: Option<ComponentNestedModule>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -1669,7 +1669,7 @@ pub struct FrontPort {
 	pub description: String,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
-	pub cable: Option<Option<NestedCable>>,
+	pub cable: Option<NestedCable>,
 	pub cable_end: String,
 	pub link_peers: Vec<serde_json::Value>,
 	/// Return the type of the peer link terminations, or None.
@@ -1700,7 +1700,7 @@ pub struct FrontPortRearPortRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct FrontPortRequest {
 	pub device: NestedDeviceRequest,
-	pub module: Option<Option<ComponentNestedModuleRequest>>,
+	pub module: Option<ComponentNestedModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -1767,8 +1767,8 @@ pub struct FrontPortTemplate {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device_type: Option<Option<NestedDeviceType>>,
-	pub module_type: Option<Option<NestedModuleType>>,
+	pub device_type: Option<NestedDeviceType>,
+	pub module_type: Option<NestedModuleType>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -1783,8 +1783,8 @@ pub struct FrontPortTemplate {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct FrontPortTemplateRequest {
-	pub device_type: Option<Option<NestedDeviceTypeRequest>>,
-	pub module_type: Option<Option<NestedModuleTypeRequest>>,
+	pub device_type: Option<NestedDeviceTypeRequest>,
+	pub module_type: Option<NestedModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -1978,14 +1978,14 @@ pub struct IPAddress {
 	pub display: String,
 	pub family: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub address: String,
-	pub vrf: Option<Option<NestedVRF>>,
-	pub tenant: Option<Option<NestedTenant>>,
+	pub vrf: Option<NestedVRF>,
+	pub tenant: Option<NestedTenant>,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub role: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub assigned_object_type: Option<String>,
 	pub assigned_object_id: Option<u64>,
 	pub assigned_object: Option<serde_json::Value>,
-	pub nat_inside: Option<Option<NestedIPAddress>>,
+	pub nat_inside: Option<NestedIPAddress>,
 	pub nat_outside: Vec<NestedIPAddress>,
 	/// Hostname or FQDN (not case-sensitive)
 	pub dns_name: String,
@@ -1999,8 +1999,8 @@ pub struct IPAddress {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IPAddressRequest {
 	pub address: String,
-	pub vrf: Option<Option<NestedVRFRequest>>,
-	pub tenant: Option<Option<NestedTenantRequest>>,
+	pub vrf: Option<NestedVRFRequest>,
+	pub tenant: Option<NestedTenantRequest>,
 	/// * `active` - Active
 	/// * `reserved` - Reserved
 	/// * `deprecated` - Deprecated
@@ -2018,7 +2018,7 @@ pub struct IPAddressRequest {
 	pub role: String,
 	pub assigned_object_type: Option<String>,
 	pub assigned_object_id: Option<u64>,
-	pub nat_inside: Option<Option<NestedIPAddressRequest>>,
+	pub nat_inside: Option<NestedIPAddressRequest>,
 	/// Hostname or FQDN (not case-sensitive)
 	pub dns_name: String,
 	pub description: String,
@@ -2035,10 +2035,10 @@ pub struct IPRange {
 	pub start_address: String,
 	pub end_address: String,
 	pub size: i64,
-	pub vrf: Option<Option<NestedVRF>>,
-	pub tenant: Option<Option<NestedTenant>>,
+	pub vrf: Option<NestedVRF>,
+	pub tenant: Option<NestedTenant>,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub role: Option<Option<NestedRole>>,
+	pub role: Option<NestedRole>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
@@ -2052,13 +2052,13 @@ pub struct IPRange {
 pub struct IPRangeRequest {
 	pub start_address: String,
 	pub end_address: String,
-	pub vrf: Option<Option<NestedVRFRequest>>,
-	pub tenant: Option<Option<NestedTenantRequest>>,
+	pub vrf: Option<NestedVRFRequest>,
+	pub tenant: Option<NestedTenantRequest>,
 	/// * `active` - Active
 	/// * `reserved` - Reserved
 	/// * `deprecated` - Deprecated
 	pub status: String,
-	pub role: Option<Option<NestedRoleRequest>>,
+	pub role: Option<NestedRoleRequest>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -2220,19 +2220,19 @@ pub struct Interface {
 	pub display: String,
 	pub device: NestedDevice,
 	pub vdcs: Vec<i64>,
-	pub module: Option<Option<ComponentNestedModule>>,
+	pub module: Option<ComponentNestedModule>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
 	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub enabled: bool,
-	pub parent: Option<Option<NestedInterface>>,
-	pub bridge: Option<Option<NestedInterface>>,
-	pub lag: Option<Option<NestedInterface>>,
+	pub parent: Option<NestedInterface>,
+	pub bridge: Option<NestedInterface>,
+	pub lag: Option<NestedInterface>,
 	pub mtu: Option<u32>,
 	pub mac_address: Option<String>,
 	pub speed: Option<u32>,
-	pub duplex: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	pub duplex: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub wwn: Option<String>,
 	/// This interface is used only for out-of-band management
 	pub mgmt_only: bool,
@@ -2247,19 +2247,19 @@ pub struct Interface {
 	/// Populated by selected channel (if set)
 	pub rf_channel_width: Option<f64>,
 	pub tx_power: Option<u8>,
-	pub untagged_vlan: Option<Option<NestedVLAN>>,
+	pub untagged_vlan: Option<NestedVLAN>,
 	pub tagged_vlans: Vec<i64>,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
-	pub cable: Option<Option<NestedCable>>,
+	pub cable: Option<NestedCable>,
 	pub cable_end: String,
-	pub wireless_link: Option<Option<NestedWirelessLink>>,
+	pub wireless_link: Option<NestedWirelessLink>,
 	pub link_peers: Vec<serde_json::Value>,
 	/// Return the type of the peer link terminations, or None.
 	pub link_peers_type: String,
 	pub wireless_lans: Vec<i64>,
-	pub vrf: Option<Option<NestedVRF>>,
-	pub l2vpn_termination: Option<Option<NestedL2VPNTermination>>,
+	pub vrf: Option<NestedVRF>,
+	pub l2vpn_termination: Option<NestedL2VPNTermination>,
 	pub connected_endpoints: Vec<serde_json::Value>,
 	pub connected_endpoints_type: String,
 	pub connected_endpoints_reachable: bool,
@@ -2275,7 +2275,7 @@ pub struct Interface {
 pub struct InterfaceRequest {
 	pub device: NestedDeviceRequest,
 	pub vdcs: Vec<i64>,
-	pub module: Option<Option<ComponentNestedModuleRequest>>,
+	pub module: Option<ComponentNestedModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -2396,9 +2396,9 @@ pub struct InterfaceRequest {
 	/// * `other` - Other
 	pub r#type: String,
 	pub enabled: bool,
-	pub parent: Option<Option<NestedInterfaceRequest>>,
-	pub bridge: Option<Option<NestedInterfaceRequest>>,
-	pub lag: Option<Option<NestedInterfaceRequest>>,
+	pub parent: Option<NestedInterfaceRequest>,
+	pub bridge: Option<NestedInterfaceRequest>,
+	pub lag: Option<NestedInterfaceRequest>,
 	pub mtu: Option<u32>,
 	pub mac_address: Option<String>,
 	pub speed: Option<u32>,
@@ -2632,12 +2632,12 @@ pub struct InterfaceRequest {
 	/// Populated by selected channel (if set)
 	pub rf_channel_width: Option<f64>,
 	pub tx_power: Option<u8>,
-	pub untagged_vlan: Option<Option<NestedVLANRequest>>,
+	pub untagged_vlan: Option<NestedVLANRequest>,
 	pub tagged_vlans: Vec<i64>,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
 	pub wireless_lans: Vec<i64>,
-	pub vrf: Option<Option<NestedVRFRequest>>,
+	pub vrf: Option<NestedVRFRequest>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -2646,8 +2646,8 @@ pub struct InterfaceTemplate {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device_type: Option<Option<NestedDeviceType>>,
-	pub module_type: Option<Option<NestedModuleType>>,
+	pub device_type: Option<NestedDeviceType>,
+	pub module_type: Option<NestedModuleType>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -2656,17 +2656,17 @@ pub struct InterfaceTemplate {
 	pub enabled: bool,
 	pub mgmt_only: bool,
 	pub description: String,
-	pub bridge: Option<Option<NestedInterfaceTemplate>>,
-	pub poe_mode: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
-	pub poe_type: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
-	pub rf_role: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	pub bridge: Option<NestedInterfaceTemplate>,
+	pub poe_mode: Option<std::collections::HashMap<String, serde_json::Value>>,
+	pub poe_type: Option<std::collections::HashMap<String, serde_json::Value>>,
+	pub rf_role: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub created: Option<String>,
 	pub last_updated: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct InterfaceTemplateRequest {
-	pub device_type: Option<Option<NestedDeviceTypeRequest>>,
-	pub module_type: Option<Option<NestedModuleTypeRequest>>,
+	pub device_type: Option<NestedDeviceTypeRequest>,
+	pub module_type: Option<NestedModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -2790,7 +2790,7 @@ pub struct InterfaceTemplateRequest {
 	pub enabled: bool,
 	pub mgmt_only: bool,
 	pub description: String,
-	pub bridge: Option<Option<NestedInterfaceTemplateRequest>>,
+	pub bridge: Option<NestedInterfaceTemplateRequest>,
 	/// * `pd` - PD
 	/// * `pse` - PSE
 	pub poe_mode: Option<String>,
@@ -2817,8 +2817,8 @@ pub struct InventoryItem {
 	pub name: String,
 	/// Physical label
 	pub label: String,
-	pub role: Option<Option<NestedInventoryItemRole>>,
-	pub manufacturer: Option<Option<NestedManufacturer>>,
+	pub role: Option<NestedInventoryItemRole>,
+	pub manufacturer: Option<NestedManufacturer>,
 	/// Manufacturer-assigned part identifier
 	pub part_id: String,
 	pub serial: String,
@@ -2843,8 +2843,8 @@ pub struct InventoryItemRequest {
 	pub name: String,
 	/// Physical label
 	pub label: String,
-	pub role: Option<Option<NestedInventoryItemRoleRequest>>,
-	pub manufacturer: Option<Option<NestedManufacturerRequest>>,
+	pub role: Option<NestedInventoryItemRoleRequest>,
+	pub manufacturer: Option<NestedManufacturerRequest>,
 	/// Manufacturer-assigned part identifier
 	pub part_id: String,
 	pub serial: String,
@@ -2893,8 +2893,8 @@ pub struct InventoryItemTemplate {
 	pub name: String,
 	/// Physical label
 	pub label: String,
-	pub role: Option<Option<NestedInventoryItemRole>>,
-	pub manufacturer: Option<Option<NestedManufacturer>>,
+	pub role: Option<NestedInventoryItemRole>,
+	pub manufacturer: Option<NestedManufacturer>,
 	/// Manufacturer-assigned part identifier
 	pub part_id: String,
 	pub description: String,
@@ -2913,8 +2913,8 @@ pub struct InventoryItemTemplateRequest {
 	pub name: String,
 	/// Physical label
 	pub label: String,
-	pub role: Option<Option<NestedInventoryItemRoleRequest>>,
-	pub manufacturer: Option<Option<NestedManufacturerRequest>>,
+	pub role: Option<NestedInventoryItemRoleRequest>,
+	pub manufacturer: Option<NestedManufacturerRequest>,
 	/// Manufacturer-assigned part identifier
 	pub part_id: String,
 	pub description: String,
@@ -2984,7 +2984,7 @@ pub struct L2VPN {
 	pub export_targets: Vec<i64>,
 	pub description: String,
 	pub comments: String,
-	pub tenant: Option<Option<NestedTenant>>,
+	pub tenant: Option<NestedTenant>,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub created: Option<String>,
@@ -3012,7 +3012,7 @@ pub struct L2VPNRequest {
 	pub export_targets: Vec<i64>,
 	pub description: String,
 	pub comments: String,
-	pub tenant: Option<Option<NestedTenantRequest>>,
+	pub tenant: Option<NestedTenantRequest>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -3046,9 +3046,9 @@ pub struct Location {
 	pub name: String,
 	pub slug: String,
 	pub site: NestedSite,
-	pub parent: Option<Option<NestedLocation>>,
+	pub parent: Option<NestedLocation>,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub tenant: Option<Option<NestedTenant>>,
+	pub tenant: Option<NestedTenant>,
 	pub description: String,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -3063,14 +3063,14 @@ pub struct LocationRequest {
 	pub name: String,
 	pub slug: String,
 	pub site: NestedSiteRequest,
-	pub parent: Option<Option<NestedLocationRequest>>,
+	pub parent: Option<NestedLocationRequest>,
 	/// * `planned` - Planned
 	/// * `staging` - Staging
 	/// * `active` - Active
 	/// * `decommissioning` - Decommissioning
 	/// * `retired` - Retired
 	pub status: String,
-	pub tenant: Option<Option<NestedTenantRequest>>,
+	pub tenant: Option<NestedTenantRequest>,
 	pub description: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -3125,7 +3125,7 @@ pub struct ModuleBay {
 	pub display: String,
 	pub device: NestedDevice,
 	pub name: String,
-	pub installed_module: Option<Option<ModuleBayNestedModule>>,
+	pub installed_module: Option<ModuleBayNestedModule>,
 	/// Physical label
 	pub label: String,
 	/// Identifier to reference when renaming installed components
@@ -3151,7 +3151,7 @@ pub struct ModuleBayNestedModuleRequest {
 pub struct ModuleBayRequest {
 	pub device: NestedDeviceRequest,
 	pub name: String,
-	pub installed_module: Option<Option<ModuleBayNestedModuleRequest>>,
+	pub installed_module: Option<ModuleBayNestedModuleRequest>,
 	/// Physical label
 	pub label: String,
 	/// Identifier to reference when renaming installed components
@@ -3228,7 +3228,7 @@ pub struct ModuleType {
 	/// Discrete part number (optional)
 	pub part_number: String,
 	pub weight: Option<f64>,
-	pub weight_unit: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	pub weight_unit: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
@@ -3651,7 +3651,7 @@ pub struct NestedModuleBay {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub module: Option<Option<NestedModule>>,
+	pub module: Option<NestedModule>,
 	pub name: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -7870,8 +7870,8 @@ pub struct Platform {
 	pub display: String,
 	pub name: String,
 	pub slug: String,
-	pub manufacturer: Option<Option<NestedManufacturer>>,
-	pub config_template: Option<Option<NestedConfigTemplate>>,
+	pub manufacturer: Option<NestedManufacturer>,
+	pub config_template: Option<NestedConfigTemplate>,
 	pub description: String,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -7884,8 +7884,8 @@ pub struct Platform {
 pub struct PlatformRequest {
 	pub name: String,
 	pub slug: String,
-	pub manufacturer: Option<Option<NestedManufacturerRequest>>,
-	pub config_template: Option<Option<NestedConfigTemplateRequest>>,
+	pub manufacturer: Option<NestedManufacturerRequest>,
+	pub config_template: Option<NestedConfigTemplateRequest>,
 	pub description: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -7896,7 +7896,7 @@ pub struct PowerFeed {
 	pub url: String,
 	pub display: String,
 	pub power_panel: NestedPowerPanel,
-	pub rack: Option<Option<NestedRack>>,
+	pub rack: Option<NestedRack>,
 	pub name: String,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -7908,7 +7908,7 @@ pub struct PowerFeed {
 	pub max_utilization: u8,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
-	pub cable: Option<Option<NestedCable>>,
+	pub cable: Option<NestedCable>,
 	pub cable_end: String,
 	pub link_peers: Vec<serde_json::Value>,
 	/// Return the type of the peer link terminations, or None.
@@ -7917,7 +7917,7 @@ pub struct PowerFeed {
 	pub connected_endpoints_type: String,
 	pub connected_endpoints_reachable: bool,
 	pub description: String,
-	pub tenant: Option<Option<NestedTenant>>,
+	pub tenant: Option<NestedTenant>,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -7928,7 +7928,7 @@ pub struct PowerFeed {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PowerFeedRequest {
 	pub power_panel: NestedPowerPanelRequest,
-	pub rack: Option<Option<NestedRackRequest>>,
+	pub rack: Option<NestedRackRequest>,
 	pub name: String,
 	/// * `offline` - Offline
 	/// * `active` - Active
@@ -7951,7 +7951,7 @@ pub struct PowerFeedRequest {
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
 	pub description: String,
-	pub tenant: Option<Option<NestedTenantRequest>>,
+	pub tenant: Option<NestedTenantRequest>,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -7962,17 +7962,17 @@ pub struct PowerOutlet {
 	pub url: String,
 	pub display: String,
 	pub device: NestedDevice,
-	pub module: Option<Option<ComponentNestedModule>>,
+	pub module: Option<ComponentNestedModule>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
-	pub r#type: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
-	pub power_port: Option<Option<NestedPowerPort>>,
-	pub feed_leg: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
+	pub power_port: Option<NestedPowerPort>,
+	pub feed_leg: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub description: String,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
-	pub cable: Option<Option<NestedCable>>,
+	pub cable: Option<NestedCable>,
 	pub cable_end: String,
 	pub link_peers: Vec<serde_json::Value>,
 	/// Return the type of the peer link terminations, or None.
@@ -7989,7 +7989,7 @@ pub struct PowerOutlet {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PowerOutletRequest {
 	pub device: NestedDeviceRequest,
-	pub module: Option<Option<ComponentNestedModuleRequest>>,
+	pub module: Option<ComponentNestedModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -8087,7 +8087,7 @@ pub struct PowerOutletRequest {
 	/// * `hardwired` - Hardwired
 	/// * `other` - Other
 	pub r#type: Option<String>,
-	pub power_port: Option<Option<NestedPowerPortRequest>>,
+	pub power_port: Option<NestedPowerPortRequest>,
 	/// * `A` - A
 	/// * `B` - B
 	/// * `C` - C
@@ -8103,23 +8103,23 @@ pub struct PowerOutletTemplate {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device_type: Option<Option<NestedDeviceType>>,
-	pub module_type: Option<Option<NestedModuleType>>,
+	pub device_type: Option<NestedDeviceType>,
+	pub module_type: Option<NestedModuleType>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
 	pub label: String,
-	pub r#type: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
-	pub power_port: Option<Option<NestedPowerPortTemplate>>,
-	pub feed_leg: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
+	pub power_port: Option<NestedPowerPortTemplate>,
+	pub feed_leg: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub description: String,
 	pub created: Option<String>,
 	pub last_updated: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PowerOutletTemplateRequest {
-	pub device_type: Option<Option<NestedDeviceTypeRequest>>,
-	pub module_type: Option<Option<NestedModuleTypeRequest>>,
+	pub device_type: Option<NestedDeviceTypeRequest>,
+	pub module_type: Option<NestedModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -8218,7 +8218,7 @@ pub struct PowerOutletTemplateRequest {
 	/// * `hardwired` - Hardwired
 	/// * `other` - Other
 	pub r#type: Option<String>,
-	pub power_port: Option<Option<NestedPowerPortTemplateRequest>>,
+	pub power_port: Option<NestedPowerPortTemplateRequest>,
 	/// * `A` - A
 	/// * `B` - B
 	/// * `C` - C
@@ -8231,7 +8231,7 @@ pub struct PowerPanel {
 	pub url: String,
 	pub display: String,
 	pub site: NestedSite,
-	pub location: Option<Option<NestedLocation>>,
+	pub location: Option<NestedLocation>,
 	pub name: String,
 	pub description: String,
 	pub comments: String,
@@ -8244,7 +8244,7 @@ pub struct PowerPanel {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PowerPanelRequest {
 	pub site: NestedSiteRequest,
-	pub location: Option<Option<NestedLocationRequest>>,
+	pub location: Option<NestedLocationRequest>,
 	pub name: String,
 	pub description: String,
 	pub comments: String,
@@ -8257,11 +8257,11 @@ pub struct PowerPort {
 	pub url: String,
 	pub display: String,
 	pub device: NestedDevice,
-	pub module: Option<Option<ComponentNestedModule>>,
+	pub module: Option<ComponentNestedModule>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
-	pub r#type: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
 	/// Maximum power draw (watts)
 	pub maximum_draw: Option<u32>,
 	/// Allocated power draw (watts)
@@ -8269,7 +8269,7 @@ pub struct PowerPort {
 	pub description: String,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
-	pub cable: Option<Option<NestedCable>>,
+	pub cable: Option<NestedCable>,
 	pub cable_end: String,
 	pub link_peers: Vec<serde_json::Value>,
 	/// Return the type of the peer link terminations, or None.
@@ -8286,7 +8286,7 @@ pub struct PowerPort {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PowerPortRequest {
 	pub device: NestedDeviceRequest,
-	pub module: Option<Option<ComponentNestedModuleRequest>>,
+	pub module: Option<ComponentNestedModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -8406,13 +8406,13 @@ pub struct PowerPortTemplate {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device_type: Option<Option<NestedDeviceType>>,
-	pub module_type: Option<Option<NestedModuleType>>,
+	pub device_type: Option<NestedDeviceType>,
+	pub module_type: Option<NestedModuleType>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
 	pub label: String,
-	pub r#type: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
 	/// Maximum power draw (watts)
 	pub maximum_draw: Option<u32>,
 	/// Allocated power draw (watts)
@@ -8423,8 +8423,8 @@ pub struct PowerPortTemplate {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PowerPortTemplateRequest {
-	pub device_type: Option<Option<NestedDeviceTypeRequest>>,
-	pub module_type: Option<Option<NestedModuleTypeRequest>>,
+	pub device_type: Option<NestedDeviceTypeRequest>,
+	pub module_type: Option<NestedModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -8543,12 +8543,12 @@ pub struct Prefix {
 	pub display: String,
 	pub family: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub prefix: String,
-	pub site: Option<Option<NestedSite>>,
-	pub vrf: Option<Option<NestedVRF>>,
-	pub tenant: Option<Option<NestedTenant>>,
-	pub vlan: Option<Option<NestedVLAN>>,
+	pub site: Option<NestedSite>,
+	pub vrf: Option<NestedVRF>,
+	pub tenant: Option<NestedTenant>,
+	pub vlan: Option<NestedVLAN>,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub role: Option<Option<NestedRole>>,
+	pub role: Option<NestedRole>,
 	/// All IP addresses within this prefix are considered usable
 	pub is_pool: bool,
 	/// Treat as fully utilized
@@ -8565,16 +8565,16 @@ pub struct Prefix {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PrefixRequest {
 	pub prefix: String,
-	pub site: Option<Option<NestedSiteRequest>>,
-	pub vrf: Option<Option<NestedVRFRequest>>,
-	pub tenant: Option<Option<NestedTenantRequest>>,
-	pub vlan: Option<Option<NestedVLANRequest>>,
+	pub site: Option<NestedSiteRequest>,
+	pub vrf: Option<NestedVRFRequest>,
+	pub tenant: Option<NestedTenantRequest>,
+	pub vlan: Option<NestedVLANRequest>,
 	/// * `container` - Container
 	/// * `active` - Active
 	/// * `reserved` - Reserved
 	/// * `deprecated` - Deprecated
 	pub status: String,
-	pub role: Option<Option<NestedRoleRequest>>,
+	pub role: Option<NestedRoleRequest>,
 	/// All IP addresses within this prefix are considered usable
 	pub is_pool: bool,
 	/// Treat as fully utilized
@@ -8698,14 +8698,14 @@ pub struct Rack {
 	pub name: String,
 	pub facility_id: Option<String>,
 	pub site: NestedSite,
-	pub location: Option<Option<NestedLocation>>,
-	pub tenant: Option<Option<NestedTenant>>,
+	pub location: Option<NestedLocation>,
+	pub tenant: Option<NestedTenant>,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub role: Option<Option<NestedRackRole>>,
+	pub role: Option<NestedRackRole>,
 	pub serial: String,
 	/// A unique tag used to identify this rack
 	pub asset_tag: Option<String>,
-	pub r#type: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub width: Option<std::collections::HashMap<String, serde_json::Value>>,
 	/// Height in rack units
 	pub u_height: u8,
@@ -8714,14 +8714,14 @@ pub struct Rack {
 	pub weight: Option<f64>,
 	/// Maximum load capacity for the rack
 	pub max_weight: Option<u32>,
-	pub weight_unit: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	pub weight_unit: Option<std::collections::HashMap<String, serde_json::Value>>,
 	/// Units are numbered top-to-bottom
 	pub desc_units: bool,
 	/// Outer dimension of rack (width)
 	pub outer_width: Option<u16>,
 	/// Outer dimension of rack (depth)
 	pub outer_depth: Option<u16>,
-	pub outer_unit: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	pub outer_unit: Option<std::collections::HashMap<String, serde_json::Value>>,
 	/// Maximum depth of a mounted device, in millimeters. For four-post racks, this is the distance between the front and rear rails.
 	pub mounting_depth: Option<u16>,
 	pub description: String,
@@ -8738,15 +8738,15 @@ pub struct RackRequest {
 	pub name: String,
 	pub facility_id: Option<String>,
 	pub site: NestedSiteRequest,
-	pub location: Option<Option<NestedLocationRequest>>,
-	pub tenant: Option<Option<NestedTenantRequest>>,
+	pub location: Option<NestedLocationRequest>,
+	pub tenant: Option<NestedTenantRequest>,
 	/// * `reserved` - Reserved
 	/// * `available` - Available
 	/// * `planned` - Planned
 	/// * `active` - Active
 	/// * `deprecated` - Deprecated
 	pub status: String,
-	pub role: Option<Option<NestedRackRoleRequest>>,
+	pub role: Option<NestedRackRoleRequest>,
 	pub serial: String,
 	/// A unique tag used to identify this rack
 	pub asset_tag: Option<String>,
@@ -8801,7 +8801,7 @@ pub struct RackReservation {
 	pub created: Option<String>,
 	pub last_updated: Option<String>,
 	pub user: NestedUser,
-	pub tenant: Option<Option<NestedTenant>>,
+	pub tenant: Option<NestedTenant>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
@@ -8812,7 +8812,7 @@ pub struct RackReservationRequest {
 	pub rack: NestedRackRequest,
 	pub units: Vec<u16>,
 	pub user: NestedUserRequest,
-	pub tenant: Option<Option<NestedTenantRequest>>,
+	pub tenant: Option<NestedTenantRequest>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -8848,7 +8848,7 @@ pub struct RearPort {
 	pub url: String,
 	pub display: String,
 	pub device: NestedDevice,
-	pub module: Option<Option<ComponentNestedModule>>,
+	pub module: Option<ComponentNestedModule>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -8859,7 +8859,7 @@ pub struct RearPort {
 	pub description: String,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
-	pub cable: Option<Option<NestedCable>>,
+	pub cable: Option<NestedCable>,
 	pub cable_end: String,
 	pub link_peers: Vec<serde_json::Value>,
 	/// Return the type of the peer link terminations, or None.
@@ -8873,7 +8873,7 @@ pub struct RearPort {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct RearPortRequest {
 	pub device: NestedDeviceRequest,
-	pub module: Option<Option<ComponentNestedModuleRequest>>,
+	pub module: Option<ComponentNestedModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -8939,8 +8939,8 @@ pub struct RearPortTemplate {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device_type: Option<Option<NestedDeviceType>>,
-	pub module_type: Option<Option<NestedModuleType>>,
+	pub device_type: Option<NestedDeviceType>,
+	pub module_type: Option<NestedModuleType>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -8954,8 +8954,8 @@ pub struct RearPortTemplate {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct RearPortTemplateRequest {
-	pub device_type: Option<Option<NestedDeviceTypeRequest>>,
-	pub module_type: Option<Option<NestedModuleTypeRequest>>,
+	pub device_type: Option<NestedDeviceTypeRequest>,
+	pub module_type: Option<NestedModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -9019,7 +9019,7 @@ pub struct Region {
 	pub display: String,
 	pub name: String,
 	pub slug: String,
-	pub parent: Option<Option<NestedRegion>>,
+	pub parent: Option<NestedRegion>,
 	pub description: String,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -9032,7 +9032,7 @@ pub struct Region {
 pub struct RegionRequest {
 	pub name: String,
 	pub slug: String,
-	pub parent: Option<Option<NestedRegionRequest>>,
+	pub parent: Option<NestedRegionRequest>,
 	pub description: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -9069,7 +9069,7 @@ pub struct RouteTarget {
 	pub display: String,
 	/// Route target value (formatted in accordance with RFC 4360)
 	pub name: String,
-	pub tenant: Option<Option<NestedTenant>>,
+	pub tenant: Option<NestedTenant>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
@@ -9081,7 +9081,7 @@ pub struct RouteTarget {
 pub struct RouteTargetRequest {
 	/// Route target value (formatted in accordance with RFC 4360)
 	pub name: String,
-	pub tenant: Option<Option<NestedTenantRequest>>,
+	pub tenant: Option<NestedTenantRequest>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -9121,8 +9121,8 @@ pub struct Service {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device: Option<Option<NestedDevice>>,
-	pub virtual_machine: Option<Option<NestedVirtualMachine>>,
+	pub device: Option<NestedDevice>,
+	pub virtual_machine: Option<NestedVirtualMachine>,
 	pub name: String,
 	pub ports: Vec<u16>,
 	pub protocol: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -9136,8 +9136,8 @@ pub struct Service {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ServiceRequest {
-	pub device: Option<Option<NestedDeviceRequest>>,
-	pub virtual_machine: Option<Option<NestedVirtualMachineRequest>>,
+	pub device: Option<NestedDeviceRequest>,
+	pub virtual_machine: Option<NestedVirtualMachineRequest>,
 	pub name: String,
 	pub ports: Vec<u16>,
 	/// * `tcp` - TCP
@@ -9187,9 +9187,9 @@ pub struct Site {
 	pub name: String,
 	pub slug: String,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub region: Option<Option<NestedRegion>>,
-	pub group: Option<Option<NestedSiteGroup>>,
-	pub tenant: Option<Option<NestedTenant>>,
+	pub region: Option<NestedRegion>,
+	pub group: Option<NestedSiteGroup>,
+	pub tenant: Option<NestedTenant>,
 	/// Local facility ID or description
 	pub facility: String,
 	pub time_zone: Option<String>,
@@ -9222,7 +9222,7 @@ pub struct SiteGroup {
 	pub display: String,
 	pub name: String,
 	pub slug: String,
-	pub parent: Option<Option<NestedSiteGroup>>,
+	pub parent: Option<NestedSiteGroup>,
 	pub description: String,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -9235,7 +9235,7 @@ pub struct SiteGroup {
 pub struct SiteGroupRequest {
 	pub name: String,
 	pub slug: String,
-	pub parent: Option<Option<NestedSiteGroupRequest>>,
+	pub parent: Option<NestedSiteGroupRequest>,
 	pub description: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -9251,9 +9251,9 @@ pub struct SiteRequest {
 	/// * `decommissioning` - Decommissioning
 	/// * `retired` - Retired
 	pub status: String,
-	pub region: Option<Option<NestedRegionRequest>>,
-	pub group: Option<Option<NestedSiteGroupRequest>>,
-	pub tenant: Option<Option<NestedTenantRequest>>,
+	pub region: Option<NestedRegionRequest>,
+	pub group: Option<NestedSiteGroupRequest>,
+	pub tenant: Option<NestedTenantRequest>,
 	/// Local facility ID or description
 	pub facility: String,
 	pub time_zone: Option<String>,
@@ -9300,7 +9300,7 @@ pub struct Tenant {
 	pub display: String,
 	pub name: String,
 	pub slug: String,
-	pub group: Option<Option<NestedTenantGroup>>,
+	pub group: Option<NestedTenantGroup>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
@@ -9325,7 +9325,7 @@ pub struct TenantGroup {
 	pub display: String,
 	pub name: String,
 	pub slug: String,
-	pub parent: Option<Option<NestedTenantGroup>>,
+	pub parent: Option<NestedTenantGroup>,
 	pub description: String,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -9338,7 +9338,7 @@ pub struct TenantGroup {
 pub struct TenantGroupRequest {
 	pub name: String,
 	pub slug: String,
-	pub parent: Option<Option<NestedTenantGroupRequest>>,
+	pub parent: Option<NestedTenantGroupRequest>,
 	pub description: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -9347,7 +9347,7 @@ pub struct TenantGroupRequest {
 pub struct TenantRequest {
 	pub name: String,
 	pub slug: String,
-	pub group: Option<Option<NestedTenantGroupRequest>>,
+	pub group: Option<NestedTenantGroupRequest>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -9409,8 +9409,8 @@ pub struct Tunnel {
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub group: NestedTunnelGroup,
 	pub encapsulation: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub ipsec_profile: Option<Option<NestedIPSecProfile>>,
-	pub tenant: Option<Option<NestedTenant>>,
+	pub ipsec_profile: Option<NestedIPSecProfile>,
+	pub tenant: Option<NestedTenant>,
 	pub tunnel_id: Option<u64>,
 	pub description: String,
 	pub comments: String,
@@ -9454,8 +9454,8 @@ pub struct TunnelRequest {
 	/// * `ip-ip` - IP-in-IP
 	/// * `gre` - GRE
 	pub encapsulation: String,
-	pub ipsec_profile: Option<Option<NestedIPSecProfileRequest>>,
-	pub tenant: Option<Option<NestedTenantRequest>>,
+	pub ipsec_profile: Option<NestedIPSecProfileRequest>,
+	pub tenant: Option<NestedTenantRequest>,
 	pub tunnel_id: Option<u64>,
 	pub description: String,
 	pub comments: String,
@@ -9472,7 +9472,7 @@ pub struct TunnelTermination {
 	pub termination_type: String,
 	pub termination_id: Option<u64>,
 	pub termination: Option<serde_json::Value>,
-	pub outside_ip: Option<Option<NestedIPAddress>>,
+	pub outside_ip: Option<NestedIPAddress>,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub created: Option<String>,
@@ -9487,7 +9487,7 @@ pub struct TunnelTerminationRequest {
 	pub role: String,
 	pub termination_type: String,
 	pub termination_id: Option<u64>,
-	pub outside_ip: Option<Option<NestedIPAddressRequest>>,
+	pub outside_ip: Option<NestedIPAddressRequest>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -9528,17 +9528,17 @@ pub struct VLAN {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub site: Option<Option<NestedSite>>,
-	pub group: Option<Option<NestedVLANGroup>>,
+	pub site: Option<NestedSite>,
+	pub group: Option<NestedVLANGroup>,
 	/// Numeric VLAN ID (1-4094)
 	pub vid: u16,
 	pub name: String,
-	pub tenant: Option<Option<NestedTenant>>,
+	pub tenant: Option<NestedTenant>,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub role: Option<Option<NestedRole>>,
+	pub role: Option<NestedRole>,
 	pub description: String,
 	pub comments: String,
-	pub l2vpn_termination: Option<Option<NestedL2VPNTermination>>,
+	pub l2vpn_termination: Option<NestedL2VPNTermination>,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub created: Option<String>,
@@ -9583,17 +9583,17 @@ pub struct VLANGroupRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VLANRequest {
-	pub site: Option<Option<NestedSiteRequest>>,
-	pub group: Option<Option<NestedVLANGroupRequest>>,
+	pub site: Option<NestedSiteRequest>,
+	pub group: Option<NestedVLANGroupRequest>,
 	/// Numeric VLAN ID (1-4094)
 	pub vid: u16,
 	pub name: String,
-	pub tenant: Option<Option<NestedTenantRequest>>,
+	pub tenant: Option<NestedTenantRequest>,
 	/// * `active` - Active
 	/// * `reserved` - Reserved
 	/// * `deprecated` - Deprecated
 	pub status: String,
-	pub role: Option<Option<NestedRoleRequest>>,
+	pub role: Option<NestedRoleRequest>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -9607,16 +9607,16 @@ pub struct VMInterface {
 	pub virtual_machine: NestedVirtualMachine,
 	pub name: String,
 	pub enabled: bool,
-	pub parent: Option<Option<NestedVMInterface>>,
-	pub bridge: Option<Option<NestedVMInterface>>,
+	pub parent: Option<NestedVMInterface>,
+	pub bridge: Option<NestedVMInterface>,
 	pub mtu: Option<u32>,
 	pub mac_address: Option<String>,
 	pub description: String,
 	pub mode: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub untagged_vlan: Option<Option<NestedVLAN>>,
+	pub untagged_vlan: Option<NestedVLAN>,
 	pub tagged_vlans: Vec<i64>,
-	pub vrf: Option<Option<NestedVRF>>,
-	pub l2vpn_termination: Option<Option<NestedL2VPNTermination>>,
+	pub vrf: Option<NestedVRF>,
+	pub l2vpn_termination: Option<NestedL2VPNTermination>,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub created: Option<String>,
@@ -9629,8 +9629,8 @@ pub struct VMInterfaceRequest {
 	pub virtual_machine: NestedVirtualMachineRequest,
 	pub name: String,
 	pub enabled: bool,
-	pub parent: Option<Option<NestedVMInterfaceRequest>>,
-	pub bridge: Option<Option<NestedVMInterfaceRequest>>,
+	pub parent: Option<NestedVMInterfaceRequest>,
+	pub bridge: Option<NestedVMInterfaceRequest>,
 	pub mtu: Option<u32>,
 	pub mac_address: Option<String>,
 	pub description: String,
@@ -9638,9 +9638,9 @@ pub struct VMInterfaceRequest {
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
 	pub mode: String,
-	pub untagged_vlan: Option<Option<NestedVLANRequest>>,
+	pub untagged_vlan: Option<NestedVLANRequest>,
 	pub tagged_vlans: Vec<i64>,
-	pub vrf: Option<Option<NestedVRFRequest>>,
+	pub vrf: Option<NestedVRFRequest>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -9652,7 +9652,7 @@ pub struct VRF {
 	pub name: String,
 	/// Unique route distinguisher (as defined in RFC 4364)
 	pub rd: Option<String>,
-	pub tenant: Option<Option<NestedTenant>>,
+	pub tenant: Option<NestedTenant>,
 	/// Prevent duplicate prefixes/IP addresses within this VRF
 	pub enforce_unique: bool,
 	pub description: String,
@@ -9671,7 +9671,7 @@ pub struct VRFRequest {
 	pub name: String,
 	/// Unique route distinguisher (as defined in RFC 4364)
 	pub rd: Option<String>,
-	pub tenant: Option<Option<NestedTenantRequest>>,
+	pub tenant: Option<NestedTenantRequest>,
 	/// Prevent duplicate prefixes/IP addresses within this VRF
 	pub enforce_unique: bool,
 	pub description: String,
@@ -9688,7 +9688,7 @@ pub struct VirtualChassis {
 	pub display: String,
 	pub name: String,
 	pub domain: String,
-	pub master: Option<Option<NestedDevice>>,
+	pub master: Option<NestedDevice>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
@@ -9701,7 +9701,7 @@ pub struct VirtualChassis {
 pub struct VirtualChassisRequest {
 	pub name: String,
 	pub domain: String,
-	pub master: Option<Option<NestedDeviceRequest>>,
+	pub master: Option<NestedDeviceRequest>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -9716,10 +9716,10 @@ pub struct VirtualDeviceContext {
 	pub device: NestedDevice,
 	/// Numeric identifier unique to the parent device
 	pub identifier: Option<u16>,
-	pub tenant: Option<Option<NestedTenant>>,
-	pub primary_ip: Option<Option<NestedIPAddress>>,
-	pub primary_ip4: Option<Option<NestedIPAddress>>,
-	pub primary_ip6: Option<Option<NestedIPAddress>>,
+	pub tenant: Option<NestedTenant>,
+	pub primary_ip: Option<NestedIPAddress>,
+	pub primary_ip4: Option<NestedIPAddress>,
+	pub primary_ip6: Option<NestedIPAddress>,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub description: String,
 	pub comments: String,
@@ -9735,9 +9735,9 @@ pub struct VirtualDeviceContextRequest {
 	pub device: NestedDeviceRequest,
 	/// Numeric identifier unique to the parent device
 	pub identifier: Option<u16>,
-	pub tenant: Option<Option<NestedTenantRequest>>,
-	pub primary_ip4: Option<Option<NestedIPAddressRequest>>,
-	pub primary_ip6: Option<Option<NestedIPAddressRequest>>,
+	pub tenant: Option<NestedTenantRequest>,
+	pub primary_ip4: Option<NestedIPAddressRequest>,
+	pub primary_ip6: Option<NestedIPAddressRequest>,
 	/// * `active` - Active
 	/// * `planned` - Planned
 	/// * `offline` - Offline
@@ -9776,15 +9776,15 @@ pub struct VirtualMachineWithConfigContext {
 	pub display: String,
 	pub name: String,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub site: Option<Option<NestedSite>>,
-	pub cluster: Option<Option<NestedCluster>>,
-	pub device: Option<Option<NestedDevice>>,
-	pub role: Option<Option<NestedDeviceRole>>,
-	pub tenant: Option<Option<NestedTenant>>,
-	pub platform: Option<Option<NestedPlatform>>,
+	pub site: Option<NestedSite>,
+	pub cluster: Option<NestedCluster>,
+	pub device: Option<NestedDevice>,
+	pub role: Option<NestedDeviceRole>,
+	pub tenant: Option<NestedTenant>,
+	pub platform: Option<NestedPlatform>,
 	pub primary_ip: Option<NestedIPAddress>,
-	pub primary_ip4: Option<Option<NestedIPAddress>>,
-	pub primary_ip6: Option<Option<NestedIPAddress>>,
+	pub primary_ip4: Option<NestedIPAddress>,
+	pub primary_ip6: Option<NestedIPAddress>,
 	pub vcpus: Option<f64>,
 	pub memory: Option<u32>,
 	pub disk: Option<u32>,
@@ -9810,14 +9810,14 @@ pub struct VirtualMachineWithConfigContextRequest {
 	/// * `failed` - Failed
 	/// * `decommissioning` - Decommissioning
 	pub status: String,
-	pub site: Option<Option<NestedSiteRequest>>,
-	pub cluster: Option<Option<NestedClusterRequest>>,
-	pub device: Option<Option<NestedDeviceRequest>>,
-	pub role: Option<Option<NestedDeviceRoleRequest>>,
-	pub tenant: Option<Option<NestedTenantRequest>>,
-	pub platform: Option<Option<NestedPlatformRequest>>,
-	pub primary_ip4: Option<Option<NestedIPAddressRequest>>,
-	pub primary_ip6: Option<Option<NestedIPAddressRequest>>,
+	pub site: Option<NestedSiteRequest>,
+	pub cluster: Option<NestedClusterRequest>,
+	pub device: Option<NestedDeviceRequest>,
+	pub role: Option<NestedDeviceRoleRequest>,
+	pub tenant: Option<NestedTenantRequest>,
+	pub platform: Option<NestedPlatformRequest>,
+	pub primary_ip4: Option<NestedIPAddressRequest>,
+	pub primary_ip6: Option<NestedIPAddressRequest>,
 	pub vcpus: Option<f64>,
 	pub memory: Option<u32>,
 	pub disk: Option<u32>,
@@ -9894,10 +9894,10 @@ pub struct WirelessLAN {
 	pub display: String,
 	pub ssid: String,
 	pub description: String,
-	pub group: Option<Option<NestedWirelessLANGroup>>,
+	pub group: Option<NestedWirelessLANGroup>,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub vlan: Option<Option<NestedVLAN>>,
-	pub tenant: Option<Option<NestedTenant>>,
+	pub vlan: Option<NestedVLAN>,
+	pub tenant: Option<NestedTenant>,
 	pub auth_type: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub auth_cipher: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub auth_psk: String,
@@ -9914,7 +9914,7 @@ pub struct WirelessLANGroup {
 	pub display: String,
 	pub name: String,
 	pub slug: String,
-	pub parent: Option<Option<NestedWirelessLANGroup>>,
+	pub parent: Option<NestedWirelessLANGroup>,
 	pub description: String,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -9927,7 +9927,7 @@ pub struct WirelessLANGroup {
 pub struct WirelessLANGroupRequest {
 	pub name: String,
 	pub slug: String,
-	pub parent: Option<Option<NestedWirelessLANGroupRequest>>,
+	pub parent: Option<NestedWirelessLANGroupRequest>,
 	pub description: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -9936,14 +9936,14 @@ pub struct WirelessLANGroupRequest {
 pub struct WirelessLANRequest {
 	pub ssid: String,
 	pub description: String,
-	pub group: Option<Option<NestedWirelessLANGroupRequest>>,
+	pub group: Option<NestedWirelessLANGroupRequest>,
 	/// * `active` - Active
 	/// * `reserved` - Reserved
 	/// * `disabled` - Disabled
 	/// * `deprecated` - Deprecated
 	pub status: String,
-	pub vlan: Option<Option<NestedVLANRequest>>,
-	pub tenant: Option<Option<NestedTenantRequest>>,
+	pub vlan: Option<NestedVLANRequest>,
+	pub tenant: Option<NestedTenantRequest>,
 	/// * `open` - Open
 	/// * `wep` - WEP
 	/// * `wpa-personal` - WPA Personal (PSK)
@@ -9967,7 +9967,7 @@ pub struct WirelessLink {
 	pub interface_b: NestedInterface,
 	pub ssid: String,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub tenant: Option<Option<NestedTenant>>,
+	pub tenant: Option<NestedTenant>,
 	pub auth_type: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub auth_cipher: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub auth_psk: String,
@@ -9987,7 +9987,7 @@ pub struct WirelessLinkRequest {
 	/// * `planned` - Planned
 	/// * `decommissioning` - Decommissioning
 	pub status: String,
-	pub tenant: Option<Option<NestedTenantRequest>>,
+	pub tenant: Option<NestedTenantRequest>,
 	/// * `open` - Open
 	/// * `wep` - WEP
 	/// * `wpa-personal` - WPA Personal (PSK)
