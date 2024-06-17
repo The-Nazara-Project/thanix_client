@@ -5,8 +5,8 @@ pub struct ASN {
 	pub display: String,
 	/// 16- or 32-bit autonomous system number
 	pub asn: u32,
-	pub rir: Option<NestedRIR>,
-	pub tenant: Option<NestedTenant>,
+	pub rir: Option<RIR>,
+	pub tenant: Option<Tenant>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
@@ -23,10 +23,10 @@ pub struct ASNRange {
 	pub display: String,
 	pub name: String,
 	pub slug: String,
-	pub rir: NestedRIR,
+	pub rir: RIR,
 	pub start: u32,
 	pub end: u32,
-	pub tenant: Option<NestedTenant>,
+	pub tenant: Option<Tenant>,
 	pub description: String,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -38,10 +38,10 @@ pub struct ASNRange {
 pub struct ASNRangeRequest {
 	pub name: String,
 	pub slug: String,
-	pub rir: NestedRIRRequest,
+	pub rir: RIRRequest,
 	pub start: u32,
 	pub end: u32,
-	pub tenant: Option<NestedTenantRequest>,
+	pub tenant: Option<TenantRequest>,
 	pub description: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -50,8 +50,8 @@ pub struct ASNRangeRequest {
 pub struct ASNRequest {
 	/// 16- or 32-bit autonomous system number
 	pub asn: u32,
-	pub rir: Option<NestedRIRRequest>,
-	pub tenant: Option<NestedTenantRequest>,
+	pub rir: Option<RIRRequest>,
+	pub tenant: Option<TenantRequest>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -64,8 +64,8 @@ pub struct Aggregate {
 	pub display: String,
 	pub family: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub prefix: String,
-	pub rir: NestedRIR,
-	pub tenant: Option<NestedTenant>,
+	pub rir: RIR,
+	pub tenant: Option<Tenant>,
 	pub date_added: Option<String>,
 	pub description: String,
 	pub comments: String,
@@ -77,8 +77,8 @@ pub struct Aggregate {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct AggregateRequest {
 	pub prefix: String,
-	pub rir: NestedRIRRequest,
-	pub tenant: Option<NestedTenantRequest>,
+	pub rir: RIRRequest,
+	pub tenant: Option<TenantRequest>,
 	pub date_added: Option<String>,
 	pub description: String,
 	pub comments: String,
@@ -94,19 +94,19 @@ pub struct AvailableASN {
 pub struct AvailableIP {
 	pub family: i64,
 	pub address: String,
-	pub vrf: Option<NestedVRF>,
+	pub vrf: Option<VRF>,
 	pub description: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct AvailablePrefix {
 	pub family: i64,
 	pub prefix: String,
-	pub vrf: Option<NestedVRF>,
+	pub vrf: Option<VRF>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct AvailableVLAN {
 	pub vid: i64,
-	pub group: Option<NestedVLANGroup>,
+	pub group: Option<VLANGroup>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct Bookmark {
@@ -116,106 +116,27 @@ pub struct Bookmark {
 	pub object_type: String,
 	pub object_id: u64,
 	pub object: Option<serde_json::Value>,
-	pub user: NestedUser,
+	pub user: User,
 	pub created: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct BookmarkRequest {
 	pub object_type: String,
 	pub object_id: u64,
-	pub user: NestedUserRequest,
+	pub user: UserRequest,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct Cable {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	/// * `cat3` - CAT3
-	/// * `cat5` - CAT5
-	/// * `cat5e` - CAT5e
-	/// * `cat6` - CAT6
-	/// * `cat6a` - CAT6a
-	/// * `cat7` - CAT7
-	/// * `cat7a` - CAT7a
-	/// * `cat8` - CAT8
-	/// * `dac-active` - Direct Attach Copper (Active)
-	/// * `dac-passive` - Direct Attach Copper (Passive)
-	/// * `mrj21-trunk` - MRJ21 Trunk
-	/// * `coaxial` - Coaxial
-	/// * `mmf` - Multimode Fiber
-	/// * `mmf-om1` - Multimode Fiber (OM1)
-	/// * `mmf-om2` - Multimode Fiber (OM2)
-	/// * `mmf-om3` - Multimode Fiber (OM3)
-	/// * `mmf-om4` - Multimode Fiber (OM4)
-	/// * `mmf-om5` - Multimode Fiber (OM5)
-	/// * `smf` - Singlemode Fiber
-	/// * `smf-os1` - Singlemode Fiber (OS1)
-	/// * `smf-os2` - Singlemode Fiber (OS2)
-	/// * `aoc` - Active Optical Cabling (AOC)
-	/// * `power` - Power
-	pub r#type: String,
-	pub a_terminations: Vec<GenericObject>,
-	pub b_terminations: Vec<GenericObject>,
-	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub tenant: Option<NestedTenant>,
 	pub label: String,
-	pub color: String,
-	pub length: Option<f64>,
-	pub length_unit: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CableRequest {
-	/// * `cat3` - CAT3
-	/// * `cat5` - CAT5
-	/// * `cat5e` - CAT5e
-	/// * `cat6` - CAT6
-	/// * `cat6a` - CAT6a
-	/// * `cat7` - CAT7
-	/// * `cat7a` - CAT7a
-	/// * `cat8` - CAT8
-	/// * `dac-active` - Direct Attach Copper (Active)
-	/// * `dac-passive` - Direct Attach Copper (Passive)
-	/// * `mrj21-trunk` - MRJ21 Trunk
-	/// * `coaxial` - Coaxial
-	/// * `mmf` - Multimode Fiber
-	/// * `mmf-om1` - Multimode Fiber (OM1)
-	/// * `mmf-om2` - Multimode Fiber (OM2)
-	/// * `mmf-om3` - Multimode Fiber (OM3)
-	/// * `mmf-om4` - Multimode Fiber (OM4)
-	/// * `mmf-om5` - Multimode Fiber (OM5)
-	/// * `smf` - Singlemode Fiber
-	/// * `smf-os1` - Singlemode Fiber (OS1)
-	/// * `smf-os2` - Singlemode Fiber (OS2)
-	/// * `aoc` - Active Optical Cabling (AOC)
-	/// * `power` - Power
-	pub r#type: String,
-	pub a_terminations: Vec<GenericObjectRequest>,
-	pub b_terminations: Vec<GenericObjectRequest>,
-	/// * `connected` - Connected
-	/// * `planned` - Planned
-	/// * `decommissioning` - Decommissioning
-	pub status: String,
-	pub tenant: Option<NestedTenantRequest>,
 	pub label: String,
-	pub color: String,
-	pub length: Option<f64>,
-	/// * `km` - Kilometers
-	/// * `m` - Meters
-	/// * `cm` - Centimeters
-	/// * `mi` - Miles
-	/// * `ft` - Feet
-	/// * `in` - Inches
-	pub length_unit: Option<String>,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CableTermination {
@@ -248,86 +169,25 @@ pub struct Circuit {
 	pub display: String,
 	/// Unique circuit ID
 	pub cid: String,
-	pub provider: NestedProvider,
-	pub provider_account: Option<NestedProviderAccount>,
-	pub r#type: NestedCircuitType,
-	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub tenant: Option<NestedTenant>,
-	pub install_date: Option<String>,
-	pub termination_date: Option<String>,
-	/// Committed rate
-	pub commit_rate: Option<u32>,
-	pub description: String,
-	pub termination_a: Option<CircuitCircuitTermination>,
-	pub termination_z: Option<CircuitCircuitTermination>,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct CircuitCircuitTermination {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub site: Option<NestedSite>,
-	pub provider_network: Option<NestedProviderNetwork>,
-	/// Physical circuit speed
-	pub port_speed: Option<u32>,
-	/// Upstream speed, if different from port speed
-	pub upstream_speed: Option<u32>,
-	/// ID of the local cross-connect
-	pub xconnect_id: String,
-	pub description: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct CircuitCircuitTerminationRequest {
-	pub site: Option<NestedSiteRequest>,
-	pub provider_network: Option<NestedProviderNetworkRequest>,
-	/// Physical circuit speed
-	pub port_speed: Option<u32>,
-	/// Upstream speed, if different from port speed
-	pub upstream_speed: Option<u32>,
-	/// ID of the local cross-connect
-	pub xconnect_id: String,
 	pub description: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CircuitRequest {
 	/// Unique circuit ID
 	pub cid: String,
-	pub provider: NestedProviderRequest,
-	pub provider_account: Option<NestedProviderAccountRequest>,
-	pub r#type: NestedCircuitTypeRequest,
-	/// * `planned` - Planned
-	/// * `provisioning` - Provisioning
-	/// * `active` - Active
-	/// * `offline` - Offline
-	/// * `deprovisioning` - Deprovisioning
-	/// * `decommissioned` - Decommissioned
-	pub status: String,
-	pub tenant: Option<NestedTenantRequest>,
-	pub install_date: Option<String>,
-	pub termination_date: Option<String>,
-	/// Committed rate
-	pub commit_rate: Option<u32>,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CircuitTermination {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub circuit: NestedCircuit,
+	pub circuit: Circuit,
 	/// * `A` - A
 	/// * `Z` - Z
 	pub term_side: String,
-	pub site: Option<NestedSite>,
-	pub provider_network: Option<NestedProviderNetwork>,
+	pub site: Option<Site>,
+	pub provider_network: Option<ProviderNetwork>,
 	/// Physical circuit speed
 	pub port_speed: Option<u32>,
 	/// Upstream speed, if different from port speed
@@ -339,7 +199,7 @@ pub struct CircuitTermination {
 	pub description: String,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
-	pub cable: Option<NestedCable>,
+	pub cable: Option<Cable>,
 	pub cable_end: String,
 	pub link_peers: Vec<serde_json::Value>,
 	/// Return the type of the peer link terminations, or None.
@@ -352,12 +212,12 @@ pub struct CircuitTermination {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CircuitTerminationRequest {
-	pub circuit: NestedCircuitRequest,
+	pub circuit: CircuitRequest,
 	/// * `A` - A
 	/// * `Z` - Z
 	pub term_side: String,
-	pub site: Option<NestedSiteRequest>,
-	pub provider_network: Option<NestedProviderNetworkRequest>,
+	pub site: Option<SiteRequest>,
+	pub provider_network: Option<ProviderNetworkRequest>,
 	/// Physical circuit speed
 	pub port_speed: Option<u32>,
 	/// Upstream speed, if different from port speed
@@ -402,18 +262,7 @@ pub struct Cluster {
 	pub url: String,
 	pub display: String,
 	pub name: String,
-	pub r#type: NestedClusterType,
-	pub group: Option<NestedClusterGroup>,
-	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub tenant: Option<NestedTenant>,
-	pub site: Option<NestedSite>,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
-	pub device_count: i64,
 	pub virtualmachine_count: i64,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -441,20 +290,7 @@ pub struct ClusterGroupRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ClusterRequest {
 	pub name: String,
-	pub r#type: NestedClusterTypeRequest,
-	pub group: Option<NestedClusterGroupRequest>,
-	/// * `planned` - Planned
-	/// * `staging` - Staging
-	/// * `active` - Active
-	/// * `decommissioning` - Decommissioning
-	/// * `offline` - Offline
-	pub status: String,
-	pub tenant: Option<NestedTenantRequest>,
-	pub site: Option<NestedSiteRequest>,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ClusterType {
@@ -479,18 +315,6 @@ pub struct ClusterTypeRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct ComponentNestedModule {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub device: i64,
-	pub module_bay: Option<ModuleNestedModuleBay>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct ComponentNestedModuleRequest {
-	pub device: i64,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ConfigContext {
 	pub id: i64,
 	pub url: String,
@@ -499,23 +323,23 @@ pub struct ConfigContext {
 	pub weight: u16,
 	pub description: String,
 	pub is_active: bool,
-	pub regions: Vec<i64>,
-	pub site_groups: Vec<i64>,
-	pub sites: Vec<i64>,
-	pub locations: Vec<i64>,
-	pub device_types: Vec<i64>,
-	pub roles: Vec<i64>,
-	pub platforms: Vec<i64>,
-	pub cluster_types: Vec<i64>,
-	pub cluster_groups: Vec<i64>,
-	pub clusters: Vec<i64>,
-	pub tenant_groups: Vec<i64>,
-	pub tenants: Vec<i64>,
+	pub regions: Vec<Region>,
+	pub site_groups: Vec<SiteGroup>,
+	pub sites: Vec<Site>,
+	pub locations: Vec<Location>,
+	pub device_types: Vec<DeviceType>,
+	pub roles: Vec<DeviceRole>,
+	pub platforms: Vec<Platform>,
+	pub cluster_types: Vec<ClusterType>,
+	pub cluster_groups: Vec<ClusterGroup>,
+	pub clusters: Vec<Cluster>,
+	pub tenant_groups: Vec<TenantGroup>,
+	pub tenants: Vec<Tenant>,
 	pub tags: Vec<String>,
-	pub data_source: NestedDataSource,
+	pub data_source: DataSource,
 	/// Path to remote file (relative to data source root)
 	pub data_path: String,
-	pub data_file: Option<NestedDataFile>,
+	pub data_file: Option<DataFile>,
 	pub data_synced: Option<String>,
 	pub data: serde_json::Value,
 	pub created: Option<String>,
@@ -540,7 +364,7 @@ pub struct ConfigContextRequest {
 	pub tenant_groups: Vec<i64>,
 	pub tenants: Vec<i64>,
 	pub tags: Vec<String>,
-	pub data_source: NestedDataSourceRequest,
+	pub data_source: DataSourceRequest,
 	pub data: serde_json::Value,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -550,37 +374,19 @@ pub struct ConfigTemplate {
 	pub display: String,
 	pub name: String,
 	pub description: String,
-	/// Any <a href="https://jinja.palletsprojects.com/en/3.1.x/api/#jinja2.Environment">additional parameters</a> to pass when constructing the Jinja2 environment.
-	pub environment_params: Option<serde_json::Value>,
-	/// Jinja2 template code.
-	pub template_code: String,
-	pub data_source: NestedDataSource,
-	/// Path to remote file (relative to data source root)
-	pub data_path: String,
-	pub data_file: NestedDataFile,
-	pub data_synced: Option<String>,
-	pub tags: Vec<NestedTag>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ConfigTemplateRequest {
 	pub name: String,
 	pub description: String,
-	/// Any <a href="https://jinja.palletsprojects.com/en/3.1.x/api/#jinja2.Environment">additional parameters</a> to pass when constructing the Jinja2 environment.
-	pub environment_params: Option<serde_json::Value>,
-	/// Jinja2 template code.
-	pub template_code: String,
-	pub data_source: NestedDataSourceRequest,
-	pub tags: Vec<NestedTagRequest>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ConsolePort {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device: NestedDevice,
-	pub module: Option<ComponentNestedModule>,
+	pub device: Device,
+	pub module: Option<Module>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -589,7 +395,7 @@ pub struct ConsolePort {
 	pub description: String,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
-	pub cable: Option<NestedCable>,
+	pub cable: Option<Cable>,
 	pub cable_end: String,
 	pub link_peers: Vec<serde_json::Value>,
 	/// Return the type of the peer link terminations, or None.
@@ -605,8 +411,8 @@ pub struct ConsolePort {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ConsolePortRequest {
-	pub device: NestedDeviceRequest,
-	pub module: Option<ComponentNestedModuleRequest>,
+	pub device: DeviceRequest,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -646,8 +452,8 @@ pub struct ConsolePortTemplate {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device_type: Option<NestedDeviceType>,
-	pub module_type: Option<NestedModuleType>,
+	pub device_type: Option<DeviceType>,
+	pub module_type: Option<ModuleType>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -659,8 +465,8 @@ pub struct ConsolePortTemplate {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ConsolePortTemplateRequest {
-	pub device_type: Option<NestedDeviceTypeRequest>,
-	pub module_type: Option<NestedModuleTypeRequest>,
+	pub device_type: Option<DeviceTypeRequest>,
+	pub module_type: Option<ModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -688,8 +494,8 @@ pub struct ConsoleServerPort {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device: NestedDevice,
-	pub module: Option<ComponentNestedModule>,
+	pub device: Device,
+	pub module: Option<Module>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -698,7 +504,7 @@ pub struct ConsoleServerPort {
 	pub description: String,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
-	pub cable: Option<NestedCable>,
+	pub cable: Option<Cable>,
 	pub cable_end: String,
 	pub link_peers: Vec<serde_json::Value>,
 	/// Return the type of the peer link terminations, or None.
@@ -714,8 +520,8 @@ pub struct ConsoleServerPort {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ConsoleServerPortRequest {
-	pub device: NestedDeviceRequest,
-	pub module: Option<ComponentNestedModuleRequest>,
+	pub device: DeviceRequest,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -755,8 +561,8 @@ pub struct ConsoleServerPortTemplate {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device_type: Option<NestedDeviceType>,
-	pub module_type: Option<NestedModuleType>,
+	pub device_type: Option<DeviceType>,
+	pub module_type: Option<ModuleType>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -768,8 +574,8 @@ pub struct ConsoleServerPortTemplate {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ConsoleServerPortTemplateRequest {
-	pub device_type: Option<NestedDeviceTypeRequest>,
-	pub module_type: Option<NestedModuleTypeRequest>,
+	pub device_type: Option<DeviceTypeRequest>,
+	pub module_type: Option<ModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -797,30 +603,19 @@ pub struct Contact {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub group: Option<NestedContactGroup>,
 	pub name: String,
-	pub title: String,
-	pub phone: String,
-	pub email: String,
-	pub address: String,
-	pub link: String,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ContactAssignment {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub content_type: String,
+	pub object_type: String,
 	pub object_id: u64,
 	pub object: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub contact: NestedContact,
-	pub role: Option<NestedContactRole>,
+	pub contact: Contact,
+	pub role: Option<ContactRole>,
 	pub priority: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -829,10 +624,10 @@ pub struct ContactAssignment {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ContactAssignmentRequest {
-	pub content_type: String,
+	pub object_type: String,
 	pub object_id: u64,
-	pub contact: NestedContactRequest,
-	pub role: Option<NestedContactRoleRequest>,
+	pub contact: ContactRequest,
+	pub role: Option<ContactRoleRequest>,
 	/// * `primary` - Primary
 	/// * `secondary` - Secondary
 	/// * `tertiary` - Tertiary
@@ -868,17 +663,8 @@ pub struct ContactGroupRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ContactRequest {
-	pub group: Option<NestedContactGroupRequest>,
 	pub name: String,
-	pub title: String,
-	pub phone: String,
-	pub email: String,
-	pub address: String,
-	pub link: String,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ContactRole {
@@ -888,35 +674,21 @@ pub struct ContactRole {
 	pub name: String,
 	pub slug: String,
 	pub description: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ContactRoleRequest {
 	pub name: String,
 	pub slug: String,
 	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct ContentType {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub app_label: String,
-	pub model: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CustomField {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub content_types: Vec<String>,
+	pub object_types: Vec<String>,
 	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub object_type: Option<String>,
+	pub related_object_type: Option<String>,
 	pub data_type: String,
 	/// Internal field name
 	pub name: String,
@@ -944,7 +716,8 @@ pub struct CustomField {
 	pub validation_maximum: Option<i64>,
 	/// Regular expression to enforce on text field values. Use ^ and $ to force matching of entire string. For example, <code>^[A-Z]{3}$</code> will limit values to exactly three uppercase letters.
 	pub validation_regex: String,
-	pub choice_set: Option<NestedCustomFieldChoiceSet>,
+	pub choice_set: Option<CustomFieldChoiceSet>,
+	pub comments: String,
 	pub created: Option<String>,
 	pub last_updated: Option<String>,
 }
@@ -977,7 +750,7 @@ pub struct CustomFieldChoiceSetRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CustomFieldRequest {
-	pub content_types: Vec<String>,
+	pub object_types: Vec<String>,
 	/// * `text` - Text
 	/// * `longtext` - Text (long)
 	/// * `integer` - Integer
@@ -992,7 +765,7 @@ pub struct CustomFieldRequest {
 	/// * `object` - Object
 	/// * `multiobject` - Multiple objects
 	pub r#type: String,
-	pub object_type: Option<String>,
+	pub related_object_type: Option<String>,
 	/// Internal field name
 	pub name: String,
 	/// Name of the field as displayed to users (if not provided, 'the field's name will be used)
@@ -1028,14 +801,15 @@ pub struct CustomFieldRequest {
 	pub validation_maximum: Option<i64>,
 	/// Regular expression to enforce on text field values. Use ^ and $ to force matching of entire string. For example, <code>^[A-Z]{3}$</code> will limit values to exactly three uppercase letters.
 	pub validation_regex: String,
-	pub choice_set: Option<NestedCustomFieldChoiceSetRequest>,
+	pub choice_set: Option<CustomFieldChoiceSetRequest>,
+	pub comments: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CustomLink {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub content_types: Vec<String>,
+	pub object_types: Vec<String>,
 	pub name: String,
 	pub enabled: bool,
 	/// Jinja2 template code for link text
@@ -1070,7 +844,7 @@ pub struct CustomLink {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CustomLinkRequest {
-	pub content_types: Vec<String>,
+	pub object_types: Vec<String>,
 	pub name: String,
 	pub enabled: bool,
 	/// Jinja2 template code for link text
@@ -1116,7 +890,7 @@ pub struct DataFile {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub source: Option<NestedDataSource>,
+	pub source: Option<DataSource>,
 	/// File path relative to the data source's root
 	pub path: String,
 	pub last_updated: String,
@@ -1130,19 +904,7 @@ pub struct DataSource {
 	pub url: String,
 	pub display: String,
 	pub name: String,
-	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub source_url: String,
-	pub enabled: bool,
-	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub description: String,
-	pub comments: String,
-	pub parameters: Option<serde_json::Value>,
-	/// Patterns (one per line) matching files to ignore when syncing
-	pub ignore_rules: String,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
-	pub file_count: i64,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DataSourceRequest {
@@ -1167,19 +929,17 @@ pub struct Device {
 	pub url: String,
 	pub display: String,
 	pub name: Option<String>,
-	pub device_type: NestedDeviceType,
-	pub role: NestedDeviceRole,
-	/// Deprecated in v3.6 in favor of `role`.
-	pub device_role: Option<NestedDeviceRole>,
-	pub tenant: Option<NestedTenant>,
-	pub platform: Option<NestedPlatform>,
+	pub device_type: DeviceType,
+	pub role: DeviceRole,
+	pub tenant: Option<Tenant>,
+	pub platform: Option<Platform>,
 	/// Chassis serial number, assigned by the manufacturer
 	pub serial: String,
 	/// A unique tag used to identify this device
 	pub asset_tag: Option<String>,
-	pub site: NestedSite,
-	pub location: Option<NestedLocation>,
-	pub rack: Option<NestedRack>,
+	pub site: Site,
+	pub location: Option<Location>,
+	pub rack: Option<Rack>,
 	pub position: Option<f64>,
 	pub face: Option<std::collections::HashMap<String, serde_json::Value>>,
 	/// GPS coordinate in decimal format (xx.yyyyyy)
@@ -1189,18 +949,18 @@ pub struct Device {
 	pub parent_device: Option<NestedDevice>,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub airflow: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub primary_ip: Option<NestedIPAddress>,
-	pub primary_ip4: Option<NestedIPAddress>,
-	pub primary_ip6: Option<NestedIPAddress>,
-	pub oob_ip: Option<NestedIPAddress>,
-	pub cluster: Option<NestedCluster>,
-	pub virtual_chassis: Option<NestedVirtualChassis>,
+	pub primary_ip: Option<IPAddress>,
+	pub primary_ip4: Option<IPAddress>,
+	pub primary_ip6: Option<IPAddress>,
+	pub oob_ip: Option<IPAddress>,
+	pub cluster: Option<Cluster>,
+	pub virtual_chassis: Option<VirtualChassis>,
 	pub vc_position: Option<u8>,
 	/// Virtual chassis master election priority
 	pub vc_priority: Option<u8>,
 	pub description: String,
 	pub comments: String,
-	pub config_template: Option<NestedConfigTemplate>,
+	pub config_template: Option<ConfigTemplate>,
 	/// Local config context data takes precedence over source contexts in the final rendered config context
 	pub local_context_data: Option<serde_json::Value>,
 	pub tags: Vec<NestedTag>,
@@ -1223,12 +983,12 @@ pub struct DeviceBay {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device: NestedDevice,
+	pub device: Device,
 	pub name: String,
 	/// Physical label
 	pub label: String,
 	pub description: String,
-	pub installed_device: Option<NestedDevice>,
+	pub installed_device: Option<Device>,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub created: Option<String>,
@@ -1236,12 +996,12 @@ pub struct DeviceBay {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DeviceBayRequest {
-	pub device: NestedDeviceRequest,
+	pub device: DeviceRequest,
 	pub name: String,
 	/// Physical label
 	pub label: String,
 	pub description: String,
-	pub installed_device: Option<NestedDeviceRequest>,
+	pub installed_device: Option<DeviceRequest>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -1250,7 +1010,7 @@ pub struct DeviceBayTemplate {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device_type: NestedDeviceType,
+	pub device_type: DeviceType,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -1261,11 +1021,16 @@ pub struct DeviceBayTemplate {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DeviceBayTemplateRequest {
-	pub device_type: NestedDeviceTypeRequest,
+	pub device_type: DeviceTypeRequest,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
 	pub label: String,
+	pub description: String,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct DeviceRequest {
+	pub name: Option<String>,
 	pub description: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -1275,15 +1040,7 @@ pub struct DeviceRole {
 	pub display: String,
 	pub name: String,
 	pub slug: String,
-	pub color: String,
-	/// Virtual machines may be assigned to this role
-	pub vm_role: bool,
-	pub config_template: Option<NestedConfigTemplate>,
 	pub description: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 	pub device_count: i64,
 	pub virtualmachine_count: i64,
 }
@@ -1294,7 +1051,7 @@ pub struct DeviceRoleRequest {
 	pub color: String,
 	/// Virtual machines may be assigned to this role
 	pub vm_role: bool,
-	pub config_template: Option<NestedConfigTemplateRequest>,
+	pub config_template: Option<ConfigTemplateRequest>,
 	pub description: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -1304,77 +1061,18 @@ pub struct DeviceType {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub manufacturer: NestedManufacturer,
-	pub default_platform: Option<NestedPlatform>,
+	pub manufacturer: Manufacturer,
 	pub model: String,
 	pub slug: String,
-	/// Discrete part number (optional)
-	pub part_number: String,
-	pub u_height: f64,
-	/// Devices of this type are excluded when calculating rack utilization.
-	pub exclude_from_utilization: bool,
-	/// Device consumes both front and rear rack faces.
-	pub is_full_depth: bool,
-	pub subdevice_role: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub airflow: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub weight: Option<f64>,
-	pub weight_unit: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub front_image: String,
-	pub rear_image: String,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 	pub device_count: i64,
-	pub console_port_template_count: i64,
-	pub console_server_port_template_count: i64,
-	pub power_port_template_count: i64,
-	pub power_outlet_template_count: i64,
-	pub interface_template_count: i64,
-	pub front_port_template_count: i64,
-	pub rear_port_template_count: i64,
-	pub device_bay_template_count: i64,
-	pub module_bay_template_count: i64,
-	pub inventory_item_template_count: i64,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DeviceTypeRequest {
-	pub manufacturer: NestedManufacturerRequest,
-	pub default_platform: Option<NestedPlatformRequest>,
+	pub manufacturer: ManufacturerRequest,
 	pub model: String,
 	pub slug: String,
-	/// Discrete part number (optional)
-	pub part_number: String,
-	pub u_height: f64,
-	/// Devices of this type are excluded when calculating rack utilization.
-	pub exclude_from_utilization: bool,
-	/// Device consumes both front and rear rack faces.
-	pub is_full_depth: bool,
-	/// * `parent` - Parent
-	/// * `child` - Child
-	pub subdevice_role: Option<String>,
-	/// * `front-to-rear` - Front to rear
-	/// * `rear-to-front` - Rear to front
-	/// * `left-to-right` - Left to right
-	/// * `right-to-left` - Right to left
-	/// * `side-to-rear` - Side to rear
-	/// * `passive` - Passive
-	/// * `mixed` - Mixed
-	pub airflow: Option<String>,
-	pub weight: Option<f64>,
-	/// * `kg` - Kilograms
-	/// * `g` - Grams
-	/// * `lb` - Pounds
-	/// * `oz` - Ounces
-	pub weight_unit: Option<String>,
-	pub front_image: String,
-	pub rear_image: String,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DeviceWithConfigContext {
@@ -1382,19 +1080,17 @@ pub struct DeviceWithConfigContext {
 	pub url: String,
 	pub display: String,
 	pub name: Option<String>,
-	pub device_type: NestedDeviceType,
-	pub role: NestedDeviceRole,
-	/// Deprecated in v3.6 in favor of `role`.
-	pub device_role: Option<NestedDeviceRole>,
-	pub tenant: Option<NestedTenant>,
-	pub platform: Option<NestedPlatform>,
+	pub device_type: DeviceType,
+	pub role: DeviceRole,
+	pub tenant: Option<Tenant>,
+	pub platform: Option<Platform>,
 	/// Chassis serial number, assigned by the manufacturer
 	pub serial: String,
 	/// A unique tag used to identify this device
 	pub asset_tag: Option<String>,
-	pub site: NestedSite,
-	pub location: Option<NestedLocation>,
-	pub rack: Option<NestedRack>,
+	pub site: Site,
+	pub location: Option<Location>,
+	pub rack: Option<Rack>,
 	pub position: Option<f64>,
 	pub face: Option<std::collections::HashMap<String, serde_json::Value>>,
 	/// GPS coordinate in decimal format (xx.yyyyyy)
@@ -1404,18 +1100,18 @@ pub struct DeviceWithConfigContext {
 	pub parent_device: Option<NestedDevice>,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub airflow: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub primary_ip: Option<NestedIPAddress>,
-	pub primary_ip4: Option<NestedIPAddress>,
-	pub primary_ip6: Option<NestedIPAddress>,
-	pub oob_ip: Option<NestedIPAddress>,
-	pub cluster: Option<NestedCluster>,
-	pub virtual_chassis: Option<NestedVirtualChassis>,
+	pub primary_ip: Option<IPAddress>,
+	pub primary_ip4: Option<IPAddress>,
+	pub primary_ip6: Option<IPAddress>,
+	pub oob_ip: Option<IPAddress>,
+	pub cluster: Option<Cluster>,
+	pub virtual_chassis: Option<VirtualChassis>,
 	pub vc_position: Option<u8>,
 	/// Virtual chassis master election priority
 	pub vc_priority: Option<u8>,
 	pub description: String,
 	pub comments: String,
-	pub config_template: Option<NestedConfigTemplate>,
+	pub config_template: Option<ConfigTemplate>,
 	pub config_context: Option<serde_json::Value>,
 	/// Local config context data takes precedence over source contexts in the final rendered config context
 	pub local_context_data: Option<serde_json::Value>,
@@ -1437,17 +1133,17 @@ pub struct DeviceWithConfigContext {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DeviceWithConfigContextRequest {
 	pub name: Option<String>,
-	pub device_type: NestedDeviceTypeRequest,
-	pub role: NestedDeviceRoleRequest,
-	pub tenant: Option<NestedTenantRequest>,
-	pub platform: Option<NestedPlatformRequest>,
+	pub device_type: DeviceTypeRequest,
+	pub role: DeviceRoleRequest,
+	pub tenant: Option<TenantRequest>,
+	pub platform: Option<PlatformRequest>,
 	/// Chassis serial number, assigned by the manufacturer
 	pub serial: String,
 	/// A unique tag used to identify this device
 	pub asset_tag: Option<String>,
-	pub site: NestedSiteRequest,
-	pub location: Option<NestedLocationRequest>,
-	pub rack: Option<NestedRackRequest>,
+	pub site: SiteRequest,
+	pub location: Option<LocationRequest>,
+	pub rack: Option<RackRequest>,
 	pub position: Option<f64>,
 	/// * `front` - Front
 	/// * `rear` - Rear
@@ -1472,17 +1168,17 @@ pub struct DeviceWithConfigContextRequest {
 	/// * `passive` - Passive
 	/// * `mixed` - Mixed
 	pub airflow: String,
-	pub primary_ip4: Option<NestedIPAddressRequest>,
-	pub primary_ip6: Option<NestedIPAddressRequest>,
-	pub oob_ip: Option<NestedIPAddressRequest>,
-	pub cluster: Option<NestedClusterRequest>,
-	pub virtual_chassis: Option<NestedVirtualChassisRequest>,
+	pub primary_ip4: Option<IPAddressRequest>,
+	pub primary_ip6: Option<IPAddressRequest>,
+	pub oob_ip: Option<IPAddressRequest>,
+	pub cluster: Option<ClusterRequest>,
+	pub virtual_chassis: Option<VirtualChassisRequest>,
 	pub vc_position: Option<u8>,
 	/// Virtual chassis master election priority
 	pub vc_priority: Option<u8>,
 	pub description: String,
 	pub comments: String,
-	pub config_template: Option<NestedConfigTemplateRequest>,
+	pub config_template: Option<ConfigTemplateRequest>,
 	/// Local config context data takes precedence over source contexts in the final rendered config context
 	pub local_context_data: Option<serde_json::Value>,
 	pub tags: Vec<NestedTagRequest>,
@@ -1493,7 +1189,7 @@ pub struct EventRule {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub content_types: Vec<String>,
+	pub object_types: Vec<String>,
 	pub name: String,
 	/// Triggers when a matching object is created.
 	pub type_create: bool,
@@ -1520,7 +1216,7 @@ pub struct EventRule {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct EventRuleRequest {
-	pub content_types: Vec<String>,
+	pub object_types: Vec<String>,
 	pub name: String,
 	/// Triggers when a matching object is created.
 	pub type_create: bool,
@@ -1549,7 +1245,7 @@ pub struct ExportTemplate {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub content_types: Vec<String>,
+	pub object_types: Vec<String>,
 	pub name: String,
 	pub description: String,
 	/// Jinja2 template code. The list of objects being exported is passed as a context variable named <code>queryset</code>.
@@ -1560,17 +1256,17 @@ pub struct ExportTemplate {
 	pub file_extension: String,
 	/// Download file as attachment
 	pub as_attachment: bool,
-	pub data_source: NestedDataSource,
+	pub data_source: DataSource,
 	/// Path to remote file (relative to data source root)
 	pub data_path: String,
-	pub data_file: Option<NestedDataFile>,
+	pub data_file: Option<DataFile>,
 	pub data_synced: Option<String>,
 	pub created: Option<String>,
 	pub last_updated: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExportTemplateRequest {
-	pub content_types: Vec<String>,
+	pub object_types: Vec<String>,
 	pub name: String,
 	pub description: String,
 	/// Jinja2 template code. The list of objects being exported is passed as a context variable named <code>queryset</code>.
@@ -1581,12 +1277,11 @@ pub struct ExportTemplateRequest {
 	pub file_extension: String,
 	/// Download file as attachment
 	pub as_attachment: bool,
-	pub data_source: NestedDataSourceRequest,
+	pub data_source: DataSourceRequest,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct FHRPGroup {
 	pub id: i64,
-	pub name: String,
 	pub url: String,
 	pub display: String,
 	/// * `vrrp2` - VRRPv2
@@ -1598,24 +1293,14 @@ pub struct FHRPGroup {
 	/// * `other` - Other
 	pub protocol: String,
 	pub group_id: u16,
-	/// * `plaintext` - Plaintext
-	/// * `md5` - MD5
-	pub auth_type: String,
-	pub auth_key: String,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
-	pub ip_addresses: Vec<NestedIPAddress>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct FHRPGroupAssignment {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub group: NestedFHRPGroup,
+	pub group: FHRPGroup,
 	pub interface_type: String,
 	pub interface_id: u64,
 	pub interface: Option<serde_json::Value>,
@@ -1625,14 +1310,13 @@ pub struct FHRPGroupAssignment {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct FHRPGroupAssignmentRequest {
-	pub group: NestedFHRPGroupRequest,
+	pub group: FHRPGroupRequest,
 	pub interface_type: String,
 	pub interface_id: u64,
 	pub priority: u8,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct FHRPGroupRequest {
-	pub name: String,
 	/// * `vrrp2` - VRRPv2
 	/// * `vrrp3` - VRRPv3
 	/// * `carp` - CARP
@@ -1642,22 +1326,15 @@ pub struct FHRPGroupRequest {
 	/// * `other` - Other
 	pub protocol: String,
 	pub group_id: u16,
-	/// * `plaintext` - Plaintext
-	/// * `md5` - MD5
-	pub auth_type: String,
-	pub auth_key: String,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct FrontPort {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device: NestedDevice,
-	pub module: Option<ComponentNestedModule>,
+	pub device: Device,
+	pub module: Option<Module>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -1669,7 +1346,7 @@ pub struct FrontPort {
 	pub description: String,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
-	pub cable: Option<NestedCable>,
+	pub cable: Option<Cable>,
 	pub cable_end: String,
 	pub link_peers: Vec<serde_json::Value>,
 	/// Return the type of the peer link terminations, or None.
@@ -1699,8 +1376,8 @@ pub struct FrontPortRearPortRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct FrontPortRequest {
-	pub device: NestedDeviceRequest,
-	pub module: Option<ComponentNestedModuleRequest>,
+	pub device: DeviceRequest,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -1767,15 +1444,15 @@ pub struct FrontPortTemplate {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device_type: Option<NestedDeviceType>,
-	pub module_type: Option<NestedModuleType>,
+	pub device_type: Option<DeviceType>,
+	pub module_type: Option<ModuleType>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
 	pub label: String,
 	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub color: String,
-	pub rear_port: NestedRearPortTemplate,
+	pub rear_port: RearPortTemplate,
 	pub rear_port_position: u16,
 	pub description: String,
 	pub created: Option<String>,
@@ -1783,8 +1460,8 @@ pub struct FrontPortTemplate {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct FrontPortTemplateRequest {
-	pub device_type: Option<NestedDeviceTypeRequest>,
-	pub module_type: Option<NestedModuleTypeRequest>,
+	pub device_type: Option<DeviceTypeRequest>,
+	pub module_type: Option<ModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -1838,15 +1515,9 @@ pub struct FrontPortTemplateRequest {
 	/// * `other` - Other
 	pub r#type: String,
 	pub color: String,
-	pub rear_port: NestedRearPortTemplateRequest,
+	pub rear_port: RearPortTemplateRequest,
 	pub rear_port_position: u16,
 	pub description: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct GenericObject {
-	pub object_type: String,
-	pub object_id: i64,
-	pub object: Option<serde_json::Value>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct GenericObjectRequest {
@@ -1859,11 +1530,15 @@ pub struct Group {
 	pub url: String,
 	pub display: String,
 	pub name: String,
+	pub description: String,
+	pub permissions: Vec<ObjectPermission>,
 	pub user_count: i64,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct GroupRequest {
 	pub name: String,
+	pub description: String,
+	pub permissions: Vec<i64>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IKEPolicy {
@@ -1874,7 +1549,7 @@ pub struct IKEPolicy {
 	pub description: String,
 	pub version: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub mode: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub proposals: Vec<i64>,
+	pub proposals: Vec<IKEProposal>,
 	pub preshared_key: String,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
@@ -1932,7 +1607,8 @@ pub struct IKEProposalRequest {
 	/// * `aes-192-gcm` - 192-bit AES (GCM)
 	/// * `aes-256-cbc` - 256-bit AES (CBC)
 	/// * `aes-256-gcm` - 256-bit AES (GCM)
-	/// * `3des-cbc` - DES
+	/// * `3des-cbc` - 3DES
+	/// * `des-cbc` - DES
 	pub encryption_algorithm: String,
 	/// * `hmac-sha1` - SHA-1 HMAC
 	/// * `hmac-sha256` - SHA-256 HMAC
@@ -1978,53 +1654,12 @@ pub struct IPAddress {
 	pub display: String,
 	pub family: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub address: String,
-	pub vrf: Option<NestedVRF>,
-	pub tenant: Option<NestedTenant>,
-	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub role: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub assigned_object_type: Option<String>,
-	pub assigned_object_id: Option<u64>,
-	pub assigned_object: Option<serde_json::Value>,
-	pub nat_inside: Option<NestedIPAddress>,
-	pub nat_outside: Vec<NestedIPAddress>,
-	/// Hostname or FQDN (not case-sensitive)
-	pub dns_name: String,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IPAddressRequest {
 	pub address: String,
-	pub vrf: Option<NestedVRFRequest>,
-	pub tenant: Option<NestedTenantRequest>,
-	/// * `active` - Active
-	/// * `reserved` - Reserved
-	/// * `deprecated` - Deprecated
-	/// * `dhcp` - DHCP
-	/// * `slaac` - SLAAC
-	pub status: String,
-	/// * `loopback` - Loopback
-	/// * `secondary` - Secondary
-	/// * `anycast` - Anycast
-	/// * `vip` - VIP
-	/// * `vrrp` - VRRP
-	/// * `hsrp` - HSRP
-	/// * `glbp` - GLBP
-	/// * `carp` - CARP
-	pub role: String,
-	pub assigned_object_type: Option<String>,
-	pub assigned_object_id: Option<u64>,
-	pub nat_inside: Option<NestedIPAddressRequest>,
-	/// Hostname or FQDN (not case-sensitive)
-	pub dns_name: String,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IPRange {
@@ -2035,10 +1670,10 @@ pub struct IPRange {
 	pub start_address: String,
 	pub end_address: String,
 	pub size: i64,
-	pub vrf: Option<NestedVRF>,
-	pub tenant: Option<NestedTenant>,
+	pub vrf: Option<VRF>,
+	pub tenant: Option<Tenant>,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub role: Option<NestedRole>,
+	pub role: Option<Role>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
@@ -2052,13 +1687,13 @@ pub struct IPRange {
 pub struct IPRangeRequest {
 	pub start_address: String,
 	pub end_address: String,
-	pub vrf: Option<NestedVRFRequest>,
-	pub tenant: Option<NestedTenantRequest>,
+	pub vrf: Option<VRFRequest>,
+	pub tenant: Option<TenantRequest>,
 	/// * `active` - Active
 	/// * `reserved` - Reserved
 	/// * `deprecated` - Deprecated
 	pub status: String,
-	pub role: Option<NestedRoleRequest>,
+	pub role: Option<RoleRequest>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -2073,7 +1708,7 @@ pub struct IPSecPolicy {
 	pub display: String,
 	pub name: String,
 	pub description: String,
-	pub proposals: Vec<i64>,
+	pub proposals: Vec<IPSecProposal>,
 	pub pfs_group: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
@@ -2123,8 +1758,8 @@ pub struct IPSecProfile {
 	pub name: String,
 	pub description: String,
 	pub mode: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub ike_policy: NestedIKEPolicy,
-	pub ipsec_policy: NestedIPSecPolicy,
+	pub ike_policy: IKEPolicy,
+	pub ipsec_policy: IPSecPolicy,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -2138,8 +1773,8 @@ pub struct IPSecProfileRequest {
 	/// * `esp` - ESP
 	/// * `ah` - AH
 	pub mode: String,
-	pub ike_policy: NestedIKEPolicyRequest,
-	pub ipsec_policy: NestedIPSecPolicyRequest,
+	pub ike_policy: IKEPolicyRequest,
+	pub ipsec_policy: IPSecPolicyRequest,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -2173,7 +1808,8 @@ pub struct IPSecProposalRequest {
 	/// * `aes-192-gcm` - 192-bit AES (GCM)
 	/// * `aes-256-cbc` - 256-bit AES (CBC)
 	/// * `aes-256-gcm` - 256-bit AES (GCM)
-	/// * `3des-cbc` - DES
+	/// * `3des-cbc` - 3DES
+	/// * `des-cbc` - DES
 	pub encryption_algorithm: String,
 	/// * `hmac-sha1` - SHA-1 HMAC
 	/// * `hmac-sha256` - SHA-256 HMAC
@@ -2194,7 +1830,7 @@ pub struct ImageAttachment {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub content_type: String,
+	pub object_type: String,
 	pub object_id: u64,
 	pub parent: Option<serde_json::Value>,
 	pub name: String,
@@ -2206,7 +1842,7 @@ pub struct ImageAttachment {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ImageAttachmentRequest {
-	pub content_type: String,
+	pub object_type: String,
 	pub object_id: u64,
 	pub name: String,
 	pub image: String,
@@ -2218,9 +1854,9 @@ pub struct Interface {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device: NestedDevice,
-	pub vdcs: Vec<i64>,
-	pub module: Option<ComponentNestedModule>,
+	pub device: Device,
+	pub vdcs: Vec<VirtualDeviceContext>,
+	pub module: Option<Module>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -2247,19 +1883,19 @@ pub struct Interface {
 	/// Populated by selected channel (if set)
 	pub rf_channel_width: Option<f64>,
 	pub tx_power: Option<u8>,
-	pub untagged_vlan: Option<NestedVLAN>,
-	pub tagged_vlans: Vec<i64>,
+	pub untagged_vlan: Option<VLAN>,
+	pub tagged_vlans: Vec<VLAN>,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
-	pub cable: Option<NestedCable>,
+	pub cable: Option<Cable>,
 	pub cable_end: String,
 	pub wireless_link: Option<NestedWirelessLink>,
 	pub link_peers: Vec<serde_json::Value>,
 	/// Return the type of the peer link terminations, or None.
 	pub link_peers_type: String,
-	pub wireless_lans: Vec<i64>,
-	pub vrf: Option<NestedVRF>,
-	pub l2vpn_termination: Option<NestedL2VPNTermination>,
+	pub wireless_lans: Vec<WirelessLAN>,
+	pub vrf: Option<VRF>,
+	pub l2vpn_termination: Option<L2VPNTermination>,
 	pub connected_endpoints: Vec<serde_json::Value>,
 	pub connected_endpoints_type: String,
 	pub connected_endpoints_reachable: bool,
@@ -2273,9 +1909,9 @@ pub struct Interface {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct InterfaceRequest {
-	pub device: NestedDeviceRequest,
+	pub device: DeviceRequest,
 	pub vdcs: Vec<i64>,
-	pub module: Option<ComponentNestedModuleRequest>,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -2287,6 +1923,7 @@ pub struct InterfaceRequest {
 	/// * `100base-tx` - 100BASE-TX (10/100ME)
 	/// * `100base-t1` - 100BASE-T1 (10/100ME Single Pair)
 	/// * `1000base-t` - 1000BASE-T (1GE)
+	/// * `1000base-tx` - 1000BASE-TX (1GE)
 	/// * `2.5gbase-t` - 2.5GBASE-T (2.5GE)
 	/// * `5gbase-t` - 5GBASE-T (5GE)
 	/// * `10gbase-t` - 10GBASE-T (10GE)
@@ -2323,6 +1960,8 @@ pub struct InterfaceRequest {
 	/// * `800gbase-x-qsfpdd` - QSFP-DD (800GE)
 	/// * `800gbase-x-osfp` - OSFP (800GE)
 	/// * `1000base-kx` - 1000BASE-KX (1GE)
+	/// * `2.5gbase-kx` - 2.5GBASE-KX (2.5GE)
+	/// * `5gbase-kr` - 5GBASE-KR (5GE)
 	/// * `10gbase-kr` - 10GBASE-KR (10GE)
 	/// * `10gbase-kx4` - 10GBASE-KX4 (10GE)
 	/// * `25gbase-kr` - 25GBASE-KR (25GE)
@@ -2343,6 +1982,8 @@ pub struct InterfaceRequest {
 	/// * `gsm` - GSM
 	/// * `cdma` - CDMA
 	/// * `lte` - LTE
+	/// * `4g` - 4G
+	/// * `5g` - 5G
 	/// * `sonet-oc3` - OC-3/STM-1
 	/// * `sonet-oc12` - OC-12/STM-4
 	/// * `sonet-oc48` - OC-48/STM-16
@@ -2356,7 +1997,10 @@ pub struct InterfaceRequest {
 	/// * `8gfc-sfpp` - SFP+ (8GFC)
 	/// * `16gfc-sfpp` - SFP+ (16GFC)
 	/// * `32gfc-sfp28` - SFP28 (32GFC)
+	/// * `32gfc-sfpp` - SFP+ (32GFC)
 	/// * `64gfc-qsfpp` - QSFP+ (64GFC)
+	/// * `64gfc-sfpdd` - SFP-DD (64GFC)
+	/// * `64gfc-sfpp` - SFP+ (64GFC)
 	/// * `128gfc-qsfp28` - QSFP28 (128GFC)
 	/// * `infiniband-sdr` - SDR (2 Gbps)
 	/// * `infiniband-ddr` - DDR (4 Gbps)
@@ -2373,12 +2017,15 @@ pub struct InterfaceRequest {
 	/// * `e3` - E3 (34 Mbps)
 	/// * `xdsl` - xDSL
 	/// * `docsis` - DOCSIS
-	/// * `gpon` - GPON (2.5 Gbps / 1.25 Gps)
+	/// * `bpon` - BPON (622 Mbps / 155 Mbps)
+	/// * `epon` - EPON (1 Gbps)
+	/// * `10g-epon` - 10G-EPON (10 Gbps)
+	/// * `gpon` - GPON (2.5 Gbps / 1.25 Gbps)
 	/// * `xg-pon` - XG-PON (10 Gbps / 2.5 Gbps)
 	/// * `xgs-pon` - XGS-PON (10 Gbps)
 	/// * `ng-pon2` - NG-PON2 (TWDM-PON) (4x10 Gbps)
-	/// * `epon` - EPON (1 Gbps)
-	/// * `10g-epon` - 10G-EPON (10 Gbps)
+	/// * `25g-pon` - 25G-PON (25 Gbps)
+	/// * `50g-pon` - 50G-PON (50 Gbps)
 	/// * `cisco-stackwise` - Cisco StackWise
 	/// * `cisco-stackwise-plus` - Cisco StackWise Plus
 	/// * `cisco-flexstack` - Cisco FlexStack
@@ -2632,12 +2279,12 @@ pub struct InterfaceRequest {
 	/// Populated by selected channel (if set)
 	pub rf_channel_width: Option<f64>,
 	pub tx_power: Option<u8>,
-	pub untagged_vlan: Option<NestedVLANRequest>,
+	pub untagged_vlan: Option<VLANRequest>,
 	pub tagged_vlans: Vec<i64>,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
 	pub wireless_lans: Vec<i64>,
-	pub vrf: Option<NestedVRFRequest>,
+	pub vrf: Option<VRFRequest>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -2646,8 +2293,8 @@ pub struct InterfaceTemplate {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device_type: Option<NestedDeviceType>,
-	pub module_type: Option<NestedModuleType>,
+	pub device_type: Option<DeviceType>,
+	pub module_type: Option<ModuleType>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -2665,8 +2312,8 @@ pub struct InterfaceTemplate {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct InterfaceTemplateRequest {
-	pub device_type: Option<NestedDeviceTypeRequest>,
-	pub module_type: Option<NestedModuleTypeRequest>,
+	pub device_type: Option<DeviceTypeRequest>,
+	pub module_type: Option<ModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -2679,6 +2326,7 @@ pub struct InterfaceTemplateRequest {
 	/// * `100base-tx` - 100BASE-TX (10/100ME)
 	/// * `100base-t1` - 100BASE-T1 (10/100ME Single Pair)
 	/// * `1000base-t` - 1000BASE-T (1GE)
+	/// * `1000base-tx` - 1000BASE-TX (1GE)
 	/// * `2.5gbase-t` - 2.5GBASE-T (2.5GE)
 	/// * `5gbase-t` - 5GBASE-T (5GE)
 	/// * `10gbase-t` - 10GBASE-T (10GE)
@@ -2715,6 +2363,8 @@ pub struct InterfaceTemplateRequest {
 	/// * `800gbase-x-qsfpdd` - QSFP-DD (800GE)
 	/// * `800gbase-x-osfp` - OSFP (800GE)
 	/// * `1000base-kx` - 1000BASE-KX (1GE)
+	/// * `2.5gbase-kx` - 2.5GBASE-KX (2.5GE)
+	/// * `5gbase-kr` - 5GBASE-KR (5GE)
 	/// * `10gbase-kr` - 10GBASE-KR (10GE)
 	/// * `10gbase-kx4` - 10GBASE-KX4 (10GE)
 	/// * `25gbase-kr` - 25GBASE-KR (25GE)
@@ -2735,6 +2385,8 @@ pub struct InterfaceTemplateRequest {
 	/// * `gsm` - GSM
 	/// * `cdma` - CDMA
 	/// * `lte` - LTE
+	/// * `4g` - 4G
+	/// * `5g` - 5G
 	/// * `sonet-oc3` - OC-3/STM-1
 	/// * `sonet-oc12` - OC-12/STM-4
 	/// * `sonet-oc48` - OC-48/STM-16
@@ -2748,7 +2400,10 @@ pub struct InterfaceTemplateRequest {
 	/// * `8gfc-sfpp` - SFP+ (8GFC)
 	/// * `16gfc-sfpp` - SFP+ (16GFC)
 	/// * `32gfc-sfp28` - SFP28 (32GFC)
+	/// * `32gfc-sfpp` - SFP+ (32GFC)
 	/// * `64gfc-qsfpp` - QSFP+ (64GFC)
+	/// * `64gfc-sfpdd` - SFP-DD (64GFC)
+	/// * `64gfc-sfpp` - SFP+ (64GFC)
 	/// * `128gfc-qsfp28` - QSFP28 (128GFC)
 	/// * `infiniband-sdr` - SDR (2 Gbps)
 	/// * `infiniband-ddr` - DDR (4 Gbps)
@@ -2765,12 +2420,15 @@ pub struct InterfaceTemplateRequest {
 	/// * `e3` - E3 (34 Mbps)
 	/// * `xdsl` - xDSL
 	/// * `docsis` - DOCSIS
-	/// * `gpon` - GPON (2.5 Gbps / 1.25 Gps)
+	/// * `bpon` - BPON (622 Mbps / 155 Mbps)
+	/// * `epon` - EPON (1 Gbps)
+	/// * `10g-epon` - 10G-EPON (10 Gbps)
+	/// * `gpon` - GPON (2.5 Gbps / 1.25 Gbps)
 	/// * `xg-pon` - XG-PON (10 Gbps / 2.5 Gbps)
 	/// * `xgs-pon` - XGS-PON (10 Gbps)
 	/// * `ng-pon2` - NG-PON2 (TWDM-PON) (4x10 Gbps)
-	/// * `epon` - EPON (1 Gbps)
-	/// * `10g-epon` - 10G-EPON (10 Gbps)
+	/// * `25g-pon` - 25G-PON (25 Gbps)
+	/// * `50g-pon` - 50G-PON (50 Gbps)
 	/// * `cisco-stackwise` - Cisco StackWise
 	/// * `cisco-stackwise-plus` - Cisco StackWise Plus
 	/// * `cisco-flexstack` - Cisco FlexStack
@@ -2812,13 +2470,13 @@ pub struct InventoryItem {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device: NestedDevice,
+	pub device: Device,
 	pub parent: Option<i64>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
-	pub role: Option<NestedInventoryItemRole>,
-	pub manufacturer: Option<NestedManufacturer>,
+	pub role: Option<InventoryItemRole>,
+	pub manufacturer: Option<Manufacturer>,
 	/// Manufacturer-assigned part identifier
 	pub part_id: String,
 	pub serial: String,
@@ -2838,13 +2496,13 @@ pub struct InventoryItem {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct InventoryItemRequest {
-	pub device: NestedDeviceRequest,
+	pub device: DeviceRequest,
 	pub parent: Option<i64>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
-	pub role: Option<NestedInventoryItemRoleRequest>,
-	pub manufacturer: Option<NestedManufacturerRequest>,
+	pub role: Option<InventoryItemRoleRequest>,
+	pub manufacturer: Option<ManufacturerRequest>,
 	/// Manufacturer-assigned part identifier
 	pub part_id: String,
 	pub serial: String,
@@ -2887,14 +2545,14 @@ pub struct InventoryItemTemplate {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device_type: NestedDeviceType,
+	pub device_type: DeviceType,
 	pub parent: Option<i64>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
 	pub label: String,
-	pub role: Option<NestedInventoryItemRole>,
-	pub manufacturer: Option<NestedManufacturer>,
+	pub role: Option<InventoryItemRole>,
+	pub manufacturer: Option<Manufacturer>,
 	/// Manufacturer-assigned part identifier
 	pub part_id: String,
 	pub description: String,
@@ -2907,14 +2565,14 @@ pub struct InventoryItemTemplate {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct InventoryItemTemplateRequest {
-	pub device_type: NestedDeviceTypeRequest,
+	pub device_type: DeviceTypeRequest,
 	pub parent: Option<i64>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
 	pub label: String,
-	pub role: Option<NestedInventoryItemRoleRequest>,
-	pub manufacturer: Option<NestedManufacturerRequest>,
+	pub role: Option<InventoryItemRoleRequest>,
+	pub manufacturer: Option<ManufacturerRequest>,
 	/// Manufacturer-assigned part identifier
 	pub part_id: String,
 	pub description: String,
@@ -2936,10 +2594,14 @@ pub struct Job {
 	pub interval: Option<u32>,
 	pub started: Option<String>,
 	pub completed: Option<String>,
-	pub user: Option<NestedUser>,
+	pub user: Option<User>,
 	pub data: Option<serde_json::Value>,
 	pub error: String,
 	pub job_id: String,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct JobRequest {
+	pub completed: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct JournalEntry {
@@ -2980,15 +2642,7 @@ pub struct L2VPN {
 	pub name: String,
 	pub slug: String,
 	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub import_targets: Vec<i64>,
-	pub export_targets: Vec<i64>,
 	pub description: String,
-	pub comments: String,
-	pub tenant: Option<NestedTenant>,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct L2VPNRequest {
@@ -3008,35 +2662,18 @@ pub struct L2VPNRequest {
 	/// * `ep-tree` - Ethernet Private Tree
 	/// * `evp-tree` - Ethernet Virtual Private Tree
 	pub r#type: String,
-	pub import_targets: Vec<i64>,
-	pub export_targets: Vec<i64>,
 	pub description: String,
-	pub comments: String,
-	pub tenant: Option<NestedTenantRequest>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct L2VPNTermination {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub l2vpn: NestedL2VPN,
-	pub assigned_object_type: String,
-	pub assigned_object_id: u64,
-	pub assigned_object: Option<serde_json::Value>,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
+	pub l2vpn: L2VPN,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct L2VPNTerminationRequest {
-	pub l2vpn: NestedL2VPNRequest,
-	pub assigned_object_type: String,
-	pub assigned_object_id: u64,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	pub l2vpn: L2VPNRequest,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct Location {
@@ -3045,35 +2682,15 @@ pub struct Location {
 	pub display: String,
 	pub name: String,
 	pub slug: String,
-	pub site: NestedSite,
-	pub parent: Option<NestedLocation>,
-	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub tenant: Option<NestedTenant>,
 	pub description: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 	pub rack_count: i64,
-	pub device_count: i64,
 	pub _depth: i64,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct LocationRequest {
 	pub name: String,
 	pub slug: String,
-	pub site: NestedSiteRequest,
-	pub parent: Option<NestedLocationRequest>,
-	/// * `planned` - Planned
-	/// * `staging` - Staging
-	/// * `active` - Active
-	/// * `decommissioning` - Decommissioning
-	/// * `retired` - Retired
-	pub status: String,
-	pub tenant: Option<NestedTenantRequest>,
 	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct Manufacturer {
@@ -3083,49 +2700,30 @@ pub struct Manufacturer {
 	pub name: String,
 	pub slug: String,
 	pub description: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 	pub devicetype_count: i64,
-	pub inventoryitem_count: i64,
-	pub platform_count: i64,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ManufacturerRequest {
 	pub name: String,
 	pub slug: String,
 	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct Module {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device: NestedDevice,
+	pub device: Device,
 	pub module_bay: NestedModuleBay,
-	pub module_type: NestedModuleType,
-	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub serial: String,
-	/// A unique tag used to identify this device
-	pub asset_tag: Option<String>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ModuleBay {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device: NestedDevice,
+	pub device: Device,
 	pub name: String,
-	pub installed_module: Option<ModuleBayNestedModule>,
+	pub installed_module: Option<Module>,
 	/// Physical label
 	pub label: String,
 	/// Identifier to reference when renaming installed components
@@ -3149,9 +2747,9 @@ pub struct ModuleBayNestedModuleRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ModuleBayRequest {
-	pub device: NestedDeviceRequest,
+	pub device: DeviceRequest,
 	pub name: String,
-	pub installed_module: Option<ModuleBayNestedModuleRequest>,
+	pub installed_module: Option<ModuleRequest>,
 	/// Physical label
 	pub label: String,
 	/// Identifier to reference when renaming installed components
@@ -3165,7 +2763,7 @@ pub struct ModuleBayTemplate {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device_type: NestedDeviceType,
+	pub device_type: DeviceType,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -3178,7 +2776,7 @@ pub struct ModuleBayTemplate {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ModuleBayTemplateRequest {
-	pub device_type: NestedDeviceTypeRequest,
+	pub device_type: DeviceTypeRequest,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -3188,162 +2786,24 @@ pub struct ModuleBayTemplateRequest {
 	pub description: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct ModuleNestedModuleBay {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct ModuleNestedModuleBayRequest {
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ModuleRequest {
-	pub device: NestedDeviceRequest,
+	pub device: DeviceRequest,
 	pub module_bay: NestedModuleBayRequest,
-	pub module_type: NestedModuleTypeRequest,
-	/// * `offline` - Offline
-	/// * `active` - Active
-	/// * `planned` - Planned
-	/// * `staged` - Staged
-	/// * `failed` - Failed
-	/// * `decommissioning` - Decommissioning
-	pub status: String,
-	pub serial: String,
-	/// A unique tag used to identify this device
-	pub asset_tag: Option<String>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ModuleType {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub manufacturer: NestedManufacturer,
+	pub manufacturer: Manufacturer,
 	pub model: String,
-	/// Discrete part number (optional)
-	pub part_number: String,
-	pub weight: Option<f64>,
-	pub weight_unit: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ModuleTypeRequest {
-	pub manufacturer: NestedManufacturerRequest,
+	pub manufacturer: ManufacturerRequest,
 	pub model: String,
-	/// Discrete part number (optional)
-	pub part_number: String,
-	pub weight: Option<f64>,
-	/// * `kg` - Kilograms
-	/// * `g` - Grams
-	/// * `lb` - Pounds
-	/// * `oz` - Ounces
-	pub weight_unit: Option<String>,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedCable {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub label: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedCableRequest {
-	pub label: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedCircuit {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	/// Unique circuit ID
-	pub cid: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedCircuitRequest {
-	/// Unique circuit ID
-	pub cid: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedCircuitType {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedCircuitTypeRequest {
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedCluster {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedClusterGroup {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedClusterGroupRequest {
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedClusterRequest {
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedClusterType {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedClusterTypeRequest {
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedConfigTemplate {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedConfigTemplateRequest {
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedContact {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedContactGroup {
@@ -3360,54 +2820,6 @@ pub struct NestedContactGroupRequest {
 	pub slug: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedContactRequest {
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedContactRole {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedContactRoleRequest {
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedCustomFieldChoiceSet {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub choices_count: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedCustomFieldChoiceSetRequest {
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedDataFile {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	/// File path relative to the data source's root
-	pub path: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedDataSource {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedDataSourceRequest {
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedDevice {
 	pub id: i64,
 	pub url: String,
@@ -3419,102 +2831,10 @@ pub struct NestedDeviceRequest {
 	pub name: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedDeviceRole {
+pub struct NestedGroup {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedDeviceRoleRequest {
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedDeviceType {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub manufacturer: Option<NestedManufacturer>,
-	pub model: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedDeviceTypeRequest {
-	pub model: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedFHRPGroup {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	/// * `vrrp2` - VRRPv2
-	/// * `vrrp3` - VRRPv3
-	/// * `carp` - CARP
-	/// * `clusterxl` - ClusterXL
-	/// * `hsrp` - HSRP
-	/// * `glbp` - GLBP
-	/// * `other` - Other
-	pub protocol: String,
-	pub group_id: u16,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedFHRPGroupRequest {
-	/// * `vrrp2` - VRRPv2
-	/// * `vrrp3` - VRRPv3
-	/// * `carp` - CARP
-	/// * `clusterxl` - ClusterXL
-	/// * `hsrp` - HSRP
-	/// * `glbp` - GLBP
-	/// * `other` - Other
-	pub protocol: String,
-	pub group_id: u16,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedIKEPolicy {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedIKEPolicyRequest {
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedIPAddress {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub family: i64,
-	pub address: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedIPAddressRequest {
-	pub address: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedIPSecPolicy {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedIPSecPolicyRequest {
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedIPSecProfile {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedIPSecProfileRequest {
 	pub name: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -3546,269 +2866,16 @@ pub struct NestedInterfaceTemplateRequest {
 	pub name: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedInventoryItemRole {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedInventoryItemRoleRequest {
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedL2VPN {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub identifier: Option<i64>,
-	pub name: String,
-	pub slug: String,
-	/// * `vpws` - VPWS
-	/// * `vpls` - VPLS
-	/// * `vxlan` - VXLAN
-	/// * `vxlan-evpn` - VXLAN-EVPN
-	/// * `mpls-evpn` - MPLS EVPN
-	/// * `pbb-evpn` - PBB EVPN
-	/// * `epl` - EPL
-	/// * `evpl` - EVPL
-	/// * `ep-lan` - Ethernet Private LAN
-	/// * `evp-lan` - Ethernet Virtual Private LAN
-	/// * `ep-tree` - Ethernet Private Tree
-	/// * `evp-tree` - Ethernet Virtual Private Tree
-	pub r#type: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedL2VPNRequest {
-	pub identifier: Option<i64>,
-	pub name: String,
-	pub slug: String,
-	/// * `vpws` - VPWS
-	/// * `vpls` - VPLS
-	/// * `vxlan` - VXLAN
-	/// * `vxlan-evpn` - VXLAN-EVPN
-	/// * `mpls-evpn` - MPLS EVPN
-	/// * `pbb-evpn` - PBB EVPN
-	/// * `epl` - EPL
-	/// * `evpl` - EVPL
-	/// * `ep-lan` - Ethernet Private LAN
-	/// * `evp-lan` - Ethernet Virtual Private LAN
-	/// * `ep-tree` - Ethernet Private Tree
-	/// * `evp-tree` - Ethernet Virtual Private Tree
-	pub r#type: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedL2VPNTermination {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub l2vpn: NestedL2VPN,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedL2VPNTerminationRequest {
-	pub l2vpn: NestedL2VPNRequest,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedLocation {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub slug: String,
-	pub _depth: i64,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedLocationRequest {
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedManufacturer {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedManufacturerRequest {
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedModule {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub device: Option<NestedDevice>,
-	pub module_bay: Option<ModuleNestedModuleBay>,
-	pub module_type: Option<NestedModuleType>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedModuleBay {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub module: Option<NestedModule>,
+	pub installed_module: Option<ModuleBayNestedModule>,
 	pub name: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedModuleBayRequest {
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedModuleType {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub manufacturer: Option<NestedManufacturer>,
-	pub model: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedModuleTypeRequest {
-	pub model: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedPlatform {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedPlatformRequest {
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedPowerPanel {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedPowerPanelRequest {
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedPowerPort {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub device: Option<NestedDevice>,
-	pub name: String,
-	pub cable: Option<i64>,
-	pub _occupied: bool,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedPowerPortRequest {
-	pub name: String,
-	pub cable: Option<i64>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedPowerPortTemplate {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedPowerPortTemplateRequest {
-	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedProvider {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	/// Full name of the provider
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedProviderAccount {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub account: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedProviderAccountRequest {
-	pub name: String,
-	pub account: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedProviderNetwork {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedProviderNetworkRequest {
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedProviderRequest {
-	/// Full name of the provider
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedRIR {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedRIRRequest {
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedRack {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedRackRequest {
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedRackRole {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedRackRoleRequest {
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedRearPortTemplate {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedRearPortTemplateRequest {
-	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
+	pub installed_module: Option<ModuleBayNestedModuleRequest>,
 	pub name: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -3826,28 +2893,6 @@ pub struct NestedRegionRequest {
 	pub slug: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedRole {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedRoleRequest {
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedSite {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	/// Full name of the site
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedSiteGroup {
 	pub id: i64,
 	pub url: String,
@@ -3858,12 +2903,6 @@ pub struct NestedSiteGroup {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedSiteGroupRequest {
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedSiteRequest {
-	/// Full name of the site
 	pub name: String,
 	pub slug: String,
 }
@@ -3883,14 +2922,6 @@ pub struct NestedTagRequest {
 	pub color: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedTenant {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedTenantGroup {
 	pub id: i64,
 	pub url: String,
@@ -3905,74 +2936,12 @@ pub struct NestedTenantGroupRequest {
 	pub slug: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedTenantRequest {
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedTunnel {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedTunnelGroup {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedTunnelGroupRequest {
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedTunnelRequest {
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedUser {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
 	/// Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
 	pub username: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedUserRequest {
-	/// Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-	pub username: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedVLAN {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	/// Numeric VLAN ID (1-4094)
-	pub vid: u16,
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedVLANGroup {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedVLANGroupRequest {
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedVLANRequest {
-	/// Numeric VLAN ID (1-4094)
-	pub vid: u16,
-	pub name: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedVMInterface {
@@ -3987,34 +2956,6 @@ pub struct NestedVMInterfaceRequest {
 	pub name: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedVRF {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	/// Unique route distinguisher (as defined in RFC 4364)
-	pub rd: Option<String>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedVRFRequest {
-	pub name: String,
-	/// Unique route distinguisher (as defined in RFC 4364)
-	pub rd: Option<String>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedVirtualChassis {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub master: NestedDevice,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedVirtualChassisRequest {
-	pub name: String,
-	pub master: NestedDeviceRequest,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedVirtualMachine {
 	pub id: i64,
 	pub url: String,
@@ -4024,15 +2965,6 @@ pub struct NestedVirtualMachine {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedVirtualMachineRequest {
 	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedWirelessLANGroup {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub slug: String,
-	pub _depth: i64,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedWirelessLANGroupRequest {
@@ -4056,7 +2988,7 @@ pub struct ObjectChange {
 	pub url: String,
 	pub display: String,
 	pub time: String,
-	pub user: Option<NestedUser>,
+	pub user: Option<User>,
 	pub user_name: String,
 	pub request_id: String,
 	pub action: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -4075,12 +3007,12 @@ pub struct ObjectPermission {
 	pub description: String,
 	pub enabled: bool,
 	pub object_types: Vec<String>,
-	pub groups: Vec<i64>,
-	pub users: Vec<i64>,
 	/// The list of actions granted by this permission
 	pub actions: Vec<String>,
 	/// Queryset filter matching the applicable objects of the selected type(s)
 	pub constraints: Option<serde_json::Value>,
+	pub groups: Vec<NestedGroup>,
+	pub users: Vec<NestedUser>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ObjectPermissionRequest {
@@ -4088,12 +3020,20 @@ pub struct ObjectPermissionRequest {
 	pub description: String,
 	pub enabled: bool,
 	pub object_types: Vec<String>,
-	pub groups: Vec<i64>,
-	pub users: Vec<i64>,
 	/// The list of actions granted by this permission
 	pub actions: Vec<String>,
 	/// Queryset filter matching the applicable objects of the selected type(s)
 	pub constraints: Option<serde_json::Value>,
+	pub groups: Vec<i64>,
+	pub users: Vec<i64>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct ObjectType {
+	pub id: i64,
+	pub url: String,
+	pub display: String,
+	pub app_label: String,
+	pub model: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedASNList {
@@ -4248,13 +3188,6 @@ pub struct PaginatedContactRoleList {
 	pub next: Option<String>,
 	pub previous: Option<String>,
 	pub results: Vec<ContactRole>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PaginatedContentTypeList {
-	pub count: i64,
-	pub next: Option<String>,
-	pub previous: Option<String>,
-	pub results: Vec<ContentType>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedCustomFieldChoiceSetList {
@@ -4551,6 +3484,13 @@ pub struct PaginatedObjectPermissionList {
 	pub results: Vec<ObjectPermission>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PaginatedObjectTypeList {
+	pub count: i64,
+	pub next: Option<String>,
+	pub previous: Option<String>,
+	pub results: Vec<ObjectType>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedPlatformList {
 	pub count: i64,
 	pub next: Option<String>,
@@ -4656,6 +3596,13 @@ pub struct PaginatedRackRoleList {
 	pub results: Vec<RackRole>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PaginatedRackUnitList {
+	pub count: i64,
+	pub next: Option<String>,
+	pub previous: Option<String>,
+	pub results: Vec<RackUnit>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedRearPortList {
 	pub count: i64,
 	pub next: Option<String>,
@@ -4696,6 +3643,13 @@ pub struct PaginatedSavedFilterList {
 	pub next: Option<String>,
 	pub previous: Option<String>,
 	pub results: Vec<SavedFilter>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PaginatedScriptList {
+	pub count: i64,
+	pub next: Option<String>,
+	pub previous: Option<String>,
+	pub results: Vec<Script>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedServiceList {
@@ -4866,6 +3820,35 @@ pub struct PaginatedWirelessLinkList {
 	pub results: Vec<WirelessLink>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedASNRangeRequest {
+	pub name: String,
+	pub slug: String,
+	pub rir: RIRRequest,
+	pub start: u32,
+	pub end: u32,
+	pub tenant: Option<TenantRequest>,
+	pub description: String,
+	pub tags: Vec<NestedTagRequest>,
+	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedASNRequest {
+	/// 16- or 32-bit autonomous system number
+	pub asn: u32,
+	pub rir: Option<RIRRequest>,
+	pub tenant: Option<TenantRequest>,
+	pub description: String,
+	pub comments: String,
+	pub tags: Vec<NestedTagRequest>,
+	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedBookmarkRequest {
+	pub object_type: String,
+	pub object_id: u64,
+	pub user: UserRequest,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedCableTerminationRequest {
 	pub cable: i64,
 	/// * `A` - A
@@ -4873,6 +3856,28 @@ pub struct PatchedCableTerminationRequest {
 	pub cable_end: String,
 	pub termination_type: String,
 	pub termination_id: u64,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedCircuitTerminationRequest {
+	pub circuit: CircuitRequest,
+	/// * `A` - A
+	/// * `Z` - Z
+	pub term_side: String,
+	pub site: Option<SiteRequest>,
+	pub provider_network: Option<ProviderNetworkRequest>,
+	/// Physical circuit speed
+	pub port_speed: Option<u32>,
+	/// Upstream speed, if different from port speed
+	pub upstream_speed: Option<u32>,
+	/// ID of the local cross-connect
+	pub xconnect_id: String,
+	/// Patch panel ID and port number(s)
+	pub pp_info: String,
+	pub description: String,
+	/// Treat as if a cable is connected
+	pub mark_connected: bool,
+	pub tags: Vec<NestedTagRequest>,
+	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedCircuitTypeRequest {
@@ -4900,6 +3905,53 @@ pub struct PatchedClusterTypeRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedConfigContextRequest {
+	pub name: String,
+	pub weight: u16,
+	pub description: String,
+	pub is_active: bool,
+	pub regions: Vec<i64>,
+	pub site_groups: Vec<i64>,
+	pub sites: Vec<i64>,
+	pub locations: Vec<i64>,
+	pub device_types: Vec<i64>,
+	pub roles: Vec<i64>,
+	pub platforms: Vec<i64>,
+	pub cluster_types: Vec<i64>,
+	pub cluster_groups: Vec<i64>,
+	pub clusters: Vec<i64>,
+	pub tenant_groups: Vec<i64>,
+	pub tenants: Vec<i64>,
+	pub tags: Vec<String>,
+	pub data_source: DataSourceRequest,
+	pub data: serde_json::Value,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedConfigTemplateRequest {
+	pub name: String,
+	pub description: String,
+	/// Any <a href="https://jinja.palletsprojects.com/en/3.1.x/api/#jinja2.Environment">additional parameters</a> to pass when constructing the Jinja2 environment.
+	pub environment_params: Option<serde_json::Value>,
+	/// Jinja2 template code.
+	pub template_code: String,
+	pub data_source: DataSourceRequest,
+	pub tags: Vec<NestedTagRequest>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedContactRequest {
+	pub group: Option<ContactGroupRequest>,
+	pub name: String,
+	pub title: String,
+	pub phone: String,
+	pub email: String,
+	pub address: String,
+	pub link: String,
+	pub description: String,
+	pub comments: String,
+	pub tags: Vec<NestedTagRequest>,
+	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedContactRoleRequest {
 	pub name: String,
 	pub slug: String,
@@ -4909,7 +3961,7 @@ pub struct PatchedContactRoleRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedCustomLinkRequest {
-	pub content_types: Vec<String>,
+	pub object_types: Vec<String>,
 	pub name: String,
 	pub enabled: bool,
 	/// Jinja2 template code for link text
@@ -4946,6 +3998,60 @@ pub struct PatchedDashboardRequest {
 	pub config: serde_json::Value,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedDeviceBayRequest {
+	pub device: DeviceRequest,
+	pub name: String,
+	/// Physical label
+	pub label: String,
+	pub description: String,
+	pub installed_device: Option<DeviceRequest>,
+	pub tags: Vec<NestedTagRequest>,
+	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedDeviceBayTemplateRequest {
+	pub device_type: DeviceTypeRequest,
+	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
+	pub name: String,
+	/// Physical label
+	pub label: String,
+	pub description: String,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedDeviceRoleRequest {
+	pub name: String,
+	pub slug: String,
+	pub color: String,
+	/// Virtual machines may be assigned to this role
+	pub vm_role: bool,
+	pub config_template: Option<ConfigTemplateRequest>,
+	pub description: String,
+	pub tags: Vec<NestedTagRequest>,
+	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedExportTemplateRequest {
+	pub object_types: Vec<String>,
+	pub name: String,
+	pub description: String,
+	/// Jinja2 template code. The list of objects being exported is passed as a context variable named <code>queryset</code>.
+	pub template_code: String,
+	/// Defaults to <code>text/plain; charset=utf-8</code>
+	pub mime_type: String,
+	/// Extension to append to the rendered filename
+	pub file_extension: String,
+	/// Download file as attachment
+	pub as_attachment: bool,
+	pub data_source: DataSourceRequest,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedFHRPGroupAssignmentRequest {
+	pub group: FHRPGroupRequest,
+	pub interface_type: String,
+	pub interface_id: u64,
+	pub priority: u8,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedFHRPGroupRequest {
 	pub name: String,
 	/// * `vrrp2` - VRRPv2
@@ -4969,10 +4075,12 @@ pub struct PatchedFHRPGroupRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedGroupRequest {
 	pub name: String,
+	pub description: String,
+	pub permissions: Vec<i64>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedImageAttachmentRequest {
-	pub content_type: String,
+	pub object_type: String,
 	pub object_id: u64,
 	pub name: String,
 	pub image: String,
@@ -4980,11 +4088,57 @@ pub struct PatchedImageAttachmentRequest {
 	pub image_width: u16,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedInventoryItemRequest {
+	pub device: DeviceRequest,
+	pub parent: Option<i64>,
+	pub name: String,
+	/// Physical label
+	pub label: String,
+	pub role: Option<InventoryItemRoleRequest>,
+	pub manufacturer: Option<ManufacturerRequest>,
+	/// Manufacturer-assigned part identifier
+	pub part_id: String,
+	pub serial: String,
+	/// A unique tag used to identify this item
+	pub asset_tag: Option<String>,
+	/// This item was automatically discovered
+	pub discovered: bool,
+	pub description: String,
+	pub component_type: Option<String>,
+	pub component_id: Option<u64>,
+	pub tags: Vec<NestedTagRequest>,
+	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedInventoryItemRoleRequest {
 	pub name: String,
 	pub slug: String,
 	pub color: String,
 	pub description: String,
+	pub tags: Vec<NestedTagRequest>,
+	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedInventoryItemTemplateRequest {
+	pub device_type: DeviceTypeRequest,
+	pub parent: Option<i64>,
+	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
+	pub name: String,
+	/// Physical label
+	pub label: String,
+	pub role: Option<InventoryItemRoleRequest>,
+	pub manufacturer: Option<ManufacturerRequest>,
+	/// Manufacturer-assigned part identifier
+	pub part_id: String,
+	pub description: String,
+	pub component_type: Option<String>,
+	pub component_id: Option<u64>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedL2VPNTerminationRequest {
+	pub l2vpn: L2VPNRequest,
+	pub assigned_object_type: String,
+	pub assigned_object_id: u64,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -4997,12 +4151,112 @@ pub struct PatchedManufacturerRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedModuleBayRequest {
+	pub device: DeviceRequest,
+	pub name: String,
+	pub installed_module: Option<ModuleRequest>,
+	/// Physical label
+	pub label: String,
+	/// Identifier to reference when renaming installed components
+	pub position: String,
+	pub description: String,
+	pub tags: Vec<NestedTagRequest>,
+	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedModuleBayTemplateRequest {
+	pub device_type: DeviceTypeRequest,
+	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
+	pub name: String,
+	/// Physical label
+	pub label: String,
+	/// Identifier to reference when renaming installed components
+	pub position: String,
+	pub description: String,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedObjectPermissionRequest {
+	pub name: String,
+	pub description: String,
+	pub enabled: bool,
+	pub object_types: Vec<String>,
+	/// The list of actions granted by this permission
+	pub actions: Vec<String>,
+	/// Queryset filter matching the applicable objects of the selected type(s)
+	pub constraints: Option<serde_json::Value>,
+	pub groups: Vec<i64>,
+	pub users: Vec<i64>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedPlatformRequest {
+	pub name: String,
+	pub slug: String,
+	pub manufacturer: Option<ManufacturerRequest>,
+	pub config_template: Option<ConfigTemplateRequest>,
+	pub description: String,
+	pub tags: Vec<NestedTagRequest>,
+	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedPowerPanelRequest {
+	pub site: SiteRequest,
+	pub location: Option<LocationRequest>,
+	pub name: String,
+	pub description: String,
+	pub comments: String,
+	pub tags: Vec<NestedTagRequest>,
+	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedProviderAccountRequest {
+	pub provider: ProviderRequest,
+	pub name: String,
+	pub account: String,
+	pub description: String,
+	pub comments: String,
+	pub tags: Vec<NestedTagRequest>,
+	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedProviderNetworkRequest {
+	pub provider: ProviderRequest,
+	pub name: String,
+	pub service_id: String,
+	pub description: String,
+	pub comments: String,
+	pub tags: Vec<NestedTagRequest>,
+	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedProviderRequest {
+	/// Full name of the provider
+	pub name: String,
+	pub slug: String,
+	pub accounts: Vec<i64>,
+	pub description: String,
+	pub comments: String,
+	pub asns: Vec<i64>,
+	pub tags: Vec<NestedTagRequest>,
+	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedRIRRequest {
 	pub name: String,
 	pub slug: String,
 	/// IP space managed by this RIR is considered private
 	pub is_private: bool,
 	pub description: String,
+	pub tags: Vec<NestedTagRequest>,
+	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedRackReservationRequest {
+	pub rack: RackRequest,
+	pub units: Vec<u16>,
+	pub user: UserRequest,
+	pub tenant: Option<TenantRequest>,
+	pub description: String,
+	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -5025,8 +4279,18 @@ pub struct PatchedRoleRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedRouteTargetRequest {
+	/// Route target value (formatted in accordance with RFC 4360)
+	pub name: String,
+	pub tenant: Option<TenantRequest>,
+	pub description: String,
+	pub comments: String,
+	pub tags: Vec<NestedTagRequest>,
+	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedSavedFilterRequest {
-	pub content_types: Vec<String>,
+	pub object_types: Vec<String>,
 	pub name: String,
 	pub slug: String,
 	pub description: String,
@@ -5045,12 +4309,49 @@ pub struct PatchedTagRequest {
 	pub object_types: Vec<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedTenantRequest {
+	pub name: String,
+	pub slug: String,
+	pub group: Option<TenantGroupRequest>,
+	pub description: String,
+	pub comments: String,
+	pub tags: Vec<NestedTagRequest>,
+	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedTokenRequest {
+	pub user: UserRequest,
+	pub expires: Option<String>,
+	pub last_used: Option<String>,
+	pub key: String,
+	/// Permit create/update/delete operations using this key
+	pub write_enabled: bool,
+	pub description: String,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedTunnelGroupRequest {
 	pub name: String,
 	pub slug: String,
 	pub description: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedUserRequest {
+	/// Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+	pub username: String,
+	pub password: String,
+	pub first_name: String,
+	pub last_name: String,
+	pub email: String,
+	/// Designates whether the user can log into this admin site.
+	pub is_staff: bool,
+	/// Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
+	pub is_active: bool,
+	pub date_joined: String,
+	pub last_login: Option<String>,
+	pub groups: Vec<i64>,
+	pub permissions: Vec<i64>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedVLANGroupRequest {
@@ -5063,6 +4364,30 @@ pub struct PatchedVLANGroupRequest {
 	/// Highest permissible ID of a child VLAN
 	pub max_vid: u16,
 	pub description: String,
+	pub tags: Vec<NestedTagRequest>,
+	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedVRFRequest {
+	pub name: String,
+	/// Unique route distinguisher (as defined in RFC 4364)
+	pub rd: Option<String>,
+	pub tenant: Option<TenantRequest>,
+	/// Prevent duplicate prefixes/IP addresses within this VRF
+	pub enforce_unique: bool,
+	pub description: String,
+	pub comments: String,
+	pub import_targets: Vec<i64>,
+	pub export_targets: Vec<i64>,
+	pub tags: Vec<NestedTagRequest>,
+	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedVirtualDiskRequest {
+	pub virtual_machine: VirtualMachineRequest,
+	pub name: String,
+	pub description: String,
+	pub size: u32,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -5094,46 +4419,15 @@ pub struct PatchedWebhookRequest {
 	pub tags: Vec<NestedTagRequest>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableASNRangeRequest {
-	pub name: String,
-	pub slug: String,
-	pub rir: i64,
-	pub start: u32,
-	pub end: u32,
-	pub tenant: Option<i64>,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableASNRequest {
-	/// 16- or 32-bit autonomous system number
-	pub asn: u32,
-	/// Regional Internet Registry responsible for this AS number space
-	pub rir: i64,
-	pub tenant: Option<i64>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableAggregateRequest {
 	pub prefix: String,
-	/// Regional Internet Registry responsible for this IP space
-	pub rir: i64,
-	pub tenant: Option<i64>,
+	pub rir: RIRRequest,
+	pub tenant: Option<TenantRequest>,
 	pub date_added: Option<String>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableBookmarkRequest {
-	pub object_type: String,
-	pub object_id: u64,
-	pub user: i64,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableCableRequest {
@@ -5167,7 +4461,7 @@ pub struct PatchedWritableCableRequest {
 	/// * `planned` - Planned
 	/// * `decommissioning` - Decommissioning
 	pub status: String,
-	pub tenant: Option<i64>,
+	pub tenant: Option<TenantRequest>,
 	pub label: String,
 	pub color: String,
 	pub length: Option<f64>,
@@ -5187,9 +4481,9 @@ pub struct PatchedWritableCableRequest {
 pub struct PatchedWritableCircuitRequest {
 	/// Unique circuit ID
 	pub cid: String,
-	pub provider: i64,
-	pub provider_account: Option<i64>,
-	pub r#type: i64,
+	pub provider: ProviderRequest,
+	pub provider_account: Option<ProviderAccountRequest>,
+	pub r#type: CircuitTypeRequest,
 	/// * `planned` - Planned
 	/// * `provisioning` - Provisioning
 	/// * `active` - Active
@@ -5197,7 +4491,7 @@ pub struct PatchedWritableCircuitRequest {
 	/// * `deprovisioning` - Deprovisioning
 	/// * `decommissioned` - Decommissioned
 	pub status: String,
-	pub tenant: Option<i64>,
+	pub tenant: Option<TenantRequest>,
 	pub install_date: Option<String>,
 	pub termination_date: Option<String>,
 	/// Committed rate
@@ -5208,85 +4502,27 @@ pub struct PatchedWritableCircuitRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableCircuitTerminationRequest {
-	pub circuit: i64,
-	/// * `A` - A
-	/// * `Z` - Z
-	pub term_side: String,
-	pub site: Option<i64>,
-	pub provider_network: Option<i64>,
-	/// Physical circuit speed
-	pub port_speed: Option<u32>,
-	/// Upstream speed, if different from port speed
-	pub upstream_speed: Option<u32>,
-	/// ID of the local cross-connect
-	pub xconnect_id: String,
-	/// Patch panel ID and port number(s)
-	pub pp_info: String,
-	pub description: String,
-	/// Treat as if a cable is connected
-	pub mark_connected: bool,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableClusterRequest {
 	pub name: String,
-	pub r#type: i64,
-	pub group: Option<i64>,
+	pub r#type: ClusterTypeRequest,
+	pub group: Option<ClusterGroupRequest>,
 	/// * `planned` - Planned
 	/// * `staging` - Staging
 	/// * `active` - Active
 	/// * `decommissioning` - Decommissioning
 	/// * `offline` - Offline
 	pub status: String,
-	pub tenant: Option<i64>,
-	pub site: Option<i64>,
+	pub tenant: Option<TenantRequest>,
+	pub site: Option<SiteRequest>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableConfigContextRequest {
-	pub name: String,
-	pub weight: u16,
-	pub description: String,
-	pub is_active: bool,
-	pub regions: Vec<i64>,
-	pub site_groups: Vec<i64>,
-	pub sites: Vec<i64>,
-	pub locations: Vec<i64>,
-	pub device_types: Vec<i64>,
-	pub roles: Vec<i64>,
-	pub platforms: Vec<i64>,
-	pub cluster_types: Vec<i64>,
-	pub cluster_groups: Vec<i64>,
-	pub clusters: Vec<i64>,
-	pub tenant_groups: Vec<i64>,
-	pub tenants: Vec<i64>,
-	pub tags: Vec<String>,
-	/// Remote data source
-	pub data_source: Option<i64>,
-	pub data: serde_json::Value,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableConfigTemplateRequest {
-	pub name: String,
-	pub description: String,
-	/// Any <a href="https://jinja.palletsprojects.com/en/3.1.x/api/#jinja2.Environment">additional parameters</a> to pass when constructing the Jinja2 environment.
-	pub environment_params: Option<serde_json::Value>,
-	/// Jinja2 template code.
-	pub template_code: String,
-	/// Remote data source
-	pub data_source: Option<i64>,
-	pub data_file: Option<i64>,
-	pub tags: Vec<NestedTagRequest>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableConsolePortRequest {
-	pub device: i64,
-	pub module: Option<i64>,
+	pub device: DeviceRequest,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -5327,8 +4563,8 @@ pub struct PatchedWritableConsolePortRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableConsolePortTemplateRequest {
-	pub device_type: Option<i64>,
-	pub module_type: Option<i64>,
+	pub device_type: Option<DeviceTypeRequest>,
+	pub module_type: Option<ModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -5353,8 +4589,8 @@ pub struct PatchedWritableConsolePortTemplateRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableConsoleServerPortRequest {
-	pub device: i64,
-	pub module: Option<i64>,
+	pub device: DeviceRequest,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -5395,8 +4631,8 @@ pub struct PatchedWritableConsoleServerPortRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableConsoleServerPortTemplateRequest {
-	pub device_type: Option<i64>,
-	pub module_type: Option<i64>,
+	pub device_type: Option<DeviceTypeRequest>,
+	pub module_type: Option<ModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -5421,10 +4657,10 @@ pub struct PatchedWritableConsoleServerPortTemplateRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableContactAssignmentRequest {
-	pub content_type: String,
+	pub object_type: String,
 	pub object_id: u64,
-	pub contact: i64,
-	pub role: i64,
+	pub contact: ContactRequest,
+	pub role: Option<ContactRoleRequest>,
 	/// * `primary` - Primary
 	/// * `secondary` - Secondary
 	/// * `tertiary` - Tertiary
@@ -5439,20 +4675,6 @@ pub struct PatchedWritableContactGroupRequest {
 	pub slug: String,
 	pub parent: Option<i64>,
 	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableContactRequest {
-	pub group: Option<i64>,
-	pub name: String,
-	pub title: String,
-	pub phone: String,
-	pub email: String,
-	pub address: String,
-	pub link: String,
-	pub description: String,
-	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -5472,7 +4694,7 @@ pub struct PatchedWritableCustomFieldChoiceSetRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableCustomFieldRequest {
-	pub content_types: Vec<String>,
+	pub object_types: Vec<String>,
 	/// The type of data this custom field holds
 	/// 
 	/// * `text` - Text
@@ -5489,7 +4711,7 @@ pub struct PatchedWritableCustomFieldRequest {
 	/// * `object` - Object
 	/// * `multiobject` - Multiple objects
 	pub r#type: String,
-	pub object_type: Option<String>,
+	pub related_object_type: Option<String>,
 	/// Internal field name
 	pub name: String,
 	/// Name of the field as displayed to users (if not provided, 'the field's name will be used)
@@ -5531,7 +4753,8 @@ pub struct PatchedWritableCustomFieldRequest {
 	pub validation_maximum: Option<i64>,
 	/// Regular expression to enforce on text field values. Use ^ and $ to force matching of entire string. For example, <code>^[A-Z]{3}$</code> will limit values to exactly three uppercase letters.
 	pub validation_regex: String,
-	pub choice_set: Option<i64>,
+	pub choice_set: Option<CustomFieldChoiceSetRequest>,
+	pub comments: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableDataSourceRequest {
@@ -5547,41 +4770,9 @@ pub struct PatchedWritableDataSourceRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableDeviceBayRequest {
-	pub device: i64,
-	pub name: String,
-	/// Physical label
-	pub label: String,
-	pub description: String,
-	pub installed_device: Option<i64>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableDeviceBayTemplateRequest {
-	pub device_type: i64,
-	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
-	/// Physical label
-	pub label: String,
-	pub description: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableDeviceRoleRequest {
-	pub name: String,
-	pub slug: String,
-	pub color: String,
-	/// Virtual machines may be assigned to this role
-	pub vm_role: bool,
-	pub config_template: Option<i64>,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableDeviceTypeRequest {
-	pub manufacturer: i64,
-	pub default_platform: Option<i64>,
+	pub manufacturer: ManufacturerRequest,
+	pub default_platform: Option<PlatformRequest>,
 	pub model: String,
 	pub slug: String,
 	/// Discrete part number (optional)
@@ -5610,8 +4801,8 @@ pub struct PatchedWritableDeviceTypeRequest {
 	/// * `lb` - Pounds
 	/// * `oz` - Ounces
 	pub weight_unit: String,
-	pub front_image: String,
-	pub rear_image: String,
+	pub front_image: Option<String>,
+	pub rear_image: Option<String>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -5620,18 +4811,17 @@ pub struct PatchedWritableDeviceTypeRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableDeviceWithConfigContextRequest {
 	pub name: Option<String>,
-	pub device_type: i64,
-	/// The function this device serves
-	pub role: i64,
-	pub tenant: Option<i64>,
-	pub platform: Option<i64>,
+	pub device_type: DeviceTypeRequest,
+	pub role: DeviceRoleRequest,
+	pub tenant: Option<TenantRequest>,
+	pub platform: Option<PlatformRequest>,
 	/// Chassis serial number, assigned by the manufacturer
 	pub serial: String,
 	/// A unique tag used to identify this device
 	pub asset_tag: Option<String>,
-	pub site: i64,
-	pub location: Option<i64>,
-	pub rack: Option<i64>,
+	pub site: SiteRequest,
+	pub location: Option<LocationRequest>,
+	pub rack: Option<RackRequest>,
 	pub position: Option<f64>,
 	/// * `front` - Front
 	/// * `rear` - Rear
@@ -5656,17 +4846,17 @@ pub struct PatchedWritableDeviceWithConfigContextRequest {
 	/// * `passive` - Passive
 	/// * `mixed` - Mixed
 	pub airflow: String,
-	pub primary_ip4: Option<i64>,
-	pub primary_ip6: Option<i64>,
-	pub oob_ip: Option<i64>,
-	pub cluster: Option<i64>,
-	pub virtual_chassis: Option<i64>,
+	pub primary_ip4: Option<IPAddressRequest>,
+	pub primary_ip6: Option<IPAddressRequest>,
+	pub oob_ip: Option<IPAddressRequest>,
+	pub cluster: Option<ClusterRequest>,
+	pub virtual_chassis: Option<VirtualChassisRequest>,
 	pub vc_position: Option<u8>,
 	/// Virtual chassis master election priority
 	pub vc_priority: Option<u8>,
 	pub description: String,
 	pub comments: String,
-	pub config_template: Option<i64>,
+	pub config_template: Option<ConfigTemplateRequest>,
 	/// Local config context data takes precedence over source contexts in the final rendered config context
 	pub local_context_data: Option<serde_json::Value>,
 	pub tags: Vec<NestedTagRequest>,
@@ -5674,7 +4864,7 @@ pub struct PatchedWritableDeviceWithConfigContextRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableEventRuleRequest {
-	pub content_types: Vec<String>,
+	pub object_types: Vec<String>,
 	pub name: String,
 	/// Triggers when a matching object is created.
 	pub type_create: bool,
@@ -5699,32 +4889,9 @@ pub struct PatchedWritableEventRuleRequest {
 	pub tags: Vec<NestedTagRequest>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableExportTemplateRequest {
-	pub content_types: Vec<String>,
-	pub name: String,
-	pub description: String,
-	/// Jinja2 template code. The list of objects being exported is passed as a context variable named <code>queryset</code>.
-	pub template_code: String,
-	/// Defaults to <code>text/plain; charset=utf-8</code>
-	pub mime_type: String,
-	/// Extension to append to the rendered filename
-	pub file_extension: String,
-	/// Download file as attachment
-	pub as_attachment: bool,
-	/// Remote data source
-	pub data_source: Option<i64>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableFHRPGroupAssignmentRequest {
-	pub group: i64,
-	pub interface_type: String,
-	pub interface_id: u64,
-	pub priority: u8,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableFrontPortRequest {
-	pub device: i64,
-	pub module: Option<i64>,
+	pub device: DeviceRequest,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -5788,8 +4955,8 @@ pub struct PatchedWritableFrontPortRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableFrontPortTemplateRequest {
-	pub device_type: Option<i64>,
-	pub module_type: Option<i64>,
+	pub device_type: Option<DeviceTypeRequest>,
+	pub module_type: Option<ModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -5843,7 +5010,7 @@ pub struct PatchedWritableFrontPortTemplateRequest {
 	/// * `other` - Other
 	pub r#type: String,
 	pub color: String,
-	pub rear_port: i64,
+	pub rear_port: RearPortTemplateRequest,
 	pub rear_port_position: u16,
 	pub description: String,
 }
@@ -5878,7 +5045,8 @@ pub struct PatchedWritableIKEProposalRequest {
 	/// * `aes-192-gcm` - 192-bit AES (GCM)
 	/// * `aes-256-cbc` - 256-bit AES (CBC)
 	/// * `aes-256-gcm` - 256-bit AES (GCM)
-	/// * `3des-cbc` - DES
+	/// * `3des-cbc` - 3DES
+	/// * `des-cbc` - DES
 	pub encryption_algorithm: String,
 	/// * `hmac-sha1` - SHA-1 HMAC
 	/// * `hmac-sha256` - SHA-256 HMAC
@@ -5922,8 +5090,8 @@ pub struct PatchedWritableIKEProposalRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableIPAddressRequest {
 	pub address: String,
-	pub vrf: Option<i64>,
-	pub tenant: Option<i64>,
+	pub vrf: Option<VRFRequest>,
+	pub tenant: Option<TenantRequest>,
 	/// The operational status of this IP
 	/// 
 	/// * `active` - Active
@@ -5958,16 +5126,15 @@ pub struct PatchedWritableIPAddressRequest {
 pub struct PatchedWritableIPRangeRequest {
 	pub start_address: String,
 	pub end_address: String,
-	pub vrf: Option<i64>,
-	pub tenant: Option<i64>,
+	pub vrf: Option<VRFRequest>,
+	pub tenant: Option<TenantRequest>,
 	/// Operational status of this range
 	/// 
 	/// * `active` - Active
 	/// * `reserved` - Reserved
 	/// * `deprecated` - Deprecated
 	pub status: String,
-	/// The primary function of this range
-	pub role: Option<i64>,
+	pub role: Option<RoleRequest>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -6018,8 +5185,8 @@ pub struct PatchedWritableIPSecProfileRequest {
 	/// * `esp` - ESP
 	/// * `ah` - AH
 	pub mode: String,
-	pub ike_policy: i64,
-	pub ipsec_policy: i64,
+	pub ike_policy: IKEPolicyRequest,
+	pub ipsec_policy: IPSecPolicyRequest,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -6034,7 +5201,8 @@ pub struct PatchedWritableIPSecProposalRequest {
 	/// * `aes-192-gcm` - 192-bit AES (GCM)
 	/// * `aes-256-cbc` - 256-bit AES (CBC)
 	/// * `aes-256-gcm` - 256-bit AES (GCM)
-	/// * `3des-cbc` - DES
+	/// * `3des-cbc` - 3DES
+	/// * `des-cbc` - DES
 	pub encryption_algorithm: String,
 	/// * `hmac-sha1` - SHA-1 HMAC
 	/// * `hmac-sha256` - SHA-256 HMAC
@@ -6052,9 +5220,9 @@ pub struct PatchedWritableIPSecProposalRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableInterfaceRequest {
-	pub device: i64,
+	pub device: DeviceRequest,
 	pub vdcs: Vec<i64>,
-	pub module: Option<i64>,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -6066,6 +5234,7 @@ pub struct PatchedWritableInterfaceRequest {
 	/// * `100base-tx` - 100BASE-TX (10/100ME)
 	/// * `100base-t1` - 100BASE-T1 (10/100ME Single Pair)
 	/// * `1000base-t` - 1000BASE-T (1GE)
+	/// * `1000base-tx` - 1000BASE-TX (1GE)
 	/// * `2.5gbase-t` - 2.5GBASE-T (2.5GE)
 	/// * `5gbase-t` - 5GBASE-T (5GE)
 	/// * `10gbase-t` - 10GBASE-T (10GE)
@@ -6102,6 +5271,8 @@ pub struct PatchedWritableInterfaceRequest {
 	/// * `800gbase-x-qsfpdd` - QSFP-DD (800GE)
 	/// * `800gbase-x-osfp` - OSFP (800GE)
 	/// * `1000base-kx` - 1000BASE-KX (1GE)
+	/// * `2.5gbase-kx` - 2.5GBASE-KX (2.5GE)
+	/// * `5gbase-kr` - 5GBASE-KR (5GE)
 	/// * `10gbase-kr` - 10GBASE-KR (10GE)
 	/// * `10gbase-kx4` - 10GBASE-KX4 (10GE)
 	/// * `25gbase-kr` - 25GBASE-KR (25GE)
@@ -6122,6 +5293,8 @@ pub struct PatchedWritableInterfaceRequest {
 	/// * `gsm` - GSM
 	/// * `cdma` - CDMA
 	/// * `lte` - LTE
+	/// * `4g` - 4G
+	/// * `5g` - 5G
 	/// * `sonet-oc3` - OC-3/STM-1
 	/// * `sonet-oc12` - OC-12/STM-4
 	/// * `sonet-oc48` - OC-48/STM-16
@@ -6135,7 +5308,10 @@ pub struct PatchedWritableInterfaceRequest {
 	/// * `8gfc-sfpp` - SFP+ (8GFC)
 	/// * `16gfc-sfpp` - SFP+ (16GFC)
 	/// * `32gfc-sfp28` - SFP28 (32GFC)
+	/// * `32gfc-sfpp` - SFP+ (32GFC)
 	/// * `64gfc-qsfpp` - QSFP+ (64GFC)
+	/// * `64gfc-sfpdd` - SFP-DD (64GFC)
+	/// * `64gfc-sfpp` - SFP+ (64GFC)
 	/// * `128gfc-qsfp28` - QSFP28 (128GFC)
 	/// * `infiniband-sdr` - SDR (2 Gbps)
 	/// * `infiniband-ddr` - DDR (4 Gbps)
@@ -6152,12 +5328,15 @@ pub struct PatchedWritableInterfaceRequest {
 	/// * `e3` - E3 (34 Mbps)
 	/// * `xdsl` - xDSL
 	/// * `docsis` - DOCSIS
-	/// * `gpon` - GPON (2.5 Gbps / 1.25 Gps)
+	/// * `bpon` - BPON (622 Mbps / 155 Mbps)
+	/// * `epon` - EPON (1 Gbps)
+	/// * `10g-epon` - 10G-EPON (10 Gbps)
+	/// * `gpon` - GPON (2.5 Gbps / 1.25 Gbps)
 	/// * `xg-pon` - XG-PON (10 Gbps / 2.5 Gbps)
 	/// * `xgs-pon` - XGS-PON (10 Gbps)
 	/// * `ng-pon2` - NG-PON2 (TWDM-PON) (4x10 Gbps)
-	/// * `epon` - EPON (1 Gbps)
-	/// * `10g-epon` - 10G-EPON (10 Gbps)
+	/// * `25g-pon` - 25G-PON (25 Gbps)
+	/// * `50g-pon` - 50G-PON (50 Gbps)
 	/// * `cisco-stackwise` - Cisco StackWise
 	/// * `cisco-stackwise-plus` - Cisco StackWise Plus
 	/// * `cisco-flexstack` - Cisco FlexStack
@@ -6413,19 +5592,19 @@ pub struct PatchedWritableInterfaceRequest {
 	/// Populated by selected channel (if set)
 	pub rf_channel_width: Option<f64>,
 	pub tx_power: Option<u8>,
-	pub untagged_vlan: Option<i64>,
+	pub untagged_vlan: Option<VLANRequest>,
 	pub tagged_vlans: Vec<i64>,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
 	pub wireless_lans: Vec<i64>,
-	pub vrf: Option<i64>,
+	pub vrf: Option<VRFRequest>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableInterfaceTemplateRequest {
-	pub device_type: Option<i64>,
-	pub module_type: Option<i64>,
+	pub device_type: Option<DeviceTypeRequest>,
+	pub module_type: Option<ModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -6438,6 +5617,7 @@ pub struct PatchedWritableInterfaceTemplateRequest {
 	/// * `100base-tx` - 100BASE-TX (10/100ME)
 	/// * `100base-t1` - 100BASE-T1 (10/100ME Single Pair)
 	/// * `1000base-t` - 1000BASE-T (1GE)
+	/// * `1000base-tx` - 1000BASE-TX (1GE)
 	/// * `2.5gbase-t` - 2.5GBASE-T (2.5GE)
 	/// * `5gbase-t` - 5GBASE-T (5GE)
 	/// * `10gbase-t` - 10GBASE-T (10GE)
@@ -6474,6 +5654,8 @@ pub struct PatchedWritableInterfaceTemplateRequest {
 	/// * `800gbase-x-qsfpdd` - QSFP-DD (800GE)
 	/// * `800gbase-x-osfp` - OSFP (800GE)
 	/// * `1000base-kx` - 1000BASE-KX (1GE)
+	/// * `2.5gbase-kx` - 2.5GBASE-KX (2.5GE)
+	/// * `5gbase-kr` - 5GBASE-KR (5GE)
 	/// * `10gbase-kr` - 10GBASE-KR (10GE)
 	/// * `10gbase-kx4` - 10GBASE-KX4 (10GE)
 	/// * `25gbase-kr` - 25GBASE-KR (25GE)
@@ -6494,6 +5676,8 @@ pub struct PatchedWritableInterfaceTemplateRequest {
 	/// * `gsm` - GSM
 	/// * `cdma` - CDMA
 	/// * `lte` - LTE
+	/// * `4g` - 4G
+	/// * `5g` - 5G
 	/// * `sonet-oc3` - OC-3/STM-1
 	/// * `sonet-oc12` - OC-12/STM-4
 	/// * `sonet-oc48` - OC-48/STM-16
@@ -6507,7 +5691,10 @@ pub struct PatchedWritableInterfaceTemplateRequest {
 	/// * `8gfc-sfpp` - SFP+ (8GFC)
 	/// * `16gfc-sfpp` - SFP+ (16GFC)
 	/// * `32gfc-sfp28` - SFP28 (32GFC)
+	/// * `32gfc-sfpp` - SFP+ (32GFC)
 	/// * `64gfc-qsfpp` - QSFP+ (64GFC)
+	/// * `64gfc-sfpdd` - SFP-DD (64GFC)
+	/// * `64gfc-sfpp` - SFP+ (64GFC)
 	/// * `128gfc-qsfp28` - QSFP28 (128GFC)
 	/// * `infiniband-sdr` - SDR (2 Gbps)
 	/// * `infiniband-ddr` - DDR (4 Gbps)
@@ -6524,12 +5711,15 @@ pub struct PatchedWritableInterfaceTemplateRequest {
 	/// * `e3` - E3 (34 Mbps)
 	/// * `xdsl` - xDSL
 	/// * `docsis` - DOCSIS
-	/// * `gpon` - GPON (2.5 Gbps / 1.25 Gps)
+	/// * `bpon` - BPON (622 Mbps / 155 Mbps)
+	/// * `epon` - EPON (1 Gbps)
+	/// * `10g-epon` - 10G-EPON (10 Gbps)
+	/// * `gpon` - GPON (2.5 Gbps / 1.25 Gbps)
 	/// * `xg-pon` - XG-PON (10 Gbps / 2.5 Gbps)
 	/// * `xgs-pon` - XGS-PON (10 Gbps)
 	/// * `ng-pon2` - NG-PON2 (TWDM-PON) (4x10 Gbps)
-	/// * `epon` - EPON (1 Gbps)
-	/// * `10g-epon` - 10G-EPON (10 Gbps)
+	/// * `25g-pon` - 25G-PON (25 Gbps)
+	/// * `50g-pon` - 50G-PON (50 Gbps)
 	/// * `cisco-stackwise` - Cisco StackWise
 	/// * `cisco-stackwise-plus` - Cisco StackWise Plus
 	/// * `cisco-flexstack` - Cisco FlexStack
@@ -6567,44 +5757,6 @@ pub struct PatchedWritableInterfaceTemplateRequest {
 	pub rf_role: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableInventoryItemRequest {
-	pub device: i64,
-	pub parent: Option<i64>,
-	pub name: String,
-	/// Physical label
-	pub label: String,
-	pub role: Option<i64>,
-	pub manufacturer: Option<i64>,
-	/// Manufacturer-assigned part identifier
-	pub part_id: String,
-	pub serial: String,
-	/// A unique tag used to identify this item
-	pub asset_tag: Option<String>,
-	/// This item was automatically discovered
-	pub discovered: bool,
-	pub description: String,
-	pub component_type: Option<String>,
-	pub component_id: Option<u64>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableInventoryItemTemplateRequest {
-	pub device_type: i64,
-	pub parent: Option<i64>,
-	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
-	/// Physical label
-	pub label: String,
-	pub role: Option<i64>,
-	pub manufacturer: Option<i64>,
-	/// Manufacturer-assigned part identifier
-	pub part_id: String,
-	pub description: String,
-	pub component_type: Option<String>,
-	pub component_id: Option<u64>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableJournalEntryRequest {
 	pub assigned_object_type: String,
 	pub assigned_object_id: u64,
@@ -6640,15 +5792,7 @@ pub struct PatchedWritableL2VPNRequest {
 	pub export_targets: Vec<i64>,
 	pub description: String,
 	pub comments: String,
-	pub tenant: Option<i64>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableL2VPNTerminationRequest {
-	pub l2vpn: i64,
-	pub assigned_object_type: String,
-	pub assigned_object_id: u64,
+	pub tenant: Option<TenantRequest>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -6656,7 +5800,7 @@ pub struct PatchedWritableL2VPNTerminationRequest {
 pub struct PatchedWritableLocationRequest {
 	pub name: String,
 	pub slug: String,
-	pub site: i64,
+	pub site: SiteRequest,
 	pub parent: Option<i64>,
 	/// * `planned` - Planned
 	/// * `staging` - Staging
@@ -6664,40 +5808,18 @@ pub struct PatchedWritableLocationRequest {
 	/// * `decommissioning` - Decommissioning
 	/// * `retired` - Retired
 	pub status: String,
-	pub tenant: Option<i64>,
+	pub tenant: Option<TenantRequest>,
+	/// Local facility ID or description
+	pub facility: String,
 	pub description: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableModuleBayRequest {
-	pub device: i64,
-	pub name: String,
-	pub installed_module: i64,
-	/// Physical label
-	pub label: String,
-	/// Identifier to reference when renaming installed components
-	pub position: String,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableModuleBayTemplateRequest {
-	pub device_type: i64,
-	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
-	/// Physical label
-	pub label: String,
-	/// Identifier to reference when renaming installed components
-	pub position: String,
-	pub description: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableModuleRequest {
-	pub device: i64,
+	pub device: DeviceRequest,
 	pub module_bay: i64,
-	pub module_type: i64,
+	pub module_type: ModuleTypeRequest,
 	/// * `offline` - Offline
 	/// * `active` - Active
 	/// * `planned` - Planned
@@ -6715,7 +5837,7 @@ pub struct PatchedWritableModuleRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableModuleTypeRequest {
-	pub manufacturer: i64,
+	pub manufacturer: ManufacturerRequest,
 	pub model: String,
 	/// Discrete part number (optional)
 	pub part_number: String,
@@ -6731,33 +5853,9 @@ pub struct PatchedWritableModuleTypeRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableObjectPermissionRequest {
-	pub name: String,
-	pub description: String,
-	pub enabled: bool,
-	pub object_types: Vec<String>,
-	pub groups: Vec<i64>,
-	pub users: Vec<i64>,
-	/// The list of actions granted by this permission
-	pub actions: Vec<String>,
-	/// Queryset filter matching the applicable objects of the selected type(s)
-	pub constraints: Option<serde_json::Value>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritablePlatformRequest {
-	pub name: String,
-	pub slug: String,
-	/// Optionally limit this platform to devices of a certain manufacturer
-	pub manufacturer: Option<i64>,
-	pub config_template: Option<i64>,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritablePowerFeedRequest {
-	pub power_panel: i64,
-	pub rack: Option<i64>,
+	pub power_panel: PowerPanelRequest,
+	pub rack: Option<RackRequest>,
 	pub name: String,
 	/// * `offline` - Offline
 	/// * `active` - Active
@@ -6780,15 +5878,15 @@ pub struct PatchedWritablePowerFeedRequest {
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
 	pub description: String,
-	pub tenant: Option<i64>,
+	pub tenant: Option<TenantRequest>,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritablePowerOutletRequest {
-	pub device: i64,
-	pub module: Option<i64>,
+	pub device: DeviceRequest,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -6877,6 +5975,9 @@ pub struct PatchedWritablePowerOutletRequest {
 	/// * `usb-a` - USB Type A
 	/// * `usb-micro-b` - USB Micro B
 	/// * `usb-c` - USB Type C
+	/// * `molex-micro-fit-1x2` - Molex Micro-Fit 1x2
+	/// * `molex-micro-fit-2x2` - Molex Micro-Fit 2x2
+	/// * `molex-micro-fit-2x4` - Molex Micro-Fit 2x4
 	/// * `dc-terminal` - DC Terminal
 	/// * `hdot-cx` - HDOT Cx
 	/// * `saf-d-grid` - Saf-D-Grid
@@ -6888,7 +5989,7 @@ pub struct PatchedWritablePowerOutletRequest {
 	/// * `hardwired` - Hardwired
 	/// * `other` - Other
 	pub r#type: String,
-	pub power_port: Option<i64>,
+	pub power_port: Option<PowerPortRequest>,
 	/// Phase (for three-phase feeds)
 	/// 
 	/// * `A` - A
@@ -6903,8 +6004,8 @@ pub struct PatchedWritablePowerOutletRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritablePowerOutletTemplateRequest {
-	pub device_type: Option<i64>,
-	pub module_type: Option<i64>,
+	pub device_type: Option<DeviceTypeRequest>,
+	pub module_type: Option<ModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -6992,6 +6093,9 @@ pub struct PatchedWritablePowerOutletTemplateRequest {
 	/// * `usb-a` - USB Type A
 	/// * `usb-micro-b` - USB Micro B
 	/// * `usb-c` - USB Type C
+	/// * `molex-micro-fit-1x2` - Molex Micro-Fit 1x2
+	/// * `molex-micro-fit-2x2` - Molex Micro-Fit 2x2
+	/// * `molex-micro-fit-2x4` - Molex Micro-Fit 2x4
 	/// * `dc-terminal` - DC Terminal
 	/// * `hdot-cx` - HDOT Cx
 	/// * `saf-d-grid` - Saf-D-Grid
@@ -7003,7 +6107,7 @@ pub struct PatchedWritablePowerOutletTemplateRequest {
 	/// * `hardwired` - Hardwired
 	/// * `other` - Other
 	pub r#type: String,
-	pub power_port: Option<i64>,
+	pub power_port: Option<PowerPortTemplateRequest>,
 	/// Phase (for three-phase feeds)
 	/// 
 	/// * `A` - A
@@ -7013,19 +6117,9 @@ pub struct PatchedWritablePowerOutletTemplateRequest {
 	pub description: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritablePowerPanelRequest {
-	pub site: i64,
-	pub location: Option<i64>,
-	pub name: String,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritablePowerPortRequest {
-	pub device: i64,
-	pub module: Option<i64>,
+	pub device: DeviceRequest,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -7122,6 +6216,9 @@ pub struct PatchedWritablePowerPortRequest {
 	/// * `usb-micro-ab` - USB Micro AB
 	/// * `usb-3-b` - USB 3.0 Type B
 	/// * `usb-3-micro-b` - USB 3.0 Micro B
+	/// * `molex-micro-fit-1x2` - Molex Micro-Fit 1x2
+	/// * `molex-micro-fit-2x2` - Molex Micro-Fit 2x2
+	/// * `molex-micro-fit-2x4` - Molex Micro-Fit 2x4
 	/// * `dc-terminal` - DC Terminal
 	/// * `saf-d-grid` - Saf-D-Grid
 	/// * `neutrik-powercon-20` - Neutrik powerCON (20A)
@@ -7144,8 +6241,8 @@ pub struct PatchedWritablePowerPortRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritablePowerPortTemplateRequest {
-	pub device_type: Option<i64>,
-	pub module_type: Option<i64>,
+	pub device_type: Option<DeviceTypeRequest>,
+	pub module_type: Option<ModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -7241,6 +6338,9 @@ pub struct PatchedWritablePowerPortTemplateRequest {
 	/// * `usb-micro-ab` - USB Micro AB
 	/// * `usb-3-b` - USB 3.0 Type B
 	/// * `usb-3-micro-b` - USB 3.0 Micro B
+	/// * `molex-micro-fit-1x2` - Molex Micro-Fit 1x2
+	/// * `molex-micro-fit-2x2` - Molex Micro-Fit 2x2
+	/// * `molex-micro-fit-2x4` - Molex Micro-Fit 2x4
 	/// * `dc-terminal` - DC Terminal
 	/// * `saf-d-grid` - Saf-D-Grid
 	/// * `neutrik-powercon-20` - Neutrik powerCON (20A)
@@ -7260,10 +6360,10 @@ pub struct PatchedWritablePowerPortTemplateRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritablePrefixRequest {
 	pub prefix: String,
-	pub site: Option<i64>,
-	pub vrf: Option<i64>,
-	pub tenant: Option<i64>,
-	pub vlan: Option<i64>,
+	pub site: Option<SiteRequest>,
+	pub vrf: Option<VRFRequest>,
+	pub tenant: Option<TenantRequest>,
+	pub vlan: Option<VLANRequest>,
 	/// Operational status of this prefix
 	/// 
 	/// * `container` - Container
@@ -7271,8 +6371,7 @@ pub struct PatchedWritablePrefixRequest {
 	/// * `reserved` - Reserved
 	/// * `deprecated` - Deprecated
 	pub status: String,
-	/// The primary function of this prefix
-	pub role: Option<i64>,
+	pub role: Option<RoleRequest>,
 	/// All IP addresses within this prefix are considered usable
 	pub is_pool: bool,
 	/// Treat as fully utilized
@@ -7283,52 +6382,19 @@ pub struct PatchedWritablePrefixRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableProviderAccountRequest {
-	pub provider: i64,
-	pub name: String,
-	pub account: String,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableProviderNetworkRequest {
-	pub provider: i64,
-	pub name: String,
-	pub service_id: String,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableProviderRequest {
-	/// Full name of the provider
-	pub name: String,
-	pub slug: String,
-	pub accounts: Vec<i64>,
-	pub description: String,
-	pub comments: String,
-	pub asns: Vec<i64>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableRackRequest {
 	pub name: String,
 	pub facility_id: Option<String>,
-	pub site: i64,
-	pub location: Option<i64>,
-	pub tenant: Option<i64>,
+	pub site: SiteRequest,
+	pub location: Option<LocationRequest>,
+	pub tenant: Option<TenantRequest>,
 	/// * `reserved` - Reserved
 	/// * `available` - Available
 	/// * `planned` - Planned
 	/// * `active` - Active
 	/// * `deprecated` - Deprecated
 	pub status: String,
-	/// Functional role
-	pub role: Option<i64>,
+	pub role: Option<RackRoleRequest>,
 	pub serial: String,
 	/// A unique tag used to identify this rack
 	pub asset_tag: Option<String>,
@@ -7376,20 +6442,9 @@ pub struct PatchedWritableRackRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableRackReservationRequest {
-	pub rack: i64,
-	pub units: Vec<u16>,
-	pub user: i64,
-	pub tenant: Option<i64>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableRearPortRequest {
-	pub device: i64,
-	pub module: Option<i64>,
+	pub device: DeviceRequest,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -7452,8 +6507,8 @@ pub struct PatchedWritableRearPortRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableRearPortTemplateRequest {
-	pub device_type: Option<i64>,
-	pub module_type: Option<i64>,
+	pub device_type: Option<DeviceTypeRequest>,
+	pub module_type: Option<ModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -7520,26 +6575,15 @@ pub struct PatchedWritableRegionRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableRouteTargetRequest {
-	/// Route target value (formatted in accordance with RFC 4360)
-	pub name: String,
-	pub tenant: Option<i64>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableServiceRequest {
-	pub device: Option<i64>,
-	pub virtual_machine: Option<i64>,
+	pub device: Option<DeviceRequest>,
+	pub virtual_machine: Option<VirtualMachineRequest>,
 	pub name: String,
-	pub ports: Vec<u16>,
 	/// * `tcp` - TCP
 	/// * `udp` - UDP
 	/// * `sctp` - SCTP
 	pub protocol: String,
-	/// The specific IP addresses (if any) to which this service is bound
+	pub ports: Vec<u16>,
 	pub ipaddresses: Vec<i64>,
 	pub description: String,
 	pub comments: String,
@@ -7549,11 +6593,11 @@ pub struct PatchedWritableServiceRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableServiceTemplateRequest {
 	pub name: String,
-	pub ports: Vec<u16>,
 	/// * `tcp` - TCP
 	/// * `udp` - UDP
 	/// * `sctp` - SCTP
 	pub protocol: String,
+	pub ports: Vec<u16>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -7579,9 +6623,9 @@ pub struct PatchedWritableSiteRequest {
 	/// * `decommissioning` - Decommissioning
 	/// * `retired` - Retired
 	pub status: String,
-	pub region: Option<i64>,
-	pub group: Option<i64>,
-	pub tenant: Option<i64>,
+	pub region: Option<RegionRequest>,
+	pub group: Option<SiteGroupRequest>,
+	pub tenant: Option<TenantRequest>,
 	/// Local facility ID or description
 	pub facility: String,
 	pub time_zone: Option<String>,
@@ -7609,40 +6653,20 @@ pub struct PatchedWritableTenantGroupRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableTenantRequest {
-	pub name: String,
-	pub slug: String,
-	pub group: Option<i64>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableTokenRequest {
-	pub user: i64,
-	pub expires: Option<String>,
-	pub last_used: Option<String>,
-	pub key: String,
-	/// Permit create/update/delete operations using this key
-	pub write_enabled: bool,
-	pub description: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableTunnelRequest {
 	pub name: String,
 	/// * `planned` - Planned
 	/// * `active` - Active
 	/// * `disabled` - Disabled
 	pub status: String,
-	pub group: Option<i64>,
+	pub group: Option<TunnelGroupRequest>,
 	/// * `ipsec-transport` - IPsec - Transport
 	/// * `ipsec-tunnel` - IPsec - Tunnel
 	/// * `ip-ip` - IP-in-IP
 	/// * `gre` - GRE
 	pub encapsulation: String,
-	pub ipsec_profile: Option<i64>,
-	pub tenant: Option<i64>,
+	pub ipsec_profile: Option<IPSecProfileRequest>,
+	pub tenant: Option<TenantRequest>,
 	pub tunnel_id: Option<u64>,
 	pub description: String,
 	pub comments: String,
@@ -7651,51 +6675,32 @@ pub struct PatchedWritableTunnelRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableTunnelTerminationRequest {
-	pub tunnel: i64,
+	pub tunnel: TunnelRequest,
 	/// * `peer` - Peer
 	/// * `hub` - Hub
 	/// * `spoke` - Spoke
 	pub role: String,
 	pub termination_type: String,
 	pub termination_id: Option<u64>,
-	pub outside_ip: Option<i64>,
+	pub outside_ip: Option<IPAddressRequest>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableUserRequest {
-	/// Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-	pub username: String,
-	pub password: String,
-	pub first_name: String,
-	pub last_name: String,
-	pub email: String,
-	/// Designates whether the user can log into this admin site.
-	pub is_staff: bool,
-	/// Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
-	pub is_active: bool,
-	pub date_joined: String,
-	/// The groups this user belongs to. A user will get all permissions granted to each of their groups.
-	pub groups: Vec<i64>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableVLANRequest {
-	/// The specific site to which this VLAN is assigned (if any)
-	pub site: Option<i64>,
-	/// VLAN group (optional)
-	pub group: Option<i64>,
+	pub site: Option<SiteRequest>,
+	pub group: Option<VLANGroupRequest>,
 	/// Numeric VLAN ID (1-4094)
 	pub vid: u16,
 	pub name: String,
-	pub tenant: Option<i64>,
+	pub tenant: Option<TenantRequest>,
 	/// Operational status of this VLAN
 	/// 
 	/// * `active` - Active
 	/// * `reserved` - Reserved
 	/// * `deprecated` - Deprecated
 	pub status: String,
-	/// The primary function of this VLAN
-	pub role: Option<i64>,
+	pub role: Option<RoleRequest>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -7703,7 +6708,7 @@ pub struct PatchedWritableVLANRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableVMInterfaceRequest {
-	pub virtual_machine: i64,
+	pub virtual_machine: VirtualMachineRequest,
 	pub name: String,
 	pub enabled: bool,
 	pub parent: Option<i64>,
@@ -7717,24 +6722,9 @@ pub struct PatchedWritableVMInterfaceRequest {
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
 	pub mode: String,
-	pub untagged_vlan: Option<i64>,
+	pub untagged_vlan: Option<VLANRequest>,
 	pub tagged_vlans: Vec<i64>,
-	pub vrf: Option<i64>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableVRFRequest {
-	pub name: String,
-	/// Unique route distinguisher (as defined in RFC 4364)
-	pub rd: Option<String>,
-	pub tenant: Option<i64>,
-	/// Prevent duplicate prefixes/IP addresses within this VRF
-	pub enforce_unique: bool,
-	pub description: String,
-	pub comments: String,
-	pub import_targets: Vec<i64>,
-	pub export_targets: Vec<i64>,
+	pub vrf: Option<VRFRequest>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -7751,27 +6741,17 @@ pub struct PatchedWritableVirtualChassisRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableVirtualDeviceContextRequest {
 	pub name: String,
-	pub device: Option<i64>,
-	/// Numeric identifier unique to the parent device
+	pub device: DeviceRequest,
 	pub identifier: Option<u16>,
-	pub tenant: Option<i64>,
-	pub primary_ip4: Option<i64>,
-	pub primary_ip6: Option<i64>,
+	pub tenant: Option<TenantRequest>,
+	pub primary_ip4: Option<IPAddressRequest>,
+	pub primary_ip6: Option<IPAddressRequest>,
 	/// * `active` - Active
 	/// * `planned` - Planned
 	/// * `offline` - Offline
 	pub status: String,
 	pub description: String,
 	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableVirtualDiskRequest {
-	pub virtual_machine: i64,
-	pub name: String,
-	pub description: String,
-	pub size: u32,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -7785,19 +6765,20 @@ pub struct PatchedWritableVirtualMachineWithConfigContextRequest {
 	/// * `failed` - Failed
 	/// * `decommissioning` - Decommissioning
 	pub status: String,
-	pub site: Option<i64>,
-	pub cluster: Option<i64>,
-	pub device: Option<i64>,
-	pub role: Option<i64>,
-	pub tenant: Option<i64>,
-	pub platform: Option<i64>,
-	pub primary_ip4: Option<i64>,
-	pub primary_ip6: Option<i64>,
+	pub site: Option<SiteRequest>,
+	pub cluster: Option<ClusterRequest>,
+	pub device: Option<DeviceRequest>,
+	pub role: Option<DeviceRoleRequest>,
+	pub tenant: Option<TenantRequest>,
+	pub platform: Option<PlatformRequest>,
+	pub primary_ip4: Option<IPAddressRequest>,
+	pub primary_ip6: Option<IPAddressRequest>,
 	pub vcpus: Option<f64>,
 	pub memory: Option<u32>,
 	pub disk: Option<u32>,
 	pub description: String,
 	pub comments: String,
+	pub config_template: Option<ConfigTemplateRequest>,
 	/// Local config context data takes precedence over source contexts in the final rendered config context
 	pub local_context_data: Option<serde_json::Value>,
 	pub tags: Vec<NestedTagRequest>,
@@ -7816,14 +6797,14 @@ pub struct PatchedWritableWirelessLANGroupRequest {
 pub struct PatchedWritableWirelessLANRequest {
 	pub ssid: String,
 	pub description: String,
-	pub group: Option<i64>,
+	pub group: Option<WirelessLANGroupRequest>,
 	/// * `active` - Active
 	/// * `reserved` - Reserved
 	/// * `disabled` - Disabled
 	/// * `deprecated` - Deprecated
 	pub status: String,
-	pub vlan: Option<i64>,
-	pub tenant: Option<i64>,
+	pub vlan: Option<VLANRequest>,
+	pub tenant: Option<TenantRequest>,
 	/// * `open` - Open
 	/// * `wep` - WEP
 	/// * `wpa-personal` - WPA Personal (PSK)
@@ -7840,14 +6821,14 @@ pub struct PatchedWritableWirelessLANRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableWirelessLinkRequest {
-	pub interface_a: i64,
-	pub interface_b: i64,
+	pub interface_a: InterfaceRequest,
+	pub interface_b: InterfaceRequest,
 	pub ssid: String,
 	/// * `connected` - Connected
 	/// * `planned` - Planned
 	/// * `decommissioning` - Decommissioning
 	pub status: String,
-	pub tenant: Option<i64>,
+	pub tenant: Option<TenantRequest>,
 	/// * `open` - Open
 	/// * `wep` - WEP
 	/// * `wpa-personal` - WPA Personal (PSK)
@@ -7870,13 +6851,7 @@ pub struct Platform {
 	pub display: String,
 	pub name: String,
 	pub slug: String,
-	pub manufacturer: Option<NestedManufacturer>,
-	pub config_template: Option<NestedConfigTemplate>,
 	pub description: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 	pub device_count: i64,
 	pub virtualmachine_count: i64,
 }
@@ -7884,19 +6859,15 @@ pub struct Platform {
 pub struct PlatformRequest {
 	pub name: String,
 	pub slug: String,
-	pub manufacturer: Option<NestedManufacturerRequest>,
-	pub config_template: Option<NestedConfigTemplateRequest>,
 	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PowerFeed {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub power_panel: NestedPowerPanel,
-	pub rack: Option<NestedRack>,
+	pub power_panel: PowerPanel,
+	pub rack: Option<Rack>,
 	pub name: String,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -7908,7 +6879,7 @@ pub struct PowerFeed {
 	pub max_utilization: u8,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
-	pub cable: Option<NestedCable>,
+	pub cable: Option<Cable>,
 	pub cable_end: String,
 	pub link_peers: Vec<serde_json::Value>,
 	/// Return the type of the peer link terminations, or None.
@@ -7917,7 +6888,7 @@ pub struct PowerFeed {
 	pub connected_endpoints_type: String,
 	pub connected_endpoints_reachable: bool,
 	pub description: String,
-	pub tenant: Option<NestedTenant>,
+	pub tenant: Option<Tenant>,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -7927,8 +6898,8 @@ pub struct PowerFeed {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PowerFeedRequest {
-	pub power_panel: NestedPowerPanelRequest,
-	pub rack: Option<NestedRackRequest>,
+	pub power_panel: PowerPanelRequest,
+	pub rack: Option<RackRequest>,
 	pub name: String,
 	/// * `offline` - Offline
 	/// * `active` - Active
@@ -7951,7 +6922,7 @@ pub struct PowerFeedRequest {
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
 	pub description: String,
-	pub tenant: Option<NestedTenantRequest>,
+	pub tenant: Option<TenantRequest>,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -7961,18 +6932,18 @@ pub struct PowerOutlet {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device: NestedDevice,
-	pub module: Option<ComponentNestedModule>,
+	pub device: Device,
+	pub module: Option<Module>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
 	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub power_port: Option<NestedPowerPort>,
+	pub power_port: Option<PowerPort>,
 	pub feed_leg: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub description: String,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
-	pub cable: Option<NestedCable>,
+	pub cable: Option<Cable>,
 	pub cable_end: String,
 	pub link_peers: Vec<serde_json::Value>,
 	/// Return the type of the peer link terminations, or None.
@@ -7988,8 +6959,8 @@ pub struct PowerOutlet {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PowerOutletRequest {
-	pub device: NestedDeviceRequest,
-	pub module: Option<ComponentNestedModuleRequest>,
+	pub device: DeviceRequest,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -8076,6 +7047,9 @@ pub struct PowerOutletRequest {
 	/// * `usb-a` - USB Type A
 	/// * `usb-micro-b` - USB Micro B
 	/// * `usb-c` - USB Type C
+	/// * `molex-micro-fit-1x2` - Molex Micro-Fit 1x2
+	/// * `molex-micro-fit-2x2` - Molex Micro-Fit 2x2
+	/// * `molex-micro-fit-2x4` - Molex Micro-Fit 2x4
 	/// * `dc-terminal` - DC Terminal
 	/// * `hdot-cx` - HDOT Cx
 	/// * `saf-d-grid` - Saf-D-Grid
@@ -8087,7 +7061,7 @@ pub struct PowerOutletRequest {
 	/// * `hardwired` - Hardwired
 	/// * `other` - Other
 	pub r#type: Option<String>,
-	pub power_port: Option<NestedPowerPortRequest>,
+	pub power_port: Option<PowerPortRequest>,
 	/// * `A` - A
 	/// * `B` - B
 	/// * `C` - C
@@ -8103,14 +7077,14 @@ pub struct PowerOutletTemplate {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device_type: Option<NestedDeviceType>,
-	pub module_type: Option<NestedModuleType>,
+	pub device_type: Option<DeviceType>,
+	pub module_type: Option<ModuleType>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
 	pub label: String,
 	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub power_port: Option<NestedPowerPortTemplate>,
+	pub power_port: Option<PowerPortTemplate>,
 	pub feed_leg: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub description: String,
 	pub created: Option<String>,
@@ -8118,8 +7092,8 @@ pub struct PowerOutletTemplate {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PowerOutletTemplateRequest {
-	pub device_type: Option<NestedDeviceTypeRequest>,
-	pub module_type: Option<NestedModuleTypeRequest>,
+	pub device_type: Option<DeviceTypeRequest>,
+	pub module_type: Option<ModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -8207,6 +7181,9 @@ pub struct PowerOutletTemplateRequest {
 	/// * `usb-a` - USB Type A
 	/// * `usb-micro-b` - USB Micro B
 	/// * `usb-c` - USB Type C
+	/// * `molex-micro-fit-1x2` - Molex Micro-Fit 1x2
+	/// * `molex-micro-fit-2x2` - Molex Micro-Fit 2x2
+	/// * `molex-micro-fit-2x4` - Molex Micro-Fit 2x4
 	/// * `dc-terminal` - DC Terminal
 	/// * `hdot-cx` - HDOT Cx
 	/// * `saf-d-grid` - Saf-D-Grid
@@ -8218,7 +7195,7 @@ pub struct PowerOutletTemplateRequest {
 	/// * `hardwired` - Hardwired
 	/// * `other` - Other
 	pub r#type: Option<String>,
-	pub power_port: Option<NestedPowerPortTemplateRequest>,
+	pub power_port: Option<PowerPortTemplateRequest>,
 	/// * `A` - A
 	/// * `B` - B
 	/// * `C` - C
@@ -8230,310 +7207,45 @@ pub struct PowerPanel {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub site: NestedSite,
-	pub location: Option<NestedLocation>,
 	pub name: String,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub powerfeed_count: i64,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PowerPanelRequest {
-	pub site: NestedSiteRequest,
-	pub location: Option<NestedLocationRequest>,
 	pub name: String,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PowerPort {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device: NestedDevice,
-	pub module: Option<ComponentNestedModule>,
+	pub device: Device,
 	pub name: String,
-	/// Physical label
-	pub label: String,
-	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
-	/// Maximum power draw (watts)
-	pub maximum_draw: Option<u32>,
-	/// Allocated power draw (watts)
-	pub allocated_draw: Option<u32>,
 	pub description: String,
-	/// Treat as if a cable is connected
-	pub mark_connected: bool,
-	pub cable: Option<NestedCable>,
-	pub cable_end: String,
-	pub link_peers: Vec<serde_json::Value>,
-	/// Return the type of the peer link terminations, or None.
-	pub link_peers_type: String,
-	pub connected_endpoints: Vec<serde_json::Value>,
-	pub connected_endpoints_type: String,
-	pub connected_endpoints_reachable: bool,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
+	pub cable: Option<Cable>,
 	pub _occupied: bool,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PowerPortRequest {
-	pub device: NestedDeviceRequest,
-	pub module: Option<ComponentNestedModuleRequest>,
+	pub device: DeviceRequest,
 	pub name: String,
-	/// Physical label
-	pub label: String,
-	/// * `iec-60320-c6` - C6
-	/// * `iec-60320-c8` - C8
-	/// * `iec-60320-c14` - C14
-	/// * `iec-60320-c16` - C16
-	/// * `iec-60320-c20` - C20
-	/// * `iec-60320-c22` - C22
-	/// * `iec-60309-p-n-e-4h` - P+N+E 4H
-	/// * `iec-60309-p-n-e-6h` - P+N+E 6H
-	/// * `iec-60309-p-n-e-9h` - P+N+E 9H
-	/// * `iec-60309-2p-e-4h` - 2P+E 4H
-	/// * `iec-60309-2p-e-6h` - 2P+E 6H
-	/// * `iec-60309-2p-e-9h` - 2P+E 9H
-	/// * `iec-60309-3p-e-4h` - 3P+E 4H
-	/// * `iec-60309-3p-e-6h` - 3P+E 6H
-	/// * `iec-60309-3p-e-9h` - 3P+E 9H
-	/// * `iec-60309-3p-n-e-4h` - 3P+N+E 4H
-	/// * `iec-60309-3p-n-e-6h` - 3P+N+E 6H
-	/// * `iec-60309-3p-n-e-9h` - 3P+N+E 9H
-	/// * `iec-60906-1` - IEC 60906-1
-	/// * `nbr-14136-10a` - 2P+T 10A (NBR 14136)
-	/// * `nbr-14136-20a` - 2P+T 20A (NBR 14136)
-	/// * `nema-1-15p` - NEMA 1-15P
-	/// * `nema-5-15p` - NEMA 5-15P
-	/// * `nema-5-20p` - NEMA 5-20P
-	/// * `nema-5-30p` - NEMA 5-30P
-	/// * `nema-5-50p` - NEMA 5-50P
-	/// * `nema-6-15p` - NEMA 6-15P
-	/// * `nema-6-20p` - NEMA 6-20P
-	/// * `nema-6-30p` - NEMA 6-30P
-	/// * `nema-6-50p` - NEMA 6-50P
-	/// * `nema-10-30p` - NEMA 10-30P
-	/// * `nema-10-50p` - NEMA 10-50P
-	/// * `nema-14-20p` - NEMA 14-20P
-	/// * `nema-14-30p` - NEMA 14-30P
-	/// * `nema-14-50p` - NEMA 14-50P
-	/// * `nema-14-60p` - NEMA 14-60P
-	/// * `nema-15-15p` - NEMA 15-15P
-	/// * `nema-15-20p` - NEMA 15-20P
-	/// * `nema-15-30p` - NEMA 15-30P
-	/// * `nema-15-50p` - NEMA 15-50P
-	/// * `nema-15-60p` - NEMA 15-60P
-	/// * `nema-l1-15p` - NEMA L1-15P
-	/// * `nema-l5-15p` - NEMA L5-15P
-	/// * `nema-l5-20p` - NEMA L5-20P
-	/// * `nema-l5-30p` - NEMA L5-30P
-	/// * `nema-l5-50p` - NEMA L5-50P
-	/// * `nema-l6-15p` - NEMA L6-15P
-	/// * `nema-l6-20p` - NEMA L6-20P
-	/// * `nema-l6-30p` - NEMA L6-30P
-	/// * `nema-l6-50p` - NEMA L6-50P
-	/// * `nema-l10-30p` - NEMA L10-30P
-	/// * `nema-l14-20p` - NEMA L14-20P
-	/// * `nema-l14-30p` - NEMA L14-30P
-	/// * `nema-l14-50p` - NEMA L14-50P
-	/// * `nema-l14-60p` - NEMA L14-60P
-	/// * `nema-l15-20p` - NEMA L15-20P
-	/// * `nema-l15-30p` - NEMA L15-30P
-	/// * `nema-l15-50p` - NEMA L15-50P
-	/// * `nema-l15-60p` - NEMA L15-60P
-	/// * `nema-l21-20p` - NEMA L21-20P
-	/// * `nema-l21-30p` - NEMA L21-30P
-	/// * `nema-l22-30p` - NEMA L22-30P
-	/// * `cs6361c` - CS6361C
-	/// * `cs6365c` - CS6365C
-	/// * `cs8165c` - CS8165C
-	/// * `cs8265c` - CS8265C
-	/// * `cs8365c` - CS8365C
-	/// * `cs8465c` - CS8465C
-	/// * `ita-c` - ITA Type C (CEE 7/16)
-	/// * `ita-e` - ITA Type E (CEE 7/6)
-	/// * `ita-f` - ITA Type F (CEE 7/4)
-	/// * `ita-ef` - ITA Type E/F (CEE 7/7)
-	/// * `ita-g` - ITA Type G (BS 1363)
-	/// * `ita-h` - ITA Type H
-	/// * `ita-i` - ITA Type I
-	/// * `ita-j` - ITA Type J
-	/// * `ita-k` - ITA Type K
-	/// * `ita-l` - ITA Type L (CEI 23-50)
-	/// * `ita-m` - ITA Type M (BS 546)
-	/// * `ita-n` - ITA Type N
-	/// * `ita-o` - ITA Type O
-	/// * `usb-a` - USB Type A
-	/// * `usb-b` - USB Type B
-	/// * `usb-c` - USB Type C
-	/// * `usb-mini-a` - USB Mini A
-	/// * `usb-mini-b` - USB Mini B
-	/// * `usb-micro-a` - USB Micro A
-	/// * `usb-micro-b` - USB Micro B
-	/// * `usb-micro-ab` - USB Micro AB
-	/// * `usb-3-b` - USB 3.0 Type B
-	/// * `usb-3-micro-b` - USB 3.0 Micro B
-	/// * `dc-terminal` - DC Terminal
-	/// * `saf-d-grid` - Saf-D-Grid
-	/// * `neutrik-powercon-20` - Neutrik powerCON (20A)
-	/// * `neutrik-powercon-32` - Neutrik powerCON (32A)
-	/// * `neutrik-powercon-true1` - Neutrik powerCON TRUE1
-	/// * `neutrik-powercon-true1-top` - Neutrik powerCON TRUE1 TOP
-	/// * `ubiquiti-smartpower` - Ubiquiti SmartPower
-	/// * `hardwired` - Hardwired
-	/// * `other` - Other
-	pub r#type: Option<String>,
-	/// Maximum power draw (watts)
-	pub maximum_draw: Option<u32>,
-	/// Allocated power draw (watts)
-	pub allocated_draw: Option<u32>,
 	pub description: String,
-	/// Treat as if a cable is connected
-	pub mark_connected: bool,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PowerPortTemplate {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device_type: Option<NestedDeviceType>,
-	pub module_type: Option<NestedModuleType>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
-	/// Physical label
-	pub label: String,
-	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
-	/// Maximum power draw (watts)
-	pub maximum_draw: Option<u32>,
-	/// Allocated power draw (watts)
-	pub allocated_draw: Option<u32>,
 	pub description: String,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PowerPortTemplateRequest {
-	pub device_type: Option<NestedDeviceTypeRequest>,
-	pub module_type: Option<NestedModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
-	/// Physical label
-	pub label: String,
-	/// * `iec-60320-c6` - C6
-	/// * `iec-60320-c8` - C8
-	/// * `iec-60320-c14` - C14
-	/// * `iec-60320-c16` - C16
-	/// * `iec-60320-c20` - C20
-	/// * `iec-60320-c22` - C22
-	/// * `iec-60309-p-n-e-4h` - P+N+E 4H
-	/// * `iec-60309-p-n-e-6h` - P+N+E 6H
-	/// * `iec-60309-p-n-e-9h` - P+N+E 9H
-	/// * `iec-60309-2p-e-4h` - 2P+E 4H
-	/// * `iec-60309-2p-e-6h` - 2P+E 6H
-	/// * `iec-60309-2p-e-9h` - 2P+E 9H
-	/// * `iec-60309-3p-e-4h` - 3P+E 4H
-	/// * `iec-60309-3p-e-6h` - 3P+E 6H
-	/// * `iec-60309-3p-e-9h` - 3P+E 9H
-	/// * `iec-60309-3p-n-e-4h` - 3P+N+E 4H
-	/// * `iec-60309-3p-n-e-6h` - 3P+N+E 6H
-	/// * `iec-60309-3p-n-e-9h` - 3P+N+E 9H
-	/// * `iec-60906-1` - IEC 60906-1
-	/// * `nbr-14136-10a` - 2P+T 10A (NBR 14136)
-	/// * `nbr-14136-20a` - 2P+T 20A (NBR 14136)
-	/// * `nema-1-15p` - NEMA 1-15P
-	/// * `nema-5-15p` - NEMA 5-15P
-	/// * `nema-5-20p` - NEMA 5-20P
-	/// * `nema-5-30p` - NEMA 5-30P
-	/// * `nema-5-50p` - NEMA 5-50P
-	/// * `nema-6-15p` - NEMA 6-15P
-	/// * `nema-6-20p` - NEMA 6-20P
-	/// * `nema-6-30p` - NEMA 6-30P
-	/// * `nema-6-50p` - NEMA 6-50P
-	/// * `nema-10-30p` - NEMA 10-30P
-	/// * `nema-10-50p` - NEMA 10-50P
-	/// * `nema-14-20p` - NEMA 14-20P
-	/// * `nema-14-30p` - NEMA 14-30P
-	/// * `nema-14-50p` - NEMA 14-50P
-	/// * `nema-14-60p` - NEMA 14-60P
-	/// * `nema-15-15p` - NEMA 15-15P
-	/// * `nema-15-20p` - NEMA 15-20P
-	/// * `nema-15-30p` - NEMA 15-30P
-	/// * `nema-15-50p` - NEMA 15-50P
-	/// * `nema-15-60p` - NEMA 15-60P
-	/// * `nema-l1-15p` - NEMA L1-15P
-	/// * `nema-l5-15p` - NEMA L5-15P
-	/// * `nema-l5-20p` - NEMA L5-20P
-	/// * `nema-l5-30p` - NEMA L5-30P
-	/// * `nema-l5-50p` - NEMA L5-50P
-	/// * `nema-l6-15p` - NEMA L6-15P
-	/// * `nema-l6-20p` - NEMA L6-20P
-	/// * `nema-l6-30p` - NEMA L6-30P
-	/// * `nema-l6-50p` - NEMA L6-50P
-	/// * `nema-l10-30p` - NEMA L10-30P
-	/// * `nema-l14-20p` - NEMA L14-20P
-	/// * `nema-l14-30p` - NEMA L14-30P
-	/// * `nema-l14-50p` - NEMA L14-50P
-	/// * `nema-l14-60p` - NEMA L14-60P
-	/// * `nema-l15-20p` - NEMA L15-20P
-	/// * `nema-l15-30p` - NEMA L15-30P
-	/// * `nema-l15-50p` - NEMA L15-50P
-	/// * `nema-l15-60p` - NEMA L15-60P
-	/// * `nema-l21-20p` - NEMA L21-20P
-	/// * `nema-l21-30p` - NEMA L21-30P
-	/// * `nema-l22-30p` - NEMA L22-30P
-	/// * `cs6361c` - CS6361C
-	/// * `cs6365c` - CS6365C
-	/// * `cs8165c` - CS8165C
-	/// * `cs8265c` - CS8265C
-	/// * `cs8365c` - CS8365C
-	/// * `cs8465c` - CS8465C
-	/// * `ita-c` - ITA Type C (CEE 7/16)
-	/// * `ita-e` - ITA Type E (CEE 7/6)
-	/// * `ita-f` - ITA Type F (CEE 7/4)
-	/// * `ita-ef` - ITA Type E/F (CEE 7/7)
-	/// * `ita-g` - ITA Type G (BS 1363)
-	/// * `ita-h` - ITA Type H
-	/// * `ita-i` - ITA Type I
-	/// * `ita-j` - ITA Type J
-	/// * `ita-k` - ITA Type K
-	/// * `ita-l` - ITA Type L (CEI 23-50)
-	/// * `ita-m` - ITA Type M (BS 546)
-	/// * `ita-n` - ITA Type N
-	/// * `ita-o` - ITA Type O
-	/// * `usb-a` - USB Type A
-	/// * `usb-b` - USB Type B
-	/// * `usb-c` - USB Type C
-	/// * `usb-mini-a` - USB Mini A
-	/// * `usb-mini-b` - USB Mini B
-	/// * `usb-micro-a` - USB Micro A
-	/// * `usb-micro-b` - USB Micro B
-	/// * `usb-micro-ab` - USB Micro AB
-	/// * `usb-3-b` - USB 3.0 Type B
-	/// * `usb-3-micro-b` - USB 3.0 Micro B
-	/// * `dc-terminal` - DC Terminal
-	/// * `saf-d-grid` - Saf-D-Grid
-	/// * `neutrik-powercon-20` - Neutrik powerCON (20A)
-	/// * `neutrik-powercon-32` - Neutrik powerCON (32A)
-	/// * `neutrik-powercon-true1` - Neutrik powerCON TRUE1
-	/// * `neutrik-powercon-true1-top` - Neutrik powerCON TRUE1 TOP
-	/// * `ubiquiti-smartpower` - Ubiquiti SmartPower
-	/// * `hardwired` - Hardwired
-	/// * `other` - Other
-	pub r#type: Option<String>,
-	/// Maximum power draw (watts)
-	pub maximum_draw: Option<u32>,
-	/// Allocated power draw (watts)
-	pub allocated_draw: Option<u32>,
 	pub description: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -8543,12 +7255,12 @@ pub struct Prefix {
 	pub display: String,
 	pub family: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub prefix: String,
-	pub site: Option<NestedSite>,
-	pub vrf: Option<NestedVRF>,
-	pub tenant: Option<NestedTenant>,
-	pub vlan: Option<NestedVLAN>,
+	pub site: Option<Site>,
+	pub vrf: Option<VRF>,
+	pub tenant: Option<Tenant>,
+	pub vlan: Option<VLAN>,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub role: Option<NestedRole>,
+	pub role: Option<Role>,
 	/// All IP addresses within this prefix are considered usable
 	pub is_pool: bool,
 	/// Treat as fully utilized
@@ -8565,16 +7277,16 @@ pub struct Prefix {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PrefixRequest {
 	pub prefix: String,
-	pub site: Option<NestedSiteRequest>,
-	pub vrf: Option<NestedVRFRequest>,
-	pub tenant: Option<NestedTenantRequest>,
-	pub vlan: Option<NestedVLANRequest>,
+	pub site: Option<SiteRequest>,
+	pub vrf: Option<VRFRequest>,
+	pub tenant: Option<TenantRequest>,
+	pub vlan: Option<VLANRequest>,
 	/// * `container` - Container
 	/// * `active` - Active
 	/// * `reserved` - Reserved
 	/// * `deprecated` - Deprecated
 	pub status: String,
-	pub role: Option<NestedRoleRequest>,
+	pub role: Option<RoleRequest>,
 	/// All IP addresses within this prefix are considered usable
 	pub is_pool: bool,
 	/// Treat as fully utilized
@@ -8592,14 +7304,7 @@ pub struct Provider {
 	/// Full name of the provider
 	pub name: String,
 	pub slug: String,
-	pub accounts: Vec<i64>,
 	pub description: String,
-	pub comments: String,
-	pub asns: Vec<i64>,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 	pub circuit_count: i64,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -8607,7 +7312,7 @@ pub struct ProviderAccount {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub provider: NestedProvider,
+	pub provider: Provider,
 	pub name: String,
 	pub account: String,
 	pub description: String,
@@ -8619,50 +7324,29 @@ pub struct ProviderAccount {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ProviderAccountRequest {
-	pub provider: NestedProviderRequest,
 	pub name: String,
 	pub account: String,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ProviderNetwork {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub provider: NestedProvider,
 	pub name: String,
-	pub service_id: String,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ProviderNetworkRequest {
-	pub provider: NestedProviderRequest,
 	pub name: String,
-	pub service_id: String,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ProviderRequest {
 	/// Full name of the provider
 	pub name: String,
 	pub slug: String,
-	pub accounts: Vec<i64>,
 	pub description: String,
-	pub comments: String,
-	pub asns: Vec<i64>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct RIR {
@@ -8671,24 +7355,14 @@ pub struct RIR {
 	pub display: String,
 	pub name: String,
 	pub slug: String,
-	/// IP space managed by this RIR is considered private
-	pub is_private: bool,
 	pub description: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 	pub aggregate_count: i64,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct RIRRequest {
 	pub name: String,
 	pub slug: String,
-	/// IP space managed by this RIR is considered private
-	pub is_private: bool,
 	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct Rack {
@@ -8696,112 +7370,25 @@ pub struct Rack {
 	pub url: String,
 	pub display: String,
 	pub name: String,
-	pub facility_id: Option<String>,
-	pub site: NestedSite,
-	pub location: Option<NestedLocation>,
-	pub tenant: Option<NestedTenant>,
-	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub role: Option<NestedRackRole>,
-	pub serial: String,
-	/// A unique tag used to identify this rack
-	pub asset_tag: Option<String>,
-	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub width: Option<std::collections::HashMap<String, serde_json::Value>>,
-	/// Height in rack units
-	pub u_height: u8,
-	/// Starting unit for rack
-	pub starting_unit: u16,
-	pub weight: Option<f64>,
-	/// Maximum load capacity for the rack
-	pub max_weight: Option<u32>,
-	pub weight_unit: Option<std::collections::HashMap<String, serde_json::Value>>,
-	/// Units are numbered top-to-bottom
-	pub desc_units: bool,
-	/// Outer dimension of rack (width)
-	pub outer_width: Option<u16>,
-	/// Outer dimension of rack (depth)
-	pub outer_depth: Option<u16>,
-	pub outer_unit: Option<std::collections::HashMap<String, serde_json::Value>>,
-	/// Maximum depth of a mounted device, in millimeters. For four-post racks, this is the distance between the front and rear rails.
-	pub mounting_depth: Option<u16>,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 	pub device_count: i64,
-	pub powerfeed_count: i64,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct RackRequest {
 	pub name: String,
-	pub facility_id: Option<String>,
-	pub site: NestedSiteRequest,
-	pub location: Option<NestedLocationRequest>,
-	pub tenant: Option<NestedTenantRequest>,
-	/// * `reserved` - Reserved
-	/// * `available` - Available
-	/// * `planned` - Planned
-	/// * `active` - Active
-	/// * `deprecated` - Deprecated
-	pub status: String,
-	pub role: Option<NestedRackRoleRequest>,
-	pub serial: String,
-	/// A unique tag used to identify this rack
-	pub asset_tag: Option<String>,
-	/// * `2-post-frame` - 2-post frame
-	/// * `4-post-frame` - 4-post frame
-	/// * `4-post-cabinet` - 4-post cabinet
-	/// * `wall-frame` - Wall-mounted frame
-	/// * `wall-frame-vertical` - Wall-mounted frame (vertical)
-	/// * `wall-cabinet` - Wall-mounted cabinet
-	/// * `wall-cabinet-vertical` - Wall-mounted cabinet (vertical)
-	pub r#type: Option<String>,
-	/// * `10` - 10 inches
-	/// * `19` - 19 inches
-	/// * `21` - 21 inches
-	/// * `23` - 23 inches
-	pub width: i64,
-	/// Height in rack units
-	pub u_height: u8,
-	/// Starting unit for rack
-	pub starting_unit: u16,
-	pub weight: Option<f64>,
-	/// Maximum load capacity for the rack
-	pub max_weight: Option<u32>,
-	/// * `kg` - Kilograms
-	/// * `g` - Grams
-	/// * `lb` - Pounds
-	/// * `oz` - Ounces
-	pub weight_unit: Option<String>,
-	/// Units are numbered top-to-bottom
-	pub desc_units: bool,
-	/// Outer dimension of rack (width)
-	pub outer_width: Option<u16>,
-	/// Outer dimension of rack (depth)
-	pub outer_depth: Option<u16>,
-	/// * `mm` - Millimeters
-	/// * `in` - Inches
-	pub outer_unit: Option<String>,
-	/// Maximum depth of a mounted device, in millimeters. For four-post racks, this is the distance between the front and rear rails.
-	pub mounting_depth: Option<u16>,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct RackReservation {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub rack: NestedRack,
+	pub rack: Rack,
 	pub units: Vec<u16>,
 	pub created: Option<String>,
 	pub last_updated: Option<String>,
-	pub user: NestedUser,
-	pub tenant: Option<NestedTenant>,
+	pub user: User,
+	pub tenant: Option<Tenant>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
@@ -8809,10 +7396,10 @@ pub struct RackReservation {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct RackReservationRequest {
-	pub rack: NestedRackRequest,
+	pub rack: RackRequest,
 	pub units: Vec<u16>,
-	pub user: NestedUserRequest,
-	pub tenant: Option<NestedTenantRequest>,
+	pub user: UserRequest,
+	pub tenant: Option<TenantRequest>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -8843,12 +7430,21 @@ pub struct RackRoleRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct RackUnit {
+	pub id: f64,
+	pub name: String,
+	pub face: Option<std::collections::HashMap<String, serde_json::Value>>,
+	pub device: Option<Device>,
+	pub occupied: bool,
+	pub display: String,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct RearPort {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device: NestedDevice,
-	pub module: Option<ComponentNestedModule>,
+	pub device: Device,
+	pub module: Option<Module>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -8859,7 +7455,7 @@ pub struct RearPort {
 	pub description: String,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
-	pub cable: Option<NestedCable>,
+	pub cable: Option<Cable>,
 	pub cable_end: String,
 	pub link_peers: Vec<serde_json::Value>,
 	/// Return the type of the peer link terminations, or None.
@@ -8872,8 +7468,8 @@ pub struct RearPort {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct RearPortRequest {
-	pub device: NestedDeviceRequest,
-	pub module: Option<ComponentNestedModuleRequest>,
+	pub device: DeviceRequest,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -8939,77 +7535,14 @@ pub struct RearPortTemplate {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device_type: Option<NestedDeviceType>,
-	pub module_type: Option<NestedModuleType>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
-	/// Physical label
-	pub label: String,
-	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub color: String,
-	pub positions: u16,
 	pub description: String,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct RearPortTemplateRequest {
-	pub device_type: Option<NestedDeviceTypeRequest>,
-	pub module_type: Option<NestedModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
-	/// Physical label
-	pub label: String,
-	/// * `8p8c` - 8P8C
-	/// * `8p6c` - 8P6C
-	/// * `8p4c` - 8P4C
-	/// * `8p2c` - 8P2C
-	/// * `6p6c` - 6P6C
-	/// * `6p4c` - 6P4C
-	/// * `6p2c` - 6P2C
-	/// * `4p4c` - 4P4C
-	/// * `4p2c` - 4P2C
-	/// * `gg45` - GG45
-	/// * `tera-4p` - TERA 4P
-	/// * `tera-2p` - TERA 2P
-	/// * `tera-1p` - TERA 1P
-	/// * `110-punch` - 110 Punch
-	/// * `bnc` - BNC
-	/// * `f` - F Connector
-	/// * `n` - N Connector
-	/// * `mrj21` - MRJ21
-	/// * `fc` - FC
-	/// * `lc` - LC
-	/// * `lc-pc` - LC/PC
-	/// * `lc-upc` - LC/UPC
-	/// * `lc-apc` - LC/APC
-	/// * `lsh` - LSH
-	/// * `lsh-pc` - LSH/PC
-	/// * `lsh-upc` - LSH/UPC
-	/// * `lsh-apc` - LSH/APC
-	/// * `lx5` - LX.5
-	/// * `lx5-pc` - LX.5/PC
-	/// * `lx5-upc` - LX.5/UPC
-	/// * `lx5-apc` - LX.5/APC
-	/// * `mpo` - MPO
-	/// * `mtrj` - MTRJ
-	/// * `sc` - SC
-	/// * `sc-pc` - SC/PC
-	/// * `sc-upc` - SC/UPC
-	/// * `sc-apc` - SC/APC
-	/// * `st` - ST
-	/// * `cs` - CS
-	/// * `sn` - SN
-	/// * `sma-905` - SMA 905
-	/// * `sma-906` - SMA 906
-	/// * `urm-p2` - URM-P2
-	/// * `urm-p4` - URM-P4
-	/// * `urm-p8` - URM-P8
-	/// * `splice` - Splice
-	/// * `other` - Other
-	pub r#type: String,
-	pub color: String,
-	pub positions: u16,
 	pub description: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -9044,12 +7577,7 @@ pub struct Role {
 	pub display: String,
 	pub name: String,
 	pub slug: String,
-	pub weight: u16,
 	pub description: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 	pub prefix_count: i64,
 	pub vlan_count: i64,
 }
@@ -9057,10 +7585,7 @@ pub struct Role {
 pub struct RoleRequest {
 	pub name: String,
 	pub slug: String,
-	pub weight: u16,
 	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct RouteTarget {
@@ -9069,7 +7594,7 @@ pub struct RouteTarget {
 	pub display: String,
 	/// Route target value (formatted in accordance with RFC 4360)
 	pub name: String,
-	pub tenant: Option<NestedTenant>,
+	pub tenant: Option<Tenant>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
@@ -9081,7 +7606,7 @@ pub struct RouteTarget {
 pub struct RouteTargetRequest {
 	/// Route target value (formatted in accordance with RFC 4360)
 	pub name: String,
-	pub tenant: Option<NestedTenantRequest>,
+	pub tenant: Option<TenantRequest>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -9092,7 +7617,7 @@ pub struct SavedFilter {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub content_types: Vec<String>,
+	pub object_types: Vec<String>,
 	pub name: String,
 	pub slug: String,
 	pub description: String,
@@ -9106,7 +7631,7 @@ pub struct SavedFilter {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct SavedFilterRequest {
-	pub content_types: Vec<String>,
+	pub object_types: Vec<String>,
 	pub name: String,
 	pub slug: String,
 	pub description: String,
@@ -9117,16 +7642,28 @@ pub struct SavedFilterRequest {
 	pub parameters: serde_json::Value,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct Script {
+	pub id: i64,
+	pub url: String,
+	pub module: i64,
+	pub name: String,
+	pub description: String,
+	pub vars: Option<serde_json::Value>,
+	pub result: Option<Job>,
+	pub display: String,
+	pub is_executable: bool,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct Service {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub device: Option<NestedDevice>,
-	pub virtual_machine: Option<NestedVirtualMachine>,
+	pub device: Option<Device>,
+	pub virtual_machine: Option<VirtualMachine>,
 	pub name: String,
-	pub ports: Vec<u16>,
 	pub protocol: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub ipaddresses: Vec<i64>,
+	pub ports: Vec<u16>,
+	pub ipaddresses: Vec<IPAddress>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
@@ -9136,14 +7673,14 @@ pub struct Service {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ServiceRequest {
-	pub device: Option<NestedDeviceRequest>,
-	pub virtual_machine: Option<NestedVirtualMachineRequest>,
+	pub device: Option<DeviceRequest>,
+	pub virtual_machine: Option<VirtualMachineRequest>,
 	pub name: String,
-	pub ports: Vec<u16>,
 	/// * `tcp` - TCP
 	/// * `udp` - UDP
 	/// * `sctp` - SCTP
 	pub protocol: String,
+	pub ports: Vec<u16>,
 	pub ipaddresses: Vec<i64>,
 	pub description: String,
 	pub comments: String,
@@ -9156,8 +7693,8 @@ pub struct ServiceTemplate {
 	pub url: String,
 	pub display: String,
 	pub name: String,
-	pub ports: Vec<u16>,
 	pub protocol: Option<std::collections::HashMap<String, serde_json::Value>>,
+	pub ports: Vec<u16>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTag>,
@@ -9168,11 +7705,11 @@ pub struct ServiceTemplate {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ServiceTemplateRequest {
 	pub name: String,
-	pub ports: Vec<u16>,
 	/// * `tcp` - TCP
 	/// * `udp` - UDP
 	/// * `sctp` - SCTP
 	pub protocol: String,
+	pub ports: Vec<u16>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -9186,34 +7723,7 @@ pub struct Site {
 	/// Full name of the site
 	pub name: String,
 	pub slug: String,
-	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub region: Option<NestedRegion>,
-	pub group: Option<NestedSiteGroup>,
-	pub tenant: Option<NestedTenant>,
-	/// Local facility ID or description
-	pub facility: String,
-	pub time_zone: Option<String>,
 	pub description: String,
-	/// Physical location of the building
-	pub physical_address: String,
-	/// If different from the physical address
-	pub shipping_address: String,
-	/// GPS coordinate in decimal format (xx.yyyyyy)
-	pub latitude: Option<f64>,
-	/// GPS coordinate in decimal format (xx.yyyyyy)
-	pub longitude: Option<f64>,
-	pub comments: String,
-	pub asns: Vec<i64>,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
-	pub circuit_count: i64,
-	pub device_count: i64,
-	pub prefix_count: i64,
-	pub rack_count: i64,
-	pub virtualmachine_count: i64,
-	pub vlan_count: i64,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct SiteGroup {
@@ -9245,31 +7755,7 @@ pub struct SiteRequest {
 	/// Full name of the site
 	pub name: String,
 	pub slug: String,
-	/// * `planned` - Planned
-	/// * `staging` - Staging
-	/// * `active` - Active
-	/// * `decommissioning` - Decommissioning
-	/// * `retired` - Retired
-	pub status: String,
-	pub region: Option<NestedRegionRequest>,
-	pub group: Option<NestedSiteGroupRequest>,
-	pub tenant: Option<NestedTenantRequest>,
-	/// Local facility ID or description
-	pub facility: String,
-	pub time_zone: Option<String>,
 	pub description: String,
-	/// Physical location of the building
-	pub physical_address: String,
-	/// If different from the physical address
-	pub shipping_address: String,
-	/// GPS coordinate in decimal format (xx.yyyyyy)
-	pub latitude: Option<f64>,
-	/// GPS coordinate in decimal format (xx.yyyyyy)
-	pub longitude: Option<f64>,
-	pub comments: String,
-	pub asns: Vec<i64>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct Tag {
@@ -9300,23 +7786,7 @@ pub struct Tenant {
 	pub display: String,
 	pub name: String,
 	pub slug: String,
-	pub group: Option<NestedTenantGroup>,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
-	pub circuit_count: i64,
-	pub device_count: i64,
-	pub ipaddress_count: i64,
-	pub prefix_count: i64,
-	pub rack_count: i64,
-	pub site_count: i64,
-	pub virtualmachine_count: i64,
-	pub vlan_count: i64,
-	pub vrf_count: i64,
-	pub cluster_count: i64,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct TenantGroup {
@@ -9347,18 +7817,14 @@ pub struct TenantGroupRequest {
 pub struct TenantRequest {
 	pub name: String,
 	pub slug: String,
-	pub group: Option<NestedTenantGroupRequest>,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct Token {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub user: NestedUser,
+	pub user: User,
 	pub created: String,
 	pub expires: Option<String>,
 	pub last_used: Option<String>,
@@ -9372,7 +7838,7 @@ pub struct TokenProvision {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub user: Option<NestedUser>,
+	pub user: Option<User>,
 	pub created: String,
 	pub expires: Option<String>,
 	pub last_used: String,
@@ -9392,7 +7858,7 @@ pub struct TokenProvisionRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct TokenRequest {
-	pub user: NestedUserRequest,
+	pub user: UserRequest,
 	pub expires: Option<String>,
 	pub last_used: Option<String>,
 	pub key: String,
@@ -9406,18 +7872,7 @@ pub struct Tunnel {
 	pub url: String,
 	pub display: String,
 	pub name: String,
-	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub group: NestedTunnelGroup,
-	pub encapsulation: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub ipsec_profile: Option<NestedIPSecProfile>,
-	pub tenant: Option<NestedTenant>,
-	pub tunnel_id: Option<u64>,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct TunnelGroup {
@@ -9444,35 +7899,19 @@ pub struct TunnelGroupRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct TunnelRequest {
 	pub name: String,
-	/// * `planned` - Planned
-	/// * `active` - Active
-	/// * `disabled` - Disabled
-	pub status: String,
-	pub group: NestedTunnelGroupRequest,
-	/// * `ipsec-transport` - IPsec - Transport
-	/// * `ipsec-tunnel` - IPsec - Tunnel
-	/// * `ip-ip` - IP-in-IP
-	/// * `gre` - GRE
-	pub encapsulation: String,
-	pub ipsec_profile: Option<NestedIPSecProfileRequest>,
-	pub tenant: Option<NestedTenantRequest>,
-	pub tunnel_id: Option<u64>,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct TunnelTermination {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub tunnel: NestedTunnel,
+	pub tunnel: Tunnel,
 	pub role: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub termination_type: String,
 	pub termination_id: Option<u64>,
 	pub termination: Option<serde_json::Value>,
-	pub outside_ip: Option<NestedIPAddress>,
+	pub outside_ip: Option<IPAddress>,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub created: Option<String>,
@@ -9480,14 +7919,14 @@ pub struct TunnelTermination {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct TunnelTerminationRequest {
-	pub tunnel: NestedTunnelRequest,
+	pub tunnel: TunnelRequest,
 	/// * `peer` - Peer
 	/// * `hub` - Hub
 	/// * `spoke` - Spoke
 	pub role: String,
 	pub termination_type: String,
 	pub termination_id: Option<u64>,
-	pub outside_ip: Option<NestedIPAddressRequest>,
+	pub outside_ip: Option<IPAddressRequest>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -9498,52 +7937,21 @@ pub struct User {
 	pub display: String,
 	/// Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
 	pub username: String,
-	pub first_name: String,
-	pub last_name: String,
-	pub email: String,
-	/// Designates whether the user can log into this admin site.
-	pub is_staff: bool,
-	/// Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
-	pub is_active: bool,
-	pub date_joined: String,
-	pub groups: Vec<i64>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct UserRequest {
 	/// Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
 	pub username: String,
-	pub password: String,
-	pub first_name: String,
-	pub last_name: String,
-	pub email: String,
-	/// Designates whether the user can log into this admin site.
-	pub is_staff: bool,
-	/// Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
-	pub is_active: bool,
-	pub date_joined: String,
-	pub groups: Vec<i64>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VLAN {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub site: Option<NestedSite>,
-	pub group: Option<NestedVLANGroup>,
 	/// Numeric VLAN ID (1-4094)
 	pub vid: u16,
 	pub name: String,
-	pub tenant: Option<NestedTenant>,
-	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub role: Option<NestedRole>,
 	pub description: String,
-	pub comments: String,
-	pub l2vpn_termination: Option<NestedL2VPNTermination>,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
-	pub prefix_count: i64,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VLANGroup {
@@ -9583,28 +7991,17 @@ pub struct VLANGroupRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VLANRequest {
-	pub site: Option<NestedSiteRequest>,
-	pub group: Option<NestedVLANGroupRequest>,
 	/// Numeric VLAN ID (1-4094)
 	pub vid: u16,
 	pub name: String,
-	pub tenant: Option<NestedTenantRequest>,
-	/// * `active` - Active
-	/// * `reserved` - Reserved
-	/// * `deprecated` - Deprecated
-	pub status: String,
-	pub role: Option<NestedRoleRequest>,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VMInterface {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub virtual_machine: NestedVirtualMachine,
+	pub virtual_machine: VirtualMachine,
 	pub name: String,
 	pub enabled: bool,
 	pub parent: Option<NestedVMInterface>,
@@ -9613,10 +8010,10 @@ pub struct VMInterface {
 	pub mac_address: Option<String>,
 	pub description: String,
 	pub mode: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub untagged_vlan: Option<NestedVLAN>,
-	pub tagged_vlans: Vec<i64>,
-	pub vrf: Option<NestedVRF>,
-	pub l2vpn_termination: Option<NestedL2VPNTermination>,
+	pub untagged_vlan: Option<VLAN>,
+	pub tagged_vlans: Vec<VLAN>,
+	pub vrf: Option<VRF>,
+	pub l2vpn_termination: Option<L2VPNTermination>,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub created: Option<String>,
@@ -9626,7 +8023,7 @@ pub struct VMInterface {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VMInterfaceRequest {
-	pub virtual_machine: NestedVirtualMachineRequest,
+	pub virtual_machine: VirtualMachineRequest,
 	pub name: String,
 	pub enabled: bool,
 	pub parent: Option<NestedVMInterfaceRequest>,
@@ -9638,9 +8035,9 @@ pub struct VMInterfaceRequest {
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
 	pub mode: String,
-	pub untagged_vlan: Option<NestedVLANRequest>,
+	pub untagged_vlan: Option<VLANRequest>,
 	pub tagged_vlans: Vec<i64>,
-	pub vrf: Option<NestedVRFRequest>,
+	pub vrf: Option<VRFRequest>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -9652,18 +8049,7 @@ pub struct VRF {
 	pub name: String,
 	/// Unique route distinguisher (as defined in RFC 4364)
 	pub rd: Option<String>,
-	pub tenant: Option<NestedTenant>,
-	/// Prevent duplicate prefixes/IP addresses within this VRF
-	pub enforce_unique: bool,
 	pub description: String,
-	pub comments: String,
-	pub import_targets: Vec<i64>,
-	pub export_targets: Vec<i64>,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
-	pub ipaddress_count: i64,
 	pub prefix_count: i64,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -9671,15 +8057,7 @@ pub struct VRFRequest {
 	pub name: String,
 	/// Unique route distinguisher (as defined in RFC 4364)
 	pub rd: Option<String>,
-	pub tenant: Option<NestedTenantRequest>,
-	/// Prevent duplicate prefixes/IP addresses within this VRF
-	pub enforce_unique: bool,
 	pub description: String,
-	pub comments: String,
-	pub import_targets: Vec<i64>,
-	pub export_targets: Vec<i64>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VirtualChassis {
@@ -9687,25 +8065,15 @@ pub struct VirtualChassis {
 	pub url: String,
 	pub display: String,
 	pub name: String,
-	pub domain: String,
 	pub master: Option<NestedDevice>,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 	pub member_count: i64,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VirtualChassisRequest {
 	pub name: String,
-	pub domain: String,
 	pub master: Option<NestedDeviceRequest>,
 	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VirtualDeviceContext {
@@ -9713,13 +8081,12 @@ pub struct VirtualDeviceContext {
 	pub url: String,
 	pub display: String,
 	pub name: String,
-	pub device: NestedDevice,
-	/// Numeric identifier unique to the parent device
+	pub device: Device,
 	pub identifier: Option<u16>,
-	pub tenant: Option<NestedTenant>,
-	pub primary_ip: Option<NestedIPAddress>,
-	pub primary_ip4: Option<NestedIPAddress>,
-	pub primary_ip6: Option<NestedIPAddress>,
+	pub tenant: Option<Tenant>,
+	pub primary_ip: Option<IPAddress>,
+	pub primary_ip4: Option<IPAddress>,
+	pub primary_ip6: Option<IPAddress>,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub description: String,
 	pub comments: String,
@@ -9732,12 +8099,11 @@ pub struct VirtualDeviceContext {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VirtualDeviceContextRequest {
 	pub name: String,
-	pub device: NestedDeviceRequest,
-	/// Numeric identifier unique to the parent device
+	pub device: DeviceRequest,
 	pub identifier: Option<u16>,
-	pub tenant: Option<NestedTenantRequest>,
-	pub primary_ip4: Option<NestedIPAddressRequest>,
-	pub primary_ip6: Option<NestedIPAddressRequest>,
+	pub tenant: Option<TenantRequest>,
+	pub primary_ip4: Option<IPAddressRequest>,
+	pub primary_ip6: Option<IPAddressRequest>,
 	/// * `active` - Active
 	/// * `planned` - Planned
 	/// * `offline` - Offline
@@ -9751,7 +8117,8 @@ pub struct VirtualDeviceContextRequest {
 pub struct VirtualDisk {
 	pub id: i64,
 	pub url: String,
-	pub virtual_machine: NestedVirtualMachine,
+	pub display: String,
+	pub virtual_machine: VirtualMachine,
 	pub name: String,
 	pub description: String,
 	pub size: u32,
@@ -9762,12 +8129,25 @@ pub struct VirtualDisk {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VirtualDiskRequest {
-	pub virtual_machine: NestedVirtualMachineRequest,
+	pub virtual_machine: VirtualMachineRequest,
 	pub name: String,
 	pub description: String,
 	pub size: u32,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct VirtualMachine {
+	pub id: i64,
+	pub url: String,
+	pub display: String,
+	pub name: String,
+	pub description: String,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct VirtualMachineRequest {
+	pub name: String,
+	pub description: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VirtualMachineWithConfigContext {
@@ -9776,20 +8156,21 @@ pub struct VirtualMachineWithConfigContext {
 	pub display: String,
 	pub name: String,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub site: Option<NestedSite>,
-	pub cluster: Option<NestedCluster>,
-	pub device: Option<NestedDevice>,
-	pub role: Option<NestedDeviceRole>,
-	pub tenant: Option<NestedTenant>,
-	pub platform: Option<NestedPlatform>,
-	pub primary_ip: Option<NestedIPAddress>,
-	pub primary_ip4: Option<NestedIPAddress>,
-	pub primary_ip6: Option<NestedIPAddress>,
+	pub site: Option<Site>,
+	pub cluster: Option<Cluster>,
+	pub device: Option<Device>,
+	pub role: Option<DeviceRole>,
+	pub tenant: Option<Tenant>,
+	pub platform: Option<Platform>,
+	pub primary_ip: Option<IPAddress>,
+	pub primary_ip4: Option<IPAddress>,
+	pub primary_ip6: Option<IPAddress>,
 	pub vcpus: Option<f64>,
 	pub memory: Option<u32>,
 	pub disk: Option<u32>,
 	pub description: String,
 	pub comments: String,
+	pub config_template: Option<ConfigTemplate>,
 	/// Local config context data takes precedence over source contexts in the final rendered config context
 	pub local_context_data: Option<serde_json::Value>,
 	pub tags: Vec<NestedTag>,
@@ -9810,19 +8191,20 @@ pub struct VirtualMachineWithConfigContextRequest {
 	/// * `failed` - Failed
 	/// * `decommissioning` - Decommissioning
 	pub status: String,
-	pub site: Option<NestedSiteRequest>,
-	pub cluster: Option<NestedClusterRequest>,
-	pub device: Option<NestedDeviceRequest>,
-	pub role: Option<NestedDeviceRoleRequest>,
-	pub tenant: Option<NestedTenantRequest>,
-	pub platform: Option<NestedPlatformRequest>,
-	pub primary_ip4: Option<NestedIPAddressRequest>,
-	pub primary_ip6: Option<NestedIPAddressRequest>,
+	pub site: Option<SiteRequest>,
+	pub cluster: Option<ClusterRequest>,
+	pub device: Option<DeviceRequest>,
+	pub role: Option<DeviceRoleRequest>,
+	pub tenant: Option<TenantRequest>,
+	pub platform: Option<PlatformRequest>,
+	pub primary_ip4: Option<IPAddressRequest>,
+	pub primary_ip6: Option<IPAddressRequest>,
 	pub vcpus: Option<f64>,
 	pub memory: Option<u32>,
 	pub disk: Option<u32>,
 	pub description: String,
 	pub comments: String,
+	pub config_template: Option<ConfigTemplateRequest>,
 	/// Local config context data takes precedence over source contexts in the final rendered config context
 	pub local_context_data: Option<serde_json::Value>,
 	pub tags: Vec<NestedTagRequest>,
@@ -9894,10 +8276,10 @@ pub struct WirelessLAN {
 	pub display: String,
 	pub ssid: String,
 	pub description: String,
-	pub group: Option<NestedWirelessLANGroup>,
+	pub group: Option<WirelessLANGroup>,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub vlan: Option<NestedVLAN>,
-	pub tenant: Option<NestedTenant>,
+	pub vlan: Option<VLAN>,
+	pub tenant: Option<Tenant>,
 	pub auth_type: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub auth_cipher: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub auth_psk: String,
@@ -9914,12 +8296,7 @@ pub struct WirelessLANGroup {
 	pub display: String,
 	pub name: String,
 	pub slug: String,
-	pub parent: Option<NestedWirelessLANGroup>,
 	pub description: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
 	pub wirelesslan_count: i64,
 	pub _depth: i64,
 }
@@ -9936,14 +8313,14 @@ pub struct WirelessLANGroupRequest {
 pub struct WirelessLANRequest {
 	pub ssid: String,
 	pub description: String,
-	pub group: Option<NestedWirelessLANGroupRequest>,
+	pub group: Option<WirelessLANGroupRequest>,
 	/// * `active` - Active
 	/// * `reserved` - Reserved
 	/// * `disabled` - Disabled
 	/// * `deprecated` - Deprecated
 	pub status: String,
-	pub vlan: Option<NestedVLANRequest>,
-	pub tenant: Option<NestedTenantRequest>,
+	pub vlan: Option<VLANRequest>,
+	pub tenant: Option<TenantRequest>,
 	/// * `open` - Open
 	/// * `wep` - WEP
 	/// * `wpa-personal` - WPA Personal (PSK)
@@ -9963,11 +8340,11 @@ pub struct WirelessLink {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
-	pub interface_a: NestedInterface,
-	pub interface_b: NestedInterface,
+	pub interface_a: Interface,
+	pub interface_b: Interface,
 	pub ssid: String,
 	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub tenant: Option<NestedTenant>,
+	pub tenant: Option<Tenant>,
 	pub auth_type: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub auth_cipher: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub auth_psk: String,
@@ -9980,14 +8357,14 @@ pub struct WirelessLink {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WirelessLinkRequest {
-	pub interface_a: NestedInterfaceRequest,
-	pub interface_b: NestedInterfaceRequest,
+	pub interface_a: InterfaceRequest,
+	pub interface_b: InterfaceRequest,
 	pub ssid: String,
 	/// * `connected` - Connected
 	/// * `planned` - Planned
 	/// * `decommissioning` - Decommissioning
 	pub status: String,
-	pub tenant: Option<NestedTenantRequest>,
+	pub tenant: Option<TenantRequest>,
 	/// * `open` - Open
 	/// * `wep` - WEP
 	/// * `wpa-personal` - WPA Personal (PSK)
@@ -10004,46 +8381,15 @@ pub struct WirelessLinkRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableASNRangeRequest {
-	pub name: String,
-	pub slug: String,
-	pub rir: i64,
-	pub start: u32,
-	pub end: u32,
-	pub tenant: Option<i64>,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableASNRequest {
-	/// 16- or 32-bit autonomous system number
-	pub asn: u32,
-	/// Regional Internet Registry responsible for this AS number space
-	pub rir: i64,
-	pub tenant: Option<i64>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableAggregateRequest {
 	pub prefix: String,
-	/// Regional Internet Registry responsible for this IP space
-	pub rir: i64,
-	pub tenant: Option<i64>,
+	pub rir: RIRRequest,
+	pub tenant: Option<TenantRequest>,
 	pub date_added: Option<String>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableBookmarkRequest {
-	pub object_type: String,
-	pub object_id: u64,
-	pub user: i64,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableCableRequest {
@@ -10077,7 +8423,7 @@ pub struct WritableCableRequest {
 	/// * `planned` - Planned
 	/// * `decommissioning` - Decommissioning
 	pub status: String,
-	pub tenant: Option<i64>,
+	pub tenant: Option<TenantRequest>,
 	pub label: String,
 	pub color: String,
 	pub length: Option<f64>,
@@ -10097,9 +8443,9 @@ pub struct WritableCableRequest {
 pub struct WritableCircuitRequest {
 	/// Unique circuit ID
 	pub cid: String,
-	pub provider: i64,
-	pub provider_account: Option<i64>,
-	pub r#type: i64,
+	pub provider: ProviderRequest,
+	pub provider_account: Option<ProviderAccountRequest>,
+	pub r#type: CircuitTypeRequest,
 	/// * `planned` - Planned
 	/// * `provisioning` - Provisioning
 	/// * `active` - Active
@@ -10107,7 +8453,7 @@ pub struct WritableCircuitRequest {
 	/// * `deprovisioning` - Deprovisioning
 	/// * `decommissioned` - Decommissioned
 	pub status: String,
-	pub tenant: Option<i64>,
+	pub tenant: Option<TenantRequest>,
 	pub install_date: Option<String>,
 	pub termination_date: Option<String>,
 	/// Committed rate
@@ -10118,85 +8464,27 @@ pub struct WritableCircuitRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableCircuitTerminationRequest {
-	pub circuit: i64,
-	/// * `A` - A
-	/// * `Z` - Z
-	pub term_side: String,
-	pub site: Option<i64>,
-	pub provider_network: Option<i64>,
-	/// Physical circuit speed
-	pub port_speed: Option<u32>,
-	/// Upstream speed, if different from port speed
-	pub upstream_speed: Option<u32>,
-	/// ID of the local cross-connect
-	pub xconnect_id: String,
-	/// Patch panel ID and port number(s)
-	pub pp_info: String,
-	pub description: String,
-	/// Treat as if a cable is connected
-	pub mark_connected: bool,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableClusterRequest {
 	pub name: String,
-	pub r#type: i64,
-	pub group: Option<i64>,
+	pub r#type: ClusterTypeRequest,
+	pub group: Option<ClusterGroupRequest>,
 	/// * `planned` - Planned
 	/// * `staging` - Staging
 	/// * `active` - Active
 	/// * `decommissioning` - Decommissioning
 	/// * `offline` - Offline
 	pub status: String,
-	pub tenant: Option<i64>,
-	pub site: Option<i64>,
+	pub tenant: Option<TenantRequest>,
+	pub site: Option<SiteRequest>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableConfigContextRequest {
-	pub name: String,
-	pub weight: u16,
-	pub description: String,
-	pub is_active: bool,
-	pub regions: Vec<i64>,
-	pub site_groups: Vec<i64>,
-	pub sites: Vec<i64>,
-	pub locations: Vec<i64>,
-	pub device_types: Vec<i64>,
-	pub roles: Vec<i64>,
-	pub platforms: Vec<i64>,
-	pub cluster_types: Vec<i64>,
-	pub cluster_groups: Vec<i64>,
-	pub clusters: Vec<i64>,
-	pub tenant_groups: Vec<i64>,
-	pub tenants: Vec<i64>,
-	pub tags: Vec<String>,
-	/// Remote data source
-	pub data_source: Option<i64>,
-	pub data: serde_json::Value,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableConfigTemplateRequest {
-	pub name: String,
-	pub description: String,
-	/// Any <a href="https://jinja.palletsprojects.com/en/3.1.x/api/#jinja2.Environment">additional parameters</a> to pass when constructing the Jinja2 environment.
-	pub environment_params: Option<serde_json::Value>,
-	/// Jinja2 template code.
-	pub template_code: String,
-	/// Remote data source
-	pub data_source: Option<i64>,
-	pub data_file: Option<i64>,
-	pub tags: Vec<NestedTagRequest>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableConsolePortRequest {
-	pub device: i64,
-	pub module: Option<i64>,
+	pub device: DeviceRequest,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -10237,8 +8525,8 @@ pub struct WritableConsolePortRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableConsolePortTemplateRequest {
-	pub device_type: Option<i64>,
-	pub module_type: Option<i64>,
+	pub device_type: Option<DeviceTypeRequest>,
+	pub module_type: Option<ModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -10263,8 +8551,8 @@ pub struct WritableConsolePortTemplateRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableConsoleServerPortRequest {
-	pub device: i64,
-	pub module: Option<i64>,
+	pub device: DeviceRequest,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -10305,8 +8593,8 @@ pub struct WritableConsoleServerPortRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableConsoleServerPortTemplateRequest {
-	pub device_type: Option<i64>,
-	pub module_type: Option<i64>,
+	pub device_type: Option<DeviceTypeRequest>,
+	pub module_type: Option<ModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -10331,10 +8619,10 @@ pub struct WritableConsoleServerPortTemplateRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableContactAssignmentRequest {
-	pub content_type: String,
+	pub object_type: String,
 	pub object_id: u64,
-	pub contact: i64,
-	pub role: i64,
+	pub contact: ContactRequest,
+	pub role: Option<ContactRoleRequest>,
 	/// * `primary` - Primary
 	/// * `secondary` - Secondary
 	/// * `tertiary` - Tertiary
@@ -10349,20 +8637,6 @@ pub struct WritableContactGroupRequest {
 	pub slug: String,
 	pub parent: Option<i64>,
 	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableContactRequest {
-	pub group: Option<i64>,
-	pub name: String,
-	pub title: String,
-	pub phone: String,
-	pub email: String,
-	pub address: String,
-	pub link: String,
-	pub description: String,
-	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -10382,7 +8656,7 @@ pub struct WritableCustomFieldChoiceSetRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableCustomFieldRequest {
-	pub content_types: Vec<String>,
+	pub object_types: Vec<String>,
 	/// The type of data this custom field holds
 	/// 
 	/// * `text` - Text
@@ -10399,7 +8673,7 @@ pub struct WritableCustomFieldRequest {
 	/// * `object` - Object
 	/// * `multiobject` - Multiple objects
 	pub r#type: String,
-	pub object_type: Option<String>,
+	pub related_object_type: Option<String>,
 	/// Internal field name
 	pub name: String,
 	/// Name of the field as displayed to users (if not provided, 'the field's name will be used)
@@ -10441,7 +8715,8 @@ pub struct WritableCustomFieldRequest {
 	pub validation_maximum: Option<i64>,
 	/// Regular expression to enforce on text field values. Use ^ and $ to force matching of entire string. For example, <code>^[A-Z]{3}$</code> will limit values to exactly three uppercase letters.
 	pub validation_regex: String,
-	pub choice_set: Option<i64>,
+	pub choice_set: Option<CustomFieldChoiceSetRequest>,
+	pub comments: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableDataSourceRequest {
@@ -10457,41 +8732,9 @@ pub struct WritableDataSourceRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableDeviceBayRequest {
-	pub device: i64,
-	pub name: String,
-	/// Physical label
-	pub label: String,
-	pub description: String,
-	pub installed_device: Option<i64>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableDeviceBayTemplateRequest {
-	pub device_type: i64,
-	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
-	/// Physical label
-	pub label: String,
-	pub description: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableDeviceRoleRequest {
-	pub name: String,
-	pub slug: String,
-	pub color: String,
-	/// Virtual machines may be assigned to this role
-	pub vm_role: bool,
-	pub config_template: Option<i64>,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableDeviceTypeRequest {
-	pub manufacturer: i64,
-	pub default_platform: Option<i64>,
+	pub manufacturer: ManufacturerRequest,
+	pub default_platform: Option<PlatformRequest>,
 	pub model: String,
 	pub slug: String,
 	/// Discrete part number (optional)
@@ -10520,8 +8763,8 @@ pub struct WritableDeviceTypeRequest {
 	/// * `lb` - Pounds
 	/// * `oz` - Ounces
 	pub weight_unit: String,
-	pub front_image: String,
-	pub rear_image: String,
+	pub front_image: Option<String>,
+	pub rear_image: Option<String>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -10530,18 +8773,17 @@ pub struct WritableDeviceTypeRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableDeviceWithConfigContextRequest {
 	pub name: Option<String>,
-	pub device_type: i64,
-	/// The function this device serves
-	pub role: i64,
-	pub tenant: Option<i64>,
-	pub platform: Option<i64>,
+	pub device_type: DeviceTypeRequest,
+	pub role: DeviceRoleRequest,
+	pub tenant: Option<TenantRequest>,
+	pub platform: Option<PlatformRequest>,
 	/// Chassis serial number, assigned by the manufacturer
 	pub serial: String,
 	/// A unique tag used to identify this device
 	pub asset_tag: Option<String>,
-	pub site: i64,
-	pub location: Option<i64>,
-	pub rack: Option<i64>,
+	pub site: SiteRequest,
+	pub location: Option<LocationRequest>,
+	pub rack: Option<RackRequest>,
 	pub position: Option<f64>,
 	/// * `front` - Front
 	/// * `rear` - Rear
@@ -10566,17 +8808,17 @@ pub struct WritableDeviceWithConfigContextRequest {
 	/// * `passive` - Passive
 	/// * `mixed` - Mixed
 	pub airflow: String,
-	pub primary_ip4: Option<i64>,
-	pub primary_ip6: Option<i64>,
-	pub oob_ip: Option<i64>,
-	pub cluster: Option<i64>,
-	pub virtual_chassis: Option<i64>,
+	pub primary_ip4: Option<IPAddressRequest>,
+	pub primary_ip6: Option<IPAddressRequest>,
+	pub oob_ip: Option<IPAddressRequest>,
+	pub cluster: Option<ClusterRequest>,
+	pub virtual_chassis: Option<VirtualChassisRequest>,
 	pub vc_position: Option<u8>,
 	/// Virtual chassis master election priority
 	pub vc_priority: Option<u8>,
 	pub description: String,
 	pub comments: String,
-	pub config_template: Option<i64>,
+	pub config_template: Option<ConfigTemplateRequest>,
 	/// Local config context data takes precedence over source contexts in the final rendered config context
 	pub local_context_data: Option<serde_json::Value>,
 	pub tags: Vec<NestedTagRequest>,
@@ -10584,7 +8826,7 @@ pub struct WritableDeviceWithConfigContextRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableEventRuleRequest {
-	pub content_types: Vec<String>,
+	pub object_types: Vec<String>,
 	pub name: String,
 	/// Triggers when a matching object is created.
 	pub type_create: bool,
@@ -10609,32 +8851,9 @@ pub struct WritableEventRuleRequest {
 	pub tags: Vec<NestedTagRequest>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableExportTemplateRequest {
-	pub content_types: Vec<String>,
-	pub name: String,
-	pub description: String,
-	/// Jinja2 template code. The list of objects being exported is passed as a context variable named <code>queryset</code>.
-	pub template_code: String,
-	/// Defaults to <code>text/plain; charset=utf-8</code>
-	pub mime_type: String,
-	/// Extension to append to the rendered filename
-	pub file_extension: String,
-	/// Download file as attachment
-	pub as_attachment: bool,
-	/// Remote data source
-	pub data_source: Option<i64>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableFHRPGroupAssignmentRequest {
-	pub group: i64,
-	pub interface_type: String,
-	pub interface_id: u64,
-	pub priority: u8,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableFrontPortRequest {
-	pub device: i64,
-	pub module: Option<i64>,
+	pub device: DeviceRequest,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -10698,8 +8917,8 @@ pub struct WritableFrontPortRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableFrontPortTemplateRequest {
-	pub device_type: Option<i64>,
-	pub module_type: Option<i64>,
+	pub device_type: Option<DeviceTypeRequest>,
+	pub module_type: Option<ModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -10753,7 +8972,7 @@ pub struct WritableFrontPortTemplateRequest {
 	/// * `other` - Other
 	pub r#type: String,
 	pub color: String,
-	pub rear_port: i64,
+	pub rear_port: RearPortTemplateRequest,
 	pub rear_port_position: u16,
 	pub description: String,
 }
@@ -10788,7 +9007,8 @@ pub struct WritableIKEProposalRequest {
 	/// * `aes-192-gcm` - 192-bit AES (GCM)
 	/// * `aes-256-cbc` - 256-bit AES (CBC)
 	/// * `aes-256-gcm` - 256-bit AES (GCM)
-	/// * `3des-cbc` - DES
+	/// * `3des-cbc` - 3DES
+	/// * `des-cbc` - DES
 	pub encryption_algorithm: String,
 	/// * `hmac-sha1` - SHA-1 HMAC
 	/// * `hmac-sha256` - SHA-256 HMAC
@@ -10832,8 +9052,8 @@ pub struct WritableIKEProposalRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableIPAddressRequest {
 	pub address: String,
-	pub vrf: Option<i64>,
-	pub tenant: Option<i64>,
+	pub vrf: Option<VRFRequest>,
+	pub tenant: Option<TenantRequest>,
 	/// The operational status of this IP
 	/// 
 	/// * `active` - Active
@@ -10868,16 +9088,15 @@ pub struct WritableIPAddressRequest {
 pub struct WritableIPRangeRequest {
 	pub start_address: String,
 	pub end_address: String,
-	pub vrf: Option<i64>,
-	pub tenant: Option<i64>,
+	pub vrf: Option<VRFRequest>,
+	pub tenant: Option<TenantRequest>,
 	/// Operational status of this range
 	/// 
 	/// * `active` - Active
 	/// * `reserved` - Reserved
 	/// * `deprecated` - Deprecated
 	pub status: String,
-	/// The primary function of this range
-	pub role: Option<i64>,
+	pub role: Option<RoleRequest>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -10928,8 +9147,8 @@ pub struct WritableIPSecProfileRequest {
 	/// * `esp` - ESP
 	/// * `ah` - AH
 	pub mode: String,
-	pub ike_policy: i64,
-	pub ipsec_policy: i64,
+	pub ike_policy: IKEPolicyRequest,
+	pub ipsec_policy: IPSecPolicyRequest,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -10944,7 +9163,8 @@ pub struct WritableIPSecProposalRequest {
 	/// * `aes-192-gcm` - 192-bit AES (GCM)
 	/// * `aes-256-cbc` - 256-bit AES (CBC)
 	/// * `aes-256-gcm` - 256-bit AES (GCM)
-	/// * `3des-cbc` - DES
+	/// * `3des-cbc` - 3DES
+	/// * `des-cbc` - DES
 	pub encryption_algorithm: String,
 	/// * `hmac-sha1` - SHA-1 HMAC
 	/// * `hmac-sha256` - SHA-256 HMAC
@@ -10962,9 +9182,9 @@ pub struct WritableIPSecProposalRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableInterfaceRequest {
-	pub device: i64,
+	pub device: DeviceRequest,
 	pub vdcs: Vec<i64>,
-	pub module: Option<i64>,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -10976,6 +9196,7 @@ pub struct WritableInterfaceRequest {
 	/// * `100base-tx` - 100BASE-TX (10/100ME)
 	/// * `100base-t1` - 100BASE-T1 (10/100ME Single Pair)
 	/// * `1000base-t` - 1000BASE-T (1GE)
+	/// * `1000base-tx` - 1000BASE-TX (1GE)
 	/// * `2.5gbase-t` - 2.5GBASE-T (2.5GE)
 	/// * `5gbase-t` - 5GBASE-T (5GE)
 	/// * `10gbase-t` - 10GBASE-T (10GE)
@@ -11012,6 +9233,8 @@ pub struct WritableInterfaceRequest {
 	/// * `800gbase-x-qsfpdd` - QSFP-DD (800GE)
 	/// * `800gbase-x-osfp` - OSFP (800GE)
 	/// * `1000base-kx` - 1000BASE-KX (1GE)
+	/// * `2.5gbase-kx` - 2.5GBASE-KX (2.5GE)
+	/// * `5gbase-kr` - 5GBASE-KR (5GE)
 	/// * `10gbase-kr` - 10GBASE-KR (10GE)
 	/// * `10gbase-kx4` - 10GBASE-KX4 (10GE)
 	/// * `25gbase-kr` - 25GBASE-KR (25GE)
@@ -11032,6 +9255,8 @@ pub struct WritableInterfaceRequest {
 	/// * `gsm` - GSM
 	/// * `cdma` - CDMA
 	/// * `lte` - LTE
+	/// * `4g` - 4G
+	/// * `5g` - 5G
 	/// * `sonet-oc3` - OC-3/STM-1
 	/// * `sonet-oc12` - OC-12/STM-4
 	/// * `sonet-oc48` - OC-48/STM-16
@@ -11045,7 +9270,10 @@ pub struct WritableInterfaceRequest {
 	/// * `8gfc-sfpp` - SFP+ (8GFC)
 	/// * `16gfc-sfpp` - SFP+ (16GFC)
 	/// * `32gfc-sfp28` - SFP28 (32GFC)
+	/// * `32gfc-sfpp` - SFP+ (32GFC)
 	/// * `64gfc-qsfpp` - QSFP+ (64GFC)
+	/// * `64gfc-sfpdd` - SFP-DD (64GFC)
+	/// * `64gfc-sfpp` - SFP+ (64GFC)
 	/// * `128gfc-qsfp28` - QSFP28 (128GFC)
 	/// * `infiniband-sdr` - SDR (2 Gbps)
 	/// * `infiniband-ddr` - DDR (4 Gbps)
@@ -11062,12 +9290,15 @@ pub struct WritableInterfaceRequest {
 	/// * `e3` - E3 (34 Mbps)
 	/// * `xdsl` - xDSL
 	/// * `docsis` - DOCSIS
-	/// * `gpon` - GPON (2.5 Gbps / 1.25 Gps)
+	/// * `bpon` - BPON (622 Mbps / 155 Mbps)
+	/// * `epon` - EPON (1 Gbps)
+	/// * `10g-epon` - 10G-EPON (10 Gbps)
+	/// * `gpon` - GPON (2.5 Gbps / 1.25 Gbps)
 	/// * `xg-pon` - XG-PON (10 Gbps / 2.5 Gbps)
 	/// * `xgs-pon` - XGS-PON (10 Gbps)
 	/// * `ng-pon2` - NG-PON2 (TWDM-PON) (4x10 Gbps)
-	/// * `epon` - EPON (1 Gbps)
-	/// * `10g-epon` - 10G-EPON (10 Gbps)
+	/// * `25g-pon` - 25G-PON (25 Gbps)
+	/// * `50g-pon` - 50G-PON (50 Gbps)
 	/// * `cisco-stackwise` - Cisco StackWise
 	/// * `cisco-stackwise-plus` - Cisco StackWise Plus
 	/// * `cisco-flexstack` - Cisco FlexStack
@@ -11323,19 +9554,19 @@ pub struct WritableInterfaceRequest {
 	/// Populated by selected channel (if set)
 	pub rf_channel_width: Option<f64>,
 	pub tx_power: Option<u8>,
-	pub untagged_vlan: Option<i64>,
+	pub untagged_vlan: Option<VLANRequest>,
 	pub tagged_vlans: Vec<i64>,
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
 	pub wireless_lans: Vec<i64>,
-	pub vrf: Option<i64>,
+	pub vrf: Option<VRFRequest>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableInterfaceTemplateRequest {
-	pub device_type: Option<i64>,
-	pub module_type: Option<i64>,
+	pub device_type: Option<DeviceTypeRequest>,
+	pub module_type: Option<ModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -11348,6 +9579,7 @@ pub struct WritableInterfaceTemplateRequest {
 	/// * `100base-tx` - 100BASE-TX (10/100ME)
 	/// * `100base-t1` - 100BASE-T1 (10/100ME Single Pair)
 	/// * `1000base-t` - 1000BASE-T (1GE)
+	/// * `1000base-tx` - 1000BASE-TX (1GE)
 	/// * `2.5gbase-t` - 2.5GBASE-T (2.5GE)
 	/// * `5gbase-t` - 5GBASE-T (5GE)
 	/// * `10gbase-t` - 10GBASE-T (10GE)
@@ -11384,6 +9616,8 @@ pub struct WritableInterfaceTemplateRequest {
 	/// * `800gbase-x-qsfpdd` - QSFP-DD (800GE)
 	/// * `800gbase-x-osfp` - OSFP (800GE)
 	/// * `1000base-kx` - 1000BASE-KX (1GE)
+	/// * `2.5gbase-kx` - 2.5GBASE-KX (2.5GE)
+	/// * `5gbase-kr` - 5GBASE-KR (5GE)
 	/// * `10gbase-kr` - 10GBASE-KR (10GE)
 	/// * `10gbase-kx4` - 10GBASE-KX4 (10GE)
 	/// * `25gbase-kr` - 25GBASE-KR (25GE)
@@ -11404,6 +9638,8 @@ pub struct WritableInterfaceTemplateRequest {
 	/// * `gsm` - GSM
 	/// * `cdma` - CDMA
 	/// * `lte` - LTE
+	/// * `4g` - 4G
+	/// * `5g` - 5G
 	/// * `sonet-oc3` - OC-3/STM-1
 	/// * `sonet-oc12` - OC-12/STM-4
 	/// * `sonet-oc48` - OC-48/STM-16
@@ -11417,7 +9653,10 @@ pub struct WritableInterfaceTemplateRequest {
 	/// * `8gfc-sfpp` - SFP+ (8GFC)
 	/// * `16gfc-sfpp` - SFP+ (16GFC)
 	/// * `32gfc-sfp28` - SFP28 (32GFC)
+	/// * `32gfc-sfpp` - SFP+ (32GFC)
 	/// * `64gfc-qsfpp` - QSFP+ (64GFC)
+	/// * `64gfc-sfpdd` - SFP-DD (64GFC)
+	/// * `64gfc-sfpp` - SFP+ (64GFC)
 	/// * `128gfc-qsfp28` - QSFP28 (128GFC)
 	/// * `infiniband-sdr` - SDR (2 Gbps)
 	/// * `infiniband-ddr` - DDR (4 Gbps)
@@ -11434,12 +9673,15 @@ pub struct WritableInterfaceTemplateRequest {
 	/// * `e3` - E3 (34 Mbps)
 	/// * `xdsl` - xDSL
 	/// * `docsis` - DOCSIS
-	/// * `gpon` - GPON (2.5 Gbps / 1.25 Gps)
+	/// * `bpon` - BPON (622 Mbps / 155 Mbps)
+	/// * `epon` - EPON (1 Gbps)
+	/// * `10g-epon` - 10G-EPON (10 Gbps)
+	/// * `gpon` - GPON (2.5 Gbps / 1.25 Gbps)
 	/// * `xg-pon` - XG-PON (10 Gbps / 2.5 Gbps)
 	/// * `xgs-pon` - XGS-PON (10 Gbps)
 	/// * `ng-pon2` - NG-PON2 (TWDM-PON) (4x10 Gbps)
-	/// * `epon` - EPON (1 Gbps)
-	/// * `10g-epon` - 10G-EPON (10 Gbps)
+	/// * `25g-pon` - 25G-PON (25 Gbps)
+	/// * `50g-pon` - 50G-PON (50 Gbps)
 	/// * `cisco-stackwise` - Cisco StackWise
 	/// * `cisco-stackwise-plus` - Cisco StackWise Plus
 	/// * `cisco-flexstack` - Cisco FlexStack
@@ -11477,44 +9719,6 @@ pub struct WritableInterfaceTemplateRequest {
 	pub rf_role: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableInventoryItemRequest {
-	pub device: i64,
-	pub parent: Option<i64>,
-	pub name: String,
-	/// Physical label
-	pub label: String,
-	pub role: Option<i64>,
-	pub manufacturer: Option<i64>,
-	/// Manufacturer-assigned part identifier
-	pub part_id: String,
-	pub serial: String,
-	/// A unique tag used to identify this item
-	pub asset_tag: Option<String>,
-	/// This item was automatically discovered
-	pub discovered: bool,
-	pub description: String,
-	pub component_type: Option<String>,
-	pub component_id: Option<u64>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableInventoryItemTemplateRequest {
-	pub device_type: i64,
-	pub parent: Option<i64>,
-	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
-	/// Physical label
-	pub label: String,
-	pub role: Option<i64>,
-	pub manufacturer: Option<i64>,
-	/// Manufacturer-assigned part identifier
-	pub part_id: String,
-	pub description: String,
-	pub component_type: Option<String>,
-	pub component_id: Option<u64>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableJournalEntryRequest {
 	pub assigned_object_type: String,
 	pub assigned_object_id: u64,
@@ -11550,15 +9754,7 @@ pub struct WritableL2VPNRequest {
 	pub export_targets: Vec<i64>,
 	pub description: String,
 	pub comments: String,
-	pub tenant: Option<i64>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableL2VPNTerminationRequest {
-	pub l2vpn: i64,
-	pub assigned_object_type: String,
-	pub assigned_object_id: u64,
+	pub tenant: Option<TenantRequest>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -11566,7 +9762,7 @@ pub struct WritableL2VPNTerminationRequest {
 pub struct WritableLocationRequest {
 	pub name: String,
 	pub slug: String,
-	pub site: i64,
+	pub site: SiteRequest,
 	pub parent: Option<i64>,
 	/// * `planned` - Planned
 	/// * `staging` - Staging
@@ -11574,40 +9770,18 @@ pub struct WritableLocationRequest {
 	/// * `decommissioning` - Decommissioning
 	/// * `retired` - Retired
 	pub status: String,
-	pub tenant: Option<i64>,
+	pub tenant: Option<TenantRequest>,
+	/// Local facility ID or description
+	pub facility: String,
 	pub description: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableModuleBayRequest {
-	pub device: i64,
-	pub name: String,
-	pub installed_module: i64,
-	/// Physical label
-	pub label: String,
-	/// Identifier to reference when renaming installed components
-	pub position: String,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableModuleBayTemplateRequest {
-	pub device_type: i64,
-	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
-	/// Physical label
-	pub label: String,
-	/// Identifier to reference when renaming installed components
-	pub position: String,
-	pub description: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableModuleRequest {
-	pub device: i64,
+	pub device: DeviceRequest,
 	pub module_bay: i64,
-	pub module_type: i64,
+	pub module_type: ModuleTypeRequest,
 	/// * `offline` - Offline
 	/// * `active` - Active
 	/// * `planned` - Planned
@@ -11625,7 +9799,7 @@ pub struct WritableModuleRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableModuleTypeRequest {
-	pub manufacturer: i64,
+	pub manufacturer: ManufacturerRequest,
 	pub model: String,
 	/// Discrete part number (optional)
 	pub part_number: String,
@@ -11641,33 +9815,9 @@ pub struct WritableModuleTypeRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableObjectPermissionRequest {
-	pub name: String,
-	pub description: String,
-	pub enabled: bool,
-	pub object_types: Vec<String>,
-	pub groups: Vec<i64>,
-	pub users: Vec<i64>,
-	/// The list of actions granted by this permission
-	pub actions: Vec<String>,
-	/// Queryset filter matching the applicable objects of the selected type(s)
-	pub constraints: Option<serde_json::Value>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritablePlatformRequest {
-	pub name: String,
-	pub slug: String,
-	/// Optionally limit this platform to devices of a certain manufacturer
-	pub manufacturer: Option<i64>,
-	pub config_template: Option<i64>,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritablePowerFeedRequest {
-	pub power_panel: i64,
-	pub rack: Option<i64>,
+	pub power_panel: PowerPanelRequest,
+	pub rack: Option<RackRequest>,
 	pub name: String,
 	/// * `offline` - Offline
 	/// * `active` - Active
@@ -11690,15 +9840,15 @@ pub struct WritablePowerFeedRequest {
 	/// Treat as if a cable is connected
 	pub mark_connected: bool,
 	pub description: String,
-	pub tenant: Option<i64>,
+	pub tenant: Option<TenantRequest>,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritablePowerOutletRequest {
-	pub device: i64,
-	pub module: Option<i64>,
+	pub device: DeviceRequest,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -11787,6 +9937,9 @@ pub struct WritablePowerOutletRequest {
 	/// * `usb-a` - USB Type A
 	/// * `usb-micro-b` - USB Micro B
 	/// * `usb-c` - USB Type C
+	/// * `molex-micro-fit-1x2` - Molex Micro-Fit 1x2
+	/// * `molex-micro-fit-2x2` - Molex Micro-Fit 2x2
+	/// * `molex-micro-fit-2x4` - Molex Micro-Fit 2x4
 	/// * `dc-terminal` - DC Terminal
 	/// * `hdot-cx` - HDOT Cx
 	/// * `saf-d-grid` - Saf-D-Grid
@@ -11798,7 +9951,7 @@ pub struct WritablePowerOutletRequest {
 	/// * `hardwired` - Hardwired
 	/// * `other` - Other
 	pub r#type: String,
-	pub power_port: Option<i64>,
+	pub power_port: Option<PowerPortRequest>,
 	/// Phase (for three-phase feeds)
 	/// 
 	/// * `A` - A
@@ -11813,8 +9966,8 @@ pub struct WritablePowerOutletRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritablePowerOutletTemplateRequest {
-	pub device_type: Option<i64>,
-	pub module_type: Option<i64>,
+	pub device_type: Option<DeviceTypeRequest>,
+	pub module_type: Option<ModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -11902,6 +10055,9 @@ pub struct WritablePowerOutletTemplateRequest {
 	/// * `usb-a` - USB Type A
 	/// * `usb-micro-b` - USB Micro B
 	/// * `usb-c` - USB Type C
+	/// * `molex-micro-fit-1x2` - Molex Micro-Fit 1x2
+	/// * `molex-micro-fit-2x2` - Molex Micro-Fit 2x2
+	/// * `molex-micro-fit-2x4` - Molex Micro-Fit 2x4
 	/// * `dc-terminal` - DC Terminal
 	/// * `hdot-cx` - HDOT Cx
 	/// * `saf-d-grid` - Saf-D-Grid
@@ -11913,7 +10069,7 @@ pub struct WritablePowerOutletTemplateRequest {
 	/// * `hardwired` - Hardwired
 	/// * `other` - Other
 	pub r#type: String,
-	pub power_port: Option<i64>,
+	pub power_port: Option<PowerPortTemplateRequest>,
 	/// Phase (for three-phase feeds)
 	/// 
 	/// * `A` - A
@@ -11923,19 +10079,9 @@ pub struct WritablePowerOutletTemplateRequest {
 	pub description: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritablePowerPanelRequest {
-	pub site: i64,
-	pub location: Option<i64>,
-	pub name: String,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritablePowerPortRequest {
-	pub device: i64,
-	pub module: Option<i64>,
+	pub device: DeviceRequest,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -12032,6 +10178,9 @@ pub struct WritablePowerPortRequest {
 	/// * `usb-micro-ab` - USB Micro AB
 	/// * `usb-3-b` - USB 3.0 Type B
 	/// * `usb-3-micro-b` - USB 3.0 Micro B
+	/// * `molex-micro-fit-1x2` - Molex Micro-Fit 1x2
+	/// * `molex-micro-fit-2x2` - Molex Micro-Fit 2x2
+	/// * `molex-micro-fit-2x4` - Molex Micro-Fit 2x4
 	/// * `dc-terminal` - DC Terminal
 	/// * `saf-d-grid` - Saf-D-Grid
 	/// * `neutrik-powercon-20` - Neutrik powerCON (20A)
@@ -12054,8 +10203,8 @@ pub struct WritablePowerPortRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritablePowerPortTemplateRequest {
-	pub device_type: Option<i64>,
-	pub module_type: Option<i64>,
+	pub device_type: Option<DeviceTypeRequest>,
+	pub module_type: Option<ModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -12151,6 +10300,9 @@ pub struct WritablePowerPortTemplateRequest {
 	/// * `usb-micro-ab` - USB Micro AB
 	/// * `usb-3-b` - USB 3.0 Type B
 	/// * `usb-3-micro-b` - USB 3.0 Micro B
+	/// * `molex-micro-fit-1x2` - Molex Micro-Fit 1x2
+	/// * `molex-micro-fit-2x2` - Molex Micro-Fit 2x2
+	/// * `molex-micro-fit-2x4` - Molex Micro-Fit 2x4
 	/// * `dc-terminal` - DC Terminal
 	/// * `saf-d-grid` - Saf-D-Grid
 	/// * `neutrik-powercon-20` - Neutrik powerCON (20A)
@@ -12170,10 +10322,10 @@ pub struct WritablePowerPortTemplateRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritablePrefixRequest {
 	pub prefix: String,
-	pub site: Option<i64>,
-	pub vrf: Option<i64>,
-	pub tenant: Option<i64>,
-	pub vlan: Option<i64>,
+	pub site: Option<SiteRequest>,
+	pub vrf: Option<VRFRequest>,
+	pub tenant: Option<TenantRequest>,
+	pub vlan: Option<VLANRequest>,
 	/// Operational status of this prefix
 	/// 
 	/// * `container` - Container
@@ -12181,8 +10333,7 @@ pub struct WritablePrefixRequest {
 	/// * `reserved` - Reserved
 	/// * `deprecated` - Deprecated
 	pub status: String,
-	/// The primary function of this prefix
-	pub role: Option<i64>,
+	pub role: Option<RoleRequest>,
 	/// All IP addresses within this prefix are considered usable
 	pub is_pool: bool,
 	/// Treat as fully utilized
@@ -12193,52 +10344,19 @@ pub struct WritablePrefixRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableProviderAccountRequest {
-	pub provider: i64,
-	pub name: String,
-	pub account: String,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableProviderNetworkRequest {
-	pub provider: i64,
-	pub name: String,
-	pub service_id: String,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableProviderRequest {
-	/// Full name of the provider
-	pub name: String,
-	pub slug: String,
-	pub accounts: Vec<i64>,
-	pub description: String,
-	pub comments: String,
-	pub asns: Vec<i64>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableRackRequest {
 	pub name: String,
 	pub facility_id: Option<String>,
-	pub site: i64,
-	pub location: Option<i64>,
-	pub tenant: Option<i64>,
+	pub site: SiteRequest,
+	pub location: Option<LocationRequest>,
+	pub tenant: Option<TenantRequest>,
 	/// * `reserved` - Reserved
 	/// * `available` - Available
 	/// * `planned` - Planned
 	/// * `active` - Active
 	/// * `deprecated` - Deprecated
 	pub status: String,
-	/// Functional role
-	pub role: Option<i64>,
+	pub role: Option<RackRoleRequest>,
 	pub serial: String,
 	/// A unique tag used to identify this rack
 	pub asset_tag: Option<String>,
@@ -12286,20 +10404,9 @@ pub struct WritableRackRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableRackReservationRequest {
-	pub rack: i64,
-	pub units: Vec<u16>,
-	pub user: i64,
-	pub tenant: Option<i64>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableRearPortRequest {
-	pub device: i64,
-	pub module: Option<i64>,
+	pub device: DeviceRequest,
+	pub module: Option<ModuleRequest>,
 	pub name: String,
 	/// Physical label
 	pub label: String,
@@ -12362,8 +10469,8 @@ pub struct WritableRearPortRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableRearPortTemplateRequest {
-	pub device_type: Option<i64>,
-	pub module_type: Option<i64>,
+	pub device_type: Option<DeviceTypeRequest>,
+	pub module_type: Option<ModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
 	pub name: String,
 	/// Physical label
@@ -12430,26 +10537,15 @@ pub struct WritableRegionRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableRouteTargetRequest {
-	/// Route target value (formatted in accordance with RFC 4360)
-	pub name: String,
-	pub tenant: Option<i64>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableServiceRequest {
-	pub device: Option<i64>,
-	pub virtual_machine: Option<i64>,
+	pub device: Option<DeviceRequest>,
+	pub virtual_machine: Option<VirtualMachineRequest>,
 	pub name: String,
-	pub ports: Vec<u16>,
 	/// * `tcp` - TCP
 	/// * `udp` - UDP
 	/// * `sctp` - SCTP
 	pub protocol: String,
-	/// The specific IP addresses (if any) to which this service is bound
+	pub ports: Vec<u16>,
 	pub ipaddresses: Vec<i64>,
 	pub description: String,
 	pub comments: String,
@@ -12459,11 +10555,11 @@ pub struct WritableServiceRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableServiceTemplateRequest {
 	pub name: String,
-	pub ports: Vec<u16>,
 	/// * `tcp` - TCP
 	/// * `udp` - UDP
 	/// * `sctp` - SCTP
 	pub protocol: String,
+	pub ports: Vec<u16>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -12489,9 +10585,9 @@ pub struct WritableSiteRequest {
 	/// * `decommissioning` - Decommissioning
 	/// * `retired` - Retired
 	pub status: String,
-	pub region: Option<i64>,
-	pub group: Option<i64>,
-	pub tenant: Option<i64>,
+	pub region: Option<RegionRequest>,
+	pub group: Option<SiteGroupRequest>,
+	pub tenant: Option<TenantRequest>,
 	/// Local facility ID or description
 	pub facility: String,
 	pub time_zone: Option<String>,
@@ -12519,40 +10615,20 @@ pub struct WritableTenantGroupRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableTenantRequest {
-	pub name: String,
-	pub slug: String,
-	pub group: Option<i64>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableTokenRequest {
-	pub user: i64,
-	pub expires: Option<String>,
-	pub last_used: Option<String>,
-	pub key: String,
-	/// Permit create/update/delete operations using this key
-	pub write_enabled: bool,
-	pub description: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableTunnelRequest {
 	pub name: String,
 	/// * `planned` - Planned
 	/// * `active` - Active
 	/// * `disabled` - Disabled
 	pub status: String,
-	pub group: Option<i64>,
+	pub group: Option<TunnelGroupRequest>,
 	/// * `ipsec-transport` - IPsec - Transport
 	/// * `ipsec-tunnel` - IPsec - Tunnel
 	/// * `ip-ip` - IP-in-IP
 	/// * `gre` - GRE
 	pub encapsulation: String,
-	pub ipsec_profile: Option<i64>,
-	pub tenant: Option<i64>,
+	pub ipsec_profile: Option<IPSecProfileRequest>,
+	pub tenant: Option<TenantRequest>,
 	pub tunnel_id: Option<u64>,
 	pub description: String,
 	pub comments: String,
@@ -12561,51 +10637,32 @@ pub struct WritableTunnelRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableTunnelTerminationRequest {
-	pub tunnel: i64,
+	pub tunnel: TunnelRequest,
 	/// * `peer` - Peer
 	/// * `hub` - Hub
 	/// * `spoke` - Spoke
 	pub role: String,
 	pub termination_type: String,
 	pub termination_id: Option<u64>,
-	pub outside_ip: Option<i64>,
+	pub outside_ip: Option<IPAddressRequest>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableUserRequest {
-	/// Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-	pub username: String,
-	pub password: String,
-	pub first_name: String,
-	pub last_name: String,
-	pub email: String,
-	/// Designates whether the user can log into this admin site.
-	pub is_staff: bool,
-	/// Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
-	pub is_active: bool,
-	pub date_joined: String,
-	/// The groups this user belongs to. A user will get all permissions granted to each of their groups.
-	pub groups: Vec<i64>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableVLANRequest {
-	/// The specific site to which this VLAN is assigned (if any)
-	pub site: Option<i64>,
-	/// VLAN group (optional)
-	pub group: Option<i64>,
+	pub site: Option<SiteRequest>,
+	pub group: Option<VLANGroupRequest>,
 	/// Numeric VLAN ID (1-4094)
 	pub vid: u16,
 	pub name: String,
-	pub tenant: Option<i64>,
+	pub tenant: Option<TenantRequest>,
 	/// Operational status of this VLAN
 	/// 
 	/// * `active` - Active
 	/// * `reserved` - Reserved
 	/// * `deprecated` - Deprecated
 	pub status: String,
-	/// The primary function of this VLAN
-	pub role: Option<i64>,
+	pub role: Option<RoleRequest>,
 	pub description: String,
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
@@ -12613,7 +10670,7 @@ pub struct WritableVLANRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableVMInterfaceRequest {
-	pub virtual_machine: i64,
+	pub virtual_machine: VirtualMachineRequest,
 	pub name: String,
 	pub enabled: bool,
 	pub parent: Option<i64>,
@@ -12627,24 +10684,9 @@ pub struct WritableVMInterfaceRequest {
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
 	pub mode: String,
-	pub untagged_vlan: Option<i64>,
+	pub untagged_vlan: Option<VLANRequest>,
 	pub tagged_vlans: Vec<i64>,
-	pub vrf: Option<i64>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableVRFRequest {
-	pub name: String,
-	/// Unique route distinguisher (as defined in RFC 4364)
-	pub rd: Option<String>,
-	pub tenant: Option<i64>,
-	/// Prevent duplicate prefixes/IP addresses within this VRF
-	pub enforce_unique: bool,
-	pub description: String,
-	pub comments: String,
-	pub import_targets: Vec<i64>,
-	pub export_targets: Vec<i64>,
+	pub vrf: Option<VRFRequest>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -12661,27 +10703,17 @@ pub struct WritableVirtualChassisRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableVirtualDeviceContextRequest {
 	pub name: String,
-	pub device: Option<i64>,
-	/// Numeric identifier unique to the parent device
+	pub device: DeviceRequest,
 	pub identifier: Option<u16>,
-	pub tenant: Option<i64>,
-	pub primary_ip4: Option<i64>,
-	pub primary_ip6: Option<i64>,
+	pub tenant: Option<TenantRequest>,
+	pub primary_ip4: Option<IPAddressRequest>,
+	pub primary_ip6: Option<IPAddressRequest>,
 	/// * `active` - Active
 	/// * `planned` - Planned
 	/// * `offline` - Offline
 	pub status: String,
 	pub description: String,
 	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableVirtualDiskRequest {
-	pub virtual_machine: i64,
-	pub name: String,
-	pub description: String,
-	pub size: u32,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -12695,19 +10727,20 @@ pub struct WritableVirtualMachineWithConfigContextRequest {
 	/// * `failed` - Failed
 	/// * `decommissioning` - Decommissioning
 	pub status: String,
-	pub site: Option<i64>,
-	pub cluster: Option<i64>,
-	pub device: Option<i64>,
-	pub role: Option<i64>,
-	pub tenant: Option<i64>,
-	pub platform: Option<i64>,
-	pub primary_ip4: Option<i64>,
-	pub primary_ip6: Option<i64>,
+	pub site: Option<SiteRequest>,
+	pub cluster: Option<ClusterRequest>,
+	pub device: Option<DeviceRequest>,
+	pub role: Option<DeviceRoleRequest>,
+	pub tenant: Option<TenantRequest>,
+	pub platform: Option<PlatformRequest>,
+	pub primary_ip4: Option<IPAddressRequest>,
+	pub primary_ip6: Option<IPAddressRequest>,
 	pub vcpus: Option<f64>,
 	pub memory: Option<u32>,
 	pub disk: Option<u32>,
 	pub description: String,
 	pub comments: String,
+	pub config_template: Option<ConfigTemplateRequest>,
 	/// Local config context data takes precedence over source contexts in the final rendered config context
 	pub local_context_data: Option<serde_json::Value>,
 	pub tags: Vec<NestedTagRequest>,
@@ -12726,14 +10759,14 @@ pub struct WritableWirelessLANGroupRequest {
 pub struct WritableWirelessLANRequest {
 	pub ssid: String,
 	pub description: String,
-	pub group: Option<i64>,
+	pub group: Option<WirelessLANGroupRequest>,
 	/// * `active` - Active
 	/// * `reserved` - Reserved
 	/// * `disabled` - Disabled
 	/// * `deprecated` - Deprecated
 	pub status: String,
-	pub vlan: Option<i64>,
-	pub tenant: Option<i64>,
+	pub vlan: Option<VLANRequest>,
+	pub tenant: Option<TenantRequest>,
 	/// * `open` - Open
 	/// * `wep` - WEP
 	/// * `wpa-personal` - WPA Personal (PSK)
@@ -12750,14 +10783,14 @@ pub struct WritableWirelessLANRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableWirelessLinkRequest {
-	pub interface_a: i64,
-	pub interface_b: i64,
+	pub interface_a: InterfaceRequest,
+	pub interface_b: InterfaceRequest,
 	pub ssid: String,
 	/// * `connected` - Connected
 	/// * `planned` - Planned
 	/// * `decommissioning` - Decommissioning
 	pub status: String,
-	pub tenant: Option<i64>,
+	pub tenant: Option<TenantRequest>,
 	/// * `open` - Open
 	/// * `wep` - WEP
 	/// * `wpa-personal` - WPA Personal (PSK)
