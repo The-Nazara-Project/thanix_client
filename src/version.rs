@@ -1,2 +1,2 @@
 #[allow(dead_code)]
-pub const VERSION: &str = "1.2.3";
+pub const VERSION: &str = "1.2.4";
