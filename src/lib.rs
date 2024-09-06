@@ -6,3 +6,7 @@ extern crate reqwest;
 pub mod paths;
 pub mod types;
 pub mod util;
+
+mod version {
+    include!("version.rs");
+}
