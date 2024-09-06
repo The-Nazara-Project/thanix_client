@@ -23,3 +23,4 @@ fn main() {
     )
     .expect("Unable to write to file!");
 }
+

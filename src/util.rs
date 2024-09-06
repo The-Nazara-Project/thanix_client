@@ -3,3 +3,4 @@ pub struct ThanixClient {
     pub base_url: String,
     pub authentication_token: String,
 }
+
