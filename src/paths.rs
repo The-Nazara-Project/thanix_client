@@ -6,450 +6,9 @@ use serde_qs;
 use reqwest::{Error, blocking::Response};
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct CircuitsCircuitGroupAssignmentsListQuery {
-	/// Circuit (CID)
-	circuit: Option<Vec<String>>,
-	/// Circuit (CID)
-	circuit__n: Option<Vec<String>>,
-	/// Circuit (ID)
-	circuit_id: Option<Vec<i64>>,
-	/// Circuit (ID)
-	circuit_id__n: Option<Vec<i64>>,
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
-	/// Circuit group (slug)
-	group: Option<Vec<String>>,
-	/// Circuit group (slug)
-	group__n: Option<Vec<String>>,
-	/// Circuit group (ID)
-	group_id: Option<Vec<i64>>,
-	/// Circuit group (ID)
-	group_id__n: Option<Vec<i64>>,
-	id: Option<Vec<i64>>,
-	id__empty: Option<bool>,
-	id__gt: Option<Vec<i64>>,
-	id__gte: Option<Vec<i64>>,
-	id__lt: Option<Vec<i64>>,
-	id__lte: Option<Vec<i64>>,
-	id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	modified_by_request: Option<String>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-	/// * `primary` - Primary
-	/// * `secondary` - Secondary
-	/// * `tertiary` - Tertiary
-	/// * `inactive` - Inactive
-	priority: Option<String>,
-	/// * `primary` - Primary
-	/// * `secondary` - Secondary
-	/// * `tertiary` - Tertiary
-	/// * `inactive` - Inactive
-	priority__n: Option<String>,
-	/// Provider (slug)
-	provider: Option<Vec<String>>,
-	/// Provider (slug)
-	provider__n: Option<Vec<String>>,
-	/// Provider (ID)
-	provider_id: Option<Vec<i64>>,
-	/// Provider (ID)
-	provider_id__n: Option<Vec<i64>>,
-	/// Search
-	q: Option<String>,
-	tag: Option<Vec<String>>,
-	tag__n: Option<Vec<String>>,
-	updated_by_request: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum CircuitsCircuitGroupAssignmentsListResponse {
-	Http200(PaginatedCircuitGroupAssignmentList),
-	Other(Response)
-}
-/// Get a list of Circuit group assignment objects.
-pub fn circuits_circuit_group_assignments_list(state: &ThanixClient, query: CircuitsCircuitGroupAssignmentsListQuery) -> Result<CircuitsCircuitGroupAssignmentsListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/circuits/circuit-group-assignments/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(CircuitsCircuitGroupAssignmentsListResponse::Http200(r#response.json::<PaginatedCircuitGroupAssignmentList>()?)) },
-		r#other_status => { Ok(CircuitsCircuitGroupAssignmentsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum CircuitsCircuitGroupAssignmentsBulkUpdateResponse {
-	Http200(Vec<CircuitGroupAssignment>),
-	Other(Response)
-}
-/// Put a list of Circuit group assignment objects.
-pub fn circuits_circuit_group_assignments_bulk_update(state: &ThanixClient, body: Vec<CircuitGroupAssignmentRequest>) -> Result<CircuitsCircuitGroupAssignmentsBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/circuits/circuit-group-assignments/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(CircuitsCircuitGroupAssignmentsBulkUpdateResponse::Http200(r#response.json::<Vec<CircuitGroupAssignment>>()?)) },
-		r#other_status => { Ok(CircuitsCircuitGroupAssignmentsBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum CircuitsCircuitGroupAssignmentsCreateResponse {
-	Http201(CircuitGroupAssignment),
-	Other(Response)
-}
-/// Post a list of Circuit group assignment objects.
-pub fn circuits_circuit_group_assignments_create(state: &ThanixClient, body: WritableCircuitGroupAssignmentRequest) -> Result<CircuitsCircuitGroupAssignmentsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/circuits/circuit-group-assignments/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(CircuitsCircuitGroupAssignmentsCreateResponse::Http201(r#response.json::<CircuitGroupAssignment>()?)) },
-		r#other_status => { Ok(CircuitsCircuitGroupAssignmentsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum CircuitsCircuitGroupAssignmentsBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of Circuit group assignment objects.
-pub fn circuits_circuit_group_assignments_bulk_destroy(state: &ThanixClient, body: Vec<CircuitGroupAssignmentRequest>) -> Result<CircuitsCircuitGroupAssignmentsBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/circuits/circuit-group-assignments/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(CircuitsCircuitGroupAssignmentsBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum CircuitsCircuitGroupAssignmentsBulkPartialUpdateResponse {
-	Http200(Vec<CircuitGroupAssignment>),
-	Other(Response)
-}
-/// Patch a list of Circuit group assignment objects.
-pub fn circuits_circuit_group_assignments_bulk_partial_update(state: &ThanixClient, body: Vec<CircuitGroupAssignmentRequest>) -> Result<CircuitsCircuitGroupAssignmentsBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/circuits/circuit-group-assignments/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(CircuitsCircuitGroupAssignmentsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<CircuitGroupAssignment>>()?)) },
-		r#other_status => { Ok(CircuitsCircuitGroupAssignmentsBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum CircuitsCircuitGroupAssignmentsRetrieveResponse {
-	Http200(CircuitGroupAssignment),
-	Other(Response)
-}
-/// Get a Circuit group assignment object.
-pub fn circuits_circuit_group_assignments_retrieve(state: &ThanixClient, id: i64) -> Result<CircuitsCircuitGroupAssignmentsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/circuits/circuit-group-assignments/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(CircuitsCircuitGroupAssignmentsRetrieveResponse::Http200(r#response.json::<CircuitGroupAssignment>()?)) },
-		r#other_status => { Ok(CircuitsCircuitGroupAssignmentsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum CircuitsCircuitGroupAssignmentsUpdateResponse {
-	Http200(CircuitGroupAssignment),
-	Other(Response)
-}
-/// Put a Circuit group assignment object.
-pub fn circuits_circuit_group_assignments_update(state: &ThanixClient, body: WritableCircuitGroupAssignmentRequest, id: i64) -> Result<CircuitsCircuitGroupAssignmentsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/circuits/circuit-group-assignments/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(CircuitsCircuitGroupAssignmentsUpdateResponse::Http200(r#response.json::<CircuitGroupAssignment>()?)) },
-		r#other_status => { Ok(CircuitsCircuitGroupAssignmentsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum CircuitsCircuitGroupAssignmentsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a Circuit group assignment object.
-pub fn circuits_circuit_group_assignments_destroy(state: &ThanixClient, id: i64) -> Result<CircuitsCircuitGroupAssignmentsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/circuits/circuit-group-assignments/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(CircuitsCircuitGroupAssignmentsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum CircuitsCircuitGroupAssignmentsPartialUpdateResponse {
-	Http200(CircuitGroupAssignment),
-	Other(Response)
-}
-/// Patch a Circuit group assignment object.
-pub fn circuits_circuit_group_assignments_partial_update(state: &ThanixClient, body: PatchedWritableCircuitGroupAssignmentRequest, id: i64) -> Result<CircuitsCircuitGroupAssignmentsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/circuits/circuit-group-assignments/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(CircuitsCircuitGroupAssignmentsPartialUpdateResponse::Http200(r#response.json::<CircuitGroupAssignment>()?)) },
-		r#other_status => { Ok(CircuitsCircuitGroupAssignmentsPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct CircuitsCircuitGroupsListQuery {
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
-	description: Option<Vec<String>>,
-	description__empty: Option<bool>,
-	description__ic: Option<Vec<String>>,
-	description__ie: Option<Vec<String>>,
-	description__iew: Option<Vec<String>>,
-	description__isw: Option<Vec<String>>,
-	description__n: Option<Vec<String>>,
-	description__nic: Option<Vec<String>>,
-	description__nie: Option<Vec<String>>,
-	description__niew: Option<Vec<String>>,
-	description__nisw: Option<Vec<String>>,
-	id: Option<Vec<i64>>,
-	id__empty: Option<bool>,
-	id__gt: Option<Vec<i64>>,
-	id__gte: Option<Vec<i64>>,
-	id__lt: Option<Vec<i64>>,
-	id__lte: Option<Vec<i64>>,
-	id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	modified_by_request: Option<String>,
-	name: Option<Vec<String>>,
-	name__empty: Option<bool>,
-	name__ic: Option<Vec<String>>,
-	name__ie: Option<Vec<String>>,
-	name__iew: Option<Vec<String>>,
-	name__isw: Option<Vec<String>>,
-	name__n: Option<Vec<String>>,
-	name__nic: Option<Vec<String>>,
-	name__nie: Option<Vec<String>>,
-	name__niew: Option<Vec<String>>,
-	name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-	/// Search
-	q: Option<String>,
-	slug: Option<Vec<String>>,
-	slug__empty: Option<bool>,
-	slug__ic: Option<Vec<String>>,
-	slug__ie: Option<Vec<String>>,
-	slug__iew: Option<Vec<String>>,
-	slug__isw: Option<Vec<String>>,
-	slug__n: Option<Vec<String>>,
-	slug__nic: Option<Vec<String>>,
-	slug__nie: Option<Vec<String>>,
-	slug__niew: Option<Vec<String>>,
-	slug__nisw: Option<Vec<String>>,
-	tag: Option<Vec<String>>,
-	tag__n: Option<Vec<String>>,
-	/// Tenant (slug)
-	tenant: Option<Vec<String>>,
-	/// Tenant (slug)
-	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
-	/// Tenant (ID)
-	tenant_id: Option<Vec<Option<i64>>>,
-	/// Tenant (ID)
-	tenant_id__n: Option<Vec<Option<i64>>>,
-	updated_by_request: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum CircuitsCircuitGroupsListResponse {
-	Http200(PaginatedCircuitGroupList),
-	Other(Response)
-}
-/// Get a list of circuit group objects.
-pub fn circuits_circuit_groups_list(state: &ThanixClient, query: CircuitsCircuitGroupsListQuery) -> Result<CircuitsCircuitGroupsListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/circuits/circuit-groups/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(CircuitsCircuitGroupsListResponse::Http200(r#response.json::<PaginatedCircuitGroupList>()?)) },
-		r#other_status => { Ok(CircuitsCircuitGroupsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum CircuitsCircuitGroupsBulkUpdateResponse {
-	Http200(Vec<CircuitGroup>),
-	Other(Response)
-}
-/// Put a list of circuit group objects.
-pub fn circuits_circuit_groups_bulk_update(state: &ThanixClient, body: Vec<CircuitGroupRequest>) -> Result<CircuitsCircuitGroupsBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/circuits/circuit-groups/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(CircuitsCircuitGroupsBulkUpdateResponse::Http200(r#response.json::<Vec<CircuitGroup>>()?)) },
-		r#other_status => { Ok(CircuitsCircuitGroupsBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum CircuitsCircuitGroupsCreateResponse {
-	Http201(CircuitGroup),
-	Other(Response)
-}
-/// Post a list of circuit group objects.
-pub fn circuits_circuit_groups_create(state: &ThanixClient, body: CircuitGroupRequest) -> Result<CircuitsCircuitGroupsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/circuits/circuit-groups/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(CircuitsCircuitGroupsCreateResponse::Http201(r#response.json::<CircuitGroup>()?)) },
-		r#other_status => { Ok(CircuitsCircuitGroupsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum CircuitsCircuitGroupsBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of circuit group objects.
-pub fn circuits_circuit_groups_bulk_destroy(state: &ThanixClient, body: Vec<CircuitGroupRequest>) -> Result<CircuitsCircuitGroupsBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/circuits/circuit-groups/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(CircuitsCircuitGroupsBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum CircuitsCircuitGroupsBulkPartialUpdateResponse {
-	Http200(Vec<CircuitGroup>),
-	Other(Response)
-}
-/// Patch a list of circuit group objects.
-pub fn circuits_circuit_groups_bulk_partial_update(state: &ThanixClient, body: Vec<CircuitGroupRequest>) -> Result<CircuitsCircuitGroupsBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/circuits/circuit-groups/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(CircuitsCircuitGroupsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<CircuitGroup>>()?)) },
-		r#other_status => { Ok(CircuitsCircuitGroupsBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum CircuitsCircuitGroupsRetrieveResponse {
-	Http200(CircuitGroup),
-	Other(Response)
-}
-/// Get a circuit group object.
-pub fn circuits_circuit_groups_retrieve(state: &ThanixClient, id: i64) -> Result<CircuitsCircuitGroupsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/circuits/circuit-groups/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(CircuitsCircuitGroupsRetrieveResponse::Http200(r#response.json::<CircuitGroup>()?)) },
-		r#other_status => { Ok(CircuitsCircuitGroupsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum CircuitsCircuitGroupsUpdateResponse {
-	Http200(CircuitGroup),
-	Other(Response)
-}
-/// Put a circuit group object.
-pub fn circuits_circuit_groups_update(state: &ThanixClient, body: CircuitGroupRequest, id: i64) -> Result<CircuitsCircuitGroupsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/circuits/circuit-groups/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(CircuitsCircuitGroupsUpdateResponse::Http200(r#response.json::<CircuitGroup>()?)) },
-		r#other_status => { Ok(CircuitsCircuitGroupsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum CircuitsCircuitGroupsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a circuit group object.
-pub fn circuits_circuit_groups_destroy(state: &ThanixClient, id: i64) -> Result<CircuitsCircuitGroupsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/circuits/circuit-groups/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(CircuitsCircuitGroupsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum CircuitsCircuitGroupsPartialUpdateResponse {
-	Http200(CircuitGroup),
-	Other(Response)
-}
-/// Patch a circuit group object.
-pub fn circuits_circuit_groups_partial_update(state: &ThanixClient, body: PatchedCircuitGroupRequest, id: i64) -> Result<CircuitsCircuitGroupsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/circuits/circuit-groups/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(CircuitsCircuitGroupsPartialUpdateResponse::Http200(r#response.json::<CircuitGroup>()?)) },
-		r#other_status => { Ok(CircuitsCircuitGroupsPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CircuitsCircuitTerminationsListQuery {
-	/// * `A` - A
-	/// * `B` - B
 	cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
 	cable_end__n: Option<String>,
-	/// Cable (ID)
-	cable_id: Option<Vec<Option<i64>>>,
-	/// Cable (ID)
-	cable_id__n: Option<Vec<Option<i64>>>,
 	cabled: Option<bool>,
 	/// Circuit
 	circuit_id: Option<Vec<i64>>,
@@ -490,7 +49,6 @@ pub struct CircuitsCircuitTerminationsListQuery {
 	last_updated__n: Option<Vec<String>>,
 	/// Number of results to return per page.
 	limit: Option<i64>,
-	mark_connected: Option<bool>,
 	modified_by_request: Option<String>,
 	occupied: Option<bool>,
 	/// The initial index from which to return the results.
@@ -504,25 +62,6 @@ pub struct CircuitsCircuitTerminationsListQuery {
 	port_speed__lt: Option<Vec<i64>>,
 	port_speed__lte: Option<Vec<i64>>,
 	port_speed__n: Option<Vec<i64>>,
-	pp_info: Option<Vec<String>>,
-	pp_info__empty: Option<bool>,
-	pp_info__ic: Option<Vec<String>>,
-	pp_info__ie: Option<Vec<String>>,
-	pp_info__iew: Option<Vec<String>>,
-	pp_info__isw: Option<Vec<String>>,
-	pp_info__n: Option<Vec<String>>,
-	pp_info__nic: Option<Vec<String>>,
-	pp_info__nie: Option<Vec<String>>,
-	pp_info__niew: Option<Vec<String>>,
-	pp_info__nisw: Option<Vec<String>>,
-	/// Provider (slug)
-	provider: Option<Vec<String>>,
-	/// Provider (slug)
-	provider__n: Option<Vec<String>>,
-	/// Provider (ID)
-	provider_id: Option<Vec<i64>>,
-	/// Provider (ID)
-	provider_id__n: Option<Vec<i64>>,
 	/// ProviderNetwork (ID)
 	provider_network_id: Option<Vec<Option<i64>>>,
 	/// ProviderNetwork (ID)
@@ -539,11 +78,7 @@ pub struct CircuitsCircuitTerminationsListQuery {
 	site_id__n: Option<Vec<Option<i64>>>,
 	tag: Option<Vec<String>>,
 	tag__n: Option<Vec<String>>,
-	/// * `A` - A
-	/// * `Z` - Z
 	term_side: Option<String>,
-	/// * `A` - A
-	/// * `Z` - Z
 	term_side__n: Option<String>,
 	updated_by_request: Option<String>,
 	upstream_speed: Option<Vec<i64>>,
@@ -603,7 +138,7 @@ pub enum CircuitsCircuitTerminationsCreateResponse {
 	Other(Response)
 }
 /// Post a list of circuit termination objects.
-pub fn circuits_circuit_terminations_create(state: &ThanixClient, body: CircuitTerminationRequest) -> Result<CircuitsCircuitTerminationsCreateResponse, Error> {
+pub fn circuits_circuit_terminations_create(state: &ThanixClient, body: WritableCircuitTerminationRequest) -> Result<CircuitsCircuitTerminationsCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/circuits/circuit-terminations/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -665,7 +200,7 @@ pub enum CircuitsCircuitTerminationsUpdateResponse {
 	Other(Response)
 }
 /// Put a circuit termination object.
-pub fn circuits_circuit_terminations_update(state: &ThanixClient, body: CircuitTerminationRequest, id: i64) -> Result<CircuitsCircuitTerminationsUpdateResponse, Error> {
+pub fn circuits_circuit_terminations_update(state: &ThanixClient, body: WritableCircuitTerminationRequest, id: i64) -> Result<CircuitsCircuitTerminationsUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/circuits/circuit-terminations/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -695,7 +230,7 @@ pub enum CircuitsCircuitTerminationsPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a circuit termination object.
-pub fn circuits_circuit_terminations_partial_update(state: &ThanixClient, body: PatchedCircuitTerminationRequest, id: i64) -> Result<CircuitsCircuitTerminationsPartialUpdateResponse, Error> {
+pub fn circuits_circuit_terminations_partial_update(state: &ThanixClient, body: PatchedWritableCircuitTerminationRequest, id: i64) -> Result<CircuitsCircuitTerminationsPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/circuits/circuit-terminations/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -722,17 +257,6 @@ pub fn circuits_circuit_terminations_paths_retrieve(state: &ThanixClient, id: i6
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CircuitsCircuitTypesListQuery {
-	color: Option<Vec<String>>,
-	color__empty: Option<bool>,
-	color__ic: Option<Vec<String>>,
-	color__ie: Option<Vec<String>>,
-	color__iew: Option<Vec<String>>,
-	color__isw: Option<Vec<String>>,
-	color__n: Option<Vec<String>>,
-	color__nic: Option<Vec<String>>,
-	color__nie: Option<Vec<String>>,
-	color__niew: Option<Vec<String>>,
-	color__nisw: Option<Vec<String>>,
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
 	created__gt: Option<Vec<String>>,
@@ -965,8 +489,10 @@ pub struct CircuitsCircuitsListQuery {
 	contact: Option<Vec<i64>>,
 	/// Contact
 	contact__n: Option<Vec<i64>>,
-	contact_group: Option<Vec<String>>,
-	contact_group__n: Option<Vec<String>>,
+	/// Contact group
+	contact_group: Option<Vec<i64>>,
+	/// Contact group
+	contact_group__n: Option<Vec<i64>>,
 	/// Contact Role
 	contact_role: Option<Vec<i64>>,
 	/// Contact Role
@@ -1022,36 +548,40 @@ pub struct CircuitsCircuitsListQuery {
 	provider: Option<Vec<String>>,
 	/// Provider (slug)
 	provider__n: Option<Vec<String>>,
-	/// Provider account (account)
-	provider_account: Option<Vec<String>>,
-	/// Provider account (account)
-	provider_account__n: Option<Vec<String>>,
-	/// Provider account (ID)
+	/// ProviderAccount (ID)
 	provider_account_id: Option<Vec<i64>>,
-	/// Provider account (ID)
+	/// ProviderAccount (ID)
 	provider_account_id__n: Option<Vec<i64>>,
 	/// Provider (ID)
 	provider_id: Option<Vec<i64>>,
 	/// Provider (ID)
 	provider_id__n: Option<Vec<i64>>,
-	/// Provider network (ID)
+	/// ProviderNetwork (ID)
 	provider_network_id: Option<Vec<i64>>,
-	/// Provider network (ID)
+	/// ProviderNetwork (ID)
 	provider_network_id__n: Option<Vec<i64>>,
 	/// Search
 	q: Option<String>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
 	/// Site (slug)
 	site: Option<Vec<String>>,
 	/// Site (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<i64>>,
 	/// Site (ID)
@@ -1064,18 +594,18 @@ pub struct CircuitsCircuitsListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
 	tenant_id__n: Option<Vec<Option<i64>>>,
-	/// Termination A (ID)
-	termination_a_id: Option<Vec<Option<i64>>>,
-	/// Termination A (ID)
-	termination_a_id__n: Option<Vec<Option<i64>>>,
 	termination_date: Option<Vec<String>>,
 	termination_date__empty: Option<bool>,
 	termination_date__gt: Option<Vec<String>>,
@@ -1083,10 +613,6 @@ pub struct CircuitsCircuitsListQuery {
 	termination_date__lt: Option<Vec<String>>,
 	termination_date__lte: Option<Vec<String>>,
 	termination_date__n: Option<Vec<String>>,
-	/// Termination A (ID)
-	termination_z_id: Option<Vec<Option<i64>>>,
-	/// Termination A (ID)
-	termination_z_id__n: Option<Vec<Option<i64>>>,
 	/// Circuit type (slug)
 	r#type: Option<Vec<String>>,
 	/// Circuit type (slug)
@@ -1353,7 +879,7 @@ pub enum CircuitsProviderAccountsCreateResponse {
 	Other(Response)
 }
 /// Post a list of provider account objects.
-pub fn circuits_provider_accounts_create(state: &ThanixClient, body: ProviderAccountRequest) -> Result<CircuitsProviderAccountsCreateResponse, Error> {
+pub fn circuits_provider_accounts_create(state: &ThanixClient, body: WritableProviderAccountRequest) -> Result<CircuitsProviderAccountsCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/circuits/provider-accounts/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -1415,7 +941,7 @@ pub enum CircuitsProviderAccountsUpdateResponse {
 	Other(Response)
 }
 /// Put a provider account object.
-pub fn circuits_provider_accounts_update(state: &ThanixClient, body: ProviderAccountRequest, id: i64) -> Result<CircuitsProviderAccountsUpdateResponse, Error> {
+pub fn circuits_provider_accounts_update(state: &ThanixClient, body: WritableProviderAccountRequest, id: i64) -> Result<CircuitsProviderAccountsUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/circuits/provider-accounts/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -1445,7 +971,7 @@ pub enum CircuitsProviderAccountsPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a provider account object.
-pub fn circuits_provider_accounts_partial_update(state: &ThanixClient, body: PatchedProviderAccountRequest, id: i64) -> Result<CircuitsProviderAccountsPartialUpdateResponse, Error> {
+pub fn circuits_provider_accounts_partial_update(state: &ThanixClient, body: PatchedWritableProviderAccountRequest, id: i64) -> Result<CircuitsProviderAccountsPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/circuits/provider-accounts/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -1571,7 +1097,7 @@ pub enum CircuitsProviderNetworksCreateResponse {
 	Other(Response)
 }
 /// Post a list of provider network objects.
-pub fn circuits_provider_networks_create(state: &ThanixClient, body: ProviderNetworkRequest) -> Result<CircuitsProviderNetworksCreateResponse, Error> {
+pub fn circuits_provider_networks_create(state: &ThanixClient, body: WritableProviderNetworkRequest) -> Result<CircuitsProviderNetworksCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/circuits/provider-networks/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -1633,7 +1159,7 @@ pub enum CircuitsProviderNetworksUpdateResponse {
 	Other(Response)
 }
 /// Put a provider network object.
-pub fn circuits_provider_networks_update(state: &ThanixClient, body: ProviderNetworkRequest, id: i64) -> Result<CircuitsProviderNetworksUpdateResponse, Error> {
+pub fn circuits_provider_networks_update(state: &ThanixClient, body: WritableProviderNetworkRequest, id: i64) -> Result<CircuitsProviderNetworksUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/circuits/provider-networks/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -1663,7 +1189,7 @@ pub enum CircuitsProviderNetworksPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a provider network object.
-pub fn circuits_provider_networks_partial_update(state: &ThanixClient, body: PatchedProviderNetworkRequest, id: i64) -> Result<CircuitsProviderNetworksPartialUpdateResponse, Error> {
+pub fn circuits_provider_networks_partial_update(state: &ThanixClient, body: PatchedWritableProviderNetworkRequest, id: i64) -> Result<CircuitsProviderNetworksPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/circuits/provider-networks/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -1675,10 +1201,6 @@ pub fn circuits_provider_networks_partial_update(state: &ThanixClient, body: Pat
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CircuitsProvidersListQuery {
-	/// ASN
-	asn: Option<Vec<u32>>,
-	/// ASN
-	asn__n: Option<Vec<u32>>,
 	/// ASN (ID)
 	asn_id: Option<Vec<i64>>,
 	/// ASN (ID)
@@ -1687,8 +1209,10 @@ pub struct CircuitsProvidersListQuery {
 	contact: Option<Vec<i64>>,
 	/// Contact
 	contact__n: Option<Vec<i64>>,
-	contact_group: Option<Vec<String>>,
-	contact_group__n: Option<Vec<String>>,
+	/// Contact group
+	contact_group: Option<Vec<i64>>,
+	/// Contact group
+	contact_group__n: Option<Vec<i64>>,
 	/// Contact Role
 	contact_role: Option<Vec<i64>>,
 	/// Contact Role
@@ -1746,18 +1270,26 @@ pub struct CircuitsProvidersListQuery {
 	ordering: Option<String>,
 	/// Search
 	q: Option<String>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
 	/// Site (slug)
 	site: Option<Vec<String>>,
 	/// Site (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site
 	site_id: Option<Vec<i64>>,
 	/// Site
@@ -1815,7 +1347,7 @@ pub enum CircuitsProvidersCreateResponse {
 	Other(Response)
 }
 /// Post a list of provider objects.
-pub fn circuits_providers_create(state: &ThanixClient, body: ProviderRequest) -> Result<CircuitsProvidersCreateResponse, Error> {
+pub fn circuits_providers_create(state: &ThanixClient, body: WritableProviderRequest) -> Result<CircuitsProvidersCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/circuits/providers/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -1877,7 +1409,7 @@ pub enum CircuitsProvidersUpdateResponse {
 	Other(Response)
 }
 /// Put a provider object.
-pub fn circuits_providers_update(state: &ThanixClient, body: ProviderRequest, id: i64) -> Result<CircuitsProvidersUpdateResponse, Error> {
+pub fn circuits_providers_update(state: &ThanixClient, body: WritableProviderRequest, id: i64) -> Result<CircuitsProvidersUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/circuits/providers/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -1907,7 +1439,7 @@ pub enum CircuitsProvidersPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a provider object.
-pub fn circuits_providers_partial_update(state: &ThanixClient, body: PatchedProviderRequest, id: i64) -> Result<CircuitsProvidersPartialUpdateResponse, Error> {
+pub fn circuits_providers_partial_update(state: &ThanixClient, body: PatchedWritableProviderRequest, id: i64) -> Result<CircuitsProvidersPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/circuits/providers/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -2048,13 +1580,6 @@ pub struct CoreDataSourcesListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	last_synced: Option<Vec<String>>,
-	last_synced__empty: Option<bool>,
-	last_synced__gt: Option<Vec<String>>,
-	last_synced__gte: Option<Vec<String>>,
-	last_synced__lt: Option<Vec<String>>,
-	last_synced__lte: Option<Vec<String>>,
-	last_synced__n: Option<Vec<String>>,
 	last_updated: Option<Vec<String>>,
 	last_updated__empty: Option<Vec<String>>,
 	last_updated__gt: Option<Vec<String>>,
@@ -2082,17 +1607,6 @@ pub struct CoreDataSourcesListQuery {
 	ordering: Option<String>,
 	/// Search
 	q: Option<String>,
-	source_url: Option<Vec<String>>,
-	source_url__empty: Option<bool>,
-	source_url__ic: Option<Vec<String>>,
-	source_url__ie: Option<Vec<String>>,
-	source_url__iew: Option<Vec<String>>,
-	source_url__isw: Option<Vec<String>>,
-	source_url__n: Option<Vec<String>>,
-	source_url__nic: Option<Vec<String>>,
-	source_url__nie: Option<Vec<String>>,
-	source_url__niew: Option<Vec<String>>,
-	source_url__nisw: Option<Vec<String>>,
 	status: Option<Vec<String>>,
 	status__n: Option<Vec<String>>,
 	tag: Option<Vec<String>>,
@@ -2279,7 +1793,6 @@ pub struct CoreJobsListQuery {
 	interval__lt: Option<Vec<i64>>,
 	interval__lte: Option<Vec<i64>>,
 	interval__n: Option<Vec<i64>>,
-	job_id: Option<String>,
 	/// Number of results to return per page.
 	limit: Option<i64>,
 	name: Option<Vec<String>>,
@@ -2351,133 +1864,11 @@ pub fn core_jobs_retrieve(state: &ThanixClient, id: i64) -> Result<CoreJobsRetri
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct CoreObjectChangesListQuery {
-	/// * `create` - Created
-	/// * `update` - Updated
-	/// * `delete` - Deleted
-	action: Option<String>,
-	/// * `create` - Created
-	/// * `update` - Updated
-	/// * `delete` - Deleted
-	action__n: Option<String>,
-	changed_object_id: Option<Vec<i64>>,
-	changed_object_id__empty: Option<bool>,
-	changed_object_id__gt: Option<Vec<i64>>,
-	changed_object_id__gte: Option<Vec<i64>>,
-	changed_object_id__lt: Option<Vec<i64>>,
-	changed_object_id__lte: Option<Vec<i64>>,
-	changed_object_id__n: Option<Vec<i64>>,
-	changed_object_type: Option<String>,
-	changed_object_type__n: Option<String>,
-	changed_object_type_id: Option<Vec<i64>>,
-	changed_object_type_id__n: Option<Vec<i64>>,
-	id: Option<Vec<i64>>,
-	id__empty: Option<bool>,
-	id__gt: Option<Vec<i64>>,
-	id__gte: Option<Vec<i64>>,
-	id__lt: Option<Vec<i64>>,
-	id__lte: Option<Vec<i64>>,
-	id__n: Option<Vec<i64>>,
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	object_repr: Option<Vec<String>>,
-	object_repr__empty: Option<bool>,
-	object_repr__ic: Option<Vec<String>>,
-	object_repr__ie: Option<Vec<String>>,
-	object_repr__iew: Option<Vec<String>>,
-	object_repr__isw: Option<Vec<String>>,
-	object_repr__n: Option<Vec<String>>,
-	object_repr__nic: Option<Vec<String>>,
-	object_repr__nie: Option<Vec<String>>,
-	object_repr__niew: Option<Vec<String>>,
-	object_repr__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-	/// Search
-	q: Option<String>,
-	related_object_id: Option<Vec<i64>>,
-	related_object_id__empty: Option<bool>,
-	related_object_id__gt: Option<Vec<i64>>,
-	related_object_id__gte: Option<Vec<i64>>,
-	related_object_id__lt: Option<Vec<i64>>,
-	related_object_id__lte: Option<Vec<i64>>,
-	related_object_id__n: Option<Vec<i64>>,
-	related_object_type: Option<i64>,
-	related_object_type__n: Option<i64>,
-	request_id: Option<String>,
-	time_after: Option<String>,
-	time_before: Option<String>,
-	/// User name
-	user: Option<Vec<String>>,
-	/// User name
-	user__n: Option<Vec<String>>,
-	/// User (ID)
-	user_id: Option<Vec<Option<i64>>>,
-	/// User (ID)
-	user_id__n: Option<Vec<Option<i64>>>,
-	user_name: Option<Vec<String>>,
-	user_name__empty: Option<bool>,
-	user_name__ic: Option<Vec<String>>,
-	user_name__ie: Option<Vec<String>>,
-	user_name__iew: Option<Vec<String>>,
-	user_name__isw: Option<Vec<String>>,
-	user_name__n: Option<Vec<String>>,
-	user_name__nic: Option<Vec<String>>,
-	user_name__nie: Option<Vec<String>>,
-	user_name__niew: Option<Vec<String>>,
-	user_name__nisw: Option<Vec<String>>,
-
-}
-#[derive(Debug)]
-pub enum CoreObjectChangesListResponse {
-	Http200(PaginatedObjectChangeList),
-	Other(Response)
-}
-/// Retrieve a list of recent changes.
-pub fn core_object_changes_list(state: &ThanixClient, query: CoreObjectChangesListQuery) -> Result<CoreObjectChangesListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/core/object-changes/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(CoreObjectChangesListResponse::Http200(r#response.json::<PaginatedObjectChangeList>()?)) },
-		r#other_status => { Ok(CoreObjectChangesListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum CoreObjectChangesRetrieveResponse {
-	Http200(ObjectChange),
-	Other(Response)
-}
-/// Retrieve a list of recent changes.
-pub fn core_object_changes_retrieve(state: &ThanixClient, id: i64) -> Result<CoreObjectChangesRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/core/object-changes/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(CoreObjectChangesRetrieveResponse::Http200(r#response.json::<ObjectChange>()?)) },
-		r#other_status => { Ok(CoreObjectChangesRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimCableTerminationsListQuery {
 	cable: Option<i64>,
 	cable__n: Option<i64>,
-	/// * `A` - A
-	/// * `B` - B
 	cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
 	cable_end__n: Option<String>,
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -2485,16 +1876,8 @@ pub struct DcimCableTerminationsListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
 	/// Number of results to return per page.
 	limit: Option<i64>,
-	modified_by_request: Option<String>,
 	/// The initial index from which to return the results.
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -2508,7 +1891,6 @@ pub struct DcimCableTerminationsListQuery {
 	termination_id__n: Option<Vec<i64>>,
 	termination_type: Option<String>,
 	termination_type__n: Option<String>,
-	updated_by_request: Option<String>,
 
 }
 #[derive(Debug)]
@@ -2652,11 +2034,8 @@ pub fn dcim_cable_terminations_partial_update(state: &ThanixClient, body: Patche
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimCablesListQuery {
-	circuittermination_id: Option<Vec<i64>>,
 	color: Option<Vec<String>>,
 	color__n: Option<Vec<String>>,
-	consoleport_id: Option<Vec<i64>>,
-	consoleserverport_id: Option<Vec<i64>>,
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
 	created__gt: Option<Vec<String>>,
@@ -2678,7 +2057,6 @@ pub struct DcimCablesListQuery {
 	description__nisw: Option<Vec<String>>,
 	device: Option<Vec<String>>,
 	device_id: Option<Vec<i64>>,
-	frontport_id: Option<Vec<i64>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -2686,7 +2064,6 @@ pub struct DcimCablesListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	interface_id: Option<Vec<i64>>,
 	label: Option<Vec<String>>,
 	label__empty: Option<bool>,
 	label__ic: Option<Vec<String>>,
@@ -2712,19 +2089,7 @@ pub struct DcimCablesListQuery {
 	length__lt: Option<Vec<f64>>,
 	length__lte: Option<Vec<f64>>,
 	length__n: Option<Vec<f64>>,
-	/// * `km` - Kilometers
-	/// * `m` - Meters
-	/// * `cm` - Centimeters
-	/// * `mi` - Miles
-	/// * `ft` - Feet
-	/// * `in` - Inches
 	length_unit: Option<String>,
-	/// * `km` - Kilometers
-	/// * `m` - Meters
-	/// * `cm` - Centimeters
-	/// * `mi` - Miles
-	/// * `ft` - Feet
-	/// * `in` - Inches
 	length_unit__n: Option<String>,
 	/// Number of results to return per page.
 	limit: Option<i64>,
@@ -2735,14 +2100,10 @@ pub struct DcimCablesListQuery {
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
-	powerfeed_id: Option<Vec<i64>>,
-	poweroutlet_id: Option<Vec<i64>>,
-	powerport_id: Option<Vec<i64>>,
 	/// Search
 	q: Option<String>,
 	rack: Option<Vec<String>>,
 	rack_id: Option<Vec<i64>>,
-	rearport_id: Option<Vec<i64>>,
 	site: Option<Vec<String>>,
 	site_id: Option<Vec<i64>>,
 	status: Option<Vec<String>>,
@@ -2753,10 +2114,14 @@ pub struct DcimCablesListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
@@ -2963,9 +2328,9 @@ pub struct DcimConsolePortTemplatesListQuery {
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
 	/// Device type (ID)
-	device_type_id: Option<Vec<Option<i64>>>,
+	devicetype_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
-	device_type_id__n: Option<Vec<Option<i64>>>,
+	devicetype_id__n: Option<Vec<Option<i64>>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -2973,17 +2338,6 @@ pub struct DcimConsolePortTemplatesListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	label: Option<Vec<String>>,
-	label__empty: Option<bool>,
-	label__ic: Option<Vec<String>>,
-	label__ie: Option<Vec<String>>,
-	label__iew: Option<Vec<String>>,
-	label__isw: Option<Vec<String>>,
-	label__n: Option<Vec<String>>,
-	label__nic: Option<Vec<String>>,
-	label__nie: Option<Vec<String>>,
-	label__niew: Option<Vec<String>>,
-	label__nisw: Option<Vec<String>>,
 	last_updated: Option<Vec<String>>,
 	last_updated__empty: Option<Vec<String>>,
 	last_updated__gt: Option<Vec<String>>,
@@ -2995,9 +2349,9 @@ pub struct DcimConsolePortTemplatesListQuery {
 	limit: Option<i64>,
 	modified_by_request: Option<String>,
 	/// Module type (ID)
-	module_type_id: Option<Vec<Option<i64>>>,
+	moduletype_id: Option<Vec<Option<i64>>>,
 	/// Module type (ID)
-	module_type_id__n: Option<Vec<Option<i64>>>,
+	moduletype_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -3015,13 +2369,7 @@ pub struct DcimConsolePortTemplatesListQuery {
 	ordering: Option<String>,
 	/// Search
 	q: Option<String>,
-	/// * `Serial` - [('de-9', 'DE-9'), ('db-25', 'DB-25'), ('rj-11', 'RJ-11'), ('rj-12', 'RJ-12'), ('rj-45', 'RJ-45'), ('mini-din-8', 'Mini-DIN 8')]
-	/// * `USB` - [('usb-a', 'USB Type A'), ('usb-b', 'USB Type B'), ('usb-c', 'USB Type C'), ('usb-mini-a', 'USB Mini A'), ('usb-mini-b', 'USB Mini B'), ('usb-micro-a', 'USB Micro A'), ('usb-micro-b', 'USB Micro B'), ('usb-micro-ab', 'USB Micro AB')]
-	/// * `Other` - [('other', 'Other')]
 	r#type: Option<String>,
-	/// * `Serial` - [('de-9', 'DE-9'), ('db-25', 'DB-25'), ('rj-11', 'RJ-11'), ('rj-12', 'RJ-12'), ('rj-45', 'RJ-45'), ('mini-din-8', 'Mini-DIN 8')]
-	/// * `USB` - [('usb-a', 'USB Type A'), ('usb-b', 'USB Type B'), ('usb-c', 'USB Type C'), ('usb-mini-a', 'USB Mini A'), ('usb-mini-b', 'USB Mini B'), ('usb-micro-a', 'USB Micro A'), ('usb-micro-b', 'USB Micro B'), ('usb-micro-ab', 'USB Micro AB')]
-	/// * `Other` - [('other', 'Other')]
 	type__n: Option<String>,
 	updated_by_request: Option<String>,
 
@@ -3167,16 +2515,8 @@ pub fn dcim_console_port_templates_partial_update(state: &ThanixClient, body: Pa
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimConsolePortsListQuery {
-	/// * `A` - A
-	/// * `B` - B
 	cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
 	cable_end__n: Option<String>,
-	/// Cable (ID)
-	cable_id: Option<Vec<Option<i64>>>,
-	/// Cable (ID)
-	cable_id__n: Option<Vec<Option<i64>>>,
 	cabled: Option<bool>,
 	connected: Option<bool>,
 	created: Option<Vec<String>>,
@@ -3214,8 +2554,6 @@ pub struct DcimConsolePortsListQuery {
 	device_role_id: Option<Vec<i64>>,
 	/// Device role (ID)
 	device_role_id__n: Option<Vec<i64>>,
-	device_status: Option<Vec<String>>,
-	device_status__n: Option<Vec<String>>,
 	/// Device type (model)
 	device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -3259,7 +2597,6 @@ pub struct DcimConsolePortsListQuery {
 	location_id: Option<Vec<i64>>,
 	/// Location (ID)
 	location_id__n: Option<Vec<i64>>,
-	mark_connected: Option<bool>,
 	modified_by_request: Option<String>,
 	/// Module (ID)
 	module_id: Option<Vec<Option<i64>>>,
@@ -3291,44 +2628,38 @@ pub struct DcimConsolePortsListQuery {
 	rack_id: Option<Vec<i64>>,
 	/// Rack (ID)
 	rack_id__n: Option<Vec<i64>>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
+	/// Device role (slug)
+	role: Option<Vec<String>>,
+	/// Device role (slug)
+	role__n: Option<Vec<String>>,
+	/// Device role (ID)
+	role_id: Option<Vec<i64>>,
+	/// Device role (ID)
+	role_id__n: Option<Vec<i64>>,
 	/// Site name (slug)
 	site: Option<Vec<String>>,
 	/// Site name (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id__n: Option<Vec<i64>>,
-	/// Port speed in bits per second
-	/// 
-	/// * `1200` - 1200 bps
-	/// * `2400` - 2400 bps
-	/// * `4800` - 4800 bps
-	/// * `9600` - 9600 bps
-	/// * `19200` - 19.2 kbps
-	/// * `38400` - 38.4 kbps
-	/// * `57600` - 57.6 kbps
-	/// * `115200` - 115.2 kbps
-	speed: Option<Option<i64>>,
-	/// Port speed in bits per second
-	/// 
-	/// * `1200` - 1200 bps
-	/// * `2400` - 2400 bps
-	/// * `4800` - 4800 bps
-	/// * `9600` - 9600 bps
-	/// * `19200` - 19.2 kbps
-	/// * `38400` - 38.4 kbps
-	/// * `57600` - 57.6 kbps
-	/// * `115200` - 115.2 kbps
-	speed__n: Option<Option<i64>>,
 	tag: Option<Vec<String>>,
 	tag__n: Option<Vec<String>>,
 	/// Physical port type
@@ -3522,9 +2853,9 @@ pub struct DcimConsoleServerPortTemplatesListQuery {
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
 	/// Device type (ID)
-	device_type_id: Option<Vec<Option<i64>>>,
+	devicetype_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
-	device_type_id__n: Option<Vec<Option<i64>>>,
+	devicetype_id__n: Option<Vec<Option<i64>>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -3532,17 +2863,6 @@ pub struct DcimConsoleServerPortTemplatesListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	label: Option<Vec<String>>,
-	label__empty: Option<bool>,
-	label__ic: Option<Vec<String>>,
-	label__ie: Option<Vec<String>>,
-	label__iew: Option<Vec<String>>,
-	label__isw: Option<Vec<String>>,
-	label__n: Option<Vec<String>>,
-	label__nic: Option<Vec<String>>,
-	label__nie: Option<Vec<String>>,
-	label__niew: Option<Vec<String>>,
-	label__nisw: Option<Vec<String>>,
 	last_updated: Option<Vec<String>>,
 	last_updated__empty: Option<Vec<String>>,
 	last_updated__gt: Option<Vec<String>>,
@@ -3554,9 +2874,9 @@ pub struct DcimConsoleServerPortTemplatesListQuery {
 	limit: Option<i64>,
 	modified_by_request: Option<String>,
 	/// Module type (ID)
-	module_type_id: Option<Vec<Option<i64>>>,
+	moduletype_id: Option<Vec<Option<i64>>>,
 	/// Module type (ID)
-	module_type_id__n: Option<Vec<Option<i64>>>,
+	moduletype_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -3574,13 +2894,7 @@ pub struct DcimConsoleServerPortTemplatesListQuery {
 	ordering: Option<String>,
 	/// Search
 	q: Option<String>,
-	/// * `Serial` - [('de-9', 'DE-9'), ('db-25', 'DB-25'), ('rj-11', 'RJ-11'), ('rj-12', 'RJ-12'), ('rj-45', 'RJ-45'), ('mini-din-8', 'Mini-DIN 8')]
-	/// * `USB` - [('usb-a', 'USB Type A'), ('usb-b', 'USB Type B'), ('usb-c', 'USB Type C'), ('usb-mini-a', 'USB Mini A'), ('usb-mini-b', 'USB Mini B'), ('usb-micro-a', 'USB Micro A'), ('usb-micro-b', 'USB Micro B'), ('usb-micro-ab', 'USB Micro AB')]
-	/// * `Other` - [('other', 'Other')]
 	r#type: Option<String>,
-	/// * `Serial` - [('de-9', 'DE-9'), ('db-25', 'DB-25'), ('rj-11', 'RJ-11'), ('rj-12', 'RJ-12'), ('rj-45', 'RJ-45'), ('mini-din-8', 'Mini-DIN 8')]
-	/// * `USB` - [('usb-a', 'USB Type A'), ('usb-b', 'USB Type B'), ('usb-c', 'USB Type C'), ('usb-mini-a', 'USB Mini A'), ('usb-mini-b', 'USB Mini B'), ('usb-micro-a', 'USB Micro A'), ('usb-micro-b', 'USB Micro B'), ('usb-micro-ab', 'USB Micro AB')]
-	/// * `Other` - [('other', 'Other')]
 	type__n: Option<String>,
 	updated_by_request: Option<String>,
 
@@ -3726,16 +3040,8 @@ pub fn dcim_console_server_port_templates_partial_update(state: &ThanixClient, b
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimConsoleServerPortsListQuery {
-	/// * `A` - A
-	/// * `B` - B
 	cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
 	cable_end__n: Option<String>,
-	/// Cable (ID)
-	cable_id: Option<Vec<Option<i64>>>,
-	/// Cable (ID)
-	cable_id__n: Option<Vec<Option<i64>>>,
 	cabled: Option<bool>,
 	connected: Option<bool>,
 	created: Option<Vec<String>>,
@@ -3773,8 +3079,6 @@ pub struct DcimConsoleServerPortsListQuery {
 	device_role_id: Option<Vec<i64>>,
 	/// Device role (ID)
 	device_role_id__n: Option<Vec<i64>>,
-	device_status: Option<Vec<String>>,
-	device_status__n: Option<Vec<String>>,
 	/// Device type (model)
 	device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -3818,7 +3122,6 @@ pub struct DcimConsoleServerPortsListQuery {
 	location_id: Option<Vec<i64>>,
 	/// Location (ID)
 	location_id__n: Option<Vec<i64>>,
-	mark_connected: Option<bool>,
 	modified_by_request: Option<String>,
 	/// Module (ID)
 	module_id: Option<Vec<Option<i64>>>,
@@ -3850,44 +3153,38 @@ pub struct DcimConsoleServerPortsListQuery {
 	rack_id: Option<Vec<i64>>,
 	/// Rack (ID)
 	rack_id__n: Option<Vec<i64>>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
+	/// Device role (slug)
+	role: Option<Vec<String>>,
+	/// Device role (slug)
+	role__n: Option<Vec<String>>,
+	/// Device role (ID)
+	role_id: Option<Vec<i64>>,
+	/// Device role (ID)
+	role_id__n: Option<Vec<i64>>,
 	/// Site name (slug)
 	site: Option<Vec<String>>,
 	/// Site name (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id__n: Option<Vec<i64>>,
-	/// Port speed in bits per second
-	/// 
-	/// * `1200` - 1200 bps
-	/// * `2400` - 2400 bps
-	/// * `4800` - 4800 bps
-	/// * `9600` - 9600 bps
-	/// * `19200` - 19.2 kbps
-	/// * `38400` - 38.4 kbps
-	/// * `57600` - 57.6 kbps
-	/// * `115200` - 115.2 kbps
-	speed: Option<Option<i64>>,
-	/// Port speed in bits per second
-	/// 
-	/// * `1200` - 1200 bps
-	/// * `2400` - 2400 bps
-	/// * `4800` - 4800 bps
-	/// * `9600` - 9600 bps
-	/// * `19200` - 19.2 kbps
-	/// * `38400` - 38.4 kbps
-	/// * `57600` - 57.6 kbps
-	/// * `115200` - 115.2 kbps
-	speed__n: Option<Option<i64>>,
 	tag: Option<Vec<String>>,
 	tag__n: Option<Vec<String>>,
 	/// Physical port type
@@ -4081,9 +3378,9 @@ pub struct DcimDeviceBayTemplatesListQuery {
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
 	/// Device type (ID)
-	device_type_id: Option<Vec<i64>>,
+	devicetype_id: Option<Vec<i64>>,
 	/// Device type (ID)
-	device_type_id__n: Option<Vec<i64>>,
+	devicetype_id__n: Option<Vec<i64>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -4091,17 +3388,6 @@ pub struct DcimDeviceBayTemplatesListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	label: Option<Vec<String>>,
-	label__empty: Option<bool>,
-	label__ic: Option<Vec<String>>,
-	label__ie: Option<Vec<String>>,
-	label__iew: Option<Vec<String>>,
-	label__isw: Option<Vec<String>>,
-	label__n: Option<Vec<String>>,
-	label__nic: Option<Vec<String>>,
-	label__nie: Option<Vec<String>>,
-	label__niew: Option<Vec<String>>,
-	label__nisw: Option<Vec<String>>,
 	last_updated: Option<Vec<String>>,
 	last_updated__empty: Option<Vec<String>>,
 	last_updated__gt: Option<Vec<String>>,
@@ -4169,7 +3455,7 @@ pub enum DcimDeviceBayTemplatesCreateResponse {
 	Other(Response)
 }
 /// Post a list of device bay template objects.
-pub fn dcim_device_bay_templates_create(state: &ThanixClient, body: DeviceBayTemplateRequest) -> Result<DcimDeviceBayTemplatesCreateResponse, Error> {
+pub fn dcim_device_bay_templates_create(state: &ThanixClient, body: WritableDeviceBayTemplateRequest) -> Result<DcimDeviceBayTemplatesCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/dcim/device-bay-templates/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -4231,7 +3517,7 @@ pub enum DcimDeviceBayTemplatesUpdateResponse {
 	Other(Response)
 }
 /// Put a device bay template object.
-pub fn dcim_device_bay_templates_update(state: &ThanixClient, body: DeviceBayTemplateRequest, id: i64) -> Result<DcimDeviceBayTemplatesUpdateResponse, Error> {
+pub fn dcim_device_bay_templates_update(state: &ThanixClient, body: WritableDeviceBayTemplateRequest, id: i64) -> Result<DcimDeviceBayTemplatesUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/dcim/device-bay-templates/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -4261,7 +3547,7 @@ pub enum DcimDeviceBayTemplatesPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a device bay template object.
-pub fn dcim_device_bay_templates_partial_update(state: &ThanixClient, body: PatchedDeviceBayTemplateRequest, id: i64) -> Result<DcimDeviceBayTemplatesPartialUpdateResponse, Error> {
+pub fn dcim_device_bay_templates_partial_update(state: &ThanixClient, body: PatchedWritableDeviceBayTemplateRequest, id: i64) -> Result<DcimDeviceBayTemplatesPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/dcim/device-bay-templates/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -4308,8 +3594,6 @@ pub struct DcimDeviceBaysListQuery {
 	device_role_id: Option<Vec<i64>>,
 	/// Device role (ID)
 	device_role_id__n: Option<Vec<i64>>,
-	device_status: Option<Vec<String>>,
-	device_status__n: Option<Vec<String>>,
 	/// Device type (model)
 	device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -4325,14 +3609,6 @@ pub struct DcimDeviceBaysListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	/// Installed device (name)
-	installed_device: Option<Vec<Option<String>>>,
-	/// Installed device (name)
-	installed_device__n: Option<Vec<Option<String>>>,
-	/// Installed device (ID)
-	installed_device_id: Option<Vec<Option<i64>>>,
-	/// Installed device (ID)
-	installed_device_id__n: Option<Vec<Option<i64>>>,
 	label: Option<Vec<String>>,
 	label__empty: Option<bool>,
 	label__ic: Option<Vec<String>>,
@@ -4387,18 +3663,34 @@ pub struct DcimDeviceBaysListQuery {
 	rack_id: Option<Vec<i64>>,
 	/// Rack (ID)
 	rack_id__n: Option<Vec<i64>>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
+	/// Device role (slug)
+	role: Option<Vec<String>>,
+	/// Device role (slug)
+	role__n: Option<Vec<String>>,
+	/// Device role (ID)
+	role_id: Option<Vec<i64>>,
+	/// Device role (ID)
+	role_id__n: Option<Vec<i64>>,
 	/// Site name (slug)
 	site: Option<Vec<String>>,
 	/// Site name (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<i64>>,
 	/// Site (ID)
@@ -4453,7 +3745,7 @@ pub enum DcimDeviceBaysCreateResponse {
 	Other(Response)
 }
 /// Post a list of device bay objects.
-pub fn dcim_device_bays_create(state: &ThanixClient, body: DeviceBayRequest) -> Result<DcimDeviceBaysCreateResponse, Error> {
+pub fn dcim_device_bays_create(state: &ThanixClient, body: WritableDeviceBayRequest) -> Result<DcimDeviceBaysCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/dcim/device-bays/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -4515,7 +3807,7 @@ pub enum DcimDeviceBaysUpdateResponse {
 	Other(Response)
 }
 /// Put a device bay object.
-pub fn dcim_device_bays_update(state: &ThanixClient, body: DeviceBayRequest, id: i64) -> Result<DcimDeviceBaysUpdateResponse, Error> {
+pub fn dcim_device_bays_update(state: &ThanixClient, body: WritableDeviceBayRequest, id: i64) -> Result<DcimDeviceBaysUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/dcim/device-bays/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -4545,7 +3837,7 @@ pub enum DcimDeviceBaysPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a device bay object.
-pub fn dcim_device_bays_partial_update(state: &ThanixClient, body: PatchedDeviceBayRequest, id: i64) -> Result<DcimDeviceBaysPartialUpdateResponse, Error> {
+pub fn dcim_device_bays_partial_update(state: &ThanixClient, body: PatchedWritableDeviceBayRequest, id: i64) -> Result<DcimDeviceBaysPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/dcim/device-bays/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -4679,7 +3971,7 @@ pub enum DcimDeviceRolesCreateResponse {
 	Other(Response)
 }
 /// Post a list of device role objects.
-pub fn dcim_device_roles_create(state: &ThanixClient, body: DeviceRoleRequest) -> Result<DcimDeviceRolesCreateResponse, Error> {
+pub fn dcim_device_roles_create(state: &ThanixClient, body: WritableDeviceRoleRequest) -> Result<DcimDeviceRolesCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/dcim/device-roles/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -4741,7 +4033,7 @@ pub enum DcimDeviceRolesUpdateResponse {
 	Other(Response)
 }
 /// Put a device role object.
-pub fn dcim_device_roles_update(state: &ThanixClient, body: DeviceRoleRequest, id: i64) -> Result<DcimDeviceRolesUpdateResponse, Error> {
+pub fn dcim_device_roles_update(state: &ThanixClient, body: WritableDeviceRoleRequest, id: i64) -> Result<DcimDeviceRolesUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/dcim/device-roles/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -4771,7 +4063,7 @@ pub enum DcimDeviceRolesPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a device role object.
-pub fn dcim_device_roles_partial_update(state: &ThanixClient, body: PatchedDeviceRoleRequest, id: i64) -> Result<DcimDeviceRolesPartialUpdateResponse, Error> {
+pub fn dcim_device_roles_partial_update(state: &ThanixClient, body: PatchedWritableDeviceRoleRequest, id: i64) -> Result<DcimDeviceRolesPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/dcim/device-roles/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -4783,38 +4075,10 @@ pub fn dcim_device_roles_partial_update(state: &ThanixClient, body: PatchedDevic
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimDeviceTypesListQuery {
-	/// * `front-to-rear` - Front to rear
-	/// * `rear-to-front` - Rear to front
-	/// * `left-to-right` - Left to right
-	/// * `right-to-left` - Right to left
-	/// * `side-to-rear` - Side to rear
-	/// * `passive` - Passive
-	/// * `mixed` - Mixed
 	airflow: Option<String>,
-	/// * `front-to-rear` - Front to rear
-	/// * `rear-to-front` - Rear to front
-	/// * `left-to-right` - Left to right
-	/// * `right-to-left` - Right to left
-	/// * `side-to-rear` - Side to rear
-	/// * `passive` - Passive
-	/// * `mixed` - Mixed
 	airflow__n: Option<String>,
-	console_port_template_count: Option<Vec<i64>>,
-	console_port_template_count__empty: Option<bool>,
-	console_port_template_count__gt: Option<Vec<i64>>,
-	console_port_template_count__gte: Option<Vec<i64>>,
-	console_port_template_count__lt: Option<Vec<i64>>,
-	console_port_template_count__lte: Option<Vec<i64>>,
-	console_port_template_count__n: Option<Vec<i64>>,
 	/// Has console ports
 	console_ports: Option<bool>,
-	console_server_port_template_count: Option<Vec<i64>>,
-	console_server_port_template_count__empty: Option<bool>,
-	console_server_port_template_count__gt: Option<Vec<i64>>,
-	console_server_port_template_count__gte: Option<Vec<i64>>,
-	console_server_port_template_count__lt: Option<Vec<i64>>,
-	console_server_port_template_count__lte: Option<Vec<i64>>,
-	console_server_port_template_count__n: Option<Vec<i64>>,
 	/// Has console server ports
 	console_server_ports: Option<bool>,
 	created: Option<Vec<String>>,
@@ -4844,23 +4108,8 @@ pub struct DcimDeviceTypesListQuery {
 	description__nie: Option<Vec<String>>,
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
-	device_bay_template_count: Option<Vec<i64>>,
-	device_bay_template_count__empty: Option<bool>,
-	device_bay_template_count__gt: Option<Vec<i64>>,
-	device_bay_template_count__gte: Option<Vec<i64>>,
-	device_bay_template_count__lt: Option<Vec<i64>>,
-	device_bay_template_count__lte: Option<Vec<i64>>,
-	device_bay_template_count__n: Option<Vec<i64>>,
 	/// Has device bays
 	device_bays: Option<bool>,
-	exclude_from_utilization: Option<bool>,
-	front_port_template_count: Option<Vec<i64>>,
-	front_port_template_count__empty: Option<bool>,
-	front_port_template_count__gt: Option<Vec<i64>>,
-	front_port_template_count__gte: Option<Vec<i64>>,
-	front_port_template_count__lt: Option<Vec<i64>>,
-	front_port_template_count__lte: Option<Vec<i64>>,
-	front_port_template_count__n: Option<Vec<i64>>,
 	/// Has a front image
 	has_front_image: Option<bool>,
 	/// Has a rear image
@@ -4872,22 +4121,8 @@ pub struct DcimDeviceTypesListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	interface_template_count: Option<Vec<i64>>,
-	interface_template_count__empty: Option<bool>,
-	interface_template_count__gt: Option<Vec<i64>>,
-	interface_template_count__gte: Option<Vec<i64>>,
-	interface_template_count__lt: Option<Vec<i64>>,
-	interface_template_count__lte: Option<Vec<i64>>,
-	interface_template_count__n: Option<Vec<i64>>,
 	/// Has interfaces
 	interfaces: Option<bool>,
-	inventory_item_template_count: Option<Vec<i64>>,
-	inventory_item_template_count__empty: Option<bool>,
-	inventory_item_template_count__gt: Option<Vec<i64>>,
-	inventory_item_template_count__gte: Option<Vec<i64>>,
-	inventory_item_template_count__lt: Option<Vec<i64>>,
-	inventory_item_template_count__lte: Option<Vec<i64>>,
-	inventory_item_template_count__n: Option<Vec<i64>>,
 	/// Has inventory items
 	inventory_items: Option<bool>,
 	is_full_depth: Option<bool>,
@@ -4920,13 +4155,6 @@ pub struct DcimDeviceTypesListQuery {
 	model__niew: Option<Vec<String>>,
 	model__nisw: Option<Vec<String>>,
 	modified_by_request: Option<String>,
-	module_bay_template_count: Option<Vec<i64>>,
-	module_bay_template_count__empty: Option<bool>,
-	module_bay_template_count__gt: Option<Vec<i64>>,
-	module_bay_template_count__gte: Option<Vec<i64>>,
-	module_bay_template_count__lt: Option<Vec<i64>>,
-	module_bay_template_count__lte: Option<Vec<i64>>,
-	module_bay_template_count__n: Option<Vec<i64>>,
 	/// Has module bays
 	module_bays: Option<bool>,
 	/// The initial index from which to return the results.
@@ -4946,33 +4174,12 @@ pub struct DcimDeviceTypesListQuery {
 	part_number__nisw: Option<Vec<String>>,
 	/// Has pass-through ports
 	pass_through_ports: Option<bool>,
-	power_outlet_template_count: Option<Vec<i64>>,
-	power_outlet_template_count__empty: Option<bool>,
-	power_outlet_template_count__gt: Option<Vec<i64>>,
-	power_outlet_template_count__gte: Option<Vec<i64>>,
-	power_outlet_template_count__lt: Option<Vec<i64>>,
-	power_outlet_template_count__lte: Option<Vec<i64>>,
-	power_outlet_template_count__n: Option<Vec<i64>>,
 	/// Has power outlets
 	power_outlets: Option<bool>,
-	power_port_template_count: Option<Vec<i64>>,
-	power_port_template_count__empty: Option<bool>,
-	power_port_template_count__gt: Option<Vec<i64>>,
-	power_port_template_count__gte: Option<Vec<i64>>,
-	power_port_template_count__lt: Option<Vec<i64>>,
-	power_port_template_count__lte: Option<Vec<i64>>,
-	power_port_template_count__n: Option<Vec<i64>>,
 	/// Has power ports
 	power_ports: Option<bool>,
 	/// Search
 	q: Option<String>,
-	rear_port_template_count: Option<Vec<i64>>,
-	rear_port_template_count__empty: Option<bool>,
-	rear_port_template_count__gt: Option<Vec<i64>>,
-	rear_port_template_count__gte: Option<Vec<i64>>,
-	rear_port_template_count__lt: Option<Vec<i64>>,
-	rear_port_template_count__lte: Option<Vec<i64>>,
-	rear_port_template_count__n: Option<Vec<i64>>,
 	slug: Option<Vec<String>>,
 	slug__empty: Option<bool>,
 	slug__ic: Option<Vec<String>>,
@@ -4985,14 +4192,8 @@ pub struct DcimDeviceTypesListQuery {
 	slug__niew: Option<Vec<String>>,
 	slug__nisw: Option<Vec<String>>,
 	/// Parent devices house child devices in device bays. Leave blank if this device type is neither a parent nor a child.
-	/// 
-	/// * `parent` - Parent
-	/// * `child` - Child
 	subdevice_role: Option<String>,
 	/// Parent devices house child devices in device bays. Leave blank if this device type is neither a parent nor a child.
-	/// 
-	/// * `parent` - Parent
-	/// * `child` - Child
 	subdevice_role__n: Option<String>,
 	tag: Option<Vec<String>>,
 	tag__n: Option<Vec<String>>,
@@ -5011,15 +4212,7 @@ pub struct DcimDeviceTypesListQuery {
 	weight__lt: Option<Vec<f64>>,
 	weight__lte: Option<Vec<f64>>,
 	weight__n: Option<Vec<f64>>,
-	/// * `kg` - Kilograms
-	/// * `g` - Grams
-	/// * `lb` - Pounds
-	/// * `oz` - Ounces
 	weight_unit: Option<String>,
-	/// * `kg` - Kilograms
-	/// * `g` - Grams
-	/// * `lb` - Pounds
-	/// * `oz` - Ounces
 	weight_unit__n: Option<String>,
 
 }
@@ -5164,21 +4357,7 @@ pub fn dcim_device_types_partial_update(state: &ThanixClient, body: PatchedWrita
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimDevicesListQuery {
-	/// * `front-to-rear` - Front to rear
-	/// * `rear-to-front` - Rear to front
-	/// * `left-to-right` - Left to right
-	/// * `right-to-left` - Right to left
-	/// * `side-to-rear` - Side to rear
-	/// * `passive` - Passive
-	/// * `mixed` - Mixed
 	airflow: Option<String>,
-	/// * `front-to-rear` - Front to rear
-	/// * `rear-to-front` - Rear to front
-	/// * `left-to-right` - Left to right
-	/// * `right-to-left` - Right to left
-	/// * `side-to-rear` - Side to rear
-	/// * `passive` - Passive
-	/// * `mixed` - Mixed
 	airflow__n: Option<String>,
 	asset_tag: Option<Vec<String>>,
 	asset_tag__empty: Option<bool>,
@@ -5191,14 +4370,6 @@ pub struct DcimDevicesListQuery {
 	asset_tag__nie: Option<Vec<String>>,
 	asset_tag__niew: Option<Vec<String>>,
 	asset_tag__nisw: Option<Vec<String>>,
-	/// Cluster group (slug)
-	cluster_group: Option<Vec<String>>,
-	/// Cluster group (slug)
-	cluster_group__n: Option<Vec<String>>,
-	/// Cluster group (ID)
-	cluster_group_id: Option<Vec<i64>>,
-	/// Cluster group (ID)
-	cluster_group_id__n: Option<Vec<i64>>,
 	/// VM cluster (ID)
 	cluster_id: Option<Vec<Option<i64>>>,
 	/// VM cluster (ID)
@@ -5207,30 +4378,18 @@ pub struct DcimDevicesListQuery {
 	config_template_id: Option<Vec<Option<i64>>>,
 	/// Config template (ID)
 	config_template_id__n: Option<Vec<Option<i64>>>,
-	console_port_count: Option<Vec<i64>>,
-	console_port_count__empty: Option<bool>,
-	console_port_count__gt: Option<Vec<i64>>,
-	console_port_count__gte: Option<Vec<i64>>,
-	console_port_count__lt: Option<Vec<i64>>,
-	console_port_count__lte: Option<Vec<i64>>,
-	console_port_count__n: Option<Vec<i64>>,
 	/// Has console ports
 	console_ports: Option<bool>,
-	console_server_port_count: Option<Vec<i64>>,
-	console_server_port_count__empty: Option<bool>,
-	console_server_port_count__gt: Option<Vec<i64>>,
-	console_server_port_count__gte: Option<Vec<i64>>,
-	console_server_port_count__lt: Option<Vec<i64>>,
-	console_server_port_count__lte: Option<Vec<i64>>,
-	console_server_port_count__n: Option<Vec<i64>>,
 	/// Has console server ports
 	console_server_ports: Option<bool>,
 	/// Contact
 	contact: Option<Vec<i64>>,
 	/// Contact
 	contact__n: Option<Vec<i64>>,
-	contact_group: Option<Vec<String>>,
-	contact_group__n: Option<Vec<String>>,
+	/// Contact group
+	contact_group: Option<Vec<i64>>,
+	/// Contact group
+	contact_group__n: Option<Vec<i64>>,
 	/// Contact Role
 	contact_role: Option<Vec<i64>>,
 	/// Contact Role
@@ -5254,13 +4413,6 @@ pub struct DcimDevicesListQuery {
 	description__nie: Option<Vec<String>>,
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
-	device_bay_count: Option<Vec<i64>>,
-	device_bay_count__empty: Option<bool>,
-	device_bay_count__gt: Option<Vec<i64>>,
-	device_bay_count__gte: Option<Vec<i64>>,
-	device_bay_count__lt: Option<Vec<i64>>,
-	device_bay_count__lte: Option<Vec<i64>>,
-	device_bay_count__n: Option<Vec<i64>>,
 	/// Has device bays
 	device_bays: Option<bool>,
 	/// Device type (slug)
@@ -5271,25 +4423,12 @@ pub struct DcimDevicesListQuery {
 	device_type_id: Option<Vec<i64>>,
 	/// Device type (ID)
 	device_type_id__n: Option<Vec<i64>>,
-	/// * `front` - Front
-	/// * `rear` - Rear
 	face: Option<String>,
-	/// * `front` - Front
-	/// * `rear` - Rear
 	face__n: Option<String>,
-	front_port_count: Option<Vec<i64>>,
-	front_port_count__empty: Option<bool>,
-	front_port_count__gt: Option<Vec<i64>>,
-	front_port_count__gte: Option<Vec<i64>>,
-	front_port_count__lt: Option<Vec<i64>>,
-	front_port_count__lte: Option<Vec<i64>>,
-	front_port_count__n: Option<Vec<i64>>,
 	/// Has an out-of-band IP
 	has_oob_ip: Option<bool>,
 	/// Has a primary IP
 	has_primary_ip: Option<bool>,
-	/// Has virtual device context
-	has_virtual_device_context: Option<bool>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -5297,22 +4436,8 @@ pub struct DcimDevicesListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	interface_count: Option<Vec<i64>>,
-	interface_count__empty: Option<bool>,
-	interface_count__gt: Option<Vec<i64>>,
-	interface_count__gte: Option<Vec<i64>>,
-	interface_count__lt: Option<Vec<i64>>,
-	interface_count__lte: Option<Vec<i64>>,
-	interface_count__n: Option<Vec<i64>>,
 	/// Has interfaces
 	interfaces: Option<bool>,
-	inventory_item_count: Option<Vec<i64>>,
-	inventory_item_count__empty: Option<bool>,
-	inventory_item_count__gt: Option<Vec<i64>>,
-	inventory_item_count__gte: Option<Vec<i64>>,
-	inventory_item_count__lt: Option<Vec<i64>>,
-	inventory_item_count__lte: Option<Vec<i64>>,
-	inventory_item_count__n: Option<Vec<i64>>,
 	/// Is full depth
 	is_full_depth: Option<bool>,
 	last_updated: Option<Vec<String>>,
@@ -5333,8 +4458,10 @@ pub struct DcimDevicesListQuery {
 	limit: Option<i64>,
 	/// Has local config context data
 	local_context_data: Option<bool>,
-	location_id: Option<Vec<String>>,
-	location_id__n: Option<Vec<String>>,
+	/// Location (ID)
+	location_id: Option<Vec<i64>>,
+	/// Location (ID)
+	location_id__n: Option<Vec<i64>>,
 	longitude: Option<Vec<f64>>,
 	longitude__empty: Option<bool>,
 	longitude__gt: Option<Vec<f64>>,
@@ -5365,13 +4492,6 @@ pub struct DcimDevicesListQuery {
 	/// Device model (slug)
 	model__n: Option<Vec<String>>,
 	modified_by_request: Option<String>,
-	module_bay_count: Option<Vec<i64>>,
-	module_bay_count__empty: Option<bool>,
-	module_bay_count__gt: Option<Vec<i64>>,
-	module_bay_count__gte: Option<Vec<i64>>,
-	module_bay_count__lt: Option<Vec<i64>>,
-	module_bay_count__lte: Option<Vec<i64>>,
-	module_bay_count__n: Option<Vec<i64>>,
 	/// Has module bays
 	module_bays: Option<bool>,
 	name: Option<Vec<String>>,
@@ -5393,10 +4513,6 @@ pub struct DcimDevicesListQuery {
 	oob_ip_id__n: Option<Vec<i64>>,
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
-	/// Parent bay (ID)
-	parent_bay_id: Option<Vec<i64>>,
-	/// Parent bay (ID)
-	parent_bay_id__n: Option<Vec<i64>>,
 	/// Parent Device (ID)
 	parent_device_id: Option<Vec<i64>>,
 	/// Parent Device (ID)
@@ -5418,22 +4534,8 @@ pub struct DcimDevicesListQuery {
 	position__lt: Option<Vec<f64>>,
 	position__lte: Option<Vec<f64>>,
 	position__n: Option<Vec<f64>>,
-	power_outlet_count: Option<Vec<i64>>,
-	power_outlet_count__empty: Option<bool>,
-	power_outlet_count__gt: Option<Vec<i64>>,
-	power_outlet_count__gte: Option<Vec<i64>>,
-	power_outlet_count__lt: Option<Vec<i64>>,
-	power_outlet_count__lte: Option<Vec<i64>>,
-	power_outlet_count__n: Option<Vec<i64>>,
 	/// Has power outlets
 	power_outlets: Option<bool>,
-	power_port_count: Option<Vec<i64>>,
-	power_port_count__empty: Option<bool>,
-	power_port_count__gt: Option<Vec<i64>>,
-	power_port_count__gte: Option<Vec<i64>>,
-	power_port_count__lt: Option<Vec<i64>>,
-	power_port_count__lte: Option<Vec<i64>>,
-	power_port_count__n: Option<Vec<i64>>,
 	/// Has power ports
 	power_ports: Option<bool>,
 	/// Primary IPv4 (ID)
@@ -5450,17 +4552,14 @@ pub struct DcimDevicesListQuery {
 	rack_id: Option<Vec<i64>>,
 	/// Rack (ID)
 	rack_id__n: Option<Vec<i64>>,
-	rear_port_count: Option<Vec<i64>>,
-	rear_port_count__empty: Option<bool>,
-	rear_port_count__gt: Option<Vec<i64>>,
-	rear_port_count__gte: Option<Vec<i64>>,
-	rear_port_count__lt: Option<Vec<i64>>,
-	rear_port_count__lte: Option<Vec<i64>>,
-	rear_port_count__n: Option<Vec<i64>>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
 	/// Role (slug)
 	role: Option<Vec<String>>,
 	/// Role (slug)
@@ -5484,10 +4583,14 @@ pub struct DcimDevicesListQuery {
 	site: Option<Vec<String>>,
 	/// Site name (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<i64>>,
 	/// Site (ID)
@@ -5500,10 +4603,14 @@ pub struct DcimDevicesListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
@@ -5724,9 +4831,9 @@ pub struct DcimFrontPortTemplatesListQuery {
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
 	/// Device type (ID)
-	device_type_id: Option<Vec<Option<i64>>>,
+	devicetype_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
-	device_type_id__n: Option<Vec<Option<i64>>>,
+	devicetype_id__n: Option<Vec<Option<i64>>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -5734,17 +4841,6 @@ pub struct DcimFrontPortTemplatesListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	label: Option<Vec<String>>,
-	label__empty: Option<bool>,
-	label__ic: Option<Vec<String>>,
-	label__ie: Option<Vec<String>>,
-	label__iew: Option<Vec<String>>,
-	label__isw: Option<Vec<String>>,
-	label__n: Option<Vec<String>>,
-	label__nic: Option<Vec<String>>,
-	label__nie: Option<Vec<String>>,
-	label__niew: Option<Vec<String>>,
-	label__nisw: Option<Vec<String>>,
 	last_updated: Option<Vec<String>>,
 	last_updated__empty: Option<Vec<String>>,
 	last_updated__gt: Option<Vec<String>>,
@@ -5756,9 +4852,9 @@ pub struct DcimFrontPortTemplatesListQuery {
 	limit: Option<i64>,
 	modified_by_request: Option<String>,
 	/// Module type (ID)
-	module_type_id: Option<Vec<Option<i64>>>,
+	moduletype_id: Option<Vec<Option<i64>>>,
 	/// Module type (ID)
-	module_type_id__n: Option<Vec<Option<i64>>>,
+	moduletype_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -5776,15 +4872,6 @@ pub struct DcimFrontPortTemplatesListQuery {
 	ordering: Option<String>,
 	/// Search
 	q: Option<String>,
-	rear_port_id: Option<Vec<i64>>,
-	rear_port_id__n: Option<Vec<i64>>,
-	rear_port_position: Option<Vec<i64>>,
-	rear_port_position__empty: Option<bool>,
-	rear_port_position__gt: Option<Vec<i64>>,
-	rear_port_position__gte: Option<Vec<i64>>,
-	rear_port_position__lt: Option<Vec<i64>>,
-	rear_port_position__lte: Option<Vec<i64>>,
-	rear_port_position__n: Option<Vec<i64>>,
 	r#type: Option<Vec<String>>,
 	type__n: Option<Vec<String>>,
 	updated_by_request: Option<String>,
@@ -5931,16 +5018,8 @@ pub fn dcim_front_port_templates_partial_update(state: &ThanixClient, body: Patc
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimFrontPortsListQuery {
-	/// * `A` - A
-	/// * `B` - B
 	cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
 	cable_end__n: Option<String>,
-	/// Cable (ID)
-	cable_id: Option<Vec<Option<i64>>>,
-	/// Cable (ID)
-	cable_id__n: Option<Vec<Option<i64>>>,
 	cabled: Option<bool>,
 	color: Option<Vec<String>>,
 	color__empty: Option<bool>,
@@ -5988,8 +5067,6 @@ pub struct DcimFrontPortsListQuery {
 	device_role_id: Option<Vec<i64>>,
 	/// Device role (ID)
 	device_role_id__n: Option<Vec<i64>>,
-	device_status: Option<Vec<String>>,
-	device_status__n: Option<Vec<String>>,
 	/// Device type (model)
 	device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -6033,7 +5110,6 @@ pub struct DcimFrontPortsListQuery {
 	location_id: Option<Vec<i64>>,
 	/// Location (ID)
 	location_id__n: Option<Vec<i64>>,
-	mark_connected: Option<bool>,
 	modified_by_request: Option<String>,
 	/// Module (ID)
 	module_id: Option<Vec<Option<i64>>>,
@@ -6065,27 +5141,34 @@ pub struct DcimFrontPortsListQuery {
 	rack_id: Option<Vec<i64>>,
 	/// Rack (ID)
 	rack_id__n: Option<Vec<i64>>,
-	rear_port_id: Option<Vec<i64>>,
-	rear_port_id__n: Option<Vec<i64>>,
-	rear_port_position: Option<Vec<i64>>,
-	rear_port_position__empty: Option<bool>,
-	rear_port_position__gt: Option<Vec<i64>>,
-	rear_port_position__gte: Option<Vec<i64>>,
-	rear_port_position__lt: Option<Vec<i64>>,
-	rear_port_position__lte: Option<Vec<i64>>,
-	rear_port_position__n: Option<Vec<i64>>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
+	/// Device role (slug)
+	role: Option<Vec<String>>,
+	/// Device role (slug)
+	role__n: Option<Vec<String>>,
+	/// Device role (ID)
+	role_id: Option<Vec<i64>>,
+	/// Device role (ID)
+	role_id__n: Option<Vec<i64>>,
 	/// Site name (slug)
 	site: Option<Vec<String>>,
 	/// Site name (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<i64>>,
 	/// Site (ID)
@@ -6283,9 +5366,9 @@ pub struct DcimInterfaceTemplatesListQuery {
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
 	/// Device type (ID)
-	device_type_id: Option<Vec<Option<i64>>>,
+	devicetype_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
-	device_type_id__n: Option<Vec<Option<i64>>>,
+	devicetype_id__n: Option<Vec<Option<i64>>>,
 	enabled: Option<bool>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
@@ -6294,17 +5377,6 @@ pub struct DcimInterfaceTemplatesListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	label: Option<Vec<String>>,
-	label__empty: Option<bool>,
-	label__ic: Option<Vec<String>>,
-	label__ie: Option<Vec<String>>,
-	label__iew: Option<Vec<String>>,
-	label__isw: Option<Vec<String>>,
-	label__n: Option<Vec<String>>,
-	label__nic: Option<Vec<String>>,
-	label__nie: Option<Vec<String>>,
-	label__niew: Option<Vec<String>>,
-	label__nisw: Option<Vec<String>>,
 	last_updated: Option<Vec<String>>,
 	last_updated__empty: Option<Vec<String>>,
 	last_updated__gt: Option<Vec<String>>,
@@ -6317,9 +5389,9 @@ pub struct DcimInterfaceTemplatesListQuery {
 	mgmt_only: Option<bool>,
 	modified_by_request: Option<String>,
 	/// Module type (ID)
-	module_type_id: Option<Vec<Option<i64>>>,
+	moduletype_id: Option<Vec<Option<i64>>>,
 	/// Module type (ID)
-	module_type_id__n: Option<Vec<Option<i64>>>,
+	moduletype_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -6493,16 +5565,8 @@ pub struct DcimInterfacesListQuery {
 	bridge_id: Option<Vec<i64>>,
 	/// Bridged interface (ID)
 	bridge_id__n: Option<Vec<i64>>,
-	/// * `A` - A
-	/// * `B` - B
 	cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
 	cable_end__n: Option<String>,
-	/// Cable (ID)
-	cable_id: Option<Vec<Option<i64>>>,
-	/// Cable (ID)
-	cable_id__n: Option<Vec<Option<i64>>>,
 	cabled: Option<bool>,
 	connected: Option<bool>,
 	created: Option<Vec<String>>,
@@ -6540,8 +5604,6 @@ pub struct DcimInterfacesListQuery {
 	device_role_id: Option<Vec<i64>>,
 	/// Device role (ID)
 	device_role_id__n: Option<Vec<i64>>,
-	device_status: Option<Vec<String>>,
-	device_status__n: Option<Vec<String>>,
 	/// Device type (model)
 	device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -6612,19 +5674,10 @@ pub struct DcimInterfacesListQuery {
 	mac_address__nie: Option<Vec<String>>,
 	mac_address__niew: Option<Vec<String>>,
 	mac_address__nisw: Option<Vec<String>>,
-	mark_connected: Option<bool>,
 	mgmt_only: Option<bool>,
 	/// IEEE 802.1Q tagging strategy
-	/// 
-	/// * `access` - Access
-	/// * `tagged` - Tagged
-	/// * `tagged-all` - Tagged (All)
 	mode: Option<String>,
 	/// IEEE 802.1Q tagging strategy
-	/// 
-	/// * `access` - Access
-	/// * `tagged` - Tagged
-	/// * `tagged-all` - Tagged (All)
 	mode__n: Option<String>,
 	modified_by_request: Option<String>,
 	/// Module (ID)
@@ -6672,10 +5725,14 @@ pub struct DcimInterfacesListQuery {
 	rack_id: Option<Vec<i64>>,
 	/// Rack (ID)
 	rack_id__n: Option<Vec<i64>>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
 	rf_channel: Option<Vec<String>>,
 	rf_channel__n: Option<Vec<String>>,
 	rf_channel_frequency: Option<Vec<f64>>,
@@ -6694,14 +5751,26 @@ pub struct DcimInterfacesListQuery {
 	rf_channel_width__n: Option<Vec<f64>>,
 	rf_role: Option<Vec<String>>,
 	rf_role__n: Option<Vec<String>>,
+	/// Device role (slug)
+	role: Option<Vec<String>>,
+	/// Device role (slug)
+	role__n: Option<Vec<String>>,
+	/// Device role (ID)
+	role_id: Option<Vec<i64>>,
+	/// Device role (ID)
+	role_id__n: Option<Vec<i64>>,
 	/// Site name (slug)
 	site: Option<Vec<String>>,
 	/// Site name (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<i64>>,
 	/// Site (ID)
@@ -6759,14 +5828,6 @@ pub struct DcimInterfacesListQuery {
 	vrf_id: Option<Vec<i64>>,
 	/// VRF
 	vrf_id__n: Option<Vec<i64>>,
-	/// Wireless LAN
-	wireless_lan_id: Option<Vec<i64>>,
-	/// Wireless LAN
-	wireless_lan_id__n: Option<Vec<i64>>,
-	/// Wireless link
-	wireless_link_id: Option<Vec<Option<i64>>>,
-	/// Wireless link
-	wireless_link_id__n: Option<Vec<Option<i64>>>,
 	wwn: Option<Vec<String>>,
 	wwn__ic: Option<Vec<String>>,
 	wwn__ie: Option<Vec<String>>,
@@ -7185,9 +6246,9 @@ pub struct DcimInventoryItemTemplatesListQuery {
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
 	/// Device type (ID)
-	device_type_id: Option<Vec<i64>>,
+	devicetype_id: Option<Vec<i64>>,
 	/// Device type (ID)
-	device_type_id__n: Option<Vec<i64>>,
+	devicetype_id__n: Option<Vec<i64>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -7304,7 +6365,7 @@ pub enum DcimInventoryItemTemplatesCreateResponse {
 	Other(Response)
 }
 /// Post a list of inventory item template objects.
-pub fn dcim_inventory_item_templates_create(state: &ThanixClient, body: InventoryItemTemplateRequest) -> Result<DcimInventoryItemTemplatesCreateResponse, Error> {
+pub fn dcim_inventory_item_templates_create(state: &ThanixClient, body: WritableInventoryItemTemplateRequest) -> Result<DcimInventoryItemTemplatesCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/dcim/inventory-item-templates/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -7366,7 +6427,7 @@ pub enum DcimInventoryItemTemplatesUpdateResponse {
 	Other(Response)
 }
 /// Put a inventory item template object.
-pub fn dcim_inventory_item_templates_update(state: &ThanixClient, body: InventoryItemTemplateRequest, id: i64) -> Result<DcimInventoryItemTemplatesUpdateResponse, Error> {
+pub fn dcim_inventory_item_templates_update(state: &ThanixClient, body: WritableInventoryItemTemplateRequest, id: i64) -> Result<DcimInventoryItemTemplatesUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/dcim/inventory-item-templates/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -7396,7 +6457,7 @@ pub enum DcimInventoryItemTemplatesPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a inventory item template object.
-pub fn dcim_inventory_item_templates_partial_update(state: &ThanixClient, body: PatchedInventoryItemTemplateRequest, id: i64) -> Result<DcimInventoryItemTemplatesPartialUpdateResponse, Error> {
+pub fn dcim_inventory_item_templates_partial_update(state: &ThanixClient, body: PatchedWritableInventoryItemTemplateRequest, id: i64) -> Result<DcimInventoryItemTemplatesPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/dcim/inventory-item-templates/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -7436,17 +6497,6 @@ pub struct DcimInventoryItemsListQuery {
 	created__lte: Option<Vec<String>>,
 	created__n: Option<Vec<String>>,
 	created_by_request: Option<String>,
-	description: Option<Vec<String>>,
-	description__empty: Option<bool>,
-	description__ic: Option<Vec<String>>,
-	description__ie: Option<Vec<String>>,
-	description__iew: Option<Vec<String>>,
-	description__isw: Option<Vec<String>>,
-	description__n: Option<Vec<String>>,
-	description__nic: Option<Vec<String>>,
-	description__nie: Option<Vec<String>>,
-	description__niew: Option<Vec<String>>,
-	description__nisw: Option<Vec<String>>,
 	/// Device (name)
 	device: Option<Vec<Option<String>>>,
 	/// Device (name)
@@ -7463,8 +6513,6 @@ pub struct DcimInventoryItemsListQuery {
 	device_role_id: Option<Vec<i64>>,
 	/// Device role (ID)
 	device_role_id__n: Option<Vec<i64>>,
-	device_status: Option<Vec<String>>,
-	device_status__n: Option<Vec<String>>,
 	/// Device type (model)
 	device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -7558,10 +6606,14 @@ pub struct DcimInventoryItemsListQuery {
 	rack_id: Option<Vec<i64>>,
 	/// Rack (ID)
 	rack_id__n: Option<Vec<i64>>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
 	/// Role (slug)
 	role: Option<Vec<String>>,
 	/// Role (slug)
@@ -7585,10 +6637,14 @@ pub struct DcimInventoryItemsListQuery {
 	site: Option<Vec<String>>,
 	/// Site name (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<i64>>,
 	/// Site (ID)
@@ -7643,7 +6699,7 @@ pub enum DcimInventoryItemsCreateResponse {
 	Other(Response)
 }
 /// Post a list of inventory item objects.
-pub fn dcim_inventory_items_create(state: &ThanixClient, body: InventoryItemRequest) -> Result<DcimInventoryItemsCreateResponse, Error> {
+pub fn dcim_inventory_items_create(state: &ThanixClient, body: WritableInventoryItemRequest) -> Result<DcimInventoryItemsCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/dcim/inventory-items/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -7705,7 +6761,7 @@ pub enum DcimInventoryItemsUpdateResponse {
 	Other(Response)
 }
 /// Put a inventory item object.
-pub fn dcim_inventory_items_update(state: &ThanixClient, body: InventoryItemRequest, id: i64) -> Result<DcimInventoryItemsUpdateResponse, Error> {
+pub fn dcim_inventory_items_update(state: &ThanixClient, body: WritableInventoryItemRequest, id: i64) -> Result<DcimInventoryItemsUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/dcim/inventory-items/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -7735,7 +6791,7 @@ pub enum DcimInventoryItemsPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a inventory item object.
-pub fn dcim_inventory_items_partial_update(state: &ThanixClient, body: PatchedInventoryItemRequest, id: i64) -> Result<DcimInventoryItemsPartialUpdateResponse, Error> {
+pub fn dcim_inventory_items_partial_update(state: &ThanixClient, body: PatchedWritableInventoryItemRequest, id: i64) -> Result<DcimInventoryItemsPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/dcim/inventory-items/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -7747,16 +6803,14 @@ pub fn dcim_inventory_items_partial_update(state: &ThanixClient, body: PatchedIn
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimLocationsListQuery {
-	ancestor: Option<Vec<String>>,
-	ancestor__n: Option<Vec<String>>,
-	ancestor_id: Option<Vec<String>>,
-	ancestor_id__n: Option<Vec<String>>,
 	/// Contact
 	contact: Option<Vec<i64>>,
 	/// Contact
 	contact__n: Option<Vec<i64>>,
-	contact_group: Option<Vec<String>>,
-	contact_group__n: Option<Vec<String>>,
+	/// Contact group
+	contact_group: Option<Vec<i64>>,
+	/// Contact group
+	contact_group__n: Option<Vec<i64>>,
 	/// Contact Role
 	contact_role: Option<Vec<i64>>,
 	/// Contact Role
@@ -7780,17 +6834,6 @@ pub struct DcimLocationsListQuery {
 	description__nie: Option<Vec<String>>,
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
-	facility: Option<Vec<String>>,
-	facility__empty: Option<bool>,
-	facility__ic: Option<Vec<String>>,
-	facility__ie: Option<Vec<String>>,
-	facility__iew: Option<Vec<String>>,
-	facility__isw: Option<Vec<String>>,
-	facility__n: Option<Vec<String>>,
-	facility__nic: Option<Vec<String>>,
-	facility__nie: Option<Vec<String>>,
-	facility__niew: Option<Vec<String>>,
-	facility__nisw: Option<Vec<String>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -7823,28 +6866,36 @@ pub struct DcimLocationsListQuery {
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
-	/// Parent location (slug)
-	parent: Option<Vec<String>>,
-	/// Parent location (slug)
-	parent__n: Option<Vec<String>>,
-	/// Parent location (ID)
-	parent_id: Option<Vec<Option<i64>>>,
-	/// Parent location (ID)
-	parent_id__n: Option<Vec<Option<i64>>>,
+	/// Location (slug)
+	parent: Option<Vec<i64>>,
+	/// Location (slug)
+	parent__n: Option<Vec<i64>>,
+	/// Location (ID)
+	parent_id: Option<Vec<i64>>,
+	/// Location (ID)
+	parent_id__n: Option<Vec<i64>>,
 	/// Search
 	q: Option<String>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
 	/// Site (slug)
 	site: Option<Vec<String>>,
 	/// Site (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<i64>>,
 	/// Site (ID)
@@ -7868,10 +6919,14 @@ pub struct DcimLocationsListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
@@ -8024,8 +7079,10 @@ pub struct DcimManufacturersListQuery {
 	contact: Option<Vec<i64>>,
 	/// Contact
 	contact__n: Option<Vec<i64>>,
-	contact_group: Option<Vec<String>>,
-	contact_group__n: Option<Vec<String>>,
+	/// Contact group
+	contact_group: Option<Vec<i64>>,
+	/// Contact group
+	contact_group__n: Option<Vec<i64>>,
 	/// Contact Role
 	contact_role: Option<Vec<i64>>,
 	/// Contact Role
@@ -8260,9 +7317,9 @@ pub struct DcimModuleBayTemplatesListQuery {
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
 	/// Device type (ID)
-	device_type_id: Option<Vec<Option<i64>>>,
+	devicetype_id: Option<Vec<i64>>,
 	/// Device type (ID)
-	device_type_id__n: Option<Vec<Option<i64>>>,
+	devicetype_id__n: Option<Vec<i64>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -8270,17 +7327,6 @@ pub struct DcimModuleBayTemplatesListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	label: Option<Vec<String>>,
-	label__empty: Option<bool>,
-	label__ic: Option<Vec<String>>,
-	label__ie: Option<Vec<String>>,
-	label__iew: Option<Vec<String>>,
-	label__isw: Option<Vec<String>>,
-	label__n: Option<Vec<String>>,
-	label__nic: Option<Vec<String>>,
-	label__nie: Option<Vec<String>>,
-	label__niew: Option<Vec<String>>,
-	label__nisw: Option<Vec<String>>,
 	last_updated: Option<Vec<String>>,
 	last_updated__empty: Option<Vec<String>>,
 	last_updated__gt: Option<Vec<String>>,
@@ -8291,10 +7337,6 @@ pub struct DcimModuleBayTemplatesListQuery {
 	/// Number of results to return per page.
 	limit: Option<i64>,
 	modified_by_request: Option<String>,
-	/// Module type (ID)
-	module_type_id: Option<Vec<Option<i64>>>,
-	/// Module type (ID)
-	module_type_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -8310,17 +7352,6 @@ pub struct DcimModuleBayTemplatesListQuery {
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
-	position: Option<Vec<String>>,
-	position__empty: Option<bool>,
-	position__ic: Option<Vec<String>>,
-	position__ie: Option<Vec<String>>,
-	position__iew: Option<Vec<String>>,
-	position__isw: Option<Vec<String>>,
-	position__n: Option<Vec<String>>,
-	position__nic: Option<Vec<String>>,
-	position__nie: Option<Vec<String>>,
-	position__niew: Option<Vec<String>>,
-	position__nisw: Option<Vec<String>>,
 	/// Search
 	q: Option<String>,
 	updated_by_request: Option<String>,
@@ -8363,7 +7394,7 @@ pub enum DcimModuleBayTemplatesCreateResponse {
 	Other(Response)
 }
 /// Post a list of module bay template objects.
-pub fn dcim_module_bay_templates_create(state: &ThanixClient, body: ModuleBayTemplateRequest) -> Result<DcimModuleBayTemplatesCreateResponse, Error> {
+pub fn dcim_module_bay_templates_create(state: &ThanixClient, body: WritableModuleBayTemplateRequest) -> Result<DcimModuleBayTemplatesCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/dcim/module-bay-templates/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -8425,7 +7456,7 @@ pub enum DcimModuleBayTemplatesUpdateResponse {
 	Other(Response)
 }
 /// Put a module bay template object.
-pub fn dcim_module_bay_templates_update(state: &ThanixClient, body: ModuleBayTemplateRequest, id: i64) -> Result<DcimModuleBayTemplatesUpdateResponse, Error> {
+pub fn dcim_module_bay_templates_update(state: &ThanixClient, body: WritableModuleBayTemplateRequest, id: i64) -> Result<DcimModuleBayTemplatesUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/dcim/module-bay-templates/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -8455,7 +7486,7 @@ pub enum DcimModuleBayTemplatesPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a module bay template object.
-pub fn dcim_module_bay_templates_partial_update(state: &ThanixClient, body: PatchedModuleBayTemplateRequest, id: i64) -> Result<DcimModuleBayTemplatesPartialUpdateResponse, Error> {
+pub fn dcim_module_bay_templates_partial_update(state: &ThanixClient, body: PatchedWritableModuleBayTemplateRequest, id: i64) -> Result<DcimModuleBayTemplatesPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/dcim/module-bay-templates/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -8502,8 +7533,6 @@ pub struct DcimModuleBaysListQuery {
 	device_role_id: Option<Vec<i64>>,
 	/// Device role (ID)
 	device_role_id__n: Option<Vec<i64>>,
-	device_status: Option<Vec<String>>,
-	device_status__n: Option<Vec<String>>,
 	/// Device type (model)
 	device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -8519,10 +7548,6 @@ pub struct DcimModuleBaysListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	/// Installed module (ID)
-	installed_module_id: Option<Vec<i64>>,
-	/// Installed module (ID)
-	installed_module_id__n: Option<Vec<i64>>,
 	label: Option<Vec<String>>,
 	label__empty: Option<bool>,
 	label__ic: Option<Vec<String>>,
@@ -8552,10 +7577,6 @@ pub struct DcimModuleBaysListQuery {
 	/// Location (ID)
 	location_id__n: Option<Vec<i64>>,
 	modified_by_request: Option<String>,
-	/// Module (ID)
-	module_id: Option<Vec<Option<i64>>>,
-	/// Module (ID)
-	module_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -8571,21 +7592,6 @@ pub struct DcimModuleBaysListQuery {
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
-	/// Parent module bay (ID)
-	parent_id: Option<Vec<Option<i64>>>,
-	/// Parent module bay (ID)
-	parent_id__n: Option<Vec<Option<i64>>>,
-	position: Option<Vec<String>>,
-	position__empty: Option<bool>,
-	position__ic: Option<Vec<String>>,
-	position__ie: Option<Vec<String>>,
-	position__iew: Option<Vec<String>>,
-	position__isw: Option<Vec<String>>,
-	position__n: Option<Vec<String>>,
-	position__nic: Option<Vec<String>>,
-	position__nie: Option<Vec<String>>,
-	position__niew: Option<Vec<String>>,
-	position__nisw: Option<Vec<String>>,
 	/// Search
 	q: Option<String>,
 	/// Rack (name)
@@ -8596,18 +7602,34 @@ pub struct DcimModuleBaysListQuery {
 	rack_id: Option<Vec<i64>>,
 	/// Rack (ID)
 	rack_id__n: Option<Vec<i64>>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
+	/// Device role (slug)
+	role: Option<Vec<String>>,
+	/// Device role (slug)
+	role__n: Option<Vec<String>>,
+	/// Device role (ID)
+	role_id: Option<Vec<i64>>,
+	/// Device role (ID)
+	role_id__n: Option<Vec<i64>>,
 	/// Site name (slug)
 	site: Option<Vec<String>>,
 	/// Site name (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<i64>>,
 	/// Site (ID)
@@ -8662,7 +7684,7 @@ pub enum DcimModuleBaysCreateResponse {
 	Other(Response)
 }
 /// Post a list of module bay objects.
-pub fn dcim_module_bays_create(state: &ThanixClient, body: ModuleBayRequest) -> Result<DcimModuleBaysCreateResponse, Error> {
+pub fn dcim_module_bays_create(state: &ThanixClient, body: WritableModuleBayRequest) -> Result<DcimModuleBaysCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/dcim/module-bays/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -8724,7 +7746,7 @@ pub enum DcimModuleBaysUpdateResponse {
 	Other(Response)
 }
 /// Put a module bay object.
-pub fn dcim_module_bays_update(state: &ThanixClient, body: ModuleBayRequest, id: i64) -> Result<DcimModuleBaysUpdateResponse, Error> {
+pub fn dcim_module_bays_update(state: &ThanixClient, body: WritableModuleBayRequest, id: i64) -> Result<DcimModuleBaysUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/dcim/module-bays/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -8754,7 +7776,7 @@ pub enum DcimModuleBaysPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a module bay object.
-pub fn dcim_module_bays_partial_update(state: &ThanixClient, body: PatchedModuleBayRequest, id: i64) -> Result<DcimModuleBaysPartialUpdateResponse, Error> {
+pub fn dcim_module_bays_partial_update(state: &ThanixClient, body: PatchedWritableModuleBayRequest, id: i64) -> Result<DcimModuleBaysPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/dcim/module-bays/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -8766,20 +7788,6 @@ pub fn dcim_module_bays_partial_update(state: &ThanixClient, body: PatchedModule
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimModuleTypesListQuery {
-	/// * `front-to-rear` - Front to rear
-	/// * `rear-to-front` - Rear to front
-	/// * `left-to-right` - Left to right
-	/// * `right-to-left` - Right to left
-	/// * `side-to-rear` - Side to rear
-	/// * `passive` - Passive
-	airflow: Option<String>,
-	/// * `front-to-rear` - Front to rear
-	/// * `rear-to-front` - Rear to front
-	/// * `left-to-right` - Left to right
-	/// * `right-to-left` - Right to left
-	/// * `side-to-rear` - Side to rear
-	/// * `passive` - Passive
-	airflow__n: Option<String>,
 	/// Has console ports
 	console_ports: Option<bool>,
 	/// Has console server ports
@@ -8874,15 +7882,7 @@ pub struct DcimModuleTypesListQuery {
 	weight__lt: Option<Vec<f64>>,
 	weight__lte: Option<Vec<f64>>,
 	weight__n: Option<Vec<f64>>,
-	/// * `kg` - Kilograms
-	/// * `g` - Grams
-	/// * `lb` - Pounds
-	/// * `oz` - Ounces
 	weight_unit: Option<String>,
-	/// * `kg` - Kilograms
-	/// * `g` - Grams
-	/// * `lb` - Pounds
-	/// * `oz` - Ounces
 	weight_unit__n: Option<String>,
 
 }
@@ -9086,8 +8086,10 @@ pub struct DcimModulesListQuery {
 	/// Manufacturer (ID)
 	manufacturer_id__n: Option<Vec<i64>>,
 	modified_by_request: Option<String>,
-	module_bay_id: Option<Vec<String>>,
-	module_bay_id__n: Option<Vec<String>>,
+	/// Module Bay (ID)
+	module_bay_id: Option<Vec<i64>>,
+	/// Module Bay (ID)
+	module_bay_id__n: Option<Vec<i64>>,
 	/// Module type (model)
 	module_type: Option<Vec<String>>,
 	/// Module type (model)
@@ -9261,7 +8263,6 @@ pub fn dcim_modules_partial_update(state: &ThanixClient, body: PatchedWritableMo
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimPlatformsListQuery {
-	available_for_device_type: Option<String>,
 	/// Config template (ID)
 	config_template_id: Option<Vec<Option<i64>>>,
 	/// Config template (ID)
@@ -9380,7 +8381,7 @@ pub enum DcimPlatformsCreateResponse {
 	Other(Response)
 }
 /// Post a list of platform objects.
-pub fn dcim_platforms_create(state: &ThanixClient, body: PlatformRequest) -> Result<DcimPlatformsCreateResponse, Error> {
+pub fn dcim_platforms_create(state: &ThanixClient, body: WritablePlatformRequest) -> Result<DcimPlatformsCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/dcim/platforms/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -9442,7 +8443,7 @@ pub enum DcimPlatformsUpdateResponse {
 	Other(Response)
 }
 /// Put a platform object.
-pub fn dcim_platforms_update(state: &ThanixClient, body: PlatformRequest, id: i64) -> Result<DcimPlatformsUpdateResponse, Error> {
+pub fn dcim_platforms_update(state: &ThanixClient, body: WritablePlatformRequest, id: i64) -> Result<DcimPlatformsUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/dcim/platforms/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -9472,7 +8473,7 @@ pub enum DcimPlatformsPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a platform object.
-pub fn dcim_platforms_partial_update(state: &ThanixClient, body: PatchedPlatformRequest, id: i64) -> Result<DcimPlatformsPartialUpdateResponse, Error> {
+pub fn dcim_platforms_partial_update(state: &ThanixClient, body: PatchedWritablePlatformRequest, id: i64) -> Result<DcimPlatformsPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/dcim/platforms/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -9491,23 +8492,8 @@ pub struct DcimPowerFeedsListQuery {
 	amperage__lt: Option<Vec<i64>>,
 	amperage__lte: Option<Vec<i64>>,
 	amperage__n: Option<Vec<i64>>,
-	available_power: Option<Vec<i64>>,
-	available_power__empty: Option<bool>,
-	available_power__gt: Option<Vec<i64>>,
-	available_power__gte: Option<Vec<i64>>,
-	available_power__lt: Option<Vec<i64>>,
-	available_power__lte: Option<Vec<i64>>,
-	available_power__n: Option<Vec<i64>>,
-	/// * `A` - A
-	/// * `B` - B
 	cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
 	cable_end__n: Option<String>,
-	/// Cable (ID)
-	cable_id: Option<Vec<Option<i64>>>,
-	/// Cable (ID)
-	cable_id__n: Option<Vec<Option<i64>>>,
 	cabled: Option<bool>,
 	connected: Option<bool>,
 	created: Option<Vec<String>>,
@@ -9545,7 +8531,6 @@ pub struct DcimPowerFeedsListQuery {
 	last_updated__n: Option<Vec<String>>,
 	/// Number of results to return per page.
 	limit: Option<i64>,
-	mark_connected: Option<bool>,
 	max_utilization: Option<Vec<i64>>,
 	max_utilization__empty: Option<bool>,
 	max_utilization__gt: Option<Vec<i64>>,
@@ -9570,11 +8555,7 @@ pub struct DcimPowerFeedsListQuery {
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
-	/// * `single-phase` - Single phase
-	/// * `three-phase` - Three-phase
 	phase: Option<String>,
-	/// * `single-phase` - Single phase
-	/// * `three-phase` - Three-phase
 	phase__n: Option<String>,
 	/// Power panel (ID)
 	power_panel_id: Option<Vec<i64>>,
@@ -9586,29 +8567,33 @@ pub struct DcimPowerFeedsListQuery {
 	rack_id: Option<Vec<i64>>,
 	/// Rack (ID)
 	rack_id__n: Option<Vec<i64>>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
 	/// Site name (slug)
 	site: Option<Vec<String>>,
 	/// Site name (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id__n: Option<Vec<i64>>,
 	status: Option<Vec<String>>,
 	status__n: Option<Vec<String>>,
-	/// * `ac` - AC
-	/// * `dc` - DC
 	supply: Option<String>,
-	/// * `ac` - AC
-	/// * `dc` - DC
 	supply__n: Option<String>,
 	tag: Option<Vec<String>>,
 	tag__n: Option<Vec<String>>,
@@ -9616,19 +8601,19 @@ pub struct DcimPowerFeedsListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
 	tenant_id__n: Option<Vec<Option<i64>>>,
-	/// * `primary` - Primary
-	/// * `redundant` - Redundant
 	r#type: Option<String>,
-	/// * `primary` - Primary
-	/// * `redundant` - Redundant
 	type__n: Option<String>,
 	updated_by_request: Option<String>,
 	voltage: Option<Vec<i64>>,
@@ -9816,9 +8801,9 @@ pub struct DcimPowerOutletTemplatesListQuery {
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
 	/// Device type (ID)
-	device_type_id: Option<Vec<Option<i64>>>,
+	devicetype_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
-	device_type_id__n: Option<Vec<Option<i64>>>,
+	devicetype_id__n: Option<Vec<Option<i64>>>,
 	/// Phase (for three-phase feeds)
 	feed_leg: Option<Vec<String>>,
 	/// Phase (for three-phase feeds)
@@ -9830,17 +8815,6 @@ pub struct DcimPowerOutletTemplatesListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	label: Option<Vec<String>>,
-	label__empty: Option<bool>,
-	label__ic: Option<Vec<String>>,
-	label__ie: Option<Vec<String>>,
-	label__iew: Option<Vec<String>>,
-	label__isw: Option<Vec<String>>,
-	label__n: Option<Vec<String>>,
-	label__nic: Option<Vec<String>>,
-	label__nie: Option<Vec<String>>,
-	label__niew: Option<Vec<String>>,
-	label__nisw: Option<Vec<String>>,
 	last_updated: Option<Vec<String>>,
 	last_updated__empty: Option<Vec<String>>,
 	last_updated__gt: Option<Vec<String>>,
@@ -9852,9 +8826,9 @@ pub struct DcimPowerOutletTemplatesListQuery {
 	limit: Option<i64>,
 	modified_by_request: Option<String>,
 	/// Module type (ID)
-	module_type_id: Option<Vec<Option<i64>>>,
+	moduletype_id: Option<Vec<Option<i64>>>,
 	/// Module type (ID)
-	module_type_id__n: Option<Vec<Option<i64>>>,
+	moduletype_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -9870,37 +8844,9 @@ pub struct DcimPowerOutletTemplatesListQuery {
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
-	/// Power port (ID)
-	power_port_id: Option<Vec<Option<i64>>>,
-	/// Power port (ID)
-	power_port_id__n: Option<Vec<Option<i64>>>,
 	/// Search
 	q: Option<String>,
-	/// * `IEC 60320` - [('iec-60320-c5', 'C5'), ('iec-60320-c7', 'C7'), ('iec-60320-c13', 'C13'), ('iec-60320-c15', 'C15'), ('iec-60320-c19', 'C19'), ('iec-60320-c21', 'C21')]
-	/// * `IEC 60309` - [('iec-60309-p-n-e-4h', 'P+N+E 4H'), ('iec-60309-p-n-e-6h', 'P+N+E 6H'), ('iec-60309-p-n-e-9h', 'P+N+E 9H'), ('iec-60309-2p-e-4h', '2P+E 4H'), ('iec-60309-2p-e-6h', '2P+E 6H'), ('iec-60309-2p-e-9h', '2P+E 9H'), ('iec-60309-3p-e-4h', '3P+E 4H'), ('iec-60309-3p-e-6h', '3P+E 6H'), ('iec-60309-3p-e-9h', '3P+E 9H'), ('iec-60309-3p-n-e-4h', '3P+N+E 4H'), ('iec-60309-3p-n-e-6h', '3P+N+E 6H'), ('iec-60309-3p-n-e-9h', '3P+N+E 9H')]
-	/// * `IEC 60906-1` - [('iec-60906-1', 'IEC 60906-1'), ('nbr-14136-10a', '2P+T 10A (NBR 14136)'), ('nbr-14136-20a', '2P+T 20A (NBR 14136)')]
-	/// * `NEMA (Non-locking)` - [('nema-1-15r', 'NEMA 1-15R'), ('nema-5-15r', 'NEMA 5-15R'), ('nema-5-20r', 'NEMA 5-20R'), ('nema-5-30r', 'NEMA 5-30R'), ('nema-5-50r', 'NEMA 5-50R'), ('nema-6-15r', 'NEMA 6-15R'), ('nema-6-20r', 'NEMA 6-20R'), ('nema-6-30r', 'NEMA 6-30R'), ('nema-6-50r', 'NEMA 6-50R'), ('nema-10-30r', 'NEMA 10-30R'), ('nema-10-50r', 'NEMA 10-50R'), ('nema-14-20r', 'NEMA 14-20R'), ('nema-14-30r', 'NEMA 14-30R'), ('nema-14-50r', 'NEMA 14-50R'), ('nema-14-60r', 'NEMA 14-60R'), ('nema-15-15r', 'NEMA 15-15R'), ('nema-15-20r', 'NEMA 15-20R'), ('nema-15-30r', 'NEMA 15-30R'), ('nema-15-50r', 'NEMA 15-50R'), ('nema-15-60r', 'NEMA 15-60R')]
-	/// * `NEMA (Locking)` - [('nema-l1-15r', 'NEMA L1-15R'), ('nema-l5-15r', 'NEMA L5-15R'), ('nema-l5-20r', 'NEMA L5-20R'), ('nema-l5-30r', 'NEMA L5-30R'), ('nema-l5-50r', 'NEMA L5-50R'), ('nema-l6-15r', 'NEMA L6-15R'), ('nema-l6-20r', 'NEMA L6-20R'), ('nema-l6-30r', 'NEMA L6-30R'), ('nema-l6-50r', 'NEMA L6-50R'), ('nema-l10-30r', 'NEMA L10-30R'), ('nema-l14-20r', 'NEMA L14-20R'), ('nema-l14-30r', 'NEMA L14-30R'), ('nema-l14-50r', 'NEMA L14-50R'), ('nema-l14-60r', 'NEMA L14-60R'), ('nema-l15-20r', 'NEMA L15-20R'), ('nema-l15-30r', 'NEMA L15-30R'), ('nema-l15-50r', 'NEMA L15-50R'), ('nema-l15-60r', 'NEMA L15-60R'), ('nema-l21-20r', 'NEMA L21-20R'), ('nema-l21-30r', 'NEMA L21-30R'), ('nema-l22-30r', 'NEMA L22-30R')]
-	/// * `California Style` - [('CS6360C', 'CS6360C'), ('CS6364C', 'CS6364C'), ('CS8164C', 'CS8164C'), ('CS8264C', 'CS8264C'), ('CS8364C', 'CS8364C'), ('CS8464C', 'CS8464C')]
-	/// * `ITA/International` - [('ita-e', 'ITA Type E (CEE 7/5)'), ('ita-f', 'ITA Type F (CEE 7/3)'), ('ita-g', 'ITA Type G (BS 1363)'), ('ita-h', 'ITA Type H'), ('ita-i', 'ITA Type I'), ('ita-j', 'ITA Type J'), ('ita-k', 'ITA Type K'), ('ita-l', 'ITA Type L (CEI 23-50)'), ('ita-m', 'ITA Type M (BS 546)'), ('ita-n', 'ITA Type N'), ('ita-o', 'ITA Type O'), ('ita-multistandard', 'ITA Multistandard')]
-	/// * `USB` - [('usb-a', 'USB Type A'), ('usb-micro-b', 'USB Micro B'), ('usb-c', 'USB Type C')]
-	/// * `Molex` - [('molex-micro-fit-1x2', 'Molex Micro-Fit 1x2'), ('molex-micro-fit-2x2', 'Molex Micro-Fit 2x2'), ('molex-micro-fit-2x4', 'Molex Micro-Fit 2x4')]
-	/// * `DC` - [('dc-terminal', 'DC Terminal')]
-	/// * `Proprietary` - [('hdot-cx', 'HDOT Cx'), ('saf-d-grid', 'Saf-D-Grid'), ('neutrik-powercon-20a', 'Neutrik powerCON (20A)'), ('neutrik-powercon-32a', 'Neutrik powerCON (32A)'), ('neutrik-powercon-true1', 'Neutrik powerCON TRUE1'), ('neutrik-powercon-true1-top', 'Neutrik powerCON TRUE1 TOP'), ('ubiquiti-smartpower', 'Ubiquiti SmartPower')]
-	/// * `Other` - [('hardwired', 'Hardwired'), ('other', 'Other')]
 	r#type: Option<String>,
-	/// * `IEC 60320` - [('iec-60320-c5', 'C5'), ('iec-60320-c7', 'C7'), ('iec-60320-c13', 'C13'), ('iec-60320-c15', 'C15'), ('iec-60320-c19', 'C19'), ('iec-60320-c21', 'C21')]
-	/// * `IEC 60309` - [('iec-60309-p-n-e-4h', 'P+N+E 4H'), ('iec-60309-p-n-e-6h', 'P+N+E 6H'), ('iec-60309-p-n-e-9h', 'P+N+E 9H'), ('iec-60309-2p-e-4h', '2P+E 4H'), ('iec-60309-2p-e-6h', '2P+E 6H'), ('iec-60309-2p-e-9h', '2P+E 9H'), ('iec-60309-3p-e-4h', '3P+E 4H'), ('iec-60309-3p-e-6h', '3P+E 6H'), ('iec-60309-3p-e-9h', '3P+E 9H'), ('iec-60309-3p-n-e-4h', '3P+N+E 4H'), ('iec-60309-3p-n-e-6h', '3P+N+E 6H'), ('iec-60309-3p-n-e-9h', '3P+N+E 9H')]
-	/// * `IEC 60906-1` - [('iec-60906-1', 'IEC 60906-1'), ('nbr-14136-10a', '2P+T 10A (NBR 14136)'), ('nbr-14136-20a', '2P+T 20A (NBR 14136)')]
-	/// * `NEMA (Non-locking)` - [('nema-1-15r', 'NEMA 1-15R'), ('nema-5-15r', 'NEMA 5-15R'), ('nema-5-20r', 'NEMA 5-20R'), ('nema-5-30r', 'NEMA 5-30R'), ('nema-5-50r', 'NEMA 5-50R'), ('nema-6-15r', 'NEMA 6-15R'), ('nema-6-20r', 'NEMA 6-20R'), ('nema-6-30r', 'NEMA 6-30R'), ('nema-6-50r', 'NEMA 6-50R'), ('nema-10-30r', 'NEMA 10-30R'), ('nema-10-50r', 'NEMA 10-50R'), ('nema-14-20r', 'NEMA 14-20R'), ('nema-14-30r', 'NEMA 14-30R'), ('nema-14-50r', 'NEMA 14-50R'), ('nema-14-60r', 'NEMA 14-60R'), ('nema-15-15r', 'NEMA 15-15R'), ('nema-15-20r', 'NEMA 15-20R'), ('nema-15-30r', 'NEMA 15-30R'), ('nema-15-50r', 'NEMA 15-50R'), ('nema-15-60r', 'NEMA 15-60R')]
-	/// * `NEMA (Locking)` - [('nema-l1-15r', 'NEMA L1-15R'), ('nema-l5-15r', 'NEMA L5-15R'), ('nema-l5-20r', 'NEMA L5-20R'), ('nema-l5-30r', 'NEMA L5-30R'), ('nema-l5-50r', 'NEMA L5-50R'), ('nema-l6-15r', 'NEMA L6-15R'), ('nema-l6-20r', 'NEMA L6-20R'), ('nema-l6-30r', 'NEMA L6-30R'), ('nema-l6-50r', 'NEMA L6-50R'), ('nema-l10-30r', 'NEMA L10-30R'), ('nema-l14-20r', 'NEMA L14-20R'), ('nema-l14-30r', 'NEMA L14-30R'), ('nema-l14-50r', 'NEMA L14-50R'), ('nema-l14-60r', 'NEMA L14-60R'), ('nema-l15-20r', 'NEMA L15-20R'), ('nema-l15-30r', 'NEMA L15-30R'), ('nema-l15-50r', 'NEMA L15-50R'), ('nema-l15-60r', 'NEMA L15-60R'), ('nema-l21-20r', 'NEMA L21-20R'), ('nema-l21-30r', 'NEMA L21-30R'), ('nema-l22-30r', 'NEMA L22-30R')]
-	/// * `California Style` - [('CS6360C', 'CS6360C'), ('CS6364C', 'CS6364C'), ('CS8164C', 'CS8164C'), ('CS8264C', 'CS8264C'), ('CS8364C', 'CS8364C'), ('CS8464C', 'CS8464C')]
-	/// * `ITA/International` - [('ita-e', 'ITA Type E (CEE 7/5)'), ('ita-f', 'ITA Type F (CEE 7/3)'), ('ita-g', 'ITA Type G (BS 1363)'), ('ita-h', 'ITA Type H'), ('ita-i', 'ITA Type I'), ('ita-j', 'ITA Type J'), ('ita-k', 'ITA Type K'), ('ita-l', 'ITA Type L (CEI 23-50)'), ('ita-m', 'ITA Type M (BS 546)'), ('ita-n', 'ITA Type N'), ('ita-o', 'ITA Type O'), ('ita-multistandard', 'ITA Multistandard')]
-	/// * `USB` - [('usb-a', 'USB Type A'), ('usb-micro-b', 'USB Micro B'), ('usb-c', 'USB Type C')]
-	/// * `Molex` - [('molex-micro-fit-1x2', 'Molex Micro-Fit 1x2'), ('molex-micro-fit-2x2', 'Molex Micro-Fit 2x2'), ('molex-micro-fit-2x4', 'Molex Micro-Fit 2x4')]
-	/// * `DC` - [('dc-terminal', 'DC Terminal')]
-	/// * `Proprietary` - [('hdot-cx', 'HDOT Cx'), ('saf-d-grid', 'Saf-D-Grid'), ('neutrik-powercon-20a', 'Neutrik powerCON (20A)'), ('neutrik-powercon-32a', 'Neutrik powerCON (32A)'), ('neutrik-powercon-true1', 'Neutrik powerCON TRUE1'), ('neutrik-powercon-true1-top', 'Neutrik powerCON TRUE1 TOP'), ('ubiquiti-smartpower', 'Ubiquiti SmartPower')]
-	/// * `Other` - [('hardwired', 'Hardwired'), ('other', 'Other')]
 	type__n: Option<String>,
 	updated_by_request: Option<String>,
 
@@ -10046,16 +8992,8 @@ pub fn dcim_power_outlet_templates_partial_update(state: &ThanixClient, body: Pa
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimPowerOutletsListQuery {
-	/// * `A` - A
-	/// * `B` - B
 	cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
 	cable_end__n: Option<String>,
-	/// Cable (ID)
-	cable_id: Option<Vec<Option<i64>>>,
-	/// Cable (ID)
-	cable_id__n: Option<Vec<Option<i64>>>,
 	cabled: Option<bool>,
 	connected: Option<bool>,
 	created: Option<Vec<String>>,
@@ -10093,8 +9031,6 @@ pub struct DcimPowerOutletsListQuery {
 	device_role_id: Option<Vec<i64>>,
 	/// Device role (ID)
 	device_role_id__n: Option<Vec<i64>>,
-	device_status: Option<Vec<String>>,
-	device_status__n: Option<Vec<String>>,
 	/// Device type (model)
 	device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -10142,7 +9078,6 @@ pub struct DcimPowerOutletsListQuery {
 	location_id: Option<Vec<i64>>,
 	/// Location (ID)
 	location_id__n: Option<Vec<i64>>,
-	mark_connected: Option<bool>,
 	modified_by_request: Option<String>,
 	/// Module (ID)
 	module_id: Option<Vec<Option<i64>>>,
@@ -10164,10 +9099,6 @@ pub struct DcimPowerOutletsListQuery {
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
-	/// Power port (ID)
-	power_port_id: Option<Vec<Option<i64>>>,
-	/// Power port (ID)
-	power_port_id__n: Option<Vec<Option<i64>>>,
 	/// Search
 	q: Option<String>,
 	/// Rack (name)
@@ -10178,18 +9109,34 @@ pub struct DcimPowerOutletsListQuery {
 	rack_id: Option<Vec<i64>>,
 	/// Rack (ID)
 	rack_id__n: Option<Vec<i64>>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
+	/// Device role (slug)
+	role: Option<Vec<String>>,
+	/// Device role (slug)
+	role__n: Option<Vec<String>>,
+	/// Device role (ID)
+	role_id: Option<Vec<i64>>,
+	/// Device role (ID)
+	role_id__n: Option<Vec<i64>>,
 	/// Site name (slug)
 	site: Option<Vec<String>>,
 	/// Site name (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<i64>>,
 	/// Site (ID)
@@ -10371,8 +9318,10 @@ pub struct DcimPowerPanelsListQuery {
 	contact: Option<Vec<i64>>,
 	/// Contact
 	contact__n: Option<Vec<i64>>,
-	contact_group: Option<Vec<String>>,
-	contact_group__n: Option<Vec<String>>,
+	/// Contact group
+	contact_group: Option<Vec<i64>>,
+	/// Contact group
+	contact_group__n: Option<Vec<i64>>,
 	/// Contact Role
 	contact_role: Option<Vec<i64>>,
 	/// Contact Role
@@ -10412,8 +9361,10 @@ pub struct DcimPowerPanelsListQuery {
 	last_updated__n: Option<Vec<String>>,
 	/// Number of results to return per page.
 	limit: Option<i64>,
-	location_id: Option<Vec<String>>,
-	location_id__n: Option<Vec<String>>,
+	/// Location (ID)
+	location_id: Option<Vec<i64>>,
+	/// Location (ID)
+	location_id__n: Option<Vec<i64>>,
 	modified_by_request: Option<String>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
@@ -10432,18 +9383,26 @@ pub struct DcimPowerPanelsListQuery {
 	ordering: Option<String>,
 	/// Search
 	q: Option<String>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
 	/// Site name (slug)
 	site: Option<Vec<String>>,
 	/// Site name (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<i64>>,
 	/// Site (ID)
@@ -10490,7 +9449,7 @@ pub enum DcimPowerPanelsCreateResponse {
 	Other(Response)
 }
 /// Post a list of power panel objects.
-pub fn dcim_power_panels_create(state: &ThanixClient, body: PowerPanelRequest) -> Result<DcimPowerPanelsCreateResponse, Error> {
+pub fn dcim_power_panels_create(state: &ThanixClient, body: WritablePowerPanelRequest) -> Result<DcimPowerPanelsCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/dcim/power-panels/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -10552,7 +9511,7 @@ pub enum DcimPowerPanelsUpdateResponse {
 	Other(Response)
 }
 /// Put a power panel object.
-pub fn dcim_power_panels_update(state: &ThanixClient, body: PowerPanelRequest, id: i64) -> Result<DcimPowerPanelsUpdateResponse, Error> {
+pub fn dcim_power_panels_update(state: &ThanixClient, body: WritablePowerPanelRequest, id: i64) -> Result<DcimPowerPanelsUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/dcim/power-panels/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -10582,7 +9541,7 @@ pub enum DcimPowerPanelsPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a power panel object.
-pub fn dcim_power_panels_partial_update(state: &ThanixClient, body: PatchedPowerPanelRequest, id: i64) -> Result<DcimPowerPanelsPartialUpdateResponse, Error> {
+pub fn dcim_power_panels_partial_update(state: &ThanixClient, body: PatchedWritablePowerPanelRequest, id: i64) -> Result<DcimPowerPanelsPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/dcim/power-panels/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -10621,9 +9580,9 @@ pub struct DcimPowerPortTemplatesListQuery {
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
 	/// Device type (ID)
-	device_type_id: Option<Vec<Option<i64>>>,
+	devicetype_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
-	device_type_id__n: Option<Vec<Option<i64>>>,
+	devicetype_id__n: Option<Vec<Option<i64>>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -10631,17 +9590,6 @@ pub struct DcimPowerPortTemplatesListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	label: Option<Vec<String>>,
-	label__empty: Option<bool>,
-	label__ic: Option<Vec<String>>,
-	label__ie: Option<Vec<String>>,
-	label__iew: Option<Vec<String>>,
-	label__isw: Option<Vec<String>>,
-	label__n: Option<Vec<String>>,
-	label__nic: Option<Vec<String>>,
-	label__nie: Option<Vec<String>>,
-	label__niew: Option<Vec<String>>,
-	label__nisw: Option<Vec<String>>,
 	last_updated: Option<Vec<String>>,
 	last_updated__empty: Option<Vec<String>>,
 	last_updated__gt: Option<Vec<String>>,
@@ -10660,9 +9608,9 @@ pub struct DcimPowerPortTemplatesListQuery {
 	maximum_draw__n: Option<Vec<i64>>,
 	modified_by_request: Option<String>,
 	/// Module type (ID)
-	module_type_id: Option<Vec<Option<i64>>>,
+	moduletype_id: Option<Vec<Option<i64>>>,
 	/// Module type (ID)
-	module_type_id__n: Option<Vec<Option<i64>>>,
+	moduletype_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -10680,31 +9628,7 @@ pub struct DcimPowerPortTemplatesListQuery {
 	ordering: Option<String>,
 	/// Search
 	q: Option<String>,
-	/// * `IEC 60320` - [('iec-60320-c6', 'C6'), ('iec-60320-c8', 'C8'), ('iec-60320-c14', 'C14'), ('iec-60320-c16', 'C16'), ('iec-60320-c20', 'C20'), ('iec-60320-c22', 'C22')]
-	/// * `IEC 60309` - [('iec-60309-p-n-e-4h', 'P+N+E 4H'), ('iec-60309-p-n-e-6h', 'P+N+E 6H'), ('iec-60309-p-n-e-9h', 'P+N+E 9H'), ('iec-60309-2p-e-4h', '2P+E 4H'), ('iec-60309-2p-e-6h', '2P+E 6H'), ('iec-60309-2p-e-9h', '2P+E 9H'), ('iec-60309-3p-e-4h', '3P+E 4H'), ('iec-60309-3p-e-6h', '3P+E 6H'), ('iec-60309-3p-e-9h', '3P+E 9H'), ('iec-60309-3p-n-e-4h', '3P+N+E 4H'), ('iec-60309-3p-n-e-6h', '3P+N+E 6H'), ('iec-60309-3p-n-e-9h', '3P+N+E 9H')]
-	/// * `IEC 60906-1` - [('iec-60906-1', 'IEC 60906-1'), ('nbr-14136-10a', '2P+T 10A (NBR 14136)'), ('nbr-14136-20a', '2P+T 20A (NBR 14136)')]
-	/// * `NEMA (Non-locking)` - [('nema-1-15p', 'NEMA 1-15P'), ('nema-5-15p', 'NEMA 5-15P'), ('nema-5-20p', 'NEMA 5-20P'), ('nema-5-30p', 'NEMA 5-30P'), ('nema-5-50p', 'NEMA 5-50P'), ('nema-6-15p', 'NEMA 6-15P'), ('nema-6-20p', 'NEMA 6-20P'), ('nema-6-30p', 'NEMA 6-30P'), ('nema-6-50p', 'NEMA 6-50P'), ('nema-10-30p', 'NEMA 10-30P'), ('nema-10-50p', 'NEMA 10-50P'), ('nema-14-20p', 'NEMA 14-20P'), ('nema-14-30p', 'NEMA 14-30P'), ('nema-14-50p', 'NEMA 14-50P'), ('nema-14-60p', 'NEMA 14-60P'), ('nema-15-15p', 'NEMA 15-15P'), ('nema-15-20p', 'NEMA 15-20P'), ('nema-15-30p', 'NEMA 15-30P'), ('nema-15-50p', 'NEMA 15-50P'), ('nema-15-60p', 'NEMA 15-60P')]
-	/// * `NEMA (Locking)` - [('nema-l1-15p', 'NEMA L1-15P'), ('nema-l5-15p', 'NEMA L5-15P'), ('nema-l5-20p', 'NEMA L5-20P'), ('nema-l5-30p', 'NEMA L5-30P'), ('nema-l5-50p', 'NEMA L5-50P'), ('nema-l6-15p', 'NEMA L6-15P'), ('nema-l6-20p', 'NEMA L6-20P'), ('nema-l6-30p', 'NEMA L6-30P'), ('nema-l6-50p', 'NEMA L6-50P'), ('nema-l10-30p', 'NEMA L10-30P'), ('nema-l14-20p', 'NEMA L14-20P'), ('nema-l14-30p', 'NEMA L14-30P'), ('nema-l14-50p', 'NEMA L14-50P'), ('nema-l14-60p', 'NEMA L14-60P'), ('nema-l15-20p', 'NEMA L15-20P'), ('nema-l15-30p', 'NEMA L15-30P'), ('nema-l15-50p', 'NEMA L15-50P'), ('nema-l15-60p', 'NEMA L15-60P'), ('nema-l21-20p', 'NEMA L21-20P'), ('nema-l21-30p', 'NEMA L21-30P'), ('nema-l22-30p', 'NEMA L22-30P')]
-	/// * `California Style` - [('cs6361c', 'CS6361C'), ('cs6365c', 'CS6365C'), ('cs8165c', 'CS8165C'), ('cs8265c', 'CS8265C'), ('cs8365c', 'CS8365C'), ('cs8465c', 'CS8465C')]
-	/// * `International/ITA` - [('ita-c', 'ITA Type C (CEE 7/16)'), ('ita-e', 'ITA Type E (CEE 7/6)'), ('ita-f', 'ITA Type F (CEE 7/4)'), ('ita-ef', 'ITA Type E/F (CEE 7/7)'), ('ita-g', 'ITA Type G (BS 1363)'), ('ita-h', 'ITA Type H'), ('ita-i', 'ITA Type I'), ('ita-j', 'ITA Type J'), ('ita-k', 'ITA Type K'), ('ita-l', 'ITA Type L (CEI 23-50)'), ('ita-m', 'ITA Type M (BS 546)'), ('ita-n', 'ITA Type N'), ('ita-o', 'ITA Type O')]
-	/// * `USB` - [('usb-a', 'USB Type A'), ('usb-b', 'USB Type B'), ('usb-c', 'USB Type C'), ('usb-mini-a', 'USB Mini A'), ('usb-mini-b', 'USB Mini B'), ('usb-micro-a', 'USB Micro A'), ('usb-micro-b', 'USB Micro B'), ('usb-micro-ab', 'USB Micro AB'), ('usb-3-b', 'USB 3.0 Type B'), ('usb-3-micro-b', 'USB 3.0 Micro B')]
-	/// * `Molex` - [('molex-micro-fit-1x2', 'Molex Micro-Fit 1x2'), ('molex-micro-fit-2x2', 'Molex Micro-Fit 2x2'), ('molex-micro-fit-2x4', 'Molex Micro-Fit 2x4')]
-	/// * `DC` - [('dc-terminal', 'DC Terminal')]
-	/// * `Proprietary` - [('saf-d-grid', 'Saf-D-Grid'), ('neutrik-powercon-20', 'Neutrik powerCON (20A)'), ('neutrik-powercon-32', 'Neutrik powerCON (32A)'), ('neutrik-powercon-true1', 'Neutrik powerCON TRUE1'), ('neutrik-powercon-true1-top', 'Neutrik powerCON TRUE1 TOP'), ('ubiquiti-smartpower', 'Ubiquiti SmartPower')]
-	/// * `Other` - [('hardwired', 'Hardwired'), ('other', 'Other')]
 	r#type: Option<String>,
-	/// * `IEC 60320` - [('iec-60320-c6', 'C6'), ('iec-60320-c8', 'C8'), ('iec-60320-c14', 'C14'), ('iec-60320-c16', 'C16'), ('iec-60320-c20', 'C20'), ('iec-60320-c22', 'C22')]
-	/// * `IEC 60309` - [('iec-60309-p-n-e-4h', 'P+N+E 4H'), ('iec-60309-p-n-e-6h', 'P+N+E 6H'), ('iec-60309-p-n-e-9h', 'P+N+E 9H'), ('iec-60309-2p-e-4h', '2P+E 4H'), ('iec-60309-2p-e-6h', '2P+E 6H'), ('iec-60309-2p-e-9h', '2P+E 9H'), ('iec-60309-3p-e-4h', '3P+E 4H'), ('iec-60309-3p-e-6h', '3P+E 6H'), ('iec-60309-3p-e-9h', '3P+E 9H'), ('iec-60309-3p-n-e-4h', '3P+N+E 4H'), ('iec-60309-3p-n-e-6h', '3P+N+E 6H'), ('iec-60309-3p-n-e-9h', '3P+N+E 9H')]
-	/// * `IEC 60906-1` - [('iec-60906-1', 'IEC 60906-1'), ('nbr-14136-10a', '2P+T 10A (NBR 14136)'), ('nbr-14136-20a', '2P+T 20A (NBR 14136)')]
-	/// * `NEMA (Non-locking)` - [('nema-1-15p', 'NEMA 1-15P'), ('nema-5-15p', 'NEMA 5-15P'), ('nema-5-20p', 'NEMA 5-20P'), ('nema-5-30p', 'NEMA 5-30P'), ('nema-5-50p', 'NEMA 5-50P'), ('nema-6-15p', 'NEMA 6-15P'), ('nema-6-20p', 'NEMA 6-20P'), ('nema-6-30p', 'NEMA 6-30P'), ('nema-6-50p', 'NEMA 6-50P'), ('nema-10-30p', 'NEMA 10-30P'), ('nema-10-50p', 'NEMA 10-50P'), ('nema-14-20p', 'NEMA 14-20P'), ('nema-14-30p', 'NEMA 14-30P'), ('nema-14-50p', 'NEMA 14-50P'), ('nema-14-60p', 'NEMA 14-60P'), ('nema-15-15p', 'NEMA 15-15P'), ('nema-15-20p', 'NEMA 15-20P'), ('nema-15-30p', 'NEMA 15-30P'), ('nema-15-50p', 'NEMA 15-50P'), ('nema-15-60p', 'NEMA 15-60P')]
-	/// * `NEMA (Locking)` - [('nema-l1-15p', 'NEMA L1-15P'), ('nema-l5-15p', 'NEMA L5-15P'), ('nema-l5-20p', 'NEMA L5-20P'), ('nema-l5-30p', 'NEMA L5-30P'), ('nema-l5-50p', 'NEMA L5-50P'), ('nema-l6-15p', 'NEMA L6-15P'), ('nema-l6-20p', 'NEMA L6-20P'), ('nema-l6-30p', 'NEMA L6-30P'), ('nema-l6-50p', 'NEMA L6-50P'), ('nema-l10-30p', 'NEMA L10-30P'), ('nema-l14-20p', 'NEMA L14-20P'), ('nema-l14-30p', 'NEMA L14-30P'), ('nema-l14-50p', 'NEMA L14-50P'), ('nema-l14-60p', 'NEMA L14-60P'), ('nema-l15-20p', 'NEMA L15-20P'), ('nema-l15-30p', 'NEMA L15-30P'), ('nema-l15-50p', 'NEMA L15-50P'), ('nema-l15-60p', 'NEMA L15-60P'), ('nema-l21-20p', 'NEMA L21-20P'), ('nema-l21-30p', 'NEMA L21-30P'), ('nema-l22-30p', 'NEMA L22-30P')]
-	/// * `California Style` - [('cs6361c', 'CS6361C'), ('cs6365c', 'CS6365C'), ('cs8165c', 'CS8165C'), ('cs8265c', 'CS8265C'), ('cs8365c', 'CS8365C'), ('cs8465c', 'CS8465C')]
-	/// * `International/ITA` - [('ita-c', 'ITA Type C (CEE 7/16)'), ('ita-e', 'ITA Type E (CEE 7/6)'), ('ita-f', 'ITA Type F (CEE 7/4)'), ('ita-ef', 'ITA Type E/F (CEE 7/7)'), ('ita-g', 'ITA Type G (BS 1363)'), ('ita-h', 'ITA Type H'), ('ita-i', 'ITA Type I'), ('ita-j', 'ITA Type J'), ('ita-k', 'ITA Type K'), ('ita-l', 'ITA Type L (CEI 23-50)'), ('ita-m', 'ITA Type M (BS 546)'), ('ita-n', 'ITA Type N'), ('ita-o', 'ITA Type O')]
-	/// * `USB` - [('usb-a', 'USB Type A'), ('usb-b', 'USB Type B'), ('usb-c', 'USB Type C'), ('usb-mini-a', 'USB Mini A'), ('usb-mini-b', 'USB Mini B'), ('usb-micro-a', 'USB Micro A'), ('usb-micro-b', 'USB Micro B'), ('usb-micro-ab', 'USB Micro AB'), ('usb-3-b', 'USB 3.0 Type B'), ('usb-3-micro-b', 'USB 3.0 Micro B')]
-	/// * `Molex` - [('molex-micro-fit-1x2', 'Molex Micro-Fit 1x2'), ('molex-micro-fit-2x2', 'Molex Micro-Fit 2x2'), ('molex-micro-fit-2x4', 'Molex Micro-Fit 2x4')]
-	/// * `DC` - [('dc-terminal', 'DC Terminal')]
-	/// * `Proprietary` - [('saf-d-grid', 'Saf-D-Grid'), ('neutrik-powercon-20', 'Neutrik powerCON (20A)'), ('neutrik-powercon-32', 'Neutrik powerCON (32A)'), ('neutrik-powercon-true1', 'Neutrik powerCON TRUE1'), ('neutrik-powercon-true1-top', 'Neutrik powerCON TRUE1 TOP'), ('ubiquiti-smartpower', 'Ubiquiti SmartPower')]
-	/// * `Other` - [('hardwired', 'Hardwired'), ('other', 'Other')]
 	type__n: Option<String>,
 	updated_by_request: Option<String>,
 
@@ -10857,16 +9781,8 @@ pub struct DcimPowerPortsListQuery {
 	allocated_draw__lt: Option<Vec<i64>>,
 	allocated_draw__lte: Option<Vec<i64>>,
 	allocated_draw__n: Option<Vec<i64>>,
-	/// * `A` - A
-	/// * `B` - B
 	cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
 	cable_end__n: Option<String>,
-	/// Cable (ID)
-	cable_id: Option<Vec<Option<i64>>>,
-	/// Cable (ID)
-	cable_id__n: Option<Vec<Option<i64>>>,
 	cabled: Option<bool>,
 	connected: Option<bool>,
 	created: Option<Vec<String>>,
@@ -10904,8 +9820,6 @@ pub struct DcimPowerPortsListQuery {
 	device_role_id: Option<Vec<i64>>,
 	/// Device role (ID)
 	device_role_id__n: Option<Vec<i64>>,
-	device_status: Option<Vec<String>>,
-	device_status__n: Option<Vec<String>>,
 	/// Device type (model)
 	device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -10949,7 +9863,6 @@ pub struct DcimPowerPortsListQuery {
 	location_id: Option<Vec<i64>>,
 	/// Location (ID)
 	location_id__n: Option<Vec<i64>>,
-	mark_connected: Option<bool>,
 	maximum_draw: Option<Vec<i64>>,
 	maximum_draw__empty: Option<bool>,
 	maximum_draw__gt: Option<Vec<i64>>,
@@ -10988,18 +9901,34 @@ pub struct DcimPowerPortsListQuery {
 	rack_id: Option<Vec<i64>>,
 	/// Rack (ID)
 	rack_id__n: Option<Vec<i64>>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
+	/// Device role (slug)
+	role: Option<Vec<String>>,
+	/// Device role (slug)
+	role__n: Option<Vec<String>>,
+	/// Device role (ID)
+	role_id: Option<Vec<i64>>,
+	/// Device role (ID)
+	role_id__n: Option<Vec<i64>>,
 	/// Site name (slug)
 	site: Option<Vec<String>>,
 	/// Site name (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<i64>>,
 	/// Site (ID)
@@ -11212,10 +10141,14 @@ pub struct DcimRackReservationsListQuery {
 	last_updated__n: Option<Vec<String>>,
 	/// Number of results to return per page.
 	limit: Option<i64>,
-	location: Option<Vec<String>>,
-	location__n: Option<Vec<String>>,
-	location_id: Option<Vec<String>>,
-	location_id__n: Option<Vec<String>>,
+	/// Location (slug)
+	location: Option<Vec<i64>>,
+	/// Location (slug)
+	location__n: Option<Vec<i64>>,
+	/// Location (ID)
+	location_id: Option<Vec<i64>>,
+	/// Location (ID)
+	location_id__n: Option<Vec<i64>>,
 	modified_by_request: Option<String>,
 	/// The initial index from which to return the results.
 	offset: Option<i64>,
@@ -11227,18 +10160,26 @@ pub struct DcimRackReservationsListQuery {
 	rack_id: Option<Vec<i64>>,
 	/// Rack (ID)
 	rack_id__n: Option<Vec<i64>>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
 	/// Site (slug)
 	site: Option<Vec<String>>,
 	/// Site (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<i64>>,
 	/// Site (ID)
@@ -11249,15 +10190,18 @@ pub struct DcimRackReservationsListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
 	tenant_id__n: Option<Vec<Option<i64>>>,
-	unit: Option<f64>,
 	updated_by_request: Option<String>,
 	/// User (name)
 	user: Option<Vec<String>>,
@@ -11306,7 +10250,7 @@ pub enum DcimRackReservationsCreateResponse {
 	Other(Response)
 }
 /// Post a list of rack reservation objects.
-pub fn dcim_rack_reservations_create(state: &ThanixClient, body: RackReservationRequest) -> Result<DcimRackReservationsCreateResponse, Error> {
+pub fn dcim_rack_reservations_create(state: &ThanixClient, body: WritableRackReservationRequest) -> Result<DcimRackReservationsCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/dcim/rack-reservations/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -11368,7 +10312,7 @@ pub enum DcimRackReservationsUpdateResponse {
 	Other(Response)
 }
 /// Put a rack reservation object.
-pub fn dcim_rack_reservations_update(state: &ThanixClient, body: RackReservationRequest, id: i64) -> Result<DcimRackReservationsUpdateResponse, Error> {
+pub fn dcim_rack_reservations_update(state: &ThanixClient, body: WritableRackReservationRequest, id: i64) -> Result<DcimRackReservationsUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/dcim/rack-reservations/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -11398,7 +10342,7 @@ pub enum DcimRackReservationsPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a rack reservation object.
-pub fn dcim_rack_reservations_partial_update(state: &ThanixClient, body: PatchedRackReservationRequest, id: i64) -> Result<DcimRackReservationsPartialUpdateResponse, Error> {
+pub fn dcim_rack_reservations_partial_update(state: &ThanixClient, body: PatchedWritableRackReservationRequest, id: i64) -> Result<DcimRackReservationsPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/dcim/rack-reservations/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -11630,303 +10574,7 @@ pub fn dcim_rack_roles_partial_update(state: &ThanixClient, body: PatchedRackRol
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct DcimRackTypesListQuery {
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
-	desc_units: Option<bool>,
-	description: Option<Vec<String>>,
-	description__empty: Option<bool>,
-	description__ic: Option<Vec<String>>,
-	description__ie: Option<Vec<String>>,
-	description__iew: Option<Vec<String>>,
-	description__isw: Option<Vec<String>>,
-	description__n: Option<Vec<String>>,
-	description__nic: Option<Vec<String>>,
-	description__nie: Option<Vec<String>>,
-	description__niew: Option<Vec<String>>,
-	description__nisw: Option<Vec<String>>,
-	form_factor: Option<Vec<String>>,
-	form_factor__n: Option<Vec<String>>,
-	id: Option<Vec<i64>>,
-	id__empty: Option<bool>,
-	id__gt: Option<Vec<i64>>,
-	id__gte: Option<Vec<i64>>,
-	id__lt: Option<Vec<i64>>,
-	id__lte: Option<Vec<i64>>,
-	id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	/// Manufacturer (slug)
-	manufacturer: Option<Vec<String>>,
-	/// Manufacturer (slug)
-	manufacturer__n: Option<Vec<String>>,
-	/// Manufacturer (ID)
-	manufacturer_id: Option<Vec<i64>>,
-	/// Manufacturer (ID)
-	manufacturer_id__n: Option<Vec<i64>>,
-	max_weight: Option<Vec<i64>>,
-	max_weight__empty: Option<bool>,
-	max_weight__gt: Option<Vec<i64>>,
-	max_weight__gte: Option<Vec<i64>>,
-	max_weight__lt: Option<Vec<i64>>,
-	max_weight__lte: Option<Vec<i64>>,
-	max_weight__n: Option<Vec<i64>>,
-	model: Option<Vec<String>>,
-	model__empty: Option<bool>,
-	model__ic: Option<Vec<String>>,
-	model__ie: Option<Vec<String>>,
-	model__iew: Option<Vec<String>>,
-	model__isw: Option<Vec<String>>,
-	model__n: Option<Vec<String>>,
-	model__nic: Option<Vec<String>>,
-	model__nie: Option<Vec<String>>,
-	model__niew: Option<Vec<String>>,
-	model__nisw: Option<Vec<String>>,
-	modified_by_request: Option<String>,
-	mounting_depth: Option<Vec<i64>>,
-	mounting_depth__empty: Option<bool>,
-	mounting_depth__gt: Option<Vec<i64>>,
-	mounting_depth__gte: Option<Vec<i64>>,
-	mounting_depth__lt: Option<Vec<i64>>,
-	mounting_depth__lte: Option<Vec<i64>>,
-	mounting_depth__n: Option<Vec<i64>>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-	outer_depth: Option<Vec<i64>>,
-	outer_depth__empty: Option<bool>,
-	outer_depth__gt: Option<Vec<i64>>,
-	outer_depth__gte: Option<Vec<i64>>,
-	outer_depth__lt: Option<Vec<i64>>,
-	outer_depth__lte: Option<Vec<i64>>,
-	outer_depth__n: Option<Vec<i64>>,
-	/// * `mm` - Millimeters
-	/// * `in` - Inches
-	outer_unit: Option<String>,
-	/// * `mm` - Millimeters
-	/// * `in` - Inches
-	outer_unit__n: Option<String>,
-	outer_width: Option<Vec<i64>>,
-	outer_width__empty: Option<bool>,
-	outer_width__gt: Option<Vec<i64>>,
-	outer_width__gte: Option<Vec<i64>>,
-	outer_width__lt: Option<Vec<i64>>,
-	outer_width__lte: Option<Vec<i64>>,
-	outer_width__n: Option<Vec<i64>>,
-	/// Search
-	q: Option<String>,
-	slug: Option<Vec<String>>,
-	slug__empty: Option<bool>,
-	slug__ic: Option<Vec<String>>,
-	slug__ie: Option<Vec<String>>,
-	slug__iew: Option<Vec<String>>,
-	slug__isw: Option<Vec<String>>,
-	slug__n: Option<Vec<String>>,
-	slug__nic: Option<Vec<String>>,
-	slug__nie: Option<Vec<String>>,
-	slug__niew: Option<Vec<String>>,
-	slug__nisw: Option<Vec<String>>,
-	starting_unit: Option<Vec<i64>>,
-	starting_unit__empty: Option<bool>,
-	starting_unit__gt: Option<Vec<i64>>,
-	starting_unit__gte: Option<Vec<i64>>,
-	starting_unit__lt: Option<Vec<i64>>,
-	starting_unit__lte: Option<Vec<i64>>,
-	starting_unit__n: Option<Vec<i64>>,
-	tag: Option<Vec<String>>,
-	tag__n: Option<Vec<String>>,
-	u_height: Option<Vec<i64>>,
-	u_height__empty: Option<bool>,
-	u_height__gt: Option<Vec<i64>>,
-	u_height__gte: Option<Vec<i64>>,
-	u_height__lt: Option<Vec<i64>>,
-	u_height__lte: Option<Vec<i64>>,
-	u_height__n: Option<Vec<i64>>,
-	updated_by_request: Option<String>,
-	weight: Option<Vec<f64>>,
-	weight__empty: Option<bool>,
-	weight__gt: Option<Vec<f64>>,
-	weight__gte: Option<Vec<f64>>,
-	weight__lt: Option<Vec<f64>>,
-	weight__lte: Option<Vec<f64>>,
-	weight__n: Option<Vec<f64>>,
-	/// * `kg` - Kilograms
-	/// * `g` - Grams
-	/// * `lb` - Pounds
-	/// * `oz` - Ounces
-	weight_unit: Option<String>,
-	/// * `kg` - Kilograms
-	/// * `g` - Grams
-	/// * `lb` - Pounds
-	/// * `oz` - Ounces
-	weight_unit__n: Option<String>,
-	/// Rail-to-rail width
-	width: Option<Vec<i64>>,
-	/// Rail-to-rail width
-	width__n: Option<Vec<i64>>,
-
-}
-#[derive(Debug)]
-pub enum DcimRackTypesListResponse {
-	Http200(PaginatedRackTypeList),
-	Other(Response)
-}
-/// Get a list of rack type objects.
-pub fn dcim_rack_types_list(state: &ThanixClient, query: DcimRackTypesListQuery) -> Result<DcimRackTypesListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/dcim/rack-types/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(DcimRackTypesListResponse::Http200(r#response.json::<PaginatedRackTypeList>()?)) },
-		r#other_status => { Ok(DcimRackTypesListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum DcimRackTypesBulkUpdateResponse {
-	Http200(Vec<RackType>),
-	Other(Response)
-}
-/// Put a list of rack type objects.
-pub fn dcim_rack_types_bulk_update(state: &ThanixClient, body: Vec<RackTypeRequest>) -> Result<DcimRackTypesBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/dcim/rack-types/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(DcimRackTypesBulkUpdateResponse::Http200(r#response.json::<Vec<RackType>>()?)) },
-		r#other_status => { Ok(DcimRackTypesBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum DcimRackTypesCreateResponse {
-	Http201(RackType),
-	Other(Response)
-}
-/// Post a list of rack type objects.
-pub fn dcim_rack_types_create(state: &ThanixClient, body: WritableRackTypeRequest) -> Result<DcimRackTypesCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/dcim/rack-types/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(DcimRackTypesCreateResponse::Http201(r#response.json::<RackType>()?)) },
-		r#other_status => { Ok(DcimRackTypesCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum DcimRackTypesBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of rack type objects.
-pub fn dcim_rack_types_bulk_destroy(state: &ThanixClient, body: Vec<RackTypeRequest>) -> Result<DcimRackTypesBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/dcim/rack-types/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(DcimRackTypesBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum DcimRackTypesBulkPartialUpdateResponse {
-	Http200(Vec<RackType>),
-	Other(Response)
-}
-/// Patch a list of rack type objects.
-pub fn dcim_rack_types_bulk_partial_update(state: &ThanixClient, body: Vec<RackTypeRequest>) -> Result<DcimRackTypesBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/dcim/rack-types/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(DcimRackTypesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<RackType>>()?)) },
-		r#other_status => { Ok(DcimRackTypesBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum DcimRackTypesRetrieveResponse {
-	Http200(RackType),
-	Other(Response)
-}
-/// Get a rack type object.
-pub fn dcim_rack_types_retrieve(state: &ThanixClient, id: i64) -> Result<DcimRackTypesRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/dcim/rack-types/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(DcimRackTypesRetrieveResponse::Http200(r#response.json::<RackType>()?)) },
-		r#other_status => { Ok(DcimRackTypesRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum DcimRackTypesUpdateResponse {
-	Http200(RackType),
-	Other(Response)
-}
-/// Put a rack type object.
-pub fn dcim_rack_types_update(state: &ThanixClient, body: WritableRackTypeRequest, id: i64) -> Result<DcimRackTypesUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/dcim/rack-types/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(DcimRackTypesUpdateResponse::Http200(r#response.json::<RackType>()?)) },
-		r#other_status => { Ok(DcimRackTypesUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum DcimRackTypesDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a rack type object.
-pub fn dcim_rack_types_destroy(state: &ThanixClient, id: i64) -> Result<DcimRackTypesDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/dcim/rack-types/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(DcimRackTypesDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum DcimRackTypesPartialUpdateResponse {
-	Http200(RackType),
-	Other(Response)
-}
-/// Patch a rack type object.
-pub fn dcim_rack_types_partial_update(state: &ThanixClient, body: PatchedWritableRackTypeRequest, id: i64) -> Result<DcimRackTypesPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/dcim/rack-types/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(DcimRackTypesPartialUpdateResponse::Http200(r#response.json::<RackType>()?)) },
-		r#other_status => { Ok(DcimRackTypesPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimRacksListQuery {
-	/// * `front-to-rear` - Front to rear
-	/// * `rear-to-front` - Rear to front
-	airflow: Option<String>,
-	/// * `front-to-rear` - Front to rear
-	/// * `rear-to-front` - Rear to front
-	airflow__n: Option<String>,
 	asset_tag: Option<Vec<String>>,
 	asset_tag__empty: Option<bool>,
 	asset_tag__ic: Option<Vec<String>>,
@@ -11942,8 +10590,10 @@ pub struct DcimRacksListQuery {
 	contact: Option<Vec<i64>>,
 	/// Contact
 	contact__n: Option<Vec<i64>>,
-	contact_group: Option<Vec<String>>,
-	contact_group__n: Option<Vec<String>>,
+	/// Contact group
+	contact_group: Option<Vec<i64>>,
+	/// Contact group
+	contact_group__n: Option<Vec<i64>>,
 	/// Contact Role
 	contact_role: Option<Vec<i64>>,
 	/// Contact Role
@@ -11979,8 +10629,6 @@ pub struct DcimRacksListQuery {
 	facility_id__nie: Option<Vec<String>>,
 	facility_id__niew: Option<Vec<String>>,
 	facility_id__nisw: Option<Vec<String>>,
-	form_factor: Option<Vec<String>>,
-	form_factor__n: Option<Vec<String>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -11997,18 +10645,14 @@ pub struct DcimRacksListQuery {
 	last_updated__n: Option<Vec<String>>,
 	/// Number of results to return per page.
 	limit: Option<i64>,
-	location: Option<Vec<String>>,
-	location__n: Option<Vec<String>>,
-	location_id: Option<Vec<String>>,
-	location_id__n: Option<Vec<String>>,
-	/// Manufacturer (slug)
-	manufacturer: Option<Vec<String>>,
-	/// Manufacturer (slug)
-	manufacturer__n: Option<Vec<String>>,
-	/// Manufacturer (ID)
-	manufacturer_id: Option<Vec<i64>>,
-	/// Manufacturer (ID)
-	manufacturer_id__n: Option<Vec<i64>>,
+	/// Location (slug)
+	location: Option<Vec<i64>>,
+	/// Location (slug)
+	location__n: Option<Vec<i64>>,
+	/// Location (ID)
+	location_id: Option<Vec<i64>>,
+	/// Location (ID)
+	location_id__n: Option<Vec<i64>>,
 	max_weight: Option<Vec<i64>>,
 	max_weight__empty: Option<bool>,
 	max_weight__gt: Option<Vec<i64>>,
@@ -12046,11 +10690,7 @@ pub struct DcimRacksListQuery {
 	outer_depth__lt: Option<Vec<i64>>,
 	outer_depth__lte: Option<Vec<i64>>,
 	outer_depth__n: Option<Vec<i64>>,
-	/// * `mm` - Millimeters
-	/// * `in` - Inches
 	outer_unit: Option<String>,
-	/// * `mm` - Millimeters
-	/// * `in` - Inches
 	outer_unit__n: Option<String>,
 	outer_width: Option<Vec<i64>>,
 	outer_width__empty: Option<bool>,
@@ -12061,18 +10701,14 @@ pub struct DcimRacksListQuery {
 	outer_width__n: Option<Vec<i64>>,
 	/// Search
 	q: Option<String>,
-	/// Rack type (slug)
-	rack_type: Option<Vec<String>>,
-	/// Rack type (slug)
-	rack_type__n: Option<Vec<String>>,
-	/// Rack type (ID)
-	rack_type_id: Option<Vec<Option<i64>>>,
-	/// Rack type (ID)
-	rack_type_id__n: Option<Vec<Option<i64>>>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
 	/// Role (slug)
 	role: Option<Vec<String>>,
 	/// Role (slug)
@@ -12096,10 +10732,14 @@ pub struct DcimRacksListQuery {
 	site: Option<Vec<String>>,
 	/// Site (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<i64>>,
 	/// Site (ID)
@@ -12119,14 +10759,20 @@ pub struct DcimRacksListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
 	tenant_id__n: Option<Vec<Option<i64>>>,
+	r#type: Option<Vec<String>>,
+	type__n: Option<Vec<String>>,
 	u_height: Option<Vec<i64>>,
 	u_height__empty: Option<bool>,
 	u_height__gt: Option<Vec<i64>>,
@@ -12142,15 +10788,7 @@ pub struct DcimRacksListQuery {
 	weight__lt: Option<Vec<f64>>,
 	weight__lte: Option<Vec<f64>>,
 	weight__n: Option<Vec<f64>>,
-	/// * `kg` - Kilograms
-	/// * `g` - Grams
-	/// * `lb` - Pounds
-	/// * `oz` - Ounces
 	weight_unit: Option<String>,
-	/// * `kg` - Kilograms
-	/// * `g` - Grams
-	/// * `lb` - Pounds
-	/// * `oz` - Ounces
 	weight_unit__n: Option<String>,
 	/// Rail-to-rail width
 	width: Option<Vec<i64>>,
@@ -12297,40 +10935,18 @@ pub fn dcim_racks_partial_update(state: &ThanixClient, body: PatchedWritableRack
 		r#other_status => { Ok(DcimRacksPartialUpdateResponse::Other(r#response)) }
 	}
 }
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct DcimRacksElevationRetrieveQuery {
-	exclude: Option<i64>,
-	expand_devices: Option<bool>,
-	/// * `front` - Front
-	/// * `rear` - Rear
-	face: Option<String>,
-	include_images: Option<bool>,
-	legend_width: Option<i64>,
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	margin_width: Option<i64>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	q: Option<String>,
-	/// * `json` - json
-	/// * `svg` - svg
-	render: Option<String>,
-	unit_height: Option<i64>,
-	unit_width: Option<i64>,
-
-}
 #[derive(Debug)]
 pub enum DcimRacksElevationRetrieveResponse {
-	Http200(PaginatedRackUnitList),
+	Http200(Rack),
 	Other(Response)
 }
 /// Rack elevation representing the list of rack units. Also supports rendering the elevation as an SVG.
-pub fn dcim_racks_elevation_retrieve(state: &ThanixClient, query: DcimRacksElevationRetrieveQuery, id: i64) -> Result<DcimRacksElevationRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/dcim/racks/{id}/elevation/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
+pub fn dcim_racks_elevation_retrieve(state: &ThanixClient, id: i64) -> Result<DcimRacksElevationRetrieveResponse, Error> {
+	let r#response = state.client.get(format!("{}/api/dcim/racks/{id}/elevation/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		200 => { Ok(DcimRacksElevationRetrieveResponse::Http200(r#response.json::<PaginatedRackUnitList>()?)) },
+		200 => { Ok(DcimRacksElevationRetrieveResponse::Http200(r#response.json::<Rack>()?)) },
 		r#other_status => { Ok(DcimRacksElevationRetrieveResponse::Other(r#response)) }
 	}
 }
@@ -12367,9 +10983,9 @@ pub struct DcimRearPortTemplatesListQuery {
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
 	/// Device type (ID)
-	device_type_id: Option<Vec<Option<i64>>>,
+	devicetype_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
-	device_type_id__n: Option<Vec<Option<i64>>>,
+	devicetype_id__n: Option<Vec<Option<i64>>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -12377,17 +10993,6 @@ pub struct DcimRearPortTemplatesListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	label: Option<Vec<String>>,
-	label__empty: Option<bool>,
-	label__ic: Option<Vec<String>>,
-	label__ie: Option<Vec<String>>,
-	label__iew: Option<Vec<String>>,
-	label__isw: Option<Vec<String>>,
-	label__n: Option<Vec<String>>,
-	label__nic: Option<Vec<String>>,
-	label__nie: Option<Vec<String>>,
-	label__niew: Option<Vec<String>>,
-	label__nisw: Option<Vec<String>>,
 	last_updated: Option<Vec<String>>,
 	last_updated__empty: Option<Vec<String>>,
 	last_updated__gt: Option<Vec<String>>,
@@ -12399,9 +11004,9 @@ pub struct DcimRearPortTemplatesListQuery {
 	limit: Option<i64>,
 	modified_by_request: Option<String>,
 	/// Module type (ID)
-	module_type_id: Option<Vec<Option<i64>>>,
+	moduletype_id: Option<Vec<Option<i64>>>,
 	/// Module type (ID)
-	module_type_id__n: Option<Vec<Option<i64>>>,
+	moduletype_id__n: Option<Vec<Option<i64>>>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -12572,16 +11177,8 @@ pub fn dcim_rear_port_templates_partial_update(state: &ThanixClient, body: Patch
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimRearPortsListQuery {
-	/// * `A` - A
-	/// * `B` - B
 	cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
 	cable_end__n: Option<String>,
-	/// Cable (ID)
-	cable_id: Option<Vec<Option<i64>>>,
-	/// Cable (ID)
-	cable_id__n: Option<Vec<Option<i64>>>,
 	cabled: Option<bool>,
 	color: Option<Vec<String>>,
 	color__empty: Option<bool>,
@@ -12629,8 +11226,6 @@ pub struct DcimRearPortsListQuery {
 	device_role_id: Option<Vec<i64>>,
 	/// Device role (ID)
 	device_role_id__n: Option<Vec<i64>>,
-	device_status: Option<Vec<String>>,
-	device_status__n: Option<Vec<String>>,
 	/// Device type (model)
 	device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -12674,7 +11269,6 @@ pub struct DcimRearPortsListQuery {
 	location_id: Option<Vec<i64>>,
 	/// Location (ID)
 	location_id__n: Option<Vec<i64>>,
-	mark_connected: Option<bool>,
 	modified_by_request: Option<String>,
 	/// Module (ID)
 	module_id: Option<Vec<Option<i64>>>,
@@ -12713,18 +11307,34 @@ pub struct DcimRearPortsListQuery {
 	rack_id: Option<Vec<i64>>,
 	/// Rack (ID)
 	rack_id__n: Option<Vec<i64>>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
+	/// Device role (slug)
+	role: Option<Vec<String>>,
+	/// Device role (slug)
+	role__n: Option<Vec<String>>,
+	/// Device role (ID)
+	role_id: Option<Vec<i64>>,
+	/// Device role (ID)
+	role_id__n: Option<Vec<i64>>,
 	/// Site name (slug)
 	site: Option<Vec<String>>,
 	/// Site name (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<i64>>,
 	/// Site (ID)
@@ -12900,16 +11510,14 @@ pub fn dcim_rear_ports_paths_retrieve(state: &ThanixClient, id: i64) -> Result<D
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimRegionsListQuery {
-	ancestor: Option<Vec<String>>,
-	ancestor__n: Option<Vec<String>>,
-	ancestor_id: Option<Vec<String>>,
-	ancestor_id__n: Option<Vec<String>>,
 	/// Contact
 	contact: Option<Vec<i64>>,
 	/// Contact
 	contact__n: Option<Vec<i64>>,
-	contact_group: Option<Vec<String>>,
-	contact_group__n: Option<Vec<String>>,
+	/// Contact group
+	contact_group: Option<Vec<i64>>,
+	/// Contact group
+	contact_group__n: Option<Vec<i64>>,
 	/// Contact Role
 	contact_role: Option<Vec<i64>>,
 	/// Contact Role
@@ -13132,16 +11740,14 @@ pub fn dcim_regions_partial_update(state: &ThanixClient, body: PatchedWritableRe
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimSiteGroupsListQuery {
-	ancestor: Option<Vec<String>>,
-	ancestor__n: Option<Vec<String>>,
-	ancestor_id: Option<Vec<String>>,
-	ancestor_id__n: Option<Vec<String>>,
 	/// Contact
 	contact: Option<Vec<i64>>,
 	/// Contact
 	contact__n: Option<Vec<i64>>,
-	contact_group: Option<Vec<String>>,
-	contact_group__n: Option<Vec<String>>,
+	/// Contact group
+	contact_group: Option<Vec<i64>>,
+	/// Contact group
+	contact_group__n: Option<Vec<i64>>,
 	/// Contact Role
 	contact_role: Option<Vec<i64>>,
 	/// Contact Role
@@ -13376,8 +11982,10 @@ pub struct DcimSitesListQuery {
 	contact: Option<Vec<i64>>,
 	/// Contact
 	contact__n: Option<Vec<i64>>,
-	contact_group: Option<Vec<String>>,
-	contact_group__n: Option<Vec<String>>,
+	/// Contact group
+	contact_group: Option<Vec<i64>>,
+	/// Contact group
+	contact_group__n: Option<Vec<i64>>,
 	/// Contact Role
 	contact_role: Option<Vec<i64>>,
 	/// Contact Role
@@ -13412,10 +12020,14 @@ pub struct DcimSitesListQuery {
 	facility__nie: Option<Vec<String>>,
 	facility__niew: Option<Vec<String>>,
 	facility__nisw: Option<Vec<String>>,
-	group: Option<Vec<String>>,
-	group__n: Option<Vec<String>>,
-	group_id: Option<Vec<String>>,
-	group_id__n: Option<Vec<String>>,
+	/// Group (slug)
+	group: Option<Vec<i64>>,
+	/// Group (slug)
+	group__n: Option<Vec<i64>>,
+	/// Group (ID)
+	group_id: Option<Vec<i64>>,
+	/// Group (ID)
+	group_id__n: Option<Vec<i64>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -13464,10 +12076,14 @@ pub struct DcimSitesListQuery {
 	ordering: Option<String>,
 	/// Search
 	q: Option<String>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
 	slug: Option<Vec<String>>,
 	slug__empty: Option<bool>,
 	slug__ic: Option<Vec<String>>,
@@ -13487,24 +12103,18 @@ pub struct DcimSitesListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
 	tenant_id__n: Option<Vec<Option<i64>>>,
-	time_zone: Option<Vec<String>>,
-	time_zone__ic: Option<Vec<String>>,
-	time_zone__ie: Option<Vec<String>>,
-	time_zone__iew: Option<Vec<String>>,
-	time_zone__isw: Option<Vec<String>>,
-	time_zone__n: Option<Vec<String>>,
-	time_zone__nic: Option<Vec<String>>,
-	time_zone__nie: Option<Vec<String>>,
-	time_zone__niew: Option<Vec<String>>,
-	time_zone__nisw: Option<Vec<String>>,
 	updated_by_request: Option<String>,
 
 }
@@ -13703,13 +12313,6 @@ pub struct DcimVirtualChassisListQuery {
 	master_id: Option<Vec<Option<i64>>>,
 	/// Master (ID)
 	master_id__n: Option<Vec<Option<i64>>>,
-	member_count: Option<Vec<i64>>,
-	member_count__empty: Option<bool>,
-	member_count__gt: Option<Vec<i64>>,
-	member_count__gte: Option<Vec<i64>>,
-	member_count__lt: Option<Vec<i64>>,
-	member_count__lte: Option<Vec<i64>>,
-	member_count__n: Option<Vec<i64>>,
 	modified_by_request: Option<String>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
@@ -13728,18 +12331,26 @@ pub struct DcimVirtualChassisListQuery {
 	ordering: Option<String>,
 	/// Search
 	q: Option<String>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
 	/// Site name (slug)
 	site: Option<Vec<String>>,
 	/// Site name (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<i64>>,
 	/// Site (ID)
@@ -13934,17 +12545,6 @@ pub struct DcimVirtualDeviceContextsListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	identifier: Option<Vec<i64>>,
-	identifier__empty: Option<bool>,
-	identifier__gt: Option<Vec<i64>>,
-	identifier__gte: Option<Vec<i64>>,
-	identifier__lt: Option<Vec<i64>>,
-	identifier__lte: Option<Vec<i64>>,
-	identifier__n: Option<Vec<i64>>,
-	/// Interface (ID)
-	interface_id: Option<Vec<i64>>,
-	/// Interface (ID)
-	interface_id__n: Option<Vec<i64>>,
 	last_updated: Option<Vec<String>>,
 	last_updated__empty: Option<Vec<String>>,
 	last_updated__gt: Option<Vec<String>>,
@@ -13988,10 +12588,14 @@ pub struct DcimVirtualDeviceContextsListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
@@ -14217,7 +12821,7 @@ pub enum ExtrasBookmarksCreateResponse {
 	Other(Response)
 }
 /// Post a list of bookmark objects.
-pub fn extras_bookmarks_create(state: &ThanixClient, body: BookmarkRequest) -> Result<ExtrasBookmarksCreateResponse, Error> {
+pub fn extras_bookmarks_create(state: &ThanixClient, body: WritableBookmarkRequest) -> Result<ExtrasBookmarksCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/extras/bookmarks/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -14279,7 +12883,7 @@ pub enum ExtrasBookmarksUpdateResponse {
 	Other(Response)
 }
 /// Put a bookmark object.
-pub fn extras_bookmarks_update(state: &ThanixClient, body: BookmarkRequest, id: i64) -> Result<ExtrasBookmarksUpdateResponse, Error> {
+pub fn extras_bookmarks_update(state: &ThanixClient, body: WritableBookmarkRequest, id: i64) -> Result<ExtrasBookmarksUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/extras/bookmarks/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -14309,7 +12913,7 @@ pub enum ExtrasBookmarksPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a bookmark object.
-pub fn extras_bookmarks_partial_update(state: &ThanixClient, body: PatchedBookmarkRequest, id: i64) -> Result<ExtrasBookmarksPartialUpdateResponse, Error> {
+pub fn extras_bookmarks_partial_update(state: &ThanixClient, body: PatchedWritableBookmarkRequest, id: i64) -> Result<ExtrasBookmarksPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/extras/bookmarks/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -14321,7 +12925,6 @@ pub fn extras_bookmarks_partial_update(state: &ThanixClient, body: PatchedBookma
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasConfigContextsListQuery {
-	auto_sync_enabled: Option<bool>,
 	/// Cluster group (slug)
 	cluster_group: Option<Vec<String>>,
 	/// Cluster group (slug)
@@ -14376,14 +12979,6 @@ pub struct ExtrasConfigContextsListQuery {
 	description__nie: Option<Vec<String>>,
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
-	/// Role (slug)
-	device_role: Option<Vec<String>>,
-	/// Role (slug)
-	device_role__n: Option<Vec<String>>,
-	/// Role
-	device_role_id: Option<Vec<i64>>,
-	/// Role
-	device_role_id__n: Option<Vec<i64>>,
 	/// Device type
 	device_type_id: Option<Vec<i64>>,
 	/// Device type
@@ -14447,6 +13042,14 @@ pub struct ExtrasConfigContextsListQuery {
 	region_id: Option<Vec<i64>>,
 	/// Region
 	region_id__n: Option<Vec<i64>>,
+	/// Role (slug)
+	role: Option<Vec<String>>,
+	/// Role (slug)
+	role__n: Option<Vec<String>>,
+	/// Role
+	role_id: Option<Vec<i64>>,
+	/// Role
+	role_id__n: Option<Vec<i64>>,
 	/// Site (slug)
 	site: Option<Vec<String>>,
 	/// Site (slug)
@@ -14488,13 +13091,6 @@ pub struct ExtrasConfigContextsListQuery {
 	/// Tenant
 	tenant_id__n: Option<Vec<i64>>,
 	updated_by_request: Option<String>,
-	weight: Option<Vec<i64>>,
-	weight__empty: Option<bool>,
-	weight__gt: Option<Vec<i64>>,
-	weight__gte: Option<Vec<i64>>,
-	weight__lt: Option<Vec<i64>>,
-	weight__lte: Option<Vec<i64>>,
-	weight__n: Option<Vec<i64>>,
 
 }
 #[derive(Debug)]
@@ -14534,7 +13130,7 @@ pub enum ExtrasConfigContextsCreateResponse {
 	Other(Response)
 }
 /// Post a list of config context objects.
-pub fn extras_config_contexts_create(state: &ThanixClient, body: ConfigContextRequest) -> Result<ExtrasConfigContextsCreateResponse, Error> {
+pub fn extras_config_contexts_create(state: &ThanixClient, body: WritableConfigContextRequest) -> Result<ExtrasConfigContextsCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/extras/config-contexts/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -14596,7 +13192,7 @@ pub enum ExtrasConfigContextsUpdateResponse {
 	Other(Response)
 }
 /// Put a config context object.
-pub fn extras_config_contexts_update(state: &ThanixClient, body: ConfigContextRequest, id: i64) -> Result<ExtrasConfigContextsUpdateResponse, Error> {
+pub fn extras_config_contexts_update(state: &ThanixClient, body: WritableConfigContextRequest, id: i64) -> Result<ExtrasConfigContextsUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/extras/config-contexts/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -14626,7 +13222,7 @@ pub enum ExtrasConfigContextsPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a config context object.
-pub fn extras_config_contexts_partial_update(state: &ThanixClient, body: PatchedConfigContextRequest, id: i64) -> Result<ExtrasConfigContextsPartialUpdateResponse, Error> {
+pub fn extras_config_contexts_partial_update(state: &ThanixClient, body: PatchedWritableConfigContextRequest, id: i64) -> Result<ExtrasConfigContextsPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/extras/config-contexts/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -14642,7 +13238,7 @@ pub enum ExtrasConfigContextsSyncCreateResponse {
 	Other(Response)
 }
 /// Provide a /sync API endpoint to synchronize an object's data from its associated DataFile (if any).
-pub fn extras_config_contexts_sync_create(state: &ThanixClient, body: ConfigContextRequest, id: i64) -> Result<ExtrasConfigContextsSyncCreateResponse, Error> {
+pub fn extras_config_contexts_sync_create(state: &ThanixClient, body: WritableConfigContextRequest, id: i64) -> Result<ExtrasConfigContextsSyncCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/extras/config-contexts/{id}/sync/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -14654,15 +13250,6 @@ pub fn extras_config_contexts_sync_create(state: &ThanixClient, body: ConfigCont
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasConfigTemplatesListQuery {
-	auto_sync_enabled: Option<bool>,
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
 	/// Data file (ID)
 	data_file_id: Option<Vec<Option<i64>>>,
 	/// Data file (ID)
@@ -14696,16 +13283,8 @@ pub struct ExtrasConfigTemplatesListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
 	/// Number of results to return per page.
 	limit: Option<i64>,
-	modified_by_request: Option<String>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -14725,7 +13304,6 @@ pub struct ExtrasConfigTemplatesListQuery {
 	q: Option<String>,
 	tag: Option<Vec<String>>,
 	tag__n: Option<Vec<String>>,
-	updated_by_request: Option<String>,
 
 }
 #[derive(Debug)]
@@ -14765,7 +13343,7 @@ pub enum ExtrasConfigTemplatesCreateResponse {
 	Other(Response)
 }
 /// Post a list of config template objects.
-pub fn extras_config_templates_create(state: &ThanixClient, body: ConfigTemplateRequest) -> Result<ExtrasConfigTemplatesCreateResponse, Error> {
+pub fn extras_config_templates_create(state: &ThanixClient, body: WritableConfigTemplateRequest) -> Result<ExtrasConfigTemplatesCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/extras/config-templates/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -14827,7 +13405,7 @@ pub enum ExtrasConfigTemplatesUpdateResponse {
 	Other(Response)
 }
 /// Put a config template object.
-pub fn extras_config_templates_update(state: &ThanixClient, body: ConfigTemplateRequest, id: i64) -> Result<ExtrasConfigTemplatesUpdateResponse, Error> {
+pub fn extras_config_templates_update(state: &ThanixClient, body: WritableConfigTemplateRequest, id: i64) -> Result<ExtrasConfigTemplatesUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/extras/config-templates/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -14857,7 +13435,7 @@ pub enum ExtrasConfigTemplatesPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a config template object.
-pub fn extras_config_templates_partial_update(state: &ThanixClient, body: PatchedConfigTemplateRequest, id: i64) -> Result<ExtrasConfigTemplatesPartialUpdateResponse, Error> {
+pub fn extras_config_templates_partial_update(state: &ThanixClient, body: PatchedWritableConfigTemplateRequest, id: i64) -> Result<ExtrasConfigTemplatesPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/extras/config-templates/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -14879,7 +13457,7 @@ pub enum ExtrasConfigTemplatesRenderCreateResponse {
 }
 /// Render a ConfigTemplate using the context data provided (if any). If the client requests "text/plain" data,
 /// return the raw rendered content, rather than serialized JSON.
-pub fn extras_config_templates_render_create(state: &ThanixClient, query: ExtrasConfigTemplatesRenderCreateQuery, body: ConfigTemplateRequest, id: i64) -> Result<ExtrasConfigTemplatesRenderCreateResponse, Error> {
+pub fn extras_config_templates_render_create(state: &ThanixClient, query: ExtrasConfigTemplatesRenderCreateQuery, body: WritableConfigTemplateRequest, id: i64) -> Result<ExtrasConfigTemplatesRenderCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/extras/config-templates/{id}/render/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -14895,7 +13473,7 @@ pub enum ExtrasConfigTemplatesSyncCreateResponse {
 	Other(Response)
 }
 /// Provide a /sync API endpoint to synchronize an object's data from its associated DataFile (if any).
-pub fn extras_config_templates_sync_create(state: &ThanixClient, body: ConfigTemplateRequest, id: i64) -> Result<ExtrasConfigTemplatesSyncCreateResponse, Error> {
+pub fn extras_config_templates_sync_create(state: &ThanixClient, body: WritableConfigTemplateRequest, id: i64) -> Result<ExtrasConfigTemplatesSyncCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/extras/config-templates/{id}/sync/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -14906,28 +13484,57 @@ pub fn extras_config_templates_sync_create(state: &ThanixClient, body: ConfigTem
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct ExtrasContentTypesListQuery {
+	app_label: Option<String>,
+	id: Option<i64>,
+	/// Number of results to return per page.
+	limit: Option<i64>,
+	model: Option<String>,
+	/// The initial index from which to return the results.
+	offset: Option<i64>,
+	/// Which field to use when ordering the results.
+	ordering: Option<String>,
+	/// Search
+	q: Option<String>,
+
+}
+#[derive(Debug)]
+pub enum ExtrasContentTypesListResponse {
+	Http200(PaginatedContentTypeList),
+	Other(Response)
+}
+/// Read-only list of ContentTypes. Limit results to ContentTypes pertinent to NetBox objects.
+pub fn extras_content_types_list(state: &ThanixClient, query: ExtrasContentTypesListQuery) -> Result<ExtrasContentTypesListResponse, Error> {
+	let r#response = state.client.get(format!("{}/api/extras/content-types/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(ExtrasContentTypesListResponse::Http200(r#response.json::<PaginatedContentTypeList>()?)) },
+		r#other_status => { Ok(ExtrasContentTypesListResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum ExtrasContentTypesRetrieveResponse {
+	Http200(ContentType),
+	Other(Response)
+}
+/// Read-only list of ContentTypes. Limit results to ContentTypes pertinent to NetBox objects.
+pub fn extras_content_types_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasContentTypesRetrieveResponse, Error> {
+	let r#response = state.client.get(format!("{}/api/extras/content-types/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(ExtrasContentTypesRetrieveResponse::Http200(r#response.json::<ContentType>()?)) },
+		r#other_status => { Ok(ExtrasContentTypesRetrieveResponse::Other(r#response)) }
+	}
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasCustomFieldChoiceSetsListQuery {
 	/// Base set of predefined choices (optional)
-	/// 
-	/// * `IATA` - IATA (Airport codes)
-	/// * `ISO_3166` - ISO 3166 (Country codes)
-	/// * `UN_LOCODE` - UN/LOCODE (Location codes)
 	base_choices: Option<String>,
 	/// Base set of predefined choices (optional)
-	/// 
-	/// * `IATA` - IATA (Airport codes)
-	/// * `ISO_3166` - ISO 3166 (Country codes)
-	/// * `UN_LOCODE` - UN/LOCODE (Location codes)
 	base_choices__n: Option<String>,
 	choice: Option<Vec<String>>,
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
 	description: Option<Vec<String>>,
 	description__empty: Option<bool>,
 	description__ic: Option<Vec<String>>,
@@ -14946,16 +13553,8 @@ pub struct ExtrasCustomFieldChoiceSetsListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
 	/// Number of results to return per page.
 	limit: Option<i64>,
-	modified_by_request: Option<String>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -14974,7 +13573,6 @@ pub struct ExtrasCustomFieldChoiceSetsListQuery {
 	ordering: Option<String>,
 	/// Search
 	q: Option<String>,
-	updated_by_request: Option<String>,
 
 }
 #[derive(Debug)]
@@ -15137,14 +13735,23 @@ pub struct ExtrasCustomFieldsListQuery {
 	choice_set__n: Option<Vec<String>>,
 	choice_set_id: Option<Vec<Option<i64>>>,
 	choice_set_id__n: Option<Vec<Option<i64>>>,
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
+	content_type_id: Option<Vec<i64>>,
+	content_type_id__empty: Option<Vec<i64>>,
+	content_type_id__gt: Option<Vec<i64>>,
+	content_type_id__gte: Option<Vec<i64>>,
+	content_type_id__lt: Option<Vec<i64>>,
+	content_type_id__lte: Option<Vec<i64>>,
+	content_type_id__n: Option<Vec<i64>>,
+	content_types: Option<String>,
+	content_types__ic: Option<String>,
+	content_types__ie: Option<String>,
+	content_types__iew: Option<String>,
+	content_types__isw: Option<String>,
+	content_types__n: Option<String>,
+	content_types__nic: Option<String>,
+	content_types__nie: Option<String>,
+	content_types__niew: Option<String>,
+	content_types__nisw: Option<String>,
 	description: Option<Vec<String>>,
 	description__empty: Option<bool>,
 	description__ic: Option<Vec<String>>,
@@ -15157,16 +13764,8 @@ pub struct ExtrasCustomFieldsListQuery {
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
 	/// Loose matches any instance of a given string; exact matches the entire field.
-	/// 
-	/// * `disabled` - Disabled
-	/// * `loose` - Loose
-	/// * `exact` - Exact
 	filter_logic: Option<String>,
 	/// Loose matches any instance of a given string; exact matches the entire field.
-	/// 
-	/// * `disabled` - Disabled
-	/// * `loose` - Loose
-	/// * `exact` - Exact
 	filter_logic__n: Option<String>,
 	group_name: Option<Vec<String>>,
 	group_name__empty: Option<bool>,
@@ -15187,27 +13786,8 @@ pub struct ExtrasCustomFieldsListQuery {
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
 	is_cloneable: Option<bool>,
-	label: Option<Vec<String>>,
-	label__empty: Option<bool>,
-	label__ic: Option<Vec<String>>,
-	label__ie: Option<Vec<String>>,
-	label__iew: Option<Vec<String>>,
-	label__isw: Option<Vec<String>>,
-	label__n: Option<Vec<String>>,
-	label__nic: Option<Vec<String>>,
-	label__nie: Option<Vec<String>>,
-	label__niew: Option<Vec<String>>,
-	label__nisw: Option<Vec<String>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
 	/// Number of results to return per page.
 	limit: Option<i64>,
-	modified_by_request: Option<String>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -15219,28 +13799,12 @@ pub struct ExtrasCustomFieldsListQuery {
 	name__nie: Option<Vec<String>>,
 	name__niew: Option<Vec<String>>,
 	name__nisw: Option<Vec<String>>,
-	object_type: Option<String>,
-	object_type__ic: Option<String>,
-	object_type__ie: Option<String>,
-	object_type__iew: Option<String>,
-	object_type__isw: Option<String>,
-	object_type__n: Option<String>,
-	object_type__nic: Option<String>,
-	object_type__nie: Option<String>,
-	object_type__niew: Option<String>,
-	object_type__nisw: Option<String>,
-	object_type_id: Option<Vec<i64>>,
-	object_type_id__n: Option<Vec<i64>>,
 	/// The initial index from which to return the results.
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
 	/// Search
 	q: Option<String>,
-	related_object_type: Option<String>,
-	related_object_type__n: Option<String>,
-	related_object_type_id: Option<Vec<i64>>,
-	related_object_type_id__n: Option<Vec<i64>>,
 	required: Option<bool>,
 	search_weight: Option<Vec<i64>>,
 	search_weight__empty: Option<bool>,
@@ -15253,57 +13817,10 @@ pub struct ExtrasCustomFieldsListQuery {
 	r#type: Option<Vec<String>>,
 	/// The type of data this custom field holds
 	type__n: Option<Vec<String>>,
-	/// Specifies whether the custom field value can be edited in the UI
-	/// 
-	/// * `yes` - Yes
-	/// * `no` - No
-	/// * `hidden` - Hidden
-	ui_editable: Option<String>,
-	/// Specifies whether the custom field value can be edited in the UI
-	/// 
-	/// * `yes` - Yes
-	/// * `no` - No
-	/// * `hidden` - Hidden
-	ui_editable__n: Option<String>,
-	/// Specifies whether the custom field is displayed in the UI
-	/// 
-	/// * `always` - Always
-	/// * `if-set` - If set
-	/// * `hidden` - Hidden
-	ui_visible: Option<String>,
-	/// Specifies whether the custom field is displayed in the UI
-	/// 
-	/// * `always` - Always
-	/// * `if-set` - If set
-	/// * `hidden` - Hidden
-	ui_visible__n: Option<String>,
-	unique: Option<bool>,
-	updated_by_request: Option<String>,
-	validation_maximum: Option<Vec<i64>>,
-	validation_maximum__empty: Option<bool>,
-	validation_maximum__gt: Option<Vec<i64>>,
-	validation_maximum__gte: Option<Vec<i64>>,
-	validation_maximum__lt: Option<Vec<i64>>,
-	validation_maximum__lte: Option<Vec<i64>>,
-	validation_maximum__n: Option<Vec<i64>>,
-	validation_minimum: Option<Vec<i64>>,
-	validation_minimum__empty: Option<bool>,
-	validation_minimum__gt: Option<Vec<i64>>,
-	validation_minimum__gte: Option<Vec<i64>>,
-	validation_minimum__lt: Option<Vec<i64>>,
-	validation_minimum__lte: Option<Vec<i64>>,
-	validation_minimum__n: Option<Vec<i64>>,
-	validation_regex: Option<Vec<String>>,
-	validation_regex__empty: Option<bool>,
-	validation_regex__ic: Option<Vec<String>>,
-	validation_regex__ie: Option<Vec<String>>,
-	validation_regex__iew: Option<Vec<String>>,
-	validation_regex__isw: Option<Vec<String>>,
-	validation_regex__n: Option<Vec<String>>,
-	validation_regex__nic: Option<Vec<String>>,
-	validation_regex__nie: Option<Vec<String>>,
-	validation_regex__niew: Option<Vec<String>>,
-	validation_regex__nisw: Option<Vec<String>>,
+	/// Specifies the visibility of custom field in the UI
+	ui_visibility: Option<String>,
+	/// Specifies the visibility of custom field in the UI
+	ui_visibility__n: Option<String>,
 	weight: Option<Vec<i64>>,
 	weight__empty: Option<bool>,
 	weight__gt: Option<Vec<i64>>,
@@ -15454,50 +13971,23 @@ pub fn extras_custom_fields_partial_update(state: &ThanixClient, body: PatchedWr
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasCustomLinksListQuery {
-	/// The class of the first link in a group will be used for the dropdown button
-	/// 
-	/// * `default` - Default
-	/// * `blue` - Blue
-	/// * `indigo` - Indigo
-	/// * `purple` - Purple
-	/// * `pink` - Pink
-	/// * `red` - Red
-	/// * `orange` - Orange
-	/// * `yellow` - Yellow
-	/// * `green` - Green
-	/// * `teal` - Teal
-	/// * `cyan` - Cyan
-	/// * `gray` - Gray
-	/// * `black` - Black
-	/// * `white` - White
-	/// * `ghost-dark` - Link
-	button_class: Option<String>,
-	/// The class of the first link in a group will be used for the dropdown button
-	/// 
-	/// * `default` - Default
-	/// * `blue` - Blue
-	/// * `indigo` - Indigo
-	/// * `purple` - Purple
-	/// * `pink` - Pink
-	/// * `red` - Red
-	/// * `orange` - Orange
-	/// * `yellow` - Yellow
-	/// * `green` - Green
-	/// * `teal` - Teal
-	/// * `cyan` - Cyan
-	/// * `gray` - Gray
-	/// * `black` - Black
-	/// * `white` - White
-	/// * `ghost-dark` - Link
-	button_class__n: Option<String>,
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
+	content_type_id: Option<Vec<i64>>,
+	content_type_id__empty: Option<Vec<i64>>,
+	content_type_id__gt: Option<Vec<i64>>,
+	content_type_id__gte: Option<Vec<i64>>,
+	content_type_id__lt: Option<Vec<i64>>,
+	content_type_id__lte: Option<Vec<i64>>,
+	content_type_id__n: Option<Vec<i64>>,
+	content_types: Option<String>,
+	content_types__ic: Option<String>,
+	content_types__ie: Option<String>,
+	content_types__iew: Option<String>,
+	content_types__isw: Option<String>,
+	content_types__n: Option<String>,
+	content_types__nic: Option<String>,
+	content_types__nie: Option<String>,
+	content_types__niew: Option<String>,
+	content_types__nisw: Option<String>,
 	enabled: Option<bool>,
 	group_name: Option<Vec<String>>,
 	group_name__empty: Option<bool>,
@@ -15517,13 +14007,6 @@ pub struct ExtrasCustomLinksListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
 	/// Number of results to return per page.
 	limit: Option<i64>,
 	link_text: Option<String>,
@@ -15546,7 +14029,6 @@ pub struct ExtrasCustomLinksListQuery {
 	link_url__nie: Option<String>,
 	link_url__niew: Option<String>,
 	link_url__nisw: Option<String>,
-	modified_by_request: Option<String>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -15559,25 +14041,12 @@ pub struct ExtrasCustomLinksListQuery {
 	name__niew: Option<Vec<String>>,
 	name__nisw: Option<Vec<String>>,
 	new_window: Option<bool>,
-	object_type: Option<String>,
-	object_type__ic: Option<String>,
-	object_type__ie: Option<String>,
-	object_type__iew: Option<String>,
-	object_type__isw: Option<String>,
-	object_type__n: Option<String>,
-	object_type__nic: Option<String>,
-	object_type__nie: Option<String>,
-	object_type__niew: Option<String>,
-	object_type__nisw: Option<String>,
-	object_type_id: Option<Vec<i64>>,
-	object_type_id__n: Option<Vec<i64>>,
 	/// The initial index from which to return the results.
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
 	/// Search
 	q: Option<String>,
-	updated_by_request: Option<String>,
 	weight: Option<Vec<i64>>,
 	weight__empty: Option<bool>,
 	weight__gt: Option<Vec<i64>>,
@@ -15788,241 +14257,24 @@ pub fn extras_dashboard_partial_update(state: &ThanixClient, body: PatchedDashbo
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct ExtrasEventRulesListQuery {
-	action_object_id: Option<Vec<i64>>,
-	action_object_id__empty: Option<Vec<i64>>,
-	action_object_id__gt: Option<Vec<i64>>,
-	action_object_id__gte: Option<Vec<i64>>,
-	action_object_id__lt: Option<Vec<i64>>,
-	action_object_id__lte: Option<Vec<i64>>,
-	action_object_id__n: Option<Vec<i64>>,
-	action_object_type: Option<String>,
-	action_object_type__n: Option<String>,
-	action_type: Option<Vec<String>>,
-	action_type__n: Option<Vec<String>>,
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
-	description: Option<Vec<String>>,
-	description__empty: Option<bool>,
-	description__ic: Option<Vec<String>>,
-	description__ie: Option<Vec<String>>,
-	description__iew: Option<Vec<String>>,
-	description__isw: Option<Vec<String>>,
-	description__n: Option<Vec<String>>,
-	description__nic: Option<Vec<String>>,
-	description__nie: Option<Vec<String>>,
-	description__niew: Option<Vec<String>>,
-	description__nisw: Option<Vec<String>>,
-	enabled: Option<bool>,
-	event_type: Option<Vec<String>>,
-	id: Option<Vec<i64>>,
-	id__empty: Option<bool>,
-	id__gt: Option<Vec<i64>>,
-	id__gte: Option<Vec<i64>>,
-	id__lt: Option<Vec<i64>>,
-	id__lte: Option<Vec<i64>>,
-	id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	modified_by_request: Option<String>,
-	name: Option<Vec<String>>,
-	name__empty: Option<bool>,
-	name__ic: Option<Vec<String>>,
-	name__ie: Option<Vec<String>>,
-	name__iew: Option<Vec<String>>,
-	name__isw: Option<Vec<String>>,
-	name__n: Option<Vec<String>>,
-	name__nic: Option<Vec<String>>,
-	name__nie: Option<Vec<String>>,
-	name__niew: Option<Vec<String>>,
-	name__nisw: Option<Vec<String>>,
-	object_type: Option<String>,
-	object_type__ic: Option<String>,
-	object_type__ie: Option<String>,
-	object_type__iew: Option<String>,
-	object_type__isw: Option<String>,
-	object_type__n: Option<String>,
-	object_type__nic: Option<String>,
-	object_type__nie: Option<String>,
-	object_type__niew: Option<String>,
-	object_type__nisw: Option<String>,
-	object_type_id: Option<Vec<i64>>,
-	object_type_id__n: Option<Vec<i64>>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-	/// Search
-	q: Option<String>,
-	tag: Option<Vec<String>>,
-	tag__n: Option<Vec<String>>,
-	updated_by_request: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum ExtrasEventRulesListResponse {
-	Http200(PaginatedEventRuleList),
-	Other(Response)
-}
-/// Get a list of event rule objects.
-pub fn extras_event_rules_list(state: &ThanixClient, query: ExtrasEventRulesListQuery) -> Result<ExtrasEventRulesListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/extras/event-rules/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasEventRulesListResponse::Http200(r#response.json::<PaginatedEventRuleList>()?)) },
-		r#other_status => { Ok(ExtrasEventRulesListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasEventRulesBulkUpdateResponse {
-	Http200(Vec<EventRule>),
-	Other(Response)
-}
-/// Put a list of event rule objects.
-pub fn extras_event_rules_bulk_update(state: &ThanixClient, body: Vec<EventRuleRequest>) -> Result<ExtrasEventRulesBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/extras/event-rules/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasEventRulesBulkUpdateResponse::Http200(r#response.json::<Vec<EventRule>>()?)) },
-		r#other_status => { Ok(ExtrasEventRulesBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasEventRulesCreateResponse {
-	Http201(EventRule),
-	Other(Response)
-}
-/// Post a list of event rule objects.
-pub fn extras_event_rules_create(state: &ThanixClient, body: WritableEventRuleRequest) -> Result<ExtrasEventRulesCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/extras/event-rules/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(ExtrasEventRulesCreateResponse::Http201(r#response.json::<EventRule>()?)) },
-		r#other_status => { Ok(ExtrasEventRulesCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasEventRulesBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of event rule objects.
-pub fn extras_event_rules_bulk_destroy(state: &ThanixClient, body: Vec<EventRuleRequest>) -> Result<ExtrasEventRulesBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/extras/event-rules/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(ExtrasEventRulesBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasEventRulesBulkPartialUpdateResponse {
-	Http200(Vec<EventRule>),
-	Other(Response)
-}
-/// Patch a list of event rule objects.
-pub fn extras_event_rules_bulk_partial_update(state: &ThanixClient, body: Vec<EventRuleRequest>) -> Result<ExtrasEventRulesBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/extras/event-rules/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasEventRulesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<EventRule>>()?)) },
-		r#other_status => { Ok(ExtrasEventRulesBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasEventRulesRetrieveResponse {
-	Http200(EventRule),
-	Other(Response)
-}
-/// Get a event rule object.
-pub fn extras_event_rules_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasEventRulesRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/extras/event-rules/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasEventRulesRetrieveResponse::Http200(r#response.json::<EventRule>()?)) },
-		r#other_status => { Ok(ExtrasEventRulesRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasEventRulesUpdateResponse {
-	Http200(EventRule),
-	Other(Response)
-}
-/// Put a event rule object.
-pub fn extras_event_rules_update(state: &ThanixClient, body: WritableEventRuleRequest, id: i64) -> Result<ExtrasEventRulesUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/extras/event-rules/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasEventRulesUpdateResponse::Http200(r#response.json::<EventRule>()?)) },
-		r#other_status => { Ok(ExtrasEventRulesUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasEventRulesDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a event rule object.
-pub fn extras_event_rules_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasEventRulesDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/extras/event-rules/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(ExtrasEventRulesDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasEventRulesPartialUpdateResponse {
-	Http200(EventRule),
-	Other(Response)
-}
-/// Patch a event rule object.
-pub fn extras_event_rules_partial_update(state: &ThanixClient, body: PatchedWritableEventRuleRequest, id: i64) -> Result<ExtrasEventRulesPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/extras/event-rules/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasEventRulesPartialUpdateResponse::Http200(r#response.json::<EventRule>()?)) },
-		r#other_status => { Ok(ExtrasEventRulesPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasExportTemplatesListQuery {
-	as_attachment: Option<bool>,
-	auto_sync_enabled: Option<bool>,
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
+	content_type_id: Option<Vec<i64>>,
+	content_type_id__empty: Option<Vec<i64>>,
+	content_type_id__gt: Option<Vec<i64>>,
+	content_type_id__gte: Option<Vec<i64>>,
+	content_type_id__lt: Option<Vec<i64>>,
+	content_type_id__lte: Option<Vec<i64>>,
+	content_type_id__n: Option<Vec<i64>>,
+	content_types: Option<String>,
+	content_types__ic: Option<String>,
+	content_types__ie: Option<String>,
+	content_types__iew: Option<String>,
+	content_types__isw: Option<String>,
+	content_types__n: Option<String>,
+	content_types__nic: Option<String>,
+	content_types__nie: Option<String>,
+	content_types__niew: Option<String>,
+	content_types__nisw: Option<String>,
 	/// Data file (ID)
 	data_file_id: Option<Vec<Option<i64>>>,
 	/// Data file (ID)
@@ -16049,17 +14301,6 @@ pub struct ExtrasExportTemplatesListQuery {
 	description__nie: Option<Vec<String>>,
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
-	file_extension: Option<Vec<String>>,
-	file_extension__empty: Option<bool>,
-	file_extension__ic: Option<Vec<String>>,
-	file_extension__ie: Option<Vec<String>>,
-	file_extension__iew: Option<Vec<String>>,
-	file_extension__isw: Option<Vec<String>>,
-	file_extension__n: Option<Vec<String>>,
-	file_extension__nic: Option<Vec<String>>,
-	file_extension__nie: Option<Vec<String>>,
-	file_extension__niew: Option<Vec<String>>,
-	file_extension__nisw: Option<Vec<String>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -16067,27 +14308,8 @@ pub struct ExtrasExportTemplatesListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
 	/// Number of results to return per page.
 	limit: Option<i64>,
-	mime_type: Option<Vec<String>>,
-	mime_type__empty: Option<bool>,
-	mime_type__ic: Option<Vec<String>>,
-	mime_type__ie: Option<Vec<String>>,
-	mime_type__iew: Option<Vec<String>>,
-	mime_type__isw: Option<Vec<String>>,
-	mime_type__n: Option<Vec<String>>,
-	mime_type__nic: Option<Vec<String>>,
-	mime_type__nie: Option<Vec<String>>,
-	mime_type__niew: Option<Vec<String>>,
-	mime_type__nisw: Option<Vec<String>>,
-	modified_by_request: Option<String>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -16099,25 +14321,12 @@ pub struct ExtrasExportTemplatesListQuery {
 	name__nie: Option<Vec<String>>,
 	name__niew: Option<Vec<String>>,
 	name__nisw: Option<Vec<String>>,
-	object_type: Option<String>,
-	object_type__ic: Option<String>,
-	object_type__ie: Option<String>,
-	object_type__iew: Option<String>,
-	object_type__isw: Option<String>,
-	object_type__n: Option<String>,
-	object_type__nic: Option<String>,
-	object_type__nie: Option<String>,
-	object_type__niew: Option<String>,
-	object_type__nisw: Option<String>,
-	object_type_id: Option<Vec<i64>>,
-	object_type_id__n: Option<Vec<i64>>,
 	/// The initial index from which to return the results.
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
 	/// Search
 	q: Option<String>,
-	updated_by_request: Option<String>,
 
 }
 #[derive(Debug)]
@@ -16157,7 +14366,7 @@ pub enum ExtrasExportTemplatesCreateResponse {
 	Other(Response)
 }
 /// Post a list of export template objects.
-pub fn extras_export_templates_create(state: &ThanixClient, body: ExportTemplateRequest) -> Result<ExtrasExportTemplatesCreateResponse, Error> {
+pub fn extras_export_templates_create(state: &ThanixClient, body: WritableExportTemplateRequest) -> Result<ExtrasExportTemplatesCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/extras/export-templates/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -16219,7 +14428,7 @@ pub enum ExtrasExportTemplatesUpdateResponse {
 	Other(Response)
 }
 /// Put a export template object.
-pub fn extras_export_templates_update(state: &ThanixClient, body: ExportTemplateRequest, id: i64) -> Result<ExtrasExportTemplatesUpdateResponse, Error> {
+pub fn extras_export_templates_update(state: &ThanixClient, body: WritableExportTemplateRequest, id: i64) -> Result<ExtrasExportTemplatesUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/extras/export-templates/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -16249,7 +14458,7 @@ pub enum ExtrasExportTemplatesPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a export template object.
-pub fn extras_export_templates_partial_update(state: &ThanixClient, body: PatchedExportTemplateRequest, id: i64) -> Result<ExtrasExportTemplatesPartialUpdateResponse, Error> {
+pub fn extras_export_templates_partial_update(state: &ThanixClient, body: PatchedWritableExportTemplateRequest, id: i64) -> Result<ExtrasExportTemplatesPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/extras/export-templates/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -16265,7 +14474,7 @@ pub enum ExtrasExportTemplatesSyncCreateResponse {
 	Other(Response)
 }
 /// Provide a /sync API endpoint to synchronize an object's data from its associated DataFile (if any).
-pub fn extras_export_templates_sync_create(state: &ThanixClient, body: ExportTemplateRequest, id: i64) -> Result<ExtrasExportTemplatesSyncCreateResponse, Error> {
+pub fn extras_export_templates_sync_create(state: &ThanixClient, body: WritableExportTemplateRequest, id: i64) -> Result<ExtrasExportTemplatesSyncCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/extras/export-templates/{id}/sync/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -16277,14 +14486,11 @@ pub fn extras_export_templates_sync_create(state: &ThanixClient, body: ExportTem
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasImageAttachmentsListQuery {
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
+	content_type: Option<String>,
+	content_type__n: Option<String>,
+	content_type_id: Option<i64>,
+	content_type_id__n: Option<i64>,
+	created: Option<String>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -16292,30 +14498,8 @@ pub struct ExtrasImageAttachmentsListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	image_height: Option<Vec<i64>>,
-	image_height__empty: Option<bool>,
-	image_height__gt: Option<Vec<i64>>,
-	image_height__gte: Option<Vec<i64>>,
-	image_height__lt: Option<Vec<i64>>,
-	image_height__lte: Option<Vec<i64>>,
-	image_height__n: Option<Vec<i64>>,
-	image_width: Option<Vec<i64>>,
-	image_width__empty: Option<bool>,
-	image_width__gt: Option<Vec<i64>>,
-	image_width__gte: Option<Vec<i64>>,
-	image_width__lt: Option<Vec<i64>>,
-	image_width__lte: Option<Vec<i64>>,
-	image_width__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
 	/// Number of results to return per page.
 	limit: Option<i64>,
-	modified_by_request: Option<String>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -16334,17 +14518,12 @@ pub struct ExtrasImageAttachmentsListQuery {
 	object_id__lt: Option<Vec<i64>>,
 	object_id__lte: Option<Vec<i64>>,
 	object_id__n: Option<Vec<i64>>,
-	object_type: Option<String>,
-	object_type__n: Option<String>,
-	object_type_id: Option<i64>,
-	object_type_id__n: Option<i64>,
 	/// The initial index from which to return the results.
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
 	/// Search
 	q: Option<String>,
-	updated_by_request: Option<String>,
 
 }
 #[derive(Debug)]
@@ -16680,358 +14859,119 @@ pub fn extras_journal_entries_partial_update(state: &ThanixClient, body: Patched
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct ExtrasNotificationGroupsListQuery {
+pub struct ExtrasObjectChangesListQuery {
+	action: Option<String>,
+	action__n: Option<String>,
+	changed_object_id: Option<Vec<i64>>,
+	changed_object_id__empty: Option<bool>,
+	changed_object_id__gt: Option<Vec<i64>>,
+	changed_object_id__gte: Option<Vec<i64>>,
+	changed_object_id__lt: Option<Vec<i64>>,
+	changed_object_id__lte: Option<Vec<i64>>,
+	changed_object_id__n: Option<Vec<i64>>,
+	changed_object_type: Option<String>,
+	changed_object_type__n: Option<String>,
+	changed_object_type_id: Option<Vec<i64>>,
+	changed_object_type_id__n: Option<Vec<i64>>,
+	id: Option<Vec<i64>>,
+	id__empty: Option<bool>,
+	id__gt: Option<Vec<i64>>,
+	id__gte: Option<Vec<i64>>,
+	id__lt: Option<Vec<i64>>,
+	id__lte: Option<Vec<i64>>,
+	id__n: Option<Vec<i64>>,
 	/// Number of results to return per page.
 	limit: Option<i64>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum ExtrasNotificationGroupsListResponse {
-	Http200(PaginatedNotificationGroupList),
-	Other(Response)
-}
-/// Get a list of notification group objects.
-pub fn extras_notification_groups_list(state: &ThanixClient, query: ExtrasNotificationGroupsListQuery) -> Result<ExtrasNotificationGroupsListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/extras/notification-groups/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasNotificationGroupsListResponse::Http200(r#response.json::<PaginatedNotificationGroupList>()?)) },
-		r#other_status => { Ok(ExtrasNotificationGroupsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasNotificationGroupsBulkUpdateResponse {
-	Http200(Vec<NotificationGroup>),
-	Other(Response)
-}
-/// Put a list of notification group objects.
-pub fn extras_notification_groups_bulk_update(state: &ThanixClient, body: Vec<NotificationGroupRequest>) -> Result<ExtrasNotificationGroupsBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/extras/notification-groups/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasNotificationGroupsBulkUpdateResponse::Http200(r#response.json::<Vec<NotificationGroup>>()?)) },
-		r#other_status => { Ok(ExtrasNotificationGroupsBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasNotificationGroupsCreateResponse {
-	Http201(NotificationGroup),
-	Other(Response)
-}
-/// Post a list of notification group objects.
-pub fn extras_notification_groups_create(state: &ThanixClient, body: NotificationGroupRequest) -> Result<ExtrasNotificationGroupsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/extras/notification-groups/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(ExtrasNotificationGroupsCreateResponse::Http201(r#response.json::<NotificationGroup>()?)) },
-		r#other_status => { Ok(ExtrasNotificationGroupsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasNotificationGroupsBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of notification group objects.
-pub fn extras_notification_groups_bulk_destroy(state: &ThanixClient, body: Vec<NotificationGroupRequest>) -> Result<ExtrasNotificationGroupsBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/extras/notification-groups/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(ExtrasNotificationGroupsBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasNotificationGroupsBulkPartialUpdateResponse {
-	Http200(Vec<NotificationGroup>),
-	Other(Response)
-}
-/// Patch a list of notification group objects.
-pub fn extras_notification_groups_bulk_partial_update(state: &ThanixClient, body: Vec<NotificationGroupRequest>) -> Result<ExtrasNotificationGroupsBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/extras/notification-groups/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasNotificationGroupsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<NotificationGroup>>()?)) },
-		r#other_status => { Ok(ExtrasNotificationGroupsBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasNotificationGroupsRetrieveResponse {
-	Http200(NotificationGroup),
-	Other(Response)
-}
-/// Get a notification group object.
-pub fn extras_notification_groups_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasNotificationGroupsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/extras/notification-groups/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasNotificationGroupsRetrieveResponse::Http200(r#response.json::<NotificationGroup>()?)) },
-		r#other_status => { Ok(ExtrasNotificationGroupsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasNotificationGroupsUpdateResponse {
-	Http200(NotificationGroup),
-	Other(Response)
-}
-/// Put a notification group object.
-pub fn extras_notification_groups_update(state: &ThanixClient, body: NotificationGroupRequest, id: i64) -> Result<ExtrasNotificationGroupsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/extras/notification-groups/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasNotificationGroupsUpdateResponse::Http200(r#response.json::<NotificationGroup>()?)) },
-		r#other_status => { Ok(ExtrasNotificationGroupsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasNotificationGroupsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a notification group object.
-pub fn extras_notification_groups_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasNotificationGroupsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/extras/notification-groups/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(ExtrasNotificationGroupsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasNotificationGroupsPartialUpdateResponse {
-	Http200(NotificationGroup),
-	Other(Response)
-}
-/// Patch a notification group object.
-pub fn extras_notification_groups_partial_update(state: &ThanixClient, body: PatchedNotificationGroupRequest, id: i64) -> Result<ExtrasNotificationGroupsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/extras/notification-groups/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasNotificationGroupsPartialUpdateResponse::Http200(r#response.json::<NotificationGroup>()?)) },
-		r#other_status => { Ok(ExtrasNotificationGroupsPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct ExtrasNotificationsListQuery {
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum ExtrasNotificationsListResponse {
-	Http200(PaginatedNotificationList),
-	Other(Response)
-}
-/// Get a list of notification objects.
-pub fn extras_notifications_list(state: &ThanixClient, query: ExtrasNotificationsListQuery) -> Result<ExtrasNotificationsListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/extras/notifications/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasNotificationsListResponse::Http200(r#response.json::<PaginatedNotificationList>()?)) },
-		r#other_status => { Ok(ExtrasNotificationsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasNotificationsBulkUpdateResponse {
-	Http200(Vec<Notification>),
-	Other(Response)
-}
-/// Put a list of notification objects.
-pub fn extras_notifications_bulk_update(state: &ThanixClient, body: Vec<NotificationRequest>) -> Result<ExtrasNotificationsBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/extras/notifications/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasNotificationsBulkUpdateResponse::Http200(r#response.json::<Vec<Notification>>()?)) },
-		r#other_status => { Ok(ExtrasNotificationsBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasNotificationsCreateResponse {
-	Http201(Notification),
-	Other(Response)
-}
-/// Post a list of notification objects.
-pub fn extras_notifications_create(state: &ThanixClient, body: NotificationRequest) -> Result<ExtrasNotificationsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/extras/notifications/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(ExtrasNotificationsCreateResponse::Http201(r#response.json::<Notification>()?)) },
-		r#other_status => { Ok(ExtrasNotificationsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasNotificationsBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of notification objects.
-pub fn extras_notifications_bulk_destroy(state: &ThanixClient, body: Vec<NotificationRequest>) -> Result<ExtrasNotificationsBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/extras/notifications/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(ExtrasNotificationsBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasNotificationsBulkPartialUpdateResponse {
-	Http200(Vec<Notification>),
-	Other(Response)
-}
-/// Patch a list of notification objects.
-pub fn extras_notifications_bulk_partial_update(state: &ThanixClient, body: Vec<NotificationRequest>) -> Result<ExtrasNotificationsBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/extras/notifications/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasNotificationsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Notification>>()?)) },
-		r#other_status => { Ok(ExtrasNotificationsBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasNotificationsRetrieveResponse {
-	Http200(Notification),
-	Other(Response)
-}
-/// Get a notification object.
-pub fn extras_notifications_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasNotificationsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/extras/notifications/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasNotificationsRetrieveResponse::Http200(r#response.json::<Notification>()?)) },
-		r#other_status => { Ok(ExtrasNotificationsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasNotificationsUpdateResponse {
-	Http200(Notification),
-	Other(Response)
-}
-/// Put a notification object.
-pub fn extras_notifications_update(state: &ThanixClient, body: NotificationRequest, id: i64) -> Result<ExtrasNotificationsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/extras/notifications/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasNotificationsUpdateResponse::Http200(r#response.json::<Notification>()?)) },
-		r#other_status => { Ok(ExtrasNotificationsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasNotificationsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a notification object.
-pub fn extras_notifications_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasNotificationsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/extras/notifications/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(ExtrasNotificationsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasNotificationsPartialUpdateResponse {
-	Http200(Notification),
-	Other(Response)
-}
-/// Patch a notification object.
-pub fn extras_notifications_partial_update(state: &ThanixClient, body: PatchedNotificationRequest, id: i64) -> Result<ExtrasNotificationsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/extras/notifications/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasNotificationsPartialUpdateResponse::Http200(r#response.json::<Notification>()?)) },
-		r#other_status => { Ok(ExtrasNotificationsPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct ExtrasObjectTypesListQuery {
-	app_label: Option<String>,
-	id: Option<i64>,
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	model: Option<String>,
+	object_repr: Option<Vec<String>>,
+	object_repr__empty: Option<bool>,
+	object_repr__ic: Option<Vec<String>>,
+	object_repr__ie: Option<Vec<String>>,
+	object_repr__iew: Option<Vec<String>>,
+	object_repr__isw: Option<Vec<String>>,
+	object_repr__n: Option<Vec<String>>,
+	object_repr__nic: Option<Vec<String>>,
+	object_repr__nie: Option<Vec<String>>,
+	object_repr__niew: Option<Vec<String>>,
+	object_repr__nisw: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
 	/// Search
 	q: Option<String>,
+	request_id: Option<String>,
+	time_after: Option<String>,
+	time_before: Option<String>,
+	/// User name
+	user: Option<Vec<String>>,
+	/// User name
+	user__n: Option<Vec<String>>,
+	/// User (ID)
+	user_id: Option<Vec<Option<i64>>>,
+	/// User (ID)
+	user_id__n: Option<Vec<Option<i64>>>,
+	user_name: Option<Vec<String>>,
+	user_name__empty: Option<bool>,
+	user_name__ic: Option<Vec<String>>,
+	user_name__ie: Option<Vec<String>>,
+	user_name__iew: Option<Vec<String>>,
+	user_name__isw: Option<Vec<String>>,
+	user_name__n: Option<Vec<String>>,
+	user_name__nic: Option<Vec<String>>,
+	user_name__nie: Option<Vec<String>>,
+	user_name__niew: Option<Vec<String>>,
+	user_name__nisw: Option<Vec<String>>,
 
 }
 #[derive(Debug)]
-pub enum ExtrasObjectTypesListResponse {
-	Http200(PaginatedObjectTypeList),
+pub enum ExtrasObjectChangesListResponse {
+	Http200(PaginatedObjectChangeList),
 	Other(Response)
 }
-/// Read-only list of ObjectTypes.
-pub fn extras_object_types_list(state: &ThanixClient, query: ExtrasObjectTypesListQuery) -> Result<ExtrasObjectTypesListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/extras/object-types/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
+/// Retrieve a list of recent changes.
+pub fn extras_object_changes_list(state: &ThanixClient, query: ExtrasObjectChangesListQuery) -> Result<ExtrasObjectChangesListResponse, Error> {
+	let r#response = state.client.get(format!("{}/api/extras/object-changes/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasObjectTypesListResponse::Http200(r#response.json::<PaginatedObjectTypeList>()?)) },
-		r#other_status => { Ok(ExtrasObjectTypesListResponse::Other(r#response)) }
+		200 => { Ok(ExtrasObjectChangesListResponse::Http200(r#response.json::<PaginatedObjectChangeList>()?)) },
+		r#other_status => { Ok(ExtrasObjectChangesListResponse::Other(r#response)) }
 	}
 }
 #[derive(Debug)]
-pub enum ExtrasObjectTypesRetrieveResponse {
-	Http200(ObjectType),
+pub enum ExtrasObjectChangesRetrieveResponse {
+	Http200(ObjectChange),
 	Other(Response)
 }
-/// Read-only list of ObjectTypes.
-pub fn extras_object_types_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasObjectTypesRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/extras/object-types/{id}/", state.base_url))
+/// Retrieve a list of recent changes.
+pub fn extras_object_changes_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasObjectChangesRetrieveResponse, Error> {
+	let r#response = state.client.get(format!("{}/api/extras/object-changes/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.send()?;
 	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasObjectTypesRetrieveResponse::Http200(r#response.json::<ObjectType>()?)) },
-		r#other_status => { Ok(ExtrasObjectTypesRetrieveResponse::Other(r#response)) }
+		200 => { Ok(ExtrasObjectChangesRetrieveResponse::Http200(r#response.json::<ObjectChange>()?)) },
+		r#other_status => { Ok(ExtrasObjectChangesRetrieveResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasSavedFiltersListQuery {
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
+	content_type_id: Option<Vec<i64>>,
+	content_type_id__empty: Option<Vec<i64>>,
+	content_type_id__gt: Option<Vec<i64>>,
+	content_type_id__gte: Option<Vec<i64>>,
+	content_type_id__lt: Option<Vec<i64>>,
+	content_type_id__lte: Option<Vec<i64>>,
+	content_type_id__n: Option<Vec<i64>>,
+	content_types: Option<String>,
+	content_types__ic: Option<String>,
+	content_types__ie: Option<String>,
+	content_types__iew: Option<String>,
+	content_types__isw: Option<String>,
+	content_types__n: Option<String>,
+	content_types__nic: Option<String>,
+	content_types__nie: Option<String>,
+	content_types__niew: Option<String>,
+	content_types__nisw: Option<String>,
 	description: Option<Vec<String>>,
 	description__empty: Option<bool>,
 	description__ic: Option<Vec<String>>,
@@ -17051,16 +14991,8 @@ pub struct ExtrasSavedFiltersListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
 	/// Number of results to return per page.
 	limit: Option<i64>,
-	modified_by_request: Option<String>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
 	name__ic: Option<Vec<String>>,
@@ -17072,18 +15004,6 @@ pub struct ExtrasSavedFiltersListQuery {
 	name__nie: Option<Vec<String>>,
 	name__niew: Option<Vec<String>>,
 	name__nisw: Option<Vec<String>>,
-	object_type: Option<String>,
-	object_type__ic: Option<String>,
-	object_type__ie: Option<String>,
-	object_type__iew: Option<String>,
-	object_type__isw: Option<String>,
-	object_type__n: Option<String>,
-	object_type__nic: Option<String>,
-	object_type__nie: Option<String>,
-	object_type__niew: Option<String>,
-	object_type__nisw: Option<String>,
-	object_type_id: Option<Vec<i64>>,
-	object_type_id__n: Option<Vec<i64>>,
 	/// The initial index from which to return the results.
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -17102,7 +15022,6 @@ pub struct ExtrasSavedFiltersListQuery {
 	slug__nie: Option<Vec<String>>,
 	slug__niew: Option<Vec<String>>,
 	slug__nisw: Option<Vec<String>>,
-	updated_by_request: Option<String>,
 	usable: Option<bool>,
 	/// User (name)
 	user: Option<Vec<String>>,
@@ -17258,279 +15177,6 @@ pub fn extras_saved_filters_partial_update(state: &ThanixClient, body: PatchedSa
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasSavedFiltersPartialUpdateResponse::Http200(r#response.json::<SavedFilter>()?)) },
 		r#other_status => { Ok(ExtrasSavedFiltersPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct ExtrasScriptsListQuery {
-	id: Option<Vec<i64>>,
-	id__empty: Option<bool>,
-	id__gt: Option<Vec<i64>>,
-	id__gte: Option<Vec<i64>>,
-	id__lt: Option<Vec<i64>>,
-	id__lte: Option<Vec<i64>>,
-	id__n: Option<Vec<i64>>,
-	is_executable: Option<bool>,
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	/// Script module (ID)
-	module_id: Option<Vec<i64>>,
-	/// Script module (ID)
-	module_id__n: Option<Vec<i64>>,
-	name: Option<Vec<String>>,
-	name__empty: Option<bool>,
-	name__ic: Option<Vec<String>>,
-	name__ie: Option<Vec<String>>,
-	name__iew: Option<Vec<String>>,
-	name__isw: Option<Vec<String>>,
-	name__n: Option<Vec<String>>,
-	name__nic: Option<Vec<String>>,
-	name__nie: Option<Vec<String>>,
-	name__niew: Option<Vec<String>>,
-	name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-	/// Search
-	q: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum ExtrasScriptsListResponse {
-	Http200(PaginatedScriptList),
-	Other(Response)
-}
-/// Get a list of script objects.
-pub fn extras_scripts_list(state: &ThanixClient, query: ExtrasScriptsListQuery) -> Result<ExtrasScriptsListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/extras/scripts/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasScriptsListResponse::Http200(r#response.json::<PaginatedScriptList>()?)) },
-		r#other_status => { Ok(ExtrasScriptsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasScriptsCreateResponse {
-	Http201(Script),
-	Other(Response)
-}
-/// Post a list of script objects.
-pub fn extras_scripts_create(state: &ThanixClient) -> Result<ExtrasScriptsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/extras/scripts/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(ExtrasScriptsCreateResponse::Http201(r#response.json::<Script>()?)) },
-		r#other_status => { Ok(ExtrasScriptsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasScriptsRetrieveResponse {
-	Http200(Script),
-	Other(Response)
-}
-/// Get a script object.
-pub fn extras_scripts_retrieve(state: &ThanixClient, id: String) -> Result<ExtrasScriptsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/extras/scripts/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasScriptsRetrieveResponse::Http200(r#response.json::<Script>()?)) },
-		r#other_status => { Ok(ExtrasScriptsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasScriptsUpdateResponse {
-	Http200(Script),
-	Other(Response)
-}
-/// Put a script object.
-pub fn extras_scripts_update(state: &ThanixClient, id: String) -> Result<ExtrasScriptsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/extras/scripts/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasScriptsUpdateResponse::Http200(r#response.json::<Script>()?)) },
-		r#other_status => { Ok(ExtrasScriptsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasScriptsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a script object.
-pub fn extras_scripts_destroy(state: &ThanixClient, id: String) -> Result<ExtrasScriptsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/extras/scripts/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(ExtrasScriptsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasScriptsPartialUpdateResponse {
-	Http200(Script),
-	Other(Response)
-}
-/// Patch a script object.
-pub fn extras_scripts_partial_update(state: &ThanixClient, id: String) -> Result<ExtrasScriptsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/extras/scripts/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasScriptsPartialUpdateResponse::Http200(r#response.json::<Script>()?)) },
-		r#other_status => { Ok(ExtrasScriptsPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct ExtrasSubscriptionsListQuery {
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum ExtrasSubscriptionsListResponse {
-	Http200(PaginatedSubscriptionList),
-	Other(Response)
-}
-/// Get a list of subscription objects.
-pub fn extras_subscriptions_list(state: &ThanixClient, query: ExtrasSubscriptionsListQuery) -> Result<ExtrasSubscriptionsListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/extras/subscriptions/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasSubscriptionsListResponse::Http200(r#response.json::<PaginatedSubscriptionList>()?)) },
-		r#other_status => { Ok(ExtrasSubscriptionsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasSubscriptionsBulkUpdateResponse {
-	Http200(Vec<Subscription>),
-	Other(Response)
-}
-/// Put a list of subscription objects.
-pub fn extras_subscriptions_bulk_update(state: &ThanixClient, body: Vec<SubscriptionRequest>) -> Result<ExtrasSubscriptionsBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/extras/subscriptions/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasSubscriptionsBulkUpdateResponse::Http200(r#response.json::<Vec<Subscription>>()?)) },
-		r#other_status => { Ok(ExtrasSubscriptionsBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasSubscriptionsCreateResponse {
-	Http201(Subscription),
-	Other(Response)
-}
-/// Post a list of subscription objects.
-pub fn extras_subscriptions_create(state: &ThanixClient, body: SubscriptionRequest) -> Result<ExtrasSubscriptionsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/extras/subscriptions/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(ExtrasSubscriptionsCreateResponse::Http201(r#response.json::<Subscription>()?)) },
-		r#other_status => { Ok(ExtrasSubscriptionsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasSubscriptionsBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of subscription objects.
-pub fn extras_subscriptions_bulk_destroy(state: &ThanixClient, body: Vec<SubscriptionRequest>) -> Result<ExtrasSubscriptionsBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/extras/subscriptions/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(ExtrasSubscriptionsBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasSubscriptionsBulkPartialUpdateResponse {
-	Http200(Vec<Subscription>),
-	Other(Response)
-}
-/// Patch a list of subscription objects.
-pub fn extras_subscriptions_bulk_partial_update(state: &ThanixClient, body: Vec<SubscriptionRequest>) -> Result<ExtrasSubscriptionsBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/extras/subscriptions/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasSubscriptionsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Subscription>>()?)) },
-		r#other_status => { Ok(ExtrasSubscriptionsBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasSubscriptionsRetrieveResponse {
-	Http200(Subscription),
-	Other(Response)
-}
-/// Get a subscription object.
-pub fn extras_subscriptions_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasSubscriptionsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/extras/subscriptions/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasSubscriptionsRetrieveResponse::Http200(r#response.json::<Subscription>()?)) },
-		r#other_status => { Ok(ExtrasSubscriptionsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasSubscriptionsUpdateResponse {
-	Http200(Subscription),
-	Other(Response)
-}
-/// Put a subscription object.
-pub fn extras_subscriptions_update(state: &ThanixClient, body: SubscriptionRequest, id: i64) -> Result<ExtrasSubscriptionsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/extras/subscriptions/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasSubscriptionsUpdateResponse::Http200(r#response.json::<Subscription>()?)) },
-		r#other_status => { Ok(ExtrasSubscriptionsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasSubscriptionsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a subscription object.
-pub fn extras_subscriptions_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasSubscriptionsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/extras/subscriptions/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(ExtrasSubscriptionsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasSubscriptionsPartialUpdateResponse {
-	Http200(Subscription),
-	Other(Response)
-}
-/// Patch a subscription object.
-pub fn extras_subscriptions_partial_update(state: &ThanixClient, body: PatchedSubscriptionRequest, id: i64) -> Result<ExtrasSubscriptionsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/extras/subscriptions/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasSubscriptionsPartialUpdateResponse::Http200(r#response.json::<Subscription>()?)) },
-		r#other_status => { Ok(ExtrasSubscriptionsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -17770,6 +15416,23 @@ pub struct ExtrasWebhooksListQuery {
 	ca_file_path__nie: Option<Vec<String>>,
 	ca_file_path__niew: Option<Vec<String>>,
 	ca_file_path__nisw: Option<Vec<String>>,
+	content_type_id: Option<Vec<i64>>,
+	content_type_id__empty: Option<Vec<i64>>,
+	content_type_id__gt: Option<Vec<i64>>,
+	content_type_id__gte: Option<Vec<i64>>,
+	content_type_id__lt: Option<Vec<i64>>,
+	content_type_id__lte: Option<Vec<i64>>,
+	content_type_id__n: Option<Vec<i64>>,
+	content_types: Option<String>,
+	content_types__ic: Option<String>,
+	content_types__ie: Option<String>,
+	content_types__iew: Option<String>,
+	content_types__isw: Option<String>,
+	content_types__n: Option<String>,
+	content_types__nic: Option<String>,
+	content_types__nie: Option<String>,
+	content_types__niew: Option<String>,
+	content_types__nisw: Option<String>,
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
 	created__gt: Option<Vec<String>>,
@@ -17778,17 +15441,7 @@ pub struct ExtrasWebhooksListQuery {
 	created__lte: Option<Vec<String>>,
 	created__n: Option<Vec<String>>,
 	created_by_request: Option<String>,
-	description: Option<Vec<String>>,
-	description__empty: Option<bool>,
-	description__ic: Option<Vec<String>>,
-	description__ie: Option<Vec<String>>,
-	description__iew: Option<Vec<String>>,
-	description__isw: Option<Vec<String>>,
-	description__n: Option<Vec<String>>,
-	description__nic: Option<Vec<String>>,
-	description__nie: Option<Vec<String>>,
-	description__niew: Option<Vec<String>>,
-	description__nisw: Option<Vec<String>>,
+	enabled: Option<bool>,
 	http_content_type: Option<Vec<String>>,
 	http_content_type__empty: Option<bool>,
 	http_content_type__ic: Option<Vec<String>>,
@@ -17835,6 +15488,16 @@ pub struct ExtrasWebhooksListQuery {
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
 	payload_url: Option<Vec<String>>,
+	payload_url__empty: Option<bool>,
+	payload_url__ic: Option<Vec<String>>,
+	payload_url__ie: Option<Vec<String>>,
+	payload_url__iew: Option<Vec<String>>,
+	payload_url__isw: Option<Vec<String>>,
+	payload_url__n: Option<Vec<String>>,
+	payload_url__nic: Option<Vec<String>>,
+	payload_url__nie: Option<Vec<String>>,
+	payload_url__niew: Option<Vec<String>>,
+	payload_url__nisw: Option<Vec<String>>,
 	/// Search
 	q: Option<String>,
 	secret: Option<Vec<String>>,
@@ -17851,6 +15514,11 @@ pub struct ExtrasWebhooksListQuery {
 	ssl_verification: Option<bool>,
 	tag: Option<Vec<String>>,
 	tag__n: Option<Vec<String>>,
+	type_create: Option<bool>,
+	type_delete: Option<bool>,
+	type_job_end: Option<bool>,
+	type_job_start: Option<bool>,
+	type_update: Option<bool>,
 	updated_by_request: Option<String>,
 
 }
@@ -18061,10 +15729,14 @@ pub struct IpamAggregatesListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
@@ -18281,17 +15953,6 @@ pub struct IpamAsnRangesListQuery {
 	rir_id: Option<Vec<i64>>,
 	/// RIR (ID)
 	rir_id__n: Option<Vec<i64>>,
-	slug: Option<Vec<String>>,
-	slug__empty: Option<bool>,
-	slug__ic: Option<Vec<String>>,
-	slug__ie: Option<Vec<String>>,
-	slug__iew: Option<Vec<String>>,
-	slug__isw: Option<Vec<String>>,
-	slug__n: Option<Vec<String>>,
-	slug__nic: Option<Vec<String>>,
-	slug__nie: Option<Vec<String>>,
-	slug__niew: Option<Vec<String>>,
-	slug__nisw: Option<Vec<String>>,
 	start: Option<Vec<i64>>,
 	start__empty: Option<bool>,
 	start__gt: Option<Vec<i64>>,
@@ -18305,10 +15966,14 @@ pub struct IpamAsnRangesListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
@@ -18353,7 +16018,7 @@ pub enum IpamAsnRangesCreateResponse {
 	Other(Response)
 }
 /// Post a list of ASN range objects.
-pub fn ipam_asn_ranges_create(state: &ThanixClient, body: ASNRangeRequest) -> Result<IpamAsnRangesCreateResponse, Error> {
+pub fn ipam_asn_ranges_create(state: &ThanixClient, body: WritableASNRangeRequest) -> Result<IpamAsnRangesCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/ipam/asn-ranges/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -18415,7 +16080,7 @@ pub enum IpamAsnRangesUpdateResponse {
 	Other(Response)
 }
 /// Put a ASN range object.
-pub fn ipam_asn_ranges_update(state: &ThanixClient, body: ASNRangeRequest, id: i64) -> Result<IpamAsnRangesUpdateResponse, Error> {
+pub fn ipam_asn_ranges_update(state: &ThanixClient, body: WritableASNRangeRequest, id: i64) -> Result<IpamAsnRangesUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/ipam/asn-ranges/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -18445,7 +16110,7 @@ pub enum IpamAsnRangesPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a ASN range object.
-pub fn ipam_asn_ranges_partial_update(state: &ThanixClient, body: PatchedASNRangeRequest, id: i64) -> Result<IpamAsnRangesPartialUpdateResponse, Error> {
+pub fn ipam_asn_ranges_partial_update(state: &ThanixClient, body: PatchedWritableASNRangeRequest, id: i64) -> Result<IpamAsnRangesPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/ipam/asn-ranges/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -18535,14 +16200,6 @@ pub struct IpamAsnsListQuery {
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
-	/// Provider (slug)
-	provider: Option<Vec<String>>,
-	/// Provider (slug)
-	provider__n: Option<Vec<String>>,
-	/// Provider (ID)
-	provider_id: Option<Vec<i64>>,
-	/// Provider (ID)
-	provider_id__n: Option<Vec<i64>>,
 	/// Search
 	q: Option<String>,
 	/// RIR (slug)
@@ -18567,10 +16224,14 @@ pub struct IpamAsnsListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
@@ -18615,7 +16276,7 @@ pub enum IpamAsnsCreateResponse {
 	Other(Response)
 }
 /// Post a list of ASN objects.
-pub fn ipam_asns_create(state: &ThanixClient, body: ASNRequest) -> Result<IpamAsnsCreateResponse, Error> {
+pub fn ipam_asns_create(state: &ThanixClient, body: WritableASNRequest) -> Result<IpamAsnsCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/ipam/asns/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -18677,7 +16338,7 @@ pub enum IpamAsnsUpdateResponse {
 	Other(Response)
 }
 /// Put a ASN object.
-pub fn ipam_asns_update(state: &ThanixClient, body: ASNRequest, id: i64) -> Result<IpamAsnsUpdateResponse, Error> {
+pub fn ipam_asns_update(state: &ThanixClient, body: WritableASNRequest, id: i64) -> Result<IpamAsnsUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/ipam/asns/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -18707,7 +16368,7 @@ pub enum IpamAsnsPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a ASN object.
-pub fn ipam_asns_partial_update(state: &ThanixClient, body: PatchedASNRequest, id: i64) -> Result<IpamAsnsPartialUpdateResponse, Error> {
+pub fn ipam_asns_partial_update(state: &ThanixClient, body: PatchedWritableASNRequest, id: i64) -> Result<IpamAsnsPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/ipam/asns/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -18812,7 +16473,7 @@ pub enum IpamFhrpGroupAssignmentsCreateResponse {
 	Other(Response)
 }
 /// Post a list of FHRP group assignment objects.
-pub fn ipam_fhrp_group_assignments_create(state: &ThanixClient, body: FHRPGroupAssignmentRequest) -> Result<IpamFhrpGroupAssignmentsCreateResponse, Error> {
+pub fn ipam_fhrp_group_assignments_create(state: &ThanixClient, body: WritableFHRPGroupAssignmentRequest) -> Result<IpamFhrpGroupAssignmentsCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/ipam/fhrp-group-assignments/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -18874,7 +16535,7 @@ pub enum IpamFhrpGroupAssignmentsUpdateResponse {
 	Other(Response)
 }
 /// Put a FHRP group assignment object.
-pub fn ipam_fhrp_group_assignments_update(state: &ThanixClient, body: FHRPGroupAssignmentRequest, id: i64) -> Result<IpamFhrpGroupAssignmentsUpdateResponse, Error> {
+pub fn ipam_fhrp_group_assignments_update(state: &ThanixClient, body: WritableFHRPGroupAssignmentRequest, id: i64) -> Result<IpamFhrpGroupAssignmentsUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/ipam/fhrp-group-assignments/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -18904,7 +16565,7 @@ pub enum IpamFhrpGroupAssignmentsPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a FHRP group assignment object.
-pub fn ipam_fhrp_group_assignments_partial_update(state: &ThanixClient, body: PatchedFHRPGroupAssignmentRequest, id: i64) -> Result<IpamFhrpGroupAssignmentsPartialUpdateResponse, Error> {
+pub fn ipam_fhrp_group_assignments_partial_update(state: &ThanixClient, body: PatchedWritableFHRPGroupAssignmentRequest, id: i64) -> Result<IpamFhrpGroupAssignmentsPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/ipam/fhrp-group-assignments/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -19141,15 +16802,6 @@ pub struct IpamIpAddressesListQuery {
 	address: Option<Vec<String>>,
 	/// Is assigned
 	assigned: Option<bool>,
-	assigned_object_id: Option<Vec<i64>>,
-	assigned_object_id__empty: Option<bool>,
-	assigned_object_id__gt: Option<Vec<i64>>,
-	assigned_object_id__gte: Option<Vec<i64>>,
-	assigned_object_id__lt: Option<Vec<i64>>,
-	assigned_object_id__lte: Option<Vec<i64>>,
-	assigned_object_id__n: Option<Vec<i64>>,
-	assigned_object_type: Option<i64>,
-	assigned_object_type__n: Option<i64>,
 	/// Is assigned to an interface
 	assigned_to_interface: Option<bool>,
 	created: Option<Vec<String>>,
@@ -19217,10 +16869,6 @@ pub struct IpamIpAddressesListQuery {
 	mask_length__gte: Option<f64>,
 	mask_length__lte: Option<f64>,
 	modified_by_request: Option<String>,
-	/// NAT inside IP address (ID)
-	nat_inside_id: Option<Vec<i64>>,
-	/// NAT inside IP address (ID)
-	nat_inside_id__n: Option<Vec<i64>>,
 	/// The initial index from which to return the results.
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -19234,10 +16882,6 @@ pub struct IpamIpAddressesListQuery {
 	role: Option<Vec<String>>,
 	/// The functional role of this IP
 	role__n: Option<Vec<String>>,
-	/// Service (ID)
-	service_id: Option<Vec<i64>>,
-	/// Service (ID)
-	service_id__n: Option<Vec<i64>>,
 	/// The operational status of this IP
 	status: Option<Vec<String>>,
 	/// The operational status of this IP
@@ -19248,10 +16892,14 @@ pub struct IpamIpAddressesListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
@@ -19474,13 +17122,6 @@ pub struct IpamIpRangesListQuery {
 	role_id: Option<Vec<Option<i64>>>,
 	/// Role (ID)
 	role_id__n: Option<Vec<Option<i64>>>,
-	size: Option<Vec<i64>>,
-	size__empty: Option<bool>,
-	size__gt: Option<Vec<i64>>,
-	size__gte: Option<Vec<i64>>,
-	size__lt: Option<Vec<i64>>,
-	size__lte: Option<Vec<i64>>,
-	size__n: Option<Vec<i64>>,
 	start_address: Option<Vec<String>>,
 	/// Operational status of this range
 	status: Option<Vec<String>>,
@@ -19492,10 +17133,14 @@ pub struct IpamIpRangesListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
@@ -19682,6 +17327,504 @@ pub fn ipam_ip_ranges_available_ips_create(state: &ThanixClient, body: Vec<IPAdd
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct IpamL2VpnTerminationsListQuery {
+	assigned_object_type: Option<String>,
+	assigned_object_type__n: Option<String>,
+	assigned_object_type_id: Option<i64>,
+	assigned_object_type_id__n: Option<i64>,
+	created: Option<Vec<String>>,
+	created__empty: Option<Vec<String>>,
+	created__gt: Option<Vec<String>>,
+	created__gte: Option<Vec<String>>,
+	created__lt: Option<Vec<String>>,
+	created__lte: Option<Vec<String>>,
+	created__n: Option<Vec<String>>,
+	created_by_request: Option<String>,
+	/// Device (name)
+	device: Option<Vec<Option<String>>>,
+	/// Device (name)
+	device__n: Option<Vec<Option<String>>>,
+	/// Device (ID)
+	device_id: Option<Vec<i64>>,
+	/// Device (ID)
+	device_id__n: Option<Vec<i64>>,
+	id: Option<Vec<i64>>,
+	id__empty: Option<bool>,
+	id__gt: Option<Vec<i64>>,
+	id__gte: Option<Vec<i64>>,
+	id__lt: Option<Vec<i64>>,
+	id__lte: Option<Vec<i64>>,
+	id__n: Option<Vec<i64>>,
+	/// Interface (name)
+	interface: Option<Vec<String>>,
+	/// Interface (name)
+	interface__n: Option<Vec<String>>,
+	/// Interface (ID)
+	interface_id: Option<Vec<i64>>,
+	/// Interface (ID)
+	interface_id__n: Option<Vec<i64>>,
+	/// L2VPN (slug)
+	l2vpn: Option<Vec<String>>,
+	/// L2VPN (slug)
+	l2vpn__n: Option<Vec<String>>,
+	/// L2VPN (ID)
+	l2vpn_id: Option<Vec<i64>>,
+	/// L2VPN (ID)
+	l2vpn_id__n: Option<Vec<i64>>,
+	last_updated: Option<Vec<String>>,
+	last_updated__empty: Option<Vec<String>>,
+	last_updated__gt: Option<Vec<String>>,
+	last_updated__gte: Option<Vec<String>>,
+	last_updated__lt: Option<Vec<String>>,
+	last_updated__lte: Option<Vec<String>>,
+	last_updated__n: Option<Vec<String>>,
+	/// Number of results to return per page.
+	limit: Option<i64>,
+	modified_by_request: Option<String>,
+	/// The initial index from which to return the results.
+	offset: Option<i64>,
+	/// Which field to use when ordering the results.
+	ordering: Option<String>,
+	/// Search
+	q: Option<String>,
+	region: Option<Vec<String>>,
+	region_id: Option<Vec<i64>>,
+	site: Option<Vec<String>>,
+	site_id: Option<Vec<i64>>,
+	tag: Option<Vec<String>>,
+	tag__n: Option<Vec<String>>,
+	updated_by_request: Option<String>,
+	/// Virtual machine (name)
+	virtual_machine: Option<Vec<String>>,
+	/// Virtual machine (name)
+	virtual_machine__n: Option<Vec<String>>,
+	/// Virtual machine (ID)
+	virtual_machine_id: Option<Vec<i64>>,
+	/// Virtual machine (ID)
+	virtual_machine_id__n: Option<Vec<i64>>,
+	/// VLAN (name)
+	vlan: Option<Vec<String>>,
+	/// VLAN (name)
+	vlan__n: Option<Vec<String>>,
+	/// VLAN (ID)
+	vlan_id: Option<Vec<i64>>,
+	/// VLAN (ID)
+	vlan_id__n: Option<Vec<i64>>,
+	/// VLAN number (1-4094)
+	vlan_vid: Option<i64>,
+	/// VLAN number (1-4094)
+	vlan_vid__empty: Option<i64>,
+	/// VLAN number (1-4094)
+	vlan_vid__gt: Option<i64>,
+	/// VLAN number (1-4094)
+	vlan_vid__gte: Option<i64>,
+	/// VLAN number (1-4094)
+	vlan_vid__lt: Option<i64>,
+	/// VLAN number (1-4094)
+	vlan_vid__lte: Option<i64>,
+	/// VLAN number (1-4094)
+	vlan_vid__n: Option<i64>,
+	/// VM interface (name)
+	vminterface: Option<Vec<String>>,
+	/// VM interface (name)
+	vminterface__n: Option<Vec<String>>,
+	/// VM Interface (ID)
+	vminterface_id: Option<Vec<i64>>,
+	/// VM Interface (ID)
+	vminterface_id__n: Option<Vec<i64>>,
+
+}
+#[derive(Debug)]
+pub enum IpamL2VpnTerminationsListResponse {
+	Http200(PaginatedL2VPNTerminationList),
+	Other(Response)
+}
+/// Get a list of L2VPN termination objects.
+pub fn ipam_l2vpn_terminations_list(state: &ThanixClient, query: IpamL2VpnTerminationsListQuery) -> Result<IpamL2VpnTerminationsListResponse, Error> {
+	let r#response = state.client.get(format!("{}/api/ipam/l2vpn-terminations/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnTerminationsListResponse::Http200(r#response.json::<PaginatedL2VPNTerminationList>()?)) },
+		r#other_status => { Ok(IpamL2VpnTerminationsListResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnTerminationsBulkUpdateResponse {
+	Http200(Vec<L2VPNTermination>),
+	Other(Response)
+}
+/// Put a list of L2VPN termination objects.
+pub fn ipam_l2vpn_terminations_bulk_update(state: &ThanixClient, body: Vec<L2VPNTerminationRequest>) -> Result<IpamL2VpnTerminationsBulkUpdateResponse, Error> {
+	let r#response = state.client.put(format!("{}/api/ipam/l2vpn-terminations/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnTerminationsBulkUpdateResponse::Http200(r#response.json::<Vec<L2VPNTermination>>()?)) },
+		r#other_status => { Ok(IpamL2VpnTerminationsBulkUpdateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnTerminationsCreateResponse {
+	Http201(L2VPNTermination),
+	Other(Response)
+}
+/// Post a list of L2VPN termination objects.
+pub fn ipam_l2vpn_terminations_create(state: &ThanixClient, body: WritableL2VPNTerminationRequest) -> Result<IpamL2VpnTerminationsCreateResponse, Error> {
+	let r#response = state.client.post(format!("{}/api/ipam/l2vpn-terminations/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		201 => { Ok(IpamL2VpnTerminationsCreateResponse::Http201(r#response.json::<L2VPNTermination>()?)) },
+		r#other_status => { Ok(IpamL2VpnTerminationsCreateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnTerminationsBulkDestroyResponse {
+	Http204,
+	Other(Response)
+}
+/// Delete a list of L2VPN termination objects.
+pub fn ipam_l2vpn_terminations_bulk_destroy(state: &ThanixClient, body: Vec<L2VPNTerminationRequest>) -> Result<IpamL2VpnTerminationsBulkDestroyResponse, Error> {
+	let r#response = state.client.delete(format!("{}/api/ipam/l2vpn-terminations/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		r#other_status => { Ok(IpamL2VpnTerminationsBulkDestroyResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnTerminationsBulkPartialUpdateResponse {
+	Http200(Vec<L2VPNTermination>),
+	Other(Response)
+}
+/// Patch a list of L2VPN termination objects.
+pub fn ipam_l2vpn_terminations_bulk_partial_update(state: &ThanixClient, body: Vec<L2VPNTerminationRequest>) -> Result<IpamL2VpnTerminationsBulkPartialUpdateResponse, Error> {
+	let r#response = state.client.patch(format!("{}/api/ipam/l2vpn-terminations/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnTerminationsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<L2VPNTermination>>()?)) },
+		r#other_status => { Ok(IpamL2VpnTerminationsBulkPartialUpdateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnTerminationsRetrieveResponse {
+	Http200(L2VPNTermination),
+	Other(Response)
+}
+/// Get a L2VPN termination object.
+pub fn ipam_l2vpn_terminations_retrieve(state: &ThanixClient, id: i64) -> Result<IpamL2VpnTerminationsRetrieveResponse, Error> {
+	let r#response = state.client.get(format!("{}/api/ipam/l2vpn-terminations/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnTerminationsRetrieveResponse::Http200(r#response.json::<L2VPNTermination>()?)) },
+		r#other_status => { Ok(IpamL2VpnTerminationsRetrieveResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnTerminationsUpdateResponse {
+	Http200(L2VPNTermination),
+	Other(Response)
+}
+/// Put a L2VPN termination object.
+pub fn ipam_l2vpn_terminations_update(state: &ThanixClient, body: WritableL2VPNTerminationRequest, id: i64) -> Result<IpamL2VpnTerminationsUpdateResponse, Error> {
+	let r#response = state.client.put(format!("{}/api/ipam/l2vpn-terminations/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnTerminationsUpdateResponse::Http200(r#response.json::<L2VPNTermination>()?)) },
+		r#other_status => { Ok(IpamL2VpnTerminationsUpdateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnTerminationsDestroyResponse {
+	Http204,
+	Other(Response)
+}
+/// Delete a L2VPN termination object.
+pub fn ipam_l2vpn_terminations_destroy(state: &ThanixClient, id: i64) -> Result<IpamL2VpnTerminationsDestroyResponse, Error> {
+	let r#response = state.client.delete(format!("{}/api/ipam/l2vpn-terminations/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.send()?;
+	match r#response.status().as_u16() {
+		r#other_status => { Ok(IpamL2VpnTerminationsDestroyResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnTerminationsPartialUpdateResponse {
+	Http200(L2VPNTermination),
+	Other(Response)
+}
+/// Patch a L2VPN termination object.
+pub fn ipam_l2vpn_terminations_partial_update(state: &ThanixClient, body: PatchedWritableL2VPNTerminationRequest, id: i64) -> Result<IpamL2VpnTerminationsPartialUpdateResponse, Error> {
+	let r#response = state.client.patch(format!("{}/api/ipam/l2vpn-terminations/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnTerminationsPartialUpdateResponse::Http200(r#response.json::<L2VPNTermination>()?)) },
+		r#other_status => { Ok(IpamL2VpnTerminationsPartialUpdateResponse::Other(r#response)) }
+	}
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct IpamL2VpnsListQuery {
+	created: Option<Vec<String>>,
+	created__empty: Option<Vec<String>>,
+	created__gt: Option<Vec<String>>,
+	created__gte: Option<Vec<String>>,
+	created__lt: Option<Vec<String>>,
+	created__lte: Option<Vec<String>>,
+	created__n: Option<Vec<String>>,
+	created_by_request: Option<String>,
+	description: Option<Vec<String>>,
+	description__empty: Option<bool>,
+	description__ic: Option<Vec<String>>,
+	description__ie: Option<Vec<String>>,
+	description__iew: Option<Vec<String>>,
+	description__isw: Option<Vec<String>>,
+	description__n: Option<Vec<String>>,
+	description__nic: Option<Vec<String>>,
+	description__nie: Option<Vec<String>>,
+	description__niew: Option<Vec<String>>,
+	description__nisw: Option<Vec<String>>,
+	/// Export target (name)
+	export_target: Option<Vec<String>>,
+	/// Export target (name)
+	export_target__n: Option<Vec<String>>,
+	/// Export target
+	export_target_id: Option<Vec<i64>>,
+	/// Export target
+	export_target_id__n: Option<Vec<i64>>,
+	id: Option<Vec<i64>>,
+	id__empty: Option<bool>,
+	id__gt: Option<Vec<i64>>,
+	id__gte: Option<Vec<i64>>,
+	id__lt: Option<Vec<i64>>,
+	id__lte: Option<Vec<i64>>,
+	id__n: Option<Vec<i64>>,
+	identifier: Option<Vec<i64>>,
+	identifier__empty: Option<bool>,
+	identifier__gt: Option<Vec<i64>>,
+	identifier__gte: Option<Vec<i64>>,
+	identifier__lt: Option<Vec<i64>>,
+	identifier__lte: Option<Vec<i64>>,
+	identifier__n: Option<Vec<i64>>,
+	/// Import target (name)
+	import_target: Option<Vec<String>>,
+	/// Import target (name)
+	import_target__n: Option<Vec<String>>,
+	/// Import target
+	import_target_id: Option<Vec<i64>>,
+	/// Import target
+	import_target_id__n: Option<Vec<i64>>,
+	last_updated: Option<Vec<String>>,
+	last_updated__empty: Option<Vec<String>>,
+	last_updated__gt: Option<Vec<String>>,
+	last_updated__gte: Option<Vec<String>>,
+	last_updated__lt: Option<Vec<String>>,
+	last_updated__lte: Option<Vec<String>>,
+	last_updated__n: Option<Vec<String>>,
+	/// Number of results to return per page.
+	limit: Option<i64>,
+	modified_by_request: Option<String>,
+	name: Option<Vec<String>>,
+	name__empty: Option<bool>,
+	name__ic: Option<Vec<String>>,
+	name__ie: Option<Vec<String>>,
+	name__iew: Option<Vec<String>>,
+	name__isw: Option<Vec<String>>,
+	name__n: Option<Vec<String>>,
+	name__nic: Option<Vec<String>>,
+	name__nie: Option<Vec<String>>,
+	name__niew: Option<Vec<String>>,
+	name__nisw: Option<Vec<String>>,
+	/// The initial index from which to return the results.
+	offset: Option<i64>,
+	/// Which field to use when ordering the results.
+	ordering: Option<String>,
+	/// Search
+	q: Option<String>,
+	slug: Option<Vec<String>>,
+	slug__empty: Option<bool>,
+	slug__ic: Option<Vec<String>>,
+	slug__ie: Option<Vec<String>>,
+	slug__iew: Option<Vec<String>>,
+	slug__isw: Option<Vec<String>>,
+	slug__n: Option<Vec<String>>,
+	slug__nic: Option<Vec<String>>,
+	slug__nie: Option<Vec<String>>,
+	slug__niew: Option<Vec<String>>,
+	slug__nisw: Option<Vec<String>>,
+	tag: Option<Vec<String>>,
+	tag__n: Option<Vec<String>>,
+	/// Tenant (slug)
+	tenant: Option<Vec<String>>,
+	/// Tenant (slug)
+	tenant__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
+	/// Tenant (ID)
+	tenant_id: Option<Vec<Option<i64>>>,
+	/// Tenant (ID)
+	tenant_id__n: Option<Vec<Option<i64>>>,
+	r#type: Option<Vec<String>>,
+	type__n: Option<Vec<String>>,
+	updated_by_request: Option<String>,
+
+}
+#[derive(Debug)]
+pub enum IpamL2VpnsListResponse {
+	Http200(PaginatedL2VPNList),
+	Other(Response)
+}
+/// Get a list of L2VPN objects.
+pub fn ipam_l2vpns_list(state: &ThanixClient, query: IpamL2VpnsListQuery) -> Result<IpamL2VpnsListResponse, Error> {
+	let r#response = state.client.get(format!("{}/api/ipam/l2vpns/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnsListResponse::Http200(r#response.json::<PaginatedL2VPNList>()?)) },
+		r#other_status => { Ok(IpamL2VpnsListResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnsBulkUpdateResponse {
+	Http200(Vec<L2VPN>),
+	Other(Response)
+}
+/// Put a list of L2VPN objects.
+pub fn ipam_l2vpns_bulk_update(state: &ThanixClient, body: Vec<L2VPNRequest>) -> Result<IpamL2VpnsBulkUpdateResponse, Error> {
+	let r#response = state.client.put(format!("{}/api/ipam/l2vpns/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnsBulkUpdateResponse::Http200(r#response.json::<Vec<L2VPN>>()?)) },
+		r#other_status => { Ok(IpamL2VpnsBulkUpdateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnsCreateResponse {
+	Http201(L2VPN),
+	Other(Response)
+}
+/// Post a list of L2VPN objects.
+pub fn ipam_l2vpns_create(state: &ThanixClient, body: WritableL2VPNRequest) -> Result<IpamL2VpnsCreateResponse, Error> {
+	let r#response = state.client.post(format!("{}/api/ipam/l2vpns/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		201 => { Ok(IpamL2VpnsCreateResponse::Http201(r#response.json::<L2VPN>()?)) },
+		r#other_status => { Ok(IpamL2VpnsCreateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnsBulkDestroyResponse {
+	Http204,
+	Other(Response)
+}
+/// Delete a list of L2VPN objects.
+pub fn ipam_l2vpns_bulk_destroy(state: &ThanixClient, body: Vec<L2VPNRequest>) -> Result<IpamL2VpnsBulkDestroyResponse, Error> {
+	let r#response = state.client.delete(format!("{}/api/ipam/l2vpns/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		r#other_status => { Ok(IpamL2VpnsBulkDestroyResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnsBulkPartialUpdateResponse {
+	Http200(Vec<L2VPN>),
+	Other(Response)
+}
+/// Patch a list of L2VPN objects.
+pub fn ipam_l2vpns_bulk_partial_update(state: &ThanixClient, body: Vec<L2VPNRequest>) -> Result<IpamL2VpnsBulkPartialUpdateResponse, Error> {
+	let r#response = state.client.patch(format!("{}/api/ipam/l2vpns/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<L2VPN>>()?)) },
+		r#other_status => { Ok(IpamL2VpnsBulkPartialUpdateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnsRetrieveResponse {
+	Http200(L2VPN),
+	Other(Response)
+}
+/// Get a L2VPN object.
+pub fn ipam_l2vpns_retrieve(state: &ThanixClient, id: i64) -> Result<IpamL2VpnsRetrieveResponse, Error> {
+	let r#response = state.client.get(format!("{}/api/ipam/l2vpns/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnsRetrieveResponse::Http200(r#response.json::<L2VPN>()?)) },
+		r#other_status => { Ok(IpamL2VpnsRetrieveResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnsUpdateResponse {
+	Http200(L2VPN),
+	Other(Response)
+}
+/// Put a L2VPN object.
+pub fn ipam_l2vpns_update(state: &ThanixClient, body: WritableL2VPNRequest, id: i64) -> Result<IpamL2VpnsUpdateResponse, Error> {
+	let r#response = state.client.put(format!("{}/api/ipam/l2vpns/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnsUpdateResponse::Http200(r#response.json::<L2VPN>()?)) },
+		r#other_status => { Ok(IpamL2VpnsUpdateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnsDestroyResponse {
+	Http204,
+	Other(Response)
+}
+/// Delete a L2VPN object.
+pub fn ipam_l2vpns_destroy(state: &ThanixClient, id: i64) -> Result<IpamL2VpnsDestroyResponse, Error> {
+	let r#response = state.client.delete(format!("{}/api/ipam/l2vpns/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.send()?;
+	match r#response.status().as_u16() {
+		r#other_status => { Ok(IpamL2VpnsDestroyResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnsPartialUpdateResponse {
+	Http200(L2VPN),
+	Other(Response)
+}
+/// Patch a L2VPN object.
+pub fn ipam_l2vpns_partial_update(state: &ThanixClient, body: PatchedWritableL2VPNRequest, id: i64) -> Result<IpamL2VpnsPartialUpdateResponse, Error> {
+	let r#response = state.client.patch(format!("{}/api/ipam/l2vpns/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnsPartialUpdateResponse::Http200(r#response.json::<L2VPN>()?)) },
+		r#other_status => { Ok(IpamL2VpnsPartialUpdateResponse::Other(r#response)) }
+	}
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IpamPrefixesListQuery {
 	children: Option<Vec<i64>>,
 	children__empty: Option<Vec<i64>>,
@@ -19750,10 +17893,14 @@ pub struct IpamPrefixesListQuery {
 	present_in_vrf_id: Option<String>,
 	/// Search
 	q: Option<String>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
 	/// Role (slug)
 	role: Option<Vec<String>>,
 	/// Role (slug)
@@ -19766,10 +17913,14 @@ pub struct IpamPrefixesListQuery {
 	site: Option<Vec<String>>,
 	/// Site (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<Option<i64>>>,
 	/// Site (ID)
@@ -19784,10 +17935,14 @@ pub struct IpamPrefixesListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
@@ -20306,13 +18461,6 @@ pub struct IpamRolesListQuery {
 	tag: Option<Vec<String>>,
 	tag__n: Option<Vec<String>>,
 	updated_by_request: Option<String>,
-	weight: Option<Vec<i64>>,
-	weight__empty: Option<bool>,
-	weight__gt: Option<Vec<i64>>,
-	weight__gte: Option<Vec<i64>>,
-	weight__lt: Option<Vec<i64>>,
-	weight__lte: Option<Vec<i64>>,
-	weight__n: Option<Vec<i64>>,
 
 }
 #[derive(Debug)]
@@ -20475,14 +18623,6 @@ pub struct IpamRouteTargetsListQuery {
 	description__nie: Option<Vec<String>>,
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
-	/// Exporting L2VPN (identifier)
-	exporting_l2vpn: Option<Vec<Option<i64>>>,
-	/// Exporting L2VPN (identifier)
-	exporting_l2vpn__n: Option<Vec<Option<i64>>>,
-	/// Exporting L2VPN
-	exporting_l2vpn_id: Option<Vec<i64>>,
-	/// Exporting L2VPN
-	exporting_l2vpn_id__n: Option<Vec<i64>>,
 	/// Export VRF (RD)
 	exporting_vrf: Option<Vec<Option<String>>>,
 	/// Export VRF (RD)
@@ -20498,14 +18638,6 @@ pub struct IpamRouteTargetsListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	/// Importing L2VPN (identifier)
-	importing_l2vpn: Option<Vec<Option<i64>>>,
-	/// Importing L2VPN (identifier)
-	importing_l2vpn__n: Option<Vec<Option<i64>>>,
-	/// Importing L2VPN
-	importing_l2vpn_id: Option<Vec<i64>>,
-	/// Importing L2VPN
-	importing_l2vpn_id__n: Option<Vec<i64>>,
 	/// Import VRF (RD)
 	importing_vrf: Option<Vec<Option<String>>>,
 	/// Import VRF (RD)
@@ -20547,10 +18679,14 @@ pub struct IpamRouteTargetsListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
@@ -20595,7 +18731,7 @@ pub enum IpamRouteTargetsCreateResponse {
 	Other(Response)
 }
 /// Post a list of route target objects.
-pub fn ipam_route_targets_create(state: &ThanixClient, body: RouteTargetRequest) -> Result<IpamRouteTargetsCreateResponse, Error> {
+pub fn ipam_route_targets_create(state: &ThanixClient, body: WritableRouteTargetRequest) -> Result<IpamRouteTargetsCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/ipam/route-targets/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -20657,7 +18793,7 @@ pub enum IpamRouteTargetsUpdateResponse {
 	Other(Response)
 }
 /// Put a route target object.
-pub fn ipam_route_targets_update(state: &ThanixClient, body: RouteTargetRequest, id: i64) -> Result<IpamRouteTargetsUpdateResponse, Error> {
+pub fn ipam_route_targets_update(state: &ThanixClient, body: WritableRouteTargetRequest, id: i64) -> Result<IpamRouteTargetsUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/ipam/route-targets/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -20687,7 +18823,7 @@ pub enum IpamRouteTargetsPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a route target object.
-pub fn ipam_route_targets_partial_update(state: &ThanixClient, body: PatchedRouteTargetRequest, id: i64) -> Result<IpamRouteTargetsPartialUpdateResponse, Error> {
+pub fn ipam_route_targets_partial_update(state: &ThanixClient, body: PatchedWritableRouteTargetRequest, id: i64) -> Result<IpamRouteTargetsPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/ipam/route-targets/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -20751,13 +18887,7 @@ pub struct IpamServiceTemplatesListQuery {
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
 	port: Option<f64>,
-	/// * `tcp` - TCP
-	/// * `udp` - UDP
-	/// * `sctp` - SCTP
 	protocol: Option<String>,
-	/// * `tcp` - TCP
-	/// * `udp` - UDP
-	/// * `sctp` - SCTP
 	protocol__n: Option<String>,
 	/// Search
 	q: Option<String>,
@@ -20942,13 +19072,13 @@ pub struct IpamServicesListQuery {
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
 	/// IP address
-	ip_address: Option<Vec<String>>,
+	ipaddress: Option<Vec<String>>,
 	/// IP address
-	ip_address__n: Option<Vec<String>>,
+	ipaddress__n: Option<Vec<String>>,
 	/// IP address (ID)
-	ip_address_id: Option<Vec<i64>>,
+	ipaddress_id: Option<Vec<i64>>,
 	/// IP address (ID)
-	ip_address_id__n: Option<Vec<i64>>,
+	ipaddress_id__n: Option<Vec<i64>>,
 	last_updated: Option<Vec<String>>,
 	last_updated__empty: Option<Vec<String>>,
 	last_updated__gt: Option<Vec<String>>,
@@ -20975,13 +19105,7 @@ pub struct IpamServicesListQuery {
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
 	port: Option<f64>,
-	/// * `tcp` - TCP
-	/// * `udp` - UDP
-	/// * `sctp` - SCTP
 	protocol: Option<String>,
-	/// * `tcp` - TCP
-	/// * `udp` - UDP
-	/// * `sctp` - SCTP
 	protocol__n: Option<String>,
 	/// Search
 	q: Option<String>,
@@ -21140,8 +19264,7 @@ pub fn ipam_services_partial_update(state: &ThanixClient, body: PatchedWritableS
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IpamVlanGroupsListQuery {
 	cluster: Option<i64>,
-	cluster_group: Option<i64>,
-	contains_vid: Option<f64>,
+	clustergroup: Option<f64>,
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
 	created__gt: Option<Vec<String>>,
@@ -21178,6 +19301,20 @@ pub struct IpamVlanGroupsListQuery {
 	/// Number of results to return per page.
 	limit: Option<i64>,
 	location: Option<i64>,
+	max_vid: Option<Vec<i64>>,
+	max_vid__empty: Option<bool>,
+	max_vid__gt: Option<Vec<i64>>,
+	max_vid__gte: Option<Vec<i64>>,
+	max_vid__lt: Option<Vec<i64>>,
+	max_vid__lte: Option<Vec<i64>>,
+	max_vid__n: Option<Vec<i64>>,
+	min_vid: Option<Vec<i64>>,
+	min_vid__empty: Option<bool>,
+	min_vid__gt: Option<Vec<i64>>,
+	min_vid__gte: Option<Vec<i64>>,
+	min_vid__lt: Option<Vec<i64>>,
+	min_vid__lte: Option<Vec<i64>>,
+	min_vid__n: Option<Vec<i64>>,
 	modified_by_request: Option<String>,
 	name: Option<Vec<String>>,
 	name__empty: Option<bool>,
@@ -21208,7 +19345,7 @@ pub struct IpamVlanGroupsListQuery {
 	scope_type: Option<String>,
 	scope_type__n: Option<String>,
 	site: Option<i64>,
-	site_group: Option<i64>,
+	sitegroup: Option<f64>,
 	slug: Option<Vec<String>>,
 	slug__empty: Option<bool>,
 	slug__ic: Option<Vec<String>>,
@@ -21469,10 +19606,14 @@ pub struct IpamVlansListQuery {
 	ordering: Option<String>,
 	/// Search
 	q: Option<String>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
 	/// Role (slug)
 	role: Option<Vec<String>>,
 	/// Role (slug)
@@ -21485,10 +19626,14 @@ pub struct IpamVlansListQuery {
 	site: Option<Vec<String>>,
 	/// Site (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<Option<i64>>>,
 	/// Site (ID)
@@ -21503,10 +19648,14 @@ pub struct IpamVlansListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
@@ -21749,10 +19898,14 @@ pub struct IpamVrfsListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
@@ -21797,7 +19950,7 @@ pub enum IpamVrfsCreateResponse {
 	Other(Response)
 }
 /// Post a list of VRF objects.
-pub fn ipam_vrfs_create(state: &ThanixClient, body: VRFRequest) -> Result<IpamVrfsCreateResponse, Error> {
+pub fn ipam_vrfs_create(state: &ThanixClient, body: WritableVRFRequest) -> Result<IpamVrfsCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/ipam/vrfs/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -21859,7 +20012,7 @@ pub enum IpamVrfsUpdateResponse {
 	Other(Response)
 }
 /// Put a VRF object.
-pub fn ipam_vrfs_update(state: &ThanixClient, body: VRFRequest, id: i64) -> Result<IpamVrfsUpdateResponse, Error> {
+pub fn ipam_vrfs_update(state: &ThanixClient, body: WritableVRFRequest, id: i64) -> Result<IpamVrfsUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/ipam/vrfs/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -21889,7 +20042,7 @@ pub enum IpamVrfsPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a VRF object.
-pub fn ipam_vrfs_partial_update(state: &ThanixClient, body: PatchedVRFRequest, id: i64) -> Result<IpamVrfsPartialUpdateResponse, Error> {
+pub fn ipam_vrfs_partial_update(state: &ThanixClient, body: PatchedWritableVRFRequest, id: i64) -> Result<IpamVrfsPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/ipam/vrfs/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -21902,7 +20055,6 @@ pub fn ipam_vrfs_partial_update(state: &ThanixClient, body: PatchedVRFRequest, i
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct SchemaRetrieveQuery {
 	format: Option<String>,
-	lang: Option<String>,
 
 }
 #[derive(Debug)]
@@ -21944,6 +20096,10 @@ pub struct TenancyContactAssignmentsListQuery {
 	contact_id: Option<Vec<i64>>,
 	/// Contact (ID)
 	contact_id__n: Option<Vec<i64>>,
+	content_type: Option<String>,
+	content_type__n: Option<String>,
+	content_type_id: Option<i64>,
+	content_type_id__n: Option<i64>,
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
 	created__gt: Option<Vec<String>>,
@@ -21952,10 +20108,14 @@ pub struct TenancyContactAssignmentsListQuery {
 	created__lte: Option<Vec<String>>,
 	created__n: Option<Vec<String>>,
 	created_by_request: Option<String>,
-	group: Option<Vec<String>>,
-	group__n: Option<Vec<String>>,
-	group_id: Option<Vec<String>>,
-	group_id__n: Option<Vec<String>>,
+	/// Contact group (slug)
+	group: Option<Vec<i64>>,
+	/// Contact group (slug)
+	group__n: Option<Vec<i64>>,
+	/// Contact group (ID)
+	group_id: Option<Vec<i64>>,
+	/// Contact group (ID)
+	group_id__n: Option<Vec<i64>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -21980,23 +20140,11 @@ pub struct TenancyContactAssignmentsListQuery {
 	object_id__lt: Option<Vec<i64>>,
 	object_id__lte: Option<Vec<i64>>,
 	object_id__n: Option<Vec<i64>>,
-	object_type: Option<String>,
-	object_type__n: Option<String>,
-	object_type_id: Option<i64>,
-	object_type_id__n: Option<i64>,
 	/// The initial index from which to return the results.
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
-	/// * `primary` - Primary
-	/// * `secondary` - Secondary
-	/// * `tertiary` - Tertiary
-	/// * `inactive` - Inactive
 	priority: Option<String>,
-	/// * `primary` - Primary
-	/// * `secondary` - Secondary
-	/// * `tertiary` - Tertiary
-	/// * `inactive` - Inactive
 	priority__n: Option<String>,
 	/// Search
 	q: Option<String>,
@@ -22154,10 +20302,6 @@ pub fn tenancy_contact_assignments_partial_update(state: &ThanixClient, body: Pa
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct TenancyContactGroupsListQuery {
-	ancestor: Option<Vec<String>>,
-	ancestor__n: Option<Vec<String>>,
-	ancestor_id: Option<Vec<String>>,
-	ancestor_id__n: Option<Vec<String>>,
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
 	created__gt: Option<Vec<String>>,
@@ -22209,13 +20353,13 @@ pub struct TenancyContactGroupsListQuery {
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
-	/// Parent contact group (slug)
+	/// Contact group (slug)
 	parent: Option<Vec<String>>,
-	/// Parent contact group (slug)
+	/// Contact group (slug)
 	parent__n: Option<Vec<String>>,
-	/// Parent contact group (ID)
+	/// Contact group (ID)
 	parent_id: Option<Vec<Option<i64>>>,
-	/// Parent contact group (ID)
+	/// Contact group (ID)
 	parent_id__n: Option<Vec<Option<i64>>>,
 	/// Search
 	q: Option<String>,
@@ -22627,10 +20771,14 @@ pub struct TenancyContactsListQuery {
 	email__nie: Option<Vec<String>>,
 	email__niew: Option<Vec<String>>,
 	email__nisw: Option<Vec<String>>,
-	group: Option<Vec<String>>,
-	group__n: Option<Vec<String>>,
-	group_id: Option<Vec<String>>,
-	group_id__n: Option<Vec<String>>,
+	/// Contact group (slug)
+	group: Option<Vec<i64>>,
+	/// Contact group (slug)
+	group__n: Option<Vec<i64>>,
+	/// Contact group (ID)
+	group_id: Option<Vec<i64>>,
+	/// Contact group (ID)
+	group_id__n: Option<Vec<i64>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -22740,7 +20888,7 @@ pub enum TenancyContactsCreateResponse {
 	Other(Response)
 }
 /// Post a list of contact objects.
-pub fn tenancy_contacts_create(state: &ThanixClient, body: ContactRequest) -> Result<TenancyContactsCreateResponse, Error> {
+pub fn tenancy_contacts_create(state: &ThanixClient, body: WritableContactRequest) -> Result<TenancyContactsCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/tenancy/contacts/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -22802,7 +20950,7 @@ pub enum TenancyContactsUpdateResponse {
 	Other(Response)
 }
 /// Put a contact object.
-pub fn tenancy_contacts_update(state: &ThanixClient, body: ContactRequest, id: i64) -> Result<TenancyContactsUpdateResponse, Error> {
+pub fn tenancy_contacts_update(state: &ThanixClient, body: WritableContactRequest, id: i64) -> Result<TenancyContactsUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/tenancy/contacts/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -22832,7 +20980,7 @@ pub enum TenancyContactsPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a contact object.
-pub fn tenancy_contacts_partial_update(state: &ThanixClient, body: PatchedContactRequest, id: i64) -> Result<TenancyContactsPartialUpdateResponse, Error> {
+pub fn tenancy_contacts_partial_update(state: &ThanixClient, body: PatchedWritableContactRequest, id: i64) -> Result<TenancyContactsPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/tenancy/contacts/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -22844,10 +20992,6 @@ pub fn tenancy_contacts_partial_update(state: &ThanixClient, body: PatchedContac
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct TenancyTenantGroupsListQuery {
-	ancestor: Option<Vec<String>>,
-	ancestor__n: Option<Vec<String>>,
-	ancestor_id: Option<Vec<String>>,
-	ancestor_id__n: Option<Vec<String>>,
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
 	created__gt: Option<Vec<String>>,
@@ -22899,13 +21043,13 @@ pub struct TenancyTenantGroupsListQuery {
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
-	/// Parent tenant group (slug)
+	/// Tenant group (slug)
 	parent: Option<Vec<String>>,
-	/// Parent tenant group (slug)
+	/// Tenant group (slug)
 	parent__n: Option<Vec<String>>,
-	/// Parent tenant group (ID)
+	/// Tenant group (ID)
 	parent_id: Option<Vec<Option<i64>>>,
-	/// Parent tenant group (ID)
+	/// Tenant group (ID)
 	parent_id__n: Option<Vec<Option<i64>>>,
 	/// Search
 	q: Option<String>,
@@ -23070,8 +21214,10 @@ pub struct TenancyTenantsListQuery {
 	contact: Option<Vec<i64>>,
 	/// Contact
 	contact__n: Option<Vec<i64>>,
-	contact_group: Option<Vec<String>>,
-	contact_group__n: Option<Vec<String>>,
+	/// Contact group
+	contact_group: Option<Vec<i64>>,
+	/// Contact group
+	contact_group__n: Option<Vec<i64>>,
 	/// Contact Role
 	contact_role: Option<Vec<i64>>,
 	/// Contact Role
@@ -23095,10 +21241,14 @@ pub struct TenancyTenantsListQuery {
 	description__nie: Option<Vec<String>>,
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
-	group: Option<Vec<String>>,
-	group__n: Option<Vec<String>>,
-	group_id: Option<Vec<String>>,
-	group_id__n: Option<Vec<String>>,
+	/// Tenant group (slug)
+	group: Option<Vec<i64>>,
+	/// Tenant group (slug)
+	group__n: Option<Vec<i64>>,
+	/// Tenant group (ID)
+	group_id: Option<Vec<i64>>,
+	/// Tenant group (ID)
+	group_id__n: Option<Vec<i64>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -23186,7 +21336,7 @@ pub enum TenancyTenantsCreateResponse {
 	Other(Response)
 }
 /// Post a list of tenant objects.
-pub fn tenancy_tenants_create(state: &ThanixClient, body: TenantRequest) -> Result<TenancyTenantsCreateResponse, Error> {
+pub fn tenancy_tenants_create(state: &ThanixClient, body: WritableTenantRequest) -> Result<TenancyTenantsCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/tenancy/tenants/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -23248,7 +21398,7 @@ pub enum TenancyTenantsUpdateResponse {
 	Other(Response)
 }
 /// Put a tenant object.
-pub fn tenancy_tenants_update(state: &ThanixClient, body: TenantRequest, id: i64) -> Result<TenancyTenantsUpdateResponse, Error> {
+pub fn tenancy_tenants_update(state: &ThanixClient, body: WritableTenantRequest, id: i64) -> Result<TenancyTenantsUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/tenancy/tenants/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -23278,7 +21428,7 @@ pub enum TenancyTenantsPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a tenant object.
-pub fn tenancy_tenants_partial_update(state: &ThanixClient, body: PatchedTenantRequest, id: i64) -> Result<TenancyTenantsPartialUpdateResponse, Error> {
+pub fn tenancy_tenants_partial_update(state: &ThanixClient, body: PatchedWritableTenantRequest, id: i64) -> Result<TenancyTenantsPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/tenancy/tenants/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -23305,17 +21455,6 @@ pub fn users_config_retrieve(state: &ThanixClient) -> Result<UsersConfigRetrieve
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct UsersGroupsListQuery {
-	description: Option<Vec<String>>,
-	description__empty: Option<bool>,
-	description__ic: Option<Vec<String>>,
-	description__ie: Option<Vec<String>>,
-	description__iew: Option<Vec<String>>,
-	description__isw: Option<Vec<String>>,
-	description__n: Option<Vec<String>>,
-	description__nic: Option<Vec<String>>,
-	description__nie: Option<Vec<String>>,
-	description__niew: Option<Vec<String>>,
-	description__nisw: Option<Vec<String>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -23336,24 +21475,12 @@ pub struct UsersGroupsListQuery {
 	name__nie: Option<Vec<String>>,
 	name__niew: Option<Vec<String>>,
 	name__nisw: Option<Vec<String>>,
-	/// Notification group (ID)
-	notification_group_id: Option<Vec<i64>>,
-	/// Notification group (ID)
-	notification_group_id__n: Option<Vec<i64>>,
 	/// The initial index from which to return the results.
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
-	/// Permission (ID)
-	permission_id: Option<Vec<i64>>,
-	/// Permission (ID)
-	permission_id__n: Option<Vec<i64>>,
 	/// Search
 	q: Option<String>,
-	/// User (ID)
-	user_id: Option<Vec<i64>>,
-	/// User (ID)
-	user_id__n: Option<Vec<i64>>,
 
 }
 #[derive(Debug)]
@@ -23541,18 +21668,6 @@ pub struct UsersPermissionsListQuery {
 	name__nie: Option<Vec<String>>,
 	name__niew: Option<Vec<String>>,
 	name__nisw: Option<Vec<String>>,
-	object_type: Option<String>,
-	object_type__ic: Option<String>,
-	object_type__ie: Option<String>,
-	object_type__iew: Option<String>,
-	object_type__isw: Option<String>,
-	object_type__n: Option<String>,
-	object_type__nic: Option<String>,
-	object_type__nie: Option<String>,
-	object_type__niew: Option<String>,
-	object_type__nisw: Option<String>,
-	object_type_id: Option<Vec<i64>>,
-	object_type_id__n: Option<Vec<i64>>,
 	object_types: Option<Vec<i64>>,
 	object_types__n: Option<Vec<i64>>,
 	/// The initial index from which to return the results.
@@ -23608,7 +21723,7 @@ pub enum UsersPermissionsCreateResponse {
 	Other(Response)
 }
 /// Post a list of permission objects.
-pub fn users_permissions_create(state: &ThanixClient, body: ObjectPermissionRequest) -> Result<UsersPermissionsCreateResponse, Error> {
+pub fn users_permissions_create(state: &ThanixClient, body: WritableObjectPermissionRequest) -> Result<UsersPermissionsCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/users/permissions/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -23670,7 +21785,7 @@ pub enum UsersPermissionsUpdateResponse {
 	Other(Response)
 }
 /// Put a permission object.
-pub fn users_permissions_update(state: &ThanixClient, body: ObjectPermissionRequest, id: i64) -> Result<UsersPermissionsUpdateResponse, Error> {
+pub fn users_permissions_update(state: &ThanixClient, body: WritableObjectPermissionRequest, id: i64) -> Result<UsersPermissionsUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/users/permissions/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -23700,7 +21815,7 @@ pub enum UsersPermissionsPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a permission object.
-pub fn users_permissions_partial_update(state: &ThanixClient, body: PatchedObjectPermissionRequest, id: i64) -> Result<UsersPermissionsPartialUpdateResponse, Error> {
+pub fn users_permissions_partial_update(state: &ThanixClient, body: PatchedWritableObjectPermissionRequest, id: i64) -> Result<UsersPermissionsPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/users/permissions/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -23747,13 +21862,6 @@ pub struct UsersTokensListQuery {
 	key__nie: Option<Vec<String>>,
 	key__niew: Option<Vec<String>>,
 	key__nisw: Option<Vec<String>>,
-	last_used: Option<Vec<String>>,
-	last_used__empty: Option<bool>,
-	last_used__gt: Option<Vec<String>>,
-	last_used__gte: Option<Vec<String>>,
-	last_used__lt: Option<Vec<String>>,
-	last_used__lte: Option<Vec<String>>,
-	last_used__n: Option<Vec<String>>,
 	/// Number of results to return per page.
 	limit: Option<i64>,
 	/// The initial index from which to return the results.
@@ -23810,7 +21918,7 @@ pub enum UsersTokensCreateResponse {
 	Other(Response)
 }
 /// Post a list of token objects.
-pub fn users_tokens_create(state: &ThanixClient, body: TokenRequest) -> Result<UsersTokensCreateResponse, Error> {
+pub fn users_tokens_create(state: &ThanixClient, body: WritableTokenRequest) -> Result<UsersTokensCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/users/tokens/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -23872,7 +21980,7 @@ pub enum UsersTokensUpdateResponse {
 	Other(Response)
 }
 /// Put a token object.
-pub fn users_tokens_update(state: &ThanixClient, body: TokenRequest, id: i64) -> Result<UsersTokensUpdateResponse, Error> {
+pub fn users_tokens_update(state: &ThanixClient, body: WritableTokenRequest, id: i64) -> Result<UsersTokensUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/users/tokens/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -23902,7 +22010,7 @@ pub enum UsersTokensPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a token object.
-pub fn users_tokens_partial_update(state: &ThanixClient, body: PatchedTokenRequest, id: i64) -> Result<UsersTokensPartialUpdateResponse, Error> {
+pub fn users_tokens_partial_update(state: &ThanixClient, body: PatchedWritableTokenRequest, id: i64) -> Result<UsersTokensPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/users/tokens/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -23932,13 +22040,6 @@ pub fn users_tokens_provision_create(state: &ThanixClient, body: TokenProvisionR
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct UsersUsersListQuery {
-	date_joined: Option<Vec<String>>,
-	date_joined__empty: Option<bool>,
-	date_joined__gt: Option<Vec<String>>,
-	date_joined__gte: Option<Vec<String>>,
-	date_joined__lt: Option<Vec<String>>,
-	date_joined__lte: Option<Vec<String>>,
-	date_joined__n: Option<Vec<String>>,
 	email: Option<Vec<String>>,
 	email__empty: Option<bool>,
 	email__ic: Option<Vec<String>>,
@@ -23979,13 +22080,6 @@ pub struct UsersUsersListQuery {
 	is_active: Option<bool>,
 	is_staff: Option<bool>,
 	is_superuser: Option<bool>,
-	last_login: Option<Vec<String>>,
-	last_login__empty: Option<bool>,
-	last_login__gt: Option<Vec<String>>,
-	last_login__gte: Option<Vec<String>>,
-	last_login__lt: Option<Vec<String>>,
-	last_login__lte: Option<Vec<String>>,
-	last_login__n: Option<Vec<String>>,
 	last_name: Option<Vec<String>>,
 	last_name__empty: Option<bool>,
 	last_name__ic: Option<Vec<String>>,
@@ -23999,18 +22093,10 @@ pub struct UsersUsersListQuery {
 	last_name__nisw: Option<Vec<String>>,
 	/// Number of results to return per page.
 	limit: Option<i64>,
-	/// Notification group (ID)
-	notification_group_id: Option<Vec<i64>>,
-	/// Notification group (ID)
-	notification_group_id__n: Option<Vec<i64>>,
 	/// The initial index from which to return the results.
 	offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	ordering: Option<String>,
-	/// Permission (ID)
-	permission_id: Option<Vec<i64>>,
-	/// Permission (ID)
-	permission_id__n: Option<Vec<i64>>,
 	/// Search
 	q: Option<String>,
 	username: Option<Vec<String>>,
@@ -24063,7 +22149,7 @@ pub enum UsersUsersCreateResponse {
 	Other(Response)
 }
 /// Post a list of user objects.
-pub fn users_users_create(state: &ThanixClient, body: UserRequest) -> Result<UsersUsersCreateResponse, Error> {
+pub fn users_users_create(state: &ThanixClient, body: WritableUserRequest) -> Result<UsersUsersCreateResponse, Error> {
 	let r#response = state.client.post(format!("{}/api/users/users/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -24125,7 +22211,7 @@ pub enum UsersUsersUpdateResponse {
 	Other(Response)
 }
 /// Put a user object.
-pub fn users_users_update(state: &ThanixClient, body: UserRequest, id: i64) -> Result<UsersUsersUpdateResponse, Error> {
+pub fn users_users_update(state: &ThanixClient, body: WritableUserRequest, id: i64) -> Result<UsersUsersUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/users/users/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -24155,7 +22241,7 @@ pub enum UsersUsersPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a user object.
-pub fn users_users_partial_update(state: &ThanixClient, body: PatchedUserRequest, id: i64) -> Result<UsersUsersPartialUpdateResponse, Error> {
+pub fn users_users_partial_update(state: &ThanixClient, body: PatchedWritableUserRequest, id: i64) -> Result<UsersUsersPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/users/users/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
 		.json(&body)
@@ -24171,8 +22257,10 @@ pub struct VirtualizationClusterGroupsListQuery {
 	contact: Option<Vec<i64>>,
 	/// Contact
 	contact__n: Option<Vec<i64>>,
-	contact_group: Option<Vec<String>>,
-	contact_group__n: Option<Vec<String>>,
+	/// Contact group
+	contact_group: Option<Vec<i64>>,
+	/// Contact group
+	contact_group__n: Option<Vec<i64>>,
 	/// Contact Role
 	contact_role: Option<Vec<i64>>,
 	/// Contact Role
@@ -24601,8 +22689,10 @@ pub struct VirtualizationClustersListQuery {
 	contact: Option<Vec<i64>>,
 	/// Contact
 	contact__n: Option<Vec<i64>>,
-	contact_group: Option<Vec<String>>,
-	contact_group__n: Option<Vec<String>>,
+	/// Contact group
+	contact_group: Option<Vec<i64>>,
+	/// Contact group
+	contact_group__n: Option<Vec<i64>>,
 	/// Contact Role
 	contact_role: Option<Vec<i64>>,
 	/// Contact Role
@@ -24668,18 +22758,26 @@ pub struct VirtualizationClustersListQuery {
 	ordering: Option<String>,
 	/// Search
 	q: Option<String>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
 	/// Site (slug)
 	site: Option<Vec<String>>,
 	/// Site (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<Option<i64>>>,
 	/// Site (ID)
@@ -24692,10 +22790,14 @@ pub struct VirtualizationClustersListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
@@ -24918,18 +23020,6 @@ pub struct VirtualizationInterfacesListQuery {
 	mac_address__nie: Option<Vec<String>>,
 	mac_address__niew: Option<Vec<String>>,
 	mac_address__nisw: Option<Vec<String>>,
-	/// IEEE 802.1Q tagging strategy
-	/// 
-	/// * `access` - Access
-	/// * `tagged` - Tagged
-	/// * `tagged-all` - Tagged (All)
-	mode: Option<String>,
-	/// IEEE 802.1Q tagging strategy
-	/// 
-	/// * `access` - Access
-	/// * `tagged` - Tagged
-	/// * `tagged-all` - Tagged (All)
-	mode__n: Option<String>,
 	modified_by_request: Option<String>,
 	mtu: Option<Vec<i64>>,
 	mtu__empty: Option<bool>,
@@ -25124,220 +23214,6 @@ pub fn virtualization_interfaces_partial_update(state: &ThanixClient, body: Patc
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VirtualizationVirtualDisksListQuery {
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
-	description: Option<Vec<String>>,
-	description__empty: Option<bool>,
-	description__ic: Option<Vec<String>>,
-	description__ie: Option<Vec<String>>,
-	description__iew: Option<Vec<String>>,
-	description__isw: Option<Vec<String>>,
-	description__n: Option<Vec<String>>,
-	description__nic: Option<Vec<String>>,
-	description__nie: Option<Vec<String>>,
-	description__niew: Option<Vec<String>>,
-	description__nisw: Option<Vec<String>>,
-	id: Option<Vec<i64>>,
-	id__empty: Option<bool>,
-	id__gt: Option<Vec<i64>>,
-	id__gte: Option<Vec<i64>>,
-	id__lt: Option<Vec<i64>>,
-	id__lte: Option<Vec<i64>>,
-	id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	modified_by_request: Option<String>,
-	name: Option<Vec<String>>,
-	name__empty: Option<bool>,
-	name__ic: Option<Vec<String>>,
-	name__ie: Option<Vec<String>>,
-	name__iew: Option<Vec<String>>,
-	name__isw: Option<Vec<String>>,
-	name__n: Option<Vec<String>>,
-	name__nic: Option<Vec<String>>,
-	name__nie: Option<Vec<String>>,
-	name__niew: Option<Vec<String>>,
-	name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-	/// Search
-	q: Option<String>,
-	size: Option<Vec<i64>>,
-	size__empty: Option<bool>,
-	size__gt: Option<Vec<i64>>,
-	size__gte: Option<Vec<i64>>,
-	size__lt: Option<Vec<i64>>,
-	size__lte: Option<Vec<i64>>,
-	size__n: Option<Vec<i64>>,
-	tag: Option<Vec<String>>,
-	tag__n: Option<Vec<String>>,
-	updated_by_request: Option<String>,
-	/// Virtual machine
-	virtual_machine: Option<Vec<String>>,
-	/// Virtual machine
-	virtual_machine__n: Option<Vec<String>>,
-	/// Virtual machine (ID)
-	virtual_machine_id: Option<Vec<i64>>,
-	/// Virtual machine (ID)
-	virtual_machine_id__n: Option<Vec<i64>>,
-
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualDisksListResponse {
-	Http200(PaginatedVirtualDiskList),
-	Other(Response)
-}
-/// Get a list of virtual disk objects.
-pub fn virtualization_virtual_disks_list(state: &ThanixClient, query: VirtualizationVirtualDisksListQuery) -> Result<VirtualizationVirtualDisksListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/virtualization/virtual-disks/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VirtualizationVirtualDisksListResponse::Http200(r#response.json::<PaginatedVirtualDiskList>()?)) },
-		r#other_status => { Ok(VirtualizationVirtualDisksListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualDisksBulkUpdateResponse {
-	Http200(Vec<VirtualDisk>),
-	Other(Response)
-}
-/// Put a list of virtual disk objects.
-pub fn virtualization_virtual_disks_bulk_update(state: &ThanixClient, body: Vec<VirtualDiskRequest>) -> Result<VirtualizationVirtualDisksBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/virtualization/virtual-disks/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VirtualizationVirtualDisksBulkUpdateResponse::Http200(r#response.json::<Vec<VirtualDisk>>()?)) },
-		r#other_status => { Ok(VirtualizationVirtualDisksBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualDisksCreateResponse {
-	Http201(VirtualDisk),
-	Other(Response)
-}
-/// Post a list of virtual disk objects.
-pub fn virtualization_virtual_disks_create(state: &ThanixClient, body: VirtualDiskRequest) -> Result<VirtualizationVirtualDisksCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/virtualization/virtual-disks/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VirtualizationVirtualDisksCreateResponse::Http201(r#response.json::<VirtualDisk>()?)) },
-		r#other_status => { Ok(VirtualizationVirtualDisksCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualDisksBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of virtual disk objects.
-pub fn virtualization_virtual_disks_bulk_destroy(state: &ThanixClient, body: Vec<VirtualDiskRequest>) -> Result<VirtualizationVirtualDisksBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/virtualization/virtual-disks/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VirtualizationVirtualDisksBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualDisksBulkPartialUpdateResponse {
-	Http200(Vec<VirtualDisk>),
-	Other(Response)
-}
-/// Patch a list of virtual disk objects.
-pub fn virtualization_virtual_disks_bulk_partial_update(state: &ThanixClient, body: Vec<VirtualDiskRequest>) -> Result<VirtualizationVirtualDisksBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/virtualization/virtual-disks/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VirtualizationVirtualDisksBulkPartialUpdateResponse::Http200(r#response.json::<Vec<VirtualDisk>>()?)) },
-		r#other_status => { Ok(VirtualizationVirtualDisksBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualDisksRetrieveResponse {
-	Http200(VirtualDisk),
-	Other(Response)
-}
-/// Get a virtual disk object.
-pub fn virtualization_virtual_disks_retrieve(state: &ThanixClient, id: i64) -> Result<VirtualizationVirtualDisksRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/virtualization/virtual-disks/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VirtualizationVirtualDisksRetrieveResponse::Http200(r#response.json::<VirtualDisk>()?)) },
-		r#other_status => { Ok(VirtualizationVirtualDisksRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualDisksUpdateResponse {
-	Http200(VirtualDisk),
-	Other(Response)
-}
-/// Put a virtual disk object.
-pub fn virtualization_virtual_disks_update(state: &ThanixClient, body: VirtualDiskRequest, id: i64) -> Result<VirtualizationVirtualDisksUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/virtualization/virtual-disks/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VirtualizationVirtualDisksUpdateResponse::Http200(r#response.json::<VirtualDisk>()?)) },
-		r#other_status => { Ok(VirtualizationVirtualDisksUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualDisksDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a virtual disk object.
-pub fn virtualization_virtual_disks_destroy(state: &ThanixClient, id: i64) -> Result<VirtualizationVirtualDisksDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/virtualization/virtual-disks/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VirtualizationVirtualDisksDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualDisksPartialUpdateResponse {
-	Http200(VirtualDisk),
-	Other(Response)
-}
-/// Patch a virtual disk object.
-pub fn virtualization_virtual_disks_partial_update(state: &ThanixClient, body: PatchedVirtualDiskRequest, id: i64) -> Result<VirtualizationVirtualDisksPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/virtualization/virtual-disks/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VirtualizationVirtualDisksPartialUpdateResponse::Http200(r#response.json::<VirtualDisk>()?)) },
-		r#other_status => { Ok(VirtualizationVirtualDisksPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VirtualizationVirtualMachinesListQuery {
 	/// Cluster
 	cluster: Option<Vec<String>>,
@@ -25371,8 +23247,10 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	contact: Option<Vec<i64>>,
 	/// Contact
 	contact__n: Option<Vec<i64>>,
-	contact_group: Option<Vec<String>>,
-	contact_group__n: Option<Vec<String>>,
+	/// Contact group
+	contact_group: Option<Vec<i64>>,
+	/// Contact group
+	contact_group__n: Option<Vec<i64>>,
 	/// Contact Role
 	contact_role: Option<Vec<i64>>,
 	/// Contact Role
@@ -25420,13 +23298,6 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	interface_count: Option<Vec<i64>>,
-	interface_count__empty: Option<bool>,
-	interface_count__gt: Option<Vec<i64>>,
-	interface_count__gte: Option<Vec<i64>>,
-	interface_count__lt: Option<Vec<i64>>,
-	interface_count__lte: Option<Vec<i64>>,
-	interface_count__n: Option<Vec<i64>>,
 	last_updated: Option<Vec<String>>,
 	last_updated__empty: Option<Vec<String>>,
 	last_updated__gt: Option<Vec<String>>,
@@ -25489,10 +23360,14 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	primary_ip6_id__n: Option<Vec<i64>>,
 	/// Search
 	q: Option<String>,
-	region: Option<Vec<String>>,
-	region__n: Option<Vec<String>>,
-	region_id: Option<Vec<String>>,
-	region_id__n: Option<Vec<String>>,
+	/// Region (slug)
+	region: Option<Vec<i64>>,
+	/// Region (slug)
+	region__n: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id: Option<Vec<i64>>,
+	/// Region (ID)
+	region_id__n: Option<Vec<i64>>,
 	/// Role (slug)
 	role: Option<Vec<String>>,
 	/// Role (slug)
@@ -25501,25 +23376,18 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	role_id: Option<Vec<Option<i64>>>,
 	/// Role (ID)
 	role_id__n: Option<Vec<Option<i64>>>,
-	serial: Option<Vec<String>>,
-	serial__empty: Option<bool>,
-	serial__ic: Option<Vec<String>>,
-	serial__ie: Option<Vec<String>>,
-	serial__iew: Option<Vec<String>>,
-	serial__isw: Option<Vec<String>>,
-	serial__n: Option<Vec<String>>,
-	serial__nic: Option<Vec<String>>,
-	serial__nie: Option<Vec<String>>,
-	serial__niew: Option<Vec<String>>,
-	serial__nisw: Option<Vec<String>>,
 	/// Site (slug)
 	site: Option<Vec<String>>,
 	/// Site (slug)
 	site__n: Option<Vec<String>>,
-	site_group: Option<Vec<String>>,
-	site_group__n: Option<Vec<String>>,
-	site_group_id: Option<Vec<String>>,
-	site_group_id__n: Option<Vec<String>>,
+	/// Site group (slug)
+	site_group: Option<Vec<i64>>,
+	/// Site group (slug)
+	site_group__n: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id: Option<Vec<i64>>,
+	/// Site group (ID)
+	site_group_id__n: Option<Vec<i64>>,
 	/// Site (ID)
 	site_id: Option<Vec<Option<i64>>>,
 	/// Site (ID)
@@ -25532,10 +23400,14 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
@@ -25548,13 +23420,6 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	vcpus__lt: Option<Vec<f64>>,
 	vcpus__lte: Option<Vec<f64>>,
 	vcpus__n: Option<Vec<f64>>,
-	virtual_disk_count: Option<Vec<i64>>,
-	virtual_disk_count__empty: Option<bool>,
-	virtual_disk_count__gt: Option<Vec<i64>>,
-	virtual_disk_count__gte: Option<Vec<i64>>,
-	virtual_disk_count__lt: Option<Vec<i64>>,
-	virtual_disk_count__lte: Option<Vec<i64>>,
-	virtual_disk_count__n: Option<Vec<i64>>,
 
 }
 #[derive(Debug)]
@@ -25697,2285 +23562,7 @@ pub fn virtualization_virtual_machines_partial_update(state: &ThanixClient, body
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VirtualizationVirtualMachinesRenderConfigCreateQuery {
-	format: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualMachinesRenderConfigCreateResponse {
-	Http200(VirtualMachineWithConfigContext),
-	Other(Response)
-}
-/// Resolve and render the preferred ConfigTemplate for this Device.
-pub fn virtualization_virtual_machines_render_config_create(state: &ThanixClient, query: VirtualizationVirtualMachinesRenderConfigCreateQuery, body: WritableVirtualMachineWithConfigContextRequest, id: i64) -> Result<VirtualizationVirtualMachinesRenderConfigCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/virtualization/virtual-machines/{id}/render-config/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VirtualizationVirtualMachinesRenderConfigCreateResponse::Http200(r#response.json::<VirtualMachineWithConfigContext>()?)) },
-		r#other_status => { Ok(VirtualizationVirtualMachinesRenderConfigCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnIkePoliciesListQuery {
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
-	description: Option<Vec<String>>,
-	description__empty: Option<bool>,
-	description__ic: Option<Vec<String>>,
-	description__ie: Option<Vec<String>>,
-	description__iew: Option<Vec<String>>,
-	description__isw: Option<Vec<String>>,
-	description__n: Option<Vec<String>>,
-	description__nic: Option<Vec<String>>,
-	description__nie: Option<Vec<String>>,
-	description__niew: Option<Vec<String>>,
-	description__nisw: Option<Vec<String>>,
-	id: Option<Vec<i64>>,
-	id__empty: Option<bool>,
-	id__gt: Option<Vec<i64>>,
-	id__gte: Option<Vec<i64>>,
-	id__lt: Option<Vec<i64>>,
-	id__lte: Option<Vec<i64>>,
-	id__n: Option<Vec<i64>>,
-	ike_proposal: Option<Vec<String>>,
-	ike_proposal__n: Option<Vec<String>>,
-	ike_proposal_id: Option<Vec<i64>>,
-	ike_proposal_id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	mode: Option<Vec<String>>,
-	mode__n: Option<Vec<String>>,
-	modified_by_request: Option<String>,
-	name: Option<Vec<String>>,
-	name__empty: Option<bool>,
-	name__ic: Option<Vec<String>>,
-	name__ie: Option<Vec<String>>,
-	name__iew: Option<Vec<String>>,
-	name__isw: Option<Vec<String>>,
-	name__n: Option<Vec<String>>,
-	name__nic: Option<Vec<String>>,
-	name__nie: Option<Vec<String>>,
-	name__niew: Option<Vec<String>>,
-	name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-	preshared_key: Option<String>,
-	preshared_key__ic: Option<String>,
-	preshared_key__ie: Option<String>,
-	preshared_key__iew: Option<String>,
-	preshared_key__isw: Option<String>,
-	preshared_key__n: Option<String>,
-	preshared_key__nic: Option<String>,
-	preshared_key__nie: Option<String>,
-	preshared_key__niew: Option<String>,
-	preshared_key__nisw: Option<String>,
-	/// Search
-	q: Option<String>,
-	tag: Option<Vec<String>>,
-	tag__n: Option<Vec<String>>,
-	updated_by_request: Option<String>,
-	version: Option<Vec<i64>>,
-	version__n: Option<Vec<i64>>,
-
-}
-#[derive(Debug)]
-pub enum VpnIkePoliciesListResponse {
-	Http200(PaginatedIKEPolicyList),
-	Other(Response)
-}
-/// Get a list of IKE policy objects.
-pub fn vpn_ike_policies_list(state: &ThanixClient, query: VpnIkePoliciesListQuery) -> Result<VpnIkePoliciesListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/ike-policies/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkePoliciesListResponse::Http200(r#response.json::<PaginatedIKEPolicyList>()?)) },
-		r#other_status => { Ok(VpnIkePoliciesListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkePoliciesBulkUpdateResponse {
-	Http200(Vec<IKEPolicy>),
-	Other(Response)
-}
-/// Put a list of IKE policy objects.
-pub fn vpn_ike_policies_bulk_update(state: &ThanixClient, body: Vec<IKEPolicyRequest>) -> Result<VpnIkePoliciesBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ike-policies/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkePoliciesBulkUpdateResponse::Http200(r#response.json::<Vec<IKEPolicy>>()?)) },
-		r#other_status => { Ok(VpnIkePoliciesBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkePoliciesCreateResponse {
-	Http201(IKEPolicy),
-	Other(Response)
-}
-/// Post a list of IKE policy objects.
-pub fn vpn_ike_policies_create(state: &ThanixClient, body: WritableIKEPolicyRequest) -> Result<VpnIkePoliciesCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/ike-policies/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnIkePoliciesCreateResponse::Http201(r#response.json::<IKEPolicy>()?)) },
-		r#other_status => { Ok(VpnIkePoliciesCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkePoliciesBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of IKE policy objects.
-pub fn vpn_ike_policies_bulk_destroy(state: &ThanixClient, body: Vec<IKEPolicyRequest>) -> Result<VpnIkePoliciesBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ike-policies/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIkePoliciesBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkePoliciesBulkPartialUpdateResponse {
-	Http200(Vec<IKEPolicy>),
-	Other(Response)
-}
-/// Patch a list of IKE policy objects.
-pub fn vpn_ike_policies_bulk_partial_update(state: &ThanixClient, body: Vec<IKEPolicyRequest>) -> Result<VpnIkePoliciesBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ike-policies/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkePoliciesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<IKEPolicy>>()?)) },
-		r#other_status => { Ok(VpnIkePoliciesBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkePoliciesRetrieveResponse {
-	Http200(IKEPolicy),
-	Other(Response)
-}
-/// Get a IKE policy object.
-pub fn vpn_ike_policies_retrieve(state: &ThanixClient, id: i64) -> Result<VpnIkePoliciesRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/ike-policies/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkePoliciesRetrieveResponse::Http200(r#response.json::<IKEPolicy>()?)) },
-		r#other_status => { Ok(VpnIkePoliciesRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkePoliciesUpdateResponse {
-	Http200(IKEPolicy),
-	Other(Response)
-}
-/// Put a IKE policy object.
-pub fn vpn_ike_policies_update(state: &ThanixClient, body: WritableIKEPolicyRequest, id: i64) -> Result<VpnIkePoliciesUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ike-policies/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkePoliciesUpdateResponse::Http200(r#response.json::<IKEPolicy>()?)) },
-		r#other_status => { Ok(VpnIkePoliciesUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkePoliciesDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a IKE policy object.
-pub fn vpn_ike_policies_destroy(state: &ThanixClient, id: i64) -> Result<VpnIkePoliciesDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ike-policies/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIkePoliciesDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkePoliciesPartialUpdateResponse {
-	Http200(IKEPolicy),
-	Other(Response)
-}
-/// Patch a IKE policy object.
-pub fn vpn_ike_policies_partial_update(state: &ThanixClient, body: PatchedWritableIKEPolicyRequest, id: i64) -> Result<VpnIkePoliciesPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ike-policies/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkePoliciesPartialUpdateResponse::Http200(r#response.json::<IKEPolicy>()?)) },
-		r#other_status => { Ok(VpnIkePoliciesPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnIkeProposalsListQuery {
-	authentication_algorithm: Option<Vec<String>>,
-	authentication_algorithm__n: Option<Vec<String>>,
-	authentication_method: Option<Vec<String>>,
-	authentication_method__n: Option<Vec<String>>,
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
-	description: Option<Vec<String>>,
-	description__empty: Option<bool>,
-	description__ic: Option<Vec<String>>,
-	description__ie: Option<Vec<String>>,
-	description__iew: Option<Vec<String>>,
-	description__isw: Option<Vec<String>>,
-	description__n: Option<Vec<String>>,
-	description__nic: Option<Vec<String>>,
-	description__nie: Option<Vec<String>>,
-	description__niew: Option<Vec<String>>,
-	description__nisw: Option<Vec<String>>,
-	encryption_algorithm: Option<Vec<String>>,
-	encryption_algorithm__n: Option<Vec<String>>,
-	/// Diffie-Hellman group ID
-	group: Option<Vec<i64>>,
-	/// Diffie-Hellman group ID
-	group__n: Option<Vec<i64>>,
-	id: Option<Vec<i64>>,
-	id__empty: Option<bool>,
-	id__gt: Option<Vec<i64>>,
-	id__gte: Option<Vec<i64>>,
-	id__lt: Option<Vec<i64>>,
-	id__lte: Option<Vec<i64>>,
-	id__n: Option<Vec<i64>>,
-	/// IKE policy (name)
-	ike_policy: Option<Vec<String>>,
-	/// IKE policy (name)
-	ike_policy__n: Option<Vec<String>>,
-	/// IKE policy (ID)
-	ike_policy_id: Option<Vec<i64>>,
-	/// IKE policy (ID)
-	ike_policy_id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	modified_by_request: Option<String>,
-	name: Option<Vec<String>>,
-	name__empty: Option<bool>,
-	name__ic: Option<Vec<String>>,
-	name__ie: Option<Vec<String>>,
-	name__iew: Option<Vec<String>>,
-	name__isw: Option<Vec<String>>,
-	name__n: Option<Vec<String>>,
-	name__nic: Option<Vec<String>>,
-	name__nie: Option<Vec<String>>,
-	name__niew: Option<Vec<String>>,
-	name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-	/// Search
-	q: Option<String>,
-	sa_lifetime: Option<Vec<i64>>,
-	sa_lifetime__empty: Option<bool>,
-	sa_lifetime__gt: Option<Vec<i64>>,
-	sa_lifetime__gte: Option<Vec<i64>>,
-	sa_lifetime__lt: Option<Vec<i64>>,
-	sa_lifetime__lte: Option<Vec<i64>>,
-	sa_lifetime__n: Option<Vec<i64>>,
-	tag: Option<Vec<String>>,
-	tag__n: Option<Vec<String>>,
-	updated_by_request: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum VpnIkeProposalsListResponse {
-	Http200(PaginatedIKEProposalList),
-	Other(Response)
-}
-/// Get a list of IKE proposal objects.
-pub fn vpn_ike_proposals_list(state: &ThanixClient, query: VpnIkeProposalsListQuery) -> Result<VpnIkeProposalsListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/ike-proposals/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkeProposalsListResponse::Http200(r#response.json::<PaginatedIKEProposalList>()?)) },
-		r#other_status => { Ok(VpnIkeProposalsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkeProposalsBulkUpdateResponse {
-	Http200(Vec<IKEProposal>),
-	Other(Response)
-}
-/// Put a list of IKE proposal objects.
-pub fn vpn_ike_proposals_bulk_update(state: &ThanixClient, body: Vec<IKEProposalRequest>) -> Result<VpnIkeProposalsBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ike-proposals/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkeProposalsBulkUpdateResponse::Http200(r#response.json::<Vec<IKEProposal>>()?)) },
-		r#other_status => { Ok(VpnIkeProposalsBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkeProposalsCreateResponse {
-	Http201(IKEProposal),
-	Other(Response)
-}
-/// Post a list of IKE proposal objects.
-pub fn vpn_ike_proposals_create(state: &ThanixClient, body: WritableIKEProposalRequest) -> Result<VpnIkeProposalsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/ike-proposals/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnIkeProposalsCreateResponse::Http201(r#response.json::<IKEProposal>()?)) },
-		r#other_status => { Ok(VpnIkeProposalsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkeProposalsBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of IKE proposal objects.
-pub fn vpn_ike_proposals_bulk_destroy(state: &ThanixClient, body: Vec<IKEProposalRequest>) -> Result<VpnIkeProposalsBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ike-proposals/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIkeProposalsBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkeProposalsBulkPartialUpdateResponse {
-	Http200(Vec<IKEProposal>),
-	Other(Response)
-}
-/// Patch a list of IKE proposal objects.
-pub fn vpn_ike_proposals_bulk_partial_update(state: &ThanixClient, body: Vec<IKEProposalRequest>) -> Result<VpnIkeProposalsBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ike-proposals/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkeProposalsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<IKEProposal>>()?)) },
-		r#other_status => { Ok(VpnIkeProposalsBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkeProposalsRetrieveResponse {
-	Http200(IKEProposal),
-	Other(Response)
-}
-/// Get a IKE proposal object.
-pub fn vpn_ike_proposals_retrieve(state: &ThanixClient, id: i64) -> Result<VpnIkeProposalsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/ike-proposals/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkeProposalsRetrieveResponse::Http200(r#response.json::<IKEProposal>()?)) },
-		r#other_status => { Ok(VpnIkeProposalsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkeProposalsUpdateResponse {
-	Http200(IKEProposal),
-	Other(Response)
-}
-/// Put a IKE proposal object.
-pub fn vpn_ike_proposals_update(state: &ThanixClient, body: WritableIKEProposalRequest, id: i64) -> Result<VpnIkeProposalsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ike-proposals/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkeProposalsUpdateResponse::Http200(r#response.json::<IKEProposal>()?)) },
-		r#other_status => { Ok(VpnIkeProposalsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkeProposalsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a IKE proposal object.
-pub fn vpn_ike_proposals_destroy(state: &ThanixClient, id: i64) -> Result<VpnIkeProposalsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ike-proposals/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIkeProposalsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkeProposalsPartialUpdateResponse {
-	Http200(IKEProposal),
-	Other(Response)
-}
-/// Patch a IKE proposal object.
-pub fn vpn_ike_proposals_partial_update(state: &ThanixClient, body: PatchedWritableIKEProposalRequest, id: i64) -> Result<VpnIkeProposalsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ike-proposals/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkeProposalsPartialUpdateResponse::Http200(r#response.json::<IKEProposal>()?)) },
-		r#other_status => { Ok(VpnIkeProposalsPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnIpsecPoliciesListQuery {
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
-	description: Option<Vec<String>>,
-	description__empty: Option<bool>,
-	description__ic: Option<Vec<String>>,
-	description__ie: Option<Vec<String>>,
-	description__iew: Option<Vec<String>>,
-	description__isw: Option<Vec<String>>,
-	description__n: Option<Vec<String>>,
-	description__nic: Option<Vec<String>>,
-	description__nie: Option<Vec<String>>,
-	description__niew: Option<Vec<String>>,
-	description__nisw: Option<Vec<String>>,
-	id: Option<Vec<i64>>,
-	id__empty: Option<bool>,
-	id__gt: Option<Vec<i64>>,
-	id__gte: Option<Vec<i64>>,
-	id__lt: Option<Vec<i64>>,
-	id__lte: Option<Vec<i64>>,
-	id__n: Option<Vec<i64>>,
-	ipsec_proposal: Option<Vec<String>>,
-	ipsec_proposal__n: Option<Vec<String>>,
-	ipsec_proposal_id: Option<Vec<i64>>,
-	ipsec_proposal_id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	modified_by_request: Option<String>,
-	name: Option<Vec<String>>,
-	name__empty: Option<bool>,
-	name__ic: Option<Vec<String>>,
-	name__ie: Option<Vec<String>>,
-	name__iew: Option<Vec<String>>,
-	name__isw: Option<Vec<String>>,
-	name__n: Option<Vec<String>>,
-	name__nic: Option<Vec<String>>,
-	name__nie: Option<Vec<String>>,
-	name__niew: Option<Vec<String>>,
-	name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-	/// Diffie-Hellman group for Perfect Forward Secrecy
-	pfs_group: Option<Vec<Option<i64>>>,
-	/// Diffie-Hellman group for Perfect Forward Secrecy
-	pfs_group__n: Option<Vec<Option<i64>>>,
-	/// Search
-	q: Option<String>,
-	tag: Option<Vec<String>>,
-	tag__n: Option<Vec<String>>,
-	updated_by_request: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum VpnIpsecPoliciesListResponse {
-	Http200(PaginatedIPSecPolicyList),
-	Other(Response)
-}
-/// Get a list of IPSec policy objects.
-pub fn vpn_ipsec_policies_list(state: &ThanixClient, query: VpnIpsecPoliciesListQuery) -> Result<VpnIpsecPoliciesListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/ipsec-policies/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecPoliciesListResponse::Http200(r#response.json::<PaginatedIPSecPolicyList>()?)) },
-		r#other_status => { Ok(VpnIpsecPoliciesListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecPoliciesBulkUpdateResponse {
-	Http200(Vec<IPSecPolicy>),
-	Other(Response)
-}
-/// Put a list of IPSec policy objects.
-pub fn vpn_ipsec_policies_bulk_update(state: &ThanixClient, body: Vec<IPSecPolicyRequest>) -> Result<VpnIpsecPoliciesBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ipsec-policies/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecPoliciesBulkUpdateResponse::Http200(r#response.json::<Vec<IPSecPolicy>>()?)) },
-		r#other_status => { Ok(VpnIpsecPoliciesBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecPoliciesCreateResponse {
-	Http201(IPSecPolicy),
-	Other(Response)
-}
-/// Post a list of IPSec policy objects.
-pub fn vpn_ipsec_policies_create(state: &ThanixClient, body: WritableIPSecPolicyRequest) -> Result<VpnIpsecPoliciesCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/ipsec-policies/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnIpsecPoliciesCreateResponse::Http201(r#response.json::<IPSecPolicy>()?)) },
-		r#other_status => { Ok(VpnIpsecPoliciesCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecPoliciesBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of IPSec policy objects.
-pub fn vpn_ipsec_policies_bulk_destroy(state: &ThanixClient, body: Vec<IPSecPolicyRequest>) -> Result<VpnIpsecPoliciesBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ipsec-policies/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIpsecPoliciesBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecPoliciesBulkPartialUpdateResponse {
-	Http200(Vec<IPSecPolicy>),
-	Other(Response)
-}
-/// Patch a list of IPSec policy objects.
-pub fn vpn_ipsec_policies_bulk_partial_update(state: &ThanixClient, body: Vec<IPSecPolicyRequest>) -> Result<VpnIpsecPoliciesBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ipsec-policies/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecPoliciesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<IPSecPolicy>>()?)) },
-		r#other_status => { Ok(VpnIpsecPoliciesBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecPoliciesRetrieveResponse {
-	Http200(IPSecPolicy),
-	Other(Response)
-}
-/// Get a IPSec policy object.
-pub fn vpn_ipsec_policies_retrieve(state: &ThanixClient, id: i64) -> Result<VpnIpsecPoliciesRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/ipsec-policies/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecPoliciesRetrieveResponse::Http200(r#response.json::<IPSecPolicy>()?)) },
-		r#other_status => { Ok(VpnIpsecPoliciesRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecPoliciesUpdateResponse {
-	Http200(IPSecPolicy),
-	Other(Response)
-}
-/// Put a IPSec policy object.
-pub fn vpn_ipsec_policies_update(state: &ThanixClient, body: WritableIPSecPolicyRequest, id: i64) -> Result<VpnIpsecPoliciesUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ipsec-policies/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecPoliciesUpdateResponse::Http200(r#response.json::<IPSecPolicy>()?)) },
-		r#other_status => { Ok(VpnIpsecPoliciesUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecPoliciesDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a IPSec policy object.
-pub fn vpn_ipsec_policies_destroy(state: &ThanixClient, id: i64) -> Result<VpnIpsecPoliciesDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ipsec-policies/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIpsecPoliciesDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecPoliciesPartialUpdateResponse {
-	Http200(IPSecPolicy),
-	Other(Response)
-}
-/// Patch a IPSec policy object.
-pub fn vpn_ipsec_policies_partial_update(state: &ThanixClient, body: PatchedWritableIPSecPolicyRequest, id: i64) -> Result<VpnIpsecPoliciesPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ipsec-policies/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecPoliciesPartialUpdateResponse::Http200(r#response.json::<IPSecPolicy>()?)) },
-		r#other_status => { Ok(VpnIpsecPoliciesPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnIpsecProfilesListQuery {
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
-	description: Option<Vec<String>>,
-	description__empty: Option<bool>,
-	description__ic: Option<Vec<String>>,
-	description__ie: Option<Vec<String>>,
-	description__iew: Option<Vec<String>>,
-	description__isw: Option<Vec<String>>,
-	description__n: Option<Vec<String>>,
-	description__nic: Option<Vec<String>>,
-	description__nie: Option<Vec<String>>,
-	description__niew: Option<Vec<String>>,
-	description__nisw: Option<Vec<String>>,
-	id: Option<Vec<i64>>,
-	id__empty: Option<bool>,
-	id__gt: Option<Vec<i64>>,
-	id__gte: Option<Vec<i64>>,
-	id__lt: Option<Vec<i64>>,
-	id__lte: Option<Vec<i64>>,
-	id__n: Option<Vec<i64>>,
-	/// IKE policy (name)
-	ike_policy: Option<Vec<String>>,
-	/// IKE policy (name)
-	ike_policy__n: Option<Vec<String>>,
-	/// IKE policy (ID)
-	ike_policy_id: Option<Vec<i64>>,
-	/// IKE policy (ID)
-	ike_policy_id__n: Option<Vec<i64>>,
-	/// IPSec policy (name)
-	ipsec_policy: Option<Vec<String>>,
-	/// IPSec policy (name)
-	ipsec_policy__n: Option<Vec<String>>,
-	/// IPSec policy (ID)
-	ipsec_policy_id: Option<Vec<i64>>,
-	/// IPSec policy (ID)
-	ipsec_policy_id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	mode: Option<Vec<String>>,
-	mode__n: Option<Vec<String>>,
-	modified_by_request: Option<String>,
-	name: Option<Vec<String>>,
-	name__empty: Option<bool>,
-	name__ic: Option<Vec<String>>,
-	name__ie: Option<Vec<String>>,
-	name__iew: Option<Vec<String>>,
-	name__isw: Option<Vec<String>>,
-	name__n: Option<Vec<String>>,
-	name__nic: Option<Vec<String>>,
-	name__nie: Option<Vec<String>>,
-	name__niew: Option<Vec<String>>,
-	name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-	/// Search
-	q: Option<String>,
-	tag: Option<Vec<String>>,
-	tag__n: Option<Vec<String>>,
-	updated_by_request: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum VpnIpsecProfilesListResponse {
-	Http200(PaginatedIPSecProfileList),
-	Other(Response)
-}
-/// Get a list of IPSec profile objects.
-pub fn vpn_ipsec_profiles_list(state: &ThanixClient, query: VpnIpsecProfilesListQuery) -> Result<VpnIpsecProfilesListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/ipsec-profiles/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProfilesListResponse::Http200(r#response.json::<PaginatedIPSecProfileList>()?)) },
-		r#other_status => { Ok(VpnIpsecProfilesListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProfilesBulkUpdateResponse {
-	Http200(Vec<IPSecProfile>),
-	Other(Response)
-}
-/// Put a list of IPSec profile objects.
-pub fn vpn_ipsec_profiles_bulk_update(state: &ThanixClient, body: Vec<IPSecProfileRequest>) -> Result<VpnIpsecProfilesBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ipsec-profiles/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProfilesBulkUpdateResponse::Http200(r#response.json::<Vec<IPSecProfile>>()?)) },
-		r#other_status => { Ok(VpnIpsecProfilesBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProfilesCreateResponse {
-	Http201(IPSecProfile),
-	Other(Response)
-}
-/// Post a list of IPSec profile objects.
-pub fn vpn_ipsec_profiles_create(state: &ThanixClient, body: WritableIPSecProfileRequest) -> Result<VpnIpsecProfilesCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/ipsec-profiles/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnIpsecProfilesCreateResponse::Http201(r#response.json::<IPSecProfile>()?)) },
-		r#other_status => { Ok(VpnIpsecProfilesCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProfilesBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of IPSec profile objects.
-pub fn vpn_ipsec_profiles_bulk_destroy(state: &ThanixClient, body: Vec<IPSecProfileRequest>) -> Result<VpnIpsecProfilesBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ipsec-profiles/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIpsecProfilesBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProfilesBulkPartialUpdateResponse {
-	Http200(Vec<IPSecProfile>),
-	Other(Response)
-}
-/// Patch a list of IPSec profile objects.
-pub fn vpn_ipsec_profiles_bulk_partial_update(state: &ThanixClient, body: Vec<IPSecProfileRequest>) -> Result<VpnIpsecProfilesBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ipsec-profiles/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProfilesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<IPSecProfile>>()?)) },
-		r#other_status => { Ok(VpnIpsecProfilesBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProfilesRetrieveResponse {
-	Http200(IPSecProfile),
-	Other(Response)
-}
-/// Get a IPSec profile object.
-pub fn vpn_ipsec_profiles_retrieve(state: &ThanixClient, id: i64) -> Result<VpnIpsecProfilesRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/ipsec-profiles/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProfilesRetrieveResponse::Http200(r#response.json::<IPSecProfile>()?)) },
-		r#other_status => { Ok(VpnIpsecProfilesRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProfilesUpdateResponse {
-	Http200(IPSecProfile),
-	Other(Response)
-}
-/// Put a IPSec profile object.
-pub fn vpn_ipsec_profiles_update(state: &ThanixClient, body: WritableIPSecProfileRequest, id: i64) -> Result<VpnIpsecProfilesUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ipsec-profiles/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProfilesUpdateResponse::Http200(r#response.json::<IPSecProfile>()?)) },
-		r#other_status => { Ok(VpnIpsecProfilesUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProfilesDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a IPSec profile object.
-pub fn vpn_ipsec_profiles_destroy(state: &ThanixClient, id: i64) -> Result<VpnIpsecProfilesDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ipsec-profiles/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIpsecProfilesDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProfilesPartialUpdateResponse {
-	Http200(IPSecProfile),
-	Other(Response)
-}
-/// Patch a IPSec profile object.
-pub fn vpn_ipsec_profiles_partial_update(state: &ThanixClient, body: PatchedWritableIPSecProfileRequest, id: i64) -> Result<VpnIpsecProfilesPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ipsec-profiles/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProfilesPartialUpdateResponse::Http200(r#response.json::<IPSecProfile>()?)) },
-		r#other_status => { Ok(VpnIpsecProfilesPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnIpsecProposalsListQuery {
-	authentication_algorithm: Option<Vec<String>>,
-	authentication_algorithm__n: Option<Vec<String>>,
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
-	description: Option<Vec<String>>,
-	description__empty: Option<bool>,
-	description__ic: Option<Vec<String>>,
-	description__ie: Option<Vec<String>>,
-	description__iew: Option<Vec<String>>,
-	description__isw: Option<Vec<String>>,
-	description__n: Option<Vec<String>>,
-	description__nic: Option<Vec<String>>,
-	description__nie: Option<Vec<String>>,
-	description__niew: Option<Vec<String>>,
-	description__nisw: Option<Vec<String>>,
-	encryption_algorithm: Option<Vec<String>>,
-	encryption_algorithm__n: Option<Vec<String>>,
-	id: Option<Vec<i64>>,
-	id__empty: Option<bool>,
-	id__gt: Option<Vec<i64>>,
-	id__gte: Option<Vec<i64>>,
-	id__lt: Option<Vec<i64>>,
-	id__lte: Option<Vec<i64>>,
-	id__n: Option<Vec<i64>>,
-	/// IPSec policy (name)
-	ipsec_policy: Option<Vec<String>>,
-	/// IPSec policy (name)
-	ipsec_policy__n: Option<Vec<String>>,
-	/// IPSec policy (ID)
-	ipsec_policy_id: Option<Vec<i64>>,
-	/// IPSec policy (ID)
-	ipsec_policy_id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	modified_by_request: Option<String>,
-	name: Option<Vec<String>>,
-	name__empty: Option<bool>,
-	name__ic: Option<Vec<String>>,
-	name__ie: Option<Vec<String>>,
-	name__iew: Option<Vec<String>>,
-	name__isw: Option<Vec<String>>,
-	name__n: Option<Vec<String>>,
-	name__nic: Option<Vec<String>>,
-	name__nie: Option<Vec<String>>,
-	name__niew: Option<Vec<String>>,
-	name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-	/// Search
-	q: Option<String>,
-	sa_lifetime_data: Option<Vec<i64>>,
-	sa_lifetime_data__empty: Option<bool>,
-	sa_lifetime_data__gt: Option<Vec<i64>>,
-	sa_lifetime_data__gte: Option<Vec<i64>>,
-	sa_lifetime_data__lt: Option<Vec<i64>>,
-	sa_lifetime_data__lte: Option<Vec<i64>>,
-	sa_lifetime_data__n: Option<Vec<i64>>,
-	sa_lifetime_seconds: Option<Vec<i64>>,
-	sa_lifetime_seconds__empty: Option<bool>,
-	sa_lifetime_seconds__gt: Option<Vec<i64>>,
-	sa_lifetime_seconds__gte: Option<Vec<i64>>,
-	sa_lifetime_seconds__lt: Option<Vec<i64>>,
-	sa_lifetime_seconds__lte: Option<Vec<i64>>,
-	sa_lifetime_seconds__n: Option<Vec<i64>>,
-	tag: Option<Vec<String>>,
-	tag__n: Option<Vec<String>>,
-	updated_by_request: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum VpnIpsecProposalsListResponse {
-	Http200(PaginatedIPSecProposalList),
-	Other(Response)
-}
-/// Get a list of IPSec proposal objects.
-pub fn vpn_ipsec_proposals_list(state: &ThanixClient, query: VpnIpsecProposalsListQuery) -> Result<VpnIpsecProposalsListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/ipsec-proposals/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProposalsListResponse::Http200(r#response.json::<PaginatedIPSecProposalList>()?)) },
-		r#other_status => { Ok(VpnIpsecProposalsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProposalsBulkUpdateResponse {
-	Http200(Vec<IPSecProposal>),
-	Other(Response)
-}
-/// Put a list of IPSec proposal objects.
-pub fn vpn_ipsec_proposals_bulk_update(state: &ThanixClient, body: Vec<IPSecProposalRequest>) -> Result<VpnIpsecProposalsBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ipsec-proposals/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProposalsBulkUpdateResponse::Http200(r#response.json::<Vec<IPSecProposal>>()?)) },
-		r#other_status => { Ok(VpnIpsecProposalsBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProposalsCreateResponse {
-	Http201(IPSecProposal),
-	Other(Response)
-}
-/// Post a list of IPSec proposal objects.
-pub fn vpn_ipsec_proposals_create(state: &ThanixClient, body: WritableIPSecProposalRequest) -> Result<VpnIpsecProposalsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/ipsec-proposals/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnIpsecProposalsCreateResponse::Http201(r#response.json::<IPSecProposal>()?)) },
-		r#other_status => { Ok(VpnIpsecProposalsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProposalsBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of IPSec proposal objects.
-pub fn vpn_ipsec_proposals_bulk_destroy(state: &ThanixClient, body: Vec<IPSecProposalRequest>) -> Result<VpnIpsecProposalsBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ipsec-proposals/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIpsecProposalsBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProposalsBulkPartialUpdateResponse {
-	Http200(Vec<IPSecProposal>),
-	Other(Response)
-}
-/// Patch a list of IPSec proposal objects.
-pub fn vpn_ipsec_proposals_bulk_partial_update(state: &ThanixClient, body: Vec<IPSecProposalRequest>) -> Result<VpnIpsecProposalsBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ipsec-proposals/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProposalsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<IPSecProposal>>()?)) },
-		r#other_status => { Ok(VpnIpsecProposalsBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProposalsRetrieveResponse {
-	Http200(IPSecProposal),
-	Other(Response)
-}
-/// Get a IPSec proposal object.
-pub fn vpn_ipsec_proposals_retrieve(state: &ThanixClient, id: i64) -> Result<VpnIpsecProposalsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/ipsec-proposals/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProposalsRetrieveResponse::Http200(r#response.json::<IPSecProposal>()?)) },
-		r#other_status => { Ok(VpnIpsecProposalsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProposalsUpdateResponse {
-	Http200(IPSecProposal),
-	Other(Response)
-}
-/// Put a IPSec proposal object.
-pub fn vpn_ipsec_proposals_update(state: &ThanixClient, body: WritableIPSecProposalRequest, id: i64) -> Result<VpnIpsecProposalsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ipsec-proposals/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProposalsUpdateResponse::Http200(r#response.json::<IPSecProposal>()?)) },
-		r#other_status => { Ok(VpnIpsecProposalsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProposalsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a IPSec proposal object.
-pub fn vpn_ipsec_proposals_destroy(state: &ThanixClient, id: i64) -> Result<VpnIpsecProposalsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ipsec-proposals/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIpsecProposalsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProposalsPartialUpdateResponse {
-	Http200(IPSecProposal),
-	Other(Response)
-}
-/// Patch a IPSec proposal object.
-pub fn vpn_ipsec_proposals_partial_update(state: &ThanixClient, body: PatchedWritableIPSecProposalRequest, id: i64) -> Result<VpnIpsecProposalsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ipsec-proposals/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProposalsPartialUpdateResponse::Http200(r#response.json::<IPSecProposal>()?)) },
-		r#other_status => { Ok(VpnIpsecProposalsPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnL2VpnTerminationsListQuery {
-	assigned_object_id: Option<Vec<i64>>,
-	assigned_object_id__empty: Option<bool>,
-	assigned_object_id__gt: Option<Vec<i64>>,
-	assigned_object_id__gte: Option<Vec<i64>>,
-	assigned_object_id__lt: Option<Vec<i64>>,
-	assigned_object_id__lte: Option<Vec<i64>>,
-	assigned_object_id__n: Option<Vec<i64>>,
-	assigned_object_type: Option<String>,
-	assigned_object_type__n: Option<String>,
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
-	/// Device (name)
-	device: Option<Vec<Option<String>>>,
-	/// Device (name)
-	device__n: Option<Vec<Option<String>>>,
-	/// Device (ID)
-	device_id: Option<Vec<i64>>,
-	/// Device (ID)
-	device_id__n: Option<Vec<i64>>,
-	id: Option<Vec<i64>>,
-	id__empty: Option<bool>,
-	id__gt: Option<Vec<i64>>,
-	id__gte: Option<Vec<i64>>,
-	id__lt: Option<Vec<i64>>,
-	id__lte: Option<Vec<i64>>,
-	id__n: Option<Vec<i64>>,
-	/// Interface (name)
-	interface: Option<Vec<String>>,
-	/// Interface (name)
-	interface__n: Option<Vec<String>>,
-	/// Interface (ID)
-	interface_id: Option<Vec<i64>>,
-	/// Interface (ID)
-	interface_id__n: Option<Vec<i64>>,
-	/// L2VPN (slug)
-	l2vpn: Option<Vec<String>>,
-	/// L2VPN (slug)
-	l2vpn__n: Option<Vec<String>>,
-	/// L2VPN (ID)
-	l2vpn_id: Option<Vec<i64>>,
-	/// L2VPN (ID)
-	l2vpn_id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	modified_by_request: Option<String>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-	/// Search
-	q: Option<String>,
-	region: Option<Vec<String>>,
-	region_id: Option<Vec<i64>>,
-	site: Option<Vec<String>>,
-	site_id: Option<Vec<i64>>,
-	tag: Option<Vec<String>>,
-	tag__n: Option<Vec<String>>,
-	updated_by_request: Option<String>,
-	/// Virtual machine (name)
-	virtual_machine: Option<Vec<String>>,
-	/// Virtual machine (name)
-	virtual_machine__n: Option<Vec<String>>,
-	/// Virtual machine (ID)
-	virtual_machine_id: Option<Vec<i64>>,
-	/// Virtual machine (ID)
-	virtual_machine_id__n: Option<Vec<i64>>,
-	/// VLAN (name)
-	vlan: Option<Vec<String>>,
-	/// VLAN (name)
-	vlan__n: Option<Vec<String>>,
-	/// VLAN (ID)
-	vlan_id: Option<Vec<i64>>,
-	/// VLAN (ID)
-	vlan_id__n: Option<Vec<i64>>,
-	/// VLAN number (1-4094)
-	vlan_vid: Option<i64>,
-	/// VLAN number (1-4094)
-	vlan_vid__empty: Option<i64>,
-	/// VLAN number (1-4094)
-	vlan_vid__gt: Option<i64>,
-	/// VLAN number (1-4094)
-	vlan_vid__gte: Option<i64>,
-	/// VLAN number (1-4094)
-	vlan_vid__lt: Option<i64>,
-	/// VLAN number (1-4094)
-	vlan_vid__lte: Option<i64>,
-	/// VLAN number (1-4094)
-	vlan_vid__n: Option<i64>,
-	/// VM interface (name)
-	vminterface: Option<Vec<String>>,
-	/// VM interface (name)
-	vminterface__n: Option<Vec<String>>,
-	/// VM Interface (ID)
-	vminterface_id: Option<Vec<i64>>,
-	/// VM Interface (ID)
-	vminterface_id__n: Option<Vec<i64>>,
-
-}
-#[derive(Debug)]
-pub enum VpnL2VpnTerminationsListResponse {
-	Http200(PaginatedL2VPNTerminationList),
-	Other(Response)
-}
-/// Get a list of L2VPN termination objects.
-pub fn vpn_l2vpn_terminations_list(state: &ThanixClient, query: VpnL2VpnTerminationsListQuery) -> Result<VpnL2VpnTerminationsListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/l2vpn-terminations/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnTerminationsListResponse::Http200(r#response.json::<PaginatedL2VPNTerminationList>()?)) },
-		r#other_status => { Ok(VpnL2VpnTerminationsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnTerminationsBulkUpdateResponse {
-	Http200(Vec<L2VPNTermination>),
-	Other(Response)
-}
-/// Put a list of L2VPN termination objects.
-pub fn vpn_l2vpn_terminations_bulk_update(state: &ThanixClient, body: Vec<L2VPNTerminationRequest>) -> Result<VpnL2VpnTerminationsBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/l2vpn-terminations/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnTerminationsBulkUpdateResponse::Http200(r#response.json::<Vec<L2VPNTermination>>()?)) },
-		r#other_status => { Ok(VpnL2VpnTerminationsBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnTerminationsCreateResponse {
-	Http201(L2VPNTermination),
-	Other(Response)
-}
-/// Post a list of L2VPN termination objects.
-pub fn vpn_l2vpn_terminations_create(state: &ThanixClient, body: L2VPNTerminationRequest) -> Result<VpnL2VpnTerminationsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/l2vpn-terminations/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnL2VpnTerminationsCreateResponse::Http201(r#response.json::<L2VPNTermination>()?)) },
-		r#other_status => { Ok(VpnL2VpnTerminationsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnTerminationsBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of L2VPN termination objects.
-pub fn vpn_l2vpn_terminations_bulk_destroy(state: &ThanixClient, body: Vec<L2VPNTerminationRequest>) -> Result<VpnL2VpnTerminationsBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/l2vpn-terminations/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnL2VpnTerminationsBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnTerminationsBulkPartialUpdateResponse {
-	Http200(Vec<L2VPNTermination>),
-	Other(Response)
-}
-/// Patch a list of L2VPN termination objects.
-pub fn vpn_l2vpn_terminations_bulk_partial_update(state: &ThanixClient, body: Vec<L2VPNTerminationRequest>) -> Result<VpnL2VpnTerminationsBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/l2vpn-terminations/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnTerminationsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<L2VPNTermination>>()?)) },
-		r#other_status => { Ok(VpnL2VpnTerminationsBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnTerminationsRetrieveResponse {
-	Http200(L2VPNTermination),
-	Other(Response)
-}
-/// Get a L2VPN termination object.
-pub fn vpn_l2vpn_terminations_retrieve(state: &ThanixClient, id: i64) -> Result<VpnL2VpnTerminationsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/l2vpn-terminations/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnTerminationsRetrieveResponse::Http200(r#response.json::<L2VPNTermination>()?)) },
-		r#other_status => { Ok(VpnL2VpnTerminationsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnTerminationsUpdateResponse {
-	Http200(L2VPNTermination),
-	Other(Response)
-}
-/// Put a L2VPN termination object.
-pub fn vpn_l2vpn_terminations_update(state: &ThanixClient, body: L2VPNTerminationRequest, id: i64) -> Result<VpnL2VpnTerminationsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/l2vpn-terminations/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnTerminationsUpdateResponse::Http200(r#response.json::<L2VPNTermination>()?)) },
-		r#other_status => { Ok(VpnL2VpnTerminationsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnTerminationsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a L2VPN termination object.
-pub fn vpn_l2vpn_terminations_destroy(state: &ThanixClient, id: i64) -> Result<VpnL2VpnTerminationsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/l2vpn-terminations/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnL2VpnTerminationsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnTerminationsPartialUpdateResponse {
-	Http200(L2VPNTermination),
-	Other(Response)
-}
-/// Patch a L2VPN termination object.
-pub fn vpn_l2vpn_terminations_partial_update(state: &ThanixClient, body: PatchedL2VPNTerminationRequest, id: i64) -> Result<VpnL2VpnTerminationsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/l2vpn-terminations/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnTerminationsPartialUpdateResponse::Http200(r#response.json::<L2VPNTermination>()?)) },
-		r#other_status => { Ok(VpnL2VpnTerminationsPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnL2VpnsListQuery {
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
-	description: Option<Vec<String>>,
-	description__empty: Option<bool>,
-	description__ic: Option<Vec<String>>,
-	description__ie: Option<Vec<String>>,
-	description__iew: Option<Vec<String>>,
-	description__isw: Option<Vec<String>>,
-	description__n: Option<Vec<String>>,
-	description__nic: Option<Vec<String>>,
-	description__nie: Option<Vec<String>>,
-	description__niew: Option<Vec<String>>,
-	description__nisw: Option<Vec<String>>,
-	/// Export target (name)
-	export_target: Option<Vec<String>>,
-	/// Export target (name)
-	export_target__n: Option<Vec<String>>,
-	/// Export target
-	export_target_id: Option<Vec<i64>>,
-	/// Export target
-	export_target_id__n: Option<Vec<i64>>,
-	id: Option<Vec<i64>>,
-	id__empty: Option<bool>,
-	id__gt: Option<Vec<i64>>,
-	id__gte: Option<Vec<i64>>,
-	id__lt: Option<Vec<i64>>,
-	id__lte: Option<Vec<i64>>,
-	id__n: Option<Vec<i64>>,
-	identifier: Option<Vec<i64>>,
-	identifier__empty: Option<bool>,
-	identifier__gt: Option<Vec<i64>>,
-	identifier__gte: Option<Vec<i64>>,
-	identifier__lt: Option<Vec<i64>>,
-	identifier__lte: Option<Vec<i64>>,
-	identifier__n: Option<Vec<i64>>,
-	/// Import target (name)
-	import_target: Option<Vec<String>>,
-	/// Import target (name)
-	import_target__n: Option<Vec<String>>,
-	/// Import target
-	import_target_id: Option<Vec<i64>>,
-	/// Import target
-	import_target_id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	modified_by_request: Option<String>,
-	name: Option<Vec<String>>,
-	name__empty: Option<bool>,
-	name__ic: Option<Vec<String>>,
-	name__ie: Option<Vec<String>>,
-	name__iew: Option<Vec<String>>,
-	name__isw: Option<Vec<String>>,
-	name__n: Option<Vec<String>>,
-	name__nic: Option<Vec<String>>,
-	name__nie: Option<Vec<String>>,
-	name__niew: Option<Vec<String>>,
-	name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-	/// Search
-	q: Option<String>,
-	slug: Option<Vec<String>>,
-	slug__empty: Option<bool>,
-	slug__ic: Option<Vec<String>>,
-	slug__ie: Option<Vec<String>>,
-	slug__iew: Option<Vec<String>>,
-	slug__isw: Option<Vec<String>>,
-	slug__n: Option<Vec<String>>,
-	slug__nic: Option<Vec<String>>,
-	slug__nie: Option<Vec<String>>,
-	slug__niew: Option<Vec<String>>,
-	slug__nisw: Option<Vec<String>>,
-	tag: Option<Vec<String>>,
-	tag__n: Option<Vec<String>>,
-	/// Tenant (slug)
-	tenant: Option<Vec<String>>,
-	/// Tenant (slug)
-	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
-	/// Tenant (ID)
-	tenant_id: Option<Vec<Option<i64>>>,
-	/// Tenant (ID)
-	tenant_id__n: Option<Vec<Option<i64>>>,
-	r#type: Option<Vec<String>>,
-	type__n: Option<Vec<String>>,
-	updated_by_request: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum VpnL2VpnsListResponse {
-	Http200(PaginatedL2VPNList),
-	Other(Response)
-}
-/// Get a list of L2VPN objects.
-pub fn vpn_l2vpns_list(state: &ThanixClient, query: VpnL2VpnsListQuery) -> Result<VpnL2VpnsListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/l2vpns/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnsListResponse::Http200(r#response.json::<PaginatedL2VPNList>()?)) },
-		r#other_status => { Ok(VpnL2VpnsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnsBulkUpdateResponse {
-	Http200(Vec<L2VPN>),
-	Other(Response)
-}
-/// Put a list of L2VPN objects.
-pub fn vpn_l2vpns_bulk_update(state: &ThanixClient, body: Vec<L2VPNRequest>) -> Result<VpnL2VpnsBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/l2vpns/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnsBulkUpdateResponse::Http200(r#response.json::<Vec<L2VPN>>()?)) },
-		r#other_status => { Ok(VpnL2VpnsBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnsCreateResponse {
-	Http201(L2VPN),
-	Other(Response)
-}
-/// Post a list of L2VPN objects.
-pub fn vpn_l2vpns_create(state: &ThanixClient, body: WritableL2VPNRequest) -> Result<VpnL2VpnsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/l2vpns/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnL2VpnsCreateResponse::Http201(r#response.json::<L2VPN>()?)) },
-		r#other_status => { Ok(VpnL2VpnsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnsBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of L2VPN objects.
-pub fn vpn_l2vpns_bulk_destroy(state: &ThanixClient, body: Vec<L2VPNRequest>) -> Result<VpnL2VpnsBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/l2vpns/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnL2VpnsBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnsBulkPartialUpdateResponse {
-	Http200(Vec<L2VPN>),
-	Other(Response)
-}
-/// Patch a list of L2VPN objects.
-pub fn vpn_l2vpns_bulk_partial_update(state: &ThanixClient, body: Vec<L2VPNRequest>) -> Result<VpnL2VpnsBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/l2vpns/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<L2VPN>>()?)) },
-		r#other_status => { Ok(VpnL2VpnsBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnsRetrieveResponse {
-	Http200(L2VPN),
-	Other(Response)
-}
-/// Get a L2VPN object.
-pub fn vpn_l2vpns_retrieve(state: &ThanixClient, id: i64) -> Result<VpnL2VpnsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/l2vpns/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnsRetrieveResponse::Http200(r#response.json::<L2VPN>()?)) },
-		r#other_status => { Ok(VpnL2VpnsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnsUpdateResponse {
-	Http200(L2VPN),
-	Other(Response)
-}
-/// Put a L2VPN object.
-pub fn vpn_l2vpns_update(state: &ThanixClient, body: WritableL2VPNRequest, id: i64) -> Result<VpnL2VpnsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/l2vpns/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnsUpdateResponse::Http200(r#response.json::<L2VPN>()?)) },
-		r#other_status => { Ok(VpnL2VpnsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a L2VPN object.
-pub fn vpn_l2vpns_destroy(state: &ThanixClient, id: i64) -> Result<VpnL2VpnsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/l2vpns/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnL2VpnsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnsPartialUpdateResponse {
-	Http200(L2VPN),
-	Other(Response)
-}
-/// Patch a L2VPN object.
-pub fn vpn_l2vpns_partial_update(state: &ThanixClient, body: PatchedWritableL2VPNRequest, id: i64) -> Result<VpnL2VpnsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/l2vpns/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnsPartialUpdateResponse::Http200(r#response.json::<L2VPN>()?)) },
-		r#other_status => { Ok(VpnL2VpnsPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnTunnelGroupsListQuery {
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
-	description: Option<Vec<String>>,
-	description__empty: Option<bool>,
-	description__ic: Option<Vec<String>>,
-	description__ie: Option<Vec<String>>,
-	description__iew: Option<Vec<String>>,
-	description__isw: Option<Vec<String>>,
-	description__n: Option<Vec<String>>,
-	description__nic: Option<Vec<String>>,
-	description__nie: Option<Vec<String>>,
-	description__niew: Option<Vec<String>>,
-	description__nisw: Option<Vec<String>>,
-	id: Option<Vec<i64>>,
-	id__empty: Option<bool>,
-	id__gt: Option<Vec<i64>>,
-	id__gte: Option<Vec<i64>>,
-	id__lt: Option<Vec<i64>>,
-	id__lte: Option<Vec<i64>>,
-	id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	modified_by_request: Option<String>,
-	name: Option<Vec<String>>,
-	name__empty: Option<bool>,
-	name__ic: Option<Vec<String>>,
-	name__ie: Option<Vec<String>>,
-	name__iew: Option<Vec<String>>,
-	name__isw: Option<Vec<String>>,
-	name__n: Option<Vec<String>>,
-	name__nic: Option<Vec<String>>,
-	name__nie: Option<Vec<String>>,
-	name__niew: Option<Vec<String>>,
-	name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-	/// Search
-	q: Option<String>,
-	slug: Option<Vec<String>>,
-	slug__empty: Option<bool>,
-	slug__ic: Option<Vec<String>>,
-	slug__ie: Option<Vec<String>>,
-	slug__iew: Option<Vec<String>>,
-	slug__isw: Option<Vec<String>>,
-	slug__n: Option<Vec<String>>,
-	slug__nic: Option<Vec<String>>,
-	slug__nie: Option<Vec<String>>,
-	slug__niew: Option<Vec<String>>,
-	slug__nisw: Option<Vec<String>>,
-	tag: Option<Vec<String>>,
-	tag__n: Option<Vec<String>>,
-	updated_by_request: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum VpnTunnelGroupsListResponse {
-	Http200(PaginatedTunnelGroupList),
-	Other(Response)
-}
-/// Get a list of tunnel group objects.
-pub fn vpn_tunnel_groups_list(state: &ThanixClient, query: VpnTunnelGroupsListQuery) -> Result<VpnTunnelGroupsListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/tunnel-groups/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelGroupsListResponse::Http200(r#response.json::<PaginatedTunnelGroupList>()?)) },
-		r#other_status => { Ok(VpnTunnelGroupsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelGroupsBulkUpdateResponse {
-	Http200(Vec<TunnelGroup>),
-	Other(Response)
-}
-/// Put a list of tunnel group objects.
-pub fn vpn_tunnel_groups_bulk_update(state: &ThanixClient, body: Vec<TunnelGroupRequest>) -> Result<VpnTunnelGroupsBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/tunnel-groups/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelGroupsBulkUpdateResponse::Http200(r#response.json::<Vec<TunnelGroup>>()?)) },
-		r#other_status => { Ok(VpnTunnelGroupsBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelGroupsCreateResponse {
-	Http201(TunnelGroup),
-	Other(Response)
-}
-/// Post a list of tunnel group objects.
-pub fn vpn_tunnel_groups_create(state: &ThanixClient, body: TunnelGroupRequest) -> Result<VpnTunnelGroupsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/tunnel-groups/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnTunnelGroupsCreateResponse::Http201(r#response.json::<TunnelGroup>()?)) },
-		r#other_status => { Ok(VpnTunnelGroupsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelGroupsBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of tunnel group objects.
-pub fn vpn_tunnel_groups_bulk_destroy(state: &ThanixClient, body: Vec<TunnelGroupRequest>) -> Result<VpnTunnelGroupsBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/tunnel-groups/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnTunnelGroupsBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelGroupsBulkPartialUpdateResponse {
-	Http200(Vec<TunnelGroup>),
-	Other(Response)
-}
-/// Patch a list of tunnel group objects.
-pub fn vpn_tunnel_groups_bulk_partial_update(state: &ThanixClient, body: Vec<TunnelGroupRequest>) -> Result<VpnTunnelGroupsBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/tunnel-groups/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelGroupsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<TunnelGroup>>()?)) },
-		r#other_status => { Ok(VpnTunnelGroupsBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelGroupsRetrieveResponse {
-	Http200(TunnelGroup),
-	Other(Response)
-}
-/// Get a tunnel group object.
-pub fn vpn_tunnel_groups_retrieve(state: &ThanixClient, id: i64) -> Result<VpnTunnelGroupsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/tunnel-groups/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelGroupsRetrieveResponse::Http200(r#response.json::<TunnelGroup>()?)) },
-		r#other_status => { Ok(VpnTunnelGroupsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelGroupsUpdateResponse {
-	Http200(TunnelGroup),
-	Other(Response)
-}
-/// Put a tunnel group object.
-pub fn vpn_tunnel_groups_update(state: &ThanixClient, body: TunnelGroupRequest, id: i64) -> Result<VpnTunnelGroupsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/tunnel-groups/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelGroupsUpdateResponse::Http200(r#response.json::<TunnelGroup>()?)) },
-		r#other_status => { Ok(VpnTunnelGroupsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelGroupsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a tunnel group object.
-pub fn vpn_tunnel_groups_destroy(state: &ThanixClient, id: i64) -> Result<VpnTunnelGroupsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/tunnel-groups/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnTunnelGroupsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelGroupsPartialUpdateResponse {
-	Http200(TunnelGroup),
-	Other(Response)
-}
-/// Patch a tunnel group object.
-pub fn vpn_tunnel_groups_partial_update(state: &ThanixClient, body: PatchedTunnelGroupRequest, id: i64) -> Result<VpnTunnelGroupsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/tunnel-groups/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelGroupsPartialUpdateResponse::Http200(r#response.json::<TunnelGroup>()?)) },
-		r#other_status => { Ok(VpnTunnelGroupsPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnTunnelTerminationsListQuery {
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
-	id: Option<Vec<i64>>,
-	id__empty: Option<bool>,
-	id__gt: Option<Vec<i64>>,
-	id__gte: Option<Vec<i64>>,
-	id__lt: Option<Vec<i64>>,
-	id__lte: Option<Vec<i64>>,
-	id__n: Option<Vec<i64>>,
-	/// Interface (name)
-	interface: Option<Vec<String>>,
-	/// Interface (name)
-	interface__n: Option<Vec<String>>,
-	/// Interface (ID)
-	interface_id: Option<Vec<i64>>,
-	/// Interface (ID)
-	interface_id__n: Option<Vec<i64>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	modified_by_request: Option<String>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-	/// Outside IP (ID)
-	outside_ip_id: Option<Vec<i64>>,
-	/// Outside IP (ID)
-	outside_ip_id__n: Option<Vec<i64>>,
-	/// Search
-	q: Option<String>,
-	role: Option<Vec<String>>,
-	role__n: Option<Vec<String>>,
-	tag: Option<Vec<String>>,
-	tag__n: Option<Vec<String>>,
-	termination_id: Option<Vec<i64>>,
-	termination_id__empty: Option<bool>,
-	termination_id__gt: Option<Vec<i64>>,
-	termination_id__gte: Option<Vec<i64>>,
-	termination_id__lt: Option<Vec<i64>>,
-	termination_id__lte: Option<Vec<i64>>,
-	termination_id__n: Option<Vec<i64>>,
-	termination_type: Option<String>,
-	termination_type__n: Option<String>,
-	/// Tunnel (name)
-	tunnel: Option<Vec<String>>,
-	/// Tunnel (name)
-	tunnel__n: Option<Vec<String>>,
-	/// Tunnel (ID)
-	tunnel_id: Option<Vec<i64>>,
-	/// Tunnel (ID)
-	tunnel_id__n: Option<Vec<i64>>,
-	updated_by_request: Option<String>,
-	/// VM interface (name)
-	vminterface: Option<Vec<String>>,
-	/// VM interface (name)
-	vminterface__n: Option<Vec<String>>,
-	/// VM interface (ID)
-	vminterface_id: Option<Vec<i64>>,
-	/// VM interface (ID)
-	vminterface_id__n: Option<Vec<i64>>,
-
-}
-#[derive(Debug)]
-pub enum VpnTunnelTerminationsListResponse {
-	Http200(PaginatedTunnelTerminationList),
-	Other(Response)
-}
-/// Get a list of tunnel termination objects.
-pub fn vpn_tunnel_terminations_list(state: &ThanixClient, query: VpnTunnelTerminationsListQuery) -> Result<VpnTunnelTerminationsListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/tunnel-terminations/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelTerminationsListResponse::Http200(r#response.json::<PaginatedTunnelTerminationList>()?)) },
-		r#other_status => { Ok(VpnTunnelTerminationsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelTerminationsBulkUpdateResponse {
-	Http200(Vec<TunnelTermination>),
-	Other(Response)
-}
-/// Put a list of tunnel termination objects.
-pub fn vpn_tunnel_terminations_bulk_update(state: &ThanixClient, body: Vec<TunnelTerminationRequest>) -> Result<VpnTunnelTerminationsBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/tunnel-terminations/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelTerminationsBulkUpdateResponse::Http200(r#response.json::<Vec<TunnelTermination>>()?)) },
-		r#other_status => { Ok(VpnTunnelTerminationsBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelTerminationsCreateResponse {
-	Http201(TunnelTermination),
-	Other(Response)
-}
-/// Post a list of tunnel termination objects.
-pub fn vpn_tunnel_terminations_create(state: &ThanixClient, body: WritableTunnelTerminationRequest) -> Result<VpnTunnelTerminationsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/tunnel-terminations/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnTunnelTerminationsCreateResponse::Http201(r#response.json::<TunnelTermination>()?)) },
-		r#other_status => { Ok(VpnTunnelTerminationsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelTerminationsBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of tunnel termination objects.
-pub fn vpn_tunnel_terminations_bulk_destroy(state: &ThanixClient, body: Vec<TunnelTerminationRequest>) -> Result<VpnTunnelTerminationsBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/tunnel-terminations/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnTunnelTerminationsBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelTerminationsBulkPartialUpdateResponse {
-	Http200(Vec<TunnelTermination>),
-	Other(Response)
-}
-/// Patch a list of tunnel termination objects.
-pub fn vpn_tunnel_terminations_bulk_partial_update(state: &ThanixClient, body: Vec<TunnelTerminationRequest>) -> Result<VpnTunnelTerminationsBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/tunnel-terminations/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelTerminationsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<TunnelTermination>>()?)) },
-		r#other_status => { Ok(VpnTunnelTerminationsBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelTerminationsRetrieveResponse {
-	Http200(TunnelTermination),
-	Other(Response)
-}
-/// Get a tunnel termination object.
-pub fn vpn_tunnel_terminations_retrieve(state: &ThanixClient, id: i64) -> Result<VpnTunnelTerminationsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/tunnel-terminations/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelTerminationsRetrieveResponse::Http200(r#response.json::<TunnelTermination>()?)) },
-		r#other_status => { Ok(VpnTunnelTerminationsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelTerminationsUpdateResponse {
-	Http200(TunnelTermination),
-	Other(Response)
-}
-/// Put a tunnel termination object.
-pub fn vpn_tunnel_terminations_update(state: &ThanixClient, body: WritableTunnelTerminationRequest, id: i64) -> Result<VpnTunnelTerminationsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/tunnel-terminations/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelTerminationsUpdateResponse::Http200(r#response.json::<TunnelTermination>()?)) },
-		r#other_status => { Ok(VpnTunnelTerminationsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelTerminationsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a tunnel termination object.
-pub fn vpn_tunnel_terminations_destroy(state: &ThanixClient, id: i64) -> Result<VpnTunnelTerminationsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/tunnel-terminations/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnTunnelTerminationsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelTerminationsPartialUpdateResponse {
-	Http200(TunnelTermination),
-	Other(Response)
-}
-/// Patch a tunnel termination object.
-pub fn vpn_tunnel_terminations_partial_update(state: &ThanixClient, body: PatchedWritableTunnelTerminationRequest, id: i64) -> Result<VpnTunnelTerminationsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/tunnel-terminations/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelTerminationsPartialUpdateResponse::Http200(r#response.json::<TunnelTermination>()?)) },
-		r#other_status => { Ok(VpnTunnelTerminationsPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnTunnelsListQuery {
-	created: Option<Vec<String>>,
-	created__empty: Option<Vec<String>>,
-	created__gt: Option<Vec<String>>,
-	created__gte: Option<Vec<String>>,
-	created__lt: Option<Vec<String>>,
-	created__lte: Option<Vec<String>>,
-	created__n: Option<Vec<String>>,
-	created_by_request: Option<String>,
-	description: Option<Vec<String>>,
-	description__empty: Option<bool>,
-	description__ic: Option<Vec<String>>,
-	description__ie: Option<Vec<String>>,
-	description__iew: Option<Vec<String>>,
-	description__isw: Option<Vec<String>>,
-	description__n: Option<Vec<String>>,
-	description__nic: Option<Vec<String>>,
-	description__nie: Option<Vec<String>>,
-	description__niew: Option<Vec<String>>,
-	description__nisw: Option<Vec<String>>,
-	encapsulation: Option<Vec<String>>,
-	encapsulation__n: Option<Vec<String>>,
-	/// Tunnel group (slug)
-	group: Option<Vec<String>>,
-	/// Tunnel group (slug)
-	group__n: Option<Vec<String>>,
-	/// Tunnel group (ID)
-	group_id: Option<Vec<Option<i64>>>,
-	/// Tunnel group (ID)
-	group_id__n: Option<Vec<Option<i64>>>,
-	id: Option<Vec<i64>>,
-	id__empty: Option<bool>,
-	id__gt: Option<Vec<i64>>,
-	id__gte: Option<Vec<i64>>,
-	id__lt: Option<Vec<i64>>,
-	id__lte: Option<Vec<i64>>,
-	id__n: Option<Vec<i64>>,
-	/// IPSec profile (name)
-	ipsec_profile: Option<Vec<String>>,
-	/// IPSec profile (name)
-	ipsec_profile__n: Option<Vec<String>>,
-	/// IPSec profile (ID)
-	ipsec_profile_id: Option<Vec<Option<i64>>>,
-	/// IPSec profile (ID)
-	ipsec_profile_id__n: Option<Vec<Option<i64>>>,
-	last_updated: Option<Vec<String>>,
-	last_updated__empty: Option<Vec<String>>,
-	last_updated__gt: Option<Vec<String>>,
-	last_updated__gte: Option<Vec<String>>,
-	last_updated__lt: Option<Vec<String>>,
-	last_updated__lte: Option<Vec<String>>,
-	last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	limit: Option<i64>,
-	modified_by_request: Option<String>,
-	name: Option<Vec<String>>,
-	name__empty: Option<bool>,
-	name__ic: Option<Vec<String>>,
-	name__ie: Option<Vec<String>>,
-	name__iew: Option<Vec<String>>,
-	name__isw: Option<Vec<String>>,
-	name__n: Option<Vec<String>>,
-	name__nic: Option<Vec<String>>,
-	name__nie: Option<Vec<String>>,
-	name__niew: Option<Vec<String>>,
-	name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	ordering: Option<String>,
-	/// Search
-	q: Option<String>,
-	status: Option<Vec<String>>,
-	status__n: Option<Vec<String>>,
-	tag: Option<Vec<String>>,
-	tag__n: Option<Vec<String>>,
-	/// Tenant (slug)
-	tenant: Option<Vec<String>>,
-	/// Tenant (slug)
-	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
-	/// Tenant (ID)
-	tenant_id: Option<Vec<Option<i64>>>,
-	/// Tenant (ID)
-	tenant_id__n: Option<Vec<Option<i64>>>,
-	tunnel_id: Option<Vec<i64>>,
-	tunnel_id__empty: Option<bool>,
-	tunnel_id__gt: Option<Vec<i64>>,
-	tunnel_id__gte: Option<Vec<i64>>,
-	tunnel_id__lt: Option<Vec<i64>>,
-	tunnel_id__lte: Option<Vec<i64>>,
-	tunnel_id__n: Option<Vec<i64>>,
-	updated_by_request: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum VpnTunnelsListResponse {
-	Http200(PaginatedTunnelList),
-	Other(Response)
-}
-/// Get a list of tunnel objects.
-pub fn vpn_tunnels_list(state: &ThanixClient, query: VpnTunnelsListQuery) -> Result<VpnTunnelsListResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/tunnels/?{}", state.base_url, serde_qs::to_string(&query).unwrap()))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelsListResponse::Http200(r#response.json::<PaginatedTunnelList>()?)) },
-		r#other_status => { Ok(VpnTunnelsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelsBulkUpdateResponse {
-	Http200(Vec<Tunnel>),
-	Other(Response)
-}
-/// Put a list of tunnel objects.
-pub fn vpn_tunnels_bulk_update(state: &ThanixClient, body: Vec<TunnelRequest>) -> Result<VpnTunnelsBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/tunnels/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelsBulkUpdateResponse::Http200(r#response.json::<Vec<Tunnel>>()?)) },
-		r#other_status => { Ok(VpnTunnelsBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelsCreateResponse {
-	Http201(Tunnel),
-	Other(Response)
-}
-/// Post a list of tunnel objects.
-pub fn vpn_tunnels_create(state: &ThanixClient, body: WritableTunnelRequest) -> Result<VpnTunnelsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/tunnels/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnTunnelsCreateResponse::Http201(r#response.json::<Tunnel>()?)) },
-		r#other_status => { Ok(VpnTunnelsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelsBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of tunnel objects.
-pub fn vpn_tunnels_bulk_destroy(state: &ThanixClient, body: Vec<TunnelRequest>) -> Result<VpnTunnelsBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/tunnels/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnTunnelsBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelsBulkPartialUpdateResponse {
-	Http200(Vec<Tunnel>),
-	Other(Response)
-}
-/// Patch a list of tunnel objects.
-pub fn vpn_tunnels_bulk_partial_update(state: &ThanixClient, body: Vec<TunnelRequest>) -> Result<VpnTunnelsBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/tunnels/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Tunnel>>()?)) },
-		r#other_status => { Ok(VpnTunnelsBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelsRetrieveResponse {
-	Http200(Tunnel),
-	Other(Response)
-}
-/// Get a tunnel object.
-pub fn vpn_tunnels_retrieve(state: &ThanixClient, id: i64) -> Result<VpnTunnelsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/tunnels/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelsRetrieveResponse::Http200(r#response.json::<Tunnel>()?)) },
-		r#other_status => { Ok(VpnTunnelsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelsUpdateResponse {
-	Http200(Tunnel),
-	Other(Response)
-}
-/// Put a tunnel object.
-pub fn vpn_tunnels_update(state: &ThanixClient, body: WritableTunnelRequest, id: i64) -> Result<VpnTunnelsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/tunnels/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelsUpdateResponse::Http200(r#response.json::<Tunnel>()?)) },
-		r#other_status => { Ok(VpnTunnelsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a tunnel object.
-pub fn vpn_tunnels_destroy(state: &ThanixClient, id: i64) -> Result<VpnTunnelsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/tunnels/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnTunnelsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelsPartialUpdateResponse {
-	Http200(Tunnel),
-	Other(Response)
-}
-/// Patch a tunnel object.
-pub fn vpn_tunnels_partial_update(state: &ThanixClient, body: PatchedWritableTunnelRequest, id: i64) -> Result<VpnTunnelsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/tunnels/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelsPartialUpdateResponse::Http200(r#response.json::<Tunnel>()?)) },
-		r#other_status => { Ok(VpnTunnelsPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WirelessWirelessLanGroupsListQuery {
-	ancestor: Option<Vec<String>>,
-	ancestor__n: Option<Vec<String>>,
-	ancestor_id: Option<Vec<String>>,
-	ancestor_id__n: Option<Vec<String>>,
 	created: Option<Vec<String>>,
 	created__empty: Option<Vec<String>>,
 	created__gt: Option<Vec<String>>,
@@ -28224,10 +23811,10 @@ pub struct WirelessWirelessLansListQuery {
 	description__nie: Option<Vec<String>>,
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
-	group: Option<Vec<String>>,
-	group__n: Option<Vec<String>>,
-	group_id: Option<Vec<String>>,
-	group_id__n: Option<Vec<String>>,
+	group: Option<Vec<i64>>,
+	group__n: Option<Vec<i64>>,
+	group_id: Option<Vec<i64>>,
+	group_id__n: Option<Vec<i64>>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -28235,8 +23822,6 @@ pub struct WirelessWirelessLansListQuery {
 	id__lt: Option<Vec<i64>>,
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
-	interface_id: Option<Vec<i64>>,
-	interface_id__n: Option<Vec<i64>>,
 	last_updated: Option<Vec<String>>,
 	last_updated__empty: Option<Vec<String>>,
 	last_updated__gt: Option<Vec<String>>,
@@ -28272,10 +23857,14 @@ pub struct WirelessWirelessLansListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
@@ -28460,23 +24049,6 @@ pub struct WirelessWirelessLinksListQuery {
 	description__nie: Option<Vec<String>>,
 	description__niew: Option<Vec<String>>,
 	description__nisw: Option<Vec<String>>,
-	distance: Option<Vec<f64>>,
-	distance__empty: Option<bool>,
-	distance__gt: Option<Vec<f64>>,
-	distance__gte: Option<Vec<f64>>,
-	distance__lt: Option<Vec<f64>>,
-	distance__lte: Option<Vec<f64>>,
-	distance__n: Option<Vec<f64>>,
-	/// * `km` - Kilometers
-	/// * `m` - Meters
-	/// * `mi` - Miles
-	/// * `ft` - Feet
-	distance_unit: Option<String>,
-	/// * `km` - Kilometers
-	/// * `m` - Meters
-	/// * `mi` - Miles
-	/// * `ft` - Feet
-	distance_unit__n: Option<String>,
 	id: Option<Vec<i64>>,
 	id__empty: Option<bool>,
 	id__gt: Option<Vec<i64>>,
@@ -28485,8 +24057,18 @@ pub struct WirelessWirelessLinksListQuery {
 	id__lte: Option<Vec<i64>>,
 	id__n: Option<Vec<i64>>,
 	interface_a_id: Option<Vec<i64>>,
+	interface_a_id__empty: Option<Vec<i64>>,
+	interface_a_id__gt: Option<Vec<i64>>,
+	interface_a_id__gte: Option<Vec<i64>>,
+	interface_a_id__lt: Option<Vec<i64>>,
+	interface_a_id__lte: Option<Vec<i64>>,
 	interface_a_id__n: Option<Vec<i64>>,
 	interface_b_id: Option<Vec<i64>>,
+	interface_b_id__empty: Option<Vec<i64>>,
+	interface_b_id__gt: Option<Vec<i64>>,
+	interface_b_id__gte: Option<Vec<i64>>,
+	interface_b_id__lt: Option<Vec<i64>>,
+	interface_b_id__lte: Option<Vec<i64>>,
 	interface_b_id__n: Option<Vec<i64>>,
 	last_updated: Option<Vec<String>>,
 	last_updated__empty: Option<Vec<String>>,
@@ -28523,10 +24105,14 @@ pub struct WirelessWirelessLinksListQuery {
 	tenant: Option<Vec<String>>,
 	/// Tenant (slug)
 	tenant__n: Option<Vec<String>>,
-	tenant_group: Option<Vec<String>>,
-	tenant_group__n: Option<Vec<String>>,
-	tenant_group_id: Option<Vec<String>>,
-	tenant_group_id__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	tenant_group_id__n: Option<Vec<i64>>,
 	/// Tenant (ID)
 	tenant_id: Option<Vec<Option<i64>>>,
 	/// Tenant (ID)
