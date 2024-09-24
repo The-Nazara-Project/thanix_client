@@ -474,19 +474,19 @@ pub struct BriefIPSecProfileRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct BriefInterface {
 	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub device: BriefDevice,
-	pub name: String,
-	pub description: String,
+	pub url: Option<String>,
+	pub display: Option<String>,
+	pub device: Option<BriefDevice>,
+	pub name: Option<String>,
+	pub description: Option<String>,
 	pub cable: Option<BriefCable>,
-	pub _occupied: bool,
+	pub _occupied: Option<bool>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct BriefInterfaceRequest {
-	pub device: BriefDeviceRequest,
-	pub name: String,
-	pub description: String,
+	pub device: Option<BriefDeviceRequest>,
+	pub name: Option<String>,
+	pub description: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct BriefInventoryItemRole {
@@ -3201,17 +3201,17 @@ pub struct ImageAttachmentRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct Interface {
 	pub id: i64,
-	pub url: String,
-	pub display_url: String,
-	pub display: String,
-	pub device: BriefDevice,
-	pub vdcs: Vec<VirtualDeviceContext>,
+	pub url: Option<String>,
+	pub display_url: Option<String>,
+	pub display: Option<String>,
+	pub device: Option<BriefDevice>,
+	pub vdcs: Option<Vec<VirtualDeviceContext>>,
 	pub module: Option<BriefModule>,
-	pub name: String,
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	pub label: Option<String>,
 	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub enabled: bool,
+	pub enabled: Option<bool>,
 	pub parent: Option<NestedInterface>,
 	pub bridge: Option<NestedInterface>,
 	pub lag: Option<NestedInterface>,
@@ -3221,8 +3221,8 @@ pub struct Interface {
 	pub duplex: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub wwn: Option<String>,
 	/// This interface is used only for out-of-band management
-	pub mgmt_only: bool,
-	pub description: String,
+	pub mgmt_only: Option<bool>,
+	pub description: Option<String>,
 	pub mode: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub rf_role: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub rf_channel: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -3234,37 +3234,37 @@ pub struct Interface {
 	pub rf_channel_width: Option<f64>,
 	pub tx_power: Option<u8>,
 	pub untagged_vlan: Option<BriefVLAN>,
-	pub tagged_vlans: Vec<VLAN>,
+	pub tagged_vlans: Option<Vec<VLAN>>,
 	/// Treat as if a cable is connected
-	pub mark_connected: bool,
+	pub mark_connected: Option<bool>,
 	pub cable: Option<BriefCable>,
-	pub cable_end: String,
+	pub cable_end: Option<String>,
 	pub wireless_link: Option<NestedWirelessLink>,
-	pub link_peers: Vec<serde_json::Value>,
+	pub link_peers: Option<Vec<serde_json::Value>>,
 	/// Return the type of the peer link terminations, or None.
 	pub link_peers_type: Option<String>,
-	pub wireless_lans: Vec<WirelessLAN>,
+	pub wireless_lans: Option<Vec<WirelessLAN>>,
 	pub vrf: Option<BriefVRF>,
 	pub l2vpn_termination: Option<BriefL2VPNTermination>,
 	pub connected_endpoints: Option<Vec<serde_json::Value>>,
 	pub connected_endpoints_type: Option<String>,
-	pub connected_endpoints_reachable: bool,
-	pub tags: Vec<NestedTag>,
+	pub connected_endpoints_reachable: Option<bool>,
+	pub tags: Option<Vec<NestedTag>>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub created: Option<String>,
 	pub last_updated: Option<String>,
-	pub count_ipaddresses: i64,
-	pub count_fhrp_groups: i64,
-	pub _occupied: bool,
+	pub count_ipaddresses: Option<i64>,
+	pub count_fhrp_groups: Option<i64>,
+	pub _occupied: Option<bool>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct InterfaceRequest {
-	pub device: BriefDeviceRequest,
-	pub vdcs: Vec<i64>,
+	pub device: Option<BriefDeviceRequest>,
+	pub vdcs: Option<Vec<i64>>,
 	pub module: Option<BriefModuleRequest>,
-	pub name: String,
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	pub label: Option<String>,
 	/// * `virtual` - Virtual
 	/// * `bridge` - Bridge
 	/// * `lag` - Link Aggregation Group (LAG)
@@ -3392,8 +3392,8 @@ pub struct InterfaceRequest {
 	/// * `extreme-summitstack-256` - Extreme SummitStack-256
 	/// * `extreme-summitstack-512` - Extreme SummitStack-512
 	/// * `other` - Other
-	pub r#type: String,
-	pub enabled: bool,
+	pub r#type: Option<String>,
+	pub enabled: Option<bool>,
 	pub parent: Option<NestedInterfaceRequest>,
 	pub bridge: Option<NestedInterfaceRequest>,
 	pub lag: Option<NestedInterfaceRequest>,
@@ -3406,15 +3406,15 @@ pub struct InterfaceRequest {
 	pub duplex: Option<String>,
 	pub wwn: Option<String>,
 	/// This interface is used only for out-of-band management
-	pub mgmt_only: bool,
-	pub description: String,
+	pub mgmt_only: Option<bool>,
+	pub description: Option<String>,
 	/// * `access` - Access
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
-	pub mode: String,
+	pub mode: Option<String>,
 	/// * `ap` - Access point
 	/// * `station` - Station
-	pub rf_role: String,
+	pub rf_role: Option<String>,
 	/// * `2.4g-1-2412-22` - 1 (2412 MHz)
 	/// * `2.4g-2-2417-22` - 2 (2417 MHz)
 	/// * `2.4g-3-2422-22` - 3 (2422 MHz)
@@ -3612,10 +3612,10 @@ pub struct InterfaceRequest {
 	/// * `60g-25-61560-6480` - 25 (61.56/8.64 GHz)
 	/// * `60g-26-63720-6480` - 26 (63.72/8.64 GHz)
 	/// * `60g-27-65880-6480` - 27 (65.88/8.64 GHz)
-	pub rf_channel: String,
+	pub rf_channel: Option<String>,
 	/// * `pd` - PD
 	/// * `pse` - PSE
-	pub poe_mode: String,
+	pub poe_mode: Option<String>,
 	/// * `type1-ieee802.3af` - 802.3af (Type 1)
 	/// * `type2-ieee802.3at` - 802.3at (Type 2)
 	/// * `type3-ieee802.3bt` - 802.3bt (Type 3)
@@ -3624,36 +3624,36 @@ pub struct InterfaceRequest {
 	/// * `passive-24v-4pair` - Passive 24V (4-pair)
 	/// * `passive-48v-2pair` - Passive 48V (2-pair)
 	/// * `passive-48v-4pair` - Passive 48V (4-pair)
-	pub poe_type: String,
+	pub poe_type: Option<String>,
 	/// Populated by selected channel (if set)
 	pub rf_channel_frequency: Option<f64>,
 	/// Populated by selected channel (if set)
 	pub rf_channel_width: Option<f64>,
 	pub tx_power: Option<u8>,
 	pub untagged_vlan: Option<BriefVLANRequest>,
-	pub tagged_vlans: Vec<i64>,
+	pub tagged_vlans: Option<Vec<i64>>,
 	/// Treat as if a cable is connected
-	pub mark_connected: bool,
-	pub wireless_lans: Vec<i64>,
+	pub mark_connected: Option<bool>,
+	pub wireless_lans: Option<Vec<i64>>,
 	pub vrf: Option<BriefVRFRequest>,
-	pub tags: Vec<NestedTagRequest>,
+	pub tags: Option<Vec<NestedTagRequest>>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct InterfaceTemplate {
 	pub id: i64,
-	pub url: String,
-	pub display: String,
+	pub url: Option<String>,
+	pub display: Option<String>,
 	pub device_type: Option<BriefDeviceType>,
 	pub module_type: Option<BriefModuleType>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	pub label: Option<String>,
 	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub enabled: bool,
-	pub mgmt_only: bool,
-	pub description: String,
+	pub enabled: Option<bool>,
+	pub mgmt_only: Option<bool>,
+	pub description: Option<String>,
 	pub bridge: Option<NestedInterfaceTemplate>,
 	pub poe_mode: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub poe_type: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -3666,9 +3666,9 @@ pub struct InterfaceTemplateRequest {
 	pub device_type: Option<BriefDeviceTypeRequest>,
 	pub module_type: Option<BriefModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	pub label: Option<String>,
 	/// * `virtual` - Virtual
 	/// * `bridge` - Bridge
 	/// * `lag` - Link Aggregation Group (LAG)
@@ -3796,10 +3796,10 @@ pub struct InterfaceTemplateRequest {
 	/// * `extreme-summitstack-256` - Extreme SummitStack-256
 	/// * `extreme-summitstack-512` - Extreme SummitStack-512
 	/// * `other` - Other
-	pub r#type: String,
-	pub enabled: bool,
-	pub mgmt_only: bool,
-	pub description: String,
+	pub r#type: Option<String>,
+	pub enabled: Option<bool>,
+	pub mgmt_only: Option<bool>,
+	pub description: Option<String>,
 	pub bridge: Option<NestedInterfaceTemplateRequest>,
 	/// * `pd` - PD
 	/// * `pse` - PSE
@@ -4319,32 +4319,32 @@ pub struct NestedIPAddressRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedInterface {
 	pub id: i64,
-	pub url: String,
-	pub display_url: String,
-	pub display: String,
+	pub url: Option<String>,
+	pub display_url: Option<String>,
+	pub display: Option<String>,
 	pub device: Option<NestedDevice>,
-	pub name: String,
+	pub name: Option<String>,
 	pub cable: Option<i64>,
-	pub _occupied: bool,
+	pub _occupied: Option<bool>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedInterfaceRequest {
-	pub name: String,
+	pub name: Option<String>,
 	pub cable: Option<i64>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedInterfaceTemplate {
 	pub id: i64,
-	pub url: String,
-	pub display_url: String,
-	pub display: String,
+	pub url: Option<String>,
+	pub display_url: Option<String>,
+	pub display: Option<String>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
+	pub name: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedInterfaceTemplateRequest {
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
+	pub name: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedLocation {
@@ -4455,15 +4455,15 @@ pub struct NestedUser {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedVMInterface {
 	pub id: i64,
-	pub url: String,
-	pub display_url: String,
-	pub display: String,
+	pub url: Option<String>,
+	pub display_url: Option<String>,
+	pub display: Option<String>,
 	pub virtual_machine: Option<NestedVirtualMachine>,
-	pub name: String,
+	pub name: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedVMInterfaceRequest {
-	pub name: String,
+	pub name: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedVirtualMachine {
@@ -4957,17 +4957,17 @@ pub struct PaginatedImageAttachmentList {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedInterfaceList {
-	pub count: i64,
+	pub count: Option<i64>,
 	pub next: Option<String>,
 	pub previous: Option<String>,
-	pub results: Vec<Interface>,
+	pub results: Option<Vec<Interface>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedInterfaceTemplateList {
-	pub count: i64,
+	pub count: Option<i64>,
 	pub next: Option<String>,
 	pub previous: Option<String>,
-	pub results: Vec<InterfaceTemplate>,
+	pub results: Option<Vec<InterfaceTemplate>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedInventoryItemList {
@@ -5370,10 +5370,10 @@ pub struct PaginatedVLANList {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedVMInterfaceList {
-	pub count: i64,
+	pub count: Option<i64>,
 	pub next: Option<String>,
 	pub previous: Option<String>,
-	pub results: Vec<VMInterface>,
+	pub results: Option<Vec<VMInterface>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedVRFList {
@@ -6881,12 +6881,12 @@ pub struct PatchedWritableIPSecProposalRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableInterfaceRequest {
-	pub device: BriefDeviceRequest,
-	pub vdcs: Vec<i64>,
+	pub device: Option<BriefDeviceRequest>,
+	pub vdcs: Option<Vec<i64>>,
 	pub module: Option<BriefModuleRequest>,
-	pub name: String,
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	pub label: Option<String>,
 	/// * `virtual` - Virtual
 	/// * `bridge` - Bridge
 	/// * `lag` - Link Aggregation Group (LAG)
@@ -7014,8 +7014,8 @@ pub struct PatchedWritableInterfaceRequest {
 	/// * `extreme-summitstack-256` - Extreme SummitStack-256
 	/// * `extreme-summitstack-512` - Extreme SummitStack-512
 	/// * `other` - Other
-	pub r#type: String,
-	pub enabled: bool,
+	pub r#type: Option<String>,
+	pub enabled: Option<bool>,
 	pub parent: Option<i64>,
 	pub bridge: Option<i64>,
 	pub lag: Option<i64>,
@@ -7028,17 +7028,17 @@ pub struct PatchedWritableInterfaceRequest {
 	pub duplex: Option<String>,
 	pub wwn: Option<String>,
 	/// This interface is used only for out-of-band management
-	pub mgmt_only: bool,
-	pub description: String,
+	pub mgmt_only: Option<bool>,
+	pub description: Option<String>,
 	/// IEEE 802.1Q tagging strategy
 	/// 
 	/// * `access` - Access
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
-	pub mode: String,
+	pub mode: Option<String>,
 	/// * `ap` - Access point
 	/// * `station` - Station
-	pub rf_role: String,
+	pub rf_role: Option<String>,
 	/// * `2.4g-1-2412-22` - 1 (2412 MHz)
 	/// * `2.4g-2-2417-22` - 2 (2417 MHz)
 	/// * `2.4g-3-2422-22` - 3 (2422 MHz)
@@ -7236,10 +7236,10 @@ pub struct PatchedWritableInterfaceRequest {
 	/// * `60g-25-61560-6480` - 25 (61.56/8.64 GHz)
 	/// * `60g-26-63720-6480` - 26 (63.72/8.64 GHz)
 	/// * `60g-27-65880-6480` - 27 (65.88/8.64 GHz)
-	pub rf_channel: String,
+	pub rf_channel: Option<String>,
 	/// * `pd` - PD
 	/// * `pse` - PSE
-	pub poe_mode: String,
+	pub poe_mode: Option<String>,
 	/// * `type1-ieee802.3af` - 802.3af (Type 1)
 	/// * `type2-ieee802.3at` - 802.3at (Type 2)
 	/// * `type3-ieee802.3bt` - 802.3bt (Type 3)
@@ -7248,19 +7248,19 @@ pub struct PatchedWritableInterfaceRequest {
 	/// * `passive-24v-4pair` - Passive 24V (4-pair)
 	/// * `passive-48v-2pair` - Passive 48V (2-pair)
 	/// * `passive-48v-4pair` - Passive 48V (4-pair)
-	pub poe_type: String,
+	pub poe_type: Option<String>,
 	/// Populated by selected channel (if set)
 	pub rf_channel_frequency: Option<f64>,
 	/// Populated by selected channel (if set)
 	pub rf_channel_width: Option<f64>,
 	pub tx_power: Option<u8>,
 	pub untagged_vlan: Option<BriefVLANRequest>,
-	pub tagged_vlans: Vec<i64>,
+	pub tagged_vlans: Option<Vec<i64>>,
 	/// Treat as if a cable is connected
-	pub mark_connected: bool,
-	pub wireless_lans: Vec<i64>,
+	pub mark_connected: Option<bool>,
+	pub wireless_lans: Option<Vec<i64>>,
 	pub vrf: Option<BriefVRFRequest>,
-	pub tags: Vec<NestedTagRequest>,
+	pub tags: Option<Vec<NestedTagRequest>>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -7268,9 +7268,9 @@ pub struct PatchedWritableInterfaceTemplateRequest {
 	pub device_type: Option<BriefDeviceTypeRequest>,
 	pub module_type: Option<BriefModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	pub label: Option<String>,
 	/// * `virtual` - Virtual
 	/// * `bridge` - Bridge
 	/// * `lag` - Link Aggregation Group (LAG)
@@ -7398,14 +7398,14 @@ pub struct PatchedWritableInterfaceTemplateRequest {
 	/// * `extreme-summitstack-256` - Extreme SummitStack-256
 	/// * `extreme-summitstack-512` - Extreme SummitStack-512
 	/// * `other` - Other
-	pub r#type: String,
-	pub enabled: bool,
-	pub mgmt_only: bool,
-	pub description: String,
+	pub r#type: Option<String>,
+	pub enabled: Option<bool>,
+	pub mgmt_only: Option<bool>,
+	pub description: Option<String>,
 	pub bridge: Option<i64>,
 	/// * `pd` - PD
 	/// * `pse` - PSE
-	pub poe_mode: String,
+	pub poe_mode: Option<String>,
 	/// * `type1-ieee802.3af` - 802.3af (Type 1)
 	/// * `type2-ieee802.3at` - 802.3at (Type 2)
 	/// * `type3-ieee802.3bt` - 802.3bt (Type 3)
@@ -7414,10 +7414,10 @@ pub struct PatchedWritableInterfaceTemplateRequest {
 	/// * `passive-24v-4pair` - Passive 24V (4-pair)
 	/// * `passive-48v-2pair` - Passive 48V (2-pair)
 	/// * `passive-48v-4pair` - Passive 48V (4-pair)
-	pub poe_type: String,
+	pub poe_type: Option<String>,
 	/// * `ap` - Access point
 	/// * `station` - Station
-	pub rf_role: String,
+	pub rf_role: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableJournalEntryRequest {
@@ -8430,24 +8430,24 @@ pub struct PatchedWritableVLANRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableVMInterfaceRequest {
-	pub virtual_machine: BriefVirtualMachineRequest,
-	pub name: String,
-	pub enabled: bool,
+	pub virtual_machine: Option<BriefVirtualMachineRequest>,
+	pub name: Option<String>,
+	pub enabled: Option<bool>,
 	pub parent: Option<i64>,
 	pub bridge: Option<i64>,
 	pub mtu: Option<u32>,
 	pub mac_address: Option<String>,
-	pub description: String,
+	pub description: Option<String>,
 	/// IEEE 802.1Q tagging strategy
 	/// 
 	/// * `access` - Access
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
-	pub mode: String,
+	pub mode: Option<String>,
 	pub untagged_vlan: Option<BriefVLANRequest>,
-	pub tagged_vlans: Vec<i64>,
+	pub tagged_vlans: Option<Vec<i64>>,
 	pub vrf: Option<BriefVRFRequest>,
-	pub tags: Vec<NestedTagRequest>,
+	pub tags: Option<Vec<NestedTagRequest>>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -10480,47 +10480,47 @@ pub struct VLANRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VMInterface {
 	pub id: i64,
-	pub url: String,
-	pub display_url: String,
-	pub display: String,
-	pub virtual_machine: BriefVirtualMachine,
-	pub name: String,
-	pub enabled: bool,
+	pub url: Option<String>,
+	pub display_url: Option<String>,
+	pub display: Option<String>,
+	pub virtual_machine: Option<BriefVirtualMachine>,
+	pub name: Option<String>,
+	pub enabled: Option<bool>,
 	pub parent: Option<NestedVMInterface>,
 	pub bridge: Option<NestedVMInterface>,
 	pub mtu: Option<u32>,
 	pub mac_address: Option<String>,
-	pub description: String,
+	pub description: Option<String>,
 	pub mode: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub untagged_vlan: Option<BriefVLAN>,
-	pub tagged_vlans: Vec<VLAN>,
+	pub tagged_vlans: Option<Vec<VLAN>>,
 	pub vrf: Option<BriefVRF>,
 	pub l2vpn_termination: Option<BriefL2VPNTermination>,
-	pub tags: Vec<NestedTag>,
+	pub tags: Option<Vec<NestedTag>>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub created: Option<String>,
 	pub last_updated: Option<String>,
-	pub count_ipaddresses: i64,
-	pub count_fhrp_groups: i64,
+	pub count_ipaddresses: Option<i64>,
+	pub count_fhrp_groups: Option<i64>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VMInterfaceRequest {
-	pub virtual_machine: BriefVirtualMachineRequest,
-	pub name: String,
-	pub enabled: bool,
+	pub virtual_machine: Option<BriefVirtualMachineRequest>,
+	pub name: Option<String>,
+	pub enabled: Option<bool>,
 	pub parent: Option<NestedVMInterfaceRequest>,
 	pub bridge: Option<NestedVMInterfaceRequest>,
 	pub mtu: Option<u32>,
 	pub mac_address: Option<String>,
-	pub description: String,
+	pub description: Option<String>,
 	/// * `access` - Access
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
-	pub mode: String,
+	pub mode: Option<String>,
 	pub untagged_vlan: Option<BriefVLANRequest>,
-	pub tagged_vlans: Vec<i64>,
+	pub tagged_vlans: Option<Vec<i64>>,
 	pub vrf: Option<BriefVRFRequest>,
-	pub tags: Vec<NestedTagRequest>,
+	pub tags: Option<Vec<NestedTagRequest>>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -11714,12 +11714,12 @@ pub struct WritableIPSecProposalRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableInterfaceRequest {
-	pub device: BriefDeviceRequest,
-	pub vdcs: Vec<i64>,
+	pub device: Option<BriefDeviceRequest>,
+	pub vdcs: Option<Vec<i64>>,
 	pub module: Option<BriefModuleRequest>,
-	pub name: String,
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	pub label: Option<String>,
 	/// * `virtual` - Virtual
 	/// * `bridge` - Bridge
 	/// * `lag` - Link Aggregation Group (LAG)
@@ -11847,8 +11847,8 @@ pub struct WritableInterfaceRequest {
 	/// * `extreme-summitstack-256` - Extreme SummitStack-256
 	/// * `extreme-summitstack-512` - Extreme SummitStack-512
 	/// * `other` - Other
-	pub r#type: String,
-	pub enabled: bool,
+	pub r#type: Option<String>,
+	pub enabled: Option<bool>,
 	pub parent: Option<i64>,
 	pub bridge: Option<i64>,
 	pub lag: Option<i64>,
@@ -11861,17 +11861,17 @@ pub struct WritableInterfaceRequest {
 	pub duplex: Option<String>,
 	pub wwn: Option<String>,
 	/// This interface is used only for out-of-band management
-	pub mgmt_only: bool,
-	pub description: String,
+	pub mgmt_only: Option<bool>,
+	pub description: Option<String>,
 	/// IEEE 802.1Q tagging strategy
 	/// 
 	/// * `access` - Access
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
-	pub mode: String,
+	pub mode: Option<String>,
 	/// * `ap` - Access point
 	/// * `station` - Station
-	pub rf_role: String,
+	pub rf_role: Option<String>,
 	/// * `2.4g-1-2412-22` - 1 (2412 MHz)
 	/// * `2.4g-2-2417-22` - 2 (2417 MHz)
 	/// * `2.4g-3-2422-22` - 3 (2422 MHz)
@@ -12069,10 +12069,10 @@ pub struct WritableInterfaceRequest {
 	/// * `60g-25-61560-6480` - 25 (61.56/8.64 GHz)
 	/// * `60g-26-63720-6480` - 26 (63.72/8.64 GHz)
 	/// * `60g-27-65880-6480` - 27 (65.88/8.64 GHz)
-	pub rf_channel: String,
+	pub rf_channel: Option<String>,
 	/// * `pd` - PD
 	/// * `pse` - PSE
-	pub poe_mode: String,
+	pub poe_mode: Option<String>,
 	/// * `type1-ieee802.3af` - 802.3af (Type 1)
 	/// * `type2-ieee802.3at` - 802.3at (Type 2)
 	/// * `type3-ieee802.3bt` - 802.3bt (Type 3)
@@ -12081,19 +12081,19 @@ pub struct WritableInterfaceRequest {
 	/// * `passive-24v-4pair` - Passive 24V (4-pair)
 	/// * `passive-48v-2pair` - Passive 48V (2-pair)
 	/// * `passive-48v-4pair` - Passive 48V (4-pair)
-	pub poe_type: String,
+	pub poe_type: Option<String>,
 	/// Populated by selected channel (if set)
 	pub rf_channel_frequency: Option<f64>,
 	/// Populated by selected channel (if set)
 	pub rf_channel_width: Option<f64>,
 	pub tx_power: Option<u8>,
 	pub untagged_vlan: Option<BriefVLANRequest>,
-	pub tagged_vlans: Vec<i64>,
+	pub tagged_vlans: Option<Vec<i64>>,
 	/// Treat as if a cable is connected
-	pub mark_connected: bool,
-	pub wireless_lans: Vec<i64>,
+	pub mark_connected: Option<bool>,
+	pub wireless_lans: Option<Vec<i64>>,
 	pub vrf: Option<BriefVRFRequest>,
-	pub tags: Vec<NestedTagRequest>,
+	pub tags: Option<Vec<NestedTagRequest>>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -12101,9 +12101,9 @@ pub struct WritableInterfaceTemplateRequest {
 	pub device_type: Option<BriefDeviceTypeRequest>,
 	pub module_type: Option<BriefModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	pub label: Option<String>,
 	/// * `virtual` - Virtual
 	/// * `bridge` - Bridge
 	/// * `lag` - Link Aggregation Group (LAG)
@@ -12231,14 +12231,14 @@ pub struct WritableInterfaceTemplateRequest {
 	/// * `extreme-summitstack-256` - Extreme SummitStack-256
 	/// * `extreme-summitstack-512` - Extreme SummitStack-512
 	/// * `other` - Other
-	pub r#type: String,
-	pub enabled: bool,
-	pub mgmt_only: bool,
-	pub description: String,
+	pub r#type: Option<String>,
+	pub enabled: Option<bool>,
+	pub mgmt_only: Option<bool>,
+	pub description: Option<String>,
 	pub bridge: Option<i64>,
 	/// * `pd` - PD
 	/// * `pse` - PSE
-	pub poe_mode: String,
+	pub poe_mode: Option<String>,
 	/// * `type1-ieee802.3af` - 802.3af (Type 1)
 	/// * `type2-ieee802.3at` - 802.3at (Type 2)
 	/// * `type3-ieee802.3bt` - 802.3bt (Type 3)
@@ -12247,10 +12247,10 @@ pub struct WritableInterfaceTemplateRequest {
 	/// * `passive-24v-4pair` - Passive 24V (4-pair)
 	/// * `passive-48v-2pair` - Passive 48V (2-pair)
 	/// * `passive-48v-4pair` - Passive 48V (4-pair)
-	pub poe_type: String,
+	pub poe_type: Option<String>,
 	/// * `ap` - Access point
 	/// * `station` - Station
-	pub rf_role: String,
+	pub rf_role: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableJournalEntryRequest {
@@ -13263,24 +13263,24 @@ pub struct WritableVLANRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableVMInterfaceRequest {
-	pub virtual_machine: BriefVirtualMachineRequest,
-	pub name: String,
-	pub enabled: bool,
+	pub virtual_machine: Option<BriefVirtualMachineRequest>,
+	pub name: Option<String>,
+	pub enabled: Option<bool>,
 	pub parent: Option<i64>,
 	pub bridge: Option<i64>,
 	pub mtu: Option<u32>,
 	pub mac_address: Option<String>,
-	pub description: String,
+	pub description: Option<String>,
 	/// IEEE 802.1Q tagging strategy
 	/// 
 	/// * `access` - Access
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
-	pub mode: String,
+	pub mode: Option<String>,
 	pub untagged_vlan: Option<BriefVLANRequest>,
-	pub tagged_vlans: Vec<i64>,
+	pub tagged_vlans: Option<Vec<i64>>,
 	pub vrf: Option<BriefVRFRequest>,
-	pub tags: Vec<NestedTagRequest>,
+	pub tags: Option<Vec<NestedTagRequest>>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
