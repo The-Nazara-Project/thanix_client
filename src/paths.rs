@@ -259,17 +259,6 @@ pub fn circuits_circuit_terminations_paths_retrieve(state: &ThanixClient, id: i6
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CircuitsCircuitTypesListQuery {
-	pub color: Option<Vec<String>>,
-	pub color__empty: Option<bool>,
-	pub color__ic: Option<Vec<String>>,
-	pub color__ie: Option<Vec<String>>,
-	pub color__iew: Option<Vec<String>>,
-	pub color__isw: Option<Vec<String>>,
-	pub color__n: Option<Vec<String>>,
-	pub color__nic: Option<Vec<String>>,
-	pub color__nie: Option<Vec<String>>,
-	pub color__niew: Option<Vec<String>>,
-	pub color__nisw: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -563,17 +552,17 @@ pub struct CircuitsCircuitsListQuery {
 	pub provider: Option<Vec<String>>,
 	/// Provider (slug)
 	pub provider__n: Option<Vec<String>>,
-	/// Provider account (ID)
+	/// ProviderAccount (ID)
 	pub provider_account_id: Option<Vec<i64>>,
-	/// Provider account (ID)
+	/// ProviderAccount (ID)
 	pub provider_account_id__n: Option<Vec<i64>>,
 	/// Provider (ID)
 	pub provider_id: Option<Vec<i64>>,
 	/// Provider (ID)
 	pub provider_id__n: Option<Vec<i64>>,
-	/// Provider network (ID)
+	/// ProviderNetwork (ID)
 	pub provider_network_id: Option<Vec<i64>>,
-	/// Provider network (ID)
+	/// ProviderNetwork (ID)
 	pub provider_network_id__n: Option<Vec<i64>>,
 	/// Search
 	pub q: Option<String>,
@@ -2065,11 +2054,8 @@ pub fn dcim_cable_terminations_partial_update(state: &ThanixClient, body: Patche
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimCablesListQuery {
-	pub circuittermination_id: Option<Vec<i64>>,
 	pub color: Option<Vec<String>>,
 	pub color__n: Option<Vec<String>>,
-	pub consoleport_id: Option<Vec<i64>>,
-	pub consoleserverport_id: Option<Vec<i64>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -2091,7 +2077,6 @@ pub struct DcimCablesListQuery {
 	pub description__nisw: Option<Vec<String>>,
 	pub device: Option<Vec<String>>,
 	pub device_id: Option<Vec<i64>>,
-	pub frontport_id: Option<Vec<i64>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -2099,7 +2084,6 @@ pub struct DcimCablesListQuery {
 	pub id__lt: Option<Vec<i64>>,
 	pub id__lte: Option<Vec<i64>>,
 	pub id__n: Option<Vec<i64>>,
-	pub interface_id: Option<Vec<i64>>,
 	pub label: Option<Vec<String>>,
 	pub label__empty: Option<bool>,
 	pub label__ic: Option<Vec<String>>,
@@ -2136,14 +2120,10 @@ pub struct DcimCablesListQuery {
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	pub ordering: Option<String>,
-	pub powerfeed_id: Option<Vec<i64>>,
-	pub poweroutlet_id: Option<Vec<i64>>,
-	pub powerport_id: Option<Vec<i64>>,
 	/// Search
 	pub q: Option<String>,
 	pub rack: Option<Vec<String>>,
 	pub rack_id: Option<Vec<i64>>,
-	pub rearport_id: Option<Vec<i64>>,
 	pub site: Option<Vec<String>>,
 	pub site_id: Option<Vec<i64>>,
 	pub status: Option<Vec<String>>,
@@ -4168,7 +4148,6 @@ pub struct DcimDeviceTypesListQuery {
 	pub description__nisw: Option<Vec<String>>,
 	/// Has device bays
 	pub device_bays: Option<bool>,
-	pub exclude_from_utilization: Option<bool>,
 	/// Has a front image
 	pub has_front_image: Option<bool>,
 	/// Has a rear image
@@ -13954,14 +13933,10 @@ pub struct ExtrasCustomFieldsListQuery {
 	pub r#type: Option<Vec<String>>,
 	/// The type of data this custom field holds
 	pub type__n: Option<Vec<String>>,
-	/// Specifies whether the custom field value can be edited in the UI
-	pub ui_editable: Option<String>,
-	/// Specifies whether the custom field value can be edited in the UI
-	pub ui_editable__n: Option<String>,
-	/// Specifies whether the custom field is displayed in the UI
-	pub ui_visible: Option<String>,
-	/// Specifies whether the custom field is displayed in the UI
-	pub ui_visible__n: Option<String>,
+	/// Specifies the visibility of custom field in the UI
+	pub ui_visibility: Option<String>,
+	/// Specifies the visibility of custom field in the UI
+	pub ui_visibility__n: Option<String>,
 	pub weight: Option<Vec<i64>>,
 	pub weight__empty: Option<bool>,
 	pub weight__gt: Option<Vec<i64>>,
@@ -14399,241 +14374,6 @@ pub fn extras_dashboard_partial_update(state: &ThanixClient, body: PatchedDashbo
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasDashboardPartialUpdateResponse::Http200(r#response.json::<Dashboard>()?)) },
 		r#other_status => { Ok(ExtrasDashboardPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct ExtrasEventRulesListQuery {
-	pub action_object_id: Option<Vec<i64>>,
-	pub action_object_id__empty: Option<Vec<i64>>,
-	pub action_object_id__gt: Option<Vec<i64>>,
-	pub action_object_id__gte: Option<Vec<i64>>,
-	pub action_object_id__lt: Option<Vec<i64>>,
-	pub action_object_id__lte: Option<Vec<i64>>,
-	pub action_object_id__n: Option<Vec<i64>>,
-	pub action_object_type: Option<String>,
-	pub action_object_type__n: Option<String>,
-	pub action_type: Option<Vec<String>>,
-	pub action_type__n: Option<Vec<String>>,
-	pub content_type_id: Option<Vec<i64>>,
-	pub content_type_id__empty: Option<Vec<i64>>,
-	pub content_type_id__gt: Option<Vec<i64>>,
-	pub content_type_id__gte: Option<Vec<i64>>,
-	pub content_type_id__lt: Option<Vec<i64>>,
-	pub content_type_id__lte: Option<Vec<i64>>,
-	pub content_type_id__n: Option<Vec<i64>>,
-	pub content_types: Option<String>,
-	pub content_types__ic: Option<String>,
-	pub content_types__ie: Option<String>,
-	pub content_types__iew: Option<String>,
-	pub content_types__isw: Option<String>,
-	pub content_types__n: Option<String>,
-	pub content_types__nic: Option<String>,
-	pub content_types__nie: Option<String>,
-	pub content_types__niew: Option<String>,
-	pub content_types__nisw: Option<String>,
-	pub created: Option<Vec<String>>,
-	pub created__empty: Option<Vec<String>>,
-	pub created__gt: Option<Vec<String>>,
-	pub created__gte: Option<Vec<String>>,
-	pub created__lt: Option<Vec<String>>,
-	pub created__lte: Option<Vec<String>>,
-	pub created__n: Option<Vec<String>>,
-	pub created_by_request: Option<String>,
-	pub description: Option<Vec<String>>,
-	pub description__empty: Option<bool>,
-	pub description__ic: Option<Vec<String>>,
-	pub description__ie: Option<Vec<String>>,
-	pub description__iew: Option<Vec<String>>,
-	pub description__isw: Option<Vec<String>>,
-	pub description__n: Option<Vec<String>>,
-	pub description__nic: Option<Vec<String>>,
-	pub description__nie: Option<Vec<String>>,
-	pub description__niew: Option<Vec<String>>,
-	pub description__nisw: Option<Vec<String>>,
-	pub enabled: Option<bool>,
-	pub id: Option<Vec<i64>>,
-	pub id__empty: Option<bool>,
-	pub id__gt: Option<Vec<i64>>,
-	pub id__gte: Option<Vec<i64>>,
-	pub id__lt: Option<Vec<i64>>,
-	pub id__lte: Option<Vec<i64>>,
-	pub id__n: Option<Vec<i64>>,
-	pub last_updated: Option<Vec<String>>,
-	pub last_updated__empty: Option<Vec<String>>,
-	pub last_updated__gt: Option<Vec<String>>,
-	pub last_updated__gte: Option<Vec<String>>,
-	pub last_updated__lt: Option<Vec<String>>,
-	pub last_updated__lte: Option<Vec<String>>,
-	pub last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	pub limit: Option<i64>,
-	pub modified_by_request: Option<String>,
-	pub name: Option<Vec<String>>,
-	pub name__empty: Option<bool>,
-	pub name__ic: Option<Vec<String>>,
-	pub name__ie: Option<Vec<String>>,
-	pub name__iew: Option<Vec<String>>,
-	pub name__isw: Option<Vec<String>>,
-	pub name__n: Option<Vec<String>>,
-	pub name__nic: Option<Vec<String>>,
-	pub name__nie: Option<Vec<String>>,
-	pub name__niew: Option<Vec<String>>,
-	pub name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	pub offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	pub ordering: Option<String>,
-	/// Search
-	pub q: Option<String>,
-	pub tag: Option<Vec<String>>,
-	pub tag__n: Option<Vec<String>>,
-	pub type_create: Option<bool>,
-	pub type_delete: Option<bool>,
-	pub type_job_end: Option<bool>,
-	pub type_job_start: Option<bool>,
-	pub type_update: Option<bool>,
-	pub updated_by_request: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum ExtrasEventRulesListResponse {
-	Http200(PaginatedEventRuleList),
-	Other(Response)
-}
-/// Get a list of event rule objects.
-pub fn extras_event_rules_list(state: &ThanixClient, query: ExtrasEventRulesListQuery) -> Result<ExtrasEventRulesListResponse, Error> {
-	let qstring = serde_qs::to_string(&query).unwrap();
-	let qstring_clean = remove_square_braces(&qstring);
-	let r#response = state.client.get(format!("{}/api/extras/event-rules/?{}", state.base_url, qstring_clean))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasEventRulesListResponse::Http200(r#response.json::<PaginatedEventRuleList>()?)) },
-		r#other_status => { Ok(ExtrasEventRulesListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasEventRulesBulkUpdateResponse {
-	Http200(Vec<EventRule>),
-	Other(Response)
-}
-/// Put a list of event rule objects.
-pub fn extras_event_rules_bulk_update(state: &ThanixClient, body: Vec<EventRuleRequest>) -> Result<ExtrasEventRulesBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/extras/event-rules/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasEventRulesBulkUpdateResponse::Http200(r#response.json::<Vec<EventRule>>()?)) },
-		r#other_status => { Ok(ExtrasEventRulesBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasEventRulesCreateResponse {
-	Http201(EventRule),
-	Other(Response)
-}
-/// Post a list of event rule objects.
-pub fn extras_event_rules_create(state: &ThanixClient, body: WritableEventRuleRequest) -> Result<ExtrasEventRulesCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/extras/event-rules/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(ExtrasEventRulesCreateResponse::Http201(r#response.json::<EventRule>()?)) },
-		r#other_status => { Ok(ExtrasEventRulesCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasEventRulesBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of event rule objects.
-pub fn extras_event_rules_bulk_destroy(state: &ThanixClient, body: Vec<EventRuleRequest>) -> Result<ExtrasEventRulesBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/extras/event-rules/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(ExtrasEventRulesBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasEventRulesBulkPartialUpdateResponse {
-	Http200(Vec<EventRule>),
-	Other(Response)
-}
-/// Patch a list of event rule objects.
-pub fn extras_event_rules_bulk_partial_update(state: &ThanixClient, body: Vec<EventRuleRequest>) -> Result<ExtrasEventRulesBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/extras/event-rules/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasEventRulesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<EventRule>>()?)) },
-		r#other_status => { Ok(ExtrasEventRulesBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasEventRulesRetrieveResponse {
-	Http200(EventRule),
-	Other(Response)
-}
-/// Get a event rule object.
-pub fn extras_event_rules_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasEventRulesRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/extras/event-rules/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasEventRulesRetrieveResponse::Http200(r#response.json::<EventRule>()?)) },
-		r#other_status => { Ok(ExtrasEventRulesRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasEventRulesUpdateResponse {
-	Http200(EventRule),
-	Other(Response)
-}
-/// Put a event rule object.
-pub fn extras_event_rules_update(state: &ThanixClient, body: WritableEventRuleRequest, id: i64) -> Result<ExtrasEventRulesUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/extras/event-rules/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasEventRulesUpdateResponse::Http200(r#response.json::<EventRule>()?)) },
-		r#other_status => { Ok(ExtrasEventRulesUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasEventRulesDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a event rule object.
-pub fn extras_event_rules_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasEventRulesDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/extras/event-rules/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(ExtrasEventRulesDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum ExtrasEventRulesPartialUpdateResponse {
-	Http200(EventRule),
-	Other(Response)
-}
-/// Patch a event rule object.
-pub fn extras_event_rules_partial_update(state: &ThanixClient, body: PatchedWritableEventRuleRequest, id: i64) -> Result<ExtrasEventRulesPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/extras/event-rules/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(ExtrasEventRulesPartialUpdateResponse::Http200(r#response.json::<EventRule>()?)) },
-		r#other_status => { Ok(ExtrasEventRulesPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -15808,6 +15548,23 @@ pub struct ExtrasWebhooksListQuery {
 	pub ca_file_path__nie: Option<Vec<String>>,
 	pub ca_file_path__niew: Option<Vec<String>>,
 	pub ca_file_path__nisw: Option<Vec<String>>,
+	pub content_type_id: Option<Vec<i64>>,
+	pub content_type_id__empty: Option<Vec<i64>>,
+	pub content_type_id__gt: Option<Vec<i64>>,
+	pub content_type_id__gte: Option<Vec<i64>>,
+	pub content_type_id__lt: Option<Vec<i64>>,
+	pub content_type_id__lte: Option<Vec<i64>>,
+	pub content_type_id__n: Option<Vec<i64>>,
+	pub content_types: Option<String>,
+	pub content_types__ic: Option<String>,
+	pub content_types__ie: Option<String>,
+	pub content_types__iew: Option<String>,
+	pub content_types__isw: Option<String>,
+	pub content_types__n: Option<String>,
+	pub content_types__nic: Option<String>,
+	pub content_types__nie: Option<String>,
+	pub content_types__niew: Option<String>,
+	pub content_types__nisw: Option<String>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -15816,17 +15573,7 @@ pub struct ExtrasWebhooksListQuery {
 	pub created__lte: Option<Vec<String>>,
 	pub created__n: Option<Vec<String>>,
 	pub created_by_request: Option<String>,
-	pub description: Option<Vec<String>>,
-	pub description__empty: Option<bool>,
-	pub description__ic: Option<Vec<String>>,
-	pub description__ie: Option<Vec<String>>,
-	pub description__iew: Option<Vec<String>>,
-	pub description__isw: Option<Vec<String>>,
-	pub description__n: Option<Vec<String>>,
-	pub description__nic: Option<Vec<String>>,
-	pub description__nie: Option<Vec<String>>,
-	pub description__niew: Option<Vec<String>>,
-	pub description__nisw: Option<Vec<String>>,
+	pub enabled: Option<bool>,
 	pub http_content_type: Option<Vec<String>>,
 	pub http_content_type__empty: Option<bool>,
 	pub http_content_type__ic: Option<Vec<String>>,
@@ -15873,6 +15620,16 @@ pub struct ExtrasWebhooksListQuery {
 	/// Which field to use when ordering the results.
 	pub ordering: Option<String>,
 	pub payload_url: Option<Vec<String>>,
+	pub payload_url__empty: Option<bool>,
+	pub payload_url__ic: Option<Vec<String>>,
+	pub payload_url__ie: Option<Vec<String>>,
+	pub payload_url__iew: Option<Vec<String>>,
+	pub payload_url__isw: Option<Vec<String>>,
+	pub payload_url__n: Option<Vec<String>>,
+	pub payload_url__nic: Option<Vec<String>>,
+	pub payload_url__nie: Option<Vec<String>>,
+	pub payload_url__niew: Option<Vec<String>>,
+	pub payload_url__nisw: Option<Vec<String>>,
 	/// Search
 	pub q: Option<String>,
 	pub secret: Option<Vec<String>>,
@@ -15889,6 +15646,11 @@ pub struct ExtrasWebhooksListQuery {
 	pub ssl_verification: Option<bool>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
+	pub type_create: Option<bool>,
+	pub type_delete: Option<bool>,
+	pub type_job_end: Option<bool>,
+	pub type_job_start: Option<bool>,
+	pub type_update: Option<bool>,
 	pub updated_by_request: Option<String>,
 
 }
@@ -17710,6 +17472,508 @@ pub fn ipam_ip_ranges_available_ips_create(state: &ThanixClient, body: Vec<IPAdd
 	match r#response.status().as_u16() {
 		201 => { Ok(IpamIpRangesAvailableIpsCreateResponse::Http201(r#response.json::<Vec<IPAddress>>()?)) },
 		r#other_status => { Ok(IpamIpRangesAvailableIpsCreateResponse::Other(r#response)) }
+	}
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct IpamL2VpnTerminationsListQuery {
+	pub assigned_object_type: Option<String>,
+	pub assigned_object_type__n: Option<String>,
+	pub assigned_object_type_id: Option<i64>,
+	pub assigned_object_type_id__n: Option<i64>,
+	pub created: Option<Vec<String>>,
+	pub created__empty: Option<Vec<String>>,
+	pub created__gt: Option<Vec<String>>,
+	pub created__gte: Option<Vec<String>>,
+	pub created__lt: Option<Vec<String>>,
+	pub created__lte: Option<Vec<String>>,
+	pub created__n: Option<Vec<String>>,
+	pub created_by_request: Option<String>,
+	/// Device (name)
+	pub device: Option<Vec<Option<String>>>,
+	/// Device (name)
+	pub device__n: Option<Vec<Option<String>>>,
+	/// Device (ID)
+	pub device_id: Option<Vec<i64>>,
+	/// Device (ID)
+	pub device_id__n: Option<Vec<i64>>,
+	pub id: Option<Vec<i64>>,
+	pub id__empty: Option<bool>,
+	pub id__gt: Option<Vec<i64>>,
+	pub id__gte: Option<Vec<i64>>,
+	pub id__lt: Option<Vec<i64>>,
+	pub id__lte: Option<Vec<i64>>,
+	pub id__n: Option<Vec<i64>>,
+	/// Interface (name)
+	pub interface: Option<Vec<String>>,
+	/// Interface (name)
+	pub interface__n: Option<Vec<String>>,
+	/// Interface (ID)
+	pub interface_id: Option<Vec<i64>>,
+	/// Interface (ID)
+	pub interface_id__n: Option<Vec<i64>>,
+	/// L2VPN (slug)
+	pub l2vpn: Option<Vec<String>>,
+	/// L2VPN (slug)
+	pub l2vpn__n: Option<Vec<String>>,
+	/// L2VPN (ID)
+	pub l2vpn_id: Option<Vec<i64>>,
+	/// L2VPN (ID)
+	pub l2vpn_id__n: Option<Vec<i64>>,
+	pub last_updated: Option<Vec<String>>,
+	pub last_updated__empty: Option<Vec<String>>,
+	pub last_updated__gt: Option<Vec<String>>,
+	pub last_updated__gte: Option<Vec<String>>,
+	pub last_updated__lt: Option<Vec<String>>,
+	pub last_updated__lte: Option<Vec<String>>,
+	pub last_updated__n: Option<Vec<String>>,
+	/// Number of results to return per page.
+	pub limit: Option<i64>,
+	pub modified_by_request: Option<String>,
+	/// The initial index from which to return the results.
+	pub offset: Option<i64>,
+	/// Which field to use when ordering the results.
+	pub ordering: Option<String>,
+	/// Search
+	pub q: Option<String>,
+	pub region: Option<Vec<String>>,
+	pub region_id: Option<Vec<i64>>,
+	pub site: Option<Vec<String>>,
+	pub site_id: Option<Vec<i64>>,
+	pub tag: Option<Vec<String>>,
+	pub tag__n: Option<Vec<String>>,
+	pub updated_by_request: Option<String>,
+	/// Virtual machine (name)
+	pub virtual_machine: Option<Vec<String>>,
+	/// Virtual machine (name)
+	pub virtual_machine__n: Option<Vec<String>>,
+	/// Virtual machine (ID)
+	pub virtual_machine_id: Option<Vec<i64>>,
+	/// Virtual machine (ID)
+	pub virtual_machine_id__n: Option<Vec<i64>>,
+	/// VLAN (name)
+	pub vlan: Option<Vec<String>>,
+	/// VLAN (name)
+	pub vlan__n: Option<Vec<String>>,
+	/// VLAN (ID)
+	pub vlan_id: Option<Vec<i64>>,
+	/// VLAN (ID)
+	pub vlan_id__n: Option<Vec<i64>>,
+	/// VLAN number (1-4094)
+	pub vlan_vid: Option<i64>,
+	/// VLAN number (1-4094)
+	pub vlan_vid__empty: Option<i64>,
+	/// VLAN number (1-4094)
+	pub vlan_vid__gt: Option<i64>,
+	/// VLAN number (1-4094)
+	pub vlan_vid__gte: Option<i64>,
+	/// VLAN number (1-4094)
+	pub vlan_vid__lt: Option<i64>,
+	/// VLAN number (1-4094)
+	pub vlan_vid__lte: Option<i64>,
+	/// VLAN number (1-4094)
+	pub vlan_vid__n: Option<i64>,
+	/// VM interface (name)
+	pub vminterface: Option<Vec<String>>,
+	/// VM interface (name)
+	pub vminterface__n: Option<Vec<String>>,
+	/// VM Interface (ID)
+	pub vminterface_id: Option<Vec<i64>>,
+	/// VM Interface (ID)
+	pub vminterface_id__n: Option<Vec<i64>>,
+
+}
+#[derive(Debug)]
+pub enum IpamL2VpnTerminationsListResponse {
+	Http200(PaginatedL2VPNTerminationList),
+	Other(Response)
+}
+/// Get a list of L2VPN termination objects.
+pub fn ipam_l2vpn_terminations_list(state: &ThanixClient, query: IpamL2VpnTerminationsListQuery) -> Result<IpamL2VpnTerminationsListResponse, Error> {
+	let qstring = serde_qs::to_string(&query).unwrap();
+	let qstring_clean = remove_square_braces(&qstring);
+	let r#response = state.client.get(format!("{}/api/ipam/l2vpn-terminations/?{}", state.base_url, qstring_clean))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnTerminationsListResponse::Http200(r#response.json::<PaginatedL2VPNTerminationList>()?)) },
+		r#other_status => { Ok(IpamL2VpnTerminationsListResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnTerminationsBulkUpdateResponse {
+	Http200(Vec<L2VPNTermination>),
+	Other(Response)
+}
+/// Put a list of L2VPN termination objects.
+pub fn ipam_l2vpn_terminations_bulk_update(state: &ThanixClient, body: Vec<L2VPNTerminationRequest>) -> Result<IpamL2VpnTerminationsBulkUpdateResponse, Error> {
+	let r#response = state.client.put(format!("{}/api/ipam/l2vpn-terminations/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnTerminationsBulkUpdateResponse::Http200(r#response.json::<Vec<L2VPNTermination>>()?)) },
+		r#other_status => { Ok(IpamL2VpnTerminationsBulkUpdateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnTerminationsCreateResponse {
+	Http201(L2VPNTermination),
+	Other(Response)
+}
+/// Post a list of L2VPN termination objects.
+pub fn ipam_l2vpn_terminations_create(state: &ThanixClient, body: WritableL2VPNTerminationRequest) -> Result<IpamL2VpnTerminationsCreateResponse, Error> {
+	let r#response = state.client.post(format!("{}/api/ipam/l2vpn-terminations/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		201 => { Ok(IpamL2VpnTerminationsCreateResponse::Http201(r#response.json::<L2VPNTermination>()?)) },
+		r#other_status => { Ok(IpamL2VpnTerminationsCreateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnTerminationsBulkDestroyResponse {
+	Http204,
+	Other(Response)
+}
+/// Delete a list of L2VPN termination objects.
+pub fn ipam_l2vpn_terminations_bulk_destroy(state: &ThanixClient, body: Vec<L2VPNTerminationRequest>) -> Result<IpamL2VpnTerminationsBulkDestroyResponse, Error> {
+	let r#response = state.client.delete(format!("{}/api/ipam/l2vpn-terminations/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		r#other_status => { Ok(IpamL2VpnTerminationsBulkDestroyResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnTerminationsBulkPartialUpdateResponse {
+	Http200(Vec<L2VPNTermination>),
+	Other(Response)
+}
+/// Patch a list of L2VPN termination objects.
+pub fn ipam_l2vpn_terminations_bulk_partial_update(state: &ThanixClient, body: Vec<L2VPNTerminationRequest>) -> Result<IpamL2VpnTerminationsBulkPartialUpdateResponse, Error> {
+	let r#response = state.client.patch(format!("{}/api/ipam/l2vpn-terminations/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnTerminationsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<L2VPNTermination>>()?)) },
+		r#other_status => { Ok(IpamL2VpnTerminationsBulkPartialUpdateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnTerminationsRetrieveResponse {
+	Http200(L2VPNTermination),
+	Other(Response)
+}
+/// Get a L2VPN termination object.
+pub fn ipam_l2vpn_terminations_retrieve(state: &ThanixClient, id: i64) -> Result<IpamL2VpnTerminationsRetrieveResponse, Error> {
+	let r#response = state.client.get(format!("{}/api/ipam/l2vpn-terminations/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnTerminationsRetrieveResponse::Http200(r#response.json::<L2VPNTermination>()?)) },
+		r#other_status => { Ok(IpamL2VpnTerminationsRetrieveResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnTerminationsUpdateResponse {
+	Http200(L2VPNTermination),
+	Other(Response)
+}
+/// Put a L2VPN termination object.
+pub fn ipam_l2vpn_terminations_update(state: &ThanixClient, body: WritableL2VPNTerminationRequest, id: i64) -> Result<IpamL2VpnTerminationsUpdateResponse, Error> {
+	let r#response = state.client.put(format!("{}/api/ipam/l2vpn-terminations/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnTerminationsUpdateResponse::Http200(r#response.json::<L2VPNTermination>()?)) },
+		r#other_status => { Ok(IpamL2VpnTerminationsUpdateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnTerminationsDestroyResponse {
+	Http204,
+	Other(Response)
+}
+/// Delete a L2VPN termination object.
+pub fn ipam_l2vpn_terminations_destroy(state: &ThanixClient, id: i64) -> Result<IpamL2VpnTerminationsDestroyResponse, Error> {
+	let r#response = state.client.delete(format!("{}/api/ipam/l2vpn-terminations/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.send()?;
+	match r#response.status().as_u16() {
+		r#other_status => { Ok(IpamL2VpnTerminationsDestroyResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnTerminationsPartialUpdateResponse {
+	Http200(L2VPNTermination),
+	Other(Response)
+}
+/// Patch a L2VPN termination object.
+pub fn ipam_l2vpn_terminations_partial_update(state: &ThanixClient, body: PatchedWritableL2VPNTerminationRequest, id: i64) -> Result<IpamL2VpnTerminationsPartialUpdateResponse, Error> {
+	let r#response = state.client.patch(format!("{}/api/ipam/l2vpn-terminations/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnTerminationsPartialUpdateResponse::Http200(r#response.json::<L2VPNTermination>()?)) },
+		r#other_status => { Ok(IpamL2VpnTerminationsPartialUpdateResponse::Other(r#response)) }
+	}
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct IpamL2VpnsListQuery {
+	pub created: Option<Vec<String>>,
+	pub created__empty: Option<Vec<String>>,
+	pub created__gt: Option<Vec<String>>,
+	pub created__gte: Option<Vec<String>>,
+	pub created__lt: Option<Vec<String>>,
+	pub created__lte: Option<Vec<String>>,
+	pub created__n: Option<Vec<String>>,
+	pub created_by_request: Option<String>,
+	pub description: Option<Vec<String>>,
+	pub description__empty: Option<bool>,
+	pub description__ic: Option<Vec<String>>,
+	pub description__ie: Option<Vec<String>>,
+	pub description__iew: Option<Vec<String>>,
+	pub description__isw: Option<Vec<String>>,
+	pub description__n: Option<Vec<String>>,
+	pub description__nic: Option<Vec<String>>,
+	pub description__nie: Option<Vec<String>>,
+	pub description__niew: Option<Vec<String>>,
+	pub description__nisw: Option<Vec<String>>,
+	/// Export target (name)
+	pub export_target: Option<Vec<String>>,
+	/// Export target (name)
+	pub export_target__n: Option<Vec<String>>,
+	/// Export target
+	pub export_target_id: Option<Vec<i64>>,
+	/// Export target
+	pub export_target_id__n: Option<Vec<i64>>,
+	pub id: Option<Vec<i64>>,
+	pub id__empty: Option<bool>,
+	pub id__gt: Option<Vec<i64>>,
+	pub id__gte: Option<Vec<i64>>,
+	pub id__lt: Option<Vec<i64>>,
+	pub id__lte: Option<Vec<i64>>,
+	pub id__n: Option<Vec<i64>>,
+	pub identifier: Option<Vec<i64>>,
+	pub identifier__empty: Option<bool>,
+	pub identifier__gt: Option<Vec<i64>>,
+	pub identifier__gte: Option<Vec<i64>>,
+	pub identifier__lt: Option<Vec<i64>>,
+	pub identifier__lte: Option<Vec<i64>>,
+	pub identifier__n: Option<Vec<i64>>,
+	/// Import target (name)
+	pub import_target: Option<Vec<String>>,
+	/// Import target (name)
+	pub import_target__n: Option<Vec<String>>,
+	/// Import target
+	pub import_target_id: Option<Vec<i64>>,
+	/// Import target
+	pub import_target_id__n: Option<Vec<i64>>,
+	pub last_updated: Option<Vec<String>>,
+	pub last_updated__empty: Option<Vec<String>>,
+	pub last_updated__gt: Option<Vec<String>>,
+	pub last_updated__gte: Option<Vec<String>>,
+	pub last_updated__lt: Option<Vec<String>>,
+	pub last_updated__lte: Option<Vec<String>>,
+	pub last_updated__n: Option<Vec<String>>,
+	/// Number of results to return per page.
+	pub limit: Option<i64>,
+	pub modified_by_request: Option<String>,
+	pub name: Option<Vec<String>>,
+	pub name__empty: Option<bool>,
+	pub name__ic: Option<Vec<String>>,
+	pub name__ie: Option<Vec<String>>,
+	pub name__iew: Option<Vec<String>>,
+	pub name__isw: Option<Vec<String>>,
+	pub name__n: Option<Vec<String>>,
+	pub name__nic: Option<Vec<String>>,
+	pub name__nie: Option<Vec<String>>,
+	pub name__niew: Option<Vec<String>>,
+	pub name__nisw: Option<Vec<String>>,
+	/// The initial index from which to return the results.
+	pub offset: Option<i64>,
+	/// Which field to use when ordering the results.
+	pub ordering: Option<String>,
+	/// Search
+	pub q: Option<String>,
+	pub slug: Option<Vec<String>>,
+	pub slug__empty: Option<bool>,
+	pub slug__ic: Option<Vec<String>>,
+	pub slug__ie: Option<Vec<String>>,
+	pub slug__iew: Option<Vec<String>>,
+	pub slug__isw: Option<Vec<String>>,
+	pub slug__n: Option<Vec<String>>,
+	pub slug__nic: Option<Vec<String>>,
+	pub slug__nie: Option<Vec<String>>,
+	pub slug__niew: Option<Vec<String>>,
+	pub slug__nisw: Option<Vec<String>>,
+	pub tag: Option<Vec<String>>,
+	pub tag__n: Option<Vec<String>>,
+	/// Tenant (slug)
+	pub tenant: Option<Vec<String>>,
+	/// Tenant (slug)
+	pub tenant__n: Option<Vec<String>>,
+	/// Tenant Group (slug)
+	pub tenant_group: Option<Vec<i64>>,
+	/// Tenant Group (slug)
+	pub tenant_group__n: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	pub tenant_group_id: Option<Vec<i64>>,
+	/// Tenant Group (ID)
+	pub tenant_group_id__n: Option<Vec<i64>>,
+	/// Tenant (ID)
+	pub tenant_id: Option<Vec<Option<i64>>>,
+	/// Tenant (ID)
+	pub tenant_id__n: Option<Vec<Option<i64>>>,
+	pub r#type: Option<Vec<String>>,
+	pub type__n: Option<Vec<String>>,
+	pub updated_by_request: Option<String>,
+
+}
+#[derive(Debug)]
+pub enum IpamL2VpnsListResponse {
+	Http200(PaginatedL2VPNList),
+	Other(Response)
+}
+/// Get a list of L2VPN objects.
+pub fn ipam_l2vpns_list(state: &ThanixClient, query: IpamL2VpnsListQuery) -> Result<IpamL2VpnsListResponse, Error> {
+	let qstring = serde_qs::to_string(&query).unwrap();
+	let qstring_clean = remove_square_braces(&qstring);
+	let r#response = state.client.get(format!("{}/api/ipam/l2vpns/?{}", state.base_url, qstring_clean))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnsListResponse::Http200(r#response.json::<PaginatedL2VPNList>()?)) },
+		r#other_status => { Ok(IpamL2VpnsListResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnsBulkUpdateResponse {
+	Http200(Vec<L2VPN>),
+	Other(Response)
+}
+/// Put a list of L2VPN objects.
+pub fn ipam_l2vpns_bulk_update(state: &ThanixClient, body: Vec<L2VPNRequest>) -> Result<IpamL2VpnsBulkUpdateResponse, Error> {
+	let r#response = state.client.put(format!("{}/api/ipam/l2vpns/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnsBulkUpdateResponse::Http200(r#response.json::<Vec<L2VPN>>()?)) },
+		r#other_status => { Ok(IpamL2VpnsBulkUpdateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnsCreateResponse {
+	Http201(L2VPN),
+	Other(Response)
+}
+/// Post a list of L2VPN objects.
+pub fn ipam_l2vpns_create(state: &ThanixClient, body: WritableL2VPNRequest) -> Result<IpamL2VpnsCreateResponse, Error> {
+	let r#response = state.client.post(format!("{}/api/ipam/l2vpns/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		201 => { Ok(IpamL2VpnsCreateResponse::Http201(r#response.json::<L2VPN>()?)) },
+		r#other_status => { Ok(IpamL2VpnsCreateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnsBulkDestroyResponse {
+	Http204,
+	Other(Response)
+}
+/// Delete a list of L2VPN objects.
+pub fn ipam_l2vpns_bulk_destroy(state: &ThanixClient, body: Vec<L2VPNRequest>) -> Result<IpamL2VpnsBulkDestroyResponse, Error> {
+	let r#response = state.client.delete(format!("{}/api/ipam/l2vpns/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		r#other_status => { Ok(IpamL2VpnsBulkDestroyResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnsBulkPartialUpdateResponse {
+	Http200(Vec<L2VPN>),
+	Other(Response)
+}
+/// Patch a list of L2VPN objects.
+pub fn ipam_l2vpns_bulk_partial_update(state: &ThanixClient, body: Vec<L2VPNRequest>) -> Result<IpamL2VpnsBulkPartialUpdateResponse, Error> {
+	let r#response = state.client.patch(format!("{}/api/ipam/l2vpns/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<L2VPN>>()?)) },
+		r#other_status => { Ok(IpamL2VpnsBulkPartialUpdateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnsRetrieveResponse {
+	Http200(L2VPN),
+	Other(Response)
+}
+/// Get a L2VPN object.
+pub fn ipam_l2vpns_retrieve(state: &ThanixClient, id: i64) -> Result<IpamL2VpnsRetrieveResponse, Error> {
+	let r#response = state.client.get(format!("{}/api/ipam/l2vpns/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnsRetrieveResponse::Http200(r#response.json::<L2VPN>()?)) },
+		r#other_status => { Ok(IpamL2VpnsRetrieveResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnsUpdateResponse {
+	Http200(L2VPN),
+	Other(Response)
+}
+/// Put a L2VPN object.
+pub fn ipam_l2vpns_update(state: &ThanixClient, body: WritableL2VPNRequest, id: i64) -> Result<IpamL2VpnsUpdateResponse, Error> {
+	let r#response = state.client.put(format!("{}/api/ipam/l2vpns/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnsUpdateResponse::Http200(r#response.json::<L2VPN>()?)) },
+		r#other_status => { Ok(IpamL2VpnsUpdateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnsDestroyResponse {
+	Http204,
+	Other(Response)
+}
+/// Delete a L2VPN object.
+pub fn ipam_l2vpns_destroy(state: &ThanixClient, id: i64) -> Result<IpamL2VpnsDestroyResponse, Error> {
+	let r#response = state.client.delete(format!("{}/api/ipam/l2vpns/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.send()?;
+	match r#response.status().as_u16() {
+		r#other_status => { Ok(IpamL2VpnsDestroyResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum IpamL2VpnsPartialUpdateResponse {
+	Http200(L2VPN),
+	Other(Response)
+}
+/// Patch a L2VPN object.
+pub fn ipam_l2vpns_partial_update(state: &ThanixClient, body: PatchedWritableL2VPNRequest, id: i64) -> Result<IpamL2VpnsPartialUpdateResponse, Error> {
+	let r#response = state.client.patch(format!("{}/api/ipam/l2vpns/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
+		.send()?;
+	match r#response.status().as_u16() {
+		200 => { Ok(IpamL2VpnsPartialUpdateResponse::Http200(r#response.json::<L2VPN>()?)) },
+		r#other_status => { Ok(IpamL2VpnsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -23150,222 +23414,6 @@ pub fn virtualization_interfaces_partial_update(state: &ThanixClient, body: Patc
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VirtualizationVirtualDisksListQuery {
-	pub created: Option<Vec<String>>,
-	pub created__empty: Option<Vec<String>>,
-	pub created__gt: Option<Vec<String>>,
-	pub created__gte: Option<Vec<String>>,
-	pub created__lt: Option<Vec<String>>,
-	pub created__lte: Option<Vec<String>>,
-	pub created__n: Option<Vec<String>>,
-	pub created_by_request: Option<String>,
-	pub description: Option<Vec<String>>,
-	pub description__empty: Option<bool>,
-	pub description__ic: Option<Vec<String>>,
-	pub description__ie: Option<Vec<String>>,
-	pub description__iew: Option<Vec<String>>,
-	pub description__isw: Option<Vec<String>>,
-	pub description__n: Option<Vec<String>>,
-	pub description__nic: Option<Vec<String>>,
-	pub description__nie: Option<Vec<String>>,
-	pub description__niew: Option<Vec<String>>,
-	pub description__nisw: Option<Vec<String>>,
-	pub id: Option<Vec<i64>>,
-	pub id__empty: Option<bool>,
-	pub id__gt: Option<Vec<i64>>,
-	pub id__gte: Option<Vec<i64>>,
-	pub id__lt: Option<Vec<i64>>,
-	pub id__lte: Option<Vec<i64>>,
-	pub id__n: Option<Vec<i64>>,
-	pub last_updated: Option<Vec<String>>,
-	pub last_updated__empty: Option<Vec<String>>,
-	pub last_updated__gt: Option<Vec<String>>,
-	pub last_updated__gte: Option<Vec<String>>,
-	pub last_updated__lt: Option<Vec<String>>,
-	pub last_updated__lte: Option<Vec<String>>,
-	pub last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	pub limit: Option<i64>,
-	pub modified_by_request: Option<String>,
-	pub name: Option<Vec<String>>,
-	pub name__empty: Option<bool>,
-	pub name__ic: Option<Vec<String>>,
-	pub name__ie: Option<Vec<String>>,
-	pub name__iew: Option<Vec<String>>,
-	pub name__isw: Option<Vec<String>>,
-	pub name__n: Option<Vec<String>>,
-	pub name__nic: Option<Vec<String>>,
-	pub name__nie: Option<Vec<String>>,
-	pub name__niew: Option<Vec<String>>,
-	pub name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	pub offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	pub ordering: Option<String>,
-	/// Search
-	pub q: Option<String>,
-	pub size: Option<Vec<i64>>,
-	pub size__empty: Option<bool>,
-	pub size__gt: Option<Vec<i64>>,
-	pub size__gte: Option<Vec<i64>>,
-	pub size__lt: Option<Vec<i64>>,
-	pub size__lte: Option<Vec<i64>>,
-	pub size__n: Option<Vec<i64>>,
-	pub tag: Option<Vec<String>>,
-	pub tag__n: Option<Vec<String>>,
-	pub updated_by_request: Option<String>,
-	/// Virtual machine
-	pub virtual_machine: Option<Vec<String>>,
-	/// Virtual machine
-	pub virtual_machine__n: Option<Vec<String>>,
-	/// Virtual machine (ID)
-	pub virtual_machine_id: Option<Vec<i64>>,
-	/// Virtual machine (ID)
-	pub virtual_machine_id__n: Option<Vec<i64>>,
-
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualDisksListResponse {
-	Http200(PaginatedVirtualDiskList),
-	Other(Response)
-}
-/// Get a list of virtual disk objects.
-pub fn virtualization_virtual_disks_list(state: &ThanixClient, query: VirtualizationVirtualDisksListQuery) -> Result<VirtualizationVirtualDisksListResponse, Error> {
-	let qstring = serde_qs::to_string(&query).unwrap();
-	let qstring_clean = remove_square_braces(&qstring);
-	let r#response = state.client.get(format!("{}/api/virtualization/virtual-disks/?{}", state.base_url, qstring_clean))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VirtualizationVirtualDisksListResponse::Http200(r#response.json::<PaginatedVirtualDiskList>()?)) },
-		r#other_status => { Ok(VirtualizationVirtualDisksListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualDisksBulkUpdateResponse {
-	Http200(Vec<VirtualDisk>),
-	Other(Response)
-}
-/// Put a list of virtual disk objects.
-pub fn virtualization_virtual_disks_bulk_update(state: &ThanixClient, body: Vec<VirtualDiskRequest>) -> Result<VirtualizationVirtualDisksBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/virtualization/virtual-disks/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VirtualizationVirtualDisksBulkUpdateResponse::Http200(r#response.json::<Vec<VirtualDisk>>()?)) },
-		r#other_status => { Ok(VirtualizationVirtualDisksBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualDisksCreateResponse {
-	Http201(VirtualDisk),
-	Other(Response)
-}
-/// Post a list of virtual disk objects.
-pub fn virtualization_virtual_disks_create(state: &ThanixClient, body: WritableVirtualDiskRequest) -> Result<VirtualizationVirtualDisksCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/virtualization/virtual-disks/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VirtualizationVirtualDisksCreateResponse::Http201(r#response.json::<VirtualDisk>()?)) },
-		r#other_status => { Ok(VirtualizationVirtualDisksCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualDisksBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of virtual disk objects.
-pub fn virtualization_virtual_disks_bulk_destroy(state: &ThanixClient, body: Vec<VirtualDiskRequest>) -> Result<VirtualizationVirtualDisksBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/virtualization/virtual-disks/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VirtualizationVirtualDisksBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualDisksBulkPartialUpdateResponse {
-	Http200(Vec<VirtualDisk>),
-	Other(Response)
-}
-/// Patch a list of virtual disk objects.
-pub fn virtualization_virtual_disks_bulk_partial_update(state: &ThanixClient, body: Vec<VirtualDiskRequest>) -> Result<VirtualizationVirtualDisksBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/virtualization/virtual-disks/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VirtualizationVirtualDisksBulkPartialUpdateResponse::Http200(r#response.json::<Vec<VirtualDisk>>()?)) },
-		r#other_status => { Ok(VirtualizationVirtualDisksBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualDisksRetrieveResponse {
-	Http200(VirtualDisk),
-	Other(Response)
-}
-/// Get a virtual disk object.
-pub fn virtualization_virtual_disks_retrieve(state: &ThanixClient, id: i64) -> Result<VirtualizationVirtualDisksRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/virtualization/virtual-disks/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VirtualizationVirtualDisksRetrieveResponse::Http200(r#response.json::<VirtualDisk>()?)) },
-		r#other_status => { Ok(VirtualizationVirtualDisksRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualDisksUpdateResponse {
-	Http200(VirtualDisk),
-	Other(Response)
-}
-/// Put a virtual disk object.
-pub fn virtualization_virtual_disks_update(state: &ThanixClient, body: WritableVirtualDiskRequest, id: i64) -> Result<VirtualizationVirtualDisksUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/virtualization/virtual-disks/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VirtualizationVirtualDisksUpdateResponse::Http200(r#response.json::<VirtualDisk>()?)) },
-		r#other_status => { Ok(VirtualizationVirtualDisksUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualDisksDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a virtual disk object.
-pub fn virtualization_virtual_disks_destroy(state: &ThanixClient, id: i64) -> Result<VirtualizationVirtualDisksDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/virtualization/virtual-disks/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VirtualizationVirtualDisksDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualDisksPartialUpdateResponse {
-	Http200(VirtualDisk),
-	Other(Response)
-}
-/// Patch a virtual disk object.
-pub fn virtualization_virtual_disks_partial_update(state: &ThanixClient, body: PatchedWritableVirtualDiskRequest, id: i64) -> Result<VirtualizationVirtualDisksPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/virtualization/virtual-disks/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VirtualizationVirtualDisksPartialUpdateResponse::Http200(r#response.json::<VirtualDisk>()?)) },
-		r#other_status => { Ok(VirtualizationVirtualDisksPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VirtualizationVirtualMachinesListQuery {
 	/// Cluster
 	pub cluster: Option<Vec<String>>,
@@ -23713,2310 +23761,6 @@ pub fn virtualization_virtual_machines_partial_update(state: &ThanixClient, body
 	match r#response.status().as_u16() {
 		200 => { Ok(VirtualizationVirtualMachinesPartialUpdateResponse::Http200(r#response.json::<VirtualMachineWithConfigContext>()?)) },
 		r#other_status => { Ok(VirtualizationVirtualMachinesPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VirtualizationVirtualMachinesRenderConfigCreateQuery {
-	pub format: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum VirtualizationVirtualMachinesRenderConfigCreateResponse {
-	Http200(VirtualMachineWithConfigContext),
-	Other(Response)
-}
-/// Resolve and render the preferred ConfigTemplate for this Device.
-pub fn virtualization_virtual_machines_render_config_create(state: &ThanixClient, query: VirtualizationVirtualMachinesRenderConfigCreateQuery, body: WritableVirtualMachineWithConfigContextRequest, id: i64) -> Result<VirtualizationVirtualMachinesRenderConfigCreateResponse, Error> {
-	let qstring = serde_qs::to_string(&query).unwrap();
-	let qstring_clean = remove_square_braces(&qstring);
-	let r#response = state.client.post(format!("{}/api/virtualization/virtual-machines/{id}/render-config/?{}", state.base_url, qstring_clean))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VirtualizationVirtualMachinesRenderConfigCreateResponse::Http200(r#response.json::<VirtualMachineWithConfigContext>()?)) },
-		r#other_status => { Ok(VirtualizationVirtualMachinesRenderConfigCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnIkePoliciesListQuery {
-	pub created: Option<Vec<String>>,
-	pub created__empty: Option<Vec<String>>,
-	pub created__gt: Option<Vec<String>>,
-	pub created__gte: Option<Vec<String>>,
-	pub created__lt: Option<Vec<String>>,
-	pub created__lte: Option<Vec<String>>,
-	pub created__n: Option<Vec<String>>,
-	pub created_by_request: Option<String>,
-	pub description: Option<Vec<String>>,
-	pub description__empty: Option<bool>,
-	pub description__ic: Option<Vec<String>>,
-	pub description__ie: Option<Vec<String>>,
-	pub description__iew: Option<Vec<String>>,
-	pub description__isw: Option<Vec<String>>,
-	pub description__n: Option<Vec<String>>,
-	pub description__nic: Option<Vec<String>>,
-	pub description__nie: Option<Vec<String>>,
-	pub description__niew: Option<Vec<String>>,
-	pub description__nisw: Option<Vec<String>>,
-	pub id: Option<Vec<i64>>,
-	pub id__empty: Option<bool>,
-	pub id__gt: Option<Vec<i64>>,
-	pub id__gte: Option<Vec<i64>>,
-	pub id__lt: Option<Vec<i64>>,
-	pub id__lte: Option<Vec<i64>>,
-	pub id__n: Option<Vec<i64>>,
-	pub last_updated: Option<Vec<String>>,
-	pub last_updated__empty: Option<Vec<String>>,
-	pub last_updated__gt: Option<Vec<String>>,
-	pub last_updated__gte: Option<Vec<String>>,
-	pub last_updated__lt: Option<Vec<String>>,
-	pub last_updated__lte: Option<Vec<String>>,
-	pub last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	pub limit: Option<i64>,
-	pub mode: Option<Vec<String>>,
-	pub mode__n: Option<Vec<String>>,
-	pub modified_by_request: Option<String>,
-	pub name: Option<Vec<String>>,
-	pub name__empty: Option<bool>,
-	pub name__ic: Option<Vec<String>>,
-	pub name__ie: Option<Vec<String>>,
-	pub name__iew: Option<Vec<String>>,
-	pub name__isw: Option<Vec<String>>,
-	pub name__n: Option<Vec<String>>,
-	pub name__nic: Option<Vec<String>>,
-	pub name__nie: Option<Vec<String>>,
-	pub name__niew: Option<Vec<String>>,
-	pub name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	pub offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	pub ordering: Option<String>,
-	pub preshared_key: Option<String>,
-	pub preshared_key__ic: Option<String>,
-	pub preshared_key__ie: Option<String>,
-	pub preshared_key__iew: Option<String>,
-	pub preshared_key__isw: Option<String>,
-	pub preshared_key__n: Option<String>,
-	pub preshared_key__nic: Option<String>,
-	pub preshared_key__nie: Option<String>,
-	pub preshared_key__niew: Option<String>,
-	pub preshared_key__nisw: Option<String>,
-	pub proposal: Option<Vec<String>>,
-	pub proposal__empty: Option<bool>,
-	pub proposal__ic: Option<Vec<String>>,
-	pub proposal__ie: Option<Vec<String>>,
-	pub proposal__iew: Option<Vec<String>>,
-	pub proposal__isw: Option<Vec<String>>,
-	pub proposal__n: Option<Vec<String>>,
-	pub proposal__nic: Option<Vec<String>>,
-	pub proposal__nie: Option<Vec<String>>,
-	pub proposal__niew: Option<Vec<String>>,
-	pub proposal__nisw: Option<Vec<String>>,
-	pub proposal_id: Option<Vec<i64>>,
-	pub proposal_id__empty: Option<Vec<i64>>,
-	pub proposal_id__gt: Option<Vec<i64>>,
-	pub proposal_id__gte: Option<Vec<i64>>,
-	pub proposal_id__lt: Option<Vec<i64>>,
-	pub proposal_id__lte: Option<Vec<i64>>,
-	pub proposal_id__n: Option<Vec<i64>>,
-	/// Search
-	pub q: Option<String>,
-	pub tag: Option<Vec<String>>,
-	pub tag__n: Option<Vec<String>>,
-	pub updated_by_request: Option<String>,
-	pub version: Option<Vec<i64>>,
-	pub version__n: Option<Vec<i64>>,
-
-}
-#[derive(Debug)]
-pub enum VpnIkePoliciesListResponse {
-	Http200(PaginatedIKEPolicyList),
-	Other(Response)
-}
-/// Get a list of IKE policy objects.
-pub fn vpn_ike_policies_list(state: &ThanixClient, query: VpnIkePoliciesListQuery) -> Result<VpnIkePoliciesListResponse, Error> {
-	let qstring = serde_qs::to_string(&query).unwrap();
-	let qstring_clean = remove_square_braces(&qstring);
-	let r#response = state.client.get(format!("{}/api/vpn/ike-policies/?{}", state.base_url, qstring_clean))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkePoliciesListResponse::Http200(r#response.json::<PaginatedIKEPolicyList>()?)) },
-		r#other_status => { Ok(VpnIkePoliciesListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkePoliciesBulkUpdateResponse {
-	Http200(Vec<IKEPolicy>),
-	Other(Response)
-}
-/// Put a list of IKE policy objects.
-pub fn vpn_ike_policies_bulk_update(state: &ThanixClient, body: Vec<IKEPolicyRequest>) -> Result<VpnIkePoliciesBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ike-policies/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkePoliciesBulkUpdateResponse::Http200(r#response.json::<Vec<IKEPolicy>>()?)) },
-		r#other_status => { Ok(VpnIkePoliciesBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkePoliciesCreateResponse {
-	Http201(IKEPolicy),
-	Other(Response)
-}
-/// Post a list of IKE policy objects.
-pub fn vpn_ike_policies_create(state: &ThanixClient, body: WritableIKEPolicyRequest) -> Result<VpnIkePoliciesCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/ike-policies/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnIkePoliciesCreateResponse::Http201(r#response.json::<IKEPolicy>()?)) },
-		r#other_status => { Ok(VpnIkePoliciesCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkePoliciesBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of IKE policy objects.
-pub fn vpn_ike_policies_bulk_destroy(state: &ThanixClient, body: Vec<IKEPolicyRequest>) -> Result<VpnIkePoliciesBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ike-policies/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIkePoliciesBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkePoliciesBulkPartialUpdateResponse {
-	Http200(Vec<IKEPolicy>),
-	Other(Response)
-}
-/// Patch a list of IKE policy objects.
-pub fn vpn_ike_policies_bulk_partial_update(state: &ThanixClient, body: Vec<IKEPolicyRequest>) -> Result<VpnIkePoliciesBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ike-policies/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkePoliciesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<IKEPolicy>>()?)) },
-		r#other_status => { Ok(VpnIkePoliciesBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkePoliciesRetrieveResponse {
-	Http200(IKEPolicy),
-	Other(Response)
-}
-/// Get a IKE policy object.
-pub fn vpn_ike_policies_retrieve(state: &ThanixClient, id: i64) -> Result<VpnIkePoliciesRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/ike-policies/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkePoliciesRetrieveResponse::Http200(r#response.json::<IKEPolicy>()?)) },
-		r#other_status => { Ok(VpnIkePoliciesRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkePoliciesUpdateResponse {
-	Http200(IKEPolicy),
-	Other(Response)
-}
-/// Put a IKE policy object.
-pub fn vpn_ike_policies_update(state: &ThanixClient, body: WritableIKEPolicyRequest, id: i64) -> Result<VpnIkePoliciesUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ike-policies/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkePoliciesUpdateResponse::Http200(r#response.json::<IKEPolicy>()?)) },
-		r#other_status => { Ok(VpnIkePoliciesUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkePoliciesDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a IKE policy object.
-pub fn vpn_ike_policies_destroy(state: &ThanixClient, id: i64) -> Result<VpnIkePoliciesDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ike-policies/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIkePoliciesDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkePoliciesPartialUpdateResponse {
-	Http200(IKEPolicy),
-	Other(Response)
-}
-/// Patch a IKE policy object.
-pub fn vpn_ike_policies_partial_update(state: &ThanixClient, body: PatchedWritableIKEPolicyRequest, id: i64) -> Result<VpnIkePoliciesPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ike-policies/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkePoliciesPartialUpdateResponse::Http200(r#response.json::<IKEPolicy>()?)) },
-		r#other_status => { Ok(VpnIkePoliciesPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnIkeProposalsListQuery {
-	pub authentication_algorithm: Option<Vec<String>>,
-	pub authentication_algorithm__n: Option<Vec<String>>,
-	pub authentication_method: Option<Vec<String>>,
-	pub authentication_method__n: Option<Vec<String>>,
-	pub created: Option<Vec<String>>,
-	pub created__empty: Option<Vec<String>>,
-	pub created__gt: Option<Vec<String>>,
-	pub created__gte: Option<Vec<String>>,
-	pub created__lt: Option<Vec<String>>,
-	pub created__lte: Option<Vec<String>>,
-	pub created__n: Option<Vec<String>>,
-	pub created_by_request: Option<String>,
-	pub description: Option<Vec<String>>,
-	pub description__empty: Option<bool>,
-	pub description__ic: Option<Vec<String>>,
-	pub description__ie: Option<Vec<String>>,
-	pub description__iew: Option<Vec<String>>,
-	pub description__isw: Option<Vec<String>>,
-	pub description__n: Option<Vec<String>>,
-	pub description__nic: Option<Vec<String>>,
-	pub description__nie: Option<Vec<String>>,
-	pub description__niew: Option<Vec<String>>,
-	pub description__nisw: Option<Vec<String>>,
-	pub encryption_algorithm: Option<Vec<String>>,
-	pub encryption_algorithm__n: Option<Vec<String>>,
-	/// Diffie-Hellman group ID
-	pub group: Option<Vec<i64>>,
-	/// Diffie-Hellman group ID
-	pub group__n: Option<Vec<i64>>,
-	pub id: Option<Vec<i64>>,
-	pub id__empty: Option<bool>,
-	pub id__gt: Option<Vec<i64>>,
-	pub id__gte: Option<Vec<i64>>,
-	pub id__lt: Option<Vec<i64>>,
-	pub id__lte: Option<Vec<i64>>,
-	pub id__n: Option<Vec<i64>>,
-	pub last_updated: Option<Vec<String>>,
-	pub last_updated__empty: Option<Vec<String>>,
-	pub last_updated__gt: Option<Vec<String>>,
-	pub last_updated__gte: Option<Vec<String>>,
-	pub last_updated__lt: Option<Vec<String>>,
-	pub last_updated__lte: Option<Vec<String>>,
-	pub last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	pub limit: Option<i64>,
-	pub modified_by_request: Option<String>,
-	pub name: Option<Vec<String>>,
-	pub name__empty: Option<bool>,
-	pub name__ic: Option<Vec<String>>,
-	pub name__ie: Option<Vec<String>>,
-	pub name__iew: Option<Vec<String>>,
-	pub name__isw: Option<Vec<String>>,
-	pub name__n: Option<Vec<String>>,
-	pub name__nic: Option<Vec<String>>,
-	pub name__nie: Option<Vec<String>>,
-	pub name__niew: Option<Vec<String>>,
-	pub name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	pub offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	pub ordering: Option<String>,
-	/// Search
-	pub q: Option<String>,
-	pub sa_lifetime: Option<Vec<i64>>,
-	pub sa_lifetime__empty: Option<bool>,
-	pub sa_lifetime__gt: Option<Vec<i64>>,
-	pub sa_lifetime__gte: Option<Vec<i64>>,
-	pub sa_lifetime__lt: Option<Vec<i64>>,
-	pub sa_lifetime__lte: Option<Vec<i64>>,
-	pub sa_lifetime__n: Option<Vec<i64>>,
-	pub tag: Option<Vec<String>>,
-	pub tag__n: Option<Vec<String>>,
-	pub updated_by_request: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum VpnIkeProposalsListResponse {
-	Http200(PaginatedIKEProposalList),
-	Other(Response)
-}
-/// Get a list of IKE proposal objects.
-pub fn vpn_ike_proposals_list(state: &ThanixClient, query: VpnIkeProposalsListQuery) -> Result<VpnIkeProposalsListResponse, Error> {
-	let qstring = serde_qs::to_string(&query).unwrap();
-	let qstring_clean = remove_square_braces(&qstring);
-	let r#response = state.client.get(format!("{}/api/vpn/ike-proposals/?{}", state.base_url, qstring_clean))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkeProposalsListResponse::Http200(r#response.json::<PaginatedIKEProposalList>()?)) },
-		r#other_status => { Ok(VpnIkeProposalsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkeProposalsBulkUpdateResponse {
-	Http200(Vec<IKEProposal>),
-	Other(Response)
-}
-/// Put a list of IKE proposal objects.
-pub fn vpn_ike_proposals_bulk_update(state: &ThanixClient, body: Vec<IKEProposalRequest>) -> Result<VpnIkeProposalsBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ike-proposals/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkeProposalsBulkUpdateResponse::Http200(r#response.json::<Vec<IKEProposal>>()?)) },
-		r#other_status => { Ok(VpnIkeProposalsBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkeProposalsCreateResponse {
-	Http201(IKEProposal),
-	Other(Response)
-}
-/// Post a list of IKE proposal objects.
-pub fn vpn_ike_proposals_create(state: &ThanixClient, body: WritableIKEProposalRequest) -> Result<VpnIkeProposalsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/ike-proposals/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnIkeProposalsCreateResponse::Http201(r#response.json::<IKEProposal>()?)) },
-		r#other_status => { Ok(VpnIkeProposalsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkeProposalsBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of IKE proposal objects.
-pub fn vpn_ike_proposals_bulk_destroy(state: &ThanixClient, body: Vec<IKEProposalRequest>) -> Result<VpnIkeProposalsBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ike-proposals/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIkeProposalsBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkeProposalsBulkPartialUpdateResponse {
-	Http200(Vec<IKEProposal>),
-	Other(Response)
-}
-/// Patch a list of IKE proposal objects.
-pub fn vpn_ike_proposals_bulk_partial_update(state: &ThanixClient, body: Vec<IKEProposalRequest>) -> Result<VpnIkeProposalsBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ike-proposals/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkeProposalsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<IKEProposal>>()?)) },
-		r#other_status => { Ok(VpnIkeProposalsBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkeProposalsRetrieveResponse {
-	Http200(IKEProposal),
-	Other(Response)
-}
-/// Get a IKE proposal object.
-pub fn vpn_ike_proposals_retrieve(state: &ThanixClient, id: i64) -> Result<VpnIkeProposalsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/ike-proposals/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkeProposalsRetrieveResponse::Http200(r#response.json::<IKEProposal>()?)) },
-		r#other_status => { Ok(VpnIkeProposalsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkeProposalsUpdateResponse {
-	Http200(IKEProposal),
-	Other(Response)
-}
-/// Put a IKE proposal object.
-pub fn vpn_ike_proposals_update(state: &ThanixClient, body: WritableIKEProposalRequest, id: i64) -> Result<VpnIkeProposalsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ike-proposals/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkeProposalsUpdateResponse::Http200(r#response.json::<IKEProposal>()?)) },
-		r#other_status => { Ok(VpnIkeProposalsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkeProposalsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a IKE proposal object.
-pub fn vpn_ike_proposals_destroy(state: &ThanixClient, id: i64) -> Result<VpnIkeProposalsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ike-proposals/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIkeProposalsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIkeProposalsPartialUpdateResponse {
-	Http200(IKEProposal),
-	Other(Response)
-}
-/// Patch a IKE proposal object.
-pub fn vpn_ike_proposals_partial_update(state: &ThanixClient, body: PatchedWritableIKEProposalRequest, id: i64) -> Result<VpnIkeProposalsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ike-proposals/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIkeProposalsPartialUpdateResponse::Http200(r#response.json::<IKEProposal>()?)) },
-		r#other_status => { Ok(VpnIkeProposalsPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnIpsecPoliciesListQuery {
-	pub created: Option<Vec<String>>,
-	pub created__empty: Option<Vec<String>>,
-	pub created__gt: Option<Vec<String>>,
-	pub created__gte: Option<Vec<String>>,
-	pub created__lt: Option<Vec<String>>,
-	pub created__lte: Option<Vec<String>>,
-	pub created__n: Option<Vec<String>>,
-	pub created_by_request: Option<String>,
-	pub description: Option<Vec<String>>,
-	pub description__empty: Option<bool>,
-	pub description__ic: Option<Vec<String>>,
-	pub description__ie: Option<Vec<String>>,
-	pub description__iew: Option<Vec<String>>,
-	pub description__isw: Option<Vec<String>>,
-	pub description__n: Option<Vec<String>>,
-	pub description__nic: Option<Vec<String>>,
-	pub description__nie: Option<Vec<String>>,
-	pub description__niew: Option<Vec<String>>,
-	pub description__nisw: Option<Vec<String>>,
-	pub id: Option<Vec<i64>>,
-	pub id__empty: Option<bool>,
-	pub id__gt: Option<Vec<i64>>,
-	pub id__gte: Option<Vec<i64>>,
-	pub id__lt: Option<Vec<i64>>,
-	pub id__lte: Option<Vec<i64>>,
-	pub id__n: Option<Vec<i64>>,
-	pub last_updated: Option<Vec<String>>,
-	pub last_updated__empty: Option<Vec<String>>,
-	pub last_updated__gt: Option<Vec<String>>,
-	pub last_updated__gte: Option<Vec<String>>,
-	pub last_updated__lt: Option<Vec<String>>,
-	pub last_updated__lte: Option<Vec<String>>,
-	pub last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	pub limit: Option<i64>,
-	pub modified_by_request: Option<String>,
-	pub name: Option<Vec<String>>,
-	pub name__empty: Option<bool>,
-	pub name__ic: Option<Vec<String>>,
-	pub name__ie: Option<Vec<String>>,
-	pub name__iew: Option<Vec<String>>,
-	pub name__isw: Option<Vec<String>>,
-	pub name__n: Option<Vec<String>>,
-	pub name__nic: Option<Vec<String>>,
-	pub name__nie: Option<Vec<String>>,
-	pub name__niew: Option<Vec<String>>,
-	pub name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	pub offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	pub ordering: Option<String>,
-	/// Diffie-Hellman group for Perfect Forward Secrecy
-	pub pfs_group: Option<Vec<Option<i64>>>,
-	/// Diffie-Hellman group for Perfect Forward Secrecy
-	pub pfs_group__n: Option<Vec<Option<i64>>>,
-	pub proposal: Option<Vec<String>>,
-	pub proposal__empty: Option<bool>,
-	pub proposal__ic: Option<Vec<String>>,
-	pub proposal__ie: Option<Vec<String>>,
-	pub proposal__iew: Option<Vec<String>>,
-	pub proposal__isw: Option<Vec<String>>,
-	pub proposal__n: Option<Vec<String>>,
-	pub proposal__nic: Option<Vec<String>>,
-	pub proposal__nie: Option<Vec<String>>,
-	pub proposal__niew: Option<Vec<String>>,
-	pub proposal__nisw: Option<Vec<String>>,
-	pub proposal_id: Option<Vec<i64>>,
-	pub proposal_id__empty: Option<Vec<i64>>,
-	pub proposal_id__gt: Option<Vec<i64>>,
-	pub proposal_id__gte: Option<Vec<i64>>,
-	pub proposal_id__lt: Option<Vec<i64>>,
-	pub proposal_id__lte: Option<Vec<i64>>,
-	pub proposal_id__n: Option<Vec<i64>>,
-	/// Search
-	pub q: Option<String>,
-	pub tag: Option<Vec<String>>,
-	pub tag__n: Option<Vec<String>>,
-	pub updated_by_request: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum VpnIpsecPoliciesListResponse {
-	Http200(PaginatedIPSecPolicyList),
-	Other(Response)
-}
-/// Get a list of IPSec policy objects.
-pub fn vpn_ipsec_policies_list(state: &ThanixClient, query: VpnIpsecPoliciesListQuery) -> Result<VpnIpsecPoliciesListResponse, Error> {
-	let qstring = serde_qs::to_string(&query).unwrap();
-	let qstring_clean = remove_square_braces(&qstring);
-	let r#response = state.client.get(format!("{}/api/vpn/ipsec-policies/?{}", state.base_url, qstring_clean))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecPoliciesListResponse::Http200(r#response.json::<PaginatedIPSecPolicyList>()?)) },
-		r#other_status => { Ok(VpnIpsecPoliciesListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecPoliciesBulkUpdateResponse {
-	Http200(Vec<IPSecPolicy>),
-	Other(Response)
-}
-/// Put a list of IPSec policy objects.
-pub fn vpn_ipsec_policies_bulk_update(state: &ThanixClient, body: Vec<IPSecPolicyRequest>) -> Result<VpnIpsecPoliciesBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ipsec-policies/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecPoliciesBulkUpdateResponse::Http200(r#response.json::<Vec<IPSecPolicy>>()?)) },
-		r#other_status => { Ok(VpnIpsecPoliciesBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecPoliciesCreateResponse {
-	Http201(IPSecPolicy),
-	Other(Response)
-}
-/// Post a list of IPSec policy objects.
-pub fn vpn_ipsec_policies_create(state: &ThanixClient, body: WritableIPSecPolicyRequest) -> Result<VpnIpsecPoliciesCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/ipsec-policies/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnIpsecPoliciesCreateResponse::Http201(r#response.json::<IPSecPolicy>()?)) },
-		r#other_status => { Ok(VpnIpsecPoliciesCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecPoliciesBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of IPSec policy objects.
-pub fn vpn_ipsec_policies_bulk_destroy(state: &ThanixClient, body: Vec<IPSecPolicyRequest>) -> Result<VpnIpsecPoliciesBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ipsec-policies/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIpsecPoliciesBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecPoliciesBulkPartialUpdateResponse {
-	Http200(Vec<IPSecPolicy>),
-	Other(Response)
-}
-/// Patch a list of IPSec policy objects.
-pub fn vpn_ipsec_policies_bulk_partial_update(state: &ThanixClient, body: Vec<IPSecPolicyRequest>) -> Result<VpnIpsecPoliciesBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ipsec-policies/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecPoliciesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<IPSecPolicy>>()?)) },
-		r#other_status => { Ok(VpnIpsecPoliciesBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecPoliciesRetrieveResponse {
-	Http200(IPSecPolicy),
-	Other(Response)
-}
-/// Get a IPSec policy object.
-pub fn vpn_ipsec_policies_retrieve(state: &ThanixClient, id: i64) -> Result<VpnIpsecPoliciesRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/ipsec-policies/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecPoliciesRetrieveResponse::Http200(r#response.json::<IPSecPolicy>()?)) },
-		r#other_status => { Ok(VpnIpsecPoliciesRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecPoliciesUpdateResponse {
-	Http200(IPSecPolicy),
-	Other(Response)
-}
-/// Put a IPSec policy object.
-pub fn vpn_ipsec_policies_update(state: &ThanixClient, body: WritableIPSecPolicyRequest, id: i64) -> Result<VpnIpsecPoliciesUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ipsec-policies/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecPoliciesUpdateResponse::Http200(r#response.json::<IPSecPolicy>()?)) },
-		r#other_status => { Ok(VpnIpsecPoliciesUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecPoliciesDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a IPSec policy object.
-pub fn vpn_ipsec_policies_destroy(state: &ThanixClient, id: i64) -> Result<VpnIpsecPoliciesDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ipsec-policies/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIpsecPoliciesDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecPoliciesPartialUpdateResponse {
-	Http200(IPSecPolicy),
-	Other(Response)
-}
-/// Patch a IPSec policy object.
-pub fn vpn_ipsec_policies_partial_update(state: &ThanixClient, body: PatchedWritableIPSecPolicyRequest, id: i64) -> Result<VpnIpsecPoliciesPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ipsec-policies/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecPoliciesPartialUpdateResponse::Http200(r#response.json::<IPSecPolicy>()?)) },
-		r#other_status => { Ok(VpnIpsecPoliciesPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnIpsecProfilesListQuery {
-	pub created: Option<Vec<String>>,
-	pub created__empty: Option<Vec<String>>,
-	pub created__gt: Option<Vec<String>>,
-	pub created__gte: Option<Vec<String>>,
-	pub created__lt: Option<Vec<String>>,
-	pub created__lte: Option<Vec<String>>,
-	pub created__n: Option<Vec<String>>,
-	pub created_by_request: Option<String>,
-	pub description: Option<Vec<String>>,
-	pub description__empty: Option<bool>,
-	pub description__ic: Option<Vec<String>>,
-	pub description__ie: Option<Vec<String>>,
-	pub description__iew: Option<Vec<String>>,
-	pub description__isw: Option<Vec<String>>,
-	pub description__n: Option<Vec<String>>,
-	pub description__nic: Option<Vec<String>>,
-	pub description__nie: Option<Vec<String>>,
-	pub description__niew: Option<Vec<String>>,
-	pub description__nisw: Option<Vec<String>>,
-	pub id: Option<Vec<i64>>,
-	pub id__empty: Option<bool>,
-	pub id__gt: Option<Vec<i64>>,
-	pub id__gte: Option<Vec<i64>>,
-	pub id__lt: Option<Vec<i64>>,
-	pub id__lte: Option<Vec<i64>>,
-	pub id__n: Option<Vec<i64>>,
-	/// IKE policy (name)
-	pub ike_policy: Option<Vec<String>>,
-	/// IKE policy (name)
-	pub ike_policy__n: Option<Vec<String>>,
-	/// IKE policy (ID)
-	pub ike_policy_id: Option<Vec<i64>>,
-	/// IKE policy (ID)
-	pub ike_policy_id__n: Option<Vec<i64>>,
-	/// IPSec policy (name)
-	pub ipsec_policy: Option<Vec<String>>,
-	/// IPSec policy (name)
-	pub ipsec_policy__n: Option<Vec<String>>,
-	/// IPSec policy (ID)
-	pub ipsec_policy_id: Option<Vec<i64>>,
-	/// IPSec policy (ID)
-	pub ipsec_policy_id__n: Option<Vec<i64>>,
-	pub last_updated: Option<Vec<String>>,
-	pub last_updated__empty: Option<Vec<String>>,
-	pub last_updated__gt: Option<Vec<String>>,
-	pub last_updated__gte: Option<Vec<String>>,
-	pub last_updated__lt: Option<Vec<String>>,
-	pub last_updated__lte: Option<Vec<String>>,
-	pub last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	pub limit: Option<i64>,
-	pub mode: Option<Vec<String>>,
-	pub mode__n: Option<Vec<String>>,
-	pub modified_by_request: Option<String>,
-	pub name: Option<Vec<String>>,
-	pub name__empty: Option<bool>,
-	pub name__ic: Option<Vec<String>>,
-	pub name__ie: Option<Vec<String>>,
-	pub name__iew: Option<Vec<String>>,
-	pub name__isw: Option<Vec<String>>,
-	pub name__n: Option<Vec<String>>,
-	pub name__nic: Option<Vec<String>>,
-	pub name__nie: Option<Vec<String>>,
-	pub name__niew: Option<Vec<String>>,
-	pub name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	pub offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	pub ordering: Option<String>,
-	/// Search
-	pub q: Option<String>,
-	pub tag: Option<Vec<String>>,
-	pub tag__n: Option<Vec<String>>,
-	pub updated_by_request: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum VpnIpsecProfilesListResponse {
-	Http200(PaginatedIPSecProfileList),
-	Other(Response)
-}
-/// Get a list of IPSec profile objects.
-pub fn vpn_ipsec_profiles_list(state: &ThanixClient, query: VpnIpsecProfilesListQuery) -> Result<VpnIpsecProfilesListResponse, Error> {
-	let qstring = serde_qs::to_string(&query).unwrap();
-	let qstring_clean = remove_square_braces(&qstring);
-	let r#response = state.client.get(format!("{}/api/vpn/ipsec-profiles/?{}", state.base_url, qstring_clean))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProfilesListResponse::Http200(r#response.json::<PaginatedIPSecProfileList>()?)) },
-		r#other_status => { Ok(VpnIpsecProfilesListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProfilesBulkUpdateResponse {
-	Http200(Vec<IPSecProfile>),
-	Other(Response)
-}
-/// Put a list of IPSec profile objects.
-pub fn vpn_ipsec_profiles_bulk_update(state: &ThanixClient, body: Vec<IPSecProfileRequest>) -> Result<VpnIpsecProfilesBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ipsec-profiles/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProfilesBulkUpdateResponse::Http200(r#response.json::<Vec<IPSecProfile>>()?)) },
-		r#other_status => { Ok(VpnIpsecProfilesBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProfilesCreateResponse {
-	Http201(IPSecProfile),
-	Other(Response)
-}
-/// Post a list of IPSec profile objects.
-pub fn vpn_ipsec_profiles_create(state: &ThanixClient, body: WritableIPSecProfileRequest) -> Result<VpnIpsecProfilesCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/ipsec-profiles/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnIpsecProfilesCreateResponse::Http201(r#response.json::<IPSecProfile>()?)) },
-		r#other_status => { Ok(VpnIpsecProfilesCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProfilesBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of IPSec profile objects.
-pub fn vpn_ipsec_profiles_bulk_destroy(state: &ThanixClient, body: Vec<IPSecProfileRequest>) -> Result<VpnIpsecProfilesBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ipsec-profiles/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIpsecProfilesBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProfilesBulkPartialUpdateResponse {
-	Http200(Vec<IPSecProfile>),
-	Other(Response)
-}
-/// Patch a list of IPSec profile objects.
-pub fn vpn_ipsec_profiles_bulk_partial_update(state: &ThanixClient, body: Vec<IPSecProfileRequest>) -> Result<VpnIpsecProfilesBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ipsec-profiles/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProfilesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<IPSecProfile>>()?)) },
-		r#other_status => { Ok(VpnIpsecProfilesBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProfilesRetrieveResponse {
-	Http200(IPSecProfile),
-	Other(Response)
-}
-/// Get a IPSec profile object.
-pub fn vpn_ipsec_profiles_retrieve(state: &ThanixClient, id: i64) -> Result<VpnIpsecProfilesRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/ipsec-profiles/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProfilesRetrieveResponse::Http200(r#response.json::<IPSecProfile>()?)) },
-		r#other_status => { Ok(VpnIpsecProfilesRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProfilesUpdateResponse {
-	Http200(IPSecProfile),
-	Other(Response)
-}
-/// Put a IPSec profile object.
-pub fn vpn_ipsec_profiles_update(state: &ThanixClient, body: WritableIPSecProfileRequest, id: i64) -> Result<VpnIpsecProfilesUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ipsec-profiles/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProfilesUpdateResponse::Http200(r#response.json::<IPSecProfile>()?)) },
-		r#other_status => { Ok(VpnIpsecProfilesUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProfilesDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a IPSec profile object.
-pub fn vpn_ipsec_profiles_destroy(state: &ThanixClient, id: i64) -> Result<VpnIpsecProfilesDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ipsec-profiles/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIpsecProfilesDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProfilesPartialUpdateResponse {
-	Http200(IPSecProfile),
-	Other(Response)
-}
-/// Patch a IPSec profile object.
-pub fn vpn_ipsec_profiles_partial_update(state: &ThanixClient, body: PatchedWritableIPSecProfileRequest, id: i64) -> Result<VpnIpsecProfilesPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ipsec-profiles/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProfilesPartialUpdateResponse::Http200(r#response.json::<IPSecProfile>()?)) },
-		r#other_status => { Ok(VpnIpsecProfilesPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnIpsecProposalsListQuery {
-	pub authentication_algorithm: Option<Vec<String>>,
-	pub authentication_algorithm__n: Option<Vec<String>>,
-	pub created: Option<Vec<String>>,
-	pub created__empty: Option<Vec<String>>,
-	pub created__gt: Option<Vec<String>>,
-	pub created__gte: Option<Vec<String>>,
-	pub created__lt: Option<Vec<String>>,
-	pub created__lte: Option<Vec<String>>,
-	pub created__n: Option<Vec<String>>,
-	pub created_by_request: Option<String>,
-	pub description: Option<Vec<String>>,
-	pub description__empty: Option<bool>,
-	pub description__ic: Option<Vec<String>>,
-	pub description__ie: Option<Vec<String>>,
-	pub description__iew: Option<Vec<String>>,
-	pub description__isw: Option<Vec<String>>,
-	pub description__n: Option<Vec<String>>,
-	pub description__nic: Option<Vec<String>>,
-	pub description__nie: Option<Vec<String>>,
-	pub description__niew: Option<Vec<String>>,
-	pub description__nisw: Option<Vec<String>>,
-	pub encryption_algorithm: Option<Vec<String>>,
-	pub encryption_algorithm__n: Option<Vec<String>>,
-	pub id: Option<Vec<i64>>,
-	pub id__empty: Option<bool>,
-	pub id__gt: Option<Vec<i64>>,
-	pub id__gte: Option<Vec<i64>>,
-	pub id__lt: Option<Vec<i64>>,
-	pub id__lte: Option<Vec<i64>>,
-	pub id__n: Option<Vec<i64>>,
-	pub last_updated: Option<Vec<String>>,
-	pub last_updated__empty: Option<Vec<String>>,
-	pub last_updated__gt: Option<Vec<String>>,
-	pub last_updated__gte: Option<Vec<String>>,
-	pub last_updated__lt: Option<Vec<String>>,
-	pub last_updated__lte: Option<Vec<String>>,
-	pub last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	pub limit: Option<i64>,
-	pub modified_by_request: Option<String>,
-	pub name: Option<Vec<String>>,
-	pub name__empty: Option<bool>,
-	pub name__ic: Option<Vec<String>>,
-	pub name__ie: Option<Vec<String>>,
-	pub name__iew: Option<Vec<String>>,
-	pub name__isw: Option<Vec<String>>,
-	pub name__n: Option<Vec<String>>,
-	pub name__nic: Option<Vec<String>>,
-	pub name__nie: Option<Vec<String>>,
-	pub name__niew: Option<Vec<String>>,
-	pub name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	pub offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	pub ordering: Option<String>,
-	/// Search
-	pub q: Option<String>,
-	pub sa_lifetime_data: Option<Vec<i64>>,
-	pub sa_lifetime_data__empty: Option<bool>,
-	pub sa_lifetime_data__gt: Option<Vec<i64>>,
-	pub sa_lifetime_data__gte: Option<Vec<i64>>,
-	pub sa_lifetime_data__lt: Option<Vec<i64>>,
-	pub sa_lifetime_data__lte: Option<Vec<i64>>,
-	pub sa_lifetime_data__n: Option<Vec<i64>>,
-	pub sa_lifetime_seconds: Option<Vec<i64>>,
-	pub sa_lifetime_seconds__empty: Option<bool>,
-	pub sa_lifetime_seconds__gt: Option<Vec<i64>>,
-	pub sa_lifetime_seconds__gte: Option<Vec<i64>>,
-	pub sa_lifetime_seconds__lt: Option<Vec<i64>>,
-	pub sa_lifetime_seconds__lte: Option<Vec<i64>>,
-	pub sa_lifetime_seconds__n: Option<Vec<i64>>,
-	pub tag: Option<Vec<String>>,
-	pub tag__n: Option<Vec<String>>,
-	pub updated_by_request: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum VpnIpsecProposalsListResponse {
-	Http200(PaginatedIPSecProposalList),
-	Other(Response)
-}
-/// Get a list of IPSec proposal objects.
-pub fn vpn_ipsec_proposals_list(state: &ThanixClient, query: VpnIpsecProposalsListQuery) -> Result<VpnIpsecProposalsListResponse, Error> {
-	let qstring = serde_qs::to_string(&query).unwrap();
-	let qstring_clean = remove_square_braces(&qstring);
-	let r#response = state.client.get(format!("{}/api/vpn/ipsec-proposals/?{}", state.base_url, qstring_clean))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProposalsListResponse::Http200(r#response.json::<PaginatedIPSecProposalList>()?)) },
-		r#other_status => { Ok(VpnIpsecProposalsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProposalsBulkUpdateResponse {
-	Http200(Vec<IPSecProposal>),
-	Other(Response)
-}
-/// Put a list of IPSec proposal objects.
-pub fn vpn_ipsec_proposals_bulk_update(state: &ThanixClient, body: Vec<IPSecProposalRequest>) -> Result<VpnIpsecProposalsBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ipsec-proposals/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProposalsBulkUpdateResponse::Http200(r#response.json::<Vec<IPSecProposal>>()?)) },
-		r#other_status => { Ok(VpnIpsecProposalsBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProposalsCreateResponse {
-	Http201(IPSecProposal),
-	Other(Response)
-}
-/// Post a list of IPSec proposal objects.
-pub fn vpn_ipsec_proposals_create(state: &ThanixClient, body: WritableIPSecProposalRequest) -> Result<VpnIpsecProposalsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/ipsec-proposals/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnIpsecProposalsCreateResponse::Http201(r#response.json::<IPSecProposal>()?)) },
-		r#other_status => { Ok(VpnIpsecProposalsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProposalsBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of IPSec proposal objects.
-pub fn vpn_ipsec_proposals_bulk_destroy(state: &ThanixClient, body: Vec<IPSecProposalRequest>) -> Result<VpnIpsecProposalsBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ipsec-proposals/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIpsecProposalsBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProposalsBulkPartialUpdateResponse {
-	Http200(Vec<IPSecProposal>),
-	Other(Response)
-}
-/// Patch a list of IPSec proposal objects.
-pub fn vpn_ipsec_proposals_bulk_partial_update(state: &ThanixClient, body: Vec<IPSecProposalRequest>) -> Result<VpnIpsecProposalsBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ipsec-proposals/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProposalsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<IPSecProposal>>()?)) },
-		r#other_status => { Ok(VpnIpsecProposalsBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProposalsRetrieveResponse {
-	Http200(IPSecProposal),
-	Other(Response)
-}
-/// Get a IPSec proposal object.
-pub fn vpn_ipsec_proposals_retrieve(state: &ThanixClient, id: i64) -> Result<VpnIpsecProposalsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/ipsec-proposals/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProposalsRetrieveResponse::Http200(r#response.json::<IPSecProposal>()?)) },
-		r#other_status => { Ok(VpnIpsecProposalsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProposalsUpdateResponse {
-	Http200(IPSecProposal),
-	Other(Response)
-}
-/// Put a IPSec proposal object.
-pub fn vpn_ipsec_proposals_update(state: &ThanixClient, body: WritableIPSecProposalRequest, id: i64) -> Result<VpnIpsecProposalsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/ipsec-proposals/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProposalsUpdateResponse::Http200(r#response.json::<IPSecProposal>()?)) },
-		r#other_status => { Ok(VpnIpsecProposalsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProposalsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a IPSec proposal object.
-pub fn vpn_ipsec_proposals_destroy(state: &ThanixClient, id: i64) -> Result<VpnIpsecProposalsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/ipsec-proposals/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnIpsecProposalsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnIpsecProposalsPartialUpdateResponse {
-	Http200(IPSecProposal),
-	Other(Response)
-}
-/// Patch a IPSec proposal object.
-pub fn vpn_ipsec_proposals_partial_update(state: &ThanixClient, body: PatchedWritableIPSecProposalRequest, id: i64) -> Result<VpnIpsecProposalsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/ipsec-proposals/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnIpsecProposalsPartialUpdateResponse::Http200(r#response.json::<IPSecProposal>()?)) },
-		r#other_status => { Ok(VpnIpsecProposalsPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnL2VpnTerminationsListQuery {
-	pub assigned_object_type: Option<String>,
-	pub assigned_object_type__n: Option<String>,
-	pub assigned_object_type_id: Option<i64>,
-	pub assigned_object_type_id__n: Option<i64>,
-	pub created: Option<Vec<String>>,
-	pub created__empty: Option<Vec<String>>,
-	pub created__gt: Option<Vec<String>>,
-	pub created__gte: Option<Vec<String>>,
-	pub created__lt: Option<Vec<String>>,
-	pub created__lte: Option<Vec<String>>,
-	pub created__n: Option<Vec<String>>,
-	pub created_by_request: Option<String>,
-	/// Device (name)
-	pub device: Option<Vec<Option<String>>>,
-	/// Device (name)
-	pub device__n: Option<Vec<Option<String>>>,
-	/// Device (ID)
-	pub device_id: Option<Vec<i64>>,
-	/// Device (ID)
-	pub device_id__n: Option<Vec<i64>>,
-	pub id: Option<Vec<i64>>,
-	pub id__empty: Option<bool>,
-	pub id__gt: Option<Vec<i64>>,
-	pub id__gte: Option<Vec<i64>>,
-	pub id__lt: Option<Vec<i64>>,
-	pub id__lte: Option<Vec<i64>>,
-	pub id__n: Option<Vec<i64>>,
-	/// Interface (name)
-	pub interface: Option<Vec<String>>,
-	/// Interface (name)
-	pub interface__n: Option<Vec<String>>,
-	/// Interface (ID)
-	pub interface_id: Option<Vec<i64>>,
-	/// Interface (ID)
-	pub interface_id__n: Option<Vec<i64>>,
-	/// L2VPN (slug)
-	pub l2vpn: Option<Vec<String>>,
-	/// L2VPN (slug)
-	pub l2vpn__n: Option<Vec<String>>,
-	/// L2VPN (ID)
-	pub l2vpn_id: Option<Vec<i64>>,
-	/// L2VPN (ID)
-	pub l2vpn_id__n: Option<Vec<i64>>,
-	pub last_updated: Option<Vec<String>>,
-	pub last_updated__empty: Option<Vec<String>>,
-	pub last_updated__gt: Option<Vec<String>>,
-	pub last_updated__gte: Option<Vec<String>>,
-	pub last_updated__lt: Option<Vec<String>>,
-	pub last_updated__lte: Option<Vec<String>>,
-	pub last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	pub limit: Option<i64>,
-	pub modified_by_request: Option<String>,
-	/// The initial index from which to return the results.
-	pub offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	pub ordering: Option<String>,
-	/// Search
-	pub q: Option<String>,
-	pub region: Option<Vec<String>>,
-	pub region_id: Option<Vec<i64>>,
-	pub site: Option<Vec<String>>,
-	pub site_id: Option<Vec<i64>>,
-	pub tag: Option<Vec<String>>,
-	pub tag__n: Option<Vec<String>>,
-	pub updated_by_request: Option<String>,
-	/// Virtual machine (name)
-	pub virtual_machine: Option<Vec<String>>,
-	/// Virtual machine (name)
-	pub virtual_machine__n: Option<Vec<String>>,
-	/// Virtual machine (ID)
-	pub virtual_machine_id: Option<Vec<i64>>,
-	/// Virtual machine (ID)
-	pub virtual_machine_id__n: Option<Vec<i64>>,
-	/// VLAN (name)
-	pub vlan: Option<Vec<String>>,
-	/// VLAN (name)
-	pub vlan__n: Option<Vec<String>>,
-	/// VLAN (ID)
-	pub vlan_id: Option<Vec<i64>>,
-	/// VLAN (ID)
-	pub vlan_id__n: Option<Vec<i64>>,
-	/// VLAN number (1-4094)
-	pub vlan_vid: Option<i64>,
-	/// VLAN number (1-4094)
-	pub vlan_vid__empty: Option<i64>,
-	/// VLAN number (1-4094)
-	pub vlan_vid__gt: Option<i64>,
-	/// VLAN number (1-4094)
-	pub vlan_vid__gte: Option<i64>,
-	/// VLAN number (1-4094)
-	pub vlan_vid__lt: Option<i64>,
-	/// VLAN number (1-4094)
-	pub vlan_vid__lte: Option<i64>,
-	/// VLAN number (1-4094)
-	pub vlan_vid__n: Option<i64>,
-	/// VM interface (name)
-	pub vminterface: Option<Vec<String>>,
-	/// VM interface (name)
-	pub vminterface__n: Option<Vec<String>>,
-	/// VM Interface (ID)
-	pub vminterface_id: Option<Vec<i64>>,
-	/// VM Interface (ID)
-	pub vminterface_id__n: Option<Vec<i64>>,
-
-}
-#[derive(Debug)]
-pub enum VpnL2VpnTerminationsListResponse {
-	Http200(PaginatedL2VPNTerminationList),
-	Other(Response)
-}
-/// Get a list of L2VPN termination objects.
-pub fn vpn_l2vpn_terminations_list(state: &ThanixClient, query: VpnL2VpnTerminationsListQuery) -> Result<VpnL2VpnTerminationsListResponse, Error> {
-	let qstring = serde_qs::to_string(&query).unwrap();
-	let qstring_clean = remove_square_braces(&qstring);
-	let r#response = state.client.get(format!("{}/api/vpn/l2vpn-terminations/?{}", state.base_url, qstring_clean))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnTerminationsListResponse::Http200(r#response.json::<PaginatedL2VPNTerminationList>()?)) },
-		r#other_status => { Ok(VpnL2VpnTerminationsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnTerminationsBulkUpdateResponse {
-	Http200(Vec<L2VPNTermination>),
-	Other(Response)
-}
-/// Put a list of L2VPN termination objects.
-pub fn vpn_l2vpn_terminations_bulk_update(state: &ThanixClient, body: Vec<L2VPNTerminationRequest>) -> Result<VpnL2VpnTerminationsBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/l2vpn-terminations/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnTerminationsBulkUpdateResponse::Http200(r#response.json::<Vec<L2VPNTermination>>()?)) },
-		r#other_status => { Ok(VpnL2VpnTerminationsBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnTerminationsCreateResponse {
-	Http201(L2VPNTermination),
-	Other(Response)
-}
-/// Post a list of L2VPN termination objects.
-pub fn vpn_l2vpn_terminations_create(state: &ThanixClient, body: WritableL2VPNTerminationRequest) -> Result<VpnL2VpnTerminationsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/l2vpn-terminations/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnL2VpnTerminationsCreateResponse::Http201(r#response.json::<L2VPNTermination>()?)) },
-		r#other_status => { Ok(VpnL2VpnTerminationsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnTerminationsBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of L2VPN termination objects.
-pub fn vpn_l2vpn_terminations_bulk_destroy(state: &ThanixClient, body: Vec<L2VPNTerminationRequest>) -> Result<VpnL2VpnTerminationsBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/l2vpn-terminations/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnL2VpnTerminationsBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnTerminationsBulkPartialUpdateResponse {
-	Http200(Vec<L2VPNTermination>),
-	Other(Response)
-}
-/// Patch a list of L2VPN termination objects.
-pub fn vpn_l2vpn_terminations_bulk_partial_update(state: &ThanixClient, body: Vec<L2VPNTerminationRequest>) -> Result<VpnL2VpnTerminationsBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/l2vpn-terminations/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnTerminationsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<L2VPNTermination>>()?)) },
-		r#other_status => { Ok(VpnL2VpnTerminationsBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnTerminationsRetrieveResponse {
-	Http200(L2VPNTermination),
-	Other(Response)
-}
-/// Get a L2VPN termination object.
-pub fn vpn_l2vpn_terminations_retrieve(state: &ThanixClient, id: i64) -> Result<VpnL2VpnTerminationsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/l2vpn-terminations/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnTerminationsRetrieveResponse::Http200(r#response.json::<L2VPNTermination>()?)) },
-		r#other_status => { Ok(VpnL2VpnTerminationsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnTerminationsUpdateResponse {
-	Http200(L2VPNTermination),
-	Other(Response)
-}
-/// Put a L2VPN termination object.
-pub fn vpn_l2vpn_terminations_update(state: &ThanixClient, body: WritableL2VPNTerminationRequest, id: i64) -> Result<VpnL2VpnTerminationsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/l2vpn-terminations/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnTerminationsUpdateResponse::Http200(r#response.json::<L2VPNTermination>()?)) },
-		r#other_status => { Ok(VpnL2VpnTerminationsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnTerminationsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a L2VPN termination object.
-pub fn vpn_l2vpn_terminations_destroy(state: &ThanixClient, id: i64) -> Result<VpnL2VpnTerminationsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/l2vpn-terminations/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnL2VpnTerminationsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnTerminationsPartialUpdateResponse {
-	Http200(L2VPNTermination),
-	Other(Response)
-}
-/// Patch a L2VPN termination object.
-pub fn vpn_l2vpn_terminations_partial_update(state: &ThanixClient, body: PatchedWritableL2VPNTerminationRequest, id: i64) -> Result<VpnL2VpnTerminationsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/l2vpn-terminations/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnTerminationsPartialUpdateResponse::Http200(r#response.json::<L2VPNTermination>()?)) },
-		r#other_status => { Ok(VpnL2VpnTerminationsPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnL2VpnsListQuery {
-	pub created: Option<Vec<String>>,
-	pub created__empty: Option<Vec<String>>,
-	pub created__gt: Option<Vec<String>>,
-	pub created__gte: Option<Vec<String>>,
-	pub created__lt: Option<Vec<String>>,
-	pub created__lte: Option<Vec<String>>,
-	pub created__n: Option<Vec<String>>,
-	pub created_by_request: Option<String>,
-	pub description: Option<Vec<String>>,
-	pub description__empty: Option<bool>,
-	pub description__ic: Option<Vec<String>>,
-	pub description__ie: Option<Vec<String>>,
-	pub description__iew: Option<Vec<String>>,
-	pub description__isw: Option<Vec<String>>,
-	pub description__n: Option<Vec<String>>,
-	pub description__nic: Option<Vec<String>>,
-	pub description__nie: Option<Vec<String>>,
-	pub description__niew: Option<Vec<String>>,
-	pub description__nisw: Option<Vec<String>>,
-	/// Export target (name)
-	pub export_target: Option<Vec<String>>,
-	/// Export target (name)
-	pub export_target__n: Option<Vec<String>>,
-	/// Export target
-	pub export_target_id: Option<Vec<i64>>,
-	/// Export target
-	pub export_target_id__n: Option<Vec<i64>>,
-	pub id: Option<Vec<i64>>,
-	pub id__empty: Option<bool>,
-	pub id__gt: Option<Vec<i64>>,
-	pub id__gte: Option<Vec<i64>>,
-	pub id__lt: Option<Vec<i64>>,
-	pub id__lte: Option<Vec<i64>>,
-	pub id__n: Option<Vec<i64>>,
-	pub identifier: Option<Vec<i64>>,
-	pub identifier__empty: Option<bool>,
-	pub identifier__gt: Option<Vec<i64>>,
-	pub identifier__gte: Option<Vec<i64>>,
-	pub identifier__lt: Option<Vec<i64>>,
-	pub identifier__lte: Option<Vec<i64>>,
-	pub identifier__n: Option<Vec<i64>>,
-	/// Import target (name)
-	pub import_target: Option<Vec<String>>,
-	/// Import target (name)
-	pub import_target__n: Option<Vec<String>>,
-	/// Import target
-	pub import_target_id: Option<Vec<i64>>,
-	/// Import target
-	pub import_target_id__n: Option<Vec<i64>>,
-	pub last_updated: Option<Vec<String>>,
-	pub last_updated__empty: Option<Vec<String>>,
-	pub last_updated__gt: Option<Vec<String>>,
-	pub last_updated__gte: Option<Vec<String>>,
-	pub last_updated__lt: Option<Vec<String>>,
-	pub last_updated__lte: Option<Vec<String>>,
-	pub last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	pub limit: Option<i64>,
-	pub modified_by_request: Option<String>,
-	pub name: Option<Vec<String>>,
-	pub name__empty: Option<bool>,
-	pub name__ic: Option<Vec<String>>,
-	pub name__ie: Option<Vec<String>>,
-	pub name__iew: Option<Vec<String>>,
-	pub name__isw: Option<Vec<String>>,
-	pub name__n: Option<Vec<String>>,
-	pub name__nic: Option<Vec<String>>,
-	pub name__nie: Option<Vec<String>>,
-	pub name__niew: Option<Vec<String>>,
-	pub name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	pub offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	pub ordering: Option<String>,
-	/// Search
-	pub q: Option<String>,
-	pub slug: Option<Vec<String>>,
-	pub slug__empty: Option<bool>,
-	pub slug__ic: Option<Vec<String>>,
-	pub slug__ie: Option<Vec<String>>,
-	pub slug__iew: Option<Vec<String>>,
-	pub slug__isw: Option<Vec<String>>,
-	pub slug__n: Option<Vec<String>>,
-	pub slug__nic: Option<Vec<String>>,
-	pub slug__nie: Option<Vec<String>>,
-	pub slug__niew: Option<Vec<String>>,
-	pub slug__nisw: Option<Vec<String>>,
-	pub tag: Option<Vec<String>>,
-	pub tag__n: Option<Vec<String>>,
-	/// Tenant (slug)
-	pub tenant: Option<Vec<String>>,
-	/// Tenant (slug)
-	pub tenant__n: Option<Vec<String>>,
-	/// Tenant Group (slug)
-	pub tenant_group: Option<Vec<i64>>,
-	/// Tenant Group (slug)
-	pub tenant_group__n: Option<Vec<i64>>,
-	/// Tenant Group (ID)
-	pub tenant_group_id: Option<Vec<i64>>,
-	/// Tenant Group (ID)
-	pub tenant_group_id__n: Option<Vec<i64>>,
-	/// Tenant (ID)
-	pub tenant_id: Option<Vec<Option<i64>>>,
-	/// Tenant (ID)
-	pub tenant_id__n: Option<Vec<Option<i64>>>,
-	pub r#type: Option<Vec<String>>,
-	pub type__n: Option<Vec<String>>,
-	pub updated_by_request: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum VpnL2VpnsListResponse {
-	Http200(PaginatedL2VPNList),
-	Other(Response)
-}
-/// Get a list of L2VPN objects.
-pub fn vpn_l2vpns_list(state: &ThanixClient, query: VpnL2VpnsListQuery) -> Result<VpnL2VpnsListResponse, Error> {
-	let qstring = serde_qs::to_string(&query).unwrap();
-	let qstring_clean = remove_square_braces(&qstring);
-	let r#response = state.client.get(format!("{}/api/vpn/l2vpns/?{}", state.base_url, qstring_clean))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnsListResponse::Http200(r#response.json::<PaginatedL2VPNList>()?)) },
-		r#other_status => { Ok(VpnL2VpnsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnsBulkUpdateResponse {
-	Http200(Vec<L2VPN>),
-	Other(Response)
-}
-/// Put a list of L2VPN objects.
-pub fn vpn_l2vpns_bulk_update(state: &ThanixClient, body: Vec<L2VPNRequest>) -> Result<VpnL2VpnsBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/l2vpns/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnsBulkUpdateResponse::Http200(r#response.json::<Vec<L2VPN>>()?)) },
-		r#other_status => { Ok(VpnL2VpnsBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnsCreateResponse {
-	Http201(L2VPN),
-	Other(Response)
-}
-/// Post a list of L2VPN objects.
-pub fn vpn_l2vpns_create(state: &ThanixClient, body: WritableL2VPNRequest) -> Result<VpnL2VpnsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/l2vpns/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnL2VpnsCreateResponse::Http201(r#response.json::<L2VPN>()?)) },
-		r#other_status => { Ok(VpnL2VpnsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnsBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of L2VPN objects.
-pub fn vpn_l2vpns_bulk_destroy(state: &ThanixClient, body: Vec<L2VPNRequest>) -> Result<VpnL2VpnsBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/l2vpns/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnL2VpnsBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnsBulkPartialUpdateResponse {
-	Http200(Vec<L2VPN>),
-	Other(Response)
-}
-/// Patch a list of L2VPN objects.
-pub fn vpn_l2vpns_bulk_partial_update(state: &ThanixClient, body: Vec<L2VPNRequest>) -> Result<VpnL2VpnsBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/l2vpns/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<L2VPN>>()?)) },
-		r#other_status => { Ok(VpnL2VpnsBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnsRetrieveResponse {
-	Http200(L2VPN),
-	Other(Response)
-}
-/// Get a L2VPN object.
-pub fn vpn_l2vpns_retrieve(state: &ThanixClient, id: i64) -> Result<VpnL2VpnsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/l2vpns/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnsRetrieveResponse::Http200(r#response.json::<L2VPN>()?)) },
-		r#other_status => { Ok(VpnL2VpnsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnsUpdateResponse {
-	Http200(L2VPN),
-	Other(Response)
-}
-/// Put a L2VPN object.
-pub fn vpn_l2vpns_update(state: &ThanixClient, body: WritableL2VPNRequest, id: i64) -> Result<VpnL2VpnsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/l2vpns/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnsUpdateResponse::Http200(r#response.json::<L2VPN>()?)) },
-		r#other_status => { Ok(VpnL2VpnsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a L2VPN object.
-pub fn vpn_l2vpns_destroy(state: &ThanixClient, id: i64) -> Result<VpnL2VpnsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/l2vpns/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnL2VpnsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnL2VpnsPartialUpdateResponse {
-	Http200(L2VPN),
-	Other(Response)
-}
-/// Patch a L2VPN object.
-pub fn vpn_l2vpns_partial_update(state: &ThanixClient, body: PatchedWritableL2VPNRequest, id: i64) -> Result<VpnL2VpnsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/l2vpns/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnL2VpnsPartialUpdateResponse::Http200(r#response.json::<L2VPN>()?)) },
-		r#other_status => { Ok(VpnL2VpnsPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnTunnelGroupsListQuery {
-	pub created: Option<Vec<String>>,
-	pub created__empty: Option<Vec<String>>,
-	pub created__gt: Option<Vec<String>>,
-	pub created__gte: Option<Vec<String>>,
-	pub created__lt: Option<Vec<String>>,
-	pub created__lte: Option<Vec<String>>,
-	pub created__n: Option<Vec<String>>,
-	pub created_by_request: Option<String>,
-	pub description: Option<Vec<String>>,
-	pub description__empty: Option<bool>,
-	pub description__ic: Option<Vec<String>>,
-	pub description__ie: Option<Vec<String>>,
-	pub description__iew: Option<Vec<String>>,
-	pub description__isw: Option<Vec<String>>,
-	pub description__n: Option<Vec<String>>,
-	pub description__nic: Option<Vec<String>>,
-	pub description__nie: Option<Vec<String>>,
-	pub description__niew: Option<Vec<String>>,
-	pub description__nisw: Option<Vec<String>>,
-	pub id: Option<Vec<i64>>,
-	pub id__empty: Option<bool>,
-	pub id__gt: Option<Vec<i64>>,
-	pub id__gte: Option<Vec<i64>>,
-	pub id__lt: Option<Vec<i64>>,
-	pub id__lte: Option<Vec<i64>>,
-	pub id__n: Option<Vec<i64>>,
-	pub last_updated: Option<Vec<String>>,
-	pub last_updated__empty: Option<Vec<String>>,
-	pub last_updated__gt: Option<Vec<String>>,
-	pub last_updated__gte: Option<Vec<String>>,
-	pub last_updated__lt: Option<Vec<String>>,
-	pub last_updated__lte: Option<Vec<String>>,
-	pub last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	pub limit: Option<i64>,
-	pub modified_by_request: Option<String>,
-	pub name: Option<Vec<String>>,
-	pub name__empty: Option<bool>,
-	pub name__ic: Option<Vec<String>>,
-	pub name__ie: Option<Vec<String>>,
-	pub name__iew: Option<Vec<String>>,
-	pub name__isw: Option<Vec<String>>,
-	pub name__n: Option<Vec<String>>,
-	pub name__nic: Option<Vec<String>>,
-	pub name__nie: Option<Vec<String>>,
-	pub name__niew: Option<Vec<String>>,
-	pub name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	pub offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	pub ordering: Option<String>,
-	/// Search
-	pub q: Option<String>,
-	pub slug: Option<Vec<String>>,
-	pub slug__empty: Option<bool>,
-	pub slug__ic: Option<Vec<String>>,
-	pub slug__ie: Option<Vec<String>>,
-	pub slug__iew: Option<Vec<String>>,
-	pub slug__isw: Option<Vec<String>>,
-	pub slug__n: Option<Vec<String>>,
-	pub slug__nic: Option<Vec<String>>,
-	pub slug__nie: Option<Vec<String>>,
-	pub slug__niew: Option<Vec<String>>,
-	pub slug__nisw: Option<Vec<String>>,
-	pub tag: Option<Vec<String>>,
-	pub tag__n: Option<Vec<String>>,
-	pub updated_by_request: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum VpnTunnelGroupsListResponse {
-	Http200(PaginatedTunnelGroupList),
-	Other(Response)
-}
-/// Get a list of tunnel group objects.
-pub fn vpn_tunnel_groups_list(state: &ThanixClient, query: VpnTunnelGroupsListQuery) -> Result<VpnTunnelGroupsListResponse, Error> {
-	let qstring = serde_qs::to_string(&query).unwrap();
-	let qstring_clean = remove_square_braces(&qstring);
-	let r#response = state.client.get(format!("{}/api/vpn/tunnel-groups/?{}", state.base_url, qstring_clean))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelGroupsListResponse::Http200(r#response.json::<PaginatedTunnelGroupList>()?)) },
-		r#other_status => { Ok(VpnTunnelGroupsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelGroupsBulkUpdateResponse {
-	Http200(Vec<TunnelGroup>),
-	Other(Response)
-}
-/// Put a list of tunnel group objects.
-pub fn vpn_tunnel_groups_bulk_update(state: &ThanixClient, body: Vec<TunnelGroupRequest>) -> Result<VpnTunnelGroupsBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/tunnel-groups/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelGroupsBulkUpdateResponse::Http200(r#response.json::<Vec<TunnelGroup>>()?)) },
-		r#other_status => { Ok(VpnTunnelGroupsBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelGroupsCreateResponse {
-	Http201(TunnelGroup),
-	Other(Response)
-}
-/// Post a list of tunnel group objects.
-pub fn vpn_tunnel_groups_create(state: &ThanixClient, body: TunnelGroupRequest) -> Result<VpnTunnelGroupsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/tunnel-groups/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnTunnelGroupsCreateResponse::Http201(r#response.json::<TunnelGroup>()?)) },
-		r#other_status => { Ok(VpnTunnelGroupsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelGroupsBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of tunnel group objects.
-pub fn vpn_tunnel_groups_bulk_destroy(state: &ThanixClient, body: Vec<TunnelGroupRequest>) -> Result<VpnTunnelGroupsBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/tunnel-groups/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnTunnelGroupsBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelGroupsBulkPartialUpdateResponse {
-	Http200(Vec<TunnelGroup>),
-	Other(Response)
-}
-/// Patch a list of tunnel group objects.
-pub fn vpn_tunnel_groups_bulk_partial_update(state: &ThanixClient, body: Vec<TunnelGroupRequest>) -> Result<VpnTunnelGroupsBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/tunnel-groups/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelGroupsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<TunnelGroup>>()?)) },
-		r#other_status => { Ok(VpnTunnelGroupsBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelGroupsRetrieveResponse {
-	Http200(TunnelGroup),
-	Other(Response)
-}
-/// Get a tunnel group object.
-pub fn vpn_tunnel_groups_retrieve(state: &ThanixClient, id: i64) -> Result<VpnTunnelGroupsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/tunnel-groups/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelGroupsRetrieveResponse::Http200(r#response.json::<TunnelGroup>()?)) },
-		r#other_status => { Ok(VpnTunnelGroupsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelGroupsUpdateResponse {
-	Http200(TunnelGroup),
-	Other(Response)
-}
-/// Put a tunnel group object.
-pub fn vpn_tunnel_groups_update(state: &ThanixClient, body: TunnelGroupRequest, id: i64) -> Result<VpnTunnelGroupsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/tunnel-groups/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelGroupsUpdateResponse::Http200(r#response.json::<TunnelGroup>()?)) },
-		r#other_status => { Ok(VpnTunnelGroupsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelGroupsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a tunnel group object.
-pub fn vpn_tunnel_groups_destroy(state: &ThanixClient, id: i64) -> Result<VpnTunnelGroupsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/tunnel-groups/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnTunnelGroupsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelGroupsPartialUpdateResponse {
-	Http200(TunnelGroup),
-	Other(Response)
-}
-/// Patch a tunnel group object.
-pub fn vpn_tunnel_groups_partial_update(state: &ThanixClient, body: PatchedTunnelGroupRequest, id: i64) -> Result<VpnTunnelGroupsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/tunnel-groups/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelGroupsPartialUpdateResponse::Http200(r#response.json::<TunnelGroup>()?)) },
-		r#other_status => { Ok(VpnTunnelGroupsPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnTunnelTerminationsListQuery {
-	pub created: Option<Vec<String>>,
-	pub created__empty: Option<Vec<String>>,
-	pub created__gt: Option<Vec<String>>,
-	pub created__gte: Option<Vec<String>>,
-	pub created__lt: Option<Vec<String>>,
-	pub created__lte: Option<Vec<String>>,
-	pub created__n: Option<Vec<String>>,
-	pub created_by_request: Option<String>,
-	pub id: Option<Vec<i64>>,
-	pub id__empty: Option<bool>,
-	pub id__gt: Option<Vec<i64>>,
-	pub id__gte: Option<Vec<i64>>,
-	pub id__lt: Option<Vec<i64>>,
-	pub id__lte: Option<Vec<i64>>,
-	pub id__n: Option<Vec<i64>>,
-	/// Interface (name)
-	pub interface: Option<Vec<String>>,
-	/// Interface (name)
-	pub interface__n: Option<Vec<String>>,
-	/// Interface (ID)
-	pub interface_id: Option<Vec<i64>>,
-	/// Interface (ID)
-	pub interface_id__n: Option<Vec<i64>>,
-	pub last_updated: Option<Vec<String>>,
-	pub last_updated__empty: Option<Vec<String>>,
-	pub last_updated__gt: Option<Vec<String>>,
-	pub last_updated__gte: Option<Vec<String>>,
-	pub last_updated__lt: Option<Vec<String>>,
-	pub last_updated__lte: Option<Vec<String>>,
-	pub last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	pub limit: Option<i64>,
-	pub modified_by_request: Option<String>,
-	/// The initial index from which to return the results.
-	pub offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	pub ordering: Option<String>,
-	/// Outside IP (ID)
-	pub outside_ip_id: Option<Vec<i64>>,
-	/// Outside IP (ID)
-	pub outside_ip_id__n: Option<Vec<i64>>,
-	/// Search
-	pub q: Option<String>,
-	pub role: Option<Vec<String>>,
-	pub role__n: Option<Vec<String>>,
-	pub tag: Option<Vec<String>>,
-	pub tag__n: Option<Vec<String>>,
-	pub termination_type: Option<String>,
-	pub termination_type__n: Option<String>,
-	/// Tunnel (name)
-	pub tunnel: Option<Vec<String>>,
-	/// Tunnel (name)
-	pub tunnel__n: Option<Vec<String>>,
-	/// Tunnel (ID)
-	pub tunnel_id: Option<Vec<i64>>,
-	/// Tunnel (ID)
-	pub tunnel_id__n: Option<Vec<i64>>,
-	pub updated_by_request: Option<String>,
-	/// VM interface (name)
-	pub vminterface: Option<Vec<String>>,
-	/// VM interface (name)
-	pub vminterface__n: Option<Vec<String>>,
-	/// VM interface (ID)
-	pub vminterface_id: Option<Vec<i64>>,
-	/// VM interface (ID)
-	pub vminterface_id__n: Option<Vec<i64>>,
-
-}
-#[derive(Debug)]
-pub enum VpnTunnelTerminationsListResponse {
-	Http200(PaginatedTunnelTerminationList),
-	Other(Response)
-}
-/// Get a list of tunnel termination objects.
-pub fn vpn_tunnel_terminations_list(state: &ThanixClient, query: VpnTunnelTerminationsListQuery) -> Result<VpnTunnelTerminationsListResponse, Error> {
-	let qstring = serde_qs::to_string(&query).unwrap();
-	let qstring_clean = remove_square_braces(&qstring);
-	let r#response = state.client.get(format!("{}/api/vpn/tunnel-terminations/?{}", state.base_url, qstring_clean))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelTerminationsListResponse::Http200(r#response.json::<PaginatedTunnelTerminationList>()?)) },
-		r#other_status => { Ok(VpnTunnelTerminationsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelTerminationsBulkUpdateResponse {
-	Http200(Vec<TunnelTermination>),
-	Other(Response)
-}
-/// Put a list of tunnel termination objects.
-pub fn vpn_tunnel_terminations_bulk_update(state: &ThanixClient, body: Vec<TunnelTerminationRequest>) -> Result<VpnTunnelTerminationsBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/tunnel-terminations/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelTerminationsBulkUpdateResponse::Http200(r#response.json::<Vec<TunnelTermination>>()?)) },
-		r#other_status => { Ok(VpnTunnelTerminationsBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelTerminationsCreateResponse {
-	Http201(TunnelTermination),
-	Other(Response)
-}
-/// Post a list of tunnel termination objects.
-pub fn vpn_tunnel_terminations_create(state: &ThanixClient, body: WritableTunnelTerminationRequest) -> Result<VpnTunnelTerminationsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/tunnel-terminations/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnTunnelTerminationsCreateResponse::Http201(r#response.json::<TunnelTermination>()?)) },
-		r#other_status => { Ok(VpnTunnelTerminationsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelTerminationsBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of tunnel termination objects.
-pub fn vpn_tunnel_terminations_bulk_destroy(state: &ThanixClient, body: Vec<TunnelTerminationRequest>) -> Result<VpnTunnelTerminationsBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/tunnel-terminations/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnTunnelTerminationsBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelTerminationsBulkPartialUpdateResponse {
-	Http200(Vec<TunnelTermination>),
-	Other(Response)
-}
-/// Patch a list of tunnel termination objects.
-pub fn vpn_tunnel_terminations_bulk_partial_update(state: &ThanixClient, body: Vec<TunnelTerminationRequest>) -> Result<VpnTunnelTerminationsBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/tunnel-terminations/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelTerminationsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<TunnelTermination>>()?)) },
-		r#other_status => { Ok(VpnTunnelTerminationsBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelTerminationsRetrieveResponse {
-	Http200(TunnelTermination),
-	Other(Response)
-}
-/// Get a tunnel termination object.
-pub fn vpn_tunnel_terminations_retrieve(state: &ThanixClient, id: i64) -> Result<VpnTunnelTerminationsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/tunnel-terminations/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelTerminationsRetrieveResponse::Http200(r#response.json::<TunnelTermination>()?)) },
-		r#other_status => { Ok(VpnTunnelTerminationsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelTerminationsUpdateResponse {
-	Http200(TunnelTermination),
-	Other(Response)
-}
-/// Put a tunnel termination object.
-pub fn vpn_tunnel_terminations_update(state: &ThanixClient, body: WritableTunnelTerminationRequest, id: i64) -> Result<VpnTunnelTerminationsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/tunnel-terminations/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelTerminationsUpdateResponse::Http200(r#response.json::<TunnelTermination>()?)) },
-		r#other_status => { Ok(VpnTunnelTerminationsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelTerminationsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a tunnel termination object.
-pub fn vpn_tunnel_terminations_destroy(state: &ThanixClient, id: i64) -> Result<VpnTunnelTerminationsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/tunnel-terminations/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnTunnelTerminationsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelTerminationsPartialUpdateResponse {
-	Http200(TunnelTermination),
-	Other(Response)
-}
-/// Patch a tunnel termination object.
-pub fn vpn_tunnel_terminations_partial_update(state: &ThanixClient, body: PatchedWritableTunnelTerminationRequest, id: i64) -> Result<VpnTunnelTerminationsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/tunnel-terminations/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelTerminationsPartialUpdateResponse::Http200(r#response.json::<TunnelTermination>()?)) },
-		r#other_status => { Ok(VpnTunnelTerminationsPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VpnTunnelsListQuery {
-	pub created: Option<Vec<String>>,
-	pub created__empty: Option<Vec<String>>,
-	pub created__gt: Option<Vec<String>>,
-	pub created__gte: Option<Vec<String>>,
-	pub created__lt: Option<Vec<String>>,
-	pub created__lte: Option<Vec<String>>,
-	pub created__n: Option<Vec<String>>,
-	pub created_by_request: Option<String>,
-	pub description: Option<Vec<String>>,
-	pub description__empty: Option<bool>,
-	pub description__ic: Option<Vec<String>>,
-	pub description__ie: Option<Vec<String>>,
-	pub description__iew: Option<Vec<String>>,
-	pub description__isw: Option<Vec<String>>,
-	pub description__n: Option<Vec<String>>,
-	pub description__nic: Option<Vec<String>>,
-	pub description__nie: Option<Vec<String>>,
-	pub description__niew: Option<Vec<String>>,
-	pub description__nisw: Option<Vec<String>>,
-	pub encapsulation: Option<Vec<String>>,
-	pub encapsulation__n: Option<Vec<String>>,
-	/// Tunnel group (slug)
-	pub group: Option<Vec<String>>,
-	/// Tunnel group (slug)
-	pub group__n: Option<Vec<String>>,
-	/// Tunnel group (ID)
-	pub group_id: Option<Vec<Option<i64>>>,
-	/// Tunnel group (ID)
-	pub group_id__n: Option<Vec<Option<i64>>>,
-	pub id: Option<Vec<i64>>,
-	pub id__empty: Option<bool>,
-	pub id__gt: Option<Vec<i64>>,
-	pub id__gte: Option<Vec<i64>>,
-	pub id__lt: Option<Vec<i64>>,
-	pub id__lte: Option<Vec<i64>>,
-	pub id__n: Option<Vec<i64>>,
-	/// IPSec profile (name)
-	pub ipsec_profile: Option<Vec<String>>,
-	/// IPSec profile (name)
-	pub ipsec_profile__n: Option<Vec<String>>,
-	/// IPSec profile (ID)
-	pub ipsec_profile_id: Option<Vec<Option<i64>>>,
-	/// IPSec profile (ID)
-	pub ipsec_profile_id__n: Option<Vec<Option<i64>>>,
-	pub last_updated: Option<Vec<String>>,
-	pub last_updated__empty: Option<Vec<String>>,
-	pub last_updated__gt: Option<Vec<String>>,
-	pub last_updated__gte: Option<Vec<String>>,
-	pub last_updated__lt: Option<Vec<String>>,
-	pub last_updated__lte: Option<Vec<String>>,
-	pub last_updated__n: Option<Vec<String>>,
-	/// Number of results to return per page.
-	pub limit: Option<i64>,
-	pub modified_by_request: Option<String>,
-	pub name: Option<Vec<String>>,
-	pub name__empty: Option<bool>,
-	pub name__ic: Option<Vec<String>>,
-	pub name__ie: Option<Vec<String>>,
-	pub name__iew: Option<Vec<String>>,
-	pub name__isw: Option<Vec<String>>,
-	pub name__n: Option<Vec<String>>,
-	pub name__nic: Option<Vec<String>>,
-	pub name__nie: Option<Vec<String>>,
-	pub name__niew: Option<Vec<String>>,
-	pub name__nisw: Option<Vec<String>>,
-	/// The initial index from which to return the results.
-	pub offset: Option<i64>,
-	/// Which field to use when ordering the results.
-	pub ordering: Option<String>,
-	/// Search
-	pub q: Option<String>,
-	pub status: Option<Vec<String>>,
-	pub status__n: Option<Vec<String>>,
-	pub tag: Option<Vec<String>>,
-	pub tag__n: Option<Vec<String>>,
-	/// Tenant (slug)
-	pub tenant: Option<Vec<String>>,
-	/// Tenant (slug)
-	pub tenant__n: Option<Vec<String>>,
-	/// Tenant Group (slug)
-	pub tenant_group: Option<Vec<i64>>,
-	/// Tenant Group (slug)
-	pub tenant_group__n: Option<Vec<i64>>,
-	/// Tenant Group (ID)
-	pub tenant_group_id: Option<Vec<i64>>,
-	/// Tenant Group (ID)
-	pub tenant_group_id__n: Option<Vec<i64>>,
-	/// Tenant (ID)
-	pub tenant_id: Option<Vec<Option<i64>>>,
-	/// Tenant (ID)
-	pub tenant_id__n: Option<Vec<Option<i64>>>,
-	pub tunnel_id: Option<Vec<i64>>,
-	pub tunnel_id__empty: Option<bool>,
-	pub tunnel_id__gt: Option<Vec<i64>>,
-	pub tunnel_id__gte: Option<Vec<i64>>,
-	pub tunnel_id__lt: Option<Vec<i64>>,
-	pub tunnel_id__lte: Option<Vec<i64>>,
-	pub tunnel_id__n: Option<Vec<i64>>,
-	pub updated_by_request: Option<String>,
-
-}
-#[derive(Debug)]
-pub enum VpnTunnelsListResponse {
-	Http200(PaginatedTunnelList),
-	Other(Response)
-}
-/// Get a list of tunnel objects.
-pub fn vpn_tunnels_list(state: &ThanixClient, query: VpnTunnelsListQuery) -> Result<VpnTunnelsListResponse, Error> {
-	let qstring = serde_qs::to_string(&query).unwrap();
-	let qstring_clean = remove_square_braces(&qstring);
-	let r#response = state.client.get(format!("{}/api/vpn/tunnels/?{}", state.base_url, qstring_clean))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelsListResponse::Http200(r#response.json::<PaginatedTunnelList>()?)) },
-		r#other_status => { Ok(VpnTunnelsListResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelsBulkUpdateResponse {
-	Http200(Vec<Tunnel>),
-	Other(Response)
-}
-/// Put a list of tunnel objects.
-pub fn vpn_tunnels_bulk_update(state: &ThanixClient, body: Vec<TunnelRequest>) -> Result<VpnTunnelsBulkUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/tunnels/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelsBulkUpdateResponse::Http200(r#response.json::<Vec<Tunnel>>()?)) },
-		r#other_status => { Ok(VpnTunnelsBulkUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelsCreateResponse {
-	Http201(Tunnel),
-	Other(Response)
-}
-/// Post a list of tunnel objects.
-pub fn vpn_tunnels_create(state: &ThanixClient, body: WritableTunnelRequest) -> Result<VpnTunnelsCreateResponse, Error> {
-	let r#response = state.client.post(format!("{}/api/vpn/tunnels/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		201 => { Ok(VpnTunnelsCreateResponse::Http201(r#response.json::<Tunnel>()?)) },
-		r#other_status => { Ok(VpnTunnelsCreateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelsBulkDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a list of tunnel objects.
-pub fn vpn_tunnels_bulk_destroy(state: &ThanixClient, body: Vec<TunnelRequest>) -> Result<VpnTunnelsBulkDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/tunnels/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnTunnelsBulkDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelsBulkPartialUpdateResponse {
-	Http200(Vec<Tunnel>),
-	Other(Response)
-}
-/// Patch a list of tunnel objects.
-pub fn vpn_tunnels_bulk_partial_update(state: &ThanixClient, body: Vec<TunnelRequest>) -> Result<VpnTunnelsBulkPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/tunnels/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelsBulkPartialUpdateResponse::Http200(r#response.json::<Vec<Tunnel>>()?)) },
-		r#other_status => { Ok(VpnTunnelsBulkPartialUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelsRetrieveResponse {
-	Http200(Tunnel),
-	Other(Response)
-}
-/// Get a tunnel object.
-pub fn vpn_tunnels_retrieve(state: &ThanixClient, id: i64) -> Result<VpnTunnelsRetrieveResponse, Error> {
-	let r#response = state.client.get(format!("{}/api/vpn/tunnels/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelsRetrieveResponse::Http200(r#response.json::<Tunnel>()?)) },
-		r#other_status => { Ok(VpnTunnelsRetrieveResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelsUpdateResponse {
-	Http200(Tunnel),
-	Other(Response)
-}
-/// Put a tunnel object.
-pub fn vpn_tunnels_update(state: &ThanixClient, body: WritableTunnelRequest, id: i64) -> Result<VpnTunnelsUpdateResponse, Error> {
-	let r#response = state.client.put(format!("{}/api/vpn/tunnels/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelsUpdateResponse::Http200(r#response.json::<Tunnel>()?)) },
-		r#other_status => { Ok(VpnTunnelsUpdateResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelsDestroyResponse {
-	Http204,
-	Other(Response)
-}
-/// Delete a tunnel object.
-pub fn vpn_tunnels_destroy(state: &ThanixClient, id: i64) -> Result<VpnTunnelsDestroyResponse, Error> {
-	let r#response = state.client.delete(format!("{}/api/vpn/tunnels/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.send()?;
-	match r#response.status().as_u16() {
-		r#other_status => { Ok(VpnTunnelsDestroyResponse::Other(r#response)) }
-	}
-}
-#[derive(Debug)]
-pub enum VpnTunnelsPartialUpdateResponse {
-	Http200(Tunnel),
-	Other(Response)
-}
-/// Patch a tunnel object.
-pub fn vpn_tunnels_partial_update(state: &ThanixClient, body: PatchedWritableTunnelRequest, id: i64) -> Result<VpnTunnelsPartialUpdateResponse, Error> {
-	let r#response = state.client.patch(format!("{}/api/vpn/tunnels/{id}/", state.base_url))
-		.header("Authorization", format!("Token {}", state.authentication_token))
-		.json(&body)
-		.send()?;
-	match r#response.status().as_u16() {
-		200 => { Ok(VpnTunnelsPartialUpdateResponse::Http200(r#response.json::<Tunnel>()?)) },
-		r#other_status => { Ok(VpnTunnelsPartialUpdateResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]

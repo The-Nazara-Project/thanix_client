@@ -379,7 +379,6 @@ pub struct CircuitType {
 	pub display: String,
 	pub name: String,
 	pub slug: String,
-	pub color: String,
 	pub description: String,
 	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -391,7 +390,6 @@ pub struct CircuitType {
 pub struct CircuitTypeRequest {
 	pub name: String,
 	pub slug: String,
-	pub color: String,
 	pub description: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -823,7 +821,6 @@ pub struct ContactAssignment {
 	pub role: Option<NestedContactRole>,
 	pub priority: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub created: Option<String>,
 	pub last_updated: Option<String>,
 }
@@ -839,7 +836,6 @@ pub struct ContactAssignmentRequest {
 	/// * `inactive` - Inactive
 	pub priority: String,
 	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ContactGroup {
@@ -916,7 +912,7 @@ pub struct CustomField {
 	pub display: String,
 	pub content_types: Vec<String>,
 	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub object_type: Option<String>,
+	pub object_type: String,
 	pub data_type: String,
 	/// Internal field name
 	pub name: String,
@@ -930,8 +926,7 @@ pub struct CustomField {
 	/// Weighting for search. Lower values are considered more important. Fields with a search weight of zero will be ignored.
 	pub search_weight: u16,
 	pub filter_logic: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub ui_visible: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub ui_editable: Option<std::collections::HashMap<String, serde_json::Value>>,
+	pub ui_visibility: Option<std::collections::HashMap<String, serde_json::Value>>,
 	/// Replicate this value when cloning objects
 	pub is_cloneable: bool,
 	/// Default value for the field (must be a JSON value). Encapsulate strings with double quotes (e.g. "Foo").
@@ -939,12 +934,12 @@ pub struct CustomField {
 	/// Fields with higher weights appear lower in a form.
 	pub weight: u16,
 	/// Minimum allowed value (for numeric fields)
-	pub validation_minimum: Option<i64>,
+	pub validation_minimum: Option<i32>,
 	/// Maximum allowed value (for numeric fields)
-	pub validation_maximum: Option<i64>,
+	pub validation_maximum: Option<i32>,
 	/// Regular expression to enforce on text field values. Use ^ and $ to force matching of entire string. For example, <code>^[A-Z]{3}$</code> will limit values to exactly three uppercase letters.
 	pub validation_regex: String,
-	pub choice_set: Option<NestedCustomFieldChoiceSet>,
+	pub choice_set: NestedCustomFieldChoiceSet,
 	pub created: Option<String>,
 	pub last_updated: Option<String>,
 }
@@ -956,7 +951,7 @@ pub struct CustomFieldChoiceSet {
 	pub name: String,
 	pub description: String,
 	pub base_choices: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub extra_choices: Vec<Vec<serde_json::Value>>,
+	pub extra_choices: Option<Vec<Vec<String>>>,
 	/// Choices are automatically ordered alphabetically
 	pub order_alphabetically: bool,
 	pub choices_count: String,
@@ -971,7 +966,7 @@ pub struct CustomFieldChoiceSetRequest {
 	/// * `ISO_3166` - ISO 3166 (Country codes)
 	/// * `UN_LOCODE` - UN/LOCODE (Location codes)
 	pub base_choices: String,
-	pub extra_choices: Vec<Vec<serde_json::Value>>,
+	pub extra_choices: Option<Vec<Vec<String>>>,
 	/// Choices are automatically ordered alphabetically
 	pub order_alphabetically: bool,
 }
@@ -992,7 +987,7 @@ pub struct CustomFieldRequest {
 	/// * `object` - Object
 	/// * `multiobject` - Multiple objects
 	pub r#type: String,
-	pub object_type: Option<String>,
+	pub object_type: String,
 	/// Internal field name
 	pub name: String,
 	/// Name of the field as displayed to users (if not provided, 'the field's name will be used)
@@ -1008,14 +1003,11 @@ pub struct CustomFieldRequest {
 	/// * `loose` - Loose
 	/// * `exact` - Exact
 	pub filter_logic: String,
-	/// * `always` - Always
-	/// * `if-set` - If set
+	/// * `read-write` - Read/write
+	/// * `read-only` - Read-only
 	/// * `hidden` - Hidden
-	pub ui_visible: String,
-	/// * `yes` - Yes
-	/// * `no` - No
-	/// * `hidden` - Hidden
-	pub ui_editable: String,
+	/// * `hidden-ifunset` - Hidden (if unset)
+	pub ui_visibility: String,
 	/// Replicate this value when cloning objects
 	pub is_cloneable: bool,
 	/// Default value for the field (must be a JSON value). Encapsulate strings with double quotes (e.g. "Foo").
@@ -1023,12 +1015,12 @@ pub struct CustomFieldRequest {
 	/// Fields with higher weights appear lower in a form.
 	pub weight: u16,
 	/// Minimum allowed value (for numeric fields)
-	pub validation_minimum: Option<i64>,
+	pub validation_minimum: Option<i32>,
 	/// Maximum allowed value (for numeric fields)
-	pub validation_maximum: Option<i64>,
+	pub validation_maximum: Option<i32>,
 	/// Regular expression to enforce on text field values. Use ^ and $ to force matching of entire string. For example, <code>^[A-Z]{3}$</code> will limit values to exactly three uppercase letters.
 	pub validation_regex: String,
-	pub choice_set: Option<NestedCustomFieldChoiceSetRequest>,
+	pub choice_set: NestedCustomFieldChoiceSetRequest,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct CustomLink {
@@ -1139,7 +1131,6 @@ pub struct DataSource {
 	pub parameters: Option<serde_json::Value>,
 	/// Patterns (one per line) matching files to ignore when syncing
 	pub ignore_rules: String,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub created: Option<String>,
 	pub last_updated: Option<String>,
 	pub file_count: i64,
@@ -1147,11 +1138,10 @@ pub struct DataSource {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DataSourceRequest {
 	pub name: String,
-	/// * `None` - ---------
 	/// * `local` - Local
 	/// * `git` - Git
 	/// * `amazon-s3` - Amazon S3
-	pub r#type: serde_json::Value,
+	pub r#type: String,
 	pub source_url: String,
 	pub enabled: bool,
 	pub description: String,
@@ -1159,7 +1149,6 @@ pub struct DataSourceRequest {
 	pub parameters: Option<serde_json::Value>,
 	/// Patterns (one per line) matching files to ignore when syncing
 	pub ignore_rules: String,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct Device {
@@ -1311,9 +1300,7 @@ pub struct DeviceType {
 	/// Discrete part number (optional)
 	pub part_number: String,
 	pub u_height: f64,
-	/// Devices of this type are excluded when calculating rack utilization.
-	pub exclude_from_utilization: bool,
-	/// Device consumes both front and rear rack faces.
+	/// Device consumes both front and rear rack faces
 	pub is_full_depth: bool,
 	pub subdevice_role: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub airflow: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -1348,9 +1335,7 @@ pub struct DeviceTypeRequest {
 	/// Discrete part number (optional)
 	pub part_number: String,
 	pub u_height: f64,
-	/// Devices of this type are excluded when calculating rack utilization.
-	pub exclude_from_utilization: bool,
-	/// Device consumes both front and rear rack faces.
+	/// Device consumes both front and rear rack faces
 	pub is_full_depth: bool,
 	/// * `parent` - Parent
 	/// * `child` - Child
@@ -1487,62 +1472,6 @@ pub struct DeviceWithConfigContextRequest {
 	pub local_context_data: Option<serde_json::Value>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct EventRule {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub content_types: Vec<String>,
-	pub name: String,
-	/// Triggers when a matching object is created.
-	pub type_create: bool,
-	/// Triggers when a matching object is updated.
-	pub type_update: bool,
-	/// Triggers when a matching object is deleted.
-	pub type_delete: bool,
-	/// Triggers when a job for a matching object is started.
-	pub type_job_start: bool,
-	/// Triggers when a job for a matching object terminates.
-	pub type_job_end: bool,
-	pub enabled: bool,
-	/// A set of conditions which determine whether the event will be generated.
-	pub conditions: Option<serde_json::Value>,
-	pub action_type: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub action_object_type: String,
-	pub action_object_id: Option<u64>,
-	pub action_object: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub description: String,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub tags: Vec<NestedTag>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct EventRuleRequest {
-	pub content_types: Vec<String>,
-	pub name: String,
-	/// Triggers when a matching object is created.
-	pub type_create: bool,
-	/// Triggers when a matching object is updated.
-	pub type_update: bool,
-	/// Triggers when a matching object is deleted.
-	pub type_delete: bool,
-	/// Triggers when a job for a matching object is started.
-	pub type_job_start: bool,
-	/// Triggers when a job for a matching object terminates.
-	pub type_job_end: bool,
-	pub enabled: bool,
-	/// A set of conditions which determine whether the event will be generated.
-	pub conditions: Option<serde_json::Value>,
-	/// * `webhook` - Webhook
-	/// * `script` - Script
-	pub action_type: String,
-	pub action_object_type: String,
-	pub action_object_id: Option<u64>,
-	pub description: String,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub tags: Vec<NestedTagRequest>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExportTemplate {
@@ -1866,112 +1795,6 @@ pub struct GroupRequest {
 	pub name: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct IKEPolicy {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub description: String,
-	pub version: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub mode: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub proposals: Vec<i64>,
-	pub preshared_key: String,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct IKEPolicyRequest {
-	pub name: String,
-	pub description: String,
-	/// * `1` - IKEv1
-	/// * `2` - IKEv2
-	pub version: i64,
-	/// * `aggressive` - Aggressive
-	/// * `main` - Main
-	pub mode: String,
-	pub proposals: Vec<i64>,
-	pub preshared_key: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct IKEProposal {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub description: String,
-	pub authentication_method: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub encryption_algorithm: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub authentication_algorithm: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub group: Option<std::collections::HashMap<String, serde_json::Value>>,
-	/// Security association lifetime (in seconds)
-	pub sa_lifetime: Option<u32>,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct IKEProposalRequest {
-	pub name: String,
-	pub description: String,
-	/// * `preshared-keys` - Pre-shared keys
-	/// * `certificates` - Certificates
-	/// * `rsa-signatures` - RSA signatures
-	/// * `dsa-signatures` - DSA signatures
-	pub authentication_method: String,
-	/// * `aes-128-cbc` - 128-bit AES (CBC)
-	/// * `aes-128-gcm` - 128-bit AES (GCM)
-	/// * `aes-192-cbc` - 192-bit AES (CBC)
-	/// * `aes-192-gcm` - 192-bit AES (GCM)
-	/// * `aes-256-cbc` - 256-bit AES (CBC)
-	/// * `aes-256-gcm` - 256-bit AES (GCM)
-	/// * `3des-cbc` - DES
-	pub encryption_algorithm: String,
-	/// * `hmac-sha1` - SHA-1 HMAC
-	/// * `hmac-sha256` - SHA-256 HMAC
-	/// * `hmac-sha384` - SHA-384 HMAC
-	/// * `hmac-sha512` - SHA-512 HMAC
-	/// * `hmac-md5` - MD5 HMAC
-	pub authentication_algorithm: String,
-	/// * `1` - Group 1
-	/// * `2` - Group 2
-	/// * `5` - Group 5
-	/// * `14` - Group 14
-	/// * `15` - Group 15
-	/// * `16` - Group 16
-	/// * `17` - Group 17
-	/// * `18` - Group 18
-	/// * `19` - Group 19
-	/// * `20` - Group 20
-	/// * `21` - Group 21
-	/// * `22` - Group 22
-	/// * `23` - Group 23
-	/// * `24` - Group 24
-	/// * `25` - Group 25
-	/// * `26` - Group 26
-	/// * `27` - Group 27
-	/// * `28` - Group 28
-	/// * `29` - Group 29
-	/// * `30` - Group 30
-	/// * `31` - Group 31
-	/// * `32` - Group 32
-	/// * `33` - Group 33
-	/// * `34` - Group 34
-	pub group: i64,
-	/// Security association lifetime (in seconds)
-	pub sa_lifetime: Option<u32>,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct IPAddress {
 	pub id: i64,
 	pub url: String,
@@ -2045,7 +1868,7 @@ pub struct IPRange {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub created: Option<String>,
 	pub last_updated: Option<String>,
-	/// Treat as fully utilized
+	/// Treat as 100% utilized
 	pub mark_utilized: bool,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -2063,131 +1886,8 @@ pub struct IPRangeRequest {
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	/// Treat as fully utilized
+	/// Treat as 100% utilized
 	pub mark_utilized: bool,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct IPSecPolicy {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub description: String,
-	pub proposals: Vec<i64>,
-	pub pfs_group: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct IPSecPolicyRequest {
-	pub name: String,
-	pub description: String,
-	pub proposals: Vec<i64>,
-	/// * `1` - Group 1
-	/// * `2` - Group 2
-	/// * `5` - Group 5
-	/// * `14` - Group 14
-	/// * `15` - Group 15
-	/// * `16` - Group 16
-	/// * `17` - Group 17
-	/// * `18` - Group 18
-	/// * `19` - Group 19
-	/// * `20` - Group 20
-	/// * `21` - Group 21
-	/// * `22` - Group 22
-	/// * `23` - Group 23
-	/// * `24` - Group 24
-	/// * `25` - Group 25
-	/// * `26` - Group 26
-	/// * `27` - Group 27
-	/// * `28` - Group 28
-	/// * `29` - Group 29
-	/// * `30` - Group 30
-	/// * `31` - Group 31
-	/// * `32` - Group 32
-	/// * `33` - Group 33
-	/// * `34` - Group 34
-	pub pfs_group: i64,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct IPSecProfile {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub description: String,
-	pub mode: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub ike_policy: NestedIKEPolicy,
-	pub ipsec_policy: NestedIPSecPolicy,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct IPSecProfileRequest {
-	pub name: String,
-	pub description: String,
-	/// * `esp` - ESP
-	/// * `ah` - AH
-	pub mode: String,
-	pub ike_policy: NestedIKEPolicyRequest,
-	pub ipsec_policy: NestedIPSecPolicyRequest,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct IPSecProposal {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub description: String,
-	pub encryption_algorithm: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub authentication_algorithm: Option<std::collections::HashMap<String, serde_json::Value>>,
-	/// Security association lifetime (seconds)
-	pub sa_lifetime_seconds: Option<u32>,
-	/// Security association lifetime (in kilobytes)
-	pub sa_lifetime_data: Option<u32>,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct IPSecProposalRequest {
-	pub name: String,
-	pub description: String,
-	/// * `aes-128-cbc` - 128-bit AES (CBC)
-	/// * `aes-128-gcm` - 128-bit AES (GCM)
-	/// * `aes-192-cbc` - 192-bit AES (CBC)
-	/// * `aes-192-gcm` - 192-bit AES (GCM)
-	/// * `aes-256-cbc` - 256-bit AES (CBC)
-	/// * `aes-256-gcm` - 256-bit AES (GCM)
-	/// * `3des-cbc` - DES
-	pub encryption_algorithm: String,
-	/// * `hmac-sha1` - SHA-1 HMAC
-	/// * `hmac-sha256` - SHA-256 HMAC
-	/// * `hmac-sha384` - SHA-384 HMAC
-	/// * `hmac-sha512` - SHA-512 HMAC
-	/// * `hmac-md5` - MD5 HMAC
-	pub authentication_algorithm: String,
-	/// Security association lifetime (seconds)
-	pub sa_lifetime_seconds: Option<u32>,
-	/// Security association lifetime (in kilobytes)
-	pub sa_lifetime_data: Option<u32>,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ImageAttachment {
@@ -2938,7 +2638,6 @@ pub struct Job {
 	pub completed: Option<String>,
 	pub user: Option<NestedUser>,
 	pub data: Option<serde_json::Value>,
-	pub error: String,
 	pub job_id: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -3473,17 +3172,6 @@ pub struct NestedFHRPGroupRequest {
 	pub group_id: u16,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedIKEPolicy {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedIKEPolicyRequest {
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedIPAddress {
 	pub id: i64,
 	pub url: String,
@@ -3494,28 +3182,6 @@ pub struct NestedIPAddress {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedIPAddressRequest {
 	pub address: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedIPSecPolicy {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedIPSecPolicyRequest {
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedIPSecProfile {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedIPSecProfileRequest {
-	pub name: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedInterface {
@@ -3908,30 +3574,6 @@ pub struct NestedTenantGroupRequest {
 pub struct NestedTenantRequest {
 	pub name: String,
 	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedTunnel {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedTunnelGroup {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedTunnelGroupRequest {
-	pub name: String,
-	pub slug: String,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct NestedTunnelRequest {
-	pub name: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedUser {
@@ -4327,13 +3969,6 @@ pub struct PaginatedDeviceWithConfigContextList {
 	pub results: Vec<DeviceWithConfigContext>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PaginatedEventRuleList {
-	pub count: i64,
-	pub next: Option<String>,
-	pub previous: Option<String>,
-	pub results: Vec<EventRule>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedExportTemplateList {
 	pub count: i64,
 	pub next: Option<String>,
@@ -4376,20 +4011,6 @@ pub struct PaginatedGroupList {
 	pub results: Vec<Group>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PaginatedIKEPolicyList {
-	pub count: i64,
-	pub next: Option<String>,
-	pub previous: Option<String>,
-	pub results: Vec<IKEPolicy>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PaginatedIKEProposalList {
-	pub count: i64,
-	pub next: Option<String>,
-	pub previous: Option<String>,
-	pub results: Vec<IKEProposal>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedIPAddressList {
 	pub count: i64,
 	pub next: Option<String>,
@@ -4402,27 +4023,6 @@ pub struct PaginatedIPRangeList {
 	pub next: Option<String>,
 	pub previous: Option<String>,
 	pub results: Vec<IPRange>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PaginatedIPSecPolicyList {
-	pub count: i64,
-	pub next: Option<String>,
-	pub previous: Option<String>,
-	pub results: Vec<IPSecPolicy>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PaginatedIPSecProfileList {
-	pub count: i64,
-	pub next: Option<String>,
-	pub previous: Option<String>,
-	pub results: Vec<IPSecProfile>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PaginatedIPSecProposalList {
-	pub count: i64,
-	pub next: Option<String>,
-	pub previous: Option<String>,
-	pub results: Vec<IPSecProposal>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedImageAttachmentList {
@@ -4754,27 +4354,6 @@ pub struct PaginatedTokenList {
 	pub results: Vec<Token>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PaginatedTunnelGroupList {
-	pub count: i64,
-	pub next: Option<String>,
-	pub previous: Option<String>,
-	pub results: Vec<TunnelGroup>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PaginatedTunnelList {
-	pub count: i64,
-	pub next: Option<String>,
-	pub previous: Option<String>,
-	pub results: Vec<Tunnel>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PaginatedTunnelTerminationList {
-	pub count: i64,
-	pub next: Option<String>,
-	pub previous: Option<String>,
-	pub results: Vec<TunnelTermination>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedUserList {
 	pub count: i64,
 	pub next: Option<String>,
@@ -4824,13 +4403,6 @@ pub struct PaginatedVirtualDeviceContextList {
 	pub results: Vec<VirtualDeviceContext>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PaginatedVirtualDiskList {
-	pub count: i64,
-	pub next: Option<String>,
-	pub previous: Option<String>,
-	pub results: Vec<VirtualDisk>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedVirtualMachineWithConfigContextList {
 	pub count: i64,
 	pub next: Option<String>,
@@ -4878,7 +4450,6 @@ pub struct PatchedCableTerminationRequest {
 pub struct PatchedCircuitTypeRequest {
 	pub name: String,
 	pub slug: String,
-	pub color: String,
 	pub description: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -5045,14 +4616,6 @@ pub struct PatchedTagRequest {
 	pub object_types: Vec<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedTunnelGroupRequest {
-	pub name: String,
-	pub slug: String,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedVLANGroupRequest {
 	pub name: String,
 	pub slug: String,
@@ -5068,10 +4631,21 @@ pub struct PatchedVLANGroupRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWebhookRequest {
+	pub content_types: Vec<String>,
 	pub name: String,
-	pub description: String,
+	/// Triggers when a matching object is created.
+	pub type_create: bool,
+	/// Triggers when a matching object is updated.
+	pub type_update: bool,
+	/// Triggers when a matching object is deleted.
+	pub type_delete: bool,
+	/// Triggers when a job for a matching object is started.
+	pub type_job_start: bool,
+	/// Triggers when a job for a matching object terminates.
+	pub type_job_end: bool,
 	/// This URL will be called using the HTTP method defined when the webhook is called. Jinja2 template processing is supported with the same context as the request body.
 	pub payload_url: String,
+	pub enabled: bool,
 	/// * `GET` - GET
 	/// * `POST` - POST
 	/// * `PUT` - PUT
@@ -5086,6 +4660,8 @@ pub struct PatchedWebhookRequest {
 	pub body_template: String,
 	/// When provided, the request will include a <code>X-Hook-Signature</code> header containing a HMAC hex digest of the payload body using the secret as the key. The secret is not transmitted in the request.
 	pub secret: String,
+	/// A set of conditions which determine whether the webhook will be generated.
+	pub conditions: Option<serde_json::Value>,
 	/// Enable SSL certificate verification. Disable with caution!
 	pub ssl_verification: bool,
 	/// The specific CA certificate file to use for SSL verification. Leave blank to use the system defaults.
@@ -5431,7 +5007,6 @@ pub struct PatchedWritableContactAssignmentRequest {
 	/// * `inactive` - Inactive
 	pub priority: String,
 	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableContactGroupRequest {
@@ -5466,7 +5041,7 @@ pub struct PatchedWritableCustomFieldChoiceSetRequest {
 	/// * `ISO_3166` - ISO 3166 (Country codes)
 	/// * `UN_LOCODE` - UN/LOCODE (Location codes)
 	pub base_choices: String,
-	pub extra_choices: Vec<Vec<serde_json::Value>>,
+	pub extra_choices: Option<Vec<Vec<String>>>,
 	/// Choices are automatically ordered alphabetically
 	pub order_alphabetically: bool,
 }
@@ -5489,7 +5064,7 @@ pub struct PatchedWritableCustomFieldRequest {
 	/// * `object` - Object
 	/// * `multiobject` - Multiple objects
 	pub r#type: String,
-	pub object_type: Option<String>,
+	pub object_type: String,
 	/// Internal field name
 	pub name: String,
 	/// Name of the field as displayed to users (if not provided, 'the field's name will be used)
@@ -5507,18 +5082,13 @@ pub struct PatchedWritableCustomFieldRequest {
 	/// * `loose` - Loose
 	/// * `exact` - Exact
 	pub filter_logic: String,
-	/// Specifies whether the custom field is displayed in the UI
+	/// Specifies the visibility of custom field in the UI
 	/// 
-	/// * `always` - Always
-	/// * `if-set` - If set
+	/// * `read-write` - Read/write
+	/// * `read-only` - Read-only
 	/// * `hidden` - Hidden
-	pub ui_visible: String,
-	/// Specifies whether the custom field value can be edited in the UI
-	/// 
-	/// * `yes` - Yes
-	/// * `no` - No
-	/// * `hidden` - Hidden
-	pub ui_editable: String,
+	/// * `hidden-ifunset` - Hidden (if unset)
+	pub ui_visibility: String,
 	/// Replicate this value when cloning objects
 	pub is_cloneable: bool,
 	/// Default value for the field (must be a JSON value). Encapsulate strings with double quotes (e.g. "Foo").
@@ -5526,9 +5096,9 @@ pub struct PatchedWritableCustomFieldRequest {
 	/// Fields with higher weights appear lower in a form.
 	pub weight: u16,
 	/// Minimum allowed value (for numeric fields)
-	pub validation_minimum: Option<i64>,
+	pub validation_minimum: Option<i32>,
 	/// Maximum allowed value (for numeric fields)
-	pub validation_maximum: Option<i64>,
+	pub validation_maximum: Option<i32>,
 	/// Regular expression to enforce on text field values. Use ^ and $ to force matching of entire string. For example, <code>^[A-Z]{3}$</code> will limit values to exactly three uppercase letters.
 	pub validation_regex: String,
 	pub choice_set: Option<i64>,
@@ -5536,6 +5106,9 @@ pub struct PatchedWritableCustomFieldRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableDataSourceRequest {
 	pub name: String,
+	/// * `local` - Local
+	/// * `git` - Git
+	/// * `amazon-s3` - Amazon S3
 	pub r#type: String,
 	pub source_url: String,
 	pub enabled: bool,
@@ -5544,7 +5117,6 @@ pub struct PatchedWritableDataSourceRequest {
 	pub parameters: Option<serde_json::Value>,
 	/// Patterns (one per line) matching files to ignore when syncing
 	pub ignore_rules: String,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableDeviceBayRequest {
@@ -5587,9 +5159,7 @@ pub struct PatchedWritableDeviceTypeRequest {
 	/// Discrete part number (optional)
 	pub part_number: String,
 	pub u_height: f64,
-	/// Devices of this type are excluded when calculating rack utilization.
-	pub exclude_from_utilization: bool,
-	/// Device consumes both front and rear rack faces.
+	/// Device consumes both front and rear rack faces
 	pub is_full_depth: bool,
 	/// Parent devices house child devices in device bays. Leave blank if this device type is neither a parent nor a child.
 	/// 
@@ -5671,32 +5241,6 @@ pub struct PatchedWritableDeviceWithConfigContextRequest {
 	pub local_context_data: Option<serde_json::Value>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableEventRuleRequest {
-	pub content_types: Vec<String>,
-	pub name: String,
-	/// Triggers when a matching object is created.
-	pub type_create: bool,
-	/// Triggers when a matching object is updated.
-	pub type_update: bool,
-	/// Triggers when a matching object is deleted.
-	pub type_delete: bool,
-	/// Triggers when a job for a matching object is started.
-	pub type_job_start: bool,
-	/// Triggers when a job for a matching object terminates.
-	pub type_job_end: bool,
-	pub enabled: bool,
-	/// A set of conditions which determine whether the event will be generated.
-	pub conditions: Option<serde_json::Value>,
-	/// * `webhook` - Webhook
-	/// * `script` - Script
-	pub action_type: String,
-	pub action_object_type: String,
-	pub action_object_id: Option<u64>,
-	pub description: String,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub tags: Vec<NestedTagRequest>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableExportTemplateRequest {
@@ -5848,78 +5392,6 @@ pub struct PatchedWritableFrontPortTemplateRequest {
 	pub description: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableIKEPolicyRequest {
-	pub name: String,
-	pub description: String,
-	/// * `1` - IKEv1
-	/// * `2` - IKEv2
-	pub version: u16,
-	/// * `aggressive` - Aggressive
-	/// * `main` - Main
-	pub mode: String,
-	pub proposals: Vec<i64>,
-	pub preshared_key: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableIKEProposalRequest {
-	pub name: String,
-	pub description: String,
-	/// * `preshared-keys` - Pre-shared keys
-	/// * `certificates` - Certificates
-	/// * `rsa-signatures` - RSA signatures
-	/// * `dsa-signatures` - DSA signatures
-	pub authentication_method: String,
-	/// * `aes-128-cbc` - 128-bit AES (CBC)
-	/// * `aes-128-gcm` - 128-bit AES (GCM)
-	/// * `aes-192-cbc` - 192-bit AES (CBC)
-	/// * `aes-192-gcm` - 192-bit AES (GCM)
-	/// * `aes-256-cbc` - 256-bit AES (CBC)
-	/// * `aes-256-gcm` - 256-bit AES (GCM)
-	/// * `3des-cbc` - DES
-	pub encryption_algorithm: String,
-	/// * `hmac-sha1` - SHA-1 HMAC
-	/// * `hmac-sha256` - SHA-256 HMAC
-	/// * `hmac-sha384` - SHA-384 HMAC
-	/// * `hmac-sha512` - SHA-512 HMAC
-	/// * `hmac-md5` - MD5 HMAC
-	pub authentication_algorithm: String,
-	/// Diffie-Hellman group ID
-	/// 
-	/// * `1` - Group 1
-	/// * `2` - Group 2
-	/// * `5` - Group 5
-	/// * `14` - Group 14
-	/// * `15` - Group 15
-	/// * `16` - Group 16
-	/// * `17` - Group 17
-	/// * `18` - Group 18
-	/// * `19` - Group 19
-	/// * `20` - Group 20
-	/// * `21` - Group 21
-	/// * `22` - Group 22
-	/// * `23` - Group 23
-	/// * `24` - Group 24
-	/// * `25` - Group 25
-	/// * `26` - Group 26
-	/// * `27` - Group 27
-	/// * `28` - Group 28
-	/// * `29` - Group 29
-	/// * `30` - Group 30
-	/// * `31` - Group 31
-	/// * `32` - Group 32
-	/// * `33` - Group 33
-	/// * `34` - Group 34
-	pub group: u16,
-	/// Security association lifetime (in seconds)
-	pub sa_lifetime: Option<u32>,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableIPAddressRequest {
 	pub address: String,
 	pub vrf: Option<i64>,
@@ -5972,83 +5444,8 @@ pub struct PatchedWritableIPRangeRequest {
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	/// Treat as fully utilized
+	/// Treat as 100% utilized
 	pub mark_utilized: bool,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableIPSecPolicyRequest {
-	pub name: String,
-	pub description: String,
-	pub proposals: Vec<i64>,
-	/// Diffie-Hellman group for Perfect Forward Secrecy
-	/// 
-	/// * `1` - Group 1
-	/// * `2` - Group 2
-	/// * `5` - Group 5
-	/// * `14` - Group 14
-	/// * `15` - Group 15
-	/// * `16` - Group 16
-	/// * `17` - Group 17
-	/// * `18` - Group 18
-	/// * `19` - Group 19
-	/// * `20` - Group 20
-	/// * `21` - Group 21
-	/// * `22` - Group 22
-	/// * `23` - Group 23
-	/// * `24` - Group 24
-	/// * `25` - Group 25
-	/// * `26` - Group 26
-	/// * `27` - Group 27
-	/// * `28` - Group 28
-	/// * `29` - Group 29
-	/// * `30` - Group 30
-	/// * `31` - Group 31
-	/// * `32` - Group 32
-	/// * `33` - Group 33
-	/// * `34` - Group 34
-	pub pfs_group: Option<u16>,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableIPSecProfileRequest {
-	pub name: String,
-	pub description: String,
-	/// * `esp` - ESP
-	/// * `ah` - AH
-	pub mode: String,
-	pub ike_policy: i64,
-	pub ipsec_policy: i64,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableIPSecProposalRequest {
-	pub name: String,
-	pub description: String,
-	/// * `aes-128-cbc` - 128-bit AES (CBC)
-	/// * `aes-128-gcm` - 128-bit AES (GCM)
-	/// * `aes-192-cbc` - 192-bit AES (CBC)
-	/// * `aes-192-gcm` - 192-bit AES (GCM)
-	/// * `aes-256-cbc` - 256-bit AES (CBC)
-	/// * `aes-256-gcm` - 256-bit AES (GCM)
-	/// * `3des-cbc` - DES
-	pub encryption_algorithm: String,
-	/// * `hmac-sha1` - SHA-1 HMAC
-	/// * `hmac-sha256` - SHA-256 HMAC
-	/// * `hmac-sha384` - SHA-384 HMAC
-	/// * `hmac-sha512` - SHA-512 HMAC
-	/// * `hmac-md5` - MD5 HMAC
-	pub authentication_algorithm: String,
-	/// Security association lifetime (seconds)
-	pub sa_lifetime_seconds: Option<u32>,
-	/// Security association lifetime (in kilobytes)
-	pub sa_lifetime_data: Option<u32>,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableInterfaceRequest {
@@ -7275,7 +6672,7 @@ pub struct PatchedWritablePrefixRequest {
 	pub role: Option<i64>,
 	/// All IP addresses within this prefix are considered usable
 	pub is_pool: bool,
-	/// Treat as fully utilized
+	/// Treat as 100% utilized
 	pub mark_utilized: bool,
 	pub description: String,
 	pub comments: String,
@@ -7629,40 +7026,6 @@ pub struct PatchedWritableTokenRequest {
 	pub description: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableTunnelRequest {
-	pub name: String,
-	/// * `planned` - Planned
-	/// * `active` - Active
-	/// * `disabled` - Disabled
-	pub status: String,
-	pub group: Option<i64>,
-	/// * `ipsec-transport` - IPsec - Transport
-	/// * `ipsec-tunnel` - IPsec - Tunnel
-	/// * `ip-ip` - IP-in-IP
-	/// * `gre` - GRE
-	pub encapsulation: String,
-	pub ipsec_profile: Option<i64>,
-	pub tenant: Option<i64>,
-	pub tunnel_id: Option<u64>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableTunnelTerminationRequest {
-	pub tunnel: i64,
-	/// * `peer` - Peer
-	/// * `hub` - Hub
-	/// * `spoke` - Spoke
-	pub role: String,
-	pub termination_type: String,
-	pub termination_id: Option<u64>,
-	pub outside_ip: Option<i64>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableUserRequest {
 	/// Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
 	pub username: String,
@@ -7763,15 +7126,6 @@ pub struct PatchedWritableVirtualDeviceContextRequest {
 	pub status: String,
 	pub description: String,
 	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableVirtualDiskRequest {
-	pub virtual_machine: i64,
-	pub name: String,
-	pub description: String,
-	pub size: u32,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
@@ -8551,7 +7905,7 @@ pub struct Prefix {
 	pub role: Option<NestedRole>,
 	/// All IP addresses within this prefix are considered usable
 	pub is_pool: bool,
-	/// Treat as fully utilized
+	/// Treat as 100% utilized
 	pub mark_utilized: bool,
 	pub description: String,
 	pub comments: String,
@@ -8577,7 +7931,7 @@ pub struct PrefixRequest {
 	pub role: Option<NestedRoleRequest>,
 	/// All IP addresses within this prefix are considered usable
 	pub is_pool: bool,
-	/// Treat as fully utilized
+	/// Treat as 100% utilized
 	pub mark_utilized: bool,
 	pub description: String,
 	pub comments: String,
@@ -9401,97 +8755,6 @@ pub struct TokenRequest {
 	pub description: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct Tunnel {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub status: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub group: NestedTunnelGroup,
-	pub encapsulation: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub ipsec_profile: Option<NestedIPSecProfile>,
-	pub tenant: Option<NestedTenant>,
-	pub tunnel_id: Option<u64>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct TunnelGroup {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub name: String,
-	pub slug: String,
-	pub description: String,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
-	pub tunnel_count: i64,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct TunnelGroupRequest {
-	pub name: String,
-	pub slug: String,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct TunnelRequest {
-	pub name: String,
-	/// * `planned` - Planned
-	/// * `active` - Active
-	/// * `disabled` - Disabled
-	pub status: String,
-	pub group: NestedTunnelGroupRequest,
-	/// * `ipsec-transport` - IPsec - Transport
-	/// * `ipsec-tunnel` - IPsec - Tunnel
-	/// * `ip-ip` - IP-in-IP
-	/// * `gre` - GRE
-	pub encapsulation: String,
-	pub ipsec_profile: Option<NestedIPSecProfileRequest>,
-	pub tenant: Option<NestedTenantRequest>,
-	pub tunnel_id: Option<u64>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct TunnelTermination {
-	pub id: i64,
-	pub url: String,
-	pub display: String,
-	pub tunnel: NestedTunnel,
-	pub role: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub termination_type: String,
-	pub termination_id: Option<u64>,
-	pub termination: Option<serde_json::Value>,
-	pub outside_ip: Option<NestedIPAddress>,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct TunnelTerminationRequest {
-	pub tunnel: NestedTunnelRequest,
-	/// * `peer` - Peer
-	/// * `hub` - Hub
-	/// * `spoke` - Spoke
-	pub role: String,
-	pub termination_type: String,
-	pub termination_id: Option<u64>,
-	pub outside_ip: Option<NestedIPAddressRequest>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct User {
 	pub id: i64,
 	pub url: String,
@@ -9748,28 +9011,6 @@ pub struct VirtualDeviceContextRequest {
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VirtualDisk {
-	pub id: i64,
-	pub url: String,
-	pub virtual_machine: NestedVirtualMachine,
-	pub name: String,
-	pub description: String,
-	pub size: u32,
-	pub tags: Vec<NestedTag>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub created: Option<String>,
-	pub last_updated: Option<String>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct VirtualDiskRequest {
-	pub virtual_machine: NestedVirtualMachineRequest,
-	pub name: String,
-	pub description: String,
-	pub size: u32,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VirtualMachineWithConfigContext {
 	pub id: i64,
 	pub url: String,
@@ -9798,7 +9039,6 @@ pub struct VirtualMachineWithConfigContext {
 	pub created: Option<String>,
 	pub last_updated: Option<String>,
 	pub interface_count: i64,
-	pub virtual_disk_count: i64,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VirtualMachineWithConfigContextRequest {
@@ -9833,10 +9073,21 @@ pub struct Webhook {
 	pub id: i64,
 	pub url: String,
 	pub display: String,
+	pub content_types: Vec<String>,
 	pub name: String,
-	pub description: String,
+	/// Triggers when a matching object is created.
+	pub type_create: bool,
+	/// Triggers when a matching object is updated.
+	pub type_update: bool,
+	/// Triggers when a matching object is deleted.
+	pub type_delete: bool,
+	/// Triggers when a job for a matching object is started.
+	pub type_job_start: bool,
+	/// Triggers when a job for a matching object terminates.
+	pub type_job_end: bool,
 	/// This URL will be called using the HTTP method defined when the webhook is called. Jinja2 template processing is supported with the same context as the request body.
 	pub payload_url: String,
+	pub enabled: bool,
 	/// * `GET` - GET
 	/// * `POST` - POST
 	/// * `PUT` - PUT
@@ -9851,6 +9102,8 @@ pub struct Webhook {
 	pub body_template: String,
 	/// When provided, the request will include a <code>X-Hook-Signature</code> header containing a HMAC hex digest of the payload body using the secret as the key. The secret is not transmitted in the request.
 	pub secret: String,
+	/// A set of conditions which determine whether the webhook will be generated.
+	pub conditions: Option<serde_json::Value>,
 	/// Enable SSL certificate verification. Disable with caution!
 	pub ssl_verification: bool,
 	/// The specific CA certificate file to use for SSL verification. Leave blank to use the system defaults.
@@ -9862,10 +9115,21 @@ pub struct Webhook {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WebhookRequest {
+	pub content_types: Vec<String>,
 	pub name: String,
-	pub description: String,
+	/// Triggers when a matching object is created.
+	pub type_create: bool,
+	/// Triggers when a matching object is updated.
+	pub type_update: bool,
+	/// Triggers when a matching object is deleted.
+	pub type_delete: bool,
+	/// Triggers when a job for a matching object is started.
+	pub type_job_start: bool,
+	/// Triggers when a job for a matching object terminates.
+	pub type_job_end: bool,
 	/// This URL will be called using the HTTP method defined when the webhook is called. Jinja2 template processing is supported with the same context as the request body.
 	pub payload_url: String,
+	pub enabled: bool,
 	/// * `GET` - GET
 	/// * `POST` - POST
 	/// * `PUT` - PUT
@@ -9880,6 +9144,8 @@ pub struct WebhookRequest {
 	pub body_template: String,
 	/// When provided, the request will include a <code>X-Hook-Signature</code> header containing a HMAC hex digest of the payload body using the secret as the key. The secret is not transmitted in the request.
 	pub secret: String,
+	/// A set of conditions which determine whether the webhook will be generated.
+	pub conditions: Option<serde_json::Value>,
 	/// Enable SSL certificate verification. Disable with caution!
 	pub ssl_verification: bool,
 	/// The specific CA certificate file to use for SSL verification. Leave blank to use the system defaults.
@@ -10341,7 +9607,6 @@ pub struct WritableContactAssignmentRequest {
 	/// * `inactive` - Inactive
 	pub priority: String,
 	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableContactGroupRequest {
@@ -10376,7 +9641,7 @@ pub struct WritableCustomFieldChoiceSetRequest {
 	/// * `ISO_3166` - ISO 3166 (Country codes)
 	/// * `UN_LOCODE` - UN/LOCODE (Location codes)
 	pub base_choices: String,
-	pub extra_choices: Vec<Vec<serde_json::Value>>,
+	pub extra_choices: Option<Vec<Vec<String>>>,
 	/// Choices are automatically ordered alphabetically
 	pub order_alphabetically: bool,
 }
@@ -10399,7 +9664,7 @@ pub struct WritableCustomFieldRequest {
 	/// * `object` - Object
 	/// * `multiobject` - Multiple objects
 	pub r#type: String,
-	pub object_type: Option<String>,
+	pub object_type: String,
 	/// Internal field name
 	pub name: String,
 	/// Name of the field as displayed to users (if not provided, 'the field's name will be used)
@@ -10417,18 +9682,13 @@ pub struct WritableCustomFieldRequest {
 	/// * `loose` - Loose
 	/// * `exact` - Exact
 	pub filter_logic: String,
-	/// Specifies whether the custom field is displayed in the UI
+	/// Specifies the visibility of custom field in the UI
 	/// 
-	/// * `always` - Always
-	/// * `if-set` - If set
+	/// * `read-write` - Read/write
+	/// * `read-only` - Read-only
 	/// * `hidden` - Hidden
-	pub ui_visible: String,
-	/// Specifies whether the custom field value can be edited in the UI
-	/// 
-	/// * `yes` - Yes
-	/// * `no` - No
-	/// * `hidden` - Hidden
-	pub ui_editable: String,
+	/// * `hidden-ifunset` - Hidden (if unset)
+	pub ui_visibility: String,
 	/// Replicate this value when cloning objects
 	pub is_cloneable: bool,
 	/// Default value for the field (must be a JSON value). Encapsulate strings with double quotes (e.g. "Foo").
@@ -10436,9 +9696,9 @@ pub struct WritableCustomFieldRequest {
 	/// Fields with higher weights appear lower in a form.
 	pub weight: u16,
 	/// Minimum allowed value (for numeric fields)
-	pub validation_minimum: Option<i64>,
+	pub validation_minimum: Option<i32>,
 	/// Maximum allowed value (for numeric fields)
-	pub validation_maximum: Option<i64>,
+	pub validation_maximum: Option<i32>,
 	/// Regular expression to enforce on text field values. Use ^ and $ to force matching of entire string. For example, <code>^[A-Z]{3}$</code> will limit values to exactly three uppercase letters.
 	pub validation_regex: String,
 	pub choice_set: Option<i64>,
@@ -10446,6 +9706,9 @@ pub struct WritableCustomFieldRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableDataSourceRequest {
 	pub name: String,
+	/// * `local` - Local
+	/// * `git` - Git
+	/// * `amazon-s3` - Amazon S3
 	pub r#type: String,
 	pub source_url: String,
 	pub enabled: bool,
@@ -10454,7 +9717,6 @@ pub struct WritableDataSourceRequest {
 	pub parameters: Option<serde_json::Value>,
 	/// Patterns (one per line) matching files to ignore when syncing
 	pub ignore_rules: String,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableDeviceBayRequest {
@@ -10497,9 +9759,7 @@ pub struct WritableDeviceTypeRequest {
 	/// Discrete part number (optional)
 	pub part_number: String,
 	pub u_height: f64,
-	/// Devices of this type are excluded when calculating rack utilization.
-	pub exclude_from_utilization: bool,
-	/// Device consumes both front and rear rack faces.
+	/// Device consumes both front and rear rack faces
 	pub is_full_depth: bool,
 	/// Parent devices house child devices in device bays. Leave blank if this device type is neither a parent nor a child.
 	/// 
@@ -10581,32 +9841,6 @@ pub struct WritableDeviceWithConfigContextRequest {
 	pub local_context_data: Option<serde_json::Value>,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableEventRuleRequest {
-	pub content_types: Vec<String>,
-	pub name: String,
-	/// Triggers when a matching object is created.
-	pub type_create: bool,
-	/// Triggers when a matching object is updated.
-	pub type_update: bool,
-	/// Triggers when a matching object is deleted.
-	pub type_delete: bool,
-	/// Triggers when a job for a matching object is started.
-	pub type_job_start: bool,
-	/// Triggers when a job for a matching object terminates.
-	pub type_job_end: bool,
-	pub enabled: bool,
-	/// A set of conditions which determine whether the event will be generated.
-	pub conditions: Option<serde_json::Value>,
-	/// * `webhook` - Webhook
-	/// * `script` - Script
-	pub action_type: String,
-	pub action_object_type: String,
-	pub action_object_id: Option<u64>,
-	pub description: String,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub tags: Vec<NestedTagRequest>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableExportTemplateRequest {
@@ -10758,78 +9992,6 @@ pub struct WritableFrontPortTemplateRequest {
 	pub description: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableIKEPolicyRequest {
-	pub name: String,
-	pub description: String,
-	/// * `1` - IKEv1
-	/// * `2` - IKEv2
-	pub version: u16,
-	/// * `aggressive` - Aggressive
-	/// * `main` - Main
-	pub mode: String,
-	pub proposals: Vec<i64>,
-	pub preshared_key: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableIKEProposalRequest {
-	pub name: String,
-	pub description: String,
-	/// * `preshared-keys` - Pre-shared keys
-	/// * `certificates` - Certificates
-	/// * `rsa-signatures` - RSA signatures
-	/// * `dsa-signatures` - DSA signatures
-	pub authentication_method: String,
-	/// * `aes-128-cbc` - 128-bit AES (CBC)
-	/// * `aes-128-gcm` - 128-bit AES (GCM)
-	/// * `aes-192-cbc` - 192-bit AES (CBC)
-	/// * `aes-192-gcm` - 192-bit AES (GCM)
-	/// * `aes-256-cbc` - 256-bit AES (CBC)
-	/// * `aes-256-gcm` - 256-bit AES (GCM)
-	/// * `3des-cbc` - DES
-	pub encryption_algorithm: String,
-	/// * `hmac-sha1` - SHA-1 HMAC
-	/// * `hmac-sha256` - SHA-256 HMAC
-	/// * `hmac-sha384` - SHA-384 HMAC
-	/// * `hmac-sha512` - SHA-512 HMAC
-	/// * `hmac-md5` - MD5 HMAC
-	pub authentication_algorithm: String,
-	/// Diffie-Hellman group ID
-	/// 
-	/// * `1` - Group 1
-	/// * `2` - Group 2
-	/// * `5` - Group 5
-	/// * `14` - Group 14
-	/// * `15` - Group 15
-	/// * `16` - Group 16
-	/// * `17` - Group 17
-	/// * `18` - Group 18
-	/// * `19` - Group 19
-	/// * `20` - Group 20
-	/// * `21` - Group 21
-	/// * `22` - Group 22
-	/// * `23` - Group 23
-	/// * `24` - Group 24
-	/// * `25` - Group 25
-	/// * `26` - Group 26
-	/// * `27` - Group 27
-	/// * `28` - Group 28
-	/// * `29` - Group 29
-	/// * `30` - Group 30
-	/// * `31` - Group 31
-	/// * `32` - Group 32
-	/// * `33` - Group 33
-	/// * `34` - Group 34
-	pub group: u16,
-	/// Security association lifetime (in seconds)
-	pub sa_lifetime: Option<u32>,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableIPAddressRequest {
 	pub address: String,
 	pub vrf: Option<i64>,
@@ -10882,83 +10044,8 @@ pub struct WritableIPRangeRequest {
 	pub comments: String,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	/// Treat as fully utilized
+	/// Treat as 100% utilized
 	pub mark_utilized: bool,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableIPSecPolicyRequest {
-	pub name: String,
-	pub description: String,
-	pub proposals: Vec<i64>,
-	/// Diffie-Hellman group for Perfect Forward Secrecy
-	/// 
-	/// * `1` - Group 1
-	/// * `2` - Group 2
-	/// * `5` - Group 5
-	/// * `14` - Group 14
-	/// * `15` - Group 15
-	/// * `16` - Group 16
-	/// * `17` - Group 17
-	/// * `18` - Group 18
-	/// * `19` - Group 19
-	/// * `20` - Group 20
-	/// * `21` - Group 21
-	/// * `22` - Group 22
-	/// * `23` - Group 23
-	/// * `24` - Group 24
-	/// * `25` - Group 25
-	/// * `26` - Group 26
-	/// * `27` - Group 27
-	/// * `28` - Group 28
-	/// * `29` - Group 29
-	/// * `30` - Group 30
-	/// * `31` - Group 31
-	/// * `32` - Group 32
-	/// * `33` - Group 33
-	/// * `34` - Group 34
-	pub pfs_group: Option<u16>,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableIPSecProfileRequest {
-	pub name: String,
-	pub description: String,
-	/// * `esp` - ESP
-	/// * `ah` - AH
-	pub mode: String,
-	pub ike_policy: i64,
-	pub ipsec_policy: i64,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableIPSecProposalRequest {
-	pub name: String,
-	pub description: String,
-	/// * `aes-128-cbc` - 128-bit AES (CBC)
-	/// * `aes-128-gcm` - 128-bit AES (GCM)
-	/// * `aes-192-cbc` - 192-bit AES (CBC)
-	/// * `aes-192-gcm` - 192-bit AES (GCM)
-	/// * `aes-256-cbc` - 256-bit AES (CBC)
-	/// * `aes-256-gcm` - 256-bit AES (GCM)
-	/// * `3des-cbc` - DES
-	pub encryption_algorithm: String,
-	/// * `hmac-sha1` - SHA-1 HMAC
-	/// * `hmac-sha256` - SHA-256 HMAC
-	/// * `hmac-sha384` - SHA-384 HMAC
-	/// * `hmac-sha512` - SHA-512 HMAC
-	/// * `hmac-md5` - MD5 HMAC
-	pub authentication_algorithm: String,
-	/// Security association lifetime (seconds)
-	pub sa_lifetime_seconds: Option<u32>,
-	/// Security association lifetime (in kilobytes)
-	pub sa_lifetime_data: Option<u32>,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableInterfaceRequest {
@@ -12185,7 +11272,7 @@ pub struct WritablePrefixRequest {
 	pub role: Option<i64>,
 	/// All IP addresses within this prefix are considered usable
 	pub is_pool: bool,
-	/// Treat as fully utilized
+	/// Treat as 100% utilized
 	pub mark_utilized: bool,
 	pub description: String,
 	pub comments: String,
@@ -12539,40 +11626,6 @@ pub struct WritableTokenRequest {
 	pub description: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableTunnelRequest {
-	pub name: String,
-	/// * `planned` - Planned
-	/// * `active` - Active
-	/// * `disabled` - Disabled
-	pub status: String,
-	pub group: Option<i64>,
-	/// * `ipsec-transport` - IPsec - Transport
-	/// * `ipsec-tunnel` - IPsec - Tunnel
-	/// * `ip-ip` - IP-in-IP
-	/// * `gre` - GRE
-	pub encapsulation: String,
-	pub ipsec_profile: Option<i64>,
-	pub tenant: Option<i64>,
-	pub tunnel_id: Option<u64>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableTunnelTerminationRequest {
-	pub tunnel: i64,
-	/// * `peer` - Peer
-	/// * `hub` - Hub
-	/// * `spoke` - Spoke
-	pub role: String,
-	pub termination_type: String,
-	pub termination_id: Option<u64>,
-	pub outside_ip: Option<i64>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableUserRequest {
 	/// Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
 	pub username: String,
@@ -12673,15 +11726,6 @@ pub struct WritableVirtualDeviceContextRequest {
 	pub status: String,
 	pub description: String,
 	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct WritableVirtualDiskRequest {
-	pub virtual_machine: i64,
-	pub name: String,
-	pub description: String,
-	pub size: u32,
 	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
