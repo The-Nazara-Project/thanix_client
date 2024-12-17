@@ -474,19 +474,19 @@ pub struct BriefIPSecProfileRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct BriefInterface {
 	pub id: i64,
-	pub url: Option<String>,
-	pub display: Option<String>,
-	pub device: Option<BriefDevice>,
-	pub name: Option<String>,
-	pub description: Option<String>,
+	pub url: String,
+	pub display: String,
+	pub device: BriefDevice,
+	pub name: String,
+	pub description: String,
 	pub cable: Option<BriefCable>,
-	pub _occupied: Option<bool>,
+	pub _occupied: bool,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct BriefInterfaceRequest {
-	pub device: Option<BriefDeviceRequest>,
-	pub name: Option<String>,
-	pub description: Option<String>,
+	pub device: BriefDeviceRequest,
+	pub name: String,
+	pub description: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct BriefInventoryItemRole {
@@ -538,6 +538,7 @@ pub struct BriefL2VPNRequest {
 	/// * `vxlan-evpn` - VXLAN-EVPN
 	/// * `mpls-evpn` - MPLS EVPN
 	/// * `pbb-evpn` - PBB EVPN
+	/// * `evpn-vpws` - EVPN VPWS
 	/// * `epl` - EPL
 	/// * `evpl` - EVPL
 	/// * `ep-lan` - Ethernet Private LAN
@@ -1073,6 +1074,7 @@ pub struct Cable {
 	/// * `smf-os1` - Singlemode Fiber (OS1)
 	/// * `smf-os2` - Singlemode Fiber (OS2)
 	/// * `aoc` - Active Optical Cabling (AOC)
+	/// * `usb` - USB
 	/// * `power` - Power
 	pub r#type: String,
 	pub a_terminations: Vec<GenericObject>,
@@ -1114,6 +1116,7 @@ pub struct CableRequest {
 	/// * `smf-os1` - Singlemode Fiber (OS1)
 	/// * `smf-os2` - Singlemode Fiber (OS2)
 	/// * `aoc` - Active Optical Cabling (AOC)
+	/// * `usb` - USB
 	/// * `power` - Power
 	pub r#type: String,
 	pub a_terminations: Vec<GenericObjectRequest>,
@@ -2344,6 +2347,9 @@ pub struct DeviceTypeRequest {
 	/// * `left-to-right` - Left to right
 	/// * `right-to-left` - Right to left
 	/// * `side-to-rear` - Side to rear
+	/// * `rear-to-side` - Rear to side
+	/// * `bottom-to-top` - Bottom to top
+	/// * `top-to-bottom` - Top to bottom
 	/// * `passive` - Passive
 	/// * `mixed` - Mixed
 	pub airflow: Option<String>,
@@ -2452,6 +2458,9 @@ pub struct DeviceWithConfigContextRequest {
 	/// * `left-to-right` - Left to right
 	/// * `right-to-left` - Right to left
 	/// * `side-to-rear` - Side to rear
+	/// * `rear-to-side` - Rear to side
+	/// * `bottom-to-top` - Bottom to top
+	/// * `top-to-bottom` - Top to bottom
 	/// * `passive` - Passive
 	/// * `mixed` - Mixed
 	pub airflow: String,
@@ -2723,6 +2732,14 @@ pub struct FrontPortRequest {
 	/// * `urm-p4` - URM-P4
 	/// * `urm-p8` - URM-P8
 	/// * `splice` - Splice
+	/// * `usb-a` - USB Type A
+	/// * `usb-b` - USB Type B
+	/// * `usb-c` - USB Type C
+	/// * `usb-mini-a` - USB Mini A
+	/// * `usb-mini-b` - USB Mini B
+	/// * `usb-micro-a` - USB Micro A
+	/// * `usb-micro-b` - USB Micro B
+	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
 	pub r#type: String,
 	pub color: String,
@@ -2808,6 +2825,14 @@ pub struct FrontPortTemplateRequest {
 	/// * `urm-p4` - URM-P4
 	/// * `urm-p8` - URM-P8
 	/// * `splice` - Splice
+	/// * `usb-a` - USB Type A
+	/// * `usb-b` - USB Type B
+	/// * `usb-c` - USB Type C
+	/// * `usb-mini-a` - USB Mini A
+	/// * `usb-mini-b` - USB Mini B
+	/// * `usb-micro-a` - USB Micro A
+	/// * `usb-micro-b` - USB Micro B
+	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
 	pub r#type: String,
 	pub color: String,
@@ -3201,17 +3226,17 @@ pub struct ImageAttachmentRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct Interface {
 	pub id: i64,
-	pub url: Option<String>,
-	pub display_url: Option<String>,
-	pub display: Option<String>,
-	pub device: Option<BriefDevice>,
-	pub vdcs: Option<Vec<VirtualDeviceContext>>,
+	pub url: String,
+	pub display_url: String,
+	pub display: String,
+	pub device: BriefDevice,
+	pub vdcs: Vec<VirtualDeviceContext>,
 	pub module: Option<BriefModule>,
-	pub name: Option<String>,
+	pub name: String,
 	/// Physical label
-	pub label: Option<String>,
+	pub label: String,
 	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub enabled: Option<bool>,
+	pub enabled: bool,
 	pub parent: Option<NestedInterface>,
 	pub bridge: Option<NestedInterface>,
 	pub lag: Option<NestedInterface>,
@@ -3221,8 +3246,8 @@ pub struct Interface {
 	pub duplex: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub wwn: Option<String>,
 	/// This interface is used only for out-of-band management
-	pub mgmt_only: Option<bool>,
-	pub description: Option<String>,
+	pub mgmt_only: bool,
+	pub description: String,
 	pub mode: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub rf_role: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub rf_channel: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -3234,37 +3259,37 @@ pub struct Interface {
 	pub rf_channel_width: Option<f64>,
 	pub tx_power: Option<u8>,
 	pub untagged_vlan: Option<BriefVLAN>,
-	pub tagged_vlans: Option<Vec<VLAN>>,
+	pub tagged_vlans: Vec<VLAN>,
 	/// Treat as if a cable is connected
-	pub mark_connected: Option<bool>,
+	pub mark_connected: bool,
 	pub cable: Option<BriefCable>,
-	pub cable_end: Option<String>,
+	pub cable_end: String,
 	pub wireless_link: Option<NestedWirelessLink>,
-	pub link_peers: Option<Vec<serde_json::Value>>,
+	pub link_peers: Vec<serde_json::Value>,
 	/// Return the type of the peer link terminations, or None.
 	pub link_peers_type: Option<String>,
-	pub wireless_lans: Option<Vec<WirelessLAN>>,
+	pub wireless_lans: Vec<WirelessLAN>,
 	pub vrf: Option<BriefVRF>,
 	pub l2vpn_termination: Option<BriefL2VPNTermination>,
 	pub connected_endpoints: Option<Vec<serde_json::Value>>,
 	pub connected_endpoints_type: Option<String>,
-	pub connected_endpoints_reachable: Option<bool>,
-	pub tags: Option<Vec<NestedTag>>,
+	pub connected_endpoints_reachable: bool,
+	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub created: Option<String>,
 	pub last_updated: Option<String>,
-	pub count_ipaddresses: Option<i64>,
-	pub count_fhrp_groups: Option<i64>,
-	pub _occupied: Option<bool>,
+	pub count_ipaddresses: i64,
+	pub count_fhrp_groups: i64,
+	pub _occupied: bool,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct InterfaceRequest {
-	pub device: Option<BriefDeviceRequest>,
-	pub vdcs: Option<Vec<i64>>,
+	pub device: BriefDeviceRequest,
+	pub vdcs: Vec<i64>,
 	pub module: Option<BriefModuleRequest>,
-	pub name: Option<String>,
+	pub name: String,
 	/// Physical label
-	pub label: Option<String>,
+	pub label: String,
 	/// * `virtual` - Virtual
 	/// * `bridge` - Bridge
 	/// * `lag` - Link Aggregation Group (LAG)
@@ -3273,11 +3298,13 @@ pub struct InterfaceRequest {
 	/// * `100base-tx` - 100BASE-TX (10/100ME)
 	/// * `100base-t1` - 100BASE-T1 (10/100ME Single Pair)
 	/// * `1000base-t` - 1000BASE-T (1GE)
+	/// * `1000base-lx` - 1000BASE-LX (1GE)
 	/// * `1000base-tx` - 1000BASE-TX (1GE)
 	/// * `2.5gbase-t` - 2.5GBASE-T (2.5GE)
 	/// * `5gbase-t` - 5GBASE-T (5GE)
 	/// * `10gbase-t` - 10GBASE-T (10GE)
 	/// * `10gbase-cx4` - 10GBASE-CX4 (10GE)
+	/// * `100base-x-sfp` - SFP (100ME)
 	/// * `1000base-x-gbic` - GBIC (1GE)
 	/// * `1000base-x-sfp` - SFP (1GE)
 	/// * `10gbase-x-sfpp` - SFP+ (10GE)
@@ -3329,6 +3356,7 @@ pub struct InterfaceRequest {
 	/// * `ieee802.11ay` - IEEE 802.11ay
 	/// * `ieee802.11be` - IEEE 802.11be
 	/// * `ieee802.15.1` - IEEE 802.15.1 (Bluetooth)
+	/// * `ieee802.15.4` - IEEE 802.15.4 (LR-WPAN)
 	/// * `other-wireless` - Other (Wireless)
 	/// * `gsm` - GSM
 	/// * `cdma` - CDMA
@@ -3392,8 +3420,8 @@ pub struct InterfaceRequest {
 	/// * `extreme-summitstack-256` - Extreme SummitStack-256
 	/// * `extreme-summitstack-512` - Extreme SummitStack-512
 	/// * `other` - Other
-	pub r#type: Option<String>,
-	pub enabled: Option<bool>,
+	pub r#type: String,
+	pub enabled: bool,
 	pub parent: Option<NestedInterfaceRequest>,
 	pub bridge: Option<NestedInterfaceRequest>,
 	pub lag: Option<NestedInterfaceRequest>,
@@ -3406,15 +3434,15 @@ pub struct InterfaceRequest {
 	pub duplex: Option<String>,
 	pub wwn: Option<String>,
 	/// This interface is used only for out-of-band management
-	pub mgmt_only: Option<bool>,
-	pub description: Option<String>,
+	pub mgmt_only: bool,
+	pub description: String,
 	/// * `access` - Access
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
-	pub mode: Option<String>,
+	pub mode: String,
 	/// * `ap` - Access point
 	/// * `station` - Station
-	pub rf_role: Option<String>,
+	pub rf_role: String,
 	/// * `2.4g-1-2412-22` - 1 (2412 MHz)
 	/// * `2.4g-2-2417-22` - 2 (2417 MHz)
 	/// * `2.4g-3-2422-22` - 3 (2422 MHz)
@@ -3612,10 +3640,10 @@ pub struct InterfaceRequest {
 	/// * `60g-25-61560-6480` - 25 (61.56/8.64 GHz)
 	/// * `60g-26-63720-6480` - 26 (63.72/8.64 GHz)
 	/// * `60g-27-65880-6480` - 27 (65.88/8.64 GHz)
-	pub rf_channel: Option<String>,
+	pub rf_channel: String,
 	/// * `pd` - PD
 	/// * `pse` - PSE
-	pub poe_mode: Option<String>,
+	pub poe_mode: String,
 	/// * `type1-ieee802.3af` - 802.3af (Type 1)
 	/// * `type2-ieee802.3at` - 802.3at (Type 2)
 	/// * `type3-ieee802.3bt` - 802.3bt (Type 3)
@@ -3624,36 +3652,36 @@ pub struct InterfaceRequest {
 	/// * `passive-24v-4pair` - Passive 24V (4-pair)
 	/// * `passive-48v-2pair` - Passive 48V (2-pair)
 	/// * `passive-48v-4pair` - Passive 48V (4-pair)
-	pub poe_type: Option<String>,
+	pub poe_type: String,
 	/// Populated by selected channel (if set)
 	pub rf_channel_frequency: Option<f64>,
 	/// Populated by selected channel (if set)
 	pub rf_channel_width: Option<f64>,
 	pub tx_power: Option<u8>,
 	pub untagged_vlan: Option<BriefVLANRequest>,
-	pub tagged_vlans: Option<Vec<i64>>,
+	pub tagged_vlans: Vec<i64>,
 	/// Treat as if a cable is connected
-	pub mark_connected: Option<bool>,
-	pub wireless_lans: Option<Vec<i64>>,
+	pub mark_connected: bool,
+	pub wireless_lans: Vec<i64>,
 	pub vrf: Option<BriefVRFRequest>,
-	pub tags: Option<Vec<NestedTagRequest>>,
+	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct InterfaceTemplate {
 	pub id: i64,
-	pub url: Option<String>,
-	pub display: Option<String>,
+	pub url: String,
+	pub display: String,
 	pub device_type: Option<BriefDeviceType>,
 	pub module_type: Option<BriefModuleType>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: Option<String>,
+	pub name: String,
 	/// Physical label
-	pub label: Option<String>,
+	pub label: String,
 	pub r#type: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub enabled: Option<bool>,
-	pub mgmt_only: Option<bool>,
-	pub description: Option<String>,
+	pub enabled: bool,
+	pub mgmt_only: bool,
+	pub description: String,
 	pub bridge: Option<NestedInterfaceTemplate>,
 	pub poe_mode: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub poe_type: Option<std::collections::HashMap<String, serde_json::Value>>,
@@ -3666,9 +3694,9 @@ pub struct InterfaceTemplateRequest {
 	pub device_type: Option<BriefDeviceTypeRequest>,
 	pub module_type: Option<BriefModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: Option<String>,
+	pub name: String,
 	/// Physical label
-	pub label: Option<String>,
+	pub label: String,
 	/// * `virtual` - Virtual
 	/// * `bridge` - Bridge
 	/// * `lag` - Link Aggregation Group (LAG)
@@ -3677,11 +3705,13 @@ pub struct InterfaceTemplateRequest {
 	/// * `100base-tx` - 100BASE-TX (10/100ME)
 	/// * `100base-t1` - 100BASE-T1 (10/100ME Single Pair)
 	/// * `1000base-t` - 1000BASE-T (1GE)
+	/// * `1000base-lx` - 1000BASE-LX (1GE)
 	/// * `1000base-tx` - 1000BASE-TX (1GE)
 	/// * `2.5gbase-t` - 2.5GBASE-T (2.5GE)
 	/// * `5gbase-t` - 5GBASE-T (5GE)
 	/// * `10gbase-t` - 10GBASE-T (10GE)
 	/// * `10gbase-cx4` - 10GBASE-CX4 (10GE)
+	/// * `100base-x-sfp` - SFP (100ME)
 	/// * `1000base-x-gbic` - GBIC (1GE)
 	/// * `1000base-x-sfp` - SFP (1GE)
 	/// * `10gbase-x-sfpp` - SFP+ (10GE)
@@ -3733,6 +3763,7 @@ pub struct InterfaceTemplateRequest {
 	/// * `ieee802.11ay` - IEEE 802.11ay
 	/// * `ieee802.11be` - IEEE 802.11be
 	/// * `ieee802.15.1` - IEEE 802.15.1 (Bluetooth)
+	/// * `ieee802.15.4` - IEEE 802.15.4 (LR-WPAN)
 	/// * `other-wireless` - Other (Wireless)
 	/// * `gsm` - GSM
 	/// * `cdma` - CDMA
@@ -3796,10 +3827,10 @@ pub struct InterfaceTemplateRequest {
 	/// * `extreme-summitstack-256` - Extreme SummitStack-256
 	/// * `extreme-summitstack-512` - Extreme SummitStack-512
 	/// * `other` - Other
-	pub r#type: Option<String>,
-	pub enabled: Option<bool>,
-	pub mgmt_only: Option<bool>,
-	pub description: Option<String>,
+	pub r#type: String,
+	pub enabled: bool,
+	pub mgmt_only: bool,
+	pub description: String,
 	pub bridge: Option<NestedInterfaceTemplateRequest>,
 	/// * `pd` - PD
 	/// * `pse` - PSE
@@ -4016,6 +4047,7 @@ pub struct L2VPNRequest {
 	/// * `vxlan-evpn` - VXLAN-EVPN
 	/// * `mpls-evpn` - MPLS EVPN
 	/// * `pbb-evpn` - PBB EVPN
+	/// * `evpn-vpws` - EVPN VPWS
 	/// * `epl` - EPL
 	/// * `evpl` - EVPL
 	/// * `ep-lan` - Ethernet Private LAN
@@ -4319,32 +4351,31 @@ pub struct NestedIPAddressRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedInterface {
 	pub id: i64,
-	pub url: Option<String>,
-	pub display_url: Option<String>,
-	pub display: Option<String>,
+	pub url: String,
+	pub display_url: String,
+	pub display: String,
 	pub device: Option<NestedDevice>,
-	pub name: Option<String>,
+	pub name: String,
 	pub cable: Option<i64>,
-	pub _occupied: Option<bool>,
+	pub _occupied: bool,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedInterfaceRequest {
-	pub name: Option<String>,
+	pub name: String,
 	pub cable: Option<i64>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedInterfaceTemplate {
 	pub id: i64,
-	pub url: Option<String>,
-	pub display_url: Option<String>,
-	pub display: Option<String>,
+	pub url: String,
+	pub display: String,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: Option<String>,
+	pub name: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedInterfaceTemplateRequest {
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: Option<String>,
+	pub name: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedLocation {
@@ -4455,15 +4486,15 @@ pub struct NestedUser {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedVMInterface {
 	pub id: i64,
-	pub url: Option<String>,
-	pub display_url: Option<String>,
-	pub display: Option<String>,
+	pub url: String,
+	pub display_url: String,
+	pub display: String,
 	pub virtual_machine: Option<NestedVirtualMachine>,
-	pub name: Option<String>,
+	pub name: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedVMInterfaceRequest {
-	pub name: Option<String>,
+	pub name: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NestedVirtualMachine {
@@ -4957,17 +4988,17 @@ pub struct PaginatedImageAttachmentList {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedInterfaceList {
-	pub count: Option<i64>,
+	pub count: i64,
 	pub next: Option<String>,
 	pub previous: Option<String>,
-	pub results: Option<Vec<Interface>>,
+	pub results: Vec<Interface>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedInterfaceTemplateList {
-	pub count: Option<i64>,
+	pub count: i64,
 	pub next: Option<String>,
 	pub previous: Option<String>,
-	pub results: Option<Vec<InterfaceTemplate>>,
+	pub results: Vec<InterfaceTemplate>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedInventoryItemList {
@@ -5370,10 +5401,10 @@ pub struct PaginatedVLANList {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedVMInterfaceList {
-	pub count: Option<i64>,
+	pub count: i64,
 	pub next: Option<String>,
 	pub previous: Option<String>,
-	pub results: Option<Vec<VMInterface>>,
+	pub results: Vec<VMInterface>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PaginatedVRFList {
@@ -5951,6 +5982,13 @@ pub struct PatchedSavedFilterRequest {
 	pub parameters: serde_json::Value,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedScriptInputRequest {
+	pub data: serde_json::Value,
+	pub commit: bool,
+	pub schedule_at: Option<String>,
+	pub interval: Option<i64>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedSubscriptionRequest {
 	pub object_type: String,
 	pub object_id: u64,
@@ -6105,6 +6143,7 @@ pub struct PatchedWritableCableRequest {
 	/// * `smf-os1` - Singlemode Fiber (OS1)
 	/// * `smf-os2` - Singlemode Fiber (OS2)
 	/// * `aoc` - Active Optical Cabling (AOC)
+	/// * `usb` - USB
 	/// * `power` - Power
 	pub r#type: String,
 	pub a_terminations: Vec<GenericObjectRequest>,
@@ -6460,6 +6499,9 @@ pub struct PatchedWritableDeviceTypeRequest {
 	/// * `left-to-right` - Left to right
 	/// * `right-to-left` - Right to left
 	/// * `side-to-rear` - Side to rear
+	/// * `rear-to-side` - Rear to side
+	/// * `bottom-to-top` - Bottom to top
+	/// * `top-to-bottom` - Top to bottom
 	/// * `passive` - Passive
 	/// * `mixed` - Mixed
 	pub airflow: String,
@@ -6511,6 +6553,9 @@ pub struct PatchedWritableDeviceWithConfigContextRequest {
 	/// * `left-to-right` - Left to right
 	/// * `right-to-left` - Right to left
 	/// * `side-to-rear` - Side to rear
+	/// * `rear-to-side` - Rear to side
+	/// * `bottom-to-top` - Bottom to top
+	/// * `top-to-bottom` - Top to bottom
 	/// * `passive` - Passive
 	/// * `mixed` - Mixed
 	pub airflow: String,
@@ -6602,6 +6647,14 @@ pub struct PatchedWritableFrontPortRequest {
 	/// * `urm-p4` - URM-P4
 	/// * `urm-p8` - URM-P8
 	/// * `splice` - Splice
+	/// * `usb-a` - USB Type A
+	/// * `usb-b` - USB Type B
+	/// * `usb-c` - USB Type C
+	/// * `usb-mini-a` - USB Mini A
+	/// * `usb-mini-b` - USB Mini B
+	/// * `usb-micro-a` - USB Micro A
+	/// * `usb-micro-b` - USB Micro B
+	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
 	pub r#type: String,
 	pub color: String,
@@ -6668,6 +6721,14 @@ pub struct PatchedWritableFrontPortTemplateRequest {
 	/// * `urm-p4` - URM-P4
 	/// * `urm-p8` - URM-P8
 	/// * `splice` - Splice
+	/// * `usb-a` - USB Type A
+	/// * `usb-b` - USB Type B
+	/// * `usb-c` - USB Type C
+	/// * `usb-mini-a` - USB Mini A
+	/// * `usb-mini-b` - USB Mini B
+	/// * `usb-micro-a` - USB Micro A
+	/// * `usb-micro-b` - USB Micro B
+	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
 	pub r#type: String,
 	pub color: String,
@@ -6881,12 +6942,12 @@ pub struct PatchedWritableIPSecProposalRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableInterfaceRequest {
-	pub device: Option<BriefDeviceRequest>,
-	pub vdcs: Option<Vec<i64>>,
+	pub device: BriefDeviceRequest,
+	pub vdcs: Vec<i64>,
 	pub module: Option<BriefModuleRequest>,
-	pub name: Option<String>,
+	pub name: String,
 	/// Physical label
-	pub label: Option<String>,
+	pub label: String,
 	/// * `virtual` - Virtual
 	/// * `bridge` - Bridge
 	/// * `lag` - Link Aggregation Group (LAG)
@@ -6895,11 +6956,13 @@ pub struct PatchedWritableInterfaceRequest {
 	/// * `100base-tx` - 100BASE-TX (10/100ME)
 	/// * `100base-t1` - 100BASE-T1 (10/100ME Single Pair)
 	/// * `1000base-t` - 1000BASE-T (1GE)
+	/// * `1000base-lx` - 1000BASE-LX (1GE)
 	/// * `1000base-tx` - 1000BASE-TX (1GE)
 	/// * `2.5gbase-t` - 2.5GBASE-T (2.5GE)
 	/// * `5gbase-t` - 5GBASE-T (5GE)
 	/// * `10gbase-t` - 10GBASE-T (10GE)
 	/// * `10gbase-cx4` - 10GBASE-CX4 (10GE)
+	/// * `100base-x-sfp` - SFP (100ME)
 	/// * `1000base-x-gbic` - GBIC (1GE)
 	/// * `1000base-x-sfp` - SFP (1GE)
 	/// * `10gbase-x-sfpp` - SFP+ (10GE)
@@ -6951,6 +7014,7 @@ pub struct PatchedWritableInterfaceRequest {
 	/// * `ieee802.11ay` - IEEE 802.11ay
 	/// * `ieee802.11be` - IEEE 802.11be
 	/// * `ieee802.15.1` - IEEE 802.15.1 (Bluetooth)
+	/// * `ieee802.15.4` - IEEE 802.15.4 (LR-WPAN)
 	/// * `other-wireless` - Other (Wireless)
 	/// * `gsm` - GSM
 	/// * `cdma` - CDMA
@@ -7014,8 +7078,8 @@ pub struct PatchedWritableInterfaceRequest {
 	/// * `extreme-summitstack-256` - Extreme SummitStack-256
 	/// * `extreme-summitstack-512` - Extreme SummitStack-512
 	/// * `other` - Other
-	pub r#type: Option<String>,
-	pub enabled: Option<bool>,
+	pub r#type: String,
+	pub enabled: bool,
 	pub parent: Option<i64>,
 	pub bridge: Option<i64>,
 	pub lag: Option<i64>,
@@ -7028,17 +7092,17 @@ pub struct PatchedWritableInterfaceRequest {
 	pub duplex: Option<String>,
 	pub wwn: Option<String>,
 	/// This interface is used only for out-of-band management
-	pub mgmt_only: Option<bool>,
-	pub description: Option<String>,
+	pub mgmt_only: bool,
+	pub description: String,
 	/// IEEE 802.1Q tagging strategy
 	/// 
 	/// * `access` - Access
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
-	pub mode: Option<String>,
+	pub mode: String,
 	/// * `ap` - Access point
 	/// * `station` - Station
-	pub rf_role: Option<String>,
+	pub rf_role: String,
 	/// * `2.4g-1-2412-22` - 1 (2412 MHz)
 	/// * `2.4g-2-2417-22` - 2 (2417 MHz)
 	/// * `2.4g-3-2422-22` - 3 (2422 MHz)
@@ -7236,10 +7300,10 @@ pub struct PatchedWritableInterfaceRequest {
 	/// * `60g-25-61560-6480` - 25 (61.56/8.64 GHz)
 	/// * `60g-26-63720-6480` - 26 (63.72/8.64 GHz)
 	/// * `60g-27-65880-6480` - 27 (65.88/8.64 GHz)
-	pub rf_channel: Option<String>,
+	pub rf_channel: String,
 	/// * `pd` - PD
 	/// * `pse` - PSE
-	pub poe_mode: Option<String>,
+	pub poe_mode: String,
 	/// * `type1-ieee802.3af` - 802.3af (Type 1)
 	/// * `type2-ieee802.3at` - 802.3at (Type 2)
 	/// * `type3-ieee802.3bt` - 802.3bt (Type 3)
@@ -7248,19 +7312,19 @@ pub struct PatchedWritableInterfaceRequest {
 	/// * `passive-24v-4pair` - Passive 24V (4-pair)
 	/// * `passive-48v-2pair` - Passive 48V (2-pair)
 	/// * `passive-48v-4pair` - Passive 48V (4-pair)
-	pub poe_type: Option<String>,
+	pub poe_type: String,
 	/// Populated by selected channel (if set)
 	pub rf_channel_frequency: Option<f64>,
 	/// Populated by selected channel (if set)
 	pub rf_channel_width: Option<f64>,
 	pub tx_power: Option<u8>,
 	pub untagged_vlan: Option<BriefVLANRequest>,
-	pub tagged_vlans: Option<Vec<i64>>,
+	pub tagged_vlans: Vec<i64>,
 	/// Treat as if a cable is connected
-	pub mark_connected: Option<bool>,
-	pub wireless_lans: Option<Vec<i64>>,
+	pub mark_connected: bool,
+	pub wireless_lans: Vec<i64>,
 	pub vrf: Option<BriefVRFRequest>,
-	pub tags: Option<Vec<NestedTagRequest>>,
+	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -7268,9 +7332,9 @@ pub struct PatchedWritableInterfaceTemplateRequest {
 	pub device_type: Option<BriefDeviceTypeRequest>,
 	pub module_type: Option<BriefModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: Option<String>,
+	pub name: String,
 	/// Physical label
-	pub label: Option<String>,
+	pub label: String,
 	/// * `virtual` - Virtual
 	/// * `bridge` - Bridge
 	/// * `lag` - Link Aggregation Group (LAG)
@@ -7279,11 +7343,13 @@ pub struct PatchedWritableInterfaceTemplateRequest {
 	/// * `100base-tx` - 100BASE-TX (10/100ME)
 	/// * `100base-t1` - 100BASE-T1 (10/100ME Single Pair)
 	/// * `1000base-t` - 1000BASE-T (1GE)
+	/// * `1000base-lx` - 1000BASE-LX (1GE)
 	/// * `1000base-tx` - 1000BASE-TX (1GE)
 	/// * `2.5gbase-t` - 2.5GBASE-T (2.5GE)
 	/// * `5gbase-t` - 5GBASE-T (5GE)
 	/// * `10gbase-t` - 10GBASE-T (10GE)
 	/// * `10gbase-cx4` - 10GBASE-CX4 (10GE)
+	/// * `100base-x-sfp` - SFP (100ME)
 	/// * `1000base-x-gbic` - GBIC (1GE)
 	/// * `1000base-x-sfp` - SFP (1GE)
 	/// * `10gbase-x-sfpp` - SFP+ (10GE)
@@ -7335,6 +7401,7 @@ pub struct PatchedWritableInterfaceTemplateRequest {
 	/// * `ieee802.11ay` - IEEE 802.11ay
 	/// * `ieee802.11be` - IEEE 802.11be
 	/// * `ieee802.15.1` - IEEE 802.15.1 (Bluetooth)
+	/// * `ieee802.15.4` - IEEE 802.15.4 (LR-WPAN)
 	/// * `other-wireless` - Other (Wireless)
 	/// * `gsm` - GSM
 	/// * `cdma` - CDMA
@@ -7398,14 +7465,14 @@ pub struct PatchedWritableInterfaceTemplateRequest {
 	/// * `extreme-summitstack-256` - Extreme SummitStack-256
 	/// * `extreme-summitstack-512` - Extreme SummitStack-512
 	/// * `other` - Other
-	pub r#type: Option<String>,
-	pub enabled: Option<bool>,
-	pub mgmt_only: Option<bool>,
-	pub description: Option<String>,
+	pub r#type: String,
+	pub enabled: bool,
+	pub mgmt_only: bool,
+	pub description: String,
 	pub bridge: Option<i64>,
 	/// * `pd` - PD
 	/// * `pse` - PSE
-	pub poe_mode: Option<String>,
+	pub poe_mode: String,
 	/// * `type1-ieee802.3af` - 802.3af (Type 1)
 	/// * `type2-ieee802.3at` - 802.3at (Type 2)
 	/// * `type3-ieee802.3bt` - 802.3bt (Type 3)
@@ -7414,10 +7481,10 @@ pub struct PatchedWritableInterfaceTemplateRequest {
 	/// * `passive-24v-4pair` - Passive 24V (4-pair)
 	/// * `passive-48v-2pair` - Passive 48V (2-pair)
 	/// * `passive-48v-4pair` - Passive 48V (4-pair)
-	pub poe_type: Option<String>,
+	pub poe_type: String,
 	/// * `ap` - Access point
 	/// * `station` - Station
-	pub rf_role: Option<String>,
+	pub rf_role: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableJournalEntryRequest {
@@ -7444,6 +7511,7 @@ pub struct PatchedWritableL2VPNRequest {
 	/// * `vxlan-evpn` - VXLAN-EVPN
 	/// * `mpls-evpn` - MPLS EVPN
 	/// * `pbb-evpn` - PBB EVPN
+	/// * `evpn-vpws` - EVPN VPWS
 	/// * `epl` - EPL
 	/// * `evpl` - EVPL
 	/// * `ep-lan` - Ethernet Private LAN
@@ -7623,6 +7691,7 @@ pub struct PatchedWritablePowerOutletRequest {
 	/// * `nema-l15-60r` - NEMA L15-60R
 	/// * `nema-l21-20r` - NEMA L21-20R
 	/// * `nema-l21-30r` - NEMA L21-30R
+	/// * `nema-l22-20r` - NEMA L22-20R
 	/// * `nema-l22-30r` - NEMA L22-30R
 	/// * `CS6360C` - CS6360C
 	/// * `CS6364C` - CS6364C
@@ -7649,6 +7718,7 @@ pub struct PatchedWritablePowerOutletRequest {
 	/// * `molex-micro-fit-2x2` - Molex Micro-Fit 2x2
 	/// * `molex-micro-fit-2x4` - Molex Micro-Fit 2x4
 	/// * `dc-terminal` - DC Terminal
+	/// * `eaton-c39` - Eaton C39
 	/// * `hdot-cx` - HDOT Cx
 	/// * `saf-d-grid` - Saf-D-Grid
 	/// * `neutrik-powercon-20a` - Neutrik powerCON (20A)
@@ -7741,6 +7811,7 @@ pub struct PatchedWritablePowerOutletTemplateRequest {
 	/// * `nema-l15-60r` - NEMA L15-60R
 	/// * `nema-l21-20r` - NEMA L21-20R
 	/// * `nema-l21-30r` - NEMA L21-30R
+	/// * `nema-l22-20r` - NEMA L22-20R
 	/// * `nema-l22-30r` - NEMA L22-30R
 	/// * `CS6360C` - CS6360C
 	/// * `CS6364C` - CS6364C
@@ -7767,6 +7838,7 @@ pub struct PatchedWritablePowerOutletTemplateRequest {
 	/// * `molex-micro-fit-2x2` - Molex Micro-Fit 2x2
 	/// * `molex-micro-fit-2x4` - Molex Micro-Fit 2x4
 	/// * `dc-terminal` - DC Terminal
+	/// * `eaton-c39` - Eaton C39
 	/// * `hdot-cx` - HDOT Cx
 	/// * `saf-d-grid` - Saf-D-Grid
 	/// * `neutrik-powercon-20a` - Neutrik powerCON (20A)
@@ -7856,6 +7928,7 @@ pub struct PatchedWritablePowerPortRequest {
 	/// * `nema-l15-60p` - NEMA L15-60P
 	/// * `nema-l21-20p` - NEMA L21-20P
 	/// * `nema-l21-30p` - NEMA L21-30P
+	/// * `nema-l22-20p` - NEMA L22-20P
 	/// * `nema-l22-30p` - NEMA L22-30P
 	/// * `cs6361c` - CS6361C
 	/// * `cs6365c` - CS6365C
@@ -7978,6 +8051,7 @@ pub struct PatchedWritablePowerPortTemplateRequest {
 	/// * `nema-l15-60p` - NEMA L15-60P
 	/// * `nema-l21-20p` - NEMA L21-20P
 	/// * `nema-l21-30p` - NEMA L21-30P
+	/// * `nema-l22-20p` - NEMA L22-20P
 	/// * `nema-l22-30p` - NEMA L22-30P
 	/// * `cs6361c` - CS6361C
 	/// * `cs6365c` - CS6365C
@@ -8216,6 +8290,14 @@ pub struct PatchedWritableRearPortRequest {
 	/// * `urm-p4` - URM-P4
 	/// * `urm-p8` - URM-P8
 	/// * `splice` - Splice
+	/// * `usb-a` - USB Type A
+	/// * `usb-b` - USB Type B
+	/// * `usb-c` - USB Type C
+	/// * `usb-mini-a` - USB Mini A
+	/// * `usb-mini-b` - USB Mini B
+	/// * `usb-micro-a` - USB Micro A
+	/// * `usb-micro-b` - USB Micro B
+	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
 	pub r#type: String,
 	pub color: String,
@@ -8281,6 +8363,14 @@ pub struct PatchedWritableRearPortTemplateRequest {
 	/// * `urm-p4` - URM-P4
 	/// * `urm-p8` - URM-P8
 	/// * `splice` - Splice
+	/// * `usb-a` - USB Type A
+	/// * `usb-b` - USB Type B
+	/// * `usb-c` - USB Type C
+	/// * `usb-mini-a` - USB Mini A
+	/// * `usb-mini-b` - USB Mini B
+	/// * `usb-micro-a` - USB Micro A
+	/// * `usb-micro-b` - USB Micro B
+	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
 	pub r#type: String,
 	pub color: String,
@@ -8386,6 +8476,10 @@ pub struct PatchedWritableTunnelRequest {
 	/// * `ipsec-tunnel` - IPsec - Tunnel
 	/// * `ip-ip` - IP-in-IP
 	/// * `gre` - GRE
+	/// * `wireguard` - WireGuard
+	/// * `openvpn` - OpenVPN
+	/// * `l2tp` - L2TP
+	/// * `pptp` - PPTP
 	pub encapsulation: String,
 	pub ipsec_profile: Option<BriefIPSecProfileRequest>,
 	pub tenant: Option<BriefTenantRequest>,
@@ -8430,24 +8524,24 @@ pub struct PatchedWritableVLANRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableVMInterfaceRequest {
-	pub virtual_machine: Option<BriefVirtualMachineRequest>,
-	pub name: Option<String>,
-	pub enabled: Option<bool>,
+	pub virtual_machine: BriefVirtualMachineRequest,
+	pub name: String,
+	pub enabled: bool,
 	pub parent: Option<i64>,
 	pub bridge: Option<i64>,
 	pub mtu: Option<u32>,
 	pub mac_address: Option<String>,
-	pub description: Option<String>,
+	pub description: String,
 	/// IEEE 802.1Q tagging strategy
 	/// 
 	/// * `access` - Access
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
-	pub mode: Option<String>,
+	pub mode: String,
 	pub untagged_vlan: Option<BriefVLANRequest>,
-	pub tagged_vlans: Option<Vec<i64>>,
+	pub tagged_vlans: Vec<i64>,
 	pub vrf: Option<BriefVRFRequest>,
-	pub tags: Option<Vec<NestedTagRequest>>,
+	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -8767,6 +8861,7 @@ pub struct PowerOutletRequest {
 	/// * `nema-l15-60r` - NEMA L15-60R
 	/// * `nema-l21-20r` - NEMA L21-20R
 	/// * `nema-l21-30r` - NEMA L21-30R
+	/// * `nema-l22-20r` - NEMA L22-20R
 	/// * `nema-l22-30r` - NEMA L22-30R
 	/// * `CS6360C` - CS6360C
 	/// * `CS6364C` - CS6364C
@@ -8793,6 +8888,7 @@ pub struct PowerOutletRequest {
 	/// * `molex-micro-fit-2x2` - Molex Micro-Fit 2x2
 	/// * `molex-micro-fit-2x4` - Molex Micro-Fit 2x4
 	/// * `dc-terminal` - DC Terminal
+	/// * `eaton-c39` - Eaton C39
 	/// * `hdot-cx` - HDOT Cx
 	/// * `saf-d-grid` - Saf-D-Grid
 	/// * `neutrik-powercon-20a` - Neutrik powerCON (20A)
@@ -8901,6 +8997,7 @@ pub struct PowerOutletTemplateRequest {
 	/// * `nema-l15-60r` - NEMA L15-60R
 	/// * `nema-l21-20r` - NEMA L21-20R
 	/// * `nema-l21-30r` - NEMA L21-30R
+	/// * `nema-l22-20r` - NEMA L22-20R
 	/// * `nema-l22-30r` - NEMA L22-30R
 	/// * `CS6360C` - CS6360C
 	/// * `CS6364C` - CS6364C
@@ -8927,6 +9024,7 @@ pub struct PowerOutletTemplateRequest {
 	/// * `molex-micro-fit-2x2` - Molex Micro-Fit 2x2
 	/// * `molex-micro-fit-2x4` - Molex Micro-Fit 2x4
 	/// * `dc-terminal` - DC Terminal
+	/// * `eaton-c39` - Eaton C39
 	/// * `hdot-cx` - HDOT Cx
 	/// * `saf-d-grid` - Saf-D-Grid
 	/// * `neutrik-powercon-20a` - Neutrik powerCON (20A)
@@ -9072,6 +9170,7 @@ pub struct PowerPortRequest {
 	/// * `nema-l15-60p` - NEMA L15-60P
 	/// * `nema-l21-20p` - NEMA L21-20P
 	/// * `nema-l21-30p` - NEMA L21-30P
+	/// * `nema-l22-20p` - NEMA L22-20P
 	/// * `nema-l22-30p` - NEMA L22-30P
 	/// * `cs6361c` - CS6361C
 	/// * `cs6365c` - CS6365C
@@ -9214,6 +9313,7 @@ pub struct PowerPortTemplateRequest {
 	/// * `nema-l15-60p` - NEMA L15-60P
 	/// * `nema-l21-20p` - NEMA L21-20P
 	/// * `nema-l21-30p` - NEMA L21-30P
+	/// * `nema-l22-20p` - NEMA L22-20P
 	/// * `nema-l22-30p` - NEMA L22-30P
 	/// * `cs6361c` - CS6361C
 	/// * `cs6365c` - CS6365C
@@ -9755,6 +9855,14 @@ pub struct RearPortRequest {
 	/// * `urm-p4` - URM-P4
 	/// * `urm-p8` - URM-P8
 	/// * `splice` - Splice
+	/// * `usb-a` - USB Type A
+	/// * `usb-b` - USB Type B
+	/// * `usb-c` - USB Type C
+	/// * `usb-mini-a` - USB Mini A
+	/// * `usb-mini-b` - USB Mini B
+	/// * `usb-micro-a` - USB Micro A
+	/// * `usb-micro-b` - USB Micro B
+	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
 	pub r#type: String,
 	pub color: String,
@@ -9838,6 +9946,14 @@ pub struct RearPortTemplateRequest {
 	/// * `urm-p4` - URM-P4
 	/// * `urm-p8` - URM-P8
 	/// * `splice` - Splice
+	/// * `usb-a` - USB Type A
+	/// * `usb-b` - USB Type B
+	/// * `usb-c` - USB Type C
+	/// * `usb-mini-a` - USB Mini A
+	/// * `usb-mini-b` - USB Mini B
+	/// * `usb-micro-a` - USB Micro A
+	/// * `usb-micro-b` - USB Micro B
+	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
 	pub r#type: String,
 	pub color: String,
@@ -9964,6 +10080,13 @@ pub struct Script {
 	pub result: Option<BriefJob>,
 	pub display: String,
 	pub is_executable: bool,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct ScriptInputRequest {
+	pub data: serde_json::Value,
+	pub commit: bool,
+	pub schedule_at: Option<String>,
+	pub interval: Option<i64>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct Service {
@@ -10331,6 +10454,10 @@ pub struct TunnelRequest {
 	/// * `ipsec-tunnel` - IPsec - Tunnel
 	/// * `ip-ip` - IP-in-IP
 	/// * `gre` - GRE
+	/// * `wireguard` - WireGuard
+	/// * `openvpn` - OpenVPN
+	/// * `l2tp` - L2TP
+	/// * `pptp` - PPTP
 	pub encapsulation: String,
 	pub ipsec_profile: Option<BriefIPSecProfileRequest>,
 	pub tenant: Option<BriefTenantRequest>,
@@ -10480,47 +10607,47 @@ pub struct VLANRequest {
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VMInterface {
 	pub id: i64,
-	pub url: Option<String>,
-	pub display_url: Option<String>,
-	pub display: Option<String>,
-	pub virtual_machine: Option<BriefVirtualMachine>,
-	pub name: Option<String>,
-	pub enabled: Option<bool>,
+	pub url: String,
+	pub display_url: String,
+	pub display: String,
+	pub virtual_machine: BriefVirtualMachine,
+	pub name: String,
+	pub enabled: bool,
 	pub parent: Option<NestedVMInterface>,
 	pub bridge: Option<NestedVMInterface>,
 	pub mtu: Option<u32>,
 	pub mac_address: Option<String>,
-	pub description: Option<String>,
+	pub description: String,
 	pub mode: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub untagged_vlan: Option<BriefVLAN>,
-	pub tagged_vlans: Option<Vec<VLAN>>,
+	pub tagged_vlans: Vec<VLAN>,
 	pub vrf: Option<BriefVRF>,
 	pub l2vpn_termination: Option<BriefL2VPNTermination>,
-	pub tags: Option<Vec<NestedTag>>,
+	pub tags: Vec<NestedTag>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 	pub created: Option<String>,
 	pub last_updated: Option<String>,
-	pub count_ipaddresses: Option<i64>,
-	pub count_fhrp_groups: Option<i64>,
+	pub count_ipaddresses: i64,
+	pub count_fhrp_groups: i64,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VMInterfaceRequest {
-	pub virtual_machine: Option<BriefVirtualMachineRequest>,
-	pub name: Option<String>,
-	pub enabled: Option<bool>,
+	pub virtual_machine: BriefVirtualMachineRequest,
+	pub name: String,
+	pub enabled: bool,
 	pub parent: Option<NestedVMInterfaceRequest>,
 	pub bridge: Option<NestedVMInterfaceRequest>,
 	pub mtu: Option<u32>,
 	pub mac_address: Option<String>,
-	pub description: Option<String>,
+	pub description: String,
 	/// * `access` - Access
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
-	pub mode: Option<String>,
+	pub mode: String,
 	pub untagged_vlan: Option<BriefVLANRequest>,
-	pub tagged_vlans: Option<Vec<i64>>,
+	pub tagged_vlans: Vec<i64>,
 	pub vrf: Option<BriefVRFRequest>,
-	pub tags: Option<Vec<NestedTagRequest>>,
+	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -10938,6 +11065,7 @@ pub struct WritableCableRequest {
 	/// * `smf-os1` - Singlemode Fiber (OS1)
 	/// * `smf-os2` - Singlemode Fiber (OS2)
 	/// * `aoc` - Active Optical Cabling (AOC)
+	/// * `usb` - USB
 	/// * `power` - Power
 	pub r#type: String,
 	pub a_terminations: Vec<GenericObjectRequest>,
@@ -11293,6 +11421,9 @@ pub struct WritableDeviceTypeRequest {
 	/// * `left-to-right` - Left to right
 	/// * `right-to-left` - Right to left
 	/// * `side-to-rear` - Side to rear
+	/// * `rear-to-side` - Rear to side
+	/// * `bottom-to-top` - Bottom to top
+	/// * `top-to-bottom` - Top to bottom
 	/// * `passive` - Passive
 	/// * `mixed` - Mixed
 	pub airflow: String,
@@ -11344,6 +11475,9 @@ pub struct WritableDeviceWithConfigContextRequest {
 	/// * `left-to-right` - Left to right
 	/// * `right-to-left` - Right to left
 	/// * `side-to-rear` - Side to rear
+	/// * `rear-to-side` - Rear to side
+	/// * `bottom-to-top` - Bottom to top
+	/// * `top-to-bottom` - Top to bottom
 	/// * `passive` - Passive
 	/// * `mixed` - Mixed
 	pub airflow: String,
@@ -11435,6 +11569,14 @@ pub struct WritableFrontPortRequest {
 	/// * `urm-p4` - URM-P4
 	/// * `urm-p8` - URM-P8
 	/// * `splice` - Splice
+	/// * `usb-a` - USB Type A
+	/// * `usb-b` - USB Type B
+	/// * `usb-c` - USB Type C
+	/// * `usb-mini-a` - USB Mini A
+	/// * `usb-mini-b` - USB Mini B
+	/// * `usb-micro-a` - USB Micro A
+	/// * `usb-micro-b` - USB Micro B
+	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
 	pub r#type: String,
 	pub color: String,
@@ -11501,6 +11643,14 @@ pub struct WritableFrontPortTemplateRequest {
 	/// * `urm-p4` - URM-P4
 	/// * `urm-p8` - URM-P8
 	/// * `splice` - Splice
+	/// * `usb-a` - USB Type A
+	/// * `usb-b` - USB Type B
+	/// * `usb-c` - USB Type C
+	/// * `usb-mini-a` - USB Mini A
+	/// * `usb-mini-b` - USB Mini B
+	/// * `usb-micro-a` - USB Micro A
+	/// * `usb-micro-b` - USB Micro B
+	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
 	pub r#type: String,
 	pub color: String,
@@ -11714,12 +11864,12 @@ pub struct WritableIPSecProposalRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableInterfaceRequest {
-	pub device: Option<BriefDeviceRequest>,
-	pub vdcs: Option<Vec<i64>>,
+	pub device: BriefDeviceRequest,
+	pub vdcs: Vec<i64>,
 	pub module: Option<BriefModuleRequest>,
-	pub name: Option<String>,
+	pub name: String,
 	/// Physical label
-	pub label: Option<String>,
+	pub label: String,
 	/// * `virtual` - Virtual
 	/// * `bridge` - Bridge
 	/// * `lag` - Link Aggregation Group (LAG)
@@ -11728,11 +11878,13 @@ pub struct WritableInterfaceRequest {
 	/// * `100base-tx` - 100BASE-TX (10/100ME)
 	/// * `100base-t1` - 100BASE-T1 (10/100ME Single Pair)
 	/// * `1000base-t` - 1000BASE-T (1GE)
+	/// * `1000base-lx` - 1000BASE-LX (1GE)
 	/// * `1000base-tx` - 1000BASE-TX (1GE)
 	/// * `2.5gbase-t` - 2.5GBASE-T (2.5GE)
 	/// * `5gbase-t` - 5GBASE-T (5GE)
 	/// * `10gbase-t` - 10GBASE-T (10GE)
 	/// * `10gbase-cx4` - 10GBASE-CX4 (10GE)
+	/// * `100base-x-sfp` - SFP (100ME)
 	/// * `1000base-x-gbic` - GBIC (1GE)
 	/// * `1000base-x-sfp` - SFP (1GE)
 	/// * `10gbase-x-sfpp` - SFP+ (10GE)
@@ -11784,6 +11936,7 @@ pub struct WritableInterfaceRequest {
 	/// * `ieee802.11ay` - IEEE 802.11ay
 	/// * `ieee802.11be` - IEEE 802.11be
 	/// * `ieee802.15.1` - IEEE 802.15.1 (Bluetooth)
+	/// * `ieee802.15.4` - IEEE 802.15.4 (LR-WPAN)
 	/// * `other-wireless` - Other (Wireless)
 	/// * `gsm` - GSM
 	/// * `cdma` - CDMA
@@ -11847,8 +12000,8 @@ pub struct WritableInterfaceRequest {
 	/// * `extreme-summitstack-256` - Extreme SummitStack-256
 	/// * `extreme-summitstack-512` - Extreme SummitStack-512
 	/// * `other` - Other
-	pub r#type: Option<String>,
-	pub enabled: Option<bool>,
+	pub r#type: String,
+	pub enabled: bool,
 	pub parent: Option<i64>,
 	pub bridge: Option<i64>,
 	pub lag: Option<i64>,
@@ -11861,17 +12014,17 @@ pub struct WritableInterfaceRequest {
 	pub duplex: Option<String>,
 	pub wwn: Option<String>,
 	/// This interface is used only for out-of-band management
-	pub mgmt_only: Option<bool>,
-	pub description: Option<String>,
+	pub mgmt_only: bool,
+	pub description: String,
 	/// IEEE 802.1Q tagging strategy
 	/// 
 	/// * `access` - Access
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
-	pub mode: Option<String>,
+	pub mode: String,
 	/// * `ap` - Access point
 	/// * `station` - Station
-	pub rf_role: Option<String>,
+	pub rf_role: String,
 	/// * `2.4g-1-2412-22` - 1 (2412 MHz)
 	/// * `2.4g-2-2417-22` - 2 (2417 MHz)
 	/// * `2.4g-3-2422-22` - 3 (2422 MHz)
@@ -12069,10 +12222,10 @@ pub struct WritableInterfaceRequest {
 	/// * `60g-25-61560-6480` - 25 (61.56/8.64 GHz)
 	/// * `60g-26-63720-6480` - 26 (63.72/8.64 GHz)
 	/// * `60g-27-65880-6480` - 27 (65.88/8.64 GHz)
-	pub rf_channel: Option<String>,
+	pub rf_channel: String,
 	/// * `pd` - PD
 	/// * `pse` - PSE
-	pub poe_mode: Option<String>,
+	pub poe_mode: String,
 	/// * `type1-ieee802.3af` - 802.3af (Type 1)
 	/// * `type2-ieee802.3at` - 802.3at (Type 2)
 	/// * `type3-ieee802.3bt` - 802.3bt (Type 3)
@@ -12081,19 +12234,19 @@ pub struct WritableInterfaceRequest {
 	/// * `passive-24v-4pair` - Passive 24V (4-pair)
 	/// * `passive-48v-2pair` - Passive 48V (2-pair)
 	/// * `passive-48v-4pair` - Passive 48V (4-pair)
-	pub poe_type: Option<String>,
+	pub poe_type: String,
 	/// Populated by selected channel (if set)
 	pub rf_channel_frequency: Option<f64>,
 	/// Populated by selected channel (if set)
 	pub rf_channel_width: Option<f64>,
 	pub tx_power: Option<u8>,
 	pub untagged_vlan: Option<BriefVLANRequest>,
-	pub tagged_vlans: Option<Vec<i64>>,
+	pub tagged_vlans: Vec<i64>,
 	/// Treat as if a cable is connected
-	pub mark_connected: Option<bool>,
-	pub wireless_lans: Option<Vec<i64>>,
+	pub mark_connected: bool,
+	pub wireless_lans: Vec<i64>,
 	pub vrf: Option<BriefVRFRequest>,
-	pub tags: Option<Vec<NestedTagRequest>>,
+	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -12101,9 +12254,9 @@ pub struct WritableInterfaceTemplateRequest {
 	pub device_type: Option<BriefDeviceTypeRequest>,
 	pub module_type: Option<BriefModuleTypeRequest>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: Option<String>,
+	pub name: String,
 	/// Physical label
-	pub label: Option<String>,
+	pub label: String,
 	/// * `virtual` - Virtual
 	/// * `bridge` - Bridge
 	/// * `lag` - Link Aggregation Group (LAG)
@@ -12112,11 +12265,13 @@ pub struct WritableInterfaceTemplateRequest {
 	/// * `100base-tx` - 100BASE-TX (10/100ME)
 	/// * `100base-t1` - 100BASE-T1 (10/100ME Single Pair)
 	/// * `1000base-t` - 1000BASE-T (1GE)
+	/// * `1000base-lx` - 1000BASE-LX (1GE)
 	/// * `1000base-tx` - 1000BASE-TX (1GE)
 	/// * `2.5gbase-t` - 2.5GBASE-T (2.5GE)
 	/// * `5gbase-t` - 5GBASE-T (5GE)
 	/// * `10gbase-t` - 10GBASE-T (10GE)
 	/// * `10gbase-cx4` - 10GBASE-CX4 (10GE)
+	/// * `100base-x-sfp` - SFP (100ME)
 	/// * `1000base-x-gbic` - GBIC (1GE)
 	/// * `1000base-x-sfp` - SFP (1GE)
 	/// * `10gbase-x-sfpp` - SFP+ (10GE)
@@ -12168,6 +12323,7 @@ pub struct WritableInterfaceTemplateRequest {
 	/// * `ieee802.11ay` - IEEE 802.11ay
 	/// * `ieee802.11be` - IEEE 802.11be
 	/// * `ieee802.15.1` - IEEE 802.15.1 (Bluetooth)
+	/// * `ieee802.15.4` - IEEE 802.15.4 (LR-WPAN)
 	/// * `other-wireless` - Other (Wireless)
 	/// * `gsm` - GSM
 	/// * `cdma` - CDMA
@@ -12231,14 +12387,14 @@ pub struct WritableInterfaceTemplateRequest {
 	/// * `extreme-summitstack-256` - Extreme SummitStack-256
 	/// * `extreme-summitstack-512` - Extreme SummitStack-512
 	/// * `other` - Other
-	pub r#type: Option<String>,
-	pub enabled: Option<bool>,
-	pub mgmt_only: Option<bool>,
-	pub description: Option<String>,
+	pub r#type: String,
+	pub enabled: bool,
+	pub mgmt_only: bool,
+	pub description: String,
 	pub bridge: Option<i64>,
 	/// * `pd` - PD
 	/// * `pse` - PSE
-	pub poe_mode: Option<String>,
+	pub poe_mode: String,
 	/// * `type1-ieee802.3af` - 802.3af (Type 1)
 	/// * `type2-ieee802.3at` - 802.3at (Type 2)
 	/// * `type3-ieee802.3bt` - 802.3bt (Type 3)
@@ -12247,10 +12403,10 @@ pub struct WritableInterfaceTemplateRequest {
 	/// * `passive-24v-4pair` - Passive 24V (4-pair)
 	/// * `passive-48v-2pair` - Passive 48V (2-pair)
 	/// * `passive-48v-4pair` - Passive 48V (4-pair)
-	pub poe_type: Option<String>,
+	pub poe_type: String,
 	/// * `ap` - Access point
 	/// * `station` - Station
-	pub rf_role: Option<String>,
+	pub rf_role: String,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableJournalEntryRequest {
@@ -12277,6 +12433,7 @@ pub struct WritableL2VPNRequest {
 	/// * `vxlan-evpn` - VXLAN-EVPN
 	/// * `mpls-evpn` - MPLS EVPN
 	/// * `pbb-evpn` - PBB EVPN
+	/// * `evpn-vpws` - EVPN VPWS
 	/// * `epl` - EPL
 	/// * `evpl` - EVPL
 	/// * `ep-lan` - Ethernet Private LAN
@@ -12456,6 +12613,7 @@ pub struct WritablePowerOutletRequest {
 	/// * `nema-l15-60r` - NEMA L15-60R
 	/// * `nema-l21-20r` - NEMA L21-20R
 	/// * `nema-l21-30r` - NEMA L21-30R
+	/// * `nema-l22-20r` - NEMA L22-20R
 	/// * `nema-l22-30r` - NEMA L22-30R
 	/// * `CS6360C` - CS6360C
 	/// * `CS6364C` - CS6364C
@@ -12482,6 +12640,7 @@ pub struct WritablePowerOutletRequest {
 	/// * `molex-micro-fit-2x2` - Molex Micro-Fit 2x2
 	/// * `molex-micro-fit-2x4` - Molex Micro-Fit 2x4
 	/// * `dc-terminal` - DC Terminal
+	/// * `eaton-c39` - Eaton C39
 	/// * `hdot-cx` - HDOT Cx
 	/// * `saf-d-grid` - Saf-D-Grid
 	/// * `neutrik-powercon-20a` - Neutrik powerCON (20A)
@@ -12574,6 +12733,7 @@ pub struct WritablePowerOutletTemplateRequest {
 	/// * `nema-l15-60r` - NEMA L15-60R
 	/// * `nema-l21-20r` - NEMA L21-20R
 	/// * `nema-l21-30r` - NEMA L21-30R
+	/// * `nema-l22-20r` - NEMA L22-20R
 	/// * `nema-l22-30r` - NEMA L22-30R
 	/// * `CS6360C` - CS6360C
 	/// * `CS6364C` - CS6364C
@@ -12600,6 +12760,7 @@ pub struct WritablePowerOutletTemplateRequest {
 	/// * `molex-micro-fit-2x2` - Molex Micro-Fit 2x2
 	/// * `molex-micro-fit-2x4` - Molex Micro-Fit 2x4
 	/// * `dc-terminal` - DC Terminal
+	/// * `eaton-c39` - Eaton C39
 	/// * `hdot-cx` - HDOT Cx
 	/// * `saf-d-grid` - Saf-D-Grid
 	/// * `neutrik-powercon-20a` - Neutrik powerCON (20A)
@@ -12689,6 +12850,7 @@ pub struct WritablePowerPortRequest {
 	/// * `nema-l15-60p` - NEMA L15-60P
 	/// * `nema-l21-20p` - NEMA L21-20P
 	/// * `nema-l21-30p` - NEMA L21-30P
+	/// * `nema-l22-20p` - NEMA L22-20P
 	/// * `nema-l22-30p` - NEMA L22-30P
 	/// * `cs6361c` - CS6361C
 	/// * `cs6365c` - CS6365C
@@ -12811,6 +12973,7 @@ pub struct WritablePowerPortTemplateRequest {
 	/// * `nema-l15-60p` - NEMA L15-60P
 	/// * `nema-l21-20p` - NEMA L21-20P
 	/// * `nema-l21-30p` - NEMA L21-30P
+	/// * `nema-l22-20p` - NEMA L22-20P
 	/// * `nema-l22-30p` - NEMA L22-30P
 	/// * `cs6361c` - CS6361C
 	/// * `cs6365c` - CS6365C
@@ -13049,6 +13212,14 @@ pub struct WritableRearPortRequest {
 	/// * `urm-p4` - URM-P4
 	/// * `urm-p8` - URM-P8
 	/// * `splice` - Splice
+	/// * `usb-a` - USB Type A
+	/// * `usb-b` - USB Type B
+	/// * `usb-c` - USB Type C
+	/// * `usb-mini-a` - USB Mini A
+	/// * `usb-mini-b` - USB Mini B
+	/// * `usb-micro-a` - USB Micro A
+	/// * `usb-micro-b` - USB Micro B
+	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
 	pub r#type: String,
 	pub color: String,
@@ -13114,6 +13285,14 @@ pub struct WritableRearPortTemplateRequest {
 	/// * `urm-p4` - URM-P4
 	/// * `urm-p8` - URM-P8
 	/// * `splice` - Splice
+	/// * `usb-a` - USB Type A
+	/// * `usb-b` - USB Type B
+	/// * `usb-c` - USB Type C
+	/// * `usb-mini-a` - USB Mini A
+	/// * `usb-mini-b` - USB Mini B
+	/// * `usb-micro-a` - USB Micro A
+	/// * `usb-micro-b` - USB Micro B
+	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
 	pub r#type: String,
 	pub color: String,
@@ -13219,6 +13398,10 @@ pub struct WritableTunnelRequest {
 	/// * `ipsec-tunnel` - IPsec - Tunnel
 	/// * `ip-ip` - IP-in-IP
 	/// * `gre` - GRE
+	/// * `wireguard` - WireGuard
+	/// * `openvpn` - OpenVPN
+	/// * `l2tp` - L2TP
+	/// * `pptp` - PPTP
 	pub encapsulation: String,
 	pub ipsec_profile: Option<BriefIPSecProfileRequest>,
 	pub tenant: Option<BriefTenantRequest>,
@@ -13263,24 +13446,24 @@ pub struct WritableVLANRequest {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WritableVMInterfaceRequest {
-	pub virtual_machine: Option<BriefVirtualMachineRequest>,
-	pub name: Option<String>,
-	pub enabled: Option<bool>,
+	pub virtual_machine: BriefVirtualMachineRequest,
+	pub name: String,
+	pub enabled: bool,
 	pub parent: Option<i64>,
 	pub bridge: Option<i64>,
 	pub mtu: Option<u32>,
 	pub mac_address: Option<String>,
-	pub description: Option<String>,
+	pub description: String,
 	/// IEEE 802.1Q tagging strategy
 	/// 
 	/// * `access` - Access
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
-	pub mode: Option<String>,
+	pub mode: String,
 	pub untagged_vlan: Option<BriefVLANRequest>,
-	pub tagged_vlans: Option<Vec<i64>>,
+	pub tagged_vlans: Vec<i64>,
 	pub vrf: Option<BriefVRFRequest>,
-	pub tags: Option<Vec<NestedTagRequest>>,
+	pub tags: Vec<NestedTagRequest>,
 	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]

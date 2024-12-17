@@ -57,11 +57,6 @@ pub struct CircuitsCircuitGroupAssignmentsListQuery {
 	/// * `tertiary` - Tertiary
 	/// * `inactive` - Inactive
 	pub priority: Option<String>,
-	/// * `primary` - Primary
-	/// * `secondary` - Secondary
-	/// * `tertiary` - Tertiary
-	/// * `inactive` - Inactive
-	pub priority__n: Option<String>,
 	/// Provider (slug)
 	pub provider: Option<Vec<String>>,
 	/// Provider (slug)
@@ -447,9 +442,6 @@ pub struct CircuitsCircuitTerminationsListQuery {
 	/// * `A` - A
 	/// * `B` - B
 	pub cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
-	pub cable_end__n: Option<String>,
 	/// Cable (ID)
 	pub cable_id: Option<Vec<Option<i64>>>,
 	/// Cable (ID)
@@ -546,9 +538,6 @@ pub struct CircuitsCircuitTerminationsListQuery {
 	/// * `A` - A
 	/// * `Z` - Z
 	pub term_side: Option<String>,
-	/// * `A` - A
-	/// * `Z` - Z
-	pub term_side__n: Option<String>,
 	pub updated_by_request: Option<String>,
 	pub upstream_speed: Option<Vec<i64>>,
 	pub upstream_speed__empty: Option<bool>,
@@ -1065,7 +1054,16 @@ pub struct CircuitsCircuitsListQuery {
 	/// Site (ID)
 	pub site_id__n: Option<Vec<i64>>,
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	pub status__ic: Option<Vec<String>>,
+	pub status__ie: Option<Vec<String>>,
+	pub status__iew: Option<Vec<String>>,
+	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
+	pub status__nic: Option<Vec<String>>,
+	pub status__nie: Option<Vec<String>>,
+	pub status__niew: Option<Vec<String>>,
+	pub status__nisw: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	/// Tenant (slug)
@@ -2112,11 +2110,29 @@ pub struct CoreDataSourcesListQuery {
 	pub source_url__niew: Option<Vec<String>>,
 	pub source_url__nisw: Option<Vec<String>>,
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	pub status__ic: Option<Vec<String>>,
+	pub status__ie: Option<Vec<String>>,
+	pub status__iew: Option<Vec<String>>,
+	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
+	pub status__nic: Option<Vec<String>>,
+	pub status__nie: Option<Vec<String>>,
+	pub status__niew: Option<Vec<String>>,
+	pub status__nisw: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub r#type: Option<Vec<String>>,
+	pub type__empty: Option<bool>,
+	pub type__ic: Option<Vec<String>>,
+	pub type__ie: Option<Vec<String>>,
+	pub type__iew: Option<Vec<String>>,
+	pub type__isw: Option<Vec<String>>,
 	pub type__n: Option<Vec<String>>,
+	pub type__nic: Option<Vec<String>>,
+	pub type__nie: Option<Vec<String>>,
+	pub type__niew: Option<Vec<String>>,
+	pub type__nisw: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 
 }
@@ -2335,7 +2351,16 @@ pub struct CoreJobsListQuery {
 	pub started__after: Option<String>,
 	pub started__before: Option<String>,
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	pub status__ic: Option<Vec<String>>,
+	pub status__ie: Option<Vec<String>>,
+	pub status__iew: Option<Vec<String>>,
+	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
+	pub status__nic: Option<Vec<String>>,
+	pub status__nie: Option<Vec<String>>,
+	pub status__niew: Option<Vec<String>>,
+	pub status__nisw: Option<Vec<String>>,
 	pub user: Option<i64>,
 	pub user__n: Option<i64>,
 
@@ -2378,10 +2403,6 @@ pub struct CoreObjectChangesListQuery {
 	/// * `update` - Updated
 	/// * `delete` - Deleted
 	pub action: Option<String>,
-	/// * `create` - Created
-	/// * `update` - Updated
-	/// * `delete` - Deleted
-	pub action__n: Option<String>,
 	pub changed_object_id: Option<Vec<i64>>,
 	pub changed_object_id__empty: Option<bool>,
 	pub changed_object_id__gt: Option<Vec<i64>>,
@@ -2491,9 +2512,6 @@ pub struct DcimCableTerminationsListQuery {
 	/// * `A` - A
 	/// * `B` - B
 	pub cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
-	pub cable_end__n: Option<String>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -2680,7 +2698,16 @@ pub fn dcim_cable_terminations_partial_update(state: &ThanixClient, body: Patche
 pub struct DcimCablesListQuery {
 	pub circuittermination_id: Option<Vec<i64>>,
 	pub color: Option<Vec<String>>,
+	pub color__empty: Option<bool>,
+	pub color__ic: Option<Vec<String>>,
+	pub color__ie: Option<Vec<String>>,
+	pub color__iew: Option<Vec<String>>,
+	pub color__isw: Option<Vec<String>>,
 	pub color__n: Option<Vec<String>>,
+	pub color__nic: Option<Vec<String>>,
+	pub color__nie: Option<Vec<String>>,
+	pub color__niew: Option<Vec<String>>,
+	pub color__nisw: Option<Vec<String>>,
 	pub consoleport_id: Option<Vec<i64>>,
 	pub consoleserverport_id: Option<Vec<i64>>,
 	pub created: Option<Vec<String>>,
@@ -2745,13 +2772,6 @@ pub struct DcimCablesListQuery {
 	/// * `ft` - Feet
 	/// * `in` - Inches
 	pub length_unit: Option<String>,
-	/// * `km` - Kilometers
-	/// * `m` - Meters
-	/// * `cm` - Centimeters
-	/// * `mi` - Miles
-	/// * `ft` - Feet
-	/// * `in` - Inches
-	pub length_unit__n: Option<String>,
 	/// Number of results to return per page.
 	pub limit: Option<i64>,
 	pub location: Option<Vec<String>>,
@@ -2772,7 +2792,16 @@ pub struct DcimCablesListQuery {
 	pub site: Option<Vec<String>>,
 	pub site_id: Option<Vec<i64>>,
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	pub status__ic: Option<Vec<String>>,
+	pub status__ie: Option<Vec<String>>,
+	pub status__iew: Option<Vec<String>>,
+	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
+	pub status__nic: Option<Vec<String>>,
+	pub status__nie: Option<Vec<String>>,
+	pub status__niew: Option<Vec<String>>,
+	pub status__nisw: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	/// Tenant (slug)
@@ -2794,7 +2823,16 @@ pub struct DcimCablesListQuery {
 	pub termination_b_type: Option<String>,
 	pub termination_b_type__n: Option<String>,
 	pub r#type: Option<Vec<String>>,
+	pub type__empty: Option<bool>,
+	pub type__ic: Option<Vec<String>>,
+	pub type__ie: Option<Vec<String>>,
+	pub type__iew: Option<Vec<String>>,
+	pub type__isw: Option<Vec<String>>,
 	pub type__n: Option<Vec<String>>,
+	pub type__nic: Option<Vec<String>>,
+	pub type__nie: Option<Vec<String>>,
+	pub type__niew: Option<Vec<String>>,
+	pub type__nisw: Option<Vec<String>>,
 	/// Unterminated
 	pub unterminated: Option<bool>,
 	pub updated_by_request: Option<String>,
@@ -3049,10 +3087,6 @@ pub struct DcimConsolePortTemplatesListQuery {
 	/// * `USB` - [('usb-a', 'USB Type A'), ('usb-b', 'USB Type B'), ('usb-c', 'USB Type C'), ('usb-mini-a', 'USB Mini A'), ('usb-mini-b', 'USB Mini B'), ('usb-micro-a', 'USB Micro A'), ('usb-micro-b', 'USB Micro B'), ('usb-micro-ab', 'USB Micro AB')]
 	/// * `Other` - [('other', 'Other')]
 	pub r#type: Option<String>,
-	/// * `Serial` - [('de-9', 'DE-9'), ('db-25', 'DB-25'), ('rj-11', 'RJ-11'), ('rj-12', 'RJ-12'), ('rj-45', 'RJ-45'), ('mini-din-8', 'Mini-DIN 8')]
-	/// * `USB` - [('usb-a', 'USB Type A'), ('usb-b', 'USB Type B'), ('usb-c', 'USB Type C'), ('usb-mini-a', 'USB Mini A'), ('usb-mini-b', 'USB Mini B'), ('usb-micro-a', 'USB Micro A'), ('usb-micro-b', 'USB Micro B'), ('usb-micro-ab', 'USB Micro AB')]
-	/// * `Other` - [('other', 'Other')]
-	pub type__n: Option<String>,
 	pub updated_by_request: Option<String>,
 
 }
@@ -3202,9 +3236,6 @@ pub struct DcimConsolePortsListQuery {
 	/// * `A` - A
 	/// * `B` - B
 	pub cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
-	pub cable_end__n: Option<String>,
 	/// Cable (ID)
 	pub cable_id: Option<Vec<Option<i64>>>,
 	/// Cable (ID)
@@ -3247,7 +3278,16 @@ pub struct DcimConsolePortsListQuery {
 	/// Device role (ID)
 	pub device_role_id__n: Option<Vec<i64>>,
 	pub device_status: Option<Vec<String>>,
+	pub device_status__empty: Option<bool>,
+	pub device_status__ic: Option<Vec<String>>,
+	pub device_status__ie: Option<Vec<String>>,
+	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
+	pub device_status__nic: Option<Vec<String>>,
+	pub device_status__nie: Option<Vec<String>>,
+	pub device_status__niew: Option<Vec<String>>,
+	pub device_status__nisw: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -3350,23 +3390,29 @@ pub struct DcimConsolePortsListQuery {
 	/// * `57600` - 57.6 kbps
 	/// * `115200` - 115.2 kbps
 	pub speed: Option<Option<i64>>,
-	/// Port speed in bits per second
-	/// 
-	/// * `1200` - 1200 bps
-	/// * `2400` - 2400 bps
-	/// * `4800` - 4800 bps
-	/// * `9600` - 9600 bps
-	/// * `19200` - 19.2 kbps
-	/// * `38400` - 38.4 kbps
-	/// * `57600` - 57.6 kbps
-	/// * `115200` - 115.2 kbps
-	pub speed__n: Option<Option<i64>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	/// Physical port type
 	pub r#type: Option<Vec<String>>,
+	pub type__empty: Option<bool>,
+	/// Physical port type
+	pub type__ic: Option<Vec<String>>,
+	/// Physical port type
+	pub type__ie: Option<Vec<String>>,
+	/// Physical port type
+	pub type__iew: Option<Vec<String>>,
+	/// Physical port type
+	pub type__isw: Option<Vec<String>>,
 	/// Physical port type
 	pub type__n: Option<Vec<String>>,
+	/// Physical port type
+	pub type__nic: Option<Vec<String>>,
+	/// Physical port type
+	pub type__nie: Option<Vec<String>>,
+	/// Physical port type
+	pub type__niew: Option<Vec<String>>,
+	/// Physical port type
+	pub type__nisw: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 	/// Virtual Chassis
 	pub virtual_chassis: Option<Vec<String>>,
@@ -3612,10 +3658,6 @@ pub struct DcimConsoleServerPortTemplatesListQuery {
 	/// * `USB` - [('usb-a', 'USB Type A'), ('usb-b', 'USB Type B'), ('usb-c', 'USB Type C'), ('usb-mini-a', 'USB Mini A'), ('usb-mini-b', 'USB Mini B'), ('usb-micro-a', 'USB Micro A'), ('usb-micro-b', 'USB Micro B'), ('usb-micro-ab', 'USB Micro AB')]
 	/// * `Other` - [('other', 'Other')]
 	pub r#type: Option<String>,
-	/// * `Serial` - [('de-9', 'DE-9'), ('db-25', 'DB-25'), ('rj-11', 'RJ-11'), ('rj-12', 'RJ-12'), ('rj-45', 'RJ-45'), ('mini-din-8', 'Mini-DIN 8')]
-	/// * `USB` - [('usb-a', 'USB Type A'), ('usb-b', 'USB Type B'), ('usb-c', 'USB Type C'), ('usb-mini-a', 'USB Mini A'), ('usb-mini-b', 'USB Mini B'), ('usb-micro-a', 'USB Micro A'), ('usb-micro-b', 'USB Micro B'), ('usb-micro-ab', 'USB Micro AB')]
-	/// * `Other` - [('other', 'Other')]
-	pub type__n: Option<String>,
 	pub updated_by_request: Option<String>,
 
 }
@@ -3765,9 +3807,6 @@ pub struct DcimConsoleServerPortsListQuery {
 	/// * `A` - A
 	/// * `B` - B
 	pub cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
-	pub cable_end__n: Option<String>,
 	/// Cable (ID)
 	pub cable_id: Option<Vec<Option<i64>>>,
 	/// Cable (ID)
@@ -3810,7 +3849,16 @@ pub struct DcimConsoleServerPortsListQuery {
 	/// Device role (ID)
 	pub device_role_id__n: Option<Vec<i64>>,
 	pub device_status: Option<Vec<String>>,
+	pub device_status__empty: Option<bool>,
+	pub device_status__ic: Option<Vec<String>>,
+	pub device_status__ie: Option<Vec<String>>,
+	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
+	pub device_status__nic: Option<Vec<String>>,
+	pub device_status__nie: Option<Vec<String>>,
+	pub device_status__niew: Option<Vec<String>>,
+	pub device_status__nisw: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -3913,23 +3961,29 @@ pub struct DcimConsoleServerPortsListQuery {
 	/// * `57600` - 57.6 kbps
 	/// * `115200` - 115.2 kbps
 	pub speed: Option<Option<i64>>,
-	/// Port speed in bits per second
-	/// 
-	/// * `1200` - 1200 bps
-	/// * `2400` - 2400 bps
-	/// * `4800` - 4800 bps
-	/// * `9600` - 9600 bps
-	/// * `19200` - 19.2 kbps
-	/// * `38400` - 38.4 kbps
-	/// * `57600` - 57.6 kbps
-	/// * `115200` - 115.2 kbps
-	pub speed__n: Option<Option<i64>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	/// Physical port type
 	pub r#type: Option<Vec<String>>,
+	pub type__empty: Option<bool>,
+	/// Physical port type
+	pub type__ic: Option<Vec<String>>,
+	/// Physical port type
+	pub type__ie: Option<Vec<String>>,
+	/// Physical port type
+	pub type__iew: Option<Vec<String>>,
+	/// Physical port type
+	pub type__isw: Option<Vec<String>>,
 	/// Physical port type
 	pub type__n: Option<Vec<String>>,
+	/// Physical port type
+	pub type__nic: Option<Vec<String>>,
+	/// Physical port type
+	pub type__nie: Option<Vec<String>>,
+	/// Physical port type
+	pub type__niew: Option<Vec<String>>,
+	/// Physical port type
+	pub type__nisw: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 	/// Virtual Chassis
 	pub virtual_chassis: Option<Vec<String>>,
@@ -4349,7 +4403,16 @@ pub struct DcimDeviceBaysListQuery {
 	/// Device role (ID)
 	pub device_role_id__n: Option<Vec<i64>>,
 	pub device_status: Option<Vec<String>>,
+	pub device_status__empty: Option<bool>,
+	pub device_status__ic: Option<Vec<String>>,
+	pub device_status__ie: Option<Vec<String>>,
+	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
+	pub device_status__nic: Option<Vec<String>>,
+	pub device_status__nie: Option<Vec<String>>,
+	pub device_status__niew: Option<Vec<String>>,
+	pub device_status__nisw: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -4832,17 +4895,12 @@ pub struct DcimDeviceTypesListQuery {
 	/// * `left-to-right` - Left to right
 	/// * `right-to-left` - Right to left
 	/// * `side-to-rear` - Side to rear
+	/// * `rear-to-side` - Rear to side
+	/// * `bottom-to-top` - Bottom to top
+	/// * `top-to-bottom` - Top to bottom
 	/// * `passive` - Passive
 	/// * `mixed` - Mixed
 	pub airflow: Option<String>,
-	/// * `front-to-rear` - Front to rear
-	/// * `rear-to-front` - Rear to front
-	/// * `left-to-right` - Left to right
-	/// * `right-to-left` - Right to left
-	/// * `side-to-rear` - Side to rear
-	/// * `passive` - Passive
-	/// * `mixed` - Mixed
-	pub airflow__n: Option<String>,
 	pub console_port_template_count: Option<Vec<i64>>,
 	pub console_port_template_count__empty: Option<bool>,
 	pub console_port_template_count__gt: Option<Vec<i64>>,
@@ -5033,11 +5091,6 @@ pub struct DcimDeviceTypesListQuery {
 	/// * `parent` - Parent
 	/// * `child` - Child
 	pub subdevice_role: Option<String>,
-	/// Parent devices house child devices in device bays. Leave blank if this device type is neither a parent nor a child.
-	/// 
-	/// * `parent` - Parent
-	/// * `child` - Child
-	pub subdevice_role__n: Option<String>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub u_height: Option<Vec<f64>>,
@@ -5060,11 +5113,6 @@ pub struct DcimDeviceTypesListQuery {
 	/// * `lb` - Pounds
 	/// * `oz` - Ounces
 	pub weight_unit: Option<String>,
-	/// * `kg` - Kilograms
-	/// * `g` - Grams
-	/// * `lb` - Pounds
-	/// * `oz` - Ounces
-	pub weight_unit__n: Option<String>,
 
 }
 #[derive(Debug)]
@@ -5215,17 +5263,12 @@ pub struct DcimDevicesListQuery {
 	/// * `left-to-right` - Left to right
 	/// * `right-to-left` - Right to left
 	/// * `side-to-rear` - Side to rear
+	/// * `rear-to-side` - Rear to side
+	/// * `bottom-to-top` - Bottom to top
+	/// * `top-to-bottom` - Top to bottom
 	/// * `passive` - Passive
 	/// * `mixed` - Mixed
 	pub airflow: Option<String>,
-	/// * `front-to-rear` - Front to rear
-	/// * `rear-to-front` - Rear to front
-	/// * `left-to-right` - Left to right
-	/// * `right-to-left` - Right to left
-	/// * `side-to-rear` - Side to rear
-	/// * `passive` - Passive
-	/// * `mixed` - Mixed
-	pub airflow__n: Option<String>,
 	pub asset_tag: Option<Vec<String>>,
 	pub asset_tag__empty: Option<bool>,
 	pub asset_tag__ic: Option<Vec<String>>,
@@ -5320,9 +5363,6 @@ pub struct DcimDevicesListQuery {
 	/// * `front` - Front
 	/// * `rear` - Rear
 	pub face: Option<String>,
-	/// * `front` - Front
-	/// * `rear` - Rear
-	pub face__n: Option<String>,
 	pub front_port_count: Option<Vec<i64>>,
 	pub front_port_count__empty: Option<bool>,
 	pub front_port_count__gt: Option<Vec<i64>>,
@@ -5539,7 +5579,16 @@ pub struct DcimDevicesListQuery {
 	/// Site (ID)
 	pub site_id__n: Option<Vec<i64>>,
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	pub status__ic: Option<Vec<String>>,
+	pub status__ie: Option<Vec<String>>,
+	pub status__iew: Option<Vec<String>>,
+	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
+	pub status__nic: Option<Vec<String>>,
+	pub status__nie: Option<Vec<String>>,
+	pub status__niew: Option<Vec<String>>,
+	pub status__nisw: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	/// Tenant (slug)
@@ -5836,7 +5885,16 @@ pub struct DcimFrontPortTemplatesListQuery {
 	pub rear_port_position__lte: Option<Vec<i64>>,
 	pub rear_port_position__n: Option<Vec<i64>>,
 	pub r#type: Option<Vec<String>>,
+	pub type__empty: Option<bool>,
+	pub type__ic: Option<Vec<String>>,
+	pub type__ie: Option<Vec<String>>,
+	pub type__iew: Option<Vec<String>>,
+	pub type__isw: Option<Vec<String>>,
 	pub type__n: Option<Vec<String>>,
+	pub type__nic: Option<Vec<String>>,
+	pub type__nie: Option<Vec<String>>,
+	pub type__niew: Option<Vec<String>>,
+	pub type__nisw: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 
 }
@@ -5986,9 +6044,6 @@ pub struct DcimFrontPortsListQuery {
 	/// * `A` - A
 	/// * `B` - B
 	pub cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
-	pub cable_end__n: Option<String>,
 	/// Cable (ID)
 	pub cable_id: Option<Vec<Option<i64>>>,
 	/// Cable (ID)
@@ -6041,7 +6096,16 @@ pub struct DcimFrontPortsListQuery {
 	/// Device role (ID)
 	pub device_role_id__n: Option<Vec<i64>>,
 	pub device_status: Option<Vec<String>>,
+	pub device_status__empty: Option<bool>,
+	pub device_status__ic: Option<Vec<String>>,
+	pub device_status__ie: Option<Vec<String>>,
+	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
+	pub device_status__nic: Option<Vec<String>>,
+	pub device_status__nie: Option<Vec<String>>,
+	pub device_status__niew: Option<Vec<String>>,
+	pub device_status__nisw: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -6145,7 +6209,16 @@ pub struct DcimFrontPortsListQuery {
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub r#type: Option<Vec<String>>,
+	pub type__empty: Option<bool>,
+	pub type__ic: Option<Vec<String>>,
+	pub type__ie: Option<Vec<String>>,
+	pub type__iew: Option<Vec<String>>,
+	pub type__isw: Option<Vec<String>>,
 	pub type__n: Option<Vec<String>>,
+	pub type__nic: Option<Vec<String>>,
+	pub type__nie: Option<Vec<String>>,
+	pub type__niew: Option<Vec<String>>,
+	pub type__nisw: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 	/// Virtual Chassis
 	pub virtual_chassis: Option<Vec<String>>,
@@ -6390,15 +6463,51 @@ pub struct DcimInterfaceTemplatesListQuery {
 	/// Which field to use when ordering the results.
 	pub ordering: Option<String>,
 	pub poe_mode: Option<Vec<String>>,
+	pub poe_mode__empty: Option<bool>,
+	pub poe_mode__ic: Option<Vec<String>>,
+	pub poe_mode__ie: Option<Vec<String>>,
+	pub poe_mode__iew: Option<Vec<String>>,
+	pub poe_mode__isw: Option<Vec<String>>,
 	pub poe_mode__n: Option<Vec<String>>,
+	pub poe_mode__nic: Option<Vec<String>>,
+	pub poe_mode__nie: Option<Vec<String>>,
+	pub poe_mode__niew: Option<Vec<String>>,
+	pub poe_mode__nisw: Option<Vec<String>>,
 	pub poe_type: Option<Vec<String>>,
+	pub poe_type__empty: Option<bool>,
+	pub poe_type__ic: Option<Vec<String>>,
+	pub poe_type__ie: Option<Vec<String>>,
+	pub poe_type__iew: Option<Vec<String>>,
+	pub poe_type__isw: Option<Vec<String>>,
 	pub poe_type__n: Option<Vec<String>>,
+	pub poe_type__nic: Option<Vec<String>>,
+	pub poe_type__nie: Option<Vec<String>>,
+	pub poe_type__niew: Option<Vec<String>>,
+	pub poe_type__nisw: Option<Vec<String>>,
 	/// Search
 	pub q: Option<String>,
 	pub rf_role: Option<Vec<String>>,
+	pub rf_role__empty: Option<bool>,
+	pub rf_role__ic: Option<Vec<String>>,
+	pub rf_role__ie: Option<Vec<String>>,
+	pub rf_role__iew: Option<Vec<String>>,
+	pub rf_role__isw: Option<Vec<String>>,
 	pub rf_role__n: Option<Vec<String>>,
+	pub rf_role__nic: Option<Vec<String>>,
+	pub rf_role__nie: Option<Vec<String>>,
+	pub rf_role__niew: Option<Vec<String>>,
+	pub rf_role__nisw: Option<Vec<String>>,
 	pub r#type: Option<Vec<String>>,
+	pub type__empty: Option<bool>,
+	pub type__ic: Option<Vec<String>>,
+	pub type__ie: Option<Vec<String>>,
+	pub type__iew: Option<Vec<String>>,
+	pub type__isw: Option<Vec<String>>,
 	pub type__n: Option<Vec<String>>,
+	pub type__nic: Option<Vec<String>>,
+	pub type__nie: Option<Vec<String>>,
+	pub type__niew: Option<Vec<String>>,
+	pub type__nisw: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 
 }
@@ -6552,9 +6661,6 @@ pub struct DcimInterfacesListQuery {
 	/// * `A` - A
 	/// * `B` - B
 	pub cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
-	pub cable_end__n: Option<String>,
 	/// Cable (ID)
 	pub cable_id: Option<Vec<Option<i64>>>,
 	/// Cable (ID)
@@ -6597,7 +6703,16 @@ pub struct DcimInterfacesListQuery {
 	/// Device role (ID)
 	pub device_role_id__n: Option<Vec<i64>>,
 	pub device_status: Option<Vec<String>>,
+	pub device_status__empty: Option<bool>,
+	pub device_status__ic: Option<Vec<String>>,
+	pub device_status__ie: Option<Vec<String>>,
+	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
+	pub device_status__nic: Option<Vec<String>>,
+	pub device_status__nie: Option<Vec<String>>,
+	pub device_status__niew: Option<Vec<String>>,
+	pub device_status__nisw: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -6607,7 +6722,16 @@ pub struct DcimInterfacesListQuery {
 	/// Device type (ID)
 	pub device_type_id__n: Option<Vec<i64>>,
 	pub duplex: Option<Vec<Option<String>>>,
+	pub duplex__empty: Option<bool>,
+	pub duplex__ic: Option<Vec<Option<String>>>,
+	pub duplex__ie: Option<Vec<Option<String>>>,
+	pub duplex__iew: Option<Vec<Option<String>>>,
+	pub duplex__isw: Option<Vec<Option<String>>>,
 	pub duplex__n: Option<Vec<Option<String>>>,
+	pub duplex__nic: Option<Vec<Option<String>>>,
+	pub duplex__nie: Option<Vec<Option<String>>>,
+	pub duplex__niew: Option<Vec<Option<String>>>,
+	pub duplex__nisw: Option<Vec<Option<String>>>,
 	pub enabled: Option<bool>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
@@ -6676,12 +6800,6 @@ pub struct DcimInterfacesListQuery {
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
 	pub mode: Option<String>,
-	/// IEEE 802.1Q tagging strategy
-	/// 
-	/// * `access` - Access
-	/// * `tagged` - Tagged
-	/// * `tagged-all` - Tagged (All)
-	pub mode__n: Option<String>,
 	pub modified_by_request: Option<String>,
 	/// Module (ID)
 	pub module_id: Option<Vec<Option<i64>>>,
@@ -6715,9 +6833,27 @@ pub struct DcimInterfacesListQuery {
 	/// Parent interface (ID)
 	pub parent_id__n: Option<Vec<i64>>,
 	pub poe_mode: Option<Vec<String>>,
+	pub poe_mode__empty: Option<bool>,
+	pub poe_mode__ic: Option<Vec<String>>,
+	pub poe_mode__ie: Option<Vec<String>>,
+	pub poe_mode__iew: Option<Vec<String>>,
+	pub poe_mode__isw: Option<Vec<String>>,
 	pub poe_mode__n: Option<Vec<String>>,
+	pub poe_mode__nic: Option<Vec<String>>,
+	pub poe_mode__nie: Option<Vec<String>>,
+	pub poe_mode__niew: Option<Vec<String>>,
+	pub poe_mode__nisw: Option<Vec<String>>,
 	pub poe_type: Option<Vec<String>>,
+	pub poe_type__empty: Option<bool>,
+	pub poe_type__ic: Option<Vec<String>>,
+	pub poe_type__ie: Option<Vec<String>>,
+	pub poe_type__iew: Option<Vec<String>>,
+	pub poe_type__isw: Option<Vec<String>>,
 	pub poe_type__n: Option<Vec<String>>,
+	pub poe_type__nic: Option<Vec<String>>,
+	pub poe_type__nie: Option<Vec<String>>,
+	pub poe_type__niew: Option<Vec<String>>,
+	pub poe_type__nisw: Option<Vec<String>>,
 	/// Search
 	pub q: Option<String>,
 	/// Rack (name)
@@ -6733,7 +6869,16 @@ pub struct DcimInterfacesListQuery {
 	pub region_id: Option<Vec<String>>,
 	pub region_id__n: Option<Vec<String>>,
 	pub rf_channel: Option<Vec<String>>,
+	pub rf_channel__empty: Option<bool>,
+	pub rf_channel__ic: Option<Vec<String>>,
+	pub rf_channel__ie: Option<Vec<String>>,
+	pub rf_channel__iew: Option<Vec<String>>,
+	pub rf_channel__isw: Option<Vec<String>>,
 	pub rf_channel__n: Option<Vec<String>>,
+	pub rf_channel__nic: Option<Vec<String>>,
+	pub rf_channel__nie: Option<Vec<String>>,
+	pub rf_channel__niew: Option<Vec<String>>,
+	pub rf_channel__nisw: Option<Vec<String>>,
 	pub rf_channel_frequency: Option<Vec<f64>>,
 	pub rf_channel_frequency__empty: Option<bool>,
 	pub rf_channel_frequency__gt: Option<Vec<f64>>,
@@ -6749,7 +6894,16 @@ pub struct DcimInterfacesListQuery {
 	pub rf_channel_width__lte: Option<Vec<f64>>,
 	pub rf_channel_width__n: Option<Vec<f64>>,
 	pub rf_role: Option<Vec<String>>,
+	pub rf_role__empty: Option<bool>,
+	pub rf_role__ic: Option<Vec<String>>,
+	pub rf_role__ie: Option<Vec<String>>,
+	pub rf_role__iew: Option<Vec<String>>,
+	pub rf_role__isw: Option<Vec<String>>,
 	pub rf_role__n: Option<Vec<String>>,
+	pub rf_role__nic: Option<Vec<String>>,
+	pub rf_role__nie: Option<Vec<String>>,
+	pub rf_role__niew: Option<Vec<String>>,
+	pub rf_role__nisw: Option<Vec<String>>,
 	/// Site name (slug)
 	pub site: Option<Vec<String>>,
 	/// Site name (slug)
@@ -6779,7 +6933,16 @@ pub struct DcimInterfacesListQuery {
 	pub tx_power__lte: Option<Vec<i64>>,
 	pub tx_power__n: Option<Vec<i64>>,
 	pub r#type: Option<Vec<String>>,
+	pub type__empty: Option<bool>,
+	pub type__ic: Option<Vec<String>>,
+	pub type__ie: Option<Vec<String>>,
+	pub type__iew: Option<Vec<String>>,
+	pub type__isw: Option<Vec<String>>,
 	pub type__n: Option<Vec<String>>,
+	pub type__nic: Option<Vec<String>>,
+	pub type__nie: Option<Vec<String>>,
+	pub type__niew: Option<Vec<String>>,
+	pub type__nisw: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 	/// Virtual Device Context
 	pub vdc: Option<Vec<String>>,
@@ -7526,7 +7689,16 @@ pub struct DcimInventoryItemsListQuery {
 	/// Device role (ID)
 	pub device_role_id__n: Option<Vec<i64>>,
 	pub device_status: Option<Vec<String>>,
+	pub device_status__empty: Option<bool>,
+	pub device_status__ic: Option<Vec<String>>,
+	pub device_status__ie: Option<Vec<String>>,
+	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
+	pub device_status__nic: Option<Vec<String>>,
+	pub device_status__nie: Option<Vec<String>>,
+	pub device_status__niew: Option<Vec<String>>,
+	pub device_status__nisw: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -7925,7 +8097,16 @@ pub struct DcimLocationsListQuery {
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	pub status__ic: Option<Vec<String>>,
+	pub status__ie: Option<Vec<String>>,
+	pub status__iew: Option<Vec<String>>,
+	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
+	pub status__nic: Option<Vec<String>>,
+	pub status__nie: Option<Vec<String>>,
+	pub status__niew: Option<Vec<String>>,
+	pub status__nisw: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	/// Tenant (slug)
@@ -8573,7 +8754,16 @@ pub struct DcimModuleBaysListQuery {
 	/// Device role (ID)
 	pub device_role_id__n: Option<Vec<i64>>,
 	pub device_status: Option<Vec<String>>,
+	pub device_status__empty: Option<bool>,
+	pub device_status__ic: Option<Vec<String>>,
+	pub device_status__ie: Option<Vec<String>>,
+	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
+	pub device_status__nic: Option<Vec<String>>,
+	pub device_status__nie: Option<Vec<String>>,
+	pub device_status__niew: Option<Vec<String>>,
+	pub device_status__nisw: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -8845,13 +9035,6 @@ pub struct DcimModuleTypesListQuery {
 	/// * `side-to-rear` - Side to rear
 	/// * `passive` - Passive
 	pub airflow: Option<String>,
-	/// * `front-to-rear` - Front to rear
-	/// * `rear-to-front` - Rear to front
-	/// * `left-to-right` - Left to right
-	/// * `right-to-left` - Right to left
-	/// * `side-to-rear` - Side to rear
-	/// * `passive` - Passive
-	pub airflow__n: Option<String>,
 	/// Has console ports
 	pub console_ports: Option<bool>,
 	/// Has console server ports
@@ -8951,11 +9134,6 @@ pub struct DcimModuleTypesListQuery {
 	/// * `lb` - Pounds
 	/// * `oz` - Ounces
 	pub weight_unit: Option<String>,
-	/// * `kg` - Kilograms
-	/// * `g` - Grams
-	/// * `lb` - Pounds
-	/// * `oz` - Ounces
-	pub weight_unit__n: Option<String>,
 
 }
 #[derive(Debug)]
@@ -9188,7 +9366,16 @@ pub struct DcimModulesListQuery {
 	pub serial__niew: Option<Vec<String>>,
 	pub serial__nisw: Option<Vec<String>>,
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	pub status__ic: Option<Vec<String>>,
+	pub status__ie: Option<Vec<String>>,
+	pub status__iew: Option<Vec<String>>,
+	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
+	pub status__nic: Option<Vec<String>>,
+	pub status__nie: Option<Vec<String>>,
+	pub status__niew: Option<Vec<String>>,
+	pub status__nisw: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
@@ -9579,9 +9766,6 @@ pub struct DcimPowerFeedsListQuery {
 	/// * `A` - A
 	/// * `B` - B
 	pub cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
-	pub cable_end__n: Option<String>,
 	/// Cable (ID)
 	pub cable_id: Option<Vec<Option<i64>>>,
 	/// Cable (ID)
@@ -9651,9 +9835,6 @@ pub struct DcimPowerFeedsListQuery {
 	/// * `single-phase` - Single phase
 	/// * `three-phase` - Three-phase
 	pub phase: Option<String>,
-	/// * `single-phase` - Single phase
-	/// * `three-phase` - Three-phase
-	pub phase__n: Option<String>,
 	/// Power panel (ID)
 	pub power_panel_id: Option<Vec<i64>>,
 	/// Power panel (ID)
@@ -9681,13 +9862,19 @@ pub struct DcimPowerFeedsListQuery {
 	/// Site (ID)
 	pub site_id__n: Option<Vec<i64>>,
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	pub status__ic: Option<Vec<String>>,
+	pub status__ie: Option<Vec<String>>,
+	pub status__iew: Option<Vec<String>>,
+	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
+	pub status__nic: Option<Vec<String>>,
+	pub status__nie: Option<Vec<String>>,
+	pub status__niew: Option<Vec<String>>,
+	pub status__nisw: Option<Vec<String>>,
 	/// * `ac` - AC
 	/// * `dc` - DC
 	pub supply: Option<String>,
-	/// * `ac` - AC
-	/// * `dc` - DC
-	pub supply__n: Option<String>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	/// Tenant (slug)
@@ -9705,9 +9892,6 @@ pub struct DcimPowerFeedsListQuery {
 	/// * `primary` - Primary
 	/// * `redundant` - Redundant
 	pub r#type: Option<String>,
-	/// * `primary` - Primary
-	/// * `redundant` - Redundant
-	pub type__n: Option<String>,
 	pub updated_by_request: Option<String>,
 	pub voltage: Option<Vec<i64>>,
 	pub voltage__empty: Option<bool>,
@@ -9901,8 +10085,25 @@ pub struct DcimPowerOutletTemplatesListQuery {
 	pub device_type_id__n: Option<Vec<Option<i64>>>,
 	/// Phase (for three-phase feeds)
 	pub feed_leg: Option<Vec<String>>,
+	pub feed_leg__empty: Option<bool>,
+	/// Phase (for three-phase feeds)
+	pub feed_leg__ic: Option<Vec<String>>,
+	/// Phase (for three-phase feeds)
+	pub feed_leg__ie: Option<Vec<String>>,
+	/// Phase (for three-phase feeds)
+	pub feed_leg__iew: Option<Vec<String>>,
+	/// Phase (for three-phase feeds)
+	pub feed_leg__isw: Option<Vec<String>>,
 	/// Phase (for three-phase feeds)
 	pub feed_leg__n: Option<Vec<String>>,
+	/// Phase (for three-phase feeds)
+	pub feed_leg__nic: Option<Vec<String>>,
+	/// Phase (for three-phase feeds)
+	pub feed_leg__nie: Option<Vec<String>>,
+	/// Phase (for three-phase feeds)
+	pub feed_leg__niew: Option<Vec<String>>,
+	/// Phase (for three-phase feeds)
+	pub feed_leg__nisw: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -9960,28 +10161,15 @@ pub struct DcimPowerOutletTemplatesListQuery {
 	/// * `IEC 60309` - [('iec-60309-p-n-e-4h', 'P+N+E 4H'), ('iec-60309-p-n-e-6h', 'P+N+E 6H'), ('iec-60309-p-n-e-9h', 'P+N+E 9H'), ('iec-60309-2p-e-4h', '2P+E 4H'), ('iec-60309-2p-e-6h', '2P+E 6H'), ('iec-60309-2p-e-9h', '2P+E 9H'), ('iec-60309-3p-e-4h', '3P+E 4H'), ('iec-60309-3p-e-6h', '3P+E 6H'), ('iec-60309-3p-e-9h', '3P+E 9H'), ('iec-60309-3p-n-e-4h', '3P+N+E 4H'), ('iec-60309-3p-n-e-6h', '3P+N+E 6H'), ('iec-60309-3p-n-e-9h', '3P+N+E 9H')]
 	/// * `IEC 60906-1` - [('iec-60906-1', 'IEC 60906-1'), ('nbr-14136-10a', '2P+T 10A (NBR 14136)'), ('nbr-14136-20a', '2P+T 20A (NBR 14136)')]
 	/// * `NEMA (Non-locking)` - [('nema-1-15r', 'NEMA 1-15R'), ('nema-5-15r', 'NEMA 5-15R'), ('nema-5-20r', 'NEMA 5-20R'), ('nema-5-30r', 'NEMA 5-30R'), ('nema-5-50r', 'NEMA 5-50R'), ('nema-6-15r', 'NEMA 6-15R'), ('nema-6-20r', 'NEMA 6-20R'), ('nema-6-30r', 'NEMA 6-30R'), ('nema-6-50r', 'NEMA 6-50R'), ('nema-10-30r', 'NEMA 10-30R'), ('nema-10-50r', 'NEMA 10-50R'), ('nema-14-20r', 'NEMA 14-20R'), ('nema-14-30r', 'NEMA 14-30R'), ('nema-14-50r', 'NEMA 14-50R'), ('nema-14-60r', 'NEMA 14-60R'), ('nema-15-15r', 'NEMA 15-15R'), ('nema-15-20r', 'NEMA 15-20R'), ('nema-15-30r', 'NEMA 15-30R'), ('nema-15-50r', 'NEMA 15-50R'), ('nema-15-60r', 'NEMA 15-60R')]
-	/// * `NEMA (Locking)` - [('nema-l1-15r', 'NEMA L1-15R'), ('nema-l5-15r', 'NEMA L5-15R'), ('nema-l5-20r', 'NEMA L5-20R'), ('nema-l5-30r', 'NEMA L5-30R'), ('nema-l5-50r', 'NEMA L5-50R'), ('nema-l6-15r', 'NEMA L6-15R'), ('nema-l6-20r', 'NEMA L6-20R'), ('nema-l6-30r', 'NEMA L6-30R'), ('nema-l6-50r', 'NEMA L6-50R'), ('nema-l10-30r', 'NEMA L10-30R'), ('nema-l14-20r', 'NEMA L14-20R'), ('nema-l14-30r', 'NEMA L14-30R'), ('nema-l14-50r', 'NEMA L14-50R'), ('nema-l14-60r', 'NEMA L14-60R'), ('nema-l15-20r', 'NEMA L15-20R'), ('nema-l15-30r', 'NEMA L15-30R'), ('nema-l15-50r', 'NEMA L15-50R'), ('nema-l15-60r', 'NEMA L15-60R'), ('nema-l21-20r', 'NEMA L21-20R'), ('nema-l21-30r', 'NEMA L21-30R'), ('nema-l22-30r', 'NEMA L22-30R')]
+	/// * `NEMA (Locking)` - [('nema-l1-15r', 'NEMA L1-15R'), ('nema-l5-15r', 'NEMA L5-15R'), ('nema-l5-20r', 'NEMA L5-20R'), ('nema-l5-30r', 'NEMA L5-30R'), ('nema-l5-50r', 'NEMA L5-50R'), ('nema-l6-15r', 'NEMA L6-15R'), ('nema-l6-20r', 'NEMA L6-20R'), ('nema-l6-30r', 'NEMA L6-30R'), ('nema-l6-50r', 'NEMA L6-50R'), ('nema-l10-30r', 'NEMA L10-30R'), ('nema-l14-20r', 'NEMA L14-20R'), ('nema-l14-30r', 'NEMA L14-30R'), ('nema-l14-50r', 'NEMA L14-50R'), ('nema-l14-60r', 'NEMA L14-60R'), ('nema-l15-20r', 'NEMA L15-20R'), ('nema-l15-30r', 'NEMA L15-30R'), ('nema-l15-50r', 'NEMA L15-50R'), ('nema-l15-60r', 'NEMA L15-60R'), ('nema-l21-20r', 'NEMA L21-20R'), ('nema-l21-30r', 'NEMA L21-30R'), ('nema-l22-20r', 'NEMA L22-20R'), ('nema-l22-30r', 'NEMA L22-30R')]
 	/// * `California Style` - [('CS6360C', 'CS6360C'), ('CS6364C', 'CS6364C'), ('CS8164C', 'CS8164C'), ('CS8264C', 'CS8264C'), ('CS8364C', 'CS8364C'), ('CS8464C', 'CS8464C')]
 	/// * `ITA/International` - [('ita-e', 'ITA Type E (CEE 7/5)'), ('ita-f', 'ITA Type F (CEE 7/3)'), ('ita-g', 'ITA Type G (BS 1363)'), ('ita-h', 'ITA Type H'), ('ita-i', 'ITA Type I'), ('ita-j', 'ITA Type J'), ('ita-k', 'ITA Type K'), ('ita-l', 'ITA Type L (CEI 23-50)'), ('ita-m', 'ITA Type M (BS 546)'), ('ita-n', 'ITA Type N'), ('ita-o', 'ITA Type O'), ('ita-multistandard', 'ITA Multistandard')]
 	/// * `USB` - [('usb-a', 'USB Type A'), ('usb-micro-b', 'USB Micro B'), ('usb-c', 'USB Type C')]
 	/// * `Molex` - [('molex-micro-fit-1x2', 'Molex Micro-Fit 1x2'), ('molex-micro-fit-2x2', 'Molex Micro-Fit 2x2'), ('molex-micro-fit-2x4', 'Molex Micro-Fit 2x4')]
 	/// * `DC` - [('dc-terminal', 'DC Terminal')]
-	/// * `Proprietary` - [('hdot-cx', 'HDOT Cx'), ('saf-d-grid', 'Saf-D-Grid'), ('neutrik-powercon-20a', 'Neutrik powerCON (20A)'), ('neutrik-powercon-32a', 'Neutrik powerCON (32A)'), ('neutrik-powercon-true1', 'Neutrik powerCON TRUE1'), ('neutrik-powercon-true1-top', 'Neutrik powerCON TRUE1 TOP'), ('ubiquiti-smartpower', 'Ubiquiti SmartPower')]
+	/// * `Proprietary` - [('eaton-c39', 'Eaton C39'), ('hdot-cx', 'HDOT Cx'), ('saf-d-grid', 'Saf-D-Grid'), ('neutrik-powercon-20a', 'Neutrik powerCON (20A)'), ('neutrik-powercon-32a', 'Neutrik powerCON (32A)'), ('neutrik-powercon-true1', 'Neutrik powerCON TRUE1'), ('neutrik-powercon-true1-top', 'Neutrik powerCON TRUE1 TOP'), ('ubiquiti-smartpower', 'Ubiquiti SmartPower')]
 	/// * `Other` - [('hardwired', 'Hardwired'), ('other', 'Other')]
 	pub r#type: Option<String>,
-	/// * `IEC 60320` - [('iec-60320-c5', 'C5'), ('iec-60320-c7', 'C7'), ('iec-60320-c13', 'C13'), ('iec-60320-c15', 'C15'), ('iec-60320-c19', 'C19'), ('iec-60320-c21', 'C21')]
-	/// * `IEC 60309` - [('iec-60309-p-n-e-4h', 'P+N+E 4H'), ('iec-60309-p-n-e-6h', 'P+N+E 6H'), ('iec-60309-p-n-e-9h', 'P+N+E 9H'), ('iec-60309-2p-e-4h', '2P+E 4H'), ('iec-60309-2p-e-6h', '2P+E 6H'), ('iec-60309-2p-e-9h', '2P+E 9H'), ('iec-60309-3p-e-4h', '3P+E 4H'), ('iec-60309-3p-e-6h', '3P+E 6H'), ('iec-60309-3p-e-9h', '3P+E 9H'), ('iec-60309-3p-n-e-4h', '3P+N+E 4H'), ('iec-60309-3p-n-e-6h', '3P+N+E 6H'), ('iec-60309-3p-n-e-9h', '3P+N+E 9H')]
-	/// * `IEC 60906-1` - [('iec-60906-1', 'IEC 60906-1'), ('nbr-14136-10a', '2P+T 10A (NBR 14136)'), ('nbr-14136-20a', '2P+T 20A (NBR 14136)')]
-	/// * `NEMA (Non-locking)` - [('nema-1-15r', 'NEMA 1-15R'), ('nema-5-15r', 'NEMA 5-15R'), ('nema-5-20r', 'NEMA 5-20R'), ('nema-5-30r', 'NEMA 5-30R'), ('nema-5-50r', 'NEMA 5-50R'), ('nema-6-15r', 'NEMA 6-15R'), ('nema-6-20r', 'NEMA 6-20R'), ('nema-6-30r', 'NEMA 6-30R'), ('nema-6-50r', 'NEMA 6-50R'), ('nema-10-30r', 'NEMA 10-30R'), ('nema-10-50r', 'NEMA 10-50R'), ('nema-14-20r', 'NEMA 14-20R'), ('nema-14-30r', 'NEMA 14-30R'), ('nema-14-50r', 'NEMA 14-50R'), ('nema-14-60r', 'NEMA 14-60R'), ('nema-15-15r', 'NEMA 15-15R'), ('nema-15-20r', 'NEMA 15-20R'), ('nema-15-30r', 'NEMA 15-30R'), ('nema-15-50r', 'NEMA 15-50R'), ('nema-15-60r', 'NEMA 15-60R')]
-	/// * `NEMA (Locking)` - [('nema-l1-15r', 'NEMA L1-15R'), ('nema-l5-15r', 'NEMA L5-15R'), ('nema-l5-20r', 'NEMA L5-20R'), ('nema-l5-30r', 'NEMA L5-30R'), ('nema-l5-50r', 'NEMA L5-50R'), ('nema-l6-15r', 'NEMA L6-15R'), ('nema-l6-20r', 'NEMA L6-20R'), ('nema-l6-30r', 'NEMA L6-30R'), ('nema-l6-50r', 'NEMA L6-50R'), ('nema-l10-30r', 'NEMA L10-30R'), ('nema-l14-20r', 'NEMA L14-20R'), ('nema-l14-30r', 'NEMA L14-30R'), ('nema-l14-50r', 'NEMA L14-50R'), ('nema-l14-60r', 'NEMA L14-60R'), ('nema-l15-20r', 'NEMA L15-20R'), ('nema-l15-30r', 'NEMA L15-30R'), ('nema-l15-50r', 'NEMA L15-50R'), ('nema-l15-60r', 'NEMA L15-60R'), ('nema-l21-20r', 'NEMA L21-20R'), ('nema-l21-30r', 'NEMA L21-30R'), ('nema-l22-30r', 'NEMA L22-30R')]
-	/// * `California Style` - [('CS6360C', 'CS6360C'), ('CS6364C', 'CS6364C'), ('CS8164C', 'CS8164C'), ('CS8264C', 'CS8264C'), ('CS8364C', 'CS8364C'), ('CS8464C', 'CS8464C')]
-	/// * `ITA/International` - [('ita-e', 'ITA Type E (CEE 7/5)'), ('ita-f', 'ITA Type F (CEE 7/3)'), ('ita-g', 'ITA Type G (BS 1363)'), ('ita-h', 'ITA Type H'), ('ita-i', 'ITA Type I'), ('ita-j', 'ITA Type J'), ('ita-k', 'ITA Type K'), ('ita-l', 'ITA Type L (CEI 23-50)'), ('ita-m', 'ITA Type M (BS 546)'), ('ita-n', 'ITA Type N'), ('ita-o', 'ITA Type O'), ('ita-multistandard', 'ITA Multistandard')]
-	/// * `USB` - [('usb-a', 'USB Type A'), ('usb-micro-b', 'USB Micro B'), ('usb-c', 'USB Type C')]
-	/// * `Molex` - [('molex-micro-fit-1x2', 'Molex Micro-Fit 1x2'), ('molex-micro-fit-2x2', 'Molex Micro-Fit 2x2'), ('molex-micro-fit-2x4', 'Molex Micro-Fit 2x4')]
-	/// * `DC` - [('dc-terminal', 'DC Terminal')]
-	/// * `Proprietary` - [('hdot-cx', 'HDOT Cx'), ('saf-d-grid', 'Saf-D-Grid'), ('neutrik-powercon-20a', 'Neutrik powerCON (20A)'), ('neutrik-powercon-32a', 'Neutrik powerCON (32A)'), ('neutrik-powercon-true1', 'Neutrik powerCON TRUE1'), ('neutrik-powercon-true1-top', 'Neutrik powerCON TRUE1 TOP'), ('ubiquiti-smartpower', 'Ubiquiti SmartPower')]
-	/// * `Other` - [('hardwired', 'Hardwired'), ('other', 'Other')]
-	pub type__n: Option<String>,
 	pub updated_by_request: Option<String>,
 
 }
@@ -10131,9 +10319,6 @@ pub struct DcimPowerOutletsListQuery {
 	/// * `A` - A
 	/// * `B` - B
 	pub cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
-	pub cable_end__n: Option<String>,
 	/// Cable (ID)
 	pub cable_id: Option<Vec<Option<i64>>>,
 	/// Cable (ID)
@@ -10176,7 +10361,16 @@ pub struct DcimPowerOutletsListQuery {
 	/// Device role (ID)
 	pub device_role_id__n: Option<Vec<i64>>,
 	pub device_status: Option<Vec<String>>,
+	pub device_status__empty: Option<bool>,
+	pub device_status__ic: Option<Vec<String>>,
+	pub device_status__ie: Option<Vec<String>>,
+	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
+	pub device_status__nic: Option<Vec<String>>,
+	pub device_status__nie: Option<Vec<String>>,
+	pub device_status__niew: Option<Vec<String>>,
+	pub device_status__nisw: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -10187,8 +10381,25 @@ pub struct DcimPowerOutletsListQuery {
 	pub device_type_id__n: Option<Vec<i64>>,
 	/// Phase (for three-phase feeds)
 	pub feed_leg: Option<Vec<String>>,
+	pub feed_leg__empty: Option<bool>,
+	/// Phase (for three-phase feeds)
+	pub feed_leg__ic: Option<Vec<String>>,
+	/// Phase (for three-phase feeds)
+	pub feed_leg__ie: Option<Vec<String>>,
+	/// Phase (for three-phase feeds)
+	pub feed_leg__iew: Option<Vec<String>>,
+	/// Phase (for three-phase feeds)
+	pub feed_leg__isw: Option<Vec<String>>,
 	/// Phase (for three-phase feeds)
 	pub feed_leg__n: Option<Vec<String>>,
+	/// Phase (for three-phase feeds)
+	pub feed_leg__nic: Option<Vec<String>>,
+	/// Phase (for three-phase feeds)
+	pub feed_leg__nie: Option<Vec<String>>,
+	/// Phase (for three-phase feeds)
+	pub feed_leg__niew: Option<Vec<String>>,
+	/// Phase (for three-phase feeds)
+	pub feed_leg__nisw: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -10280,8 +10491,25 @@ pub struct DcimPowerOutletsListQuery {
 	pub tag__n: Option<Vec<String>>,
 	/// Physical port type
 	pub r#type: Option<Vec<String>>,
+	pub type__empty: Option<bool>,
+	/// Physical port type
+	pub type__ic: Option<Vec<String>>,
+	/// Physical port type
+	pub type__ie: Option<Vec<String>>,
+	/// Physical port type
+	pub type__iew: Option<Vec<String>>,
+	/// Physical port type
+	pub type__isw: Option<Vec<String>>,
 	/// Physical port type
 	pub type__n: Option<Vec<String>>,
+	/// Physical port type
+	pub type__nic: Option<Vec<String>>,
+	/// Physical port type
+	pub type__nie: Option<Vec<String>>,
+	/// Physical port type
+	pub type__niew: Option<Vec<String>>,
+	/// Physical port type
+	pub type__nisw: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 	/// Virtual Chassis
 	pub virtual_chassis: Option<Vec<String>>,
@@ -10770,7 +10998,7 @@ pub struct DcimPowerPortTemplatesListQuery {
 	/// * `IEC 60309` - [('iec-60309-p-n-e-4h', 'P+N+E 4H'), ('iec-60309-p-n-e-6h', 'P+N+E 6H'), ('iec-60309-p-n-e-9h', 'P+N+E 9H'), ('iec-60309-2p-e-4h', '2P+E 4H'), ('iec-60309-2p-e-6h', '2P+E 6H'), ('iec-60309-2p-e-9h', '2P+E 9H'), ('iec-60309-3p-e-4h', '3P+E 4H'), ('iec-60309-3p-e-6h', '3P+E 6H'), ('iec-60309-3p-e-9h', '3P+E 9H'), ('iec-60309-3p-n-e-4h', '3P+N+E 4H'), ('iec-60309-3p-n-e-6h', '3P+N+E 6H'), ('iec-60309-3p-n-e-9h', '3P+N+E 9H')]
 	/// * `IEC 60906-1` - [('iec-60906-1', 'IEC 60906-1'), ('nbr-14136-10a', '2P+T 10A (NBR 14136)'), ('nbr-14136-20a', '2P+T 20A (NBR 14136)')]
 	/// * `NEMA (Non-locking)` - [('nema-1-15p', 'NEMA 1-15P'), ('nema-5-15p', 'NEMA 5-15P'), ('nema-5-20p', 'NEMA 5-20P'), ('nema-5-30p', 'NEMA 5-30P'), ('nema-5-50p', 'NEMA 5-50P'), ('nema-6-15p', 'NEMA 6-15P'), ('nema-6-20p', 'NEMA 6-20P'), ('nema-6-30p', 'NEMA 6-30P'), ('nema-6-50p', 'NEMA 6-50P'), ('nema-10-30p', 'NEMA 10-30P'), ('nema-10-50p', 'NEMA 10-50P'), ('nema-14-20p', 'NEMA 14-20P'), ('nema-14-30p', 'NEMA 14-30P'), ('nema-14-50p', 'NEMA 14-50P'), ('nema-14-60p', 'NEMA 14-60P'), ('nema-15-15p', 'NEMA 15-15P'), ('nema-15-20p', 'NEMA 15-20P'), ('nema-15-30p', 'NEMA 15-30P'), ('nema-15-50p', 'NEMA 15-50P'), ('nema-15-60p', 'NEMA 15-60P')]
-	/// * `NEMA (Locking)` - [('nema-l1-15p', 'NEMA L1-15P'), ('nema-l5-15p', 'NEMA L5-15P'), ('nema-l5-20p', 'NEMA L5-20P'), ('nema-l5-30p', 'NEMA L5-30P'), ('nema-l5-50p', 'NEMA L5-50P'), ('nema-l6-15p', 'NEMA L6-15P'), ('nema-l6-20p', 'NEMA L6-20P'), ('nema-l6-30p', 'NEMA L6-30P'), ('nema-l6-50p', 'NEMA L6-50P'), ('nema-l10-30p', 'NEMA L10-30P'), ('nema-l14-20p', 'NEMA L14-20P'), ('nema-l14-30p', 'NEMA L14-30P'), ('nema-l14-50p', 'NEMA L14-50P'), ('nema-l14-60p', 'NEMA L14-60P'), ('nema-l15-20p', 'NEMA L15-20P'), ('nema-l15-30p', 'NEMA L15-30P'), ('nema-l15-50p', 'NEMA L15-50P'), ('nema-l15-60p', 'NEMA L15-60P'), ('nema-l21-20p', 'NEMA L21-20P'), ('nema-l21-30p', 'NEMA L21-30P'), ('nema-l22-30p', 'NEMA L22-30P')]
+	/// * `NEMA (Locking)` - [('nema-l1-15p', 'NEMA L1-15P'), ('nema-l5-15p', 'NEMA L5-15P'), ('nema-l5-20p', 'NEMA L5-20P'), ('nema-l5-30p', 'NEMA L5-30P'), ('nema-l5-50p', 'NEMA L5-50P'), ('nema-l6-15p', 'NEMA L6-15P'), ('nema-l6-20p', 'NEMA L6-20P'), ('nema-l6-30p', 'NEMA L6-30P'), ('nema-l6-50p', 'NEMA L6-50P'), ('nema-l10-30p', 'NEMA L10-30P'), ('nema-l14-20p', 'NEMA L14-20P'), ('nema-l14-30p', 'NEMA L14-30P'), ('nema-l14-50p', 'NEMA L14-50P'), ('nema-l14-60p', 'NEMA L14-60P'), ('nema-l15-20p', 'NEMA L15-20P'), ('nema-l15-30p', 'NEMA L15-30P'), ('nema-l15-50p', 'NEMA L15-50P'), ('nema-l15-60p', 'NEMA L15-60P'), ('nema-l21-20p', 'NEMA L21-20P'), ('nema-l21-30p', 'NEMA L21-30P'), ('nema-l22-20p', 'NEMA L22-20P'), ('nema-l22-30p', 'NEMA L22-30P')]
 	/// * `California Style` - [('cs6361c', 'CS6361C'), ('cs6365c', 'CS6365C'), ('cs8165c', 'CS8165C'), ('cs8265c', 'CS8265C'), ('cs8365c', 'CS8365C'), ('cs8465c', 'CS8465C')]
 	/// * `International/ITA` - [('ita-c', 'ITA Type C (CEE 7/16)'), ('ita-e', 'ITA Type E (CEE 7/6)'), ('ita-f', 'ITA Type F (CEE 7/4)'), ('ita-ef', 'ITA Type E/F (CEE 7/7)'), ('ita-g', 'ITA Type G (BS 1363)'), ('ita-h', 'ITA Type H'), ('ita-i', 'ITA Type I'), ('ita-j', 'ITA Type J'), ('ita-k', 'ITA Type K'), ('ita-l', 'ITA Type L (CEI 23-50)'), ('ita-m', 'ITA Type M (BS 546)'), ('ita-n', 'ITA Type N'), ('ita-o', 'ITA Type O')]
 	/// * `USB` - [('usb-a', 'USB Type A'), ('usb-b', 'USB Type B'), ('usb-c', 'USB Type C'), ('usb-mini-a', 'USB Mini A'), ('usb-mini-b', 'USB Mini B'), ('usb-micro-a', 'USB Micro A'), ('usb-micro-b', 'USB Micro B'), ('usb-micro-ab', 'USB Micro AB'), ('usb-3-b', 'USB 3.0 Type B'), ('usb-3-micro-b', 'USB 3.0 Micro B')]
@@ -10779,19 +11007,6 @@ pub struct DcimPowerPortTemplatesListQuery {
 	/// * `Proprietary` - [('saf-d-grid', 'Saf-D-Grid'), ('neutrik-powercon-20', 'Neutrik powerCON (20A)'), ('neutrik-powercon-32', 'Neutrik powerCON (32A)'), ('neutrik-powercon-true1', 'Neutrik powerCON TRUE1'), ('neutrik-powercon-true1-top', 'Neutrik powerCON TRUE1 TOP'), ('ubiquiti-smartpower', 'Ubiquiti SmartPower')]
 	/// * `Other` - [('hardwired', 'Hardwired'), ('other', 'Other')]
 	pub r#type: Option<String>,
-	/// * `IEC 60320` - [('iec-60320-c6', 'C6'), ('iec-60320-c8', 'C8'), ('iec-60320-c14', 'C14'), ('iec-60320-c16', 'C16'), ('iec-60320-c20', 'C20'), ('iec-60320-c22', 'C22')]
-	/// * `IEC 60309` - [('iec-60309-p-n-e-4h', 'P+N+E 4H'), ('iec-60309-p-n-e-6h', 'P+N+E 6H'), ('iec-60309-p-n-e-9h', 'P+N+E 9H'), ('iec-60309-2p-e-4h', '2P+E 4H'), ('iec-60309-2p-e-6h', '2P+E 6H'), ('iec-60309-2p-e-9h', '2P+E 9H'), ('iec-60309-3p-e-4h', '3P+E 4H'), ('iec-60309-3p-e-6h', '3P+E 6H'), ('iec-60309-3p-e-9h', '3P+E 9H'), ('iec-60309-3p-n-e-4h', '3P+N+E 4H'), ('iec-60309-3p-n-e-6h', '3P+N+E 6H'), ('iec-60309-3p-n-e-9h', '3P+N+E 9H')]
-	/// * `IEC 60906-1` - [('iec-60906-1', 'IEC 60906-1'), ('nbr-14136-10a', '2P+T 10A (NBR 14136)'), ('nbr-14136-20a', '2P+T 20A (NBR 14136)')]
-	/// * `NEMA (Non-locking)` - [('nema-1-15p', 'NEMA 1-15P'), ('nema-5-15p', 'NEMA 5-15P'), ('nema-5-20p', 'NEMA 5-20P'), ('nema-5-30p', 'NEMA 5-30P'), ('nema-5-50p', 'NEMA 5-50P'), ('nema-6-15p', 'NEMA 6-15P'), ('nema-6-20p', 'NEMA 6-20P'), ('nema-6-30p', 'NEMA 6-30P'), ('nema-6-50p', 'NEMA 6-50P'), ('nema-10-30p', 'NEMA 10-30P'), ('nema-10-50p', 'NEMA 10-50P'), ('nema-14-20p', 'NEMA 14-20P'), ('nema-14-30p', 'NEMA 14-30P'), ('nema-14-50p', 'NEMA 14-50P'), ('nema-14-60p', 'NEMA 14-60P'), ('nema-15-15p', 'NEMA 15-15P'), ('nema-15-20p', 'NEMA 15-20P'), ('nema-15-30p', 'NEMA 15-30P'), ('nema-15-50p', 'NEMA 15-50P'), ('nema-15-60p', 'NEMA 15-60P')]
-	/// * `NEMA (Locking)` - [('nema-l1-15p', 'NEMA L1-15P'), ('nema-l5-15p', 'NEMA L5-15P'), ('nema-l5-20p', 'NEMA L5-20P'), ('nema-l5-30p', 'NEMA L5-30P'), ('nema-l5-50p', 'NEMA L5-50P'), ('nema-l6-15p', 'NEMA L6-15P'), ('nema-l6-20p', 'NEMA L6-20P'), ('nema-l6-30p', 'NEMA L6-30P'), ('nema-l6-50p', 'NEMA L6-50P'), ('nema-l10-30p', 'NEMA L10-30P'), ('nema-l14-20p', 'NEMA L14-20P'), ('nema-l14-30p', 'NEMA L14-30P'), ('nema-l14-50p', 'NEMA L14-50P'), ('nema-l14-60p', 'NEMA L14-60P'), ('nema-l15-20p', 'NEMA L15-20P'), ('nema-l15-30p', 'NEMA L15-30P'), ('nema-l15-50p', 'NEMA L15-50P'), ('nema-l15-60p', 'NEMA L15-60P'), ('nema-l21-20p', 'NEMA L21-20P'), ('nema-l21-30p', 'NEMA L21-30P'), ('nema-l22-30p', 'NEMA L22-30P')]
-	/// * `California Style` - [('cs6361c', 'CS6361C'), ('cs6365c', 'CS6365C'), ('cs8165c', 'CS8165C'), ('cs8265c', 'CS8265C'), ('cs8365c', 'CS8365C'), ('cs8465c', 'CS8465C')]
-	/// * `International/ITA` - [('ita-c', 'ITA Type C (CEE 7/16)'), ('ita-e', 'ITA Type E (CEE 7/6)'), ('ita-f', 'ITA Type F (CEE 7/4)'), ('ita-ef', 'ITA Type E/F (CEE 7/7)'), ('ita-g', 'ITA Type G (BS 1363)'), ('ita-h', 'ITA Type H'), ('ita-i', 'ITA Type I'), ('ita-j', 'ITA Type J'), ('ita-k', 'ITA Type K'), ('ita-l', 'ITA Type L (CEI 23-50)'), ('ita-m', 'ITA Type M (BS 546)'), ('ita-n', 'ITA Type N'), ('ita-o', 'ITA Type O')]
-	/// * `USB` - [('usb-a', 'USB Type A'), ('usb-b', 'USB Type B'), ('usb-c', 'USB Type C'), ('usb-mini-a', 'USB Mini A'), ('usb-mini-b', 'USB Mini B'), ('usb-micro-a', 'USB Micro A'), ('usb-micro-b', 'USB Micro B'), ('usb-micro-ab', 'USB Micro AB'), ('usb-3-b', 'USB 3.0 Type B'), ('usb-3-micro-b', 'USB 3.0 Micro B')]
-	/// * `Molex` - [('molex-micro-fit-1x2', 'Molex Micro-Fit 1x2'), ('molex-micro-fit-2x2', 'Molex Micro-Fit 2x2'), ('molex-micro-fit-2x4', 'Molex Micro-Fit 2x4')]
-	/// * `DC` - [('dc-terminal', 'DC Terminal')]
-	/// * `Proprietary` - [('saf-d-grid', 'Saf-D-Grid'), ('neutrik-powercon-20', 'Neutrik powerCON (20A)'), ('neutrik-powercon-32', 'Neutrik powerCON (32A)'), ('neutrik-powercon-true1', 'Neutrik powerCON TRUE1'), ('neutrik-powercon-true1-top', 'Neutrik powerCON TRUE1 TOP'), ('ubiquiti-smartpower', 'Ubiquiti SmartPower')]
-	/// * `Other` - [('hardwired', 'Hardwired'), ('other', 'Other')]
-	pub type__n: Option<String>,
 	pub updated_by_request: Option<String>,
 
 }
@@ -10948,9 +11163,6 @@ pub struct DcimPowerPortsListQuery {
 	/// * `A` - A
 	/// * `B` - B
 	pub cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
-	pub cable_end__n: Option<String>,
 	/// Cable (ID)
 	pub cable_id: Option<Vec<Option<i64>>>,
 	/// Cable (ID)
@@ -10993,7 +11205,16 @@ pub struct DcimPowerPortsListQuery {
 	/// Device role (ID)
 	pub device_role_id__n: Option<Vec<i64>>,
 	pub device_status: Option<Vec<String>>,
+	pub device_status__empty: Option<bool>,
+	pub device_status__ic: Option<Vec<String>>,
+	pub device_status__ie: Option<Vec<String>>,
+	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
+	pub device_status__nic: Option<Vec<String>>,
+	pub device_status__nie: Option<Vec<String>>,
+	pub device_status__niew: Option<Vec<String>>,
+	pub device_status__nisw: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -11096,8 +11317,25 @@ pub struct DcimPowerPortsListQuery {
 	pub tag__n: Option<Vec<String>>,
 	/// Physical port type
 	pub r#type: Option<Vec<String>>,
+	pub type__empty: Option<bool>,
+	/// Physical port type
+	pub type__ic: Option<Vec<String>>,
+	/// Physical port type
+	pub type__ie: Option<Vec<String>>,
+	/// Physical port type
+	pub type__iew: Option<Vec<String>>,
+	/// Physical port type
+	pub type__isw: Option<Vec<String>>,
 	/// Physical port type
 	pub type__n: Option<Vec<String>>,
+	/// Physical port type
+	pub type__nic: Option<Vec<String>>,
+	/// Physical port type
+	pub type__nie: Option<Vec<String>>,
+	/// Physical port type
+	pub type__niew: Option<Vec<String>>,
+	/// Physical port type
+	pub type__nisw: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 	/// Virtual Chassis
 	pub virtual_chassis: Option<Vec<String>>,
@@ -11746,7 +11984,16 @@ pub struct DcimRackTypesListQuery {
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
 	pub form_factor: Option<Vec<String>>,
+	pub form_factor__empty: Option<bool>,
+	pub form_factor__ic: Option<Vec<String>>,
+	pub form_factor__ie: Option<Vec<String>>,
+	pub form_factor__iew: Option<Vec<String>>,
+	pub form_factor__isw: Option<Vec<String>>,
 	pub form_factor__n: Option<Vec<String>>,
+	pub form_factor__nic: Option<Vec<String>>,
+	pub form_factor__nie: Option<Vec<String>>,
+	pub form_factor__niew: Option<Vec<String>>,
+	pub form_factor__nisw: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -11811,9 +12058,6 @@ pub struct DcimRackTypesListQuery {
 	/// * `mm` - Millimeters
 	/// * `in` - Inches
 	pub outer_unit: Option<String>,
-	/// * `mm` - Millimeters
-	/// * `in` - Inches
-	pub outer_unit__n: Option<String>,
 	pub outer_width: Option<Vec<i64>>,
 	pub outer_width__empty: Option<bool>,
 	pub outer_width__gt: Option<Vec<i64>>,
@@ -11863,15 +12107,26 @@ pub struct DcimRackTypesListQuery {
 	/// * `lb` - Pounds
 	/// * `oz` - Ounces
 	pub weight_unit: Option<String>,
-	/// * `kg` - Kilograms
-	/// * `g` - Grams
-	/// * `lb` - Pounds
-	/// * `oz` - Ounces
-	pub weight_unit__n: Option<String>,
 	/// Rail-to-rail width
 	pub width: Option<Vec<i64>>,
 	/// Rail-to-rail width
+	pub width__ic: Option<Vec<i64>>,
+	/// Rail-to-rail width
+	pub width__ie: Option<Vec<i64>>,
+	/// Rail-to-rail width
+	pub width__iew: Option<Vec<i64>>,
+	/// Rail-to-rail width
+	pub width__isw: Option<Vec<i64>>,
+	/// Rail-to-rail width
 	pub width__n: Option<Vec<i64>>,
+	/// Rail-to-rail width
+	pub width__nic: Option<Vec<i64>>,
+	/// Rail-to-rail width
+	pub width__nie: Option<Vec<i64>>,
+	/// Rail-to-rail width
+	pub width__niew: Option<Vec<i64>>,
+	/// Rail-to-rail width
+	pub width__nisw: Option<Vec<i64>>,
 
 }
 #[derive(Debug)]
@@ -12020,9 +12275,6 @@ pub struct DcimRacksListQuery {
 	/// * `front-to-rear` - Front to rear
 	/// * `rear-to-front` - Rear to front
 	pub airflow: Option<String>,
-	/// * `front-to-rear` - Front to rear
-	/// * `rear-to-front` - Rear to front
-	pub airflow__n: Option<String>,
 	pub asset_tag: Option<Vec<String>>,
 	pub asset_tag__empty: Option<bool>,
 	pub asset_tag__ic: Option<Vec<String>>,
@@ -12076,7 +12328,16 @@ pub struct DcimRacksListQuery {
 	pub facility_id__niew: Option<Vec<String>>,
 	pub facility_id__nisw: Option<Vec<String>>,
 	pub form_factor: Option<Vec<String>>,
+	pub form_factor__empty: Option<bool>,
+	pub form_factor__ic: Option<Vec<String>>,
+	pub form_factor__ie: Option<Vec<String>>,
+	pub form_factor__iew: Option<Vec<String>>,
+	pub form_factor__isw: Option<Vec<String>>,
 	pub form_factor__n: Option<Vec<String>>,
+	pub form_factor__nic: Option<Vec<String>>,
+	pub form_factor__nie: Option<Vec<String>>,
+	pub form_factor__niew: Option<Vec<String>>,
+	pub form_factor__nisw: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -12145,9 +12406,6 @@ pub struct DcimRacksListQuery {
 	/// * `mm` - Millimeters
 	/// * `in` - Inches
 	pub outer_unit: Option<String>,
-	/// * `mm` - Millimeters
-	/// * `in` - Inches
-	pub outer_unit__n: Option<String>,
 	pub outer_width: Option<Vec<i64>>,
 	pub outer_width__empty: Option<bool>,
 	pub outer_width__gt: Option<Vec<i64>>,
@@ -12208,7 +12466,16 @@ pub struct DcimRacksListQuery {
 	pub starting_unit__lte: Option<Vec<i64>>,
 	pub starting_unit__n: Option<Vec<i64>>,
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	pub status__ic: Option<Vec<String>>,
+	pub status__ie: Option<Vec<String>>,
+	pub status__iew: Option<Vec<String>>,
+	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
+	pub status__nic: Option<Vec<String>>,
+	pub status__nie: Option<Vec<String>>,
+	pub status__niew: Option<Vec<String>>,
+	pub status__nisw: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	/// Tenant (slug)
@@ -12243,15 +12510,26 @@ pub struct DcimRacksListQuery {
 	/// * `lb` - Pounds
 	/// * `oz` - Ounces
 	pub weight_unit: Option<String>,
-	/// * `kg` - Kilograms
-	/// * `g` - Grams
-	/// * `lb` - Pounds
-	/// * `oz` - Ounces
-	pub weight_unit__n: Option<String>,
 	/// Rail-to-rail width
 	pub width: Option<Vec<i64>>,
 	/// Rail-to-rail width
+	pub width__ic: Option<Vec<i64>>,
+	/// Rail-to-rail width
+	pub width__ie: Option<Vec<i64>>,
+	/// Rail-to-rail width
+	pub width__iew: Option<Vec<i64>>,
+	/// Rail-to-rail width
+	pub width__isw: Option<Vec<i64>>,
+	/// Rail-to-rail width
 	pub width__n: Option<Vec<i64>>,
+	/// Rail-to-rail width
+	pub width__nic: Option<Vec<i64>>,
+	/// Rail-to-rail width
+	pub width__nie: Option<Vec<i64>>,
+	/// Rail-to-rail width
+	pub width__niew: Option<Vec<i64>>,
+	/// Rail-to-rail width
+	pub width__nisw: Option<Vec<i64>>,
 
 }
 #[derive(Debug)]
@@ -12527,7 +12805,16 @@ pub struct DcimRearPortTemplatesListQuery {
 	/// Search
 	pub q: Option<String>,
 	pub r#type: Option<Vec<String>>,
+	pub type__empty: Option<bool>,
+	pub type__ic: Option<Vec<String>>,
+	pub type__ie: Option<Vec<String>>,
+	pub type__iew: Option<Vec<String>>,
+	pub type__isw: Option<Vec<String>>,
 	pub type__n: Option<Vec<String>>,
+	pub type__nic: Option<Vec<String>>,
+	pub type__nie: Option<Vec<String>>,
+	pub type__niew: Option<Vec<String>>,
+	pub type__nisw: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 
 }
@@ -12677,9 +12964,6 @@ pub struct DcimRearPortsListQuery {
 	/// * `A` - A
 	/// * `B` - B
 	pub cable_end: Option<String>,
-	/// * `A` - A
-	/// * `B` - B
-	pub cable_end__n: Option<String>,
 	/// Cable (ID)
 	pub cable_id: Option<Vec<Option<i64>>>,
 	/// Cable (ID)
@@ -12732,7 +13016,16 @@ pub struct DcimRearPortsListQuery {
 	/// Device role (ID)
 	pub device_role_id__n: Option<Vec<i64>>,
 	pub device_status: Option<Vec<String>>,
+	pub device_status__empty: Option<bool>,
+	pub device_status__ic: Option<Vec<String>>,
+	pub device_status__ie: Option<Vec<String>>,
+	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
+	pub device_status__nic: Option<Vec<String>>,
+	pub device_status__nie: Option<Vec<String>>,
+	pub device_status__niew: Option<Vec<String>>,
+	pub device_status__nisw: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -12834,7 +13127,16 @@ pub struct DcimRearPortsListQuery {
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub r#type: Option<Vec<String>>,
+	pub type__empty: Option<bool>,
+	pub type__ic: Option<Vec<String>>,
+	pub type__ie: Option<Vec<String>>,
+	pub type__iew: Option<Vec<String>>,
+	pub type__isw: Option<Vec<String>>,
 	pub type__n: Option<Vec<String>>,
+	pub type__nic: Option<Vec<String>>,
+	pub type__nie: Option<Vec<String>>,
+	pub type__niew: Option<Vec<String>>,
+	pub type__nisw: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 	/// Virtual Chassis
 	pub virtual_chassis: Option<Vec<String>>,
@@ -13588,7 +13890,16 @@ pub struct DcimSitesListQuery {
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	pub status__ic: Option<Vec<String>>,
+	pub status__ie: Option<Vec<String>>,
+	pub status__iew: Option<Vec<String>>,
+	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
+	pub status__nic: Option<Vec<String>>,
+	pub status__nie: Option<Vec<String>>,
+	pub status__niew: Option<Vec<String>>,
+	pub status__nisw: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	/// Tenant (slug)
@@ -14093,7 +14404,16 @@ pub struct DcimVirtualDeviceContextsListQuery {
 	/// Search
 	pub q: Option<String>,
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	pub status__ic: Option<Vec<String>>,
+	pub status__ie: Option<Vec<String>>,
+	pub status__iew: Option<Vec<String>>,
+	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
+	pub status__nic: Option<Vec<String>>,
+	pub status__nie: Option<Vec<String>>,
+	pub status__niew: Option<Vec<String>>,
+	pub status__nisw: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	/// Tenant (slug)
@@ -15035,12 +15355,6 @@ pub struct ExtrasCustomFieldChoiceSetsListQuery {
 	/// * `ISO_3166` - ISO 3166 (Country codes)
 	/// * `UN_LOCODE` - UN/LOCODE (Location codes)
 	pub base_choices: Option<String>,
-	/// Base set of predefined choices (optional)
-	/// 
-	/// * `IATA` - IATA (Airport codes)
-	/// * `ISO_3166` - ISO 3166 (Country codes)
-	/// * `UN_LOCODE` - UN/LOCODE (Location codes)
-	pub base_choices__n: Option<String>,
 	pub choice: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
@@ -15286,12 +15600,6 @@ pub struct ExtrasCustomFieldsListQuery {
 	/// * `loose` - Loose
 	/// * `exact` - Exact
 	pub filter_logic: Option<String>,
-	/// Loose matches any instance of a given string; exact matches the entire field.
-	/// 
-	/// * `disabled` - Disabled
-	/// * `loose` - Loose
-	/// * `exact` - Exact
-	pub filter_logic__n: Option<String>,
 	pub group_name: Option<Vec<String>>,
 	pub group_name__empty: Option<bool>,
 	pub group_name__ic: Option<Vec<String>>,
@@ -15375,32 +15683,37 @@ pub struct ExtrasCustomFieldsListQuery {
 	pub search_weight__n: Option<Vec<i64>>,
 	/// The type of data this custom field holds
 	pub r#type: Option<Vec<String>>,
+	pub type__empty: Option<bool>,
+	/// The type of data this custom field holds
+	pub type__ic: Option<Vec<String>>,
+	/// The type of data this custom field holds
+	pub type__ie: Option<Vec<String>>,
+	/// The type of data this custom field holds
+	pub type__iew: Option<Vec<String>>,
+	/// The type of data this custom field holds
+	pub type__isw: Option<Vec<String>>,
 	/// The type of data this custom field holds
 	pub type__n: Option<Vec<String>>,
+	/// The type of data this custom field holds
+	pub type__nic: Option<Vec<String>>,
+	/// The type of data this custom field holds
+	pub type__nie: Option<Vec<String>>,
+	/// The type of data this custom field holds
+	pub type__niew: Option<Vec<String>>,
+	/// The type of data this custom field holds
+	pub type__nisw: Option<Vec<String>>,
 	/// Specifies whether the custom field value can be edited in the UI
 	/// 
 	/// * `yes` - Yes
 	/// * `no` - No
 	/// * `hidden` - Hidden
 	pub ui_editable: Option<String>,
-	/// Specifies whether the custom field value can be edited in the UI
-	/// 
-	/// * `yes` - Yes
-	/// * `no` - No
-	/// * `hidden` - Hidden
-	pub ui_editable__n: Option<String>,
 	/// Specifies whether the custom field is displayed in the UI
 	/// 
 	/// * `always` - Always
 	/// * `if-set` - If set
 	/// * `hidden` - Hidden
 	pub ui_visible: Option<String>,
-	/// Specifies whether the custom field is displayed in the UI
-	/// 
-	/// * `always` - Always
-	/// * `if-set` - If set
-	/// * `hidden` - Hidden
-	pub ui_visible__n: Option<String>,
 	pub unique: Option<bool>,
 	pub updated_by_request: Option<String>,
 	pub validation_maximum: Option<Vec<i64>>,
@@ -15598,24 +15911,6 @@ pub struct ExtrasCustomLinksListQuery {
 	/// * `white` - White
 	/// * `ghost-dark` - Link
 	pub button_class: Option<String>,
-	/// The class of the first link in a group will be used for the dropdown button
-	/// 
-	/// * `default` - Default
-	/// * `blue` - Blue
-	/// * `indigo` - Indigo
-	/// * `purple` - Purple
-	/// * `pink` - Pink
-	/// * `red` - Red
-	/// * `orange` - Orange
-	/// * `yellow` - Yellow
-	/// * `green` - Green
-	/// * `teal` - Teal
-	/// * `cyan` - Cyan
-	/// * `gray` - Gray
-	/// * `black` - Black
-	/// * `white` - White
-	/// * `ghost-dark` - Link
-	pub button_class__n: Option<String>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -15927,7 +16222,16 @@ pub struct ExtrasEventRulesListQuery {
 	pub action_object_type: Option<String>,
 	pub action_object_type__n: Option<String>,
 	pub action_type: Option<Vec<String>>,
+	pub action_type__empty: Option<bool>,
+	pub action_type__ic: Option<Vec<String>>,
+	pub action_type__ie: Option<Vec<String>>,
+	pub action_type__iew: Option<Vec<String>>,
+	pub action_type__isw: Option<Vec<String>>,
 	pub action_type__n: Option<Vec<String>>,
+	pub action_type__nic: Option<Vec<String>>,
+	pub action_type__nie: Option<Vec<String>>,
+	pub action_type__niew: Option<Vec<String>>,
+	pub action_type__nisw: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -16652,7 +16956,16 @@ pub struct ExtrasJournalEntriesListQuery {
 	pub id__lte: Option<Vec<i64>>,
 	pub id__n: Option<Vec<i64>>,
 	pub kind: Option<Vec<String>>,
+	pub kind__empty: Option<bool>,
+	pub kind__ic: Option<Vec<String>>,
+	pub kind__ie: Option<Vec<String>>,
+	pub kind__iew: Option<Vec<String>>,
+	pub kind__isw: Option<Vec<String>>,
 	pub kind__n: Option<Vec<String>>,
+	pub kind__nic: Option<Vec<String>>,
+	pub kind__nie: Option<Vec<String>>,
+	pub kind__niew: Option<Vec<String>>,
+	pub kind__nisw: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -17492,9 +17805,10 @@ pub enum ExtrasScriptsUpdateResponse {
 	Other(Response)
 }
 /// Put a script object.
-pub fn extras_scripts_update(state: &ThanixClient, id: String) -> Result<ExtrasScriptsUpdateResponse, Error> {
+pub fn extras_scripts_update(state: &ThanixClient, body: ScriptInputRequest, id: String) -> Result<ExtrasScriptsUpdateResponse, Error> {
 	let r#response = state.client.put(format!("{}/api/extras/scripts/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasScriptsUpdateResponse::Http200(r#response.json::<Script>()?)) },
@@ -17521,9 +17835,10 @@ pub enum ExtrasScriptsPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a script object.
-pub fn extras_scripts_partial_update(state: &ThanixClient, id: String) -> Result<ExtrasScriptsPartialUpdateResponse, Error> {
+pub fn extras_scripts_partial_update(state: &ThanixClient, body: PatchedScriptInputRequest, id: String) -> Result<ExtrasScriptsPartialUpdateResponse, Error> {
 	let r#response = state.client.patch(format!("{}/api/extras/scripts/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token))
+		.json(&body)
 		.send()?;
 	match r#response.status().as_u16() {
 		200 => { Ok(ExtrasScriptsPartialUpdateResponse::Http200(r#response.json::<Script>()?)) },
@@ -17951,7 +18266,16 @@ pub struct ExtrasWebhooksListQuery {
 	pub http_content_type__niew: Option<Vec<String>>,
 	pub http_content_type__nisw: Option<Vec<String>>,
 	pub http_method: Option<Vec<String>>,
+	pub http_method__empty: Option<bool>,
+	pub http_method__ic: Option<Vec<String>>,
+	pub http_method__ie: Option<Vec<String>>,
+	pub http_method__iew: Option<Vec<String>>,
+	pub http_method__isw: Option<Vec<String>>,
 	pub http_method__n: Option<Vec<String>>,
+	pub http_method__nic: Option<Vec<String>>,
+	pub http_method__nie: Option<Vec<String>>,
+	pub http_method__niew: Option<Vec<String>>,
+	pub http_method__nisw: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -19088,7 +19412,16 @@ pub struct IpamFhrpGroupsListQuery {
 	pub auth_key__niew: Option<Vec<String>>,
 	pub auth_key__nisw: Option<Vec<String>>,
 	pub auth_type: Option<Vec<String>>,
+	pub auth_type__empty: Option<bool>,
+	pub auth_type__ic: Option<Vec<String>>,
+	pub auth_type__ie: Option<Vec<String>>,
+	pub auth_type__iew: Option<Vec<String>>,
+	pub auth_type__isw: Option<Vec<String>>,
 	pub auth_type__n: Option<Vec<String>>,
+	pub auth_type__nic: Option<Vec<String>>,
+	pub auth_type__nie: Option<Vec<String>>,
+	pub auth_type__niew: Option<Vec<String>>,
+	pub auth_type__nisw: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -19148,7 +19481,16 @@ pub struct IpamFhrpGroupsListQuery {
 	/// Which field to use when ordering the results.
 	pub ordering: Option<String>,
 	pub protocol: Option<Vec<String>>,
+	pub protocol__empty: Option<bool>,
+	pub protocol__ic: Option<Vec<String>>,
+	pub protocol__ie: Option<Vec<String>>,
+	pub protocol__iew: Option<Vec<String>>,
+	pub protocol__isw: Option<Vec<String>>,
 	pub protocol__n: Option<Vec<String>>,
+	pub protocol__nic: Option<Vec<String>>,
+	pub protocol__nie: Option<Vec<String>>,
+	pub protocol__niew: Option<Vec<String>>,
+	pub protocol__nisw: Option<Vec<String>>,
 	/// Search
 	pub q: Option<String>,
 	pub related_ip: Option<Vec<String>>,
@@ -19394,16 +19736,50 @@ pub struct IpamIpAddressesListQuery {
 	pub q: Option<String>,
 	/// The functional role of this IP
 	pub role: Option<Vec<String>>,
+	pub role__empty: Option<bool>,
+	/// The functional role of this IP
+	pub role__ic: Option<Vec<String>>,
+	/// The functional role of this IP
+	pub role__ie: Option<Vec<String>>,
+	/// The functional role of this IP
+	pub role__iew: Option<Vec<String>>,
+	/// The functional role of this IP
+	pub role__isw: Option<Vec<String>>,
 	/// The functional role of this IP
 	pub role__n: Option<Vec<String>>,
+	/// The functional role of this IP
+	pub role__nic: Option<Vec<String>>,
+	/// The functional role of this IP
+	pub role__nie: Option<Vec<String>>,
+	/// The functional role of this IP
+	pub role__niew: Option<Vec<String>>,
+	/// The functional role of this IP
+	pub role__nisw: Option<Vec<String>>,
 	/// Service (ID)
 	pub service_id: Option<Vec<i64>>,
 	/// Service (ID)
 	pub service_id__n: Option<Vec<i64>>,
 	/// The operational status of this IP
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	/// The operational status of this IP
+	pub status__ic: Option<Vec<String>>,
+	/// The operational status of this IP
+	pub status__ie: Option<Vec<String>>,
+	/// The operational status of this IP
+	pub status__iew: Option<Vec<String>>,
+	/// The operational status of this IP
+	pub status__isw: Option<Vec<String>>,
 	/// The operational status of this IP
 	pub status__n: Option<Vec<String>>,
+	/// The operational status of this IP
+	pub status__nic: Option<Vec<String>>,
+	/// The operational status of this IP
+	pub status__nie: Option<Vec<String>>,
+	/// The operational status of this IP
+	pub status__niew: Option<Vec<String>>,
+	/// The operational status of this IP
+	pub status__nisw: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	/// Tenant (slug)
@@ -19648,8 +20024,25 @@ pub struct IpamIpRangesListQuery {
 	pub start_address: Option<Vec<String>>,
 	/// Operational status of this range
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	/// Operational status of this range
+	pub status__ic: Option<Vec<String>>,
+	/// Operational status of this range
+	pub status__ie: Option<Vec<String>>,
+	/// Operational status of this range
+	pub status__iew: Option<Vec<String>>,
+	/// Operational status of this range
+	pub status__isw: Option<Vec<String>>,
 	/// Operational status of this range
 	pub status__n: Option<Vec<String>>,
+	/// Operational status of this range
+	pub status__nic: Option<Vec<String>>,
+	/// Operational status of this range
+	pub status__nie: Option<Vec<String>>,
+	/// Operational status of this range
+	pub status__niew: Option<Vec<String>>,
+	/// Operational status of this range
+	pub status__nisw: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	/// Tenant (slug)
@@ -19942,8 +20335,25 @@ pub struct IpamPrefixesListQuery {
 	pub site_id__n: Option<Vec<Option<i64>>>,
 	/// Operational status of this prefix
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	/// Operational status of this prefix
+	pub status__ic: Option<Vec<String>>,
+	/// Operational status of this prefix
+	pub status__ie: Option<Vec<String>>,
+	/// Operational status of this prefix
+	pub status__iew: Option<Vec<String>>,
+	/// Operational status of this prefix
+	pub status__isw: Option<Vec<String>>,
 	/// Operational status of this prefix
 	pub status__n: Option<Vec<String>>,
+	/// Operational status of this prefix
+	pub status__nic: Option<Vec<String>>,
+	/// Operational status of this prefix
+	pub status__nie: Option<Vec<String>>,
+	/// Operational status of this prefix
+	pub status__niew: Option<Vec<String>>,
+	/// Operational status of this prefix
+	pub status__nisw: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	/// Tenant (slug)
@@ -20929,10 +21339,6 @@ pub struct IpamServiceTemplatesListQuery {
 	/// * `udp` - UDP
 	/// * `sctp` - SCTP
 	pub protocol: Option<String>,
-	/// * `tcp` - TCP
-	/// * `udp` - UDP
-	/// * `sctp` - SCTP
-	pub protocol__n: Option<String>,
 	/// Search
 	pub q: Option<String>,
 	pub tag: Option<Vec<String>>,
@@ -21155,10 +21561,6 @@ pub struct IpamServicesListQuery {
 	/// * `udp` - UDP
 	/// * `sctp` - SCTP
 	pub protocol: Option<String>,
-	/// * `tcp` - TCP
-	/// * `udp` - UDP
-	/// * `sctp` - SCTP
-	pub protocol__n: Option<String>,
 	/// Search
 	pub q: Option<String>,
 	pub tag: Option<Vec<String>>,
@@ -21614,6 +22016,8 @@ pub struct IpamVlansListQuery {
 	pub id__lt: Option<Vec<i64>>,
 	pub id__lte: Option<Vec<i64>>,
 	pub id__n: Option<Vec<i64>>,
+	/// Assigned interface
+	pub interface_id: Option<String>,
 	/// L2VPN
 	pub l2vpn: Option<Vec<Option<i64>>>,
 	/// L2VPN
@@ -21675,8 +22079,25 @@ pub struct IpamVlansListQuery {
 	pub site_id__n: Option<Vec<Option<i64>>>,
 	/// Operational status of this VLAN
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	/// Operational status of this VLAN
+	pub status__ic: Option<Vec<String>>,
+	/// Operational status of this VLAN
+	pub status__ie: Option<Vec<String>>,
+	/// Operational status of this VLAN
+	pub status__iew: Option<Vec<String>>,
+	/// Operational status of this VLAN
+	pub status__isw: Option<Vec<String>>,
 	/// Operational status of this VLAN
 	pub status__n: Option<Vec<String>>,
+	/// Operational status of this VLAN
+	pub status__nic: Option<Vec<String>>,
+	/// Operational status of this VLAN
+	pub status__nie: Option<Vec<String>>,
+	/// Operational status of this VLAN
+	pub status__niew: Option<Vec<String>>,
+	/// Operational status of this VLAN
+	pub status__nisw: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	/// Tenant (slug)
@@ -21699,6 +22120,8 @@ pub struct IpamVlansListQuery {
 	pub vid__lt: Option<Vec<i64>>,
 	pub vid__lte: Option<Vec<i64>>,
 	pub vid__n: Option<Vec<i64>>,
+	/// Assigned VM interface
+	pub vminterface_id: Option<String>,
 
 }
 #[derive(Debug)]
@@ -22179,11 +22602,6 @@ pub struct TenancyContactAssignmentsListQuery {
 	/// * `tertiary` - Tertiary
 	/// * `inactive` - Inactive
 	pub priority: Option<String>,
-	/// * `primary` - Primary
-	/// * `secondary` - Secondary
-	/// * `tertiary` - Tertiary
-	/// * `inactive` - Inactive
-	pub priority__n: Option<String>,
 	/// Search
 	pub q: Option<String>,
 	/// Contact role (slug)
@@ -24895,7 +25313,16 @@ pub struct VirtualizationClustersListQuery {
 	/// Site (ID)
 	pub site_id__n: Option<Vec<Option<i64>>>,
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	pub status__ic: Option<Vec<String>>,
+	pub status__ie: Option<Vec<String>>,
+	pub status__iew: Option<Vec<String>>,
+	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
+	pub status__nic: Option<Vec<String>>,
+	pub status__nie: Option<Vec<String>>,
+	pub status__niew: Option<Vec<String>>,
+	pub status__nisw: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	/// Tenant (slug)
@@ -25136,12 +25563,6 @@ pub struct VirtualizationInterfacesListQuery {
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
 	pub mode: Option<String>,
-	/// IEEE 802.1Q tagging strategy
-	/// 
-	/// * `access` - Access
-	/// * `tagged` - Tagged
-	/// * `tagged-all` - Tagged (All)
-	pub mode__n: Option<String>,
 	pub modified_by_request: Option<String>,
 	pub mtu: Option<Vec<i64>>,
 	pub mtu__empty: Option<bool>,
@@ -25741,7 +26162,16 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	/// Site (ID)
 	pub site_id__n: Option<Vec<Option<i64>>>,
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	pub status__ic: Option<Vec<String>>,
+	pub status__ie: Option<Vec<String>>,
+	pub status__iew: Option<Vec<String>>,
+	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
+	pub status__nic: Option<Vec<String>>,
+	pub status__nie: Option<Vec<String>>,
+	pub status__niew: Option<Vec<String>>,
+	pub status__nisw: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	/// Tenant (slug)
@@ -25979,7 +26409,16 @@ pub struct VpnIkePoliciesListQuery {
 	/// Number of results to return per page.
 	pub limit: Option<i64>,
 	pub mode: Option<Vec<String>>,
+	pub mode__empty: Option<bool>,
+	pub mode__ic: Option<Vec<String>>,
+	pub mode__ie: Option<Vec<String>>,
+	pub mode__iew: Option<Vec<String>>,
+	pub mode__isw: Option<Vec<String>>,
 	pub mode__n: Option<Vec<String>>,
+	pub mode__nic: Option<Vec<String>>,
+	pub mode__nie: Option<Vec<String>>,
+	pub mode__niew: Option<Vec<String>>,
+	pub mode__nisw: Option<Vec<String>>,
 	pub modified_by_request: Option<String>,
 	pub name: Option<Vec<String>>,
 	pub name__empty: Option<bool>,
@@ -26012,7 +26451,15 @@ pub struct VpnIkePoliciesListQuery {
 	pub tag__n: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 	pub version: Option<Vec<i64>>,
+	pub version__ic: Option<Vec<i64>>,
+	pub version__ie: Option<Vec<i64>>,
+	pub version__iew: Option<Vec<i64>>,
+	pub version__isw: Option<Vec<i64>>,
 	pub version__n: Option<Vec<i64>>,
+	pub version__nic: Option<Vec<i64>>,
+	pub version__nie: Option<Vec<i64>>,
+	pub version__niew: Option<Vec<i64>>,
+	pub version__nisw: Option<Vec<i64>>,
 
 }
 #[derive(Debug)]
@@ -26159,9 +26606,27 @@ pub fn vpn_ike_policies_partial_update(state: &ThanixClient, body: PatchedWritab
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VpnIkeProposalsListQuery {
 	pub authentication_algorithm: Option<Vec<String>>,
+	pub authentication_algorithm__empty: Option<bool>,
+	pub authentication_algorithm__ic: Option<Vec<String>>,
+	pub authentication_algorithm__ie: Option<Vec<String>>,
+	pub authentication_algorithm__iew: Option<Vec<String>>,
+	pub authentication_algorithm__isw: Option<Vec<String>>,
 	pub authentication_algorithm__n: Option<Vec<String>>,
+	pub authentication_algorithm__nic: Option<Vec<String>>,
+	pub authentication_algorithm__nie: Option<Vec<String>>,
+	pub authentication_algorithm__niew: Option<Vec<String>>,
+	pub authentication_algorithm__nisw: Option<Vec<String>>,
 	pub authentication_method: Option<Vec<String>>,
+	pub authentication_method__empty: Option<bool>,
+	pub authentication_method__ic: Option<Vec<String>>,
+	pub authentication_method__ie: Option<Vec<String>>,
+	pub authentication_method__iew: Option<Vec<String>>,
+	pub authentication_method__isw: Option<Vec<String>>,
 	pub authentication_method__n: Option<Vec<String>>,
+	pub authentication_method__nic: Option<Vec<String>>,
+	pub authentication_method__nie: Option<Vec<String>>,
+	pub authentication_method__niew: Option<Vec<String>>,
+	pub authentication_method__nisw: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -26182,11 +26647,36 @@ pub struct VpnIkeProposalsListQuery {
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
 	pub encryption_algorithm: Option<Vec<String>>,
+	pub encryption_algorithm__empty: Option<bool>,
+	pub encryption_algorithm__ic: Option<Vec<String>>,
+	pub encryption_algorithm__ie: Option<Vec<String>>,
+	pub encryption_algorithm__iew: Option<Vec<String>>,
+	pub encryption_algorithm__isw: Option<Vec<String>>,
 	pub encryption_algorithm__n: Option<Vec<String>>,
+	pub encryption_algorithm__nic: Option<Vec<String>>,
+	pub encryption_algorithm__nie: Option<Vec<String>>,
+	pub encryption_algorithm__niew: Option<Vec<String>>,
+	pub encryption_algorithm__nisw: Option<Vec<String>>,
 	/// Diffie-Hellman group ID
 	pub group: Option<Vec<i64>>,
 	/// Diffie-Hellman group ID
+	pub group__ic: Option<Vec<i64>>,
+	/// Diffie-Hellman group ID
+	pub group__ie: Option<Vec<i64>>,
+	/// Diffie-Hellman group ID
+	pub group__iew: Option<Vec<i64>>,
+	/// Diffie-Hellman group ID
+	pub group__isw: Option<Vec<i64>>,
+	/// Diffie-Hellman group ID
 	pub group__n: Option<Vec<i64>>,
+	/// Diffie-Hellman group ID
+	pub group__nic: Option<Vec<i64>>,
+	/// Diffie-Hellman group ID
+	pub group__nie: Option<Vec<i64>>,
+	/// Diffie-Hellman group ID
+	pub group__niew: Option<Vec<i64>>,
+	/// Diffie-Hellman group ID
+	pub group__nisw: Option<Vec<i64>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -26442,7 +26932,23 @@ pub struct VpnIpsecPoliciesListQuery {
 	/// Diffie-Hellman group for Perfect Forward Secrecy
 	pub pfs_group: Option<Vec<Option<i64>>>,
 	/// Diffie-Hellman group for Perfect Forward Secrecy
+	pub pfs_group__ic: Option<Vec<Option<i64>>>,
+	/// Diffie-Hellman group for Perfect Forward Secrecy
+	pub pfs_group__ie: Option<Vec<Option<i64>>>,
+	/// Diffie-Hellman group for Perfect Forward Secrecy
+	pub pfs_group__iew: Option<Vec<Option<i64>>>,
+	/// Diffie-Hellman group for Perfect Forward Secrecy
+	pub pfs_group__isw: Option<Vec<Option<i64>>>,
+	/// Diffie-Hellman group for Perfect Forward Secrecy
 	pub pfs_group__n: Option<Vec<Option<i64>>>,
+	/// Diffie-Hellman group for Perfect Forward Secrecy
+	pub pfs_group__nic: Option<Vec<Option<i64>>>,
+	/// Diffie-Hellman group for Perfect Forward Secrecy
+	pub pfs_group__nie: Option<Vec<Option<i64>>>,
+	/// Diffie-Hellman group for Perfect Forward Secrecy
+	pub pfs_group__niew: Option<Vec<Option<i64>>>,
+	/// Diffie-Hellman group for Perfect Forward Secrecy
+	pub pfs_group__nisw: Option<Vec<Option<i64>>>,
 	/// Search
 	pub q: Option<String>,
 	pub tag: Option<Vec<String>>,
@@ -26645,7 +27151,16 @@ pub struct VpnIpsecProfilesListQuery {
 	/// Number of results to return per page.
 	pub limit: Option<i64>,
 	pub mode: Option<Vec<String>>,
+	pub mode__empty: Option<bool>,
+	pub mode__ic: Option<Vec<String>>,
+	pub mode__ie: Option<Vec<String>>,
+	pub mode__iew: Option<Vec<String>>,
+	pub mode__isw: Option<Vec<String>>,
 	pub mode__n: Option<Vec<String>>,
+	pub mode__nic: Option<Vec<String>>,
+	pub mode__nie: Option<Vec<String>>,
+	pub mode__niew: Option<Vec<String>>,
+	pub mode__nisw: Option<Vec<String>>,
 	pub modified_by_request: Option<String>,
 	pub name: Option<Vec<String>>,
 	pub name__empty: Option<bool>,
@@ -26813,7 +27328,16 @@ pub fn vpn_ipsec_profiles_partial_update(state: &ThanixClient, body: PatchedWrit
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct VpnIpsecProposalsListQuery {
 	pub authentication_algorithm: Option<Vec<String>>,
+	pub authentication_algorithm__empty: Option<bool>,
+	pub authentication_algorithm__ic: Option<Vec<String>>,
+	pub authentication_algorithm__ie: Option<Vec<String>>,
+	pub authentication_algorithm__iew: Option<Vec<String>>,
+	pub authentication_algorithm__isw: Option<Vec<String>>,
 	pub authentication_algorithm__n: Option<Vec<String>>,
+	pub authentication_algorithm__nic: Option<Vec<String>>,
+	pub authentication_algorithm__nie: Option<Vec<String>>,
+	pub authentication_algorithm__niew: Option<Vec<String>>,
+	pub authentication_algorithm__nisw: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -26834,7 +27358,16 @@ pub struct VpnIpsecProposalsListQuery {
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
 	pub encryption_algorithm: Option<Vec<String>>,
+	pub encryption_algorithm__empty: Option<bool>,
+	pub encryption_algorithm__ic: Option<Vec<String>>,
+	pub encryption_algorithm__ie: Option<Vec<String>>,
+	pub encryption_algorithm__iew: Option<Vec<String>>,
+	pub encryption_algorithm__isw: Option<Vec<String>>,
 	pub encryption_algorithm__n: Option<Vec<String>>,
+	pub encryption_algorithm__nic: Option<Vec<String>>,
+	pub encryption_algorithm__nie: Option<Vec<String>>,
+	pub encryption_algorithm__niew: Option<Vec<String>>,
+	pub encryption_algorithm__nisw: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -27395,7 +27928,16 @@ pub struct VpnL2VpnsListQuery {
 	/// Tenant (ID)
 	pub tenant_id__n: Option<Vec<Option<i64>>>,
 	pub r#type: Option<Vec<String>>,
+	pub type__empty: Option<bool>,
+	pub type__ic: Option<Vec<String>>,
+	pub type__ie: Option<Vec<String>>,
+	pub type__iew: Option<Vec<String>>,
+	pub type__isw: Option<Vec<String>>,
 	pub type__n: Option<Vec<String>>,
+	pub type__nic: Option<Vec<String>>,
+	pub type__nie: Option<Vec<String>>,
+	pub type__niew: Option<Vec<String>>,
+	pub type__nisw: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 
 }
@@ -27798,7 +28340,16 @@ pub struct VpnTunnelTerminationsListQuery {
 	/// Search
 	pub q: Option<String>,
 	pub role: Option<Vec<String>>,
+	pub role__empty: Option<bool>,
+	pub role__ic: Option<Vec<String>>,
+	pub role__ie: Option<Vec<String>>,
+	pub role__iew: Option<Vec<String>>,
+	pub role__isw: Option<Vec<String>>,
 	pub role__n: Option<Vec<String>>,
+	pub role__nic: Option<Vec<String>>,
+	pub role__nie: Option<Vec<String>>,
+	pub role__niew: Option<Vec<String>>,
+	pub role__nisw: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub termination_id: Option<Vec<i64>>,
@@ -27992,7 +28543,16 @@ pub struct VpnTunnelsListQuery {
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
 	pub encapsulation: Option<Vec<String>>,
+	pub encapsulation__empty: Option<bool>,
+	pub encapsulation__ic: Option<Vec<String>>,
+	pub encapsulation__ie: Option<Vec<String>>,
+	pub encapsulation__iew: Option<Vec<String>>,
+	pub encapsulation__isw: Option<Vec<String>>,
 	pub encapsulation__n: Option<Vec<String>>,
+	pub encapsulation__nic: Option<Vec<String>>,
+	pub encapsulation__nie: Option<Vec<String>>,
+	pub encapsulation__niew: Option<Vec<String>>,
+	pub encapsulation__nisw: Option<Vec<String>>,
 	/// Tunnel group (slug)
 	pub group: Option<Vec<String>>,
 	/// Tunnel group (slug)
@@ -28044,7 +28604,16 @@ pub struct VpnTunnelsListQuery {
 	/// Search
 	pub q: Option<String>,
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	pub status__ic: Option<Vec<String>>,
+	pub status__ie: Option<Vec<String>>,
+	pub status__iew: Option<Vec<String>>,
+	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
+	pub status__nic: Option<Vec<String>>,
+	pub status__nie: Option<Vec<String>>,
+	pub status__niew: Option<Vec<String>>,
+	pub status__nisw: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	/// Tenant (slug)
@@ -28433,7 +29002,16 @@ pub fn wireless_wireless_lan_groups_partial_update(state: &ThanixClient, body: P
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WirelessWirelessLansListQuery {
 	pub auth_cipher: Option<Vec<String>>,
+	pub auth_cipher__empty: Option<bool>,
+	pub auth_cipher__ic: Option<Vec<String>>,
+	pub auth_cipher__ie: Option<Vec<String>>,
+	pub auth_cipher__iew: Option<Vec<String>>,
+	pub auth_cipher__isw: Option<Vec<String>>,
 	pub auth_cipher__n: Option<Vec<String>>,
+	pub auth_cipher__nic: Option<Vec<String>>,
+	pub auth_cipher__nie: Option<Vec<String>>,
+	pub auth_cipher__niew: Option<Vec<String>>,
+	pub auth_cipher__nisw: Option<Vec<String>>,
 	pub auth_psk: Option<Vec<String>>,
 	pub auth_psk__empty: Option<bool>,
 	pub auth_psk__ic: Option<Vec<String>>,
@@ -28446,7 +29024,16 @@ pub struct WirelessWirelessLansListQuery {
 	pub auth_psk__niew: Option<Vec<String>>,
 	pub auth_psk__nisw: Option<Vec<String>>,
 	pub auth_type: Option<Vec<String>>,
+	pub auth_type__empty: Option<bool>,
+	pub auth_type__ic: Option<Vec<String>>,
+	pub auth_type__ie: Option<Vec<String>>,
+	pub auth_type__iew: Option<Vec<String>>,
+	pub auth_type__isw: Option<Vec<String>>,
 	pub auth_type__n: Option<Vec<String>>,
+	pub auth_type__nic: Option<Vec<String>>,
+	pub auth_type__nie: Option<Vec<String>>,
+	pub auth_type__niew: Option<Vec<String>>,
+	pub auth_type__nisw: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -28507,7 +29094,16 @@ pub struct WirelessWirelessLansListQuery {
 	pub ssid__niew: Option<Vec<String>>,
 	pub ssid__nisw: Option<Vec<String>>,
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	pub status__ic: Option<Vec<String>>,
+	pub status__ie: Option<Vec<String>>,
+	pub status__iew: Option<Vec<String>>,
+	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
+	pub status__nic: Option<Vec<String>>,
+	pub status__nie: Option<Vec<String>>,
+	pub status__niew: Option<Vec<String>>,
+	pub status__nisw: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	/// Tenant (slug)
@@ -28671,7 +29267,16 @@ pub fn wireless_wireless_lans_partial_update(state: &ThanixClient, body: Patched
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct WirelessWirelessLinksListQuery {
 	pub auth_cipher: Option<Vec<String>>,
+	pub auth_cipher__empty: Option<bool>,
+	pub auth_cipher__ic: Option<Vec<String>>,
+	pub auth_cipher__ie: Option<Vec<String>>,
+	pub auth_cipher__iew: Option<Vec<String>>,
+	pub auth_cipher__isw: Option<Vec<String>>,
 	pub auth_cipher__n: Option<Vec<String>>,
+	pub auth_cipher__nic: Option<Vec<String>>,
+	pub auth_cipher__nie: Option<Vec<String>>,
+	pub auth_cipher__niew: Option<Vec<String>>,
+	pub auth_cipher__nisw: Option<Vec<String>>,
 	pub auth_psk: Option<Vec<String>>,
 	pub auth_psk__empty: Option<bool>,
 	pub auth_psk__ic: Option<Vec<String>>,
@@ -28684,7 +29289,16 @@ pub struct WirelessWirelessLinksListQuery {
 	pub auth_psk__niew: Option<Vec<String>>,
 	pub auth_psk__nisw: Option<Vec<String>>,
 	pub auth_type: Option<Vec<String>>,
+	pub auth_type__empty: Option<bool>,
+	pub auth_type__ic: Option<Vec<String>>,
+	pub auth_type__ie: Option<Vec<String>>,
+	pub auth_type__iew: Option<Vec<String>>,
+	pub auth_type__isw: Option<Vec<String>>,
 	pub auth_type__n: Option<Vec<String>>,
+	pub auth_type__nic: Option<Vec<String>>,
+	pub auth_type__nie: Option<Vec<String>>,
+	pub auth_type__niew: Option<Vec<String>>,
+	pub auth_type__nisw: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -28716,11 +29330,6 @@ pub struct WirelessWirelessLinksListQuery {
 	/// * `mi` - Miles
 	/// * `ft` - Feet
 	pub distance_unit: Option<String>,
-	/// * `km` - Kilometers
-	/// * `m` - Meters
-	/// * `mi` - Miles
-	/// * `ft` - Feet
-	pub distance_unit__n: Option<String>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -28760,7 +29369,16 @@ pub struct WirelessWirelessLinksListQuery {
 	pub ssid__niew: Option<Vec<String>>,
 	pub ssid__nisw: Option<Vec<String>>,
 	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	pub status__ic: Option<Vec<String>>,
+	pub status__ie: Option<Vec<String>>,
+	pub status__iew: Option<Vec<String>>,
+	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
+	pub status__nic: Option<Vec<String>>,
+	pub status__nie: Option<Vec<String>>,
+	pub status__niew: Option<Vec<String>>,
+	pub status__nisw: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	/// Tenant (slug)
