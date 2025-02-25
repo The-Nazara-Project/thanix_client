@@ -1,11 +1,8 @@
 [package]
 name = "thanix_client"
-version = "2.2.3"
-authors = ["Christopher Hock <christopher-hock@protonmail.com>"]
-edition = "2021"
-description = "A netbox API client used as a reference for the Nazara project. Generated from the schema of https://demo.netbox.dev/"
-readme = "README.md"
-license = "MIT"
+version = "2.3.0"
+authors = ["Tiara Lena Hock <tiara.dev@proton.me>"]
+edition = "2024"
 build = "build.rs"
 
 [lib]
