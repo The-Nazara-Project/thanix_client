@@ -2,8 +2,10 @@
 name = "thanix_client"
 version = "2.3.0"
 authors = ["Tiara Lena Hock <tiara.dev@proton.me>"]
+description = "NetBox API reference client generated from https://demo.netbox.dev/api/schema"
 edition = "2024"
 build = "build.rs"
+license = "MIT"
 
 [lib]
 path = "src/lib.rs"
