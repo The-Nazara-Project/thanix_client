@@ -17,7 +17,7 @@
 
 
 Name:           thanix_client
-Version:        2.2.3
+Version:        2.3.0
 Release:        0.1
 Summary:        Generated reference client used as standard for Nazara (github.com/The-Nazara-Project/Nazara)
 # FIXME: Select a correct license from https://github.com/openSUSE/spec-cleaner#spdx-licenses
