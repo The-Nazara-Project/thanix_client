@@ -17,7 +17,7 @@
 
 
 Name:           thanix_client
-Version:        2.4.0
+Version:        2.4.1
 Release:        0.1
 Summary:        Generated reference client used as standard for Nazara (github.com/The-Nazara-Project/Nazara)
 # FIXME: Select a correct license from https://github.com/openSUSE/spec-cleaner#spdx-licenses
@@ -27,10 +27,10 @@ License:        MIT
 URL:            https://github.com/The-Nazara-Project/thanix_client
 Source0:        thanix_client-%{version}.tar.gz
 Source1:        vendor.tar.gz
-Source2:        cargo_config
 BuildRequires:  git
 BuildRequires:  cargo
 BuildRequires:  cargo-packaging
+BuildRequires:  pkgconfig(openssl)
 
 %description
 
@@ -39,7 +39,6 @@ This code has been generated using Thanix (github.com/The-Nazara-Project/Thanix)
 
 %prep
 %autosetup -p1 -a1
-install -D -m 644 %{SOURCE2} .cargo/config
 
 %build
 %{cargo_build}
