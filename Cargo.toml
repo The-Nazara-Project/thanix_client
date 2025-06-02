@@ -1,6 +1,6 @@
 [package]
 name = "thanix_client"
-version = "2.4.2"
+version = "2.4.3"
 authors = ["Tiara Lena Hock <tiara.dev@proton.me>"]
 edition = "2021"
 description = "A netbox API client used as a reference for the Nazara project. Generated from the schema of https://demo.netbox.dev/"
@@ -21,3 +21,6 @@ serde_qs = "0.12.0"
 chrono = "0.4.31"
 reqwest = { version = "0.11.22", features = ["blocking", "json"] }
 regex = "1.10.6"
+
+[features]
+debug_messages = []
