@@ -1,5 +1,5 @@
 #
-# spec file for package specRPM_CREATION_NAME
+# spec file for package thanix_client
 #
 # Copyright (c) 2024 SUSE LLC
 #
@@ -17,7 +17,7 @@
 
 
 Name:           thanix_client
-Version:        2.4.3
+Version:        2.4.4
 Release:        0.1
 Summary:        Generated reference client used as standard for Nazara (github.com/The-Nazara-Project/Nazara)
 # FIXME: Select a correct license from https://github.com/openSUSE/spec-cleaner#spdx-licenses

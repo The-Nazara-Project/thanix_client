@@ -5793,173 +5793,282 @@ pub struct PaginatedWirelessLinkList {
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedASNRangeRequest {
-	pub name: String,
-	pub slug: String,
-	pub rir: serde_json::Value,
-	pub start: u32,
-	pub end: u32,
-	pub tenant: Option<serde_json::Value>,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub rir: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub start: Option<u32>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub end: Option<u32>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedASNRequest {
 	/// 16- or 32-bit autonomous system number
-	pub asn: u32,
-	pub rir: Option<serde_json::Value>,
-	pub tenant: Option<serde_json::Value>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub asn: Option<u32>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub rir: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedBookmarkRequest {
-	pub object_type: String,
-	pub object_id: u64,
-	pub user: serde_json::Value,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub object_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub object_id: Option<u64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub user: Option<serde_json::Value>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedCableTerminationRequest {
-	pub cable: i64,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub cable: Option<i64>,
 	/// * `A` - A
 	/// * `B` - B
-	pub cable_end: String,
-	pub termination_type: String,
-	pub termination_id: u64,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub cable_end: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub termination_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub termination_id: Option<u64>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedCircuitGroupRequest {
-	pub name: String,
-	pub slug: String,
-	pub description: String,
-	pub tenant: Option<serde_json::Value>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedCircuitTerminationRequest {
-	pub circuit: serde_json::Value,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub circuit: Option<serde_json::Value>,
 	/// * `A` - A
 	/// * `Z` - Z
-	pub term_side: String,
-	pub termination_type: Option<String>,
-	pub termination_id: Option<i64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub term_side: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub termination_type: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub termination_id: Option<Option<i64>>,
 	/// Physical circuit speed
-	pub port_speed: Option<u32>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub port_speed: Option<Option<u32>>,
 	/// Upstream speed, if different from port speed
-	pub upstream_speed: Option<u32>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub upstream_speed: Option<Option<u32>>,
 	/// ID of the local cross-connect
-	pub xconnect_id: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub xconnect_id: Option<String>,
 	/// Patch panel ID and port number(s)
-	pub pp_info: String,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub pp_info: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// Treat as if a cable is connected
-	pub mark_connected: bool,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mark_connected: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedCircuitTypeRequest {
-	pub name: String,
-	pub slug: String,
-	pub color: String,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub color: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedClusterGroupRequest {
-	pub name: String,
-	pub slug: String,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedClusterTypeRequest {
-	pub name: String,
-	pub slug: String,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedConfigContextRequest {
-	pub name: String,
-	pub weight: u16,
-	pub description: String,
-	pub is_active: bool,
-	pub regions: Vec<i64>,
-	pub site_groups: Vec<i64>,
-	pub sites: Vec<i64>,
-	pub locations: Vec<i64>,
-	pub device_types: Vec<i64>,
-	pub roles: Vec<i64>,
-	pub platforms: Vec<i64>,
-	pub cluster_types: Vec<i64>,
-	pub cluster_groups: Vec<i64>,
-	pub clusters: Vec<i64>,
-	pub tenant_groups: Vec<i64>,
-	pub tenants: Vec<i64>,
-	pub tags: Vec<String>,
-	pub data_source: serde_json::Value,
-	pub data: serde_json::Value,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub weight: Option<u16>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub is_active: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub regions: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub site_groups: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub sites: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub locations: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device_types: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub roles: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub platforms: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub cluster_types: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub cluster_groups: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub clusters: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant_groups: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenants: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub data_source: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub data: Option<serde_json::Value>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedConfigTemplateRequest {
-	pub name: String,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// Any <a href="https://jinja.palletsprojects.com/en/stable/api/#jinja2.Environment">additional parameters</a> to pass when constructing the Jinja environment
-	pub environment_params: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub environment_params: Option<Option<serde_json::Value>>,
 	/// Jinja template code.
-	pub template_code: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub template_code: Option<String>,
 	/// Defaults to <code>text/plain; charset=utf-8</code>
-	pub mime_type: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mime_type: Option<String>,
 	/// Filename to give to the rendered export file
-	pub file_name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub file_name: Option<String>,
 	/// Extension to append to the rendered filename
-	pub file_extension: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub file_extension: Option<String>,
 	/// Download file as attachment
-	pub as_attachment: bool,
-	pub data_source: serde_json::Value,
-	pub tags: Vec<NestedTagRequest>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub as_attachment: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub data_source: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedContactRequest {
-	pub groups: Vec<i64>,
-	pub name: String,
-	pub title: String,
-	pub phone: String,
-	pub email: String,
-	pub address: String,
-	pub link: String,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub groups: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub title: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub phone: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub email: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub address: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub link: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedContactRoleRequest {
-	pub name: String,
-	pub slug: String,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedCustomLinkRequest {
-	pub object_types: Vec<String>,
-	pub name: String,
-	pub enabled: bool,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub object_types: Option<Vec<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub enabled: Option<bool>,
 	/// Jinja2 template code for link text
-	pub link_text: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub link_text: Option<String>,
 	/// Jinja2 template code for link URL
-	pub link_url: String,
-	pub weight: u16,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub link_url: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub weight: Option<u16>,
 	/// Links with the same group will appear as a dropdown menu
-	pub group_name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub group_name: Option<String>,
 	/// The class of the first link in a group will be used for the dropdown button
 	/// 
 	/// * `default` - Default
@@ -5977,64 +6086,94 @@ pub struct PatchedCustomLinkRequest {
 	/// * `black` - Black
 	/// * `white` - White
 	/// * `ghost-dark` - Link
-	pub button_class: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub button_class: Option<String>,
 	/// Force link to open in a new window
-	pub new_window: bool,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub new_window: Option<bool>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedDashboardRequest {
-	pub layout: serde_json::Value,
-	pub config: serde_json::Value,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub layout: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub config: Option<serde_json::Value>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedDeviceBayRequest {
-	pub device: serde_json::Value,
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
-	pub description: String,
-	pub installed_device: Option<serde_json::Value>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub installed_device: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedDeviceBayTemplateRequest {
-	pub device_type: serde_json::Value,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device_type: Option<serde_json::Value>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedExportTemplateRequest {
-	pub object_types: Vec<String>,
-	pub name: String,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub object_types: Option<Vec<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// Any <a href="https://jinja.palletsprojects.com/en/stable/api/#jinja2.Environment">additional parameters</a> to pass when constructing the Jinja environment
-	pub environment_params: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub environment_params: Option<Option<serde_json::Value>>,
 	/// Jinja template code.
-	pub template_code: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub template_code: Option<String>,
 	/// Defaults to <code>text/plain; charset=utf-8</code>
-	pub mime_type: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mime_type: Option<String>,
 	/// Filename to give to the rendered export file
-	pub file_name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub file_name: Option<String>,
 	/// Extension to append to the rendered filename
-	pub file_extension: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub file_extension: Option<String>,
 	/// Download file as attachment
-	pub as_attachment: bool,
-	pub data_source: serde_json::Value,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub as_attachment: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub data_source: Option<serde_json::Value>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedFHRPGroupAssignmentRequest {
-	pub group: serde_json::Value,
-	pub interface_type: String,
-	pub interface_id: u64,
-	pub priority: u8,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub group: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub interface_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub interface_id: Option<u64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub priority: Option<u8>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedFHRPGroupRequest {
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// * `vrrp2` - VRRPv2
 	/// * `vrrp3` - VRRPv3
 	/// * `carp` - CARP
@@ -6042,129 +6181,206 @@ pub struct PatchedFHRPGroupRequest {
 	/// * `hsrp` - HSRP
 	/// * `glbp` - GLBP
 	/// * `other` - Other
-	pub protocol: String,
-	pub group_id: u16,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub protocol: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub group_id: Option<u16>,
 	/// * `plaintext` - Plaintext
 	/// * `md5` - MD5
-	pub auth_type: Option<String>,
-	pub auth_key: String,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub auth_type: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub auth_key: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedGroupRequest {
-	pub name: String,
-	pub description: String,
-	pub permissions: Vec<i64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub permissions: Option<Vec<i64>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedImageAttachmentRequest {
-	pub object_type: String,
-	pub object_id: u64,
-	pub name: String,
-	pub image: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub object_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub object_id: Option<u64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub image: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedInventoryItemRoleRequest {
-	pub name: String,
-	pub slug: String,
-	pub color: String,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub color: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedInventoryItemTemplateRequest {
-	pub device_type: serde_json::Value,
-	pub parent: Option<i64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device_type: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub parent: Option<Option<i64>>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
-	pub role: Option<serde_json::Value>,
-	pub manufacturer: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub role: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub manufacturer: Option<Option<serde_json::Value>>,
 	/// Manufacturer-assigned part identifier
-	pub part_id: String,
-	pub description: String,
-	pub component_type: Option<String>,
-	pub component_id: Option<u64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub part_id: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub component_type: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub component_id: Option<Option<u64>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedL2VPNTerminationRequest {
-	pub l2vpn: serde_json::Value,
-	pub assigned_object_type: String,
-	pub assigned_object_id: u64,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub l2vpn: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub assigned_object_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub assigned_object_id: Option<u64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedMACAddressRequest {
-	pub mac_address: String,
-	pub assigned_object_type: Option<String>,
-	pub assigned_object_id: Option<u64>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mac_address: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub assigned_object_type: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub assigned_object_id: Option<Option<u64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedManufacturerRequest {
-	pub name: String,
-	pub slug: String,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedModuleBayRequest {
-	pub device: serde_json::Value,
-	pub module: Option<serde_json::Value>,
-	pub name: String,
-	pub installed_module: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub module: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub installed_module: Option<Option<serde_json::Value>>,
 	/// Physical label
-	pub label: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
 	/// Identifier to reference when renaming installed components
-	pub position: String,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub position: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedModuleBayTemplateRequest {
-	pub device_type: Option<serde_json::Value>,
-	pub module_type: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device_type: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub module_type: Option<Option<serde_json::Value>>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
 	/// Identifier to reference when renaming installed components
-	pub position: String,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub position: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedModuleTypeProfileRequest {
-	pub name: String,
-	pub description: String,
-	pub schema: Option<serde_json::Value>,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub schema: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedNotificationGroupRequest {
-	pub name: String,
-	pub description: String,
-	pub groups: Vec<i64>,
-	pub users: Vec<i64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub groups: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub users: Option<Vec<i64>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedNotificationRequest {
-	pub object_type: String,
-	pub object_id: u64,
-	pub user: serde_json::Value,
-	pub read: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub object_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub object_id: Option<u64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub user: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub read: Option<Option<String>>,
 	/// * `object_created` - Object created
 	/// * `object_updated` - Object updated
 	/// * `object_deleted` - Object deleted
@@ -6172,310 +6388,505 @@ pub struct PatchedNotificationRequest {
 	/// * `job_completed` - Job completed
 	/// * `job_failed` - Job failed
 	/// * `job_errored` - Job errored
-	pub event_type: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub event_type: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedObjectPermissionRequest {
-	pub name: String,
-	pub description: String,
-	pub enabled: bool,
-	pub object_types: Vec<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub enabled: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub object_types: Option<Vec<String>>,
 	/// The list of actions granted by this permission
-	pub actions: Vec<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub actions: Option<Vec<String>>,
 	/// Queryset filter matching the applicable objects of the selected type(s)
-	pub constraints: Option<serde_json::Value>,
-	pub groups: Vec<i64>,
-	pub users: Vec<i64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub constraints: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub groups: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub users: Option<Vec<i64>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedPlatformRequest {
-	pub name: String,
-	pub slug: String,
-	pub manufacturer: Option<serde_json::Value>,
-	pub config_template: Option<serde_json::Value>,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub manufacturer: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub config_template: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedPowerPanelRequest {
-	pub site: serde_json::Value,
-	pub location: Option<serde_json::Value>,
-	pub name: String,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub site: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub location: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedProviderAccountRequest {
-	pub provider: serde_json::Value,
-	pub name: String,
-	pub account: String,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub provider: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub account: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedProviderNetworkRequest {
-	pub provider: serde_json::Value,
-	pub name: String,
-	pub service_id: String,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub provider: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub service_id: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedProviderRequest {
 	/// Full name of the provider
-	pub name: String,
-	pub slug: String,
-	pub accounts: Vec<i64>,
-	pub description: String,
-	pub comments: String,
-	pub asns: Vec<i64>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub accounts: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub asns: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedRIRRequest {
-	pub name: String,
-	pub slug: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
 	/// IP space managed by this RIR is considered private
-	pub is_private: bool,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub is_private: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedRackReservationRequest {
-	pub rack: serde_json::Value,
-	pub units: Vec<u16>,
-	pub user: serde_json::Value,
-	pub tenant: Option<serde_json::Value>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub rack: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub units: Option<Vec<u16>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub user: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedRackRoleRequest {
-	pub name: String,
-	pub slug: String,
-	pub color: String,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub color: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedRoleRequest {
-	pub name: String,
-	pub slug: String,
-	pub weight: u16,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub weight: Option<u16>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedRouteTargetRequest {
 	/// Route target value (formatted in accordance with RFC 4360)
-	pub name: String,
-	pub tenant: Option<serde_json::Value>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedSavedFilterRequest {
-	pub object_types: Vec<String>,
-	pub name: String,
-	pub slug: String,
-	pub description: String,
-	pub user: Option<i64>,
-	pub weight: u16,
-	pub enabled: bool,
-	pub shared: bool,
-	pub parameters: serde_json::Value,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub object_types: Option<Vec<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub user: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub weight: Option<u16>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub enabled: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub shared: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub parameters: Option<serde_json::Value>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedScriptInputRequest {
-	pub data: serde_json::Value,
-	pub commit: bool,
-	pub schedule_at: Option<String>,
-	pub interval: Option<i64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub data: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub commit: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub schedule_at: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub interval: Option<Option<i64>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedSubscriptionRequest {
-	pub object_type: String,
-	pub object_id: u64,
-	pub user: serde_json::Value,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub object_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub object_id: Option<u64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub user: Option<serde_json::Value>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedTableConfigRequest {
-	pub object_type: String,
-	pub table: String,
-	pub name: String,
-	pub description: String,
-	pub user: Option<i64>,
-	pub weight: u16,
-	pub enabled: bool,
-	pub shared: bool,
-	pub columns: Vec<String>,
-	pub ordering: Option<Vec<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub object_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub table: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub user: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub weight: Option<u16>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub enabled: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub shared: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub columns: Option<Vec<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub ordering: Option<Option<Vec<String>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedTagRequest {
-	pub name: String,
-	pub slug: String,
-	pub color: String,
-	pub description: String,
-	pub weight: u16,
-	pub object_types: Vec<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub color: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub weight: Option<u16>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub object_types: Option<Vec<String>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedTenantRequest {
-	pub name: String,
-	pub slug: String,
-	pub group: Option<serde_json::Value>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub group: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedTokenRequest {
-	pub user: serde_json::Value,
-	pub expires: Option<String>,
-	pub last_used: Option<String>,
-	pub key: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub user: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub expires: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub last_used: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub key: Option<String>,
 	/// Permit create/update/delete operations using this key
-	pub write_enabled: bool,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub write_enabled: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedTunnelGroupRequest {
-	pub name: String,
-	pub slug: String,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedUserRequest {
 	/// Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
-	pub username: String,
-	pub password: String,
-	pub first_name: String,
-	pub last_name: String,
-	pub email: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub username: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub password: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub first_name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub last_name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub email: Option<String>,
 	/// Designates whether the user can log into this admin site.
-	pub is_staff: bool,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub is_staff: Option<bool>,
 	/// Designates whether this user should be treated as active. Unselect this instead of deleting accounts.
-	pub is_active: bool,
-	pub date_joined: String,
-	pub last_login: Option<String>,
-	pub groups: Vec<i64>,
-	pub permissions: Vec<i64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub is_active: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub date_joined: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub last_login: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub groups: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub permissions: Option<Vec<i64>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedVLANGroupRequest {
-	pub name: String,
-	pub slug: String,
-	pub scope_type: Option<String>,
-	pub scope_id: Option<i64>,
-	pub vid_ranges: Vec<IntegerRangeRequest>,
-	pub tenant: Option<serde_json::Value>,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub scope_type: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub scope_id: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub vid_ranges: Option<Vec<IntegerRangeRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedVLANTranslationPolicyRequest {
-	pub name: String,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedVLANTranslationRuleRequest {
-	pub policy: i64,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub policy: Option<i64>,
 	/// Numeric VLAN ID (1-4094)
-	pub local_vid: u16,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub local_vid: Option<u16>,
 	/// Numeric VLAN ID (1-4094)
-	pub remote_vid: u16,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub remote_vid: Option<u16>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedVRFRequest {
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Unique route distinguisher (as defined in RFC 4364)
-	pub rd: Option<String>,
-	pub tenant: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub rd: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
 	/// Prevent duplicate prefixes/IP addresses within this VRF
-	pub enforce_unique: bool,
-	pub description: String,
-	pub comments: String,
-	pub import_targets: Vec<i64>,
-	pub export_targets: Vec<i64>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub enforce_unique: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub import_targets: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub export_targets: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedVirtualCircuitTypeRequest {
-	pub name: String,
-	pub slug: String,
-	pub color: String,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub color: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedVirtualDiskRequest {
-	pub virtual_machine: serde_json::Value,
-	pub name: String,
-	pub description: String,
-	pub size: u32,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub virtual_machine: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub size: Option<u32>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWebhookRequest {
-	pub name: String,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// This URL will be called using the HTTP method defined when the webhook is called. Jinja2 template processing is supported with the same context as the request body.
-	pub payload_url: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub payload_url: Option<String>,
 	/// * `GET` - GET
 	/// * `POST` - POST
 	/// * `PUT` - PUT
 	/// * `PATCH` - PATCH
 	/// * `DELETE` - DELETE
-	pub http_method: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub http_method: Option<String>,
 	/// The complete list of official content types is available <a href="https://www.iana.org/assignments/media-types/media-types.xhtml">here</a>.
-	pub http_content_type: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub http_content_type: Option<String>,
 	/// User-supplied HTTP headers to be sent with the request in addition to the HTTP content type. Headers should be defined in the format <code>Name: Value</code>. Jinja2 template processing is supported with the same context as the request body (below).
-	pub additional_headers: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub additional_headers: Option<String>,
 	/// Jinja2 template for a custom request body. If blank, a JSON object representing the change will be included. Available context data includes: <code>event</code>, <code>model</code>, <code>timestamp</code>, <code>username</code>, <code>request_id</code>, and <code>data</code>.
-	pub body_template: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub body_template: Option<String>,
 	/// When provided, the request will include a <code>X-Hook-Signature</code> header containing a HMAC hex digest of the payload body using the secret as the key. The secret is not transmitted in the request.
-	pub secret: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub secret: Option<String>,
 	/// Enable SSL certificate verification. Disable with caution!
-	pub ssl_verification: bool,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub ssl_verification: Option<bool>,
 	/// The specific CA certificate file to use for SSL verification. Leave blank to use the system defaults.
-	pub ca_file_path: Option<String>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub tags: Vec<NestedTagRequest>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub ca_file_path: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableAggregateRequest {
-	pub prefix: String,
-	pub rir: serde_json::Value,
-	pub tenant: Option<serde_json::Value>,
-	pub date_added: Option<String>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub prefix: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub rir: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub date_added: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableCableRequest {
@@ -6503,98 +6914,147 @@ pub struct PatchedWritableCableRequest {
 	/// * `aoc` - Active Optical Cabling (AOC)
 	/// * `usb` - USB
 	/// * `power` - Power
-	pub r#type: Option<String>,
-	pub a_terminations: Vec<GenericObjectRequest>,
-	pub b_terminations: Vec<GenericObjectRequest>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub a_terminations: Option<Vec<GenericObjectRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub b_terminations: Option<Vec<GenericObjectRequest>>,
 	/// * `connected` - Connected
 	/// * `planned` - Planned
 	/// * `decommissioning` - Decommissioning
-	pub status: String,
-	pub tenant: Option<serde_json::Value>,
-	pub label: String,
-	pub color: String,
-	pub length: Option<f64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub color: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub length: Option<Option<f64>>,
 	/// * `km` - Kilometers
 	/// * `m` - Meters
 	/// * `cm` - Centimeters
 	/// * `mi` - Miles
 	/// * `ft` - Feet
 	/// * `in` - Inches
-	pub length_unit: Option<String>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub length_unit: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableCircuitGroupAssignmentRequest {
-	pub group: serde_json::Value,
-	pub member_type: String,
-	pub member_id: u64,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub group: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub member_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub member_id: Option<u64>,
 	/// * `primary` - Primary
 	/// * `secondary` - Secondary
 	/// * `tertiary` - Tertiary
 	/// * `inactive` - Inactive
-	pub priority: Option<String>,
-	pub tags: Vec<NestedTagRequest>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub priority: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableCircuitRequest {
 	/// Unique circuit ID
-	pub cid: String,
-	pub provider: serde_json::Value,
-	pub provider_account: Option<serde_json::Value>,
-	pub r#type: serde_json::Value,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub cid: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub provider: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub provider_account: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<serde_json::Value>,
 	/// * `planned` - Planned
 	/// * `provisioning` - Provisioning
 	/// * `active` - Active
 	/// * `offline` - Offline
 	/// * `deprovisioning` - Deprovisioning
 	/// * `decommissioned` - Decommissioned
-	pub status: String,
-	pub tenant: Option<serde_json::Value>,
-	pub install_date: Option<String>,
-	pub termination_date: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub install_date: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub termination_date: Option<Option<String>>,
 	/// Committed rate
-	pub commit_rate: Option<u32>,
-	pub description: String,
-	pub distance: Option<f64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub commit_rate: Option<Option<u32>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub distance: Option<Option<f64>>,
 	/// * `km` - Kilometers
 	/// * `m` - Meters
 	/// * `mi` - Miles
 	/// * `ft` - Feet
-	pub distance_unit: Option<String>,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub assignments: Vec<BriefCircuitGroupAssignmentSerializer_Request>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub distance_unit: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub assignments: Option<Vec<BriefCircuitGroupAssignmentSerializer_Request>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableClusterRequest {
-	pub name: String,
-	pub r#type: serde_json::Value,
-	pub group: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub group: Option<Option<serde_json::Value>>,
 	/// * `planned` - Planned
 	/// * `staging` - Staging
 	/// * `active` - Active
 	/// * `decommissioning` - Decommissioning
 	/// * `offline` - Offline
-	pub status: String,
-	pub tenant: Option<serde_json::Value>,
-	pub scope_type: Option<String>,
-	pub scope_id: Option<i64>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub scope_type: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub scope_id: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableConsolePortRequest {
-	pub device: serde_json::Value,
-	pub module: Option<serde_json::Value>,
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub module: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
 	/// Physical port type
 	/// 
 	/// * `de-9` - DE-9
@@ -6612,7 +7072,8 @@ pub struct PatchedWritableConsolePortRequest {
 	/// * `usb-micro-b` - USB Micro B
 	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
-	pub r#type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<Option<String>>,
 	/// Port speed in bits per second
 	/// 
 	/// * `1200` - 1200 bps
@@ -6623,21 +7084,30 @@ pub struct PatchedWritableConsolePortRequest {
 	/// * `38400` - 38.4 kbps
 	/// * `57600` - 57.6 kbps
 	/// * `115200` - 115.2 kbps
-	pub speed: Option<u32>,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub speed: Option<Option<u32>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// Treat as if a cable is connected
-	pub mark_connected: bool,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mark_connected: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableConsolePortTemplateRequest {
-	pub device_type: Option<serde_json::Value>,
-	pub module_type: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device_type: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub module_type: Option<Option<serde_json::Value>>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
 	/// * `de-9` - DE-9
 	/// * `db-25` - DB-25
 	/// * `rj-11` - RJ-11
@@ -6653,16 +7123,22 @@ pub struct PatchedWritableConsolePortTemplateRequest {
 	/// * `usb-micro-b` - USB Micro B
 	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
-	pub r#type: Option<String>,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableConsoleServerPortRequest {
-	pub device: serde_json::Value,
-	pub module: Option<serde_json::Value>,
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub module: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
 	/// Physical port type
 	/// 
 	/// * `de-9` - DE-9
@@ -6680,7 +7156,8 @@ pub struct PatchedWritableConsoleServerPortRequest {
 	/// * `usb-micro-b` - USB Micro B
 	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
-	pub r#type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<Option<String>>,
 	/// Port speed in bits per second
 	/// 
 	/// * `1200` - 1200 bps
@@ -6691,21 +7168,30 @@ pub struct PatchedWritableConsoleServerPortRequest {
 	/// * `38400` - 38.4 kbps
 	/// * `57600` - 57.6 kbps
 	/// * `115200` - 115.2 kbps
-	pub speed: Option<u32>,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub speed: Option<Option<u32>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// Treat as if a cable is connected
-	pub mark_connected: bool,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mark_connected: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableConsoleServerPortTemplateRequest {
-	pub device_type: Option<serde_json::Value>,
-	pub module_type: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device_type: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub module_type: Option<Option<serde_json::Value>>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
 	/// * `de-9` - DE-9
 	/// * `db-25` - DB-25
 	/// * `rj-11` - RJ-11
@@ -6721,50 +7207,72 @@ pub struct PatchedWritableConsoleServerPortTemplateRequest {
 	/// * `usb-micro-b` - USB Micro B
 	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
-	pub r#type: Option<String>,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableContactAssignmentRequest {
-	pub object_type: String,
-	pub object_id: u64,
-	pub contact: serde_json::Value,
-	pub role: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub object_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub object_id: Option<u64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub contact: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub role: Option<Option<serde_json::Value>>,
 	/// * `primary` - Primary
 	/// * `secondary` - Secondary
 	/// * `tertiary` - Tertiary
 	/// * `inactive` - Inactive
-	pub priority: Option<String>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub priority: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableContactGroupRequest {
-	pub name: String,
-	pub slug: String,
-	pub parent: Option<i64>,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub comments: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub parent: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableCustomFieldChoiceSetRequest {
-	pub name: String,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// Base set of predefined choices (optional)
 	/// 
 	/// * `IATA` - IATA (Airport codes)
 	/// * `ISO_3166` - ISO 3166 (Country codes)
 	/// * `UN_LOCODE` - UN/LOCODE (Location codes)
-	pub base_choices: Option<String>,
-	pub extra_choices: Vec<Vec<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub base_choices: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub extra_choices: Option<Vec<Vec<serde_json::Value>>>,
 	/// Choices are automatically ordered alphabetically
-	pub order_alphabetically: bool,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub order_alphabetically: Option<bool>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableCustomFieldRequest {
-	pub object_types: Vec<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub object_types: Option<Vec<String>>,
 	/// The type of data this custom field holds
 	/// 
 	/// * `text` - Text
@@ -6780,108 +7288,158 @@ pub struct PatchedWritableCustomFieldRequest {
 	/// * `multiselect` - Multiple selection
 	/// * `object` - Object
 	/// * `multiobject` - Multiple objects
-	pub r#type: String,
-	pub related_object_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub related_object_type: Option<Option<String>>,
 	/// Internal field name
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Name of the field as displayed to users (if not provided, 'the field's name will be used)
-	pub label: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
 	/// Custom fields within the same group will be displayed together
-	pub group_name: String,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub group_name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// This field is required when creating new objects or editing an existing object.
-	pub required: bool,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub required: Option<bool>,
 	/// The value of this field must be unique for the assigned object
-	pub unique: bool,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub unique: Option<bool>,
 	/// Weighting for search. Lower values are considered more important. Fields with a search weight of zero will be ignored.
-	pub search_weight: u16,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub search_weight: Option<u16>,
 	/// Loose matches any instance of a given string; exact matches the entire field.
 	/// 
 	/// * `disabled` - Disabled
 	/// * `loose` - Loose
 	/// * `exact` - Exact
-	pub filter_logic: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub filter_logic: Option<String>,
 	/// Specifies whether the custom field is displayed in the UI
 	/// 
 	/// * `always` - Always
 	/// * `if-set` - If set
 	/// * `hidden` - Hidden
-	pub ui_visible: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub ui_visible: Option<String>,
 	/// Specifies whether the custom field value can be edited in the UI
 	/// 
 	/// * `yes` - Yes
 	/// * `no` - No
 	/// * `hidden` - Hidden
-	pub ui_editable: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub ui_editable: Option<String>,
 	/// Replicate this value when cloning objects
-	pub is_cloneable: bool,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub is_cloneable: Option<bool>,
 	/// Default value for the field (must be a JSON value). Encapsulate strings with double quotes (e.g. "Foo").
-	pub default: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub default: Option<Option<serde_json::Value>>,
 	/// Filter the object selection choices using a query_params dict (must be a JSON value).Encapsulate strings with double quotes (e.g. "Foo").
-	pub related_object_filter: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub related_object_filter: Option<Option<serde_json::Value>>,
 	/// Fields with higher weights appear lower in a form.
-	pub weight: u16,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub weight: Option<u16>,
 	/// Minimum allowed value (for numeric fields)
-	pub validation_minimum: Option<i64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub validation_minimum: Option<Option<i64>>,
 	/// Maximum allowed value (for numeric fields)
-	pub validation_maximum: Option<i64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub validation_maximum: Option<Option<i64>>,
 	/// Regular expression to enforce on text field values. Use ^ and $ to force matching of entire string. For example, <code>^[A-Z]{3}$</code> will limit values to exactly three uppercase letters.
-	pub validation_regex: String,
-	pub choice_set: Option<serde_json::Value>,
-	pub comments: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub validation_regex: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub choice_set: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableDataSourceRequest {
-	pub name: String,
-	pub r#type: String,
-	pub source_url: String,
-	pub enabled: bool,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub source_url: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub enabled: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// * `1` - Minutely
 	/// * `60` - Hourly
 	/// * `720` - 12 hours
 	/// * `1440` - Daily
 	/// * `10080` - Weekly
 	/// * `43200` - 30 days
-	pub sync_interval: Option<u16>,
-	pub parameters: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub sync_interval: Option<Option<u16>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub parameters: Option<Option<serde_json::Value>>,
 	/// Patterns (one per line) matching files to ignore when syncing
-	pub ignore_rules: String,
-	pub comments: String,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub ignore_rules: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableDeviceRoleRequest {
-	pub name: String,
-	pub slug: String,
-	pub color: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub color: Option<String>,
 	/// Virtual machines may be assigned to this role
-	pub vm_role: bool,
-	pub config_template: Option<serde_json::Value>,
-	pub parent: Option<i64>,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub comments: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub vm_role: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub config_template: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub parent: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableDeviceTypeRequest {
-	pub manufacturer: serde_json::Value,
-	pub default_platform: Option<serde_json::Value>,
-	pub model: String,
-	pub slug: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub manufacturer: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub default_platform: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub model: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
 	/// Discrete part number (optional)
-	pub part_number: String,
-	pub u_height: f64,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub part_number: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub u_height: Option<f64>,
 	/// Devices of this type are excluded when calculating rack utilization.
-	pub exclude_from_utilization: bool,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub exclude_from_utilization: Option<bool>,
 	/// Device consumes both front and rear rack faces.
-	pub is_full_depth: bool,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub is_full_depth: Option<bool>,
 	/// Parent devices house child devices in device bays. Leave blank if this device type is neither a parent nor a child.
 	/// 
 	/// * `parent` - Parent
 	/// * `child` - Child
-	pub subdevice_role: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub subdevice_role: Option<Option<String>>,
 	/// * `front-to-rear` - Front to rear
 	/// * `rear-to-front` - Rear to front
 	/// * `left-to-right` - Left to right
@@ -6892,42 +7450,65 @@ pub struct PatchedWritableDeviceTypeRequest {
 	/// * `top-to-bottom` - Top to bottom
 	/// * `passive` - Passive
 	/// * `mixed` - Mixed
-	pub airflow: Option<String>,
-	pub weight: Option<f64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub airflow: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub weight: Option<Option<f64>>,
 	/// * `kg` - Kilograms
 	/// * `g` - Grams
 	/// * `lb` - Pounds
 	/// * `oz` - Ounces
-	pub weight_unit: Option<String>,
-	pub front_image: Option<String>,
-	pub rear_image: Option<String>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub weight_unit: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub front_image: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub rear_image: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableDeviceWithConfigContextRequest {
-	pub name: Option<String>,
-	pub device_type: serde_json::Value,
-	pub role: serde_json::Value,
-	pub tenant: Option<serde_json::Value>,
-	pub platform: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device_type: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub role: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub platform: Option<Option<serde_json::Value>>,
 	/// Chassis serial number, assigned by the manufacturer
-	pub serial: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub serial: Option<String>,
 	/// A unique tag used to identify this device
-	pub asset_tag: Option<String>,
-	pub site: serde_json::Value,
-	pub location: Option<serde_json::Value>,
-	pub rack: Option<serde_json::Value>,
-	pub position: Option<f64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub asset_tag: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub site: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub location: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub rack: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub position: Option<Option<f64>>,
 	/// * `front` - Front
 	/// * `rear` - Rear
-	pub face: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub face: Option<Option<String>>,
 	/// GPS coordinate in decimal format (xx.yyyyyy)
-	pub latitude: Option<f64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub latitude: Option<Option<f64>>,
 	/// GPS coordinate in decimal format (xx.yyyyyy)
-	pub longitude: Option<f64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub longitude: Option<Option<f64>>,
 	/// * `offline` - Offline
 	/// * `active` - Active
 	/// * `planned` - Planned
@@ -6935,7 +7516,8 @@ pub struct PatchedWritableDeviceWithConfigContextRequest {
 	/// * `failed` - Failed
 	/// * `inventory` - Inventory
 	/// * `decommissioning` - Decommissioning
-	pub status: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
 	/// * `front-to-rear` - Front to rear
 	/// * `rear-to-front` - Rear to front
 	/// * `left-to-right` - Left to right
@@ -6946,49 +7528,78 @@ pub struct PatchedWritableDeviceWithConfigContextRequest {
 	/// * `top-to-bottom` - Top to bottom
 	/// * `passive` - Passive
 	/// * `mixed` - Mixed
-	pub airflow: Option<String>,
-	pub primary_ip4: Option<serde_json::Value>,
-	pub primary_ip6: Option<serde_json::Value>,
-	pub oob_ip: Option<serde_json::Value>,
-	pub cluster: Option<serde_json::Value>,
-	pub virtual_chassis: Option<serde_json::Value>,
-	pub vc_position: Option<u8>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub airflow: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub primary_ip4: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub primary_ip6: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub oob_ip: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub cluster: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub virtual_chassis: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub vc_position: Option<Option<u8>>,
 	/// Virtual chassis master election priority
-	pub vc_priority: Option<u8>,
-	pub description: String,
-	pub comments: String,
-	pub config_template: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub vc_priority: Option<Option<u8>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub config_template: Option<Option<serde_json::Value>>,
 	/// Local config context data takes precedence over source contexts in the final rendered config context
-	pub local_context_data: Option<serde_json::Value>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub local_context_data: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableEventRuleRequest {
-	pub object_types: Vec<String>,
-	pub name: String,
-	pub enabled: bool,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub object_types: Option<Vec<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub enabled: Option<bool>,
 	/// The types of event which will trigger this rule.
-	pub event_types: Vec<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub event_types: Option<Vec<String>>,
 	/// A set of conditions which determine whether the event will be generated.
-	pub conditions: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub conditions: Option<Option<serde_json::Value>>,
 	/// * `webhook` - Webhook
 	/// * `script` - Script
 	/// * `notification` - Notification
-	pub action_type: String,
-	pub action_object_type: String,
-	pub action_object_id: Option<u64>,
-	pub description: String,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub tags: Vec<NestedTagRequest>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub action_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub action_object_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub action_object_id: Option<Option<u64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableFrontPortRequest {
-	pub device: serde_json::Value,
-	pub module: Option<serde_json::Value>,
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub module: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
 	/// * `8p8c` - 8P8C
 	/// * `8p6c` - 8P6C
 	/// * `8p4c` - 8P4C
@@ -7047,25 +7658,37 @@ pub struct PatchedWritableFrontPortRequest {
 	/// * `usb-micro-b` - USB Micro B
 	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
-	pub r#type: String,
-	pub color: String,
-	pub rear_port: i64,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub color: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub rear_port: Option<i64>,
 	/// Mapped position on corresponding rear port
-	pub rear_port_position: u16,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub rear_port_position: Option<u16>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// Treat as if a cable is connected
-	pub mark_connected: bool,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mark_connected: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableFrontPortTemplateRequest {
-	pub device_type: Option<serde_json::Value>,
-	pub module_type: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device_type: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub module_type: Option<Option<serde_json::Value>>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
 	/// * `8p8c` - 8P8C
 	/// * `8p6c` - 8P6C
 	/// * `8p4c` - 8P4C
@@ -7124,37 +7747,54 @@ pub struct PatchedWritableFrontPortTemplateRequest {
 	/// * `usb-micro-b` - USB Micro B
 	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
-	pub r#type: String,
-	pub color: String,
-	pub rear_port: serde_json::Value,
-	pub rear_port_position: u16,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub color: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub rear_port: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub rear_port_position: Option<u16>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableIKEPolicyRequest {
-	pub name: String,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// * `1` - IKEv1
 	/// * `2` - IKEv2
-	pub version: u16,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub version: Option<u16>,
 	/// * `aggressive` - Aggressive
 	/// * `main` - Main
-	pub mode: Option<String>,
-	pub proposals: Vec<i64>,
-	pub preshared_key: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mode: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub proposals: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub preshared_key: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableIKEProposalRequest {
-	pub name: String,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// * `preshared-keys` - Pre-shared keys
 	/// * `certificates` - Certificates
 	/// * `rsa-signatures` - RSA signatures
 	/// * `dsa-signatures` - DSA signatures
-	pub authentication_method: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub authentication_method: Option<String>,
 	/// * `aes-128-cbc` - 128-bit AES (CBC)
 	/// * `aes-128-gcm` - 128-bit AES (GCM)
 	/// * `aes-192-cbc` - 192-bit AES (CBC)
@@ -7163,13 +7803,15 @@ pub struct PatchedWritableIKEProposalRequest {
 	/// * `aes-256-gcm` - 256-bit AES (GCM)
 	/// * `3des-cbc` - 3DES
 	/// * `des-cbc` - DES
-	pub encryption_algorithm: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub encryption_algorithm: Option<String>,
 	/// * `hmac-sha1` - SHA-1 HMAC
 	/// * `hmac-sha256` - SHA-256 HMAC
 	/// * `hmac-sha384` - SHA-384 HMAC
 	/// * `hmac-sha512` - SHA-512 HMAC
 	/// * `hmac-md5` - MD5 HMAC
-	pub authentication_algorithm: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub authentication_algorithm: Option<Option<String>>,
 	/// Diffie-Hellman group ID
 	/// 
 	/// * `1` - Group 1
@@ -7196,18 +7838,26 @@ pub struct PatchedWritableIKEProposalRequest {
 	/// * `32` - Group 32
 	/// * `33` - Group 33
 	/// * `34` - Group 34
-	pub group: u16,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub group: Option<u16>,
 	/// Security association lifetime (in seconds)
-	pub sa_lifetime: Option<u32>,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub sa_lifetime: Option<Option<u32>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableIPAddressRequest {
-	pub address: String,
-	pub vrf: Option<serde_json::Value>,
-	pub tenant: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub address: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub vrf: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
 	/// The operational status of this IP
 	/// 
 	/// * `active` - Active
@@ -7215,7 +7865,8 @@ pub struct PatchedWritableIPAddressRequest {
 	/// * `deprecated` - Deprecated
 	/// * `dhcp` - DHCP
 	/// * `slaac` - SLAAC
-	pub status: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
 	/// The functional role of this IP
 	/// 
 	/// * `loopback` - Loopback
@@ -7226,45 +7877,69 @@ pub struct PatchedWritableIPAddressRequest {
 	/// * `hsrp` - HSRP
 	/// * `glbp` - GLBP
 	/// * `carp` - CARP
-	pub role: Option<String>,
-	pub assigned_object_type: Option<String>,
-	pub assigned_object_id: Option<u64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub role: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub assigned_object_type: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub assigned_object_id: Option<Option<u64>>,
 	/// The IP for which this address is the "outside" IP
-	pub nat_inside: Option<i64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub nat_inside: Option<Option<i64>>,
 	/// Hostname or FQDN (not case-sensitive)
-	pub dns_name: String,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub dns_name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableIPRangeRequest {
-	pub start_address: String,
-	pub end_address: String,
-	pub vrf: Option<serde_json::Value>,
-	pub tenant: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub start_address: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub end_address: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub vrf: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
 	/// Operational status of this range
 	/// 
 	/// * `active` - Active
 	/// * `reserved` - Reserved
 	/// * `deprecated` - Deprecated
-	pub status: String,
-	pub role: Option<serde_json::Value>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub role: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 	/// Prevent the creation of IP addresses within this range
-	pub mark_populated: bool,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mark_populated: Option<bool>,
 	/// Report space as 100% utilized
-	pub mark_utilized: bool,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mark_utilized: Option<bool>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableIPSecPolicyRequest {
-	pub name: String,
-	pub description: String,
-	pub proposals: Vec<i64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub proposals: Option<Vec<i64>>,
 	/// Diffie-Hellman group for Perfect Forward Secrecy
 	/// 
 	/// * `1` - Group 1
@@ -7291,28 +7966,42 @@ pub struct PatchedWritableIPSecPolicyRequest {
 	/// * `32` - Group 32
 	/// * `33` - Group 33
 	/// * `34` - Group 34
-	pub pfs_group: Option<u16>,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub pfs_group: Option<Option<u16>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableIPSecProfileRequest {
-	pub name: String,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// * `esp` - ESP
 	/// * `ah` - AH
-	pub mode: String,
-	pub ike_policy: serde_json::Value,
-	pub ipsec_policy: serde_json::Value,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mode: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub ike_policy: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub ipsec_policy: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableIPSecProposalRequest {
-	pub name: String,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// * `aes-128-cbc` - 128-bit AES (CBC)
 	/// * `aes-128-gcm` - 128-bit AES (GCM)
 	/// * `aes-192-cbc` - 192-bit AES (CBC)
@@ -7321,29 +8010,41 @@ pub struct PatchedWritableIPSecProposalRequest {
 	/// * `aes-256-gcm` - 256-bit AES (GCM)
 	/// * `3des-cbc` - 3DES
 	/// * `des-cbc` - DES
-	pub encryption_algorithm: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub encryption_algorithm: Option<Option<String>>,
 	/// * `hmac-sha1` - SHA-1 HMAC
 	/// * `hmac-sha256` - SHA-256 HMAC
 	/// * `hmac-sha384` - SHA-384 HMAC
 	/// * `hmac-sha512` - SHA-512 HMAC
 	/// * `hmac-md5` - MD5 HMAC
-	pub authentication_algorithm: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub authentication_algorithm: Option<Option<String>>,
 	/// Security association lifetime (seconds)
-	pub sa_lifetime_seconds: Option<u32>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub sa_lifetime_seconds: Option<Option<u32>>,
 	/// Security association lifetime (in kilobytes)
-	pub sa_lifetime_data: Option<u32>,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub sa_lifetime_data: Option<Option<u32>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableInterfaceRequest {
-	pub device: serde_json::Value,
-	pub vdcs: Vec<i64>,
-	pub module: Option<serde_json::Value>,
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub vdcs: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub module: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
 	/// * `virtual` - Virtual
 	/// * `bridge` - Bridge
 	/// * `lag` - Link Aggregation Group (LAG)
@@ -7476,32 +8177,46 @@ pub struct PatchedWritableInterfaceRequest {
 	/// * `extreme-summitstack-256` - Extreme SummitStack-256
 	/// * `extreme-summitstack-512` - Extreme SummitStack-512
 	/// * `other` - Other
-	pub r#type: String,
-	pub enabled: bool,
-	pub parent: Option<i64>,
-	pub bridge: Option<i64>,
-	pub lag: Option<i64>,
-	pub mtu: Option<u32>,
-	pub primary_mac_address: Option<serde_json::Value>,
-	pub speed: Option<u32>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub enabled: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub parent: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub bridge: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub lag: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mtu: Option<Option<u32>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub primary_mac_address: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub speed: Option<Option<u32>>,
 	/// * `half` - Half
 	/// * `full` - Full
 	/// * `auto` - Auto
-	pub duplex: Option<String>,
-	pub wwn: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub duplex: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub wwn: Option<Option<String>>,
 	/// This interface is used only for out-of-band management
-	pub mgmt_only: bool,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mgmt_only: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// IEEE 802.1Q tagging strategy
 	/// 
 	/// * `access` - Access
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
 	/// * `q-in-q` - Q-in-Q (802.1ad)
-	pub mode: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mode: Option<Option<String>>,
 	/// * `ap` - Access point
 	/// * `station` - Station
-	pub rf_role: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub rf_role: Option<Option<String>>,
 	/// * `2.4g-1-2412-22` - 1 (2412 MHz)
 	/// * `2.4g-2-2417-22` - 2 (2417 MHz)
 	/// * `2.4g-3-2422-22` - 3 (2422 MHz)
@@ -7699,10 +8414,12 @@ pub struct PatchedWritableInterfaceRequest {
 	/// * `60g-25-61560-6480` - 25 (61.56/8.64 GHz)
 	/// * `60g-26-63720-6480` - 26 (63.72/8.64 GHz)
 	/// * `60g-27-65880-6480` - 27 (65.88/8.64 GHz)
-	pub rf_channel: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub rf_channel: Option<Option<String>>,
 	/// * `pd` - PD
 	/// * `pse` - PSE
-	pub poe_mode: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub poe_mode: Option<Option<String>>,
 	/// * `type1-ieee802.3af` - 802.3af (Type 1)
 	/// * `type2-ieee802.3at` - 802.3at (Type 2)
 	/// * `type3-ieee802.3bt` - 802.3bt (Type 3)
@@ -7711,31 +8428,48 @@ pub struct PatchedWritableInterfaceRequest {
 	/// * `passive-24v-4pair` - Passive 24V (4-pair)
 	/// * `passive-48v-2pair` - Passive 48V (2-pair)
 	/// * `passive-48v-4pair` - Passive 48V (4-pair)
-	pub poe_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub poe_type: Option<Option<String>>,
 	/// Populated by selected channel (if set)
-	pub rf_channel_frequency: Option<f64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub rf_channel_frequency: Option<Option<f64>>,
 	/// Populated by selected channel (if set)
-	pub rf_channel_width: Option<f64>,
-	pub tx_power: Option<u8>,
-	pub untagged_vlan: Option<serde_json::Value>,
-	pub tagged_vlans: Vec<i64>,
-	pub qinq_svlan: Option<serde_json::Value>,
-	pub vlan_translation_policy: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub rf_channel_width: Option<Option<f64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tx_power: Option<Option<u8>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub untagged_vlan: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tagged_vlans: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub qinq_svlan: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub vlan_translation_policy: Option<Option<serde_json::Value>>,
 	/// Treat as if a cable is connected
-	pub mark_connected: bool,
-	pub wireless_lans: Vec<i64>,
-	pub vrf: Option<serde_json::Value>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mark_connected: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub wireless_lans: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub vrf: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableInterfaceTemplateRequest {
-	pub device_type: Option<serde_json::Value>,
-	pub module_type: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device_type: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub module_type: Option<Option<serde_json::Value>>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
 	/// * `virtual` - Virtual
 	/// * `bridge` - Bridge
 	/// * `lag` - Link Aggregation Group (LAG)
@@ -7868,14 +8602,20 @@ pub struct PatchedWritableInterfaceTemplateRequest {
 	/// * `extreme-summitstack-256` - Extreme SummitStack-256
 	/// * `extreme-summitstack-512` - Extreme SummitStack-512
 	/// * `other` - Other
-	pub r#type: String,
-	pub enabled: bool,
-	pub mgmt_only: bool,
-	pub description: String,
-	pub bridge: Option<i64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub enabled: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mgmt_only: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub bridge: Option<Option<i64>>,
 	/// * `pd` - PD
 	/// * `pse` - PSE
-	pub poe_mode: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub poe_mode: Option<Option<String>>,
 	/// * `type1-ieee802.3af` - 802.3af (Type 1)
 	/// * `type2-ieee802.3at` - 802.3at (Type 2)
 	/// * `type3-ieee802.3bt` - 802.3bt (Type 3)
@@ -7884,59 +8624,87 @@ pub struct PatchedWritableInterfaceTemplateRequest {
 	/// * `passive-24v-4pair` - Passive 24V (4-pair)
 	/// * `passive-48v-2pair` - Passive 48V (2-pair)
 	/// * `passive-48v-4pair` - Passive 48V (4-pair)
-	pub poe_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub poe_type: Option<Option<String>>,
 	/// * `ap` - Access point
 	/// * `station` - Station
-	pub rf_role: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub rf_role: Option<Option<String>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableInventoryItemRequest {
-	pub device: serde_json::Value,
-	pub parent: Option<i64>,
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub parent: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
 	/// * `offline` - Offline
 	/// * `active` - Active
 	/// * `planned` - Planned
 	/// * `staged` - Staged
 	/// * `failed` - Failed
 	/// * `decommissioning` - Decommissioning
-	pub status: String,
-	pub role: Option<serde_json::Value>,
-	pub manufacturer: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub role: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub manufacturer: Option<Option<serde_json::Value>>,
 	/// Manufacturer-assigned part identifier
-	pub part_id: String,
-	pub serial: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub part_id: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub serial: Option<String>,
 	/// A unique tag used to identify this item
-	pub asset_tag: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub asset_tag: Option<Option<String>>,
 	/// This item was automatically discovered
-	pub discovered: bool,
-	pub description: String,
-	pub component_type: Option<String>,
-	pub component_id: Option<u64>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub discovered: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub component_type: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub component_id: Option<Option<u64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableJournalEntryRequest {
-	pub assigned_object_type: String,
-	pub assigned_object_id: u64,
-	pub created_by: Option<i64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub assigned_object_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub assigned_object_id: Option<u64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub created_by: Option<Option<i64>>,
 	/// * `info` - Info
 	/// * `success` - Success
 	/// * `warning` - Warning
 	/// * `danger` - Danger
-	pub kind: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub kind: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableL2VPNRequest {
-	pub identifier: Option<i64>,
-	pub name: String,
-	pub slug: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub identifier: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
 	/// * `vpws` - VPWS
 	/// * `vpls` - VPLS
 	/// * `vxlan` - VXLAN
@@ -7951,123 +8719,185 @@ pub struct PatchedWritableL2VPNRequest {
 	/// * `ep-tree` - Ethernet Private Tree
 	/// * `evp-tree` - Ethernet Virtual Private Tree
 	/// * `spb` - SPB
-	pub r#type: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<String>,
 	/// * `active` - Active
 	/// * `planned` - Planned
 	/// * `decommissioning` - Decommissioning
-	pub status: String,
-	pub import_targets: Vec<i64>,
-	pub export_targets: Vec<i64>,
-	pub description: String,
-	pub comments: String,
-	pub tenant: Option<serde_json::Value>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub import_targets: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub export_targets: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableLocationRequest {
-	pub name: String,
-	pub slug: String,
-	pub site: serde_json::Value,
-	pub parent: Option<i64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub site: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub parent: Option<Option<i64>>,
 	/// * `planned` - Planned
 	/// * `staging` - Staging
 	/// * `active` - Active
 	/// * `decommissioning` - Decommissioning
 	/// * `retired` - Retired
-	pub status: String,
-	pub tenant: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
 	/// Local facility ID or description
-	pub facility: String,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub comments: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub facility: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableModuleRequest {
-	pub device: serde_json::Value,
-	pub module_bay: i64,
-	pub module_type: serde_json::Value,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub module_bay: Option<i64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub module_type: Option<serde_json::Value>,
 	/// * `offline` - Offline
 	/// * `active` - Active
 	/// * `planned` - Planned
 	/// * `staged` - Staged
 	/// * `failed` - Failed
 	/// * `decommissioning` - Decommissioning
-	pub status: String,
-	pub serial: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub serial: Option<String>,
 	/// A unique tag used to identify this device
-	pub asset_tag: Option<String>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub asset_tag: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableModuleTypeRequest {
-	pub profile: Option<serde_json::Value>,
-	pub manufacturer: serde_json::Value,
-	pub model: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub profile: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub manufacturer: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub model: Option<String>,
 	/// Discrete part number (optional)
-	pub part_number: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub part_number: Option<String>,
 	/// * `front-to-rear` - Front to rear
 	/// * `rear-to-front` - Rear to front
 	/// * `left-to-right` - Left to right
 	/// * `right-to-left` - Right to left
 	/// * `side-to-rear` - Side to rear
 	/// * `passive` - Passive
-	pub airflow: Option<String>,
-	pub weight: Option<f64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub airflow: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub weight: Option<Option<f64>>,
 	/// * `kg` - Kilograms
 	/// * `g` - Grams
 	/// * `lb` - Pounds
 	/// * `oz` - Ounces
-	pub weight_unit: Option<String>,
-	pub description: String,
-	pub attributes: Option<serde_json::Value>,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub weight_unit: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub attributes: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritablePowerFeedRequest {
-	pub power_panel: serde_json::Value,
-	pub rack: Option<serde_json::Value>,
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub power_panel: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub rack: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// * `offline` - Offline
 	/// * `active` - Active
 	/// * `planned` - Planned
 	/// * `failed` - Failed
-	pub status: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
 	/// * `primary` - Primary
 	/// * `redundant` - Redundant
-	pub r#type: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<String>,
 	/// * `ac` - AC
 	/// * `dc` - DC
-	pub supply: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub supply: Option<String>,
 	/// * `single-phase` - Single phase
 	/// * `three-phase` - Three-phase
-	pub phase: String,
-	pub voltage: i16,
-	pub amperage: u16,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub phase: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub voltage: Option<i16>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub amperage: Option<u16>,
 	/// Maximum permissible draw (percentage)
-	pub max_utilization: u8,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub max_utilization: Option<u8>,
 	/// Treat as if a cable is connected
-	pub mark_connected: bool,
-	pub description: String,
-	pub tenant: Option<serde_json::Value>,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mark_connected: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritablePowerOutletRequest {
-	pub device: serde_json::Value,
-	pub module: Option<serde_json::Value>,
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub module: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
 	/// Physical port type
 	/// 
 	/// * `iec-60320-c5` - C5
@@ -8168,33 +8998,46 @@ pub struct PatchedWritablePowerOutletRequest {
 	/// * `ubiquiti-smartpower` - Ubiquiti SmartPower
 	/// * `hardwired` - Hardwired
 	/// * `other` - Other
-	pub r#type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<Option<String>>,
 	/// * `enabled` - Enabled
 	/// * `disabled` - Disabled
 	/// * `faulty` - Faulty
-	pub status: String,
-	pub color: String,
-	pub power_port: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub color: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub power_port: Option<Option<serde_json::Value>>,
 	/// Phase (for three-phase feeds)
 	/// 
 	/// * `A` - A
 	/// * `B` - B
 	/// * `C` - C
-	pub feed_leg: Option<String>,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub feed_leg: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// Treat as if a cable is connected
-	pub mark_connected: bool,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mark_connected: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritablePowerOutletTemplateRequest {
-	pub device_type: Option<serde_json::Value>,
-	pub module_type: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device_type: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub module_type: Option<Option<serde_json::Value>>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
 	/// * `iec-60320-c5` - C5
 	/// * `iec-60320-c7` - C7
 	/// * `iec-60320-c13` - C13
@@ -8293,23 +9136,31 @@ pub struct PatchedWritablePowerOutletTemplateRequest {
 	/// * `ubiquiti-smartpower` - Ubiquiti SmartPower
 	/// * `hardwired` - Hardwired
 	/// * `other` - Other
-	pub r#type: Option<String>,
-	pub power_port: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub power_port: Option<Option<serde_json::Value>>,
 	/// Phase (for three-phase feeds)
 	/// 
 	/// * `A` - A
 	/// * `B` - B
 	/// * `C` - C
-	pub feed_leg: Option<String>,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub feed_leg: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritablePowerPortRequest {
-	pub device: serde_json::Value,
-	pub module: Option<serde_json::Value>,
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub module: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
 	/// Physical port type
 	/// 
 	/// * `iec-60320-c6` - C6
@@ -8416,25 +9267,36 @@ pub struct PatchedWritablePowerPortRequest {
 	/// * `ubiquiti-smartpower` - Ubiquiti SmartPower
 	/// * `hardwired` - Hardwired
 	/// * `other` - Other
-	pub r#type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<Option<String>>,
 	/// Maximum power draw (watts)
-	pub maximum_draw: Option<u32>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub maximum_draw: Option<Option<u32>>,
 	/// Allocated power draw (watts)
-	pub allocated_draw: Option<u32>,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub allocated_draw: Option<Option<u32>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// Treat as if a cable is connected
-	pub mark_connected: bool,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mark_connected: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritablePowerPortTemplateRequest {
-	pub device_type: Option<serde_json::Value>,
-	pub module_type: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device_type: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub module_type: Option<Option<serde_json::Value>>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
 	/// * `iec-60320-c6` - C6
 	/// * `iec-60320-c8` - C8
 	/// * `iec-60320-c14` - C14
@@ -8539,56 +9401,84 @@ pub struct PatchedWritablePowerPortTemplateRequest {
 	/// * `ubiquiti-smartpower` - Ubiquiti SmartPower
 	/// * `hardwired` - Hardwired
 	/// * `other` - Other
-	pub r#type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<Option<String>>,
 	/// Maximum power draw (watts)
-	pub maximum_draw: Option<u32>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub maximum_draw: Option<Option<u32>>,
 	/// Allocated power draw (watts)
-	pub allocated_draw: Option<u32>,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub allocated_draw: Option<Option<u32>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritablePrefixRequest {
-	pub prefix: String,
-	pub vrf: Option<serde_json::Value>,
-	pub scope_type: Option<String>,
-	pub scope_id: Option<i64>,
-	pub tenant: Option<serde_json::Value>,
-	pub vlan: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub prefix: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub vrf: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub scope_type: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub scope_id: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub vlan: Option<Option<serde_json::Value>>,
 	/// Operational status of this prefix
 	/// 
 	/// * `container` - Container
 	/// * `active` - Active
 	/// * `reserved` - Reserved
 	/// * `deprecated` - Deprecated
-	pub status: String,
-	pub role: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub role: Option<Option<serde_json::Value>>,
 	/// All IP addresses within this prefix are considered usable
-	pub is_pool: bool,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub is_pool: Option<bool>,
 	/// Treat as fully utilized
-	pub mark_utilized: bool,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mark_utilized: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableRackRequest {
-	pub name: String,
-	pub facility_id: Option<String>,
-	pub site: serde_json::Value,
-	pub location: Option<serde_json::Value>,
-	pub tenant: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub facility_id: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub site: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub location: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
 	/// * `reserved` - Reserved
 	/// * `available` - Available
 	/// * `planned` - Planned
 	/// * `active` - Active
 	/// * `deprecated` - Deprecated
-	pub status: String,
-	pub role: Option<serde_json::Value>,
-	pub serial: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub role: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub serial: Option<String>,
 	/// A unique tag used to identify this rack
-	pub asset_tag: Option<String>,
-	pub rack_type: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub asset_tag: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub rack_type: Option<Option<serde_json::Value>>,
 	/// * `2-post-frame` - 2-post frame
 	/// * `4-post-frame` - 4-post frame
 	/// * `4-post-cabinet` - 4-post cabinet
@@ -8596,6 +9486,83 @@ pub struct PatchedWritableRackRequest {
 	/// * `wall-frame-vertical` - Wall-mounted frame (vertical)
 	/// * `wall-cabinet` - Wall-mounted cabinet
 	/// * `wall-cabinet-vertical` - Wall-mounted cabinet (vertical)
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub form_factor: Option<Option<String>>,
+	/// Rail-to-rail width
+	/// 
+	/// * `10` - 10 inches
+	/// * `19` - 19 inches
+	/// * `21` - 21 inches
+	/// * `23` - 23 inches
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub width: Option<u16>,
+	/// Height in rack units
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub u_height: Option<u8>,
+	/// Starting unit for rack
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub starting_unit: Option<u16>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub weight: Option<Option<f64>>,
+	/// Maximum load capacity for the rack
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub max_weight: Option<Option<u32>>,
+	/// * `kg` - Kilograms
+	/// * `g` - Grams
+	/// * `lb` - Pounds
+	/// * `oz` - Ounces
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub weight_unit: Option<Option<String>>,
+	/// Units are numbered top-to-bottom
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub desc_units: Option<bool>,
+	/// Outer dimension of rack (width)
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub outer_width: Option<Option<u16>>,
+	/// Outer dimension of rack (height)
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub outer_height: Option<Option<u16>>,
+	/// Outer dimension of rack (depth)
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub outer_depth: Option<Option<u16>>,
+	/// * `mm` - Millimeters
+	/// * `in` - Inches
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub outer_unit: Option<Option<String>>,
+	/// Maximum depth of a mounted device, in millimeters. For four-post racks, this is the distance between the front and rear rails.
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mounting_depth: Option<Option<u16>>,
+	/// * `front-to-rear` - Front to rear
+	/// * `rear-to-front` - Rear to front
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub airflow: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct PatchedWritableRackTypeRequest {
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub manufacturer: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub model: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	/// * `2-post-frame` - 2-post frame
+	/// * `4-post-frame` - 4-post frame
+	/// * `4-post-cabinet` - 4-post cabinet
+	/// * `wall-frame` - Wall-mounted frame
+	/// * `wall-frame-vertical` - Wall-mounted frame (vertical)
+	/// * `wall-cabinet` - Wall-mounted cabinet
+	/// * `wall-cabinet-vertical` - Wall-mounted cabinet (vertical)
+	#[serde(skip_serializing_if = "Option::is_none")]
 	pub form_factor: Option<String>,
 	/// Rail-to-rail width
 	/// 
@@ -8603,97 +9570,62 @@ pub struct PatchedWritableRackRequest {
 	/// * `19` - 19 inches
 	/// * `21` - 21 inches
 	/// * `23` - 23 inches
-	pub width: u16,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub width: Option<u16>,
 	/// Height in rack units
-	pub u_height: u8,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub u_height: Option<u8>,
 	/// Starting unit for rack
-	pub starting_unit: u16,
-	pub weight: Option<f64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub starting_unit: Option<u16>,
+	/// Units are numbered top-to-bottom
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub desc_units: Option<bool>,
+	/// Outer dimension of rack (width)
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub outer_width: Option<Option<u16>>,
+	/// Outer dimension of rack (height)
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub outer_height: Option<Option<u16>>,
+	/// Outer dimension of rack (depth)
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub outer_depth: Option<Option<u16>>,
+	/// * `mm` - Millimeters
+	/// * `in` - Inches
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub outer_unit: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub weight: Option<Option<f64>>,
 	/// Maximum load capacity for the rack
-	pub max_weight: Option<u32>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub max_weight: Option<Option<u32>>,
 	/// * `kg` - Kilograms
 	/// * `g` - Grams
 	/// * `lb` - Pounds
 	/// * `oz` - Ounces
-	pub weight_unit: Option<String>,
-	/// Units are numbered top-to-bottom
-	pub desc_units: bool,
-	/// Outer dimension of rack (width)
-	pub outer_width: Option<u16>,
-	/// Outer dimension of rack (height)
-	pub outer_height: Option<u16>,
-	/// Outer dimension of rack (depth)
-	pub outer_depth: Option<u16>,
-	/// * `mm` - Millimeters
-	/// * `in` - Inches
-	pub outer_unit: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub weight_unit: Option<Option<String>>,
 	/// Maximum depth of a mounted device, in millimeters. For four-post racks, this is the distance between the front and rear rails.
-	pub mounting_depth: Option<u16>,
-	/// * `front-to-rear` - Front to rear
-	/// * `rear-to-front` - Rear to front
-	pub airflow: Option<String>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-}
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
-pub struct PatchedWritableRackTypeRequest {
-	pub manufacturer: serde_json::Value,
-	pub model: String,
-	pub slug: String,
-	pub description: String,
-	/// * `2-post-frame` - 2-post frame
-	/// * `4-post-frame` - 4-post frame
-	/// * `4-post-cabinet` - 4-post cabinet
-	/// * `wall-frame` - Wall-mounted frame
-	/// * `wall-frame-vertical` - Wall-mounted frame (vertical)
-	/// * `wall-cabinet` - Wall-mounted cabinet
-	/// * `wall-cabinet-vertical` - Wall-mounted cabinet (vertical)
-	pub form_factor: String,
-	/// Rail-to-rail width
-	/// 
-	/// * `10` - 10 inches
-	/// * `19` - 19 inches
-	/// * `21` - 21 inches
-	/// * `23` - 23 inches
-	pub width: u16,
-	/// Height in rack units
-	pub u_height: u8,
-	/// Starting unit for rack
-	pub starting_unit: u16,
-	/// Units are numbered top-to-bottom
-	pub desc_units: bool,
-	/// Outer dimension of rack (width)
-	pub outer_width: Option<u16>,
-	/// Outer dimension of rack (height)
-	pub outer_height: Option<u16>,
-	/// Outer dimension of rack (depth)
-	pub outer_depth: Option<u16>,
-	/// * `mm` - Millimeters
-	/// * `in` - Inches
-	pub outer_unit: Option<String>,
-	pub weight: Option<f64>,
-	/// Maximum load capacity for the rack
-	pub max_weight: Option<u32>,
-	/// * `kg` - Kilograms
-	/// * `g` - Grams
-	/// * `lb` - Pounds
-	/// * `oz` - Ounces
-	pub weight_unit: Option<String>,
-	/// Maximum depth of a mounted device, in millimeters. For four-post racks, this is the distance between the front and rear rails.
-	pub mounting_depth: Option<u16>,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mounting_depth: Option<Option<u16>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableRearPortRequest {
-	pub device: serde_json::Value,
-	pub module: Option<serde_json::Value>,
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub module: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
 	/// * `8p8c` - 8P8C
 	/// * `8p6c` - 8P6C
 	/// * `8p4c` - 8P4C
@@ -8752,24 +9684,35 @@ pub struct PatchedWritableRearPortRequest {
 	/// * `usb-micro-b` - USB Micro B
 	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
-	pub r#type: String,
-	pub color: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub color: Option<String>,
 	/// Number of front ports which may be mapped
-	pub positions: u16,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub positions: Option<u16>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// Treat as if a cable is connected
-	pub mark_connected: bool,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mark_connected: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableRearPortTemplateRequest {
-	pub device_type: Option<serde_json::Value>,
-	pub module_type: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device_type: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub module_type: Option<Option<serde_json::Value>>,
 	/// {module} is accepted as a substitution for the module bay position when attached to a module type.
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// Physical label
-	pub label: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub label: Option<String>,
 	/// * `8p8c` - 8P8C
 	/// * `8p6c` - 8P6C
 	/// * `8p4c` - 8P4C
@@ -8828,109 +9771,171 @@ pub struct PatchedWritableRearPortTemplateRequest {
 	/// * `usb-micro-b` - USB Micro B
 	/// * `usb-micro-ab` - USB Micro AB
 	/// * `other` - Other
-	pub r#type: String,
-	pub color: String,
-	pub positions: u16,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub color: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub positions: Option<u16>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableRegionRequest {
-	pub name: String,
-	pub slug: String,
-	pub parent: Option<i64>,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub comments: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub parent: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableServiceRequest {
-	pub parent_object_type: String,
-	pub parent_object_id: u64,
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub parent_object_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub parent_object_id: Option<u64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// * `tcp` - TCP
 	/// * `udp` - UDP
 	/// * `sctp` - SCTP
-	pub protocol: String,
-	pub ports: Vec<u16>,
-	pub ipaddresses: Vec<i64>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub protocol: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub ports: Option<Vec<u16>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub ipaddresses: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableServiceTemplateRequest {
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// * `tcp` - TCP
 	/// * `udp` - UDP
 	/// * `sctp` - SCTP
-	pub protocol: String,
-	pub ports: Vec<u16>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub protocol: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub ports: Option<Vec<u16>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableSiteGroupRequest {
-	pub name: String,
-	pub slug: String,
-	pub parent: Option<i64>,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub comments: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub parent: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableSiteRequest {
 	/// Full name of the site
-	pub name: String,
-	pub slug: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
 	/// * `planned` - Planned
 	/// * `staging` - Staging
 	/// * `active` - Active
 	/// * `decommissioning` - Decommissioning
 	/// * `retired` - Retired
-	pub status: String,
-	pub region: Option<serde_json::Value>,
-	pub group: Option<serde_json::Value>,
-	pub tenant: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub region: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub group: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
 	/// Local facility ID or description
-	pub facility: String,
-	pub time_zone: Option<String>,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub facility: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub time_zone: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// Physical location of the building
-	pub physical_address: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub physical_address: Option<String>,
 	/// If different from the physical address
-	pub shipping_address: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub shipping_address: Option<String>,
 	/// GPS coordinate in decimal format (xx.yyyyyy)
-	pub latitude: Option<f64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub latitude: Option<Option<f64>>,
 	/// GPS coordinate in decimal format (xx.yyyyyy)
-	pub longitude: Option<f64>,
-	pub comments: String,
-	pub asns: Vec<i64>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub longitude: Option<Option<f64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub asns: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableTenantGroupRequest {
-	pub name: String,
-	pub slug: String,
-	pub parent: Option<i64>,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub comments: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub parent: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableTunnelRequest {
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// * `planned` - Planned
 	/// * `active` - Active
 	/// * `disabled` - Disabled
-	pub status: String,
-	pub group: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub group: Option<Option<serde_json::Value>>,
 	/// * `ipsec-transport` - IPsec - Transport
 	/// * `ipsec-tunnel` - IPsec - Tunnel
 	/// * `ip-ip` - IP-in-IP
@@ -8939,141 +9944,220 @@ pub struct PatchedWritableTunnelRequest {
 	/// * `openvpn` - OpenVPN
 	/// * `l2tp` - L2TP
 	/// * `pptp` - PPTP
-	pub encapsulation: String,
-	pub ipsec_profile: Option<serde_json::Value>,
-	pub tenant: Option<serde_json::Value>,
-	pub tunnel_id: Option<u64>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub encapsulation: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub ipsec_profile: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tunnel_id: Option<Option<u64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableTunnelTerminationRequest {
-	pub tunnel: serde_json::Value,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tunnel: Option<serde_json::Value>,
 	/// * `peer` - Peer
 	/// * `hub` - Hub
 	/// * `spoke` - Spoke
-	pub role: String,
-	pub termination_type: String,
-	pub termination_id: Option<u64>,
-	pub outside_ip: Option<serde_json::Value>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub role: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub termination_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub termination_id: Option<Option<u64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub outside_ip: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableVLANRequest {
-	pub site: Option<serde_json::Value>,
-	pub group: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub site: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub group: Option<Option<serde_json::Value>>,
 	/// Numeric VLAN ID (1-4094)
-	pub vid: u16,
-	pub name: String,
-	pub tenant: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub vid: Option<u16>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
 	/// Operational status of this VLAN
 	/// 
 	/// * `active` - Active
 	/// * `reserved` - Reserved
 	/// * `deprecated` - Deprecated
-	pub status: String,
-	pub role: Option<serde_json::Value>,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub role: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// Customer/service VLAN designation (for Q-in-Q/IEEE 802.1ad)
 	/// 
 	/// * `svlan` - Service
 	/// * `cvlan` - Customer
-	pub qinq_role: Option<String>,
-	pub qinq_svlan: Option<i64>,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub qinq_role: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub qinq_svlan: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableVMInterfaceRequest {
-	pub virtual_machine: serde_json::Value,
-	pub name: String,
-	pub enabled: bool,
-	pub parent: Option<i64>,
-	pub bridge: Option<i64>,
-	pub mtu: Option<u32>,
-	pub primary_mac_address: Option<serde_json::Value>,
-	pub description: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub virtual_machine: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub enabled: Option<bool>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub parent: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub bridge: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mtu: Option<Option<u32>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub primary_mac_address: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
 	/// IEEE 802.1Q tagging strategy
 	/// 
 	/// * `access` - Access
 	/// * `tagged` - Tagged
 	/// * `tagged-all` - Tagged (All)
 	/// * `q-in-q` - Q-in-Q (802.1ad)
-	pub mode: Option<String>,
-	pub untagged_vlan: Option<serde_json::Value>,
-	pub tagged_vlans: Vec<i64>,
-	pub qinq_svlan: Option<serde_json::Value>,
-	pub vlan_translation_policy: Option<serde_json::Value>,
-	pub vrf: Option<serde_json::Value>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub mode: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub untagged_vlan: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tagged_vlans: Option<Vec<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub qinq_svlan: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub vlan_translation_policy: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub vrf: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableVirtualChassisRequest {
-	pub name: String,
-	pub domain: String,
-	pub master: Option<i64>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub domain: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub master: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableVirtualCircuitRequest {
 	/// Unique circuit ID
-	pub cid: String,
-	pub provider_network: serde_json::Value,
-	pub provider_account: Option<serde_json::Value>,
-	pub r#type: serde_json::Value,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub cid: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub provider_network: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub provider_account: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub r#type: Option<serde_json::Value>,
 	/// * `planned` - Planned
 	/// * `provisioning` - Provisioning
 	/// * `active` - Active
 	/// * `offline` - Offline
 	/// * `deprovisioning` - Deprovisioning
 	/// * `decommissioned` - Decommissioned
-	pub status: String,
-	pub tenant: Option<serde_json::Value>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableVirtualCircuitTerminationRequest {
-	pub virtual_circuit: serde_json::Value,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub virtual_circuit: Option<serde_json::Value>,
 	/// * `peer` - Peer
 	/// * `hub` - Hub
 	/// * `spoke` - Spoke
-	pub role: String,
-	pub interface: serde_json::Value,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub role: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub interface: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableVirtualDeviceContextRequest {
-	pub name: String,
-	pub device: serde_json::Value,
-	pub identifier: Option<u16>,
-	pub tenant: Option<serde_json::Value>,
-	pub primary_ip4: Option<serde_json::Value>,
-	pub primary_ip6: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub identifier: Option<Option<u16>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub primary_ip4: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub primary_ip6: Option<Option<serde_json::Value>>,
 	/// * `active` - Active
 	/// * `planned` - Planned
 	/// * `offline` - Offline
-	pub status: String,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableVirtualMachineWithConfigContextRequest {
-	pub name: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
 	/// * `offline` - Offline
 	/// * `active` - Active
 	/// * `planned` - Planned
@@ -9081,95 +10165,149 @@ pub struct PatchedWritableVirtualMachineWithConfigContextRequest {
 	/// * `failed` - Failed
 	/// * `decommissioning` - Decommissioning
 	/// * `paused` - Paused
-	pub status: String,
-	pub site: Option<serde_json::Value>,
-	pub cluster: Option<serde_json::Value>,
-	pub device: Option<serde_json::Value>,
-	pub serial: String,
-	pub role: Option<serde_json::Value>,
-	pub tenant: Option<serde_json::Value>,
-	pub platform: Option<serde_json::Value>,
-	pub primary_ip4: Option<serde_json::Value>,
-	pub primary_ip6: Option<serde_json::Value>,
-	pub vcpus: Option<f64>,
-	pub memory: Option<u32>,
-	pub disk: Option<u32>,
-	pub description: String,
-	pub comments: String,
-	pub config_template: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub site: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub cluster: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub device: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub serial: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub role: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub platform: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub primary_ip4: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub primary_ip6: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub vcpus: Option<Option<f64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub memory: Option<Option<u32>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub disk: Option<Option<u32>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub config_template: Option<Option<serde_json::Value>>,
 	/// Local config context data takes precedence over source contexts in the final rendered config context
-	pub local_context_data: Option<serde_json::Value>,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub local_context_data: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableWirelessLANGroupRequest {
-	pub name: String,
-	pub slug: String,
-	pub parent: Option<i64>,
-	pub description: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
-	pub comments: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub name: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub slug: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub parent: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableWirelessLANRequest {
-	pub ssid: String,
-	pub description: String,
-	pub group: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub ssid: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub group: Option<Option<serde_json::Value>>,
 	/// * `active` - Active
 	/// * `reserved` - Reserved
 	/// * `disabled` - Disabled
 	/// * `deprecated` - Deprecated
-	pub status: String,
-	pub vlan: Option<serde_json::Value>,
-	pub scope_type: Option<String>,
-	pub scope_id: Option<i64>,
-	pub tenant: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub vlan: Option<Option<serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub scope_type: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub scope_id: Option<Option<i64>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
 	/// * `open` - Open
 	/// * `wep` - WEP
 	/// * `wpa-personal` - WPA Personal (PSK)
 	/// * `wpa-enterprise` - WPA Enterprise
-	pub auth_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub auth_type: Option<Option<String>>,
 	/// * `auto` - Auto
 	/// * `tkip` - TKIP
 	/// * `aes` - AES
-	pub auth_cipher: Option<String>,
-	pub auth_psk: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub auth_cipher: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub auth_psk: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PatchedWritableWirelessLinkRequest {
-	pub interface_a: serde_json::Value,
-	pub interface_b: serde_json::Value,
-	pub ssid: String,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub interface_a: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub interface_b: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub ssid: Option<String>,
 	/// * `connected` - Connected
 	/// * `planned` - Planned
 	/// * `decommissioning` - Decommissioning
-	pub status: String,
-	pub tenant: Option<serde_json::Value>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub status: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tenant: Option<Option<serde_json::Value>>,
 	/// * `open` - Open
 	/// * `wep` - WEP
 	/// * `wpa-personal` - WPA Personal (PSK)
 	/// * `wpa-enterprise` - WPA Enterprise
-	pub auth_type: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub auth_type: Option<Option<String>>,
 	/// * `auto` - Auto
 	/// * `tkip` - TKIP
 	/// * `aes` - AES
-	pub auth_cipher: Option<String>,
-	pub auth_psk: String,
-	pub distance: Option<f64>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub auth_cipher: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub auth_psk: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub distance: Option<Option<f64>>,
 	/// * `km` - Kilometers
 	/// * `m` - Meters
 	/// * `mi` - Miles
 	/// * `ft` - Feet
-	pub distance_unit: Option<String>,
-	pub description: String,
-	pub comments: String,
-	pub tags: Vec<NestedTagRequest>,
-	pub custom_fields: Option<std::collections::HashMap<String, serde_json::Value>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub distance_unit: Option<Option<String>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub description: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub comments: Option<String>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub tags: Option<Vec<NestedTagRequest>>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub custom_fields: Option<Option<std::collections::HashMap<String, serde_json::Value>>>,
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct Platform {
