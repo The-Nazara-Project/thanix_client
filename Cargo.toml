@@ -1,6 +1,6 @@
 [package]
 name = "thanix_client"
-version = "2.4.3"
+version = "2.4.4"
 authors = ["Tiara Lena Hock <tiara.dev@proton.me>"]
 edition = "2021"
 description = "A netbox API client used as a reference for the Nazara project. Generated from the schema of https://demo.netbox.dev/"
