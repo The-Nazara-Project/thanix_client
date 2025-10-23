@@ -274,12 +274,14 @@ pub struct CircuitsCircuitGroupsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -302,12 +304,14 @@ pub struct CircuitsCircuitGroupsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -319,12 +323,14 @@ pub struct CircuitsCircuitGroupsListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -557,12 +563,14 @@ pub struct CircuitsCircuitTerminationsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -602,12 +610,14 @@ pub struct CircuitsCircuitTerminationsListQuery {
 	pub pp_info__ic: Option<Vec<String>>,
 	pub pp_info__ie: Option<Vec<String>>,
 	pub pp_info__iew: Option<Vec<String>>,
+	pub pp_info__iregex: Option<Vec<String>>,
 	pub pp_info__isw: Option<Vec<String>>,
 	pub pp_info__n: Option<Vec<String>>,
 	pub pp_info__nic: Option<Vec<String>>,
 	pub pp_info__nie: Option<Vec<String>>,
 	pub pp_info__niew: Option<Vec<String>>,
 	pub pp_info__nisw: Option<Vec<String>>,
+	pub pp_info__regex: Option<Vec<String>>,
 	/// Provider (slug)
 	pub provider: Option<Vec<String>>,
 	/// Provider (slug)
@@ -667,12 +677,14 @@ pub struct CircuitsCircuitTerminationsListQuery {
 	pub xconnect_id__ic: Option<Vec<String>>,
 	pub xconnect_id__ie: Option<Vec<String>>,
 	pub xconnect_id__iew: Option<Vec<String>>,
+	pub xconnect_id__iregex: Option<Vec<String>>,
 	pub xconnect_id__isw: Option<Vec<String>>,
 	pub xconnect_id__n: Option<Vec<String>>,
 	pub xconnect_id__nic: Option<Vec<String>>,
 	pub xconnect_id__nie: Option<Vec<String>>,
 	pub xconnect_id__niew: Option<Vec<String>>,
 	pub xconnect_id__nisw: Option<Vec<String>>,
+	pub xconnect_id__regex: Option<Vec<String>>,
 
 }
 #[derive(Debug)]
@@ -888,12 +900,14 @@ pub struct CircuitsCircuitTypesListQuery {
 	pub color__ic: Option<Vec<String>>,
 	pub color__ie: Option<Vec<String>>,
 	pub color__iew: Option<Vec<String>>,
+	pub color__iregex: Option<Vec<String>>,
 	pub color__isw: Option<Vec<String>>,
 	pub color__n: Option<Vec<String>>,
 	pub color__nic: Option<Vec<String>>,
 	pub color__nie: Option<Vec<String>>,
 	pub color__niew: Option<Vec<String>>,
 	pub color__nisw: Option<Vec<String>>,
+	pub color__regex: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -907,12 +921,14 @@ pub struct CircuitsCircuitTypesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -935,12 +951,14 @@ pub struct CircuitsCircuitTypesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -952,12 +970,14 @@ pub struct CircuitsCircuitTypesListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -1158,12 +1178,14 @@ pub struct CircuitsCircuitsListQuery {
 	pub cid__ic: Option<Vec<String>>,
 	pub cid__ie: Option<Vec<String>>,
 	pub cid__iew: Option<Vec<String>>,
+	pub cid__iregex: Option<Vec<String>>,
 	pub cid__isw: Option<Vec<String>>,
 	pub cid__n: Option<Vec<String>>,
 	pub cid__nic: Option<Vec<String>>,
 	pub cid__nie: Option<Vec<String>>,
 	pub cid__niew: Option<Vec<String>>,
 	pub cid__nisw: Option<Vec<String>>,
+	pub cid__regex: Option<Vec<String>>,
 	pub commit_rate: Option<Vec<i64>>,
 	pub commit_rate__empty: Option<bool>,
 	pub commit_rate__gt: Option<Vec<i64>>,
@@ -1194,12 +1216,14 @@ pub struct CircuitsCircuitsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub distance: Option<Vec<f64>>,
 	pub distance__empty: Option<bool>,
 	pub distance__gt: Option<Vec<f64>>,
@@ -1287,12 +1311,14 @@ pub struct CircuitsCircuitsListQuery {
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -1528,12 +1554,14 @@ pub struct CircuitsProviderAccountsListQuery {
 	pub account__ic: Option<Vec<String>>,
 	pub account__ie: Option<Vec<String>>,
 	pub account__iew: Option<Vec<String>>,
+	pub account__iregex: Option<Vec<String>>,
 	pub account__isw: Option<Vec<String>>,
 	pub account__n: Option<Vec<String>>,
 	pub account__nic: Option<Vec<String>>,
 	pub account__nie: Option<Vec<String>>,
 	pub account__niew: Option<Vec<String>>,
 	pub account__nisw: Option<Vec<String>>,
+	pub account__regex: Option<Vec<String>>,
 	/// Contact
 	pub contact: Option<Vec<i64>>,
 	/// Contact
@@ -1557,12 +1585,14 @@ pub struct CircuitsProviderAccountsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -1585,12 +1615,14 @@ pub struct CircuitsProviderAccountsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -1813,12 +1845,14 @@ pub struct CircuitsProviderNetworksListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -1841,12 +1875,14 @@ pub struct CircuitsProviderNetworksListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -1866,12 +1902,14 @@ pub struct CircuitsProviderNetworksListQuery {
 	pub service_id__ic: Option<Vec<String>>,
 	pub service_id__ie: Option<Vec<String>>,
 	pub service_id__iew: Option<Vec<String>>,
+	pub service_id__iregex: Option<Vec<String>>,
 	pub service_id__isw: Option<Vec<String>>,
 	pub service_id__n: Option<Vec<String>>,
 	pub service_id__nic: Option<Vec<String>>,
 	pub service_id__nie: Option<Vec<String>>,
 	pub service_id__niew: Option<Vec<String>>,
 	pub service_id__nisw: Option<Vec<String>>,
+	pub service_id__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -2098,12 +2136,14 @@ pub struct CircuitsProvidersListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -2126,12 +2166,14 @@ pub struct CircuitsProvidersListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -2159,12 +2201,14 @@ pub struct CircuitsProvidersListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -2373,12 +2417,14 @@ pub struct CircuitsVirtualCircuitTerminationsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -2431,12 +2477,14 @@ pub struct CircuitsVirtualCircuitTerminationsListQuery {
 	pub role__ic: Option<Vec<String>>,
 	pub role__ie: Option<Vec<String>>,
 	pub role__iew: Option<Vec<String>>,
+	pub role__iregex: Option<Vec<String>>,
 	pub role__isw: Option<Vec<String>>,
 	pub role__n: Option<Vec<String>>,
 	pub role__nic: Option<Vec<String>>,
 	pub role__nie: Option<Vec<String>>,
 	pub role__niew: Option<Vec<String>>,
 	pub role__nisw: Option<Vec<String>>,
+	pub role__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -2661,12 +2709,14 @@ pub struct CircuitsVirtualCircuitTypesListQuery {
 	pub color__ic: Option<Vec<String>>,
 	pub color__ie: Option<Vec<String>>,
 	pub color__iew: Option<Vec<String>>,
+	pub color__iregex: Option<Vec<String>>,
 	pub color__isw: Option<Vec<String>>,
 	pub color__n: Option<Vec<String>>,
 	pub color__nic: Option<Vec<String>>,
 	pub color__nie: Option<Vec<String>>,
 	pub color__niew: Option<Vec<String>>,
 	pub color__nisw: Option<Vec<String>>,
+	pub color__regex: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -2680,12 +2730,14 @@ pub struct CircuitsVirtualCircuitTypesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -2708,12 +2760,14 @@ pub struct CircuitsVirtualCircuitTypesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -2725,12 +2779,14 @@ pub struct CircuitsVirtualCircuitTypesListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -2931,12 +2987,14 @@ pub struct CircuitsVirtualCircuitsListQuery {
 	pub cid__ic: Option<Vec<String>>,
 	pub cid__ie: Option<Vec<String>>,
 	pub cid__iew: Option<Vec<String>>,
+	pub cid__iregex: Option<Vec<String>>,
 	pub cid__isw: Option<Vec<String>>,
 	pub cid__n: Option<Vec<String>>,
 	pub cid__nic: Option<Vec<String>>,
 	pub cid__nie: Option<Vec<String>>,
 	pub cid__niew: Option<Vec<String>>,
 	pub cid__nisw: Option<Vec<String>>,
+	pub cid__regex: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -2950,12 +3008,14 @@ pub struct CircuitsVirtualCircuitsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -3004,12 +3064,14 @@ pub struct CircuitsVirtualCircuitsListQuery {
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -3229,7 +3291,7 @@ pub enum CoreBackgroundQueuesRetrieveResponse {
 	Other(Response)
 }
 /// Retrieve a list of RQ Queues.
-/// Note: Queue names are not URL safe so not returning a detail view.
+/// Note: Queue names are not URL safe, so not returning a detail view.
 pub fn core_background_queues_retrieve(state: &ThanixClient) -> Result<CoreBackgroundQueuesRetrieveResponse, Error> {
 
 	let mut r#request = state.client.get(format!("{}/api/core/background-queues/", state.base_url))
@@ -3245,13 +3307,13 @@ pub fn core_background_queues_retrieve(state: &ThanixClient) -> Result<CoreBackg
 	}
 }
 #[derive(Debug)]
-pub enum CoreBackgroundQueuesRetrieve2Response {
+pub enum CoreBackgroundQueuesRetrieveByNameResponse {
 	Http200(Option<std::collections::HashMap<String, serde_json::Value>>),
 	Other(Response)
 }
 /// Retrieve a list of RQ Queues.
-/// Note: Queue names are not URL safe so not returning a detail view.
-pub fn core_background_queues_retrieve_2(state: &ThanixClient, name: String) -> Result<CoreBackgroundQueuesRetrieve2Response, Error> {
+/// Note: Queue names are not URL safe, so not returning a detail view.
+pub fn core_background_queues_retrieve_by_name(state: &ThanixClient, name: String) -> Result<CoreBackgroundQueuesRetrieveByNameResponse, Error> {
 
 	let mut r#request = state.client.get(format!("{}/api/core/background-queues/{name}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token));
@@ -3261,8 +3323,8 @@ pub fn core_background_queues_retrieve_2(state: &ThanixClient, name: String) -> 
 	#[cfg(feature = "debug_messages")]
 	eprintln!("= {:?}", &r#response);
 	match r#response.status().as_u16() {
-		200 => { Ok(CoreBackgroundQueuesRetrieve2Response::Http200(r#response.json::<Option<std::collections::HashMap<String, serde_json::Value>>>()?)) },
-		r#other_status => { Ok(CoreBackgroundQueuesRetrieve2Response::Other(r#response)) }
+		200 => { Ok(CoreBackgroundQueuesRetrieveByNameResponse::Http200(r#response.json::<Option<std::collections::HashMap<String, serde_json::Value>>>()?)) },
+		r#other_status => { Ok(CoreBackgroundQueuesRetrieveByNameResponse::Other(r#response)) }
 	}
 }
 #[derive(Debug)]
@@ -3286,12 +3348,12 @@ pub fn core_background_tasks_retrieve(state: &ThanixClient) -> Result<CoreBackgr
 	}
 }
 #[derive(Debug)]
-pub enum CoreBackgroundTasksRetrieve2Response {
+pub enum CoreBackgroundTasksRetrieveByIdResponse {
 	Http200(Option<std::collections::HashMap<String, serde_json::Value>>),
 	Other(Response)
 }
 /// Retrieve a list of RQ Tasks.
-pub fn core_background_tasks_retrieve_2(state: &ThanixClient, id: String) -> Result<CoreBackgroundTasksRetrieve2Response, Error> {
+pub fn core_background_tasks_retrieve_by_id(state: &ThanixClient, id: String) -> Result<CoreBackgroundTasksRetrieveByIdResponse, Error> {
 
 	let mut r#request = state.client.get(format!("{}/api/core/background-tasks/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token));
@@ -3301,83 +3363,91 @@ pub fn core_background_tasks_retrieve_2(state: &ThanixClient, id: String) -> Res
 	#[cfg(feature = "debug_messages")]
 	eprintln!("= {:?}", &r#response);
 	match r#response.status().as_u16() {
-		200 => { Ok(CoreBackgroundTasksRetrieve2Response::Http200(r#response.json::<Option<std::collections::HashMap<String, serde_json::Value>>>()?)) },
-		r#other_status => { Ok(CoreBackgroundTasksRetrieve2Response::Other(r#response)) }
+		200 => { Ok(CoreBackgroundTasksRetrieveByIdResponse::Http200(r#response.json::<Option<std::collections::HashMap<String, serde_json::Value>>>()?)) },
+		r#other_status => { Ok(CoreBackgroundTasksRetrieveByIdResponse::Other(r#response)) }
 	}
 }
 #[derive(Debug)]
 pub enum CoreBackgroundTasksDeleteCreateResponse {
-	Http200,
+	Http200(BackgroundTask),
 	Other(Response)
 }
 /// Retrieve a list of RQ Tasks.
-pub fn core_background_tasks_delete_create(state: &ThanixClient, id: String) -> Result<CoreBackgroundTasksDeleteCreateResponse, Error> {
+pub fn core_background_tasks_delete_create(state: &ThanixClient, body: BackgroundTaskRequest, id: String) -> Result<CoreBackgroundTasksDeleteCreateResponse, Error> {
 
 	let mut r#request = state.client.post(format!("{}/api/core/background-tasks/{id}/delete/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token));
+	r#request = r#request.json(&body);
 	#[cfg(feature = "debug_messages")]
 	eprint!("{:?} = ", &r#request);
 	let r#response = r#request.send()?;
 	#[cfg(feature = "debug_messages")]
 	eprintln!("= {:?}", &r#response);
 	match r#response.status().as_u16() {
+		200 => { Ok(CoreBackgroundTasksDeleteCreateResponse::Http200(r#response.json::<BackgroundTask>()?)) },
 		r#other_status => { Ok(CoreBackgroundTasksDeleteCreateResponse::Other(r#response)) }
 	}
 }
 #[derive(Debug)]
 pub enum CoreBackgroundTasksEnqueueCreateResponse {
-	Http200,
+	Http200(BackgroundTask),
 	Other(Response)
 }
 /// Retrieve a list of RQ Tasks.
-pub fn core_background_tasks_enqueue_create(state: &ThanixClient, id: String) -> Result<CoreBackgroundTasksEnqueueCreateResponse, Error> {
+pub fn core_background_tasks_enqueue_create(state: &ThanixClient, body: BackgroundTaskRequest, id: String) -> Result<CoreBackgroundTasksEnqueueCreateResponse, Error> {
 
 	let mut r#request = state.client.post(format!("{}/api/core/background-tasks/{id}/enqueue/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token));
+	r#request = r#request.json(&body);
 	#[cfg(feature = "debug_messages")]
 	eprint!("{:?} = ", &r#request);
 	let r#response = r#request.send()?;
 	#[cfg(feature = "debug_messages")]
 	eprintln!("= {:?}", &r#response);
 	match r#response.status().as_u16() {
+		200 => { Ok(CoreBackgroundTasksEnqueueCreateResponse::Http200(r#response.json::<BackgroundTask>()?)) },
 		r#other_status => { Ok(CoreBackgroundTasksEnqueueCreateResponse::Other(r#response)) }
 	}
 }
 #[derive(Debug)]
 pub enum CoreBackgroundTasksRequeueCreateResponse {
-	Http200,
+	Http200(BackgroundTask),
 	Other(Response)
 }
 /// Retrieve a list of RQ Tasks.
-pub fn core_background_tasks_requeue_create(state: &ThanixClient, id: String) -> Result<CoreBackgroundTasksRequeueCreateResponse, Error> {
+pub fn core_background_tasks_requeue_create(state: &ThanixClient, body: BackgroundTaskRequest, id: String) -> Result<CoreBackgroundTasksRequeueCreateResponse, Error> {
 
 	let mut r#request = state.client.post(format!("{}/api/core/background-tasks/{id}/requeue/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token));
+	r#request = r#request.json(&body);
 	#[cfg(feature = "debug_messages")]
 	eprint!("{:?} = ", &r#request);
 	let r#response = r#request.send()?;
 	#[cfg(feature = "debug_messages")]
 	eprintln!("= {:?}", &r#response);
 	match r#response.status().as_u16() {
+		200 => { Ok(CoreBackgroundTasksRequeueCreateResponse::Http200(r#response.json::<BackgroundTask>()?)) },
 		r#other_status => { Ok(CoreBackgroundTasksRequeueCreateResponse::Other(r#response)) }
 	}
 }
 #[derive(Debug)]
 pub enum CoreBackgroundTasksStopCreateResponse {
-	Http200,
+	Http200(BackgroundTask),
 	Other(Response)
 }
 /// Retrieve a list of RQ Tasks.
-pub fn core_background_tasks_stop_create(state: &ThanixClient, id: String) -> Result<CoreBackgroundTasksStopCreateResponse, Error> {
+pub fn core_background_tasks_stop_create(state: &ThanixClient, body: BackgroundTaskRequest, id: String) -> Result<CoreBackgroundTasksStopCreateResponse, Error> {
 
 	let mut r#request = state.client.post(format!("{}/api/core/background-tasks/{id}/stop/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token));
+	r#request = r#request.json(&body);
 	#[cfg(feature = "debug_messages")]
 	eprint!("{:?} = ", &r#request);
 	let r#response = r#request.send()?;
 	#[cfg(feature = "debug_messages")]
 	eprintln!("= {:?}", &r#response);
 	match r#response.status().as_u16() {
+		200 => { Ok(CoreBackgroundTasksStopCreateResponse::Http200(r#response.json::<BackgroundTask>()?)) },
 		r#other_status => { Ok(CoreBackgroundTasksStopCreateResponse::Other(r#response)) }
 	}
 }
@@ -3402,12 +3472,12 @@ pub fn core_background_workers_retrieve(state: &ThanixClient) -> Result<CoreBack
 	}
 }
 #[derive(Debug)]
-pub enum CoreBackgroundWorkersRetrieve2Response {
-	Http200,
+pub enum CoreBackgroundWorkersRetrieveByNameResponse {
+	Http200(Option<std::collections::HashMap<String, serde_json::Value>>),
 	Other(Response)
 }
 /// Retrieve a list of RQ Workers.
-pub fn core_background_workers_retrieve_2(state: &ThanixClient, name: String) -> Result<CoreBackgroundWorkersRetrieve2Response, Error> {
+pub fn core_background_workers_retrieve_by_name(state: &ThanixClient, name: String) -> Result<CoreBackgroundWorkersRetrieveByNameResponse, Error> {
 
 	let mut r#request = state.client.get(format!("{}/api/core/background-workers/{name}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token));
@@ -3417,7 +3487,8 @@ pub fn core_background_workers_retrieve_2(state: &ThanixClient, name: String) ->
 	#[cfg(feature = "debug_messages")]
 	eprintln!("= {:?}", &r#response);
 	match r#response.status().as_u16() {
-		r#other_status => { Ok(CoreBackgroundWorkersRetrieve2Response::Other(r#response)) }
+		200 => { Ok(CoreBackgroundWorkersRetrieveByNameResponse::Http200(r#response.json::<Option<std::collections::HashMap<String, serde_json::Value>>>()?)) },
+		r#other_status => { Ok(CoreBackgroundWorkersRetrieveByNameResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -3435,12 +3506,14 @@ pub struct CoreDataFilesListQuery {
 	pub hash__ic: Option<Vec<String>>,
 	pub hash__ie: Option<Vec<String>>,
 	pub hash__iew: Option<Vec<String>>,
+	pub hash__iregex: Option<Vec<String>>,
 	pub hash__isw: Option<Vec<String>>,
 	pub hash__n: Option<Vec<String>>,
 	pub hash__nic: Option<Vec<String>>,
 	pub hash__nie: Option<Vec<String>>,
 	pub hash__niew: Option<Vec<String>>,
 	pub hash__nisw: Option<Vec<String>>,
+	pub hash__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -3467,12 +3540,14 @@ pub struct CoreDataFilesListQuery {
 	pub path__ic: Option<Vec<String>>,
 	pub path__ie: Option<Vec<String>>,
 	pub path__iew: Option<Vec<String>>,
+	pub path__iregex: Option<Vec<String>>,
 	pub path__isw: Option<Vec<String>>,
 	pub path__n: Option<Vec<String>>,
 	pub path__nic: Option<Vec<String>>,
 	pub path__nie: Option<Vec<String>>,
 	pub path__niew: Option<Vec<String>>,
 	pub path__nisw: Option<Vec<String>>,
+	pub path__regex: Option<Vec<String>>,
 	pub q: Option<String>,
 	pub size: Option<Vec<i64>>,
 	pub size__empty: Option<bool>,
@@ -3549,12 +3624,14 @@ pub struct CoreDataSourcesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub enabled: Option<bool>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
@@ -3585,12 +3662,14 @@ pub struct CoreDataSourcesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -3602,33 +3681,39 @@ pub struct CoreDataSourcesListQuery {
 	pub source_url__ic: Option<Vec<String>>,
 	pub source_url__ie: Option<Vec<String>>,
 	pub source_url__iew: Option<Vec<String>>,
+	pub source_url__iregex: Option<Vec<String>>,
 	pub source_url__isw: Option<Vec<String>>,
 	pub source_url__n: Option<Vec<String>>,
 	pub source_url__nic: Option<Vec<String>>,
 	pub source_url__nie: Option<Vec<String>>,
 	pub source_url__niew: Option<Vec<String>>,
 	pub source_url__nisw: Option<Vec<String>>,
+	pub source_url__regex: Option<Vec<String>>,
 	pub status: Option<Vec<String>>,
 	pub status__empty: Option<bool>,
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub sync_interval: Option<Vec<Option<i64>>>,
 	pub sync_interval__ic: Option<Vec<Option<i64>>>,
 	pub sync_interval__ie: Option<Vec<Option<i64>>>,
 	pub sync_interval__iew: Option<Vec<Option<i64>>>,
+	pub sync_interval__iregex: Option<Vec<Option<i64>>>,
 	pub sync_interval__isw: Option<Vec<Option<i64>>>,
 	pub sync_interval__n: Option<Vec<Option<i64>>>,
 	pub sync_interval__nic: Option<Vec<Option<i64>>>,
 	pub sync_interval__nie: Option<Vec<Option<i64>>>,
 	pub sync_interval__niew: Option<Vec<Option<i64>>>,
 	pub sync_interval__nisw: Option<Vec<Option<i64>>>,
+	pub sync_interval__regex: Option<Vec<Option<i64>>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -3638,12 +3723,14 @@ pub struct CoreDataSourcesListQuery {
 	pub type__ic: Option<Vec<String>>,
 	pub type__ie: Option<Vec<String>>,
 	pub type__iew: Option<Vec<String>>,
+	pub type__iregex: Option<Vec<String>>,
 	pub type__isw: Option<Vec<String>>,
 	pub type__n: Option<Vec<String>>,
 	pub type__nic: Option<Vec<String>>,
 	pub type__nie: Option<Vec<String>>,
 	pub type__niew: Option<Vec<String>>,
 	pub type__nisw: Option<Vec<String>>,
+	pub type__regex: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 
 }
@@ -3884,12 +3971,14 @@ pub struct CoreJobsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	pub object_id: Option<Vec<i64>>,
 	pub object_id__empty: Option<bool>,
 	pub object_id__gt: Option<Vec<i64>>,
@@ -3897,8 +3986,8 @@ pub struct CoreJobsListQuery {
 	pub object_id__lt: Option<Vec<i64>>,
 	pub object_id__lte: Option<Vec<i64>>,
 	pub object_id__n: Option<Vec<i64>>,
-	pub object_type: Option<i64>,
-	pub object_type__n: Option<i64>,
+	pub object_type: Option<String>,
+	pub object_type__n: Option<String>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -3916,12 +4005,14 @@ pub struct CoreJobsListQuery {
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub user: Option<i64>,
 	pub user__n: Option<i64>,
 
@@ -3999,12 +4090,14 @@ pub struct CoreObjectChangesListQuery {
 	pub object_repr__ic: Option<Vec<String>>,
 	pub object_repr__ie: Option<Vec<String>>,
 	pub object_repr__iew: Option<Vec<String>>,
+	pub object_repr__iregex: Option<Vec<String>>,
 	pub object_repr__isw: Option<Vec<String>>,
 	pub object_repr__n: Option<Vec<String>>,
 	pub object_repr__nic: Option<Vec<String>>,
 	pub object_repr__nie: Option<Vec<String>>,
 	pub object_repr__niew: Option<Vec<String>>,
 	pub object_repr__nisw: Option<Vec<String>>,
+	pub object_repr__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -4018,8 +4111,8 @@ pub struct CoreObjectChangesListQuery {
 	pub related_object_id__lt: Option<Vec<i64>>,
 	pub related_object_id__lte: Option<Vec<i64>>,
 	pub related_object_id__n: Option<Vec<i64>>,
-	pub related_object_type: Option<i64>,
-	pub related_object_type__n: Option<i64>,
+	pub related_object_type: Option<String>,
+	pub related_object_type__n: Option<String>,
 	pub request_id: Option<String>,
 	pub time_after: Option<String>,
 	pub time_before: Option<String>,
@@ -4036,12 +4129,14 @@ pub struct CoreObjectChangesListQuery {
 	pub user_name__ic: Option<Vec<String>>,
 	pub user_name__ie: Option<Vec<String>>,
 	pub user_name__iew: Option<Vec<String>>,
+	pub user_name__iregex: Option<Vec<String>>,
 	pub user_name__isw: Option<Vec<String>>,
 	pub user_name__n: Option<Vec<String>>,
 	pub user_name__nic: Option<Vec<String>>,
 	pub user_name__nie: Option<Vec<String>>,
 	pub user_name__niew: Option<Vec<String>>,
 	pub user_name__nisw: Option<Vec<String>>,
+	pub user_name__regex: Option<Vec<String>>,
 
 }
 #[derive(Debug)]
@@ -4084,6 +4179,95 @@ pub fn core_object_changes_retrieve(state: &ThanixClient, id: i64) -> Result<Cor
 	match r#response.status().as_u16() {
 		200 => { Ok(CoreObjectChangesRetrieveResponse::Http200(r#response.json::<ObjectChange>()?)) },
 		r#other_status => { Ok(CoreObjectChangesRetrieveResponse::Other(r#response)) }
+	}
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct CoreObjectTypesListQuery {
+	pub app_label: Option<Vec<String>>,
+	pub app_label__empty: Option<bool>,
+	pub app_label__ic: Option<Vec<String>>,
+	pub app_label__ie: Option<Vec<String>>,
+	pub app_label__iew: Option<Vec<String>>,
+	pub app_label__iregex: Option<Vec<String>>,
+	pub app_label__isw: Option<Vec<String>>,
+	pub app_label__n: Option<Vec<String>>,
+	pub app_label__nic: Option<Vec<String>>,
+	pub app_label__nie: Option<Vec<String>>,
+	pub app_label__niew: Option<Vec<String>>,
+	pub app_label__nisw: Option<Vec<String>>,
+	pub app_label__regex: Option<Vec<String>>,
+	pub features: Option<String>,
+	pub id: Option<Vec<i64>>,
+	pub id__empty: Option<bool>,
+	pub id__gt: Option<Vec<i64>>,
+	pub id__gte: Option<Vec<i64>>,
+	pub id__lt: Option<Vec<i64>>,
+	pub id__lte: Option<Vec<i64>>,
+	pub id__n: Option<Vec<i64>>,
+	/// Number of results to return per page.
+	pub limit: Option<i64>,
+	pub model: Option<Vec<String>>,
+	pub model__empty: Option<bool>,
+	pub model__ic: Option<Vec<String>>,
+	pub model__ie: Option<Vec<String>>,
+	pub model__iew: Option<Vec<String>>,
+	pub model__iregex: Option<Vec<String>>,
+	pub model__isw: Option<Vec<String>>,
+	pub model__n: Option<Vec<String>>,
+	pub model__nic: Option<Vec<String>>,
+	pub model__nie: Option<Vec<String>>,
+	pub model__niew: Option<Vec<String>>,
+	pub model__nisw: Option<Vec<String>>,
+	pub model__regex: Option<Vec<String>>,
+	/// The initial index from which to return the results.
+	pub offset: Option<i64>,
+	/// Which field to use when ordering the results.
+	pub ordering: Option<String>,
+	pub public: Option<bool>,
+	/// Search
+	pub q: Option<String>,
+
+}
+#[derive(Debug)]
+pub enum CoreObjectTypesListResponse {
+	Http200(PaginatedObjectTypeList),
+	Other(Response)
+}
+/// Read-only list of ObjectTypes.
+pub fn core_object_types_list(state: &ThanixClient, query: CoreObjectTypesListQuery) -> Result<CoreObjectTypesListResponse, Error> {
+	let qstring = serde_qs::to_string(&query).unwrap();
+	let qstring_clean = remove_square_braces(&qstring);
+
+	let mut r#request = state.client.get(format!("{}/api/core/object-types/?{}", state.base_url, qstring_clean))
+		.header("Authorization", format!("Token {}", state.authentication_token));
+	#[cfg(feature = "debug_messages")]
+	eprint!("{:?} = ", &r#request);
+	let r#response = r#request.send()?;
+	#[cfg(feature = "debug_messages")]
+	eprintln!("= {:?}", &r#response);
+	match r#response.status().as_u16() {
+		200 => { Ok(CoreObjectTypesListResponse::Http200(r#response.json::<PaginatedObjectTypeList>()?)) },
+		r#other_status => { Ok(CoreObjectTypesListResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum CoreObjectTypesRetrieveResponse {
+	Http200(ObjectType),
+	Other(Response)
+}
+/// Read-only list of ObjectTypes.
+pub fn core_object_types_retrieve(state: &ThanixClient, id: i64) -> Result<CoreObjectTypesRetrieveResponse, Error> {
+
+	let mut r#request = state.client.get(format!("{}/api/core/object-types/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token));
+	#[cfg(feature = "debug_messages")]
+	eprint!("{:?} = ", &r#request);
+	let r#response = r#request.send()?;
+	#[cfg(feature = "debug_messages")]
+	eprintln!("= {:?}", &r#response);
+	match r#response.status().as_u16() {
+		200 => { Ok(CoreObjectTypesRetrieveResponse::Http200(r#response.json::<ObjectType>()?)) },
+		r#other_status => { Ok(CoreObjectTypesRetrieveResponse::Other(r#response)) }
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -4328,12 +4512,14 @@ pub struct DcimCablesListQuery {
 	pub color__ic: Option<Vec<String>>,
 	pub color__ie: Option<Vec<String>>,
 	pub color__iew: Option<Vec<String>>,
+	pub color__iregex: Option<Vec<String>>,
 	pub color__isw: Option<Vec<String>>,
 	pub color__n: Option<Vec<String>>,
 	pub color__nic: Option<Vec<String>>,
 	pub color__nie: Option<Vec<String>>,
 	pub color__niew: Option<Vec<String>>,
 	pub color__nisw: Option<Vec<String>>,
+	pub color__regex: Option<Vec<String>>,
 	pub consoleport_id: Option<Vec<i64>>,
 	pub consoleserverport_id: Option<Vec<i64>>,
 	pub created: Option<Vec<String>>,
@@ -4349,12 +4535,14 @@ pub struct DcimCablesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub device: Option<Vec<String>>,
 	pub device_id: Option<Vec<i64>>,
 	pub frontport_id: Option<Vec<i64>>,
@@ -4371,12 +4559,14 @@ pub struct DcimCablesListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -4422,12 +4612,14 @@ pub struct DcimCablesListQuery {
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -4455,12 +4647,14 @@ pub struct DcimCablesListQuery {
 	pub type__ic: Option<Vec<Option<String>>>,
 	pub type__ie: Option<Vec<Option<String>>>,
 	pub type__iew: Option<Vec<Option<String>>>,
+	pub type__iregex: Option<Vec<Option<String>>>,
 	pub type__isw: Option<Vec<Option<String>>>,
 	pub type__n: Option<Vec<Option<String>>>,
 	pub type__nic: Option<Vec<Option<String>>>,
 	pub type__nie: Option<Vec<Option<String>>>,
 	pub type__niew: Option<Vec<Option<String>>>,
 	pub type__nisw: Option<Vec<Option<String>>>,
+	pub type__regex: Option<Vec<Option<String>>>,
 	/// Unterminated
 	pub unterminated: Option<bool>,
 	pub updated_by_request: Option<String>,
@@ -4702,12 +4896,14 @@ pub struct DcimConsolePortTemplatesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device type (ID)
 	pub device_type_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
@@ -4724,12 +4920,14 @@ pub struct DcimConsolePortTemplatesListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -4749,12 +4947,14 @@ pub struct DcimConsolePortTemplatesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -4978,12 +5178,14 @@ pub struct DcimConsolePortsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device (name)
 	pub device: Option<Vec<Option<String>>>,
 	/// Device (name)
@@ -5005,12 +5207,14 @@ pub struct DcimConsolePortsListQuery {
 	pub device_status__ic: Option<Vec<String>>,
 	pub device_status__ie: Option<Vec<String>>,
 	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__iregex: Option<Vec<String>>,
 	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
 	pub device_status__nic: Option<Vec<String>>,
 	pub device_status__nie: Option<Vec<String>>,
 	pub device_status__niew: Option<Vec<String>>,
 	pub device_status__nisw: Option<Vec<String>>,
+	pub device_status__regex: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -5031,12 +5235,14 @@ pub struct DcimConsolePortsListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -5065,12 +5271,14 @@ pub struct DcimConsolePortsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	pub occupied: Option<bool>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
@@ -5127,6 +5335,8 @@ pub struct DcimConsolePortsListQuery {
 	/// Physical port type
 	pub type__iew: Option<Vec<Option<String>>>,
 	/// Physical port type
+	pub type__iregex: Option<Vec<Option<String>>>,
+	/// Physical port type
 	pub type__isw: Option<Vec<Option<String>>>,
 	/// Physical port type
 	pub type__n: Option<Vec<Option<String>>>,
@@ -5138,6 +5348,8 @@ pub struct DcimConsolePortsListQuery {
 	pub type__niew: Option<Vec<Option<String>>>,
 	/// Physical port type
 	pub type__nisw: Option<Vec<Option<String>>>,
+	/// Physical port type
+	pub type__regex: Option<Vec<Option<String>>>,
 	pub updated_by_request: Option<String>,
 	/// Virtual Chassis
 	pub virtual_chassis: Option<Vec<String>>,
@@ -5370,12 +5582,14 @@ pub struct DcimConsoleServerPortTemplatesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device type (ID)
 	pub device_type_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
@@ -5392,12 +5606,14 @@ pub struct DcimConsoleServerPortTemplatesListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -5417,12 +5633,14 @@ pub struct DcimConsoleServerPortTemplatesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -5646,12 +5864,14 @@ pub struct DcimConsoleServerPortsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device (name)
 	pub device: Option<Vec<Option<String>>>,
 	/// Device (name)
@@ -5673,12 +5893,14 @@ pub struct DcimConsoleServerPortsListQuery {
 	pub device_status__ic: Option<Vec<String>>,
 	pub device_status__ie: Option<Vec<String>>,
 	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__iregex: Option<Vec<String>>,
 	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
 	pub device_status__nic: Option<Vec<String>>,
 	pub device_status__nie: Option<Vec<String>>,
 	pub device_status__niew: Option<Vec<String>>,
 	pub device_status__nisw: Option<Vec<String>>,
+	pub device_status__regex: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -5699,12 +5921,14 @@ pub struct DcimConsoleServerPortsListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -5733,12 +5957,14 @@ pub struct DcimConsoleServerPortsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	pub occupied: Option<bool>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
@@ -5795,6 +6021,8 @@ pub struct DcimConsoleServerPortsListQuery {
 	/// Physical port type
 	pub type__iew: Option<Vec<Option<String>>>,
 	/// Physical port type
+	pub type__iregex: Option<Vec<Option<String>>>,
+	/// Physical port type
 	pub type__isw: Option<Vec<Option<String>>>,
 	/// Physical port type
 	pub type__n: Option<Vec<Option<String>>>,
@@ -5806,6 +6034,8 @@ pub struct DcimConsoleServerPortsListQuery {
 	pub type__niew: Option<Vec<Option<String>>>,
 	/// Physical port type
 	pub type__nisw: Option<Vec<Option<String>>>,
+	/// Physical port type
+	pub type__regex: Option<Vec<Option<String>>>,
 	pub updated_by_request: Option<String>,
 	/// Virtual Chassis
 	pub virtual_chassis: Option<Vec<String>>,
@@ -6038,12 +6268,14 @@ pub struct DcimDeviceBayTemplatesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device type (ID)
 	pub device_type_id: Option<Vec<i64>>,
 	/// Device type (ID)
@@ -6060,12 +6292,14 @@ pub struct DcimDeviceBayTemplatesListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -6081,12 +6315,14 @@ pub struct DcimDeviceBayTemplatesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -6297,12 +6533,14 @@ pub struct DcimDeviceBaysListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device (name)
 	pub device: Option<Vec<Option<String>>>,
 	/// Device (name)
@@ -6324,12 +6562,14 @@ pub struct DcimDeviceBaysListQuery {
 	pub device_status__ic: Option<Vec<String>>,
 	pub device_status__ie: Option<Vec<String>>,
 	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__iregex: Option<Vec<String>>,
 	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
 	pub device_status__nic: Option<Vec<String>>,
 	pub device_status__nie: Option<Vec<String>>,
 	pub device_status__niew: Option<Vec<String>>,
 	pub device_status__nisw: Option<Vec<String>>,
+	pub device_status__regex: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -6358,12 +6598,14 @@ pub struct DcimDeviceBaysListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -6387,12 +6629,14 @@ pub struct DcimDeviceBaysListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -6635,12 +6879,14 @@ pub struct DcimDeviceRolesListQuery {
 	pub color__ic: Option<Vec<String>>,
 	pub color__ie: Option<Vec<String>>,
 	pub color__iew: Option<Vec<String>>,
+	pub color__iregex: Option<Vec<String>>,
 	pub color__isw: Option<Vec<String>>,
 	pub color__n: Option<Vec<String>>,
 	pub color__nic: Option<Vec<String>>,
 	pub color__nie: Option<Vec<String>>,
 	pub color__niew: Option<Vec<String>>,
 	pub color__nisw: Option<Vec<String>>,
+	pub color__regex: Option<Vec<String>>,
 	/// Config template (ID)
 	pub config_template_id: Option<Vec<Option<i64>>>,
 	/// Config template (ID)
@@ -6658,12 +6904,14 @@ pub struct DcimDeviceRolesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -6686,12 +6934,14 @@ pub struct DcimDeviceRolesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -6711,12 +6961,14 @@ pub struct DcimDeviceRolesListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -6950,25 +7202,23 @@ pub struct DcimDeviceTypesListQuery {
 	pub created__lte: Option<Vec<String>>,
 	pub created__n: Option<Vec<String>>,
 	pub created_by_request: Option<String>,
-	/// Default platform (slug)
 	pub default_platform: Option<Vec<String>>,
-	/// Default platform (slug)
 	pub default_platform__n: Option<Vec<String>>,
-	/// Default platform (ID)
-	pub default_platform_id: Option<Vec<Option<i64>>>,
-	/// Default platform (ID)
-	pub default_platform_id__n: Option<Vec<Option<i64>>>,
+	pub default_platform_id: Option<Vec<String>>,
+	pub default_platform_id__n: Option<Vec<String>>,
 	pub description: Option<Vec<String>>,
 	pub description__empty: Option<bool>,
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub device_bay_template_count: Option<Vec<i64>>,
 	pub device_bay_template_count__empty: Option<bool>,
 	pub device_bay_template_count__gt: Option<Vec<i64>>,
@@ -7038,12 +7288,14 @@ pub struct DcimDeviceTypesListQuery {
 	pub model__ic: Option<Vec<String>>,
 	pub model__ie: Option<Vec<String>>,
 	pub model__iew: Option<Vec<String>>,
+	pub model__iregex: Option<Vec<String>>,
 	pub model__isw: Option<Vec<String>>,
 	pub model__n: Option<Vec<String>>,
 	pub model__nic: Option<Vec<String>>,
 	pub model__nie: Option<Vec<String>>,
 	pub model__niew: Option<Vec<String>>,
 	pub model__nisw: Option<Vec<String>>,
+	pub model__regex: Option<Vec<String>>,
 	pub modified_by_request: Option<String>,
 	pub module_bay_template_count: Option<Vec<i64>>,
 	pub module_bay_template_count__empty: Option<bool>,
@@ -7063,12 +7315,14 @@ pub struct DcimDeviceTypesListQuery {
 	pub part_number__ic: Option<Vec<String>>,
 	pub part_number__ie: Option<Vec<String>>,
 	pub part_number__iew: Option<Vec<String>>,
+	pub part_number__iregex: Option<Vec<String>>,
 	pub part_number__isw: Option<Vec<String>>,
 	pub part_number__n: Option<Vec<String>>,
 	pub part_number__nic: Option<Vec<String>>,
 	pub part_number__nie: Option<Vec<String>>,
 	pub part_number__niew: Option<Vec<String>>,
 	pub part_number__nisw: Option<Vec<String>>,
+	pub part_number__regex: Option<Vec<String>>,
 	/// Has pass-through ports
 	pub pass_through_ports: Option<bool>,
 	pub power_outlet_template_count: Option<Vec<i64>>,
@@ -7103,12 +7357,14 @@ pub struct DcimDeviceTypesListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	/// Parent devices house child devices in device bays. Leave blank if this device type is neither a parent nor a child.
 	/// 
 	/// * `parent` - Parent
@@ -7344,12 +7600,14 @@ pub struct DcimDevicesListQuery {
 	pub asset_tag__ic: Option<Vec<String>>,
 	pub asset_tag__ie: Option<Vec<String>>,
 	pub asset_tag__iew: Option<Vec<String>>,
+	pub asset_tag__iregex: Option<Vec<String>>,
 	pub asset_tag__isw: Option<Vec<String>>,
 	pub asset_tag__n: Option<Vec<String>>,
 	pub asset_tag__nic: Option<Vec<String>>,
 	pub asset_tag__nie: Option<Vec<String>>,
 	pub asset_tag__niew: Option<Vec<String>>,
 	pub asset_tag__nisw: Option<Vec<String>>,
+	pub asset_tag__regex: Option<Vec<String>>,
 	/// Cluster group (slug)
 	pub cluster_group: Option<Vec<String>>,
 	/// Cluster group (slug)
@@ -7407,12 +7665,14 @@ pub struct DcimDevicesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub device_bay_count: Option<Vec<i64>>,
 	pub device_bay_count__empty: Option<bool>,
 	pub device_bay_count__gt: Option<Vec<i64>>,
@@ -7504,12 +7764,14 @@ pub struct DcimDevicesListQuery {
 	pub mac_address__ic: Option<Vec<String>>,
 	pub mac_address__ie: Option<Vec<String>>,
 	pub mac_address__iew: Option<Vec<String>>,
+	pub mac_address__iregex: Option<Vec<String>>,
 	pub mac_address__isw: Option<Vec<String>>,
 	pub mac_address__n: Option<Vec<String>>,
 	pub mac_address__nic: Option<Vec<String>>,
 	pub mac_address__nie: Option<Vec<String>>,
 	pub mac_address__niew: Option<Vec<String>>,
 	pub mac_address__nisw: Option<Vec<String>>,
+	pub mac_address__regex: Option<Vec<String>>,
 	/// Manufacturer (slug)
 	pub manufacturer: Option<Vec<String>>,
 	/// Manufacturer (slug)
@@ -7537,12 +7799,14 @@ pub struct DcimDevicesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// OOB IP (ID)
@@ -7561,14 +7825,10 @@ pub struct DcimDevicesListQuery {
 	pub parent_device_id__n: Option<Vec<i64>>,
 	/// Has pass-through ports
 	pub pass_through_ports: Option<bool>,
-	/// Platform (slug)
 	pub platform: Option<Vec<String>>,
-	/// Platform (slug)
 	pub platform__n: Option<Vec<String>>,
-	/// Platform (ID)
-	pub platform_id: Option<Vec<Option<i64>>>,
-	/// Platform (ID)
-	pub platform_id__n: Option<Vec<Option<i64>>>,
+	pub platform_id: Option<Vec<String>>,
+	pub platform_id__n: Option<Vec<String>>,
 	pub position: Option<Vec<f64>>,
 	pub position__empty: Option<bool>,
 	pub position__gt: Option<Vec<f64>>,
@@ -7636,12 +7896,14 @@ pub struct DcimDevicesListQuery {
 	pub serial__ic: Option<Vec<String>>,
 	pub serial__ie: Option<Vec<String>>,
 	pub serial__iew: Option<Vec<String>>,
+	pub serial__iregex: Option<Vec<String>>,
 	pub serial__isw: Option<Vec<String>>,
 	pub serial__n: Option<Vec<String>>,
 	pub serial__nic: Option<Vec<String>>,
 	pub serial__nie: Option<Vec<String>>,
 	pub serial__niew: Option<Vec<String>>,
 	pub serial__nisw: Option<Vec<String>>,
+	pub serial__regex: Option<Vec<String>>,
 	/// Site name (slug)
 	pub site: Option<Vec<String>>,
 	/// Site name (slug)
@@ -7659,12 +7921,14 @@ pub struct DcimDevicesListQuery {
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -7925,12 +8189,14 @@ pub struct DcimFrontPortTemplatesListQuery {
 	pub color__ic: Option<Vec<String>>,
 	pub color__ie: Option<Vec<String>>,
 	pub color__iew: Option<Vec<String>>,
+	pub color__iregex: Option<Vec<String>>,
 	pub color__isw: Option<Vec<String>>,
 	pub color__n: Option<Vec<String>>,
 	pub color__nic: Option<Vec<String>>,
 	pub color__nie: Option<Vec<String>>,
 	pub color__niew: Option<Vec<String>>,
 	pub color__nisw: Option<Vec<String>>,
+	pub color__regex: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -7944,12 +8210,14 @@ pub struct DcimFrontPortTemplatesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device type (ID)
 	pub device_type_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
@@ -7966,12 +8234,14 @@ pub struct DcimFrontPortTemplatesListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -7991,12 +8261,14 @@ pub struct DcimFrontPortTemplatesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -8017,12 +8289,14 @@ pub struct DcimFrontPortTemplatesListQuery {
 	pub type__ic: Option<Vec<String>>,
 	pub type__ie: Option<Vec<String>>,
 	pub type__iew: Option<Vec<String>>,
+	pub type__iregex: Option<Vec<String>>,
 	pub type__isw: Option<Vec<String>>,
 	pub type__n: Option<Vec<String>>,
 	pub type__nic: Option<Vec<String>>,
 	pub type__nie: Option<Vec<String>>,
 	pub type__niew: Option<Vec<String>>,
 	pub type__nisw: Option<Vec<String>>,
+	pub type__regex: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 
 }
@@ -8227,12 +8501,14 @@ pub struct DcimFrontPortsListQuery {
 	pub color__ic: Option<Vec<String>>,
 	pub color__ie: Option<Vec<String>>,
 	pub color__iew: Option<Vec<String>>,
+	pub color__iregex: Option<Vec<String>>,
 	pub color__isw: Option<Vec<String>>,
 	pub color__n: Option<Vec<String>>,
 	pub color__nic: Option<Vec<String>>,
 	pub color__nie: Option<Vec<String>>,
 	pub color__niew: Option<Vec<String>>,
 	pub color__nisw: Option<Vec<String>>,
+	pub color__regex: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -8246,12 +8522,14 @@ pub struct DcimFrontPortsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device (name)
 	pub device: Option<Vec<Option<String>>>,
 	/// Device (name)
@@ -8273,12 +8551,14 @@ pub struct DcimFrontPortsListQuery {
 	pub device_status__ic: Option<Vec<String>>,
 	pub device_status__ie: Option<Vec<String>>,
 	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__iregex: Option<Vec<String>>,
 	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
 	pub device_status__nic: Option<Vec<String>>,
 	pub device_status__nie: Option<Vec<String>>,
 	pub device_status__niew: Option<Vec<String>>,
 	pub device_status__nisw: Option<Vec<String>>,
+	pub device_status__regex: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -8299,12 +8579,14 @@ pub struct DcimFrontPortsListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -8333,12 +8615,14 @@ pub struct DcimFrontPortsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	pub occupied: Option<bool>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
@@ -8388,12 +8672,14 @@ pub struct DcimFrontPortsListQuery {
 	pub type__ic: Option<Vec<String>>,
 	pub type__ie: Option<Vec<String>>,
 	pub type__iew: Option<Vec<String>>,
+	pub type__iregex: Option<Vec<String>>,
 	pub type__isw: Option<Vec<String>>,
 	pub type__n: Option<Vec<String>>,
 	pub type__nic: Option<Vec<String>>,
 	pub type__nie: Option<Vec<String>>,
 	pub type__niew: Option<Vec<String>>,
 	pub type__nisw: Option<Vec<String>>,
+	pub type__regex: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 	/// Virtual Chassis
 	pub virtual_chassis: Option<Vec<String>>,
@@ -8628,12 +8914,14 @@ pub struct DcimInterfaceTemplatesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device type (ID)
 	pub device_type_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
@@ -8651,12 +8939,14 @@ pub struct DcimInterfaceTemplatesListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -8677,12 +8967,14 @@ pub struct DcimInterfaceTemplatesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -8692,23 +8984,27 @@ pub struct DcimInterfaceTemplatesListQuery {
 	pub poe_mode__ic: Option<Vec<Option<String>>>,
 	pub poe_mode__ie: Option<Vec<Option<String>>>,
 	pub poe_mode__iew: Option<Vec<Option<String>>>,
+	pub poe_mode__iregex: Option<Vec<Option<String>>>,
 	pub poe_mode__isw: Option<Vec<Option<String>>>,
 	pub poe_mode__n: Option<Vec<Option<String>>>,
 	pub poe_mode__nic: Option<Vec<Option<String>>>,
 	pub poe_mode__nie: Option<Vec<Option<String>>>,
 	pub poe_mode__niew: Option<Vec<Option<String>>>,
 	pub poe_mode__nisw: Option<Vec<Option<String>>>,
+	pub poe_mode__regex: Option<Vec<Option<String>>>,
 	pub poe_type: Option<Vec<Option<String>>>,
 	pub poe_type__empty: Option<bool>,
 	pub poe_type__ic: Option<Vec<Option<String>>>,
 	pub poe_type__ie: Option<Vec<Option<String>>>,
 	pub poe_type__iew: Option<Vec<Option<String>>>,
+	pub poe_type__iregex: Option<Vec<Option<String>>>,
 	pub poe_type__isw: Option<Vec<Option<String>>>,
 	pub poe_type__n: Option<Vec<Option<String>>>,
 	pub poe_type__nic: Option<Vec<Option<String>>>,
 	pub poe_type__nie: Option<Vec<Option<String>>>,
 	pub poe_type__niew: Option<Vec<Option<String>>>,
 	pub poe_type__nisw: Option<Vec<Option<String>>>,
+	pub poe_type__regex: Option<Vec<Option<String>>>,
 	/// Search
 	pub q: Option<String>,
 	pub rf_role: Option<Vec<Option<String>>>,
@@ -8716,23 +9012,27 @@ pub struct DcimInterfaceTemplatesListQuery {
 	pub rf_role__ic: Option<Vec<Option<String>>>,
 	pub rf_role__ie: Option<Vec<Option<String>>>,
 	pub rf_role__iew: Option<Vec<Option<String>>>,
+	pub rf_role__iregex: Option<Vec<Option<String>>>,
 	pub rf_role__isw: Option<Vec<Option<String>>>,
 	pub rf_role__n: Option<Vec<Option<String>>>,
 	pub rf_role__nic: Option<Vec<Option<String>>>,
 	pub rf_role__nie: Option<Vec<Option<String>>>,
 	pub rf_role__niew: Option<Vec<Option<String>>>,
 	pub rf_role__nisw: Option<Vec<Option<String>>>,
+	pub rf_role__regex: Option<Vec<Option<String>>>,
 	pub r#type: Option<Vec<String>>,
 	pub type__empty: Option<bool>,
 	pub type__ic: Option<Vec<String>>,
 	pub type__ie: Option<Vec<String>>,
 	pub type__iew: Option<Vec<String>>,
+	pub type__iregex: Option<Vec<String>>,
 	pub type__isw: Option<Vec<String>>,
 	pub type__n: Option<Vec<String>>,
 	pub type__nic: Option<Vec<String>>,
 	pub type__nie: Option<Vec<String>>,
 	pub type__niew: Option<Vec<String>>,
 	pub type__nisw: Option<Vec<String>>,
+	pub type__regex: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 
 }
@@ -8950,12 +9250,14 @@ pub struct DcimInterfacesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device (name)
 	pub device: Option<Vec<Option<String>>>,
 	/// Device (name)
@@ -8977,12 +9279,14 @@ pub struct DcimInterfacesListQuery {
 	pub device_status__ic: Option<Vec<String>>,
 	pub device_status__ie: Option<Vec<String>>,
 	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__iregex: Option<Vec<String>>,
 	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
 	pub device_status__nic: Option<Vec<String>>,
 	pub device_status__nie: Option<Vec<String>>,
 	pub device_status__niew: Option<Vec<String>>,
 	pub device_status__nisw: Option<Vec<String>>,
+	pub device_status__regex: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -8996,12 +9300,14 @@ pub struct DcimInterfacesListQuery {
 	pub duplex__ic: Option<Vec<Option<String>>>,
 	pub duplex__ie: Option<Vec<Option<String>>>,
 	pub duplex__iew: Option<Vec<Option<String>>>,
+	pub duplex__iregex: Option<Vec<Option<String>>>,
 	pub duplex__isw: Option<Vec<Option<String>>>,
 	pub duplex__n: Option<Vec<Option<String>>>,
 	pub duplex__nic: Option<Vec<Option<String>>>,
 	pub duplex__nie: Option<Vec<Option<String>>>,
 	pub duplex__niew: Option<Vec<Option<String>>>,
 	pub duplex__nisw: Option<Vec<Option<String>>>,
+	pub duplex__regex: Option<Vec<Option<String>>>,
 	pub enabled: Option<bool>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
@@ -9025,12 +9331,14 @@ pub struct DcimInterfacesListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	/// LAG interface (ID)
 	pub lag_id: Option<Vec<i64>>,
 	/// LAG interface (ID)
@@ -9056,12 +9364,14 @@ pub struct DcimInterfacesListQuery {
 	pub mac_address__ic: Option<Vec<String>>,
 	pub mac_address__ie: Option<Vec<String>>,
 	pub mac_address__iew: Option<Vec<String>>,
+	pub mac_address__iregex: Option<Vec<String>>,
 	pub mac_address__isw: Option<Vec<String>>,
 	pub mac_address__n: Option<Vec<String>>,
 	pub mac_address__nic: Option<Vec<String>>,
 	pub mac_address__nie: Option<Vec<String>>,
 	pub mac_address__niew: Option<Vec<String>>,
 	pub mac_address__nisw: Option<Vec<String>>,
+	pub mac_address__regex: Option<Vec<String>>,
 	pub mark_connected: Option<bool>,
 	pub mgmt_only: Option<bool>,
 	/// 802.1Q Mode
@@ -9075,6 +9385,8 @@ pub struct DcimInterfacesListQuery {
 	/// 802.1Q Mode
 	pub mode__iew: Option<Vec<Option<String>>>,
 	/// 802.1Q Mode
+	pub mode__iregex: Option<Vec<Option<String>>>,
+	/// 802.1Q Mode
 	pub mode__isw: Option<Vec<Option<String>>>,
 	/// 802.1Q Mode
 	pub mode__n: Option<Vec<Option<String>>>,
@@ -9086,6 +9398,8 @@ pub struct DcimInterfacesListQuery {
 	pub mode__niew: Option<Vec<Option<String>>>,
 	/// 802.1Q Mode
 	pub mode__nisw: Option<Vec<Option<String>>>,
+	/// 802.1Q Mode
+	pub mode__regex: Option<Vec<Option<String>>>,
 	pub modified_by_request: Option<String>,
 	/// Module (ID)
 	pub module_id: Option<Vec<Option<i64>>>,
@@ -9103,12 +9417,14 @@ pub struct DcimInterfacesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	pub occupied: Option<bool>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
@@ -9123,23 +9439,27 @@ pub struct DcimInterfacesListQuery {
 	pub poe_mode__ic: Option<Vec<Option<String>>>,
 	pub poe_mode__ie: Option<Vec<Option<String>>>,
 	pub poe_mode__iew: Option<Vec<Option<String>>>,
+	pub poe_mode__iregex: Option<Vec<Option<String>>>,
 	pub poe_mode__isw: Option<Vec<Option<String>>>,
 	pub poe_mode__n: Option<Vec<Option<String>>>,
 	pub poe_mode__nic: Option<Vec<Option<String>>>,
 	pub poe_mode__nie: Option<Vec<Option<String>>>,
 	pub poe_mode__niew: Option<Vec<Option<String>>>,
 	pub poe_mode__nisw: Option<Vec<Option<String>>>,
+	pub poe_mode__regex: Option<Vec<Option<String>>>,
 	pub poe_type: Option<Vec<Option<String>>>,
 	pub poe_type__empty: Option<bool>,
 	pub poe_type__ic: Option<Vec<Option<String>>>,
 	pub poe_type__ie: Option<Vec<Option<String>>>,
 	pub poe_type__iew: Option<Vec<Option<String>>>,
+	pub poe_type__iregex: Option<Vec<Option<String>>>,
 	pub poe_type__isw: Option<Vec<Option<String>>>,
 	pub poe_type__n: Option<Vec<Option<String>>>,
 	pub poe_type__nic: Option<Vec<Option<String>>>,
 	pub poe_type__nie: Option<Vec<Option<String>>>,
 	pub poe_type__niew: Option<Vec<Option<String>>>,
 	pub poe_type__nisw: Option<Vec<Option<String>>>,
+	pub poe_type__regex: Option<Vec<Option<String>>>,
 	/// Primary MAC address
 	pub primary_mac_address: Option<Vec<String>>,
 	/// Primary MAC address
@@ -9167,12 +9487,14 @@ pub struct DcimInterfacesListQuery {
 	pub rf_channel__ic: Option<Vec<Option<String>>>,
 	pub rf_channel__ie: Option<Vec<Option<String>>>,
 	pub rf_channel__iew: Option<Vec<Option<String>>>,
+	pub rf_channel__iregex: Option<Vec<Option<String>>>,
 	pub rf_channel__isw: Option<Vec<Option<String>>>,
 	pub rf_channel__n: Option<Vec<Option<String>>>,
 	pub rf_channel__nic: Option<Vec<Option<String>>>,
 	pub rf_channel__nie: Option<Vec<Option<String>>>,
 	pub rf_channel__niew: Option<Vec<Option<String>>>,
 	pub rf_channel__nisw: Option<Vec<Option<String>>>,
+	pub rf_channel__regex: Option<Vec<Option<String>>>,
 	pub rf_channel_frequency: Option<Vec<f64>>,
 	pub rf_channel_frequency__empty: Option<bool>,
 	pub rf_channel_frequency__gt: Option<Vec<f64>>,
@@ -9192,12 +9514,14 @@ pub struct DcimInterfacesListQuery {
 	pub rf_role__ic: Option<Vec<Option<String>>>,
 	pub rf_role__ie: Option<Vec<Option<String>>>,
 	pub rf_role__iew: Option<Vec<Option<String>>>,
+	pub rf_role__iregex: Option<Vec<Option<String>>>,
 	pub rf_role__isw: Option<Vec<Option<String>>>,
 	pub rf_role__n: Option<Vec<Option<String>>>,
 	pub rf_role__nic: Option<Vec<Option<String>>>,
 	pub rf_role__nie: Option<Vec<Option<String>>>,
 	pub rf_role__niew: Option<Vec<Option<String>>>,
 	pub rf_role__nisw: Option<Vec<Option<String>>>,
+	pub rf_role__regex: Option<Vec<Option<String>>>,
 	/// Site name (slug)
 	pub site: Option<Vec<String>>,
 	/// Site name (slug)
@@ -9233,12 +9557,14 @@ pub struct DcimInterfacesListQuery {
 	pub type__ic: Option<Vec<String>>,
 	pub type__ie: Option<Vec<String>>,
 	pub type__iew: Option<Vec<String>>,
+	pub type__iregex: Option<Vec<String>>,
 	pub type__isw: Option<Vec<String>>,
 	pub type__n: Option<Vec<String>>,
 	pub type__nic: Option<Vec<String>>,
 	pub type__nie: Option<Vec<String>>,
 	pub type__niew: Option<Vec<String>>,
 	pub type__nisw: Option<Vec<String>>,
+	pub type__regex: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 	/// Virtual Device Context
 	pub vdc: Option<Vec<String>>,
@@ -9262,6 +9588,8 @@ pub struct DcimInterfacesListQuery {
 	pub virtual_chassis_id__n: Option<Vec<i64>>,
 	pub virtual_chassis_member: Option<Vec<String>>,
 	pub virtual_chassis_member_id: Option<Vec<i64>>,
+	pub virtual_chassis_member_or_master: Option<Vec<String>>,
+	pub virtual_chassis_member_or_master_id: Option<Vec<i64>>,
 	/// Virtual circuit (ID)
 	pub virtual_circuit_id: Option<Vec<i64>>,
 	/// Virtual circuit (ID)
@@ -9302,12 +9630,14 @@ pub struct DcimInterfacesListQuery {
 	pub wwn__ic: Option<Vec<String>>,
 	pub wwn__ie: Option<Vec<String>>,
 	pub wwn__iew: Option<Vec<String>>,
+	pub wwn__iregex: Option<Vec<String>>,
 	pub wwn__isw: Option<Vec<String>>,
 	pub wwn__n: Option<Vec<String>>,
 	pub wwn__nic: Option<Vec<String>>,
 	pub wwn__nie: Option<Vec<String>>,
 	pub wwn__niew: Option<Vec<String>>,
 	pub wwn__nisw: Option<Vec<String>>,
+	pub wwn__regex: Option<Vec<String>>,
 
 }
 #[derive(Debug)]
@@ -9523,12 +9853,14 @@ pub struct DcimInventoryItemRolesListQuery {
 	pub color__ic: Option<Vec<String>>,
 	pub color__ie: Option<Vec<String>>,
 	pub color__iew: Option<Vec<String>>,
+	pub color__iregex: Option<Vec<String>>,
 	pub color__isw: Option<Vec<String>>,
 	pub color__n: Option<Vec<String>>,
 	pub color__nic: Option<Vec<String>>,
 	pub color__nie: Option<Vec<String>>,
 	pub color__niew: Option<Vec<String>>,
 	pub color__nisw: Option<Vec<String>>,
+	pub color__regex: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -9542,12 +9874,14 @@ pub struct DcimInventoryItemRolesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -9570,12 +9904,14 @@ pub struct DcimInventoryItemRolesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -9587,12 +9923,14 @@ pub struct DcimInventoryItemRolesListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -9810,12 +10148,14 @@ pub struct DcimInventoryItemTemplatesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device type (ID)
 	pub device_type_id: Option<Vec<i64>>,
 	/// Device type (ID)
@@ -9832,12 +10172,14 @@ pub struct DcimInventoryItemTemplatesListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -9861,12 +10203,14 @@ pub struct DcimInventoryItemTemplatesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -9880,12 +10224,14 @@ pub struct DcimInventoryItemTemplatesListQuery {
 	pub part_id__ic: Option<Vec<String>>,
 	pub part_id__ie: Option<Vec<String>>,
 	pub part_id__iew: Option<Vec<String>>,
+	pub part_id__iregex: Option<Vec<String>>,
 	pub part_id__isw: Option<Vec<String>>,
 	pub part_id__n: Option<Vec<String>>,
 	pub part_id__nic: Option<Vec<String>>,
 	pub part_id__nie: Option<Vec<String>>,
 	pub part_id__niew: Option<Vec<String>>,
 	pub part_id__nisw: Option<Vec<String>>,
+	pub part_id__regex: Option<Vec<String>>,
 	/// Search
 	pub q: Option<String>,
 	/// Role (slug)
@@ -10092,12 +10438,14 @@ pub struct DcimInventoryItemsListQuery {
 	pub asset_tag__ic: Option<Vec<String>>,
 	pub asset_tag__ie: Option<Vec<String>>,
 	pub asset_tag__iew: Option<Vec<String>>,
+	pub asset_tag__iregex: Option<Vec<String>>,
 	pub asset_tag__isw: Option<Vec<String>>,
 	pub asset_tag__n: Option<Vec<String>>,
 	pub asset_tag__nic: Option<Vec<String>>,
 	pub asset_tag__nie: Option<Vec<String>>,
 	pub asset_tag__niew: Option<Vec<String>>,
 	pub asset_tag__nisw: Option<Vec<String>>,
+	pub asset_tag__regex: Option<Vec<String>>,
 	pub component_id: Option<Vec<i64>>,
 	pub component_id__empty: Option<Vec<i64>>,
 	pub component_id__gt: Option<Vec<i64>>,
@@ -10120,12 +10468,14 @@ pub struct DcimInventoryItemsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device (name)
 	pub device: Option<Vec<Option<String>>>,
 	/// Device (name)
@@ -10147,12 +10497,14 @@ pub struct DcimInventoryItemsListQuery {
 	pub device_status__ic: Option<Vec<String>>,
 	pub device_status__ie: Option<Vec<String>>,
 	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__iregex: Option<Vec<String>>,
 	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
 	pub device_status__nic: Option<Vec<String>>,
 	pub device_status__nie: Option<Vec<String>>,
 	pub device_status__niew: Option<Vec<String>>,
 	pub device_status__nisw: Option<Vec<String>>,
+	pub device_status__regex: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -10174,12 +10526,14 @@ pub struct DcimInventoryItemsListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -10211,12 +10565,14 @@ pub struct DcimInventoryItemsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -10230,12 +10586,14 @@ pub struct DcimInventoryItemsListQuery {
 	pub part_id__ic: Option<Vec<String>>,
 	pub part_id__ie: Option<Vec<String>>,
 	pub part_id__iew: Option<Vec<String>>,
+	pub part_id__iregex: Option<Vec<String>>,
 	pub part_id__isw: Option<Vec<String>>,
 	pub part_id__n: Option<Vec<String>>,
 	pub part_id__nic: Option<Vec<String>>,
 	pub part_id__nie: Option<Vec<String>>,
 	pub part_id__niew: Option<Vec<String>>,
 	pub part_id__nisw: Option<Vec<String>>,
+	pub part_id__regex: Option<Vec<String>>,
 	/// Search
 	pub q: Option<String>,
 	/// Rack (name)
@@ -10263,12 +10621,14 @@ pub struct DcimInventoryItemsListQuery {
 	pub serial__ic: Option<Vec<String>>,
 	pub serial__ie: Option<Vec<String>>,
 	pub serial__iew: Option<Vec<String>>,
+	pub serial__iregex: Option<Vec<String>>,
 	pub serial__isw: Option<Vec<String>>,
 	pub serial__n: Option<Vec<String>>,
 	pub serial__nic: Option<Vec<String>>,
 	pub serial__nie: Option<Vec<String>>,
 	pub serial__niew: Option<Vec<String>>,
 	pub serial__nisw: Option<Vec<String>>,
+	pub serial__regex: Option<Vec<String>>,
 	/// Site name (slug)
 	pub site: Option<Vec<String>>,
 	/// Site name (slug)
@@ -10286,12 +10646,14 @@ pub struct DcimInventoryItemsListQuery {
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -10522,23 +10884,27 @@ pub struct DcimLocationsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub facility: Option<Vec<String>>,
 	pub facility__empty: Option<bool>,
 	pub facility__ic: Option<Vec<String>>,
 	pub facility__ie: Option<Vec<String>>,
 	pub facility__iew: Option<Vec<String>>,
+	pub facility__iregex: Option<Vec<String>>,
 	pub facility__isw: Option<Vec<String>>,
 	pub facility__n: Option<Vec<String>>,
 	pub facility__nic: Option<Vec<String>>,
 	pub facility__nie: Option<Vec<String>>,
 	pub facility__niew: Option<Vec<String>>,
 	pub facility__nisw: Option<Vec<String>>,
+	pub facility__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -10561,12 +10927,14 @@ pub struct DcimLocationsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -10602,23 +10970,27 @@ pub struct DcimLocationsListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub status: Option<Vec<String>>,
 	pub status__empty: Option<bool>,
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -10833,8 +11205,8 @@ pub struct DcimMacAddressesListQuery {
 	pub assigned_object_id__lt: Option<Vec<i64>>,
 	pub assigned_object_id__lte: Option<Vec<i64>>,
 	pub assigned_object_id__n: Option<Vec<i64>>,
-	pub assigned_object_type: Option<i64>,
-	pub assigned_object_type__n: Option<i64>,
+	pub assigned_object_type: Option<String>,
+	pub assigned_object_type__n: Option<String>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -10848,12 +11220,14 @@ pub struct DcimMacAddressesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub device: Option<Vec<String>>,
 	pub device_id: Option<Vec<i64>>,
 	pub id: Option<Vec<i64>>,
@@ -10884,12 +11258,14 @@ pub struct DcimMacAddressesListQuery {
 	pub mac_address__ic: Option<Vec<String>>,
 	pub mac_address__ie: Option<Vec<String>>,
 	pub mac_address__iew: Option<Vec<String>>,
+	pub mac_address__iregex: Option<Vec<String>>,
 	pub mac_address__isw: Option<Vec<String>>,
 	pub mac_address__n: Option<Vec<String>>,
 	pub mac_address__nic: Option<Vec<String>>,
 	pub mac_address__nie: Option<Vec<String>>,
 	pub mac_address__niew: Option<Vec<String>>,
 	pub mac_address__nisw: Option<Vec<String>>,
+	pub mac_address__regex: Option<Vec<String>>,
 	pub modified_by_request: Option<String>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
@@ -11125,12 +11501,14 @@ pub struct DcimManufacturersListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -11153,12 +11531,14 @@ pub struct DcimManufacturersListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -11170,12 +11550,14 @@ pub struct DcimManufacturersListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -11384,12 +11766,14 @@ pub struct DcimModuleBayTemplatesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device type (ID)
 	pub device_type_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
@@ -11406,12 +11790,14 @@ pub struct DcimModuleBayTemplatesListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -11431,12 +11817,14 @@ pub struct DcimModuleBayTemplatesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -11446,12 +11834,14 @@ pub struct DcimModuleBayTemplatesListQuery {
 	pub position__ic: Option<Vec<String>>,
 	pub position__ie: Option<Vec<String>>,
 	pub position__iew: Option<Vec<String>>,
+	pub position__iregex: Option<Vec<String>>,
 	pub position__isw: Option<Vec<String>>,
 	pub position__n: Option<Vec<String>>,
 	pub position__nic: Option<Vec<String>>,
 	pub position__nie: Option<Vec<String>>,
 	pub position__niew: Option<Vec<String>>,
 	pub position__nisw: Option<Vec<String>>,
+	pub position__regex: Option<Vec<String>>,
 	/// Search
 	pub q: Option<String>,
 	pub updated_by_request: Option<String>,
@@ -11658,12 +12048,14 @@ pub struct DcimModuleBaysListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device (name)
 	pub device: Option<Vec<Option<String>>>,
 	/// Device (name)
@@ -11685,12 +12077,14 @@ pub struct DcimModuleBaysListQuery {
 	pub device_status__ic: Option<Vec<String>>,
 	pub device_status__ie: Option<Vec<String>>,
 	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__iregex: Option<Vec<String>>,
 	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
 	pub device_status__nic: Option<Vec<String>>,
 	pub device_status__nie: Option<Vec<String>>,
 	pub device_status__niew: Option<Vec<String>>,
 	pub device_status__nisw: Option<Vec<String>>,
+	pub device_status__regex: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -11715,12 +12109,14 @@ pub struct DcimModuleBaysListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -11748,12 +12144,14 @@ pub struct DcimModuleBaysListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -11767,12 +12165,14 @@ pub struct DcimModuleBaysListQuery {
 	pub position__ic: Option<Vec<String>>,
 	pub position__ie: Option<Vec<String>>,
 	pub position__iew: Option<Vec<String>>,
+	pub position__iregex: Option<Vec<String>>,
 	pub position__isw: Option<Vec<String>>,
 	pub position__n: Option<Vec<String>>,
 	pub position__nic: Option<Vec<String>>,
 	pub position__nie: Option<Vec<String>>,
 	pub position__niew: Option<Vec<String>>,
 	pub position__nisw: Option<Vec<String>>,
+	pub position__regex: Option<Vec<String>>,
 	/// Search
 	pub q: Option<String>,
 	/// Rack (name)
@@ -12015,12 +12415,14 @@ pub struct DcimModuleTypeProfilesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -12043,12 +12445,14 @@ pub struct DcimModuleTypeProfilesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -12274,12 +12678,14 @@ pub struct DcimModuleTypesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -12311,12 +12717,14 @@ pub struct DcimModuleTypesListQuery {
 	pub model__ic: Option<Vec<String>>,
 	pub model__ie: Option<Vec<String>>,
 	pub model__iew: Option<Vec<String>>,
+	pub model__iregex: Option<Vec<String>>,
 	pub model__isw: Option<Vec<String>>,
 	pub model__n: Option<Vec<String>>,
 	pub model__nic: Option<Vec<String>>,
 	pub model__nie: Option<Vec<String>>,
 	pub model__niew: Option<Vec<String>>,
 	pub model__nisw: Option<Vec<String>>,
+	pub model__regex: Option<Vec<String>>,
 	pub modified_by_request: Option<String>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
@@ -12327,12 +12735,14 @@ pub struct DcimModuleTypesListQuery {
 	pub part_number__ic: Option<Vec<String>>,
 	pub part_number__ie: Option<Vec<String>>,
 	pub part_number__iew: Option<Vec<String>>,
+	pub part_number__iregex: Option<Vec<String>>,
 	pub part_number__isw: Option<Vec<String>>,
 	pub part_number__n: Option<Vec<String>>,
 	pub part_number__nic: Option<Vec<String>>,
 	pub part_number__nie: Option<Vec<String>>,
 	pub part_number__niew: Option<Vec<String>>,
 	pub part_number__nisw: Option<Vec<String>>,
+	pub part_number__regex: Option<Vec<String>>,
 	/// Has pass-through ports
 	pub pass_through_ports: Option<bool>,
 	/// Has power outlets
@@ -12561,12 +12971,14 @@ pub struct DcimModulesListQuery {
 	pub asset_tag__ic: Option<Vec<String>>,
 	pub asset_tag__ie: Option<Vec<String>>,
 	pub asset_tag__iew: Option<Vec<String>>,
+	pub asset_tag__iregex: Option<Vec<String>>,
 	pub asset_tag__isw: Option<Vec<String>>,
 	pub asset_tag__n: Option<Vec<String>>,
 	pub asset_tag__nic: Option<Vec<String>>,
 	pub asset_tag__nie: Option<Vec<String>>,
 	pub asset_tag__niew: Option<Vec<String>>,
 	pub asset_tag__nisw: Option<Vec<String>>,
+	pub asset_tag__regex: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -12580,12 +12992,14 @@ pub struct DcimModulesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device (name)
 	pub device: Option<Vec<Option<String>>>,
 	/// Device (name)
@@ -12660,12 +13074,14 @@ pub struct DcimModulesListQuery {
 	pub serial__ic: Option<Vec<String>>,
 	pub serial__ie: Option<Vec<String>>,
 	pub serial__iew: Option<Vec<String>>,
+	pub serial__iregex: Option<Vec<String>>,
 	pub serial__isw: Option<Vec<String>>,
 	pub serial__n: Option<Vec<String>>,
 	pub serial__nic: Option<Vec<String>>,
 	pub serial__nie: Option<Vec<String>>,
 	pub serial__niew: Option<Vec<String>>,
 	pub serial__nisw: Option<Vec<String>>,
+	pub serial__regex: Option<Vec<String>>,
 	/// Site name (slug)
 	pub site: Option<Vec<String>>,
 	/// Site name (slug)
@@ -12683,12 +13099,14 @@ pub struct DcimModulesListQuery {
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -12884,6 +13302,10 @@ pub fn dcim_modules_partial_update(state: &ThanixClient, body: PatchedWritableMo
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct DcimPlatformsListQuery {
+	pub ancestor: Option<Vec<String>>,
+	pub ancestor__n: Option<Vec<String>>,
+	pub ancestor_id: Option<Vec<String>>,
+	pub ancestor_id__n: Option<Vec<String>>,
 	pub available_for_device_type: Option<String>,
 	/// Config template (ID)
 	pub config_template_id: Option<Vec<Option<i64>>>,
@@ -12902,12 +13324,14 @@ pub struct DcimPlatformsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -12938,16 +13362,26 @@ pub struct DcimPlatformsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	pub ordering: Option<String>,
+	/// Immediate parent platform (slug)
+	pub parent: Option<Vec<String>>,
+	/// Immediate parent platform (slug)
+	pub parent__n: Option<Vec<String>>,
+	/// Immediate parent platform (ID)
+	pub parent_id: Option<Vec<Option<i64>>>,
+	/// Immediate parent platform (ID)
+	pub parent_id__n: Option<Vec<Option<i64>>>,
 	/// Search
 	pub q: Option<String>,
 	pub slug: Option<Vec<String>>,
@@ -12955,12 +13389,14 @@ pub struct DcimPlatformsListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -13017,7 +13453,7 @@ pub enum DcimPlatformsCreateResponse {
 	Other(Response)
 }
 /// Post a list of platform objects.
-pub fn dcim_platforms_create(state: &ThanixClient, body: PlatformRequest) -> Result<DcimPlatformsCreateResponse, Error> {
+pub fn dcim_platforms_create(state: &ThanixClient, body: WritablePlatformRequest) -> Result<DcimPlatformsCreateResponse, Error> {
 
 	let mut r#request = state.client.post(format!("{}/api/dcim/platforms/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token));
@@ -13099,7 +13535,7 @@ pub enum DcimPlatformsUpdateResponse {
 	Other(Response)
 }
 /// Put a platform object.
-pub fn dcim_platforms_update(state: &ThanixClient, body: PlatformRequest, id: i64) -> Result<DcimPlatformsUpdateResponse, Error> {
+pub fn dcim_platforms_update(state: &ThanixClient, body: WritablePlatformRequest, id: i64) -> Result<DcimPlatformsUpdateResponse, Error> {
 
 	let mut r#request = state.client.put(format!("{}/api/dcim/platforms/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token));
@@ -13139,7 +13575,7 @@ pub enum DcimPlatformsPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a platform object.
-pub fn dcim_platforms_partial_update(state: &ThanixClient, body: PatchedPlatformRequest, id: i64) -> Result<DcimPlatformsPartialUpdateResponse, Error> {
+pub fn dcim_platforms_partial_update(state: &ThanixClient, body: PatchedWritablePlatformRequest, id: i64) -> Result<DcimPlatformsPartialUpdateResponse, Error> {
 
 	let mut r#request = state.client.patch(format!("{}/api/dcim/platforms/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token));
@@ -13192,12 +13628,14 @@ pub struct DcimPowerFeedsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -13228,12 +13666,14 @@ pub struct DcimPowerFeedsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	pub occupied: Option<bool>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
@@ -13273,12 +13713,14 @@ pub struct DcimPowerFeedsListQuery {
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	/// * `ac` - AC
 	/// * `dc` - DC
 	pub supply: Option<String>,
@@ -13532,12 +13974,14 @@ pub struct DcimPowerOutletTemplatesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device type (ID)
 	pub device_type_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
@@ -13552,6 +13996,8 @@ pub struct DcimPowerOutletTemplatesListQuery {
 	/// Phase (for three-phase feeds)
 	pub feed_leg__iew: Option<Vec<Option<String>>>,
 	/// Phase (for three-phase feeds)
+	pub feed_leg__iregex: Option<Vec<Option<String>>>,
+	/// Phase (for three-phase feeds)
 	pub feed_leg__isw: Option<Vec<Option<String>>>,
 	/// Phase (for three-phase feeds)
 	pub feed_leg__n: Option<Vec<Option<String>>>,
@@ -13563,6 +14009,8 @@ pub struct DcimPowerOutletTemplatesListQuery {
 	pub feed_leg__niew: Option<Vec<Option<String>>>,
 	/// Phase (for three-phase feeds)
 	pub feed_leg__nisw: Option<Vec<Option<String>>>,
+	/// Phase (for three-phase feeds)
+	pub feed_leg__regex: Option<Vec<Option<String>>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -13575,12 +14023,14 @@ pub struct DcimPowerOutletTemplatesListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -13600,12 +14050,14 @@ pub struct DcimPowerOutletTemplatesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -13616,7 +14068,7 @@ pub struct DcimPowerOutletTemplatesListQuery {
 	pub power_port_id__n: Option<Vec<Option<i64>>>,
 	/// Search
 	pub q: Option<String>,
-	/// * `IEC 60320` - [('iec-60320-c5', 'C5'), ('iec-60320-c7', 'C7'), ('iec-60320-c13', 'C13'), ('iec-60320-c15', 'C15'), ('iec-60320-c19', 'C19'), ('iec-60320-c21', 'C21')]
+	/// * `IEC 60320` - [('iec-60320-c5', 'C5'), ('iec-60320-c7', 'C7'), ('iec-60320-c13', 'C13'), ('iec-60320-c15', 'C15'), ('iec-60320-c17', 'C17'), ('iec-60320-c19', 'C19'), ('iec-60320-c21', 'C21')]
 	/// * `IEC 60309` - [('iec-60309-p-n-e-4h', 'P+N+E 4H'), ('iec-60309-p-n-e-6h', 'P+N+E 6H'), ('iec-60309-p-n-e-9h', 'P+N+E 9H'), ('iec-60309-2p-e-4h', '2P+E 4H'), ('iec-60309-2p-e-6h', '2P+E 6H'), ('iec-60309-2p-e-9h', '2P+E 9H'), ('iec-60309-3p-e-4h', '3P+E 4H'), ('iec-60309-3p-e-6h', '3P+E 6H'), ('iec-60309-3p-e-9h', '3P+E 9H'), ('iec-60309-3p-n-e-4h', '3P+N+E 4H'), ('iec-60309-3p-n-e-6h', '3P+N+E 6H'), ('iec-60309-3p-n-e-9h', '3P+N+E 9H')]
 	/// * `IEC 60906-1` - [('iec-60906-1', 'IEC 60906-1'), ('nbr-14136-10a', '2P+T 10A (NBR 14136)'), ('nbr-14136-20a', '2P+T 20A (NBR 14136)')]
 	/// * `NEMA (Non-locking)` - [('nema-1-15r', 'NEMA 1-15R'), ('nema-5-15r', 'NEMA 5-15R'), ('nema-5-20r', 'NEMA 5-20R'), ('nema-5-30r', 'NEMA 5-30R'), ('nema-5-50r', 'NEMA 5-50R'), ('nema-6-15r', 'NEMA 6-15R'), ('nema-6-20r', 'NEMA 6-20R'), ('nema-6-30r', 'NEMA 6-30R'), ('nema-6-50r', 'NEMA 6-50R'), ('nema-10-30r', 'NEMA 10-30R'), ('nema-10-50r', 'NEMA 10-50R'), ('nema-14-20r', 'NEMA 14-20R'), ('nema-14-30r', 'NEMA 14-30R'), ('nema-14-50r', 'NEMA 14-50R'), ('nema-14-60r', 'NEMA 14-60R'), ('nema-15-15r', 'NEMA 15-15R'), ('nema-15-20r', 'NEMA 15-20R'), ('nema-15-30r', 'NEMA 15-30R'), ('nema-15-50r', 'NEMA 15-50R'), ('nema-15-60r', 'NEMA 15-60R')]
@@ -13833,12 +14285,14 @@ pub struct DcimPowerOutletsListQuery {
 	pub color__ic: Option<Vec<String>>,
 	pub color__ie: Option<Vec<String>>,
 	pub color__iew: Option<Vec<String>>,
+	pub color__iregex: Option<Vec<String>>,
 	pub color__isw: Option<Vec<String>>,
 	pub color__n: Option<Vec<String>>,
 	pub color__nic: Option<Vec<String>>,
 	pub color__nie: Option<Vec<String>>,
 	pub color__niew: Option<Vec<String>>,
 	pub color__nisw: Option<Vec<String>>,
+	pub color__regex: Option<Vec<String>>,
 	pub connected: Option<bool>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
@@ -13853,12 +14307,14 @@ pub struct DcimPowerOutletsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device (name)
 	pub device: Option<Vec<Option<String>>>,
 	/// Device (name)
@@ -13880,12 +14336,14 @@ pub struct DcimPowerOutletsListQuery {
 	pub device_status__ic: Option<Vec<String>>,
 	pub device_status__ie: Option<Vec<String>>,
 	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__iregex: Option<Vec<String>>,
 	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
 	pub device_status__nic: Option<Vec<String>>,
 	pub device_status__nie: Option<Vec<String>>,
 	pub device_status__niew: Option<Vec<String>>,
 	pub device_status__nisw: Option<Vec<String>>,
+	pub device_status__regex: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -13904,6 +14362,8 @@ pub struct DcimPowerOutletsListQuery {
 	/// Phase (for three-phase feeds)
 	pub feed_leg__iew: Option<Vec<Option<String>>>,
 	/// Phase (for three-phase feeds)
+	pub feed_leg__iregex: Option<Vec<Option<String>>>,
+	/// Phase (for three-phase feeds)
 	pub feed_leg__isw: Option<Vec<Option<String>>>,
 	/// Phase (for three-phase feeds)
 	pub feed_leg__n: Option<Vec<Option<String>>>,
@@ -13915,6 +14375,8 @@ pub struct DcimPowerOutletsListQuery {
 	pub feed_leg__niew: Option<Vec<Option<String>>>,
 	/// Phase (for three-phase feeds)
 	pub feed_leg__nisw: Option<Vec<Option<String>>>,
+	/// Phase (for three-phase feeds)
+	pub feed_leg__regex: Option<Vec<Option<String>>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -13927,12 +14389,14 @@ pub struct DcimPowerOutletsListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -13961,12 +14425,14 @@ pub struct DcimPowerOutletsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	pub occupied: Option<bool>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
@@ -14007,12 +14473,14 @@ pub struct DcimPowerOutletsListQuery {
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -14027,6 +14495,8 @@ pub struct DcimPowerOutletsListQuery {
 	/// Physical port type
 	pub type__iew: Option<Vec<Option<String>>>,
 	/// Physical port type
+	pub type__iregex: Option<Vec<Option<String>>>,
+	/// Physical port type
 	pub type__isw: Option<Vec<Option<String>>>,
 	/// Physical port type
 	pub type__n: Option<Vec<Option<String>>>,
@@ -14038,6 +14508,8 @@ pub struct DcimPowerOutletsListQuery {
 	pub type__niew: Option<Vec<Option<String>>>,
 	/// Physical port type
 	pub type__nisw: Option<Vec<Option<String>>>,
+	/// Physical port type
+	pub type__regex: Option<Vec<Option<String>>>,
 	pub updated_by_request: Option<String>,
 	/// Virtual Chassis
 	pub virtual_chassis: Option<Vec<String>>,
@@ -14280,12 +14752,14 @@ pub struct DcimPowerPanelsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -14310,12 +14784,14 @@ pub struct DcimPowerPanelsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -14553,12 +15029,14 @@ pub struct DcimPowerPortTemplatesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device type (ID)
 	pub device_type_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
@@ -14575,12 +15053,14 @@ pub struct DcimPowerPortTemplatesListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -14607,19 +15087,21 @@ pub struct DcimPowerPortTemplatesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	pub ordering: Option<String>,
 	/// Search
 	pub q: Option<String>,
-	/// * `IEC 60320` - [('iec-60320-c6', 'C6'), ('iec-60320-c8', 'C8'), ('iec-60320-c14', 'C14'), ('iec-60320-c16', 'C16'), ('iec-60320-c20', 'C20'), ('iec-60320-c22', 'C22')]
+	/// * `IEC 60320` - [('iec-60320-c6', 'C6'), ('iec-60320-c8', 'C8'), ('iec-60320-c14', 'C14'), ('iec-60320-c16', 'C16'), ('iec-60320-c18', 'C18'), ('iec-60320-c20', 'C20'), ('iec-60320-c22', 'C22')]
 	/// * `IEC 60309` - [('iec-60309-p-n-e-4h', 'P+N+E 4H'), ('iec-60309-p-n-e-6h', 'P+N+E 6H'), ('iec-60309-p-n-e-9h', 'P+N+E 9H'), ('iec-60309-2p-e-4h', '2P+E 4H'), ('iec-60309-2p-e-6h', '2P+E 6H'), ('iec-60309-2p-e-9h', '2P+E 9H'), ('iec-60309-3p-e-4h', '3P+E 4H'), ('iec-60309-3p-e-6h', '3P+E 6H'), ('iec-60309-3p-e-9h', '3P+E 9H'), ('iec-60309-3p-n-e-4h', '3P+N+E 4H'), ('iec-60309-3p-n-e-6h', '3P+N+E 6H'), ('iec-60309-3p-n-e-9h', '3P+N+E 9H')]
 	/// * `IEC 60906-1` - [('iec-60906-1', 'IEC 60906-1'), ('nbr-14136-10a', '2P+T 10A (NBR 14136)'), ('nbr-14136-20a', '2P+T 20A (NBR 14136)')]
 	/// * `NEMA (Non-locking)` - [('nema-1-15p', 'NEMA 1-15P'), ('nema-5-15p', 'NEMA 5-15P'), ('nema-5-20p', 'NEMA 5-20P'), ('nema-5-30p', 'NEMA 5-30P'), ('nema-5-50p', 'NEMA 5-50P'), ('nema-6-15p', 'NEMA 6-15P'), ('nema-6-20p', 'NEMA 6-20P'), ('nema-6-30p', 'NEMA 6-30P'), ('nema-6-50p', 'NEMA 6-50P'), ('nema-10-30p', 'NEMA 10-30P'), ('nema-10-50p', 'NEMA 10-50P'), ('nema-14-20p', 'NEMA 14-20P'), ('nema-14-30p', 'NEMA 14-30P'), ('nema-14-50p', 'NEMA 14-50P'), ('nema-14-60p', 'NEMA 14-60P'), ('nema-15-15p', 'NEMA 15-15P'), ('nema-15-20p', 'NEMA 15-20P'), ('nema-15-30p', 'NEMA 15-30P'), ('nema-15-50p', 'NEMA 15-50P'), ('nema-15-60p', 'NEMA 15-60P')]
@@ -14852,12 +15334,14 @@ pub struct DcimPowerPortsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device (name)
 	pub device: Option<Vec<Option<String>>>,
 	/// Device (name)
@@ -14879,12 +15363,14 @@ pub struct DcimPowerPortsListQuery {
 	pub device_status__ic: Option<Vec<String>>,
 	pub device_status__ie: Option<Vec<String>>,
 	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__iregex: Option<Vec<String>>,
 	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
 	pub device_status__nic: Option<Vec<String>>,
 	pub device_status__nie: Option<Vec<String>>,
 	pub device_status__niew: Option<Vec<String>>,
 	pub device_status__nisw: Option<Vec<String>>,
+	pub device_status__regex: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -14905,12 +15391,14 @@ pub struct DcimPowerPortsListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -14946,12 +15434,14 @@ pub struct DcimPowerPortsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	pub occupied: Option<bool>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
@@ -14997,6 +15487,8 @@ pub struct DcimPowerPortsListQuery {
 	/// Physical port type
 	pub type__iew: Option<Vec<Option<String>>>,
 	/// Physical port type
+	pub type__iregex: Option<Vec<Option<String>>>,
+	/// Physical port type
 	pub type__isw: Option<Vec<Option<String>>>,
 	/// Physical port type
 	pub type__n: Option<Vec<Option<String>>>,
@@ -15008,6 +15500,8 @@ pub struct DcimPowerPortsListQuery {
 	pub type__niew: Option<Vec<Option<String>>>,
 	/// Physical port type
 	pub type__nisw: Option<Vec<Option<String>>>,
+	/// Physical port type
+	pub type__regex: Option<Vec<Option<String>>>,
 	pub updated_by_request: Option<String>,
 	/// Virtual Chassis
 	pub virtual_chassis: Option<Vec<String>>,
@@ -15240,12 +15734,14 @@ pub struct DcimRackReservationsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -15293,6 +15789,19 @@ pub struct DcimRackReservationsListQuery {
 	pub site_id: Option<Vec<i64>>,
 	/// Site (ID)
 	pub site_id__n: Option<Vec<i64>>,
+	pub status: Option<Vec<String>>,
+	pub status__empty: Option<bool>,
+	pub status__ic: Option<Vec<String>>,
+	pub status__ie: Option<Vec<String>>,
+	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
+	pub status__isw: Option<Vec<String>>,
+	pub status__n: Option<Vec<String>>,
+	pub status__nic: Option<Vec<String>>,
+	pub status__nie: Option<Vec<String>>,
+	pub status__niew: Option<Vec<String>>,
+	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -15310,6 +15819,12 @@ pub struct DcimRackReservationsListQuery {
 	/// Tenant (ID)
 	pub tenant_id__n: Option<Vec<Option<i64>>>,
 	pub unit: Option<f64>,
+	pub unit__empty: Option<f64>,
+	pub unit__gt: Option<f64>,
+	pub unit__gte: Option<f64>,
+	pub unit__lt: Option<f64>,
+	pub unit__lte: Option<f64>,
+	pub unit__n: Option<f64>,
 	pub updated_by_request: Option<String>,
 	/// User (name)
 	pub user: Option<Vec<String>>,
@@ -15370,7 +15885,7 @@ pub enum DcimRackReservationsCreateResponse {
 	Other(Response)
 }
 /// Post a list of rack reservation objects.
-pub fn dcim_rack_reservations_create(state: &ThanixClient, body: RackReservationRequest) -> Result<DcimRackReservationsCreateResponse, Error> {
+pub fn dcim_rack_reservations_create(state: &ThanixClient, body: WritableRackReservationRequest) -> Result<DcimRackReservationsCreateResponse, Error> {
 
 	let mut r#request = state.client.post(format!("{}/api/dcim/rack-reservations/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token));
@@ -15452,7 +15967,7 @@ pub enum DcimRackReservationsUpdateResponse {
 	Other(Response)
 }
 /// Put a rack reservation object.
-pub fn dcim_rack_reservations_update(state: &ThanixClient, body: RackReservationRequest, id: i64) -> Result<DcimRackReservationsUpdateResponse, Error> {
+pub fn dcim_rack_reservations_update(state: &ThanixClient, body: WritableRackReservationRequest, id: i64) -> Result<DcimRackReservationsUpdateResponse, Error> {
 
 	let mut r#request = state.client.put(format!("{}/api/dcim/rack-reservations/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token));
@@ -15492,7 +16007,7 @@ pub enum DcimRackReservationsPartialUpdateResponse {
 	Other(Response)
 }
 /// Patch a rack reservation object.
-pub fn dcim_rack_reservations_partial_update(state: &ThanixClient, body: PatchedRackReservationRequest, id: i64) -> Result<DcimRackReservationsPartialUpdateResponse, Error> {
+pub fn dcim_rack_reservations_partial_update(state: &ThanixClient, body: PatchedWritableRackReservationRequest, id: i64) -> Result<DcimRackReservationsPartialUpdateResponse, Error> {
 
 	let mut r#request = state.client.patch(format!("{}/api/dcim/rack-reservations/{id}/", state.base_url))
 		.header("Authorization", format!("Token {}", state.authentication_token));
@@ -15514,12 +16029,14 @@ pub struct DcimRackRolesListQuery {
 	pub color__ic: Option<Vec<String>>,
 	pub color__ie: Option<Vec<String>>,
 	pub color__iew: Option<Vec<String>>,
+	pub color__iregex: Option<Vec<String>>,
 	pub color__isw: Option<Vec<String>>,
 	pub color__n: Option<Vec<String>>,
 	pub color__nic: Option<Vec<String>>,
 	pub color__nie: Option<Vec<String>>,
 	pub color__niew: Option<Vec<String>>,
 	pub color__nisw: Option<Vec<String>>,
+	pub color__regex: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -15533,12 +16050,14 @@ pub struct DcimRackRolesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -15561,12 +16080,14 @@ pub struct DcimRackRolesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -15578,12 +16099,14 @@ pub struct DcimRackRolesListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -15793,23 +16316,27 @@ pub struct DcimRackTypesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub form_factor: Option<Vec<String>>,
 	pub form_factor__empty: Option<bool>,
 	pub form_factor__ic: Option<Vec<String>>,
 	pub form_factor__ie: Option<Vec<String>>,
 	pub form_factor__iew: Option<Vec<String>>,
+	pub form_factor__iregex: Option<Vec<String>>,
 	pub form_factor__isw: Option<Vec<String>>,
 	pub form_factor__n: Option<Vec<String>>,
 	pub form_factor__nic: Option<Vec<String>>,
 	pub form_factor__nie: Option<Vec<String>>,
 	pub form_factor__niew: Option<Vec<String>>,
 	pub form_factor__nisw: Option<Vec<String>>,
+	pub form_factor__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -15846,12 +16373,14 @@ pub struct DcimRackTypesListQuery {
 	pub model__ic: Option<Vec<String>>,
 	pub model__ie: Option<Vec<String>>,
 	pub model__iew: Option<Vec<String>>,
+	pub model__iregex: Option<Vec<String>>,
 	pub model__isw: Option<Vec<String>>,
 	pub model__n: Option<Vec<String>>,
 	pub model__nic: Option<Vec<String>>,
 	pub model__nie: Option<Vec<String>>,
 	pub model__niew: Option<Vec<String>>,
 	pub model__nisw: Option<Vec<String>>,
+	pub model__regex: Option<Vec<String>>,
 	pub modified_by_request: Option<String>,
 	pub mounting_depth: Option<Vec<i64>>,
 	pub mounting_depth__empty: Option<bool>,
@@ -15895,12 +16424,14 @@ pub struct DcimRackTypesListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub starting_unit: Option<Vec<i64>>,
 	pub starting_unit__empty: Option<bool>,
 	pub starting_unit__gt: Option<Vec<i64>>,
@@ -15941,6 +16472,8 @@ pub struct DcimRackTypesListQuery {
 	/// Rail-to-rail width
 	pub width__iew: Option<Vec<i64>>,
 	/// Rail-to-rail width
+	pub width__iregex: Option<Vec<i64>>,
+	/// Rail-to-rail width
 	pub width__isw: Option<Vec<i64>>,
 	/// Rail-to-rail width
 	pub width__n: Option<Vec<i64>>,
@@ -15952,6 +16485,8 @@ pub struct DcimRackTypesListQuery {
 	pub width__niew: Option<Vec<i64>>,
 	/// Rail-to-rail width
 	pub width__nisw: Option<Vec<i64>>,
+	/// Rail-to-rail width
+	pub width__regex: Option<Vec<i64>>,
 
 }
 #[derive(Debug)]
@@ -16150,12 +16685,14 @@ pub struct DcimRacksListQuery {
 	pub asset_tag__ic: Option<Vec<String>>,
 	pub asset_tag__ie: Option<Vec<String>>,
 	pub asset_tag__iew: Option<Vec<String>>,
+	pub asset_tag__iregex: Option<Vec<String>>,
 	pub asset_tag__isw: Option<Vec<String>>,
 	pub asset_tag__n: Option<Vec<String>>,
 	pub asset_tag__nic: Option<Vec<String>>,
 	pub asset_tag__nie: Option<Vec<String>>,
 	pub asset_tag__niew: Option<Vec<String>>,
 	pub asset_tag__nisw: Option<Vec<String>>,
+	pub asset_tag__regex: Option<Vec<String>>,
 	/// Contact
 	pub contact: Option<Vec<i64>>,
 	/// Contact
@@ -16180,34 +16717,40 @@ pub struct DcimRacksListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub facility_id: Option<Vec<String>>,
 	pub facility_id__empty: Option<bool>,
 	pub facility_id__ic: Option<Vec<String>>,
 	pub facility_id__ie: Option<Vec<String>>,
 	pub facility_id__iew: Option<Vec<String>>,
+	pub facility_id__iregex: Option<Vec<String>>,
 	pub facility_id__isw: Option<Vec<String>>,
 	pub facility_id__n: Option<Vec<String>>,
 	pub facility_id__nic: Option<Vec<String>>,
 	pub facility_id__nie: Option<Vec<String>>,
 	pub facility_id__niew: Option<Vec<String>>,
 	pub facility_id__nisw: Option<Vec<String>>,
+	pub facility_id__regex: Option<Vec<String>>,
 	pub form_factor: Option<Vec<Option<String>>>,
 	pub form_factor__empty: Option<bool>,
 	pub form_factor__ic: Option<Vec<Option<String>>>,
 	pub form_factor__ie: Option<Vec<Option<String>>>,
 	pub form_factor__iew: Option<Vec<Option<String>>>,
+	pub form_factor__iregex: Option<Vec<Option<String>>>,
 	pub form_factor__isw: Option<Vec<Option<String>>>,
 	pub form_factor__n: Option<Vec<Option<String>>>,
 	pub form_factor__nic: Option<Vec<Option<String>>>,
 	pub form_factor__nie: Option<Vec<Option<String>>>,
 	pub form_factor__niew: Option<Vec<Option<String>>>,
 	pub form_factor__nisw: Option<Vec<Option<String>>>,
+	pub form_factor__regex: Option<Vec<Option<String>>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -16256,12 +16799,14 @@ pub struct DcimRacksListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -16317,12 +16862,14 @@ pub struct DcimRacksListQuery {
 	pub serial__ic: Option<Vec<String>>,
 	pub serial__ie: Option<Vec<String>>,
 	pub serial__iew: Option<Vec<String>>,
+	pub serial__iregex: Option<Vec<String>>,
 	pub serial__isw: Option<Vec<String>>,
 	pub serial__n: Option<Vec<String>>,
 	pub serial__nic: Option<Vec<String>>,
 	pub serial__nie: Option<Vec<String>>,
 	pub serial__niew: Option<Vec<String>>,
 	pub serial__nisw: Option<Vec<String>>,
+	pub serial__regex: Option<Vec<String>>,
 	/// Site (slug)
 	pub site: Option<Vec<String>>,
 	/// Site (slug)
@@ -16347,12 +16894,14 @@ pub struct DcimRacksListQuery {
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -16398,6 +16947,8 @@ pub struct DcimRacksListQuery {
 	/// Rail-to-rail width
 	pub width__iew: Option<Vec<i64>>,
 	/// Rail-to-rail width
+	pub width__iregex: Option<Vec<i64>>,
+	/// Rail-to-rail width
 	pub width__isw: Option<Vec<i64>>,
 	/// Rail-to-rail width
 	pub width__n: Option<Vec<i64>>,
@@ -16409,6 +16960,8 @@ pub struct DcimRacksListQuery {
 	pub width__niew: Option<Vec<i64>>,
 	/// Rail-to-rail width
 	pub width__nisw: Option<Vec<i64>>,
+	/// Rail-to-rail width
+	pub width__regex: Option<Vec<i64>>,
 
 }
 #[derive(Debug)]
@@ -16648,12 +17201,14 @@ pub struct DcimRearPortTemplatesListQuery {
 	pub color__ic: Option<Vec<String>>,
 	pub color__ie: Option<Vec<String>>,
 	pub color__iew: Option<Vec<String>>,
+	pub color__iregex: Option<Vec<String>>,
 	pub color__isw: Option<Vec<String>>,
 	pub color__n: Option<Vec<String>>,
 	pub color__nic: Option<Vec<String>>,
 	pub color__nie: Option<Vec<String>>,
 	pub color__niew: Option<Vec<String>>,
 	pub color__nisw: Option<Vec<String>>,
+	pub color__regex: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -16667,12 +17222,14 @@ pub struct DcimRearPortTemplatesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device type (ID)
 	pub device_type_id: Option<Vec<Option<i64>>>,
 	/// Device type (ID)
@@ -16689,12 +17246,14 @@ pub struct DcimRearPortTemplatesListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -16714,12 +17273,14 @@ pub struct DcimRearPortTemplatesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -16738,12 +17299,14 @@ pub struct DcimRearPortTemplatesListQuery {
 	pub type__ic: Option<Vec<String>>,
 	pub type__ie: Option<Vec<String>>,
 	pub type__iew: Option<Vec<String>>,
+	pub type__iregex: Option<Vec<String>>,
 	pub type__isw: Option<Vec<String>>,
 	pub type__n: Option<Vec<String>>,
 	pub type__nic: Option<Vec<String>>,
 	pub type__nie: Option<Vec<String>>,
 	pub type__niew: Option<Vec<String>>,
 	pub type__nisw: Option<Vec<String>>,
+	pub type__regex: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 
 }
@@ -16948,12 +17511,14 @@ pub struct DcimRearPortsListQuery {
 	pub color__ic: Option<Vec<String>>,
 	pub color__ie: Option<Vec<String>>,
 	pub color__iew: Option<Vec<String>>,
+	pub color__iregex: Option<Vec<String>>,
 	pub color__isw: Option<Vec<String>>,
 	pub color__n: Option<Vec<String>>,
 	pub color__nic: Option<Vec<String>>,
 	pub color__nie: Option<Vec<String>>,
 	pub color__niew: Option<Vec<String>>,
 	pub color__nisw: Option<Vec<String>>,
+	pub color__regex: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -16967,12 +17532,14 @@ pub struct DcimRearPortsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device (name)
 	pub device: Option<Vec<Option<String>>>,
 	/// Device (name)
@@ -16994,12 +17561,14 @@ pub struct DcimRearPortsListQuery {
 	pub device_status__ic: Option<Vec<String>>,
 	pub device_status__ie: Option<Vec<String>>,
 	pub device_status__iew: Option<Vec<String>>,
+	pub device_status__iregex: Option<Vec<String>>,
 	pub device_status__isw: Option<Vec<String>>,
 	pub device_status__n: Option<Vec<String>>,
 	pub device_status__nic: Option<Vec<String>>,
 	pub device_status__nie: Option<Vec<String>>,
 	pub device_status__niew: Option<Vec<String>>,
 	pub device_status__nisw: Option<Vec<String>>,
+	pub device_status__regex: Option<Vec<String>>,
 	/// Device type (model)
 	pub device_type: Option<Vec<String>>,
 	/// Device type (model)
@@ -17020,12 +17589,14 @@ pub struct DcimRearPortsListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -17054,12 +17625,14 @@ pub struct DcimRearPortsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	pub occupied: Option<bool>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
@@ -17107,12 +17680,14 @@ pub struct DcimRearPortsListQuery {
 	pub type__ic: Option<Vec<String>>,
 	pub type__ie: Option<Vec<String>>,
 	pub type__iew: Option<Vec<String>>,
+	pub type__iregex: Option<Vec<String>>,
 	pub type__isw: Option<Vec<String>>,
 	pub type__n: Option<Vec<String>>,
 	pub type__nic: Option<Vec<String>>,
 	pub type__nie: Option<Vec<String>>,
 	pub type__niew: Option<Vec<String>>,
 	pub type__nisw: Option<Vec<String>>,
+	pub type__regex: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 	/// Virtual Chassis
 	pub virtual_chassis: Option<Vec<String>>,
@@ -17359,12 +17934,14 @@ pub struct DcimRegionsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -17387,12 +17964,14 @@ pub struct DcimRegionsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -17412,12 +17991,14 @@ pub struct DcimRegionsListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -17640,12 +18221,14 @@ pub struct DcimSiteGroupsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -17668,12 +18251,14 @@ pub struct DcimSiteGroupsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -17693,12 +18278,14 @@ pub struct DcimSiteGroupsListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -17925,23 +18512,27 @@ pub struct DcimSitesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub facility: Option<Vec<String>>,
 	pub facility__empty: Option<bool>,
 	pub facility__ic: Option<Vec<String>>,
 	pub facility__ie: Option<Vec<String>>,
 	pub facility__iew: Option<Vec<String>>,
+	pub facility__iregex: Option<Vec<String>>,
 	pub facility__isw: Option<Vec<String>>,
 	pub facility__n: Option<Vec<String>>,
 	pub facility__nic: Option<Vec<String>>,
 	pub facility__nie: Option<Vec<String>>,
 	pub facility__niew: Option<Vec<String>>,
 	pub facility__nisw: Option<Vec<String>>,
+	pub facility__regex: Option<Vec<String>>,
 	pub group: Option<Vec<String>>,
 	pub group__n: Option<Vec<String>>,
 	pub group_id: Option<Vec<String>>,
@@ -17982,12 +18573,14 @@ pub struct DcimSitesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -18003,23 +18596,27 @@ pub struct DcimSitesListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub status: Option<Vec<String>>,
 	pub status__empty: Option<bool>,
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -18040,12 +18637,14 @@ pub struct DcimSitesListQuery {
 	pub time_zone__ic: Option<Vec<String>>,
 	pub time_zone__ie: Option<Vec<String>>,
 	pub time_zone__iew: Option<Vec<String>>,
+	pub time_zone__iregex: Option<Vec<String>>,
 	pub time_zone__isw: Option<Vec<String>>,
 	pub time_zone__n: Option<Vec<String>>,
 	pub time_zone__nic: Option<Vec<String>>,
 	pub time_zone__nie: Option<Vec<String>>,
 	pub time_zone__niew: Option<Vec<String>>,
 	pub time_zone__nisw: Option<Vec<String>>,
+	pub time_zone__regex: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 
 }
@@ -18250,23 +18849,27 @@ pub struct DcimVirtualChassisListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub domain: Option<Vec<String>>,
 	pub domain__empty: Option<bool>,
 	pub domain__ic: Option<Vec<String>>,
 	pub domain__ie: Option<Vec<String>>,
 	pub domain__iew: Option<Vec<String>>,
+	pub domain__iregex: Option<Vec<String>>,
 	pub domain__isw: Option<Vec<String>>,
 	pub domain__n: Option<Vec<String>>,
 	pub domain__nic: Option<Vec<String>>,
 	pub domain__nie: Option<Vec<String>>,
 	pub domain__niew: Option<Vec<String>>,
 	pub domain__nisw: Option<Vec<String>>,
+	pub domain__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -18304,12 +18907,14 @@ pub struct DcimVirtualChassisListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -18548,12 +19153,14 @@ pub struct DcimVirtualDeviceContextsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device model
 	pub device: Option<Vec<i64>>,
 	/// Device model
@@ -18597,12 +19204,14 @@ pub struct DcimVirtualDeviceContextsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -18630,12 +19239,14 @@ pub struct DcimVirtualDeviceContextsListQuery {
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -19070,6 +19681,295 @@ pub fn extras_bookmarks_partial_update(state: &ThanixClient, body: PatchedBookma
 	}
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
+pub struct ExtrasConfigContextProfilesListQuery {
+	pub auto_sync_enabled: Option<bool>,
+	pub created: Option<Vec<String>>,
+	pub created__empty: Option<Vec<String>>,
+	pub created__gt: Option<Vec<String>>,
+	pub created__gte: Option<Vec<String>>,
+	pub created__lt: Option<Vec<String>>,
+	pub created__lte: Option<Vec<String>>,
+	pub created__n: Option<Vec<String>>,
+	pub created_by_request: Option<String>,
+	/// Data file (ID)
+	pub data_file_id: Option<Vec<Option<i64>>>,
+	/// Data file (ID)
+	pub data_file_id__n: Option<Vec<Option<i64>>>,
+	/// Data source (ID)
+	pub data_source_id: Option<Vec<Option<i64>>>,
+	/// Data source (ID)
+	pub data_source_id__n: Option<Vec<Option<i64>>>,
+	pub data_synced: Option<Vec<String>>,
+	pub data_synced__empty: Option<bool>,
+	pub data_synced__gt: Option<Vec<String>>,
+	pub data_synced__gte: Option<Vec<String>>,
+	pub data_synced__lt: Option<Vec<String>>,
+	pub data_synced__lte: Option<Vec<String>>,
+	pub data_synced__n: Option<Vec<String>>,
+	pub description: Option<Vec<String>>,
+	pub description__empty: Option<bool>,
+	pub description__ic: Option<Vec<String>>,
+	pub description__ie: Option<Vec<String>>,
+	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
+	pub description__isw: Option<Vec<String>>,
+	pub description__n: Option<Vec<String>>,
+	pub description__nic: Option<Vec<String>>,
+	pub description__nie: Option<Vec<String>>,
+	pub description__niew: Option<Vec<String>>,
+	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
+	pub id: Option<Vec<i64>>,
+	pub id__empty: Option<bool>,
+	pub id__gt: Option<Vec<i64>>,
+	pub id__gte: Option<Vec<i64>>,
+	pub id__lt: Option<Vec<i64>>,
+	pub id__lte: Option<Vec<i64>>,
+	pub id__n: Option<Vec<i64>>,
+	pub last_updated: Option<Vec<String>>,
+	pub last_updated__empty: Option<Vec<String>>,
+	pub last_updated__gt: Option<Vec<String>>,
+	pub last_updated__gte: Option<Vec<String>>,
+	pub last_updated__lt: Option<Vec<String>>,
+	pub last_updated__lte: Option<Vec<String>>,
+	pub last_updated__n: Option<Vec<String>>,
+	/// Number of results to return per page.
+	pub limit: Option<i64>,
+	pub modified_by_request: Option<String>,
+	pub name: Option<Vec<String>>,
+	pub name__empty: Option<bool>,
+	pub name__ic: Option<Vec<String>>,
+	pub name__ie: Option<Vec<String>>,
+	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
+	pub name__isw: Option<Vec<String>>,
+	pub name__n: Option<Vec<String>>,
+	pub name__nic: Option<Vec<String>>,
+	pub name__nie: Option<Vec<String>>,
+	pub name__niew: Option<Vec<String>>,
+	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
+	/// The initial index from which to return the results.
+	pub offset: Option<i64>,
+	/// Which field to use when ordering the results.
+	pub ordering: Option<String>,
+	/// Search
+	pub q: Option<String>,
+	pub tag: Option<Vec<String>>,
+	pub tag__n: Option<Vec<String>>,
+	pub tag_id: Option<Vec<i64>>,
+	pub tag_id__n: Option<Vec<i64>>,
+	pub updated_by_request: Option<String>,
+
+}
+#[derive(Debug)]
+pub enum ExtrasConfigContextProfilesListResponse {
+	Http200(PaginatedConfigContextProfileList),
+	Other(Response)
+}
+/// Get a list of config context profile objects.
+pub fn extras_config_context_profiles_list(state: &ThanixClient, query: ExtrasConfigContextProfilesListQuery) -> Result<ExtrasConfigContextProfilesListResponse, Error> {
+	let qstring = serde_qs::to_string(&query).unwrap();
+	let qstring_clean = remove_square_braces(&qstring);
+
+	let mut r#request = state.client.get(format!("{}/api/extras/config-context-profiles/?{}", state.base_url, qstring_clean))
+		.header("Authorization", format!("Token {}", state.authentication_token));
+	#[cfg(feature = "debug_messages")]
+	eprint!("{:?} = ", &r#request);
+	let r#response = r#request.send()?;
+	#[cfg(feature = "debug_messages")]
+	eprintln!("= {:?}", &r#response);
+	match r#response.status().as_u16() {
+		200 => { Ok(ExtrasConfigContextProfilesListResponse::Http200(r#response.json::<PaginatedConfigContextProfileList>()?)) },
+		r#other_status => { Ok(ExtrasConfigContextProfilesListResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum ExtrasConfigContextProfilesBulkUpdateResponse {
+	Http200(Vec<ConfigContextProfile>),
+	Other(Response)
+}
+/// Put a list of config context profile objects.
+pub fn extras_config_context_profiles_bulk_update(state: &ThanixClient, body: Vec<ConfigContextProfileRequest>) -> Result<ExtrasConfigContextProfilesBulkUpdateResponse, Error> {
+
+	let mut r#request = state.client.put(format!("{}/api/extras/config-context-profiles/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token));
+	r#request = r#request.json(&body);
+	#[cfg(feature = "debug_messages")]
+	eprint!("{:?} = ", &r#request);
+	let r#response = r#request.send()?;
+	#[cfg(feature = "debug_messages")]
+	eprintln!("= {:?}", &r#response);
+	match r#response.status().as_u16() {
+		200 => { Ok(ExtrasConfigContextProfilesBulkUpdateResponse::Http200(r#response.json::<Vec<ConfigContextProfile>>()?)) },
+		r#other_status => { Ok(ExtrasConfigContextProfilesBulkUpdateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum ExtrasConfigContextProfilesCreateResponse {
+	Http201(ConfigContextProfile),
+	Other(Response)
+}
+/// Post a list of config context profile objects.
+pub fn extras_config_context_profiles_create(state: &ThanixClient, body: ConfigContextProfileRequest) -> Result<ExtrasConfigContextProfilesCreateResponse, Error> {
+
+	let mut r#request = state.client.post(format!("{}/api/extras/config-context-profiles/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token));
+	r#request = r#request.json(&body);
+	#[cfg(feature = "debug_messages")]
+	eprint!("{:?} = ", &r#request);
+	let r#response = r#request.send()?;
+	#[cfg(feature = "debug_messages")]
+	eprintln!("= {:?}", &r#response);
+	match r#response.status().as_u16() {
+		201 => { Ok(ExtrasConfigContextProfilesCreateResponse::Http201(r#response.json::<ConfigContextProfile>()?)) },
+		r#other_status => { Ok(ExtrasConfigContextProfilesCreateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum ExtrasConfigContextProfilesBulkDestroyResponse {
+	Http204,
+	Other(Response)
+}
+/// Delete a list of config context profile objects.
+pub fn extras_config_context_profiles_bulk_destroy(state: &ThanixClient, body: Vec<ConfigContextProfileRequest>) -> Result<ExtrasConfigContextProfilesBulkDestroyResponse, Error> {
+
+	let mut r#request = state.client.delete(format!("{}/api/extras/config-context-profiles/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token));
+	r#request = r#request.json(&body);
+	#[cfg(feature = "debug_messages")]
+	eprint!("{:?} = ", &r#request);
+	let r#response = r#request.send()?;
+	#[cfg(feature = "debug_messages")]
+	eprintln!("= {:?}", &r#response);
+	match r#response.status().as_u16() {
+		r#other_status => { Ok(ExtrasConfigContextProfilesBulkDestroyResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum ExtrasConfigContextProfilesBulkPartialUpdateResponse {
+	Http200(Vec<ConfigContextProfile>),
+	Other(Response)
+}
+/// Patch a list of config context profile objects.
+pub fn extras_config_context_profiles_bulk_partial_update(state: &ThanixClient, body: Vec<ConfigContextProfileRequest>) -> Result<ExtrasConfigContextProfilesBulkPartialUpdateResponse, Error> {
+
+	let mut r#request = state.client.patch(format!("{}/api/extras/config-context-profiles/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token));
+	r#request = r#request.json(&body);
+	#[cfg(feature = "debug_messages")]
+	eprint!("{:?} = ", &r#request);
+	let r#response = r#request.send()?;
+	#[cfg(feature = "debug_messages")]
+	eprintln!("= {:?}", &r#response);
+	match r#response.status().as_u16() {
+		200 => { Ok(ExtrasConfigContextProfilesBulkPartialUpdateResponse::Http200(r#response.json::<Vec<ConfigContextProfile>>()?)) },
+		r#other_status => { Ok(ExtrasConfigContextProfilesBulkPartialUpdateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum ExtrasConfigContextProfilesRetrieveResponse {
+	Http200(ConfigContextProfile),
+	Other(Response)
+}
+/// Get a config context profile object.
+pub fn extras_config_context_profiles_retrieve(state: &ThanixClient, id: i64) -> Result<ExtrasConfigContextProfilesRetrieveResponse, Error> {
+
+	let mut r#request = state.client.get(format!("{}/api/extras/config-context-profiles/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token));
+	#[cfg(feature = "debug_messages")]
+	eprint!("{:?} = ", &r#request);
+	let r#response = r#request.send()?;
+	#[cfg(feature = "debug_messages")]
+	eprintln!("= {:?}", &r#response);
+	match r#response.status().as_u16() {
+		200 => { Ok(ExtrasConfigContextProfilesRetrieveResponse::Http200(r#response.json::<ConfigContextProfile>()?)) },
+		r#other_status => { Ok(ExtrasConfigContextProfilesRetrieveResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum ExtrasConfigContextProfilesUpdateResponse {
+	Http200(ConfigContextProfile),
+	Other(Response)
+}
+/// Put a config context profile object.
+pub fn extras_config_context_profiles_update(state: &ThanixClient, body: ConfigContextProfileRequest, id: i64) -> Result<ExtrasConfigContextProfilesUpdateResponse, Error> {
+
+	let mut r#request = state.client.put(format!("{}/api/extras/config-context-profiles/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token));
+	r#request = r#request.json(&body);
+	#[cfg(feature = "debug_messages")]
+	eprint!("{:?} = ", &r#request);
+	let r#response = r#request.send()?;
+	#[cfg(feature = "debug_messages")]
+	eprintln!("= {:?}", &r#response);
+	match r#response.status().as_u16() {
+		200 => { Ok(ExtrasConfigContextProfilesUpdateResponse::Http200(r#response.json::<ConfigContextProfile>()?)) },
+		r#other_status => { Ok(ExtrasConfigContextProfilesUpdateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum ExtrasConfigContextProfilesDestroyResponse {
+	Http204,
+	Other(Response)
+}
+/// Delete a config context profile object.
+pub fn extras_config_context_profiles_destroy(state: &ThanixClient, id: i64) -> Result<ExtrasConfigContextProfilesDestroyResponse, Error> {
+
+	let mut r#request = state.client.delete(format!("{}/api/extras/config-context-profiles/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token));
+	#[cfg(feature = "debug_messages")]
+	eprint!("{:?} = ", &r#request);
+	let r#response = r#request.send()?;
+	#[cfg(feature = "debug_messages")]
+	eprintln!("= {:?}", &r#response);
+	match r#response.status().as_u16() {
+		r#other_status => { Ok(ExtrasConfigContextProfilesDestroyResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum ExtrasConfigContextProfilesPartialUpdateResponse {
+	Http200(ConfigContextProfile),
+	Other(Response)
+}
+/// Patch a config context profile object.
+pub fn extras_config_context_profiles_partial_update(state: &ThanixClient, body: PatchedConfigContextProfileRequest, id: i64) -> Result<ExtrasConfigContextProfilesPartialUpdateResponse, Error> {
+
+	let mut r#request = state.client.patch(format!("{}/api/extras/config-context-profiles/{id}/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token));
+	r#request = r#request.json(&body);
+	#[cfg(feature = "debug_messages")]
+	eprint!("{:?} = ", &r#request);
+	let r#response = r#request.send()?;
+	#[cfg(feature = "debug_messages")]
+	eprintln!("= {:?}", &r#response);
+	match r#response.status().as_u16() {
+		200 => { Ok(ExtrasConfigContextProfilesPartialUpdateResponse::Http200(r#response.json::<ConfigContextProfile>()?)) },
+		r#other_status => { Ok(ExtrasConfigContextProfilesPartialUpdateResponse::Other(r#response)) }
+	}
+}
+#[derive(Debug)]
+pub enum ExtrasConfigContextProfilesSyncCreateResponse {
+	Http200(ConfigContextProfile),
+	Other(Response)
+}
+/// Provide a /sync API endpoint to synchronize an object's data from its associated DataFile (if any).
+pub fn extras_config_context_profiles_sync_create(state: &ThanixClient, body: ConfigContextProfileRequest, id: i64) -> Result<ExtrasConfigContextProfilesSyncCreateResponse, Error> {
+
+	let mut r#request = state.client.post(format!("{}/api/extras/config-context-profiles/{id}/sync/", state.base_url))
+		.header("Authorization", format!("Token {}", state.authentication_token));
+	r#request = r#request.json(&body);
+	#[cfg(feature = "debug_messages")]
+	eprint!("{:?} = ", &r#request);
+	let r#response = r#request.send()?;
+	#[cfg(feature = "debug_messages")]
+	eprintln!("= {:?}", &r#response);
+	match r#response.status().as_u16() {
+		200 => { Ok(ExtrasConfigContextProfilesSyncCreateResponse::Http200(r#response.json::<ConfigContextProfile>()?)) },
+		r#other_status => { Ok(ExtrasConfigContextProfilesSyncCreateResponse::Other(r#response)) }
+	}
+}
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasConfigContextsListQuery {
 	pub auto_sync_enabled: Option<bool>,
 	/// Cluster group (slug)
@@ -19120,12 +20020,14 @@ pub struct ExtrasConfigContextsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Role (slug)
 	pub device_role: Option<Vec<String>>,
 	/// Role (slug)
@@ -19169,12 +20071,14 @@ pub struct ExtrasConfigContextsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -19187,6 +20091,14 @@ pub struct ExtrasConfigContextsListQuery {
 	pub platform_id: Option<Vec<i64>>,
 	/// Platform
 	pub platform_id__n: Option<Vec<i64>>,
+	/// Profile (name)
+	pub profile: Option<Vec<String>>,
+	/// Profile (name)
+	pub profile__n: Option<Vec<String>>,
+	/// Profile (ID)
+	pub profile_id: Option<Vec<Option<i64>>>,
+	/// Profile (ID)
+	pub profile_id__n: Option<Vec<Option<i64>>>,
 	/// Search
 	pub q: Option<String>,
 	/// Region (slug)
@@ -19486,34 +20398,40 @@ pub struct ExtrasConfigTemplatesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub file_extension: Option<Vec<String>>,
 	pub file_extension__empty: Option<bool>,
 	pub file_extension__ic: Option<Vec<String>>,
 	pub file_extension__ie: Option<Vec<String>>,
 	pub file_extension__iew: Option<Vec<String>>,
+	pub file_extension__iregex: Option<Vec<String>>,
 	pub file_extension__isw: Option<Vec<String>>,
 	pub file_extension__n: Option<Vec<String>>,
 	pub file_extension__nic: Option<Vec<String>>,
 	pub file_extension__nie: Option<Vec<String>>,
 	pub file_extension__niew: Option<Vec<String>>,
 	pub file_extension__nisw: Option<Vec<String>>,
+	pub file_extension__regex: Option<Vec<String>>,
 	pub file_name: Option<Vec<String>>,
 	pub file_name__empty: Option<bool>,
 	pub file_name__ic: Option<Vec<String>>,
 	pub file_name__ie: Option<Vec<String>>,
 	pub file_name__iew: Option<Vec<String>>,
+	pub file_name__iregex: Option<Vec<String>>,
 	pub file_name__isw: Option<Vec<String>>,
 	pub file_name__n: Option<Vec<String>>,
 	pub file_name__nic: Option<Vec<String>>,
 	pub file_name__nie: Option<Vec<String>>,
 	pub file_name__niew: Option<Vec<String>>,
 	pub file_name__nisw: Option<Vec<String>>,
+	pub file_name__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -19535,24 +20453,28 @@ pub struct ExtrasConfigTemplatesListQuery {
 	pub mime_type__ic: Option<Vec<String>>,
 	pub mime_type__ie: Option<Vec<String>>,
 	pub mime_type__iew: Option<Vec<String>>,
+	pub mime_type__iregex: Option<Vec<String>>,
 	pub mime_type__isw: Option<Vec<String>>,
 	pub mime_type__n: Option<Vec<String>>,
 	pub mime_type__nic: Option<Vec<String>>,
 	pub mime_type__nie: Option<Vec<String>>,
 	pub mime_type__niew: Option<Vec<String>>,
 	pub mime_type__nisw: Option<Vec<String>>,
+	pub mime_type__regex: Option<Vec<String>>,
 	pub modified_by_request: Option<String>,
 	pub name: Option<Vec<String>>,
 	pub name__empty: Option<bool>,
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -19824,12 +20746,14 @@ pub struct ExtrasCustomFieldChoiceSetsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -19852,12 +20776,14 @@ pub struct ExtrasCustomFieldChoiceSetsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	pub order_alphabetically: Option<bool>,
@@ -20093,12 +21019,14 @@ pub struct ExtrasCustomFieldsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Loose matches any instance of a given string; exact matches the entire field.
 	/// 
 	/// * `disabled` - Disabled
@@ -20110,12 +21038,14 @@ pub struct ExtrasCustomFieldsListQuery {
 	pub group_name__ic: Option<Vec<String>>,
 	pub group_name__ie: Option<Vec<String>>,
 	pub group_name__iew: Option<Vec<String>>,
+	pub group_name__iregex: Option<Vec<String>>,
 	pub group_name__isw: Option<Vec<String>>,
 	pub group_name__n: Option<Vec<String>>,
 	pub group_name__nic: Option<Vec<String>>,
 	pub group_name__nie: Option<Vec<String>>,
 	pub group_name__niew: Option<Vec<String>>,
 	pub group_name__nisw: Option<Vec<String>>,
+	pub group_name__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -20129,12 +21059,14 @@ pub struct ExtrasCustomFieldsListQuery {
 	pub label__ic: Option<Vec<String>>,
 	pub label__ie: Option<Vec<String>>,
 	pub label__iew: Option<Vec<String>>,
+	pub label__iregex: Option<Vec<String>>,
 	pub label__isw: Option<Vec<String>>,
 	pub label__n: Option<Vec<String>>,
 	pub label__nic: Option<Vec<String>>,
 	pub label__nie: Option<Vec<String>>,
 	pub label__niew: Option<Vec<String>>,
 	pub label__nisw: Option<Vec<String>>,
+	pub label__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -20150,22 +21082,26 @@ pub struct ExtrasCustomFieldsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	pub object_type: Option<String>,
 	pub object_type__ic: Option<String>,
 	pub object_type__ie: Option<String>,
 	pub object_type__iew: Option<String>,
+	pub object_type__iregex: Option<String>,
 	pub object_type__isw: Option<String>,
 	pub object_type__n: Option<String>,
 	pub object_type__nic: Option<String>,
 	pub object_type__nie: Option<String>,
 	pub object_type__niew: Option<String>,
 	pub object_type__nisw: Option<String>,
+	pub object_type__regex: Option<String>,
 	pub object_type_id: Option<Vec<i64>>,
 	pub object_type_id__n: Option<Vec<i64>>,
 	/// The initial index from which to return the results.
@@ -20196,6 +21132,8 @@ pub struct ExtrasCustomFieldsListQuery {
 	/// The type of data this custom field holds
 	pub type__iew: Option<Vec<String>>,
 	/// The type of data this custom field holds
+	pub type__iregex: Option<Vec<String>>,
+	/// The type of data this custom field holds
 	pub type__isw: Option<Vec<String>>,
 	/// The type of data this custom field holds
 	pub type__n: Option<Vec<String>>,
@@ -20207,6 +21145,8 @@ pub struct ExtrasCustomFieldsListQuery {
 	pub type__niew: Option<Vec<String>>,
 	/// The type of data this custom field holds
 	pub type__nisw: Option<Vec<String>>,
+	/// The type of data this custom field holds
+	pub type__regex: Option<Vec<String>>,
 	/// Specifies whether the custom field value can be edited in the UI
 	/// 
 	/// * `yes` - Yes
@@ -20221,31 +21161,33 @@ pub struct ExtrasCustomFieldsListQuery {
 	pub ui_visible: Option<String>,
 	pub unique: Option<bool>,
 	pub updated_by_request: Option<String>,
-	pub validation_maximum: Option<Vec<i64>>,
+	pub validation_maximum: Option<Vec<f64>>,
 	pub validation_maximum__empty: Option<bool>,
-	pub validation_maximum__gt: Option<Vec<i64>>,
-	pub validation_maximum__gte: Option<Vec<i64>>,
-	pub validation_maximum__lt: Option<Vec<i64>>,
-	pub validation_maximum__lte: Option<Vec<i64>>,
-	pub validation_maximum__n: Option<Vec<i64>>,
-	pub validation_minimum: Option<Vec<i64>>,
+	pub validation_maximum__gt: Option<Vec<f64>>,
+	pub validation_maximum__gte: Option<Vec<f64>>,
+	pub validation_maximum__lt: Option<Vec<f64>>,
+	pub validation_maximum__lte: Option<Vec<f64>>,
+	pub validation_maximum__n: Option<Vec<f64>>,
+	pub validation_minimum: Option<Vec<f64>>,
 	pub validation_minimum__empty: Option<bool>,
-	pub validation_minimum__gt: Option<Vec<i64>>,
-	pub validation_minimum__gte: Option<Vec<i64>>,
-	pub validation_minimum__lt: Option<Vec<i64>>,
-	pub validation_minimum__lte: Option<Vec<i64>>,
-	pub validation_minimum__n: Option<Vec<i64>>,
+	pub validation_minimum__gt: Option<Vec<f64>>,
+	pub validation_minimum__gte: Option<Vec<f64>>,
+	pub validation_minimum__lt: Option<Vec<f64>>,
+	pub validation_minimum__lte: Option<Vec<f64>>,
+	pub validation_minimum__n: Option<Vec<f64>>,
 	pub validation_regex: Option<Vec<String>>,
 	pub validation_regex__empty: Option<bool>,
 	pub validation_regex__ic: Option<Vec<String>>,
 	pub validation_regex__ie: Option<Vec<String>>,
 	pub validation_regex__iew: Option<Vec<String>>,
+	pub validation_regex__iregex: Option<Vec<String>>,
 	pub validation_regex__isw: Option<Vec<String>>,
 	pub validation_regex__n: Option<Vec<String>>,
 	pub validation_regex__nic: Option<Vec<String>>,
 	pub validation_regex__nie: Option<Vec<String>>,
 	pub validation_regex__niew: Option<Vec<String>>,
 	pub validation_regex__nisw: Option<Vec<String>>,
+	pub validation_regex__regex: Option<Vec<String>>,
 	pub weight: Option<Vec<i64>>,
 	pub weight__empty: Option<bool>,
 	pub weight__gt: Option<Vec<i64>>,
@@ -20475,12 +21417,14 @@ pub struct ExtrasCustomLinksListQuery {
 	pub group_name__ic: Option<Vec<String>>,
 	pub group_name__ie: Option<Vec<String>>,
 	pub group_name__iew: Option<Vec<String>>,
+	pub group_name__iregex: Option<Vec<String>>,
 	pub group_name__isw: Option<Vec<String>>,
 	pub group_name__n: Option<Vec<String>>,
 	pub group_name__nic: Option<Vec<String>>,
 	pub group_name__nie: Option<Vec<String>>,
 	pub group_name__niew: Option<Vec<String>>,
 	pub group_name__nisw: Option<Vec<String>>,
+	pub group_name__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -20501,45 +21445,53 @@ pub struct ExtrasCustomLinksListQuery {
 	pub link_text__ic: Option<String>,
 	pub link_text__ie: Option<String>,
 	pub link_text__iew: Option<String>,
+	pub link_text__iregex: Option<String>,
 	pub link_text__isw: Option<String>,
 	pub link_text__n: Option<String>,
 	pub link_text__nic: Option<String>,
 	pub link_text__nie: Option<String>,
 	pub link_text__niew: Option<String>,
 	pub link_text__nisw: Option<String>,
+	pub link_text__regex: Option<String>,
 	pub link_url: Option<String>,
 	pub link_url__ic: Option<String>,
 	pub link_url__ie: Option<String>,
 	pub link_url__iew: Option<String>,
+	pub link_url__iregex: Option<String>,
 	pub link_url__isw: Option<String>,
 	pub link_url__n: Option<String>,
 	pub link_url__nic: Option<String>,
 	pub link_url__nie: Option<String>,
 	pub link_url__niew: Option<String>,
 	pub link_url__nisw: Option<String>,
+	pub link_url__regex: Option<String>,
 	pub modified_by_request: Option<String>,
 	pub name: Option<Vec<String>>,
 	pub name__empty: Option<bool>,
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	pub new_window: Option<bool>,
 	pub object_type: Option<String>,
 	pub object_type__ic: Option<String>,
 	pub object_type__ie: Option<String>,
 	pub object_type__iew: Option<String>,
+	pub object_type__iregex: Option<String>,
 	pub object_type__isw: Option<String>,
 	pub object_type__n: Option<String>,
 	pub object_type__nic: Option<String>,
 	pub object_type__nie: Option<String>,
 	pub object_type__niew: Option<String>,
 	pub object_type__nisw: Option<String>,
+	pub object_type__regex: Option<String>,
 	pub object_type_id: Option<Vec<i64>>,
 	pub object_type_id__n: Option<Vec<i64>>,
 	/// The initial index from which to return the results.
@@ -20841,12 +21793,14 @@ pub struct ExtrasEventRulesListQuery {
 	pub action_type__ic: Option<Vec<String>>,
 	pub action_type__ie: Option<Vec<String>>,
 	pub action_type__iew: Option<Vec<String>>,
+	pub action_type__iregex: Option<Vec<String>>,
 	pub action_type__isw: Option<Vec<String>>,
 	pub action_type__n: Option<Vec<String>>,
 	pub action_type__nic: Option<Vec<String>>,
 	pub action_type__nie: Option<Vec<String>>,
 	pub action_type__niew: Option<Vec<String>>,
 	pub action_type__nisw: Option<Vec<String>>,
+	pub action_type__regex: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -20860,12 +21814,14 @@ pub struct ExtrasEventRulesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub enabled: Option<bool>,
 	pub event_type: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
@@ -20890,22 +21846,26 @@ pub struct ExtrasEventRulesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	pub object_type: Option<String>,
 	pub object_type__ic: Option<String>,
 	pub object_type__ie: Option<String>,
 	pub object_type__iew: Option<String>,
+	pub object_type__iregex: Option<String>,
 	pub object_type__isw: Option<String>,
 	pub object_type__n: Option<String>,
 	pub object_type__nic: Option<String>,
 	pub object_type__nie: Option<String>,
 	pub object_type__niew: Option<String>,
 	pub object_type__nisw: Option<String>,
+	pub object_type__regex: Option<String>,
 	pub object_type_id: Option<Vec<i64>>,
 	pub object_type_id__n: Option<Vec<i64>>,
 	/// The initial index from which to return the results.
@@ -21139,34 +22099,40 @@ pub struct ExtrasExportTemplatesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub file_extension: Option<Vec<String>>,
 	pub file_extension__empty: Option<bool>,
 	pub file_extension__ic: Option<Vec<String>>,
 	pub file_extension__ie: Option<Vec<String>>,
 	pub file_extension__iew: Option<Vec<String>>,
+	pub file_extension__iregex: Option<Vec<String>>,
 	pub file_extension__isw: Option<Vec<String>>,
 	pub file_extension__n: Option<Vec<String>>,
 	pub file_extension__nic: Option<Vec<String>>,
 	pub file_extension__nie: Option<Vec<String>>,
 	pub file_extension__niew: Option<Vec<String>>,
 	pub file_extension__nisw: Option<Vec<String>>,
+	pub file_extension__regex: Option<Vec<String>>,
 	pub file_name: Option<Vec<String>>,
 	pub file_name__empty: Option<bool>,
 	pub file_name__ic: Option<Vec<String>>,
 	pub file_name__ie: Option<Vec<String>>,
 	pub file_name__iew: Option<Vec<String>>,
+	pub file_name__iregex: Option<Vec<String>>,
 	pub file_name__isw: Option<Vec<String>>,
 	pub file_name__n: Option<Vec<String>>,
 	pub file_name__nic: Option<Vec<String>>,
 	pub file_name__nie: Option<Vec<String>>,
 	pub file_name__niew: Option<Vec<String>>,
 	pub file_name__nisw: Option<Vec<String>>,
+	pub file_name__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -21188,34 +22154,40 @@ pub struct ExtrasExportTemplatesListQuery {
 	pub mime_type__ic: Option<Vec<String>>,
 	pub mime_type__ie: Option<Vec<String>>,
 	pub mime_type__iew: Option<Vec<String>>,
+	pub mime_type__iregex: Option<Vec<String>>,
 	pub mime_type__isw: Option<Vec<String>>,
 	pub mime_type__n: Option<Vec<String>>,
 	pub mime_type__nic: Option<Vec<String>>,
 	pub mime_type__nie: Option<Vec<String>>,
 	pub mime_type__niew: Option<Vec<String>>,
 	pub mime_type__nisw: Option<Vec<String>>,
+	pub mime_type__regex: Option<Vec<String>>,
 	pub modified_by_request: Option<String>,
 	pub name: Option<Vec<String>>,
 	pub name__empty: Option<bool>,
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	pub object_type: Option<String>,
 	pub object_type__ic: Option<String>,
 	pub object_type__ie: Option<String>,
 	pub object_type__iew: Option<String>,
+	pub object_type__iregex: Option<String>,
 	pub object_type__isw: Option<String>,
 	pub object_type__n: Option<String>,
 	pub object_type__nic: Option<String>,
 	pub object_type__nie: Option<String>,
 	pub object_type__niew: Option<String>,
 	pub object_type__nisw: Option<String>,
+	pub object_type__regex: Option<String>,
 	pub object_type_id: Option<Vec<i64>>,
 	pub object_type_id__n: Option<Vec<i64>>,
 	/// The initial index from which to return the results.
@@ -21444,6 +22416,19 @@ pub struct ExtrasImageAttachmentsListQuery {
 	pub created__lte: Option<Vec<String>>,
 	pub created__n: Option<Vec<String>>,
 	pub created_by_request: Option<String>,
+	pub description: Option<Vec<String>>,
+	pub description__empty: Option<bool>,
+	pub description__ic: Option<Vec<String>>,
+	pub description__ie: Option<Vec<String>>,
+	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
+	pub description__isw: Option<Vec<String>>,
+	pub description__n: Option<Vec<String>>,
+	pub description__nic: Option<Vec<String>>,
+	pub description__nie: Option<Vec<String>>,
+	pub description__niew: Option<Vec<String>>,
+	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -21480,12 +22465,14 @@ pub struct ExtrasImageAttachmentsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	pub object_id: Option<Vec<i64>>,
 	pub object_id__empty: Option<bool>,
 	pub object_id__gt: Option<Vec<i64>>,
@@ -21728,12 +22715,14 @@ pub struct ExtrasJournalEntriesListQuery {
 	pub kind__ic: Option<Vec<String>>,
 	pub kind__ie: Option<Vec<String>>,
 	pub kind__iew: Option<Vec<String>>,
+	pub kind__iregex: Option<Vec<String>>,
 	pub kind__isw: Option<Vec<String>>,
 	pub kind__n: Option<Vec<String>>,
 	pub kind__nic: Option<Vec<String>>,
 	pub kind__nie: Option<Vec<String>>,
 	pub kind__niew: Option<Vec<String>>,
 	pub kind__nisw: Option<Vec<String>>,
+	pub kind__regex: Option<Vec<String>>,
 	pub last_updated: Option<Vec<String>>,
 	pub last_updated__empty: Option<Vec<String>>,
 	pub last_updated__gt: Option<Vec<String>>,
@@ -22337,15 +23326,47 @@ pub fn extras_notifications_partial_update(state: &ThanixClient, body: PatchedNo
 }
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct ExtrasObjectTypesListQuery {
-	pub app_label: Option<String>,
-	pub id: Option<i64>,
+	pub app_label: Option<Vec<String>>,
+	pub app_label__empty: Option<bool>,
+	pub app_label__ic: Option<Vec<String>>,
+	pub app_label__ie: Option<Vec<String>>,
+	pub app_label__iew: Option<Vec<String>>,
+	pub app_label__iregex: Option<Vec<String>>,
+	pub app_label__isw: Option<Vec<String>>,
+	pub app_label__n: Option<Vec<String>>,
+	pub app_label__nic: Option<Vec<String>>,
+	pub app_label__nie: Option<Vec<String>>,
+	pub app_label__niew: Option<Vec<String>>,
+	pub app_label__nisw: Option<Vec<String>>,
+	pub app_label__regex: Option<Vec<String>>,
+	pub features: Option<String>,
+	pub id: Option<Vec<i64>>,
+	pub id__empty: Option<bool>,
+	pub id__gt: Option<Vec<i64>>,
+	pub id__gte: Option<Vec<i64>>,
+	pub id__lt: Option<Vec<i64>>,
+	pub id__lte: Option<Vec<i64>>,
+	pub id__n: Option<Vec<i64>>,
 	/// Number of results to return per page.
 	pub limit: Option<i64>,
-	pub model: Option<String>,
+	pub model: Option<Vec<String>>,
+	pub model__empty: Option<bool>,
+	pub model__ic: Option<Vec<String>>,
+	pub model__ie: Option<Vec<String>>,
+	pub model__iew: Option<Vec<String>>,
+	pub model__iregex: Option<Vec<String>>,
+	pub model__isw: Option<Vec<String>>,
+	pub model__n: Option<Vec<String>>,
+	pub model__nic: Option<Vec<String>>,
+	pub model__nie: Option<Vec<String>>,
+	pub model__niew: Option<Vec<String>>,
+	pub model__nisw: Option<Vec<String>>,
+	pub model__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	pub ordering: Option<String>,
+	pub public: Option<bool>,
 	/// Search
 	pub q: Option<String>,
 
@@ -22407,12 +23428,14 @@ pub struct ExtrasSavedFiltersListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub enabled: Option<bool>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
@@ -22436,22 +23459,26 @@ pub struct ExtrasSavedFiltersListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	pub object_type: Option<String>,
 	pub object_type__ic: Option<String>,
 	pub object_type__ie: Option<String>,
 	pub object_type__iew: Option<String>,
+	pub object_type__iregex: Option<String>,
 	pub object_type__isw: Option<String>,
 	pub object_type__n: Option<String>,
 	pub object_type__nic: Option<String>,
 	pub object_type__nie: Option<String>,
 	pub object_type__niew: Option<String>,
 	pub object_type__nisw: Option<String>,
+	pub object_type__regex: Option<String>,
 	pub object_type_id: Option<Vec<i64>>,
 	pub object_type_id__n: Option<Vec<i64>>,
 	/// The initial index from which to return the results.
@@ -22466,12 +23493,14 @@ pub struct ExtrasSavedFiltersListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 	pub usable: Option<bool>,
 	/// User (name)
@@ -22698,12 +23727,14 @@ pub struct ExtrasScriptsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -23046,12 +24077,14 @@ pub struct ExtrasTableConfigsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub enabled: Option<bool>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
@@ -23075,12 +24108,14 @@ pub struct ExtrasTableConfigsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	pub object_type: Option<String>,
 	pub object_type__n: Option<String>,
 	pub object_type_id: Option<Vec<i64>>,
@@ -23097,12 +24132,14 @@ pub struct ExtrasTableConfigsListQuery {
 	pub table__ic: Option<Vec<String>>,
 	pub table__ie: Option<Vec<String>>,
 	pub table__iew: Option<Vec<String>>,
+	pub table__iregex: Option<Vec<String>>,
 	pub table__isw: Option<Vec<String>>,
 	pub table__n: Option<Vec<String>>,
 	pub table__nic: Option<Vec<String>>,
 	pub table__nie: Option<Vec<String>>,
 	pub table__niew: Option<Vec<String>>,
 	pub table__nisw: Option<Vec<String>>,
+	pub table__regex: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 	pub usable: Option<bool>,
 	/// User (name)
@@ -23391,12 +24428,14 @@ pub struct ExtrasTagsListQuery {
 	pub color__ic: Option<Vec<String>>,
 	pub color__ie: Option<Vec<String>>,
 	pub color__iew: Option<Vec<String>>,
+	pub color__iregex: Option<Vec<String>>,
 	pub color__isw: Option<Vec<String>>,
 	pub color__n: Option<Vec<String>>,
 	pub color__nic: Option<Vec<String>>,
 	pub color__nie: Option<Vec<String>>,
 	pub color__niew: Option<Vec<String>>,
 	pub color__nisw: Option<Vec<String>>,
+	pub color__regex: Option<Vec<String>>,
 	pub content_type: Option<Vec<String>>,
 	pub content_type_id: Option<Vec<i64>>,
 	pub created: Option<Vec<String>>,
@@ -23412,12 +24451,14 @@ pub struct ExtrasTagsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub for_object_type_id: Option<Vec<i64>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
@@ -23441,12 +24482,14 @@ pub struct ExtrasTagsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	pub object_types: Option<Vec<i64>>,
 	pub object_types__n: Option<Vec<i64>>,
 	/// The initial index from which to return the results.
@@ -23460,12 +24503,14 @@ pub struct ExtrasTagsListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 	pub weight: Option<Vec<i64>>,
 	pub weight__empty: Option<bool>,
@@ -23669,12 +24714,14 @@ pub struct ExtrasWebhooksListQuery {
 	pub ca_file_path__ic: Option<Vec<String>>,
 	pub ca_file_path__ie: Option<Vec<String>>,
 	pub ca_file_path__iew: Option<Vec<String>>,
+	pub ca_file_path__iregex: Option<Vec<String>>,
 	pub ca_file_path__isw: Option<Vec<String>>,
 	pub ca_file_path__n: Option<Vec<String>>,
 	pub ca_file_path__nic: Option<Vec<String>>,
 	pub ca_file_path__nie: Option<Vec<String>>,
 	pub ca_file_path__niew: Option<Vec<String>>,
 	pub ca_file_path__nisw: Option<Vec<String>>,
+	pub ca_file_path__regex: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -23688,34 +24735,40 @@ pub struct ExtrasWebhooksListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub http_content_type: Option<Vec<String>>,
 	pub http_content_type__empty: Option<bool>,
 	pub http_content_type__ic: Option<Vec<String>>,
 	pub http_content_type__ie: Option<Vec<String>>,
 	pub http_content_type__iew: Option<Vec<String>>,
+	pub http_content_type__iregex: Option<Vec<String>>,
 	pub http_content_type__isw: Option<Vec<String>>,
 	pub http_content_type__n: Option<Vec<String>>,
 	pub http_content_type__nic: Option<Vec<String>>,
 	pub http_content_type__nie: Option<Vec<String>>,
 	pub http_content_type__niew: Option<Vec<String>>,
 	pub http_content_type__nisw: Option<Vec<String>>,
+	pub http_content_type__regex: Option<Vec<String>>,
 	pub http_method: Option<Vec<String>>,
 	pub http_method__empty: Option<bool>,
 	pub http_method__ic: Option<Vec<String>>,
 	pub http_method__ie: Option<Vec<String>>,
 	pub http_method__iew: Option<Vec<String>>,
+	pub http_method__iregex: Option<Vec<String>>,
 	pub http_method__isw: Option<Vec<String>>,
 	pub http_method__n: Option<Vec<String>>,
 	pub http_method__nic: Option<Vec<String>>,
 	pub http_method__nie: Option<Vec<String>>,
 	pub http_method__niew: Option<Vec<String>>,
 	pub http_method__nisw: Option<Vec<String>>,
+	pub http_method__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -23738,12 +24791,14 @@ pub struct ExtrasWebhooksListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -23756,12 +24811,14 @@ pub struct ExtrasWebhooksListQuery {
 	pub secret__ic: Option<Vec<String>>,
 	pub secret__ie: Option<Vec<String>>,
 	pub secret__iew: Option<Vec<String>>,
+	pub secret__iregex: Option<Vec<String>>,
 	pub secret__isw: Option<Vec<String>>,
 	pub secret__n: Option<Vec<String>>,
 	pub secret__nic: Option<Vec<String>>,
 	pub secret__nie: Option<Vec<String>>,
 	pub secret__niew: Option<Vec<String>>,
 	pub secret__nisw: Option<Vec<String>>,
+	pub secret__regex: Option<Vec<String>>,
 	pub ssl_verification: Option<bool>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
@@ -23988,12 +25045,14 @@ pub struct IpamAggregatesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub family: Option<f64>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
@@ -24248,12 +25307,14 @@ pub struct IpamAsnRangesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub end: Option<Vec<i64>>,
 	pub end__empty: Option<bool>,
 	pub end__gt: Option<Vec<i64>>,
@@ -24283,12 +25344,14 @@ pub struct IpamAsnRangesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -24308,12 +25371,14 @@ pub struct IpamAsnRangesListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub start: Option<Vec<i64>>,
 	pub start__empty: Option<bool>,
 	pub start__gt: Option<Vec<i64>>,
@@ -24589,12 +25654,14 @@ pub struct IpamAsnsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -25102,23 +26169,27 @@ pub struct IpamFhrpGroupsListQuery {
 	pub auth_key__ic: Option<Vec<String>>,
 	pub auth_key__ie: Option<Vec<String>>,
 	pub auth_key__iew: Option<Vec<String>>,
+	pub auth_key__iregex: Option<Vec<String>>,
 	pub auth_key__isw: Option<Vec<String>>,
 	pub auth_key__n: Option<Vec<String>>,
 	pub auth_key__nic: Option<Vec<String>>,
 	pub auth_key__nie: Option<Vec<String>>,
 	pub auth_key__niew: Option<Vec<String>>,
 	pub auth_key__nisw: Option<Vec<String>>,
+	pub auth_key__regex: Option<Vec<String>>,
 	pub auth_type: Option<Vec<Option<String>>>,
 	pub auth_type__empty: Option<bool>,
 	pub auth_type__ic: Option<Vec<Option<String>>>,
 	pub auth_type__ie: Option<Vec<Option<String>>>,
 	pub auth_type__iew: Option<Vec<Option<String>>>,
+	pub auth_type__iregex: Option<Vec<Option<String>>>,
 	pub auth_type__isw: Option<Vec<Option<String>>>,
 	pub auth_type__n: Option<Vec<Option<String>>>,
 	pub auth_type__nic: Option<Vec<Option<String>>>,
 	pub auth_type__nie: Option<Vec<Option<String>>>,
 	pub auth_type__niew: Option<Vec<Option<String>>>,
 	pub auth_type__nisw: Option<Vec<Option<String>>>,
+	pub auth_type__regex: Option<Vec<Option<String>>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -25132,12 +26203,14 @@ pub struct IpamFhrpGroupsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub group_id: Option<Vec<i64>>,
 	pub group_id__empty: Option<bool>,
 	pub group_id__gt: Option<Vec<i64>>,
@@ -25167,12 +26240,14 @@ pub struct IpamFhrpGroupsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -25182,12 +26257,14 @@ pub struct IpamFhrpGroupsListQuery {
 	pub protocol__ic: Option<Vec<String>>,
 	pub protocol__ie: Option<Vec<String>>,
 	pub protocol__iew: Option<Vec<String>>,
+	pub protocol__iregex: Option<Vec<String>>,
 	pub protocol__isw: Option<Vec<String>>,
 	pub protocol__n: Option<Vec<String>>,
 	pub protocol__nic: Option<Vec<String>>,
 	pub protocol__nie: Option<Vec<String>>,
 	pub protocol__niew: Option<Vec<String>>,
 	pub protocol__nisw: Option<Vec<String>>,
+	pub protocol__regex: Option<Vec<String>>,
 	/// Search
 	pub q: Option<String>,
 	pub related_ip: Option<Vec<String>>,
@@ -25396,8 +26473,8 @@ pub struct IpamIpAddressesListQuery {
 	pub assigned_object_id__lt: Option<Vec<i64>>,
 	pub assigned_object_id__lte: Option<Vec<i64>>,
 	pub assigned_object_id__n: Option<Vec<i64>>,
-	pub assigned_object_type: Option<i64>,
-	pub assigned_object_type__n: Option<i64>,
+	pub assigned_object_type: Option<String>,
+	pub assigned_object_type__n: Option<String>,
 	/// Is assigned to an interface
 	pub assigned_to_interface: Option<bool>,
 	/// Contact
@@ -25423,12 +26500,14 @@ pub struct IpamIpAddressesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub device: Option<Vec<String>>,
 	pub device_id: Option<Vec<i64>>,
 	pub dns_name: Option<Vec<String>>,
@@ -25436,12 +26515,14 @@ pub struct IpamIpAddressesListQuery {
 	pub dns_name__ic: Option<Vec<String>>,
 	pub dns_name__ie: Option<Vec<String>>,
 	pub dns_name__iew: Option<Vec<String>>,
+	pub dns_name__iregex: Option<Vec<String>>,
 	pub dns_name__isw: Option<Vec<String>>,
 	pub dns_name__n: Option<Vec<String>>,
 	pub dns_name__nic: Option<Vec<String>>,
 	pub dns_name__nie: Option<Vec<String>>,
 	pub dns_name__niew: Option<Vec<String>>,
 	pub dns_name__nisw: Option<Vec<String>>,
+	pub dns_name__regex: Option<Vec<String>>,
 	pub family: Option<f64>,
 	/// FHRP group (ID)
 	pub fhrpgroup_id: Option<Vec<i64>>,
@@ -25498,6 +26579,8 @@ pub struct IpamIpAddressesListQuery {
 	/// The functional role of this IP
 	pub role__iew: Option<Vec<Option<String>>>,
 	/// The functional role of this IP
+	pub role__iregex: Option<Vec<Option<String>>>,
+	/// The functional role of this IP
 	pub role__isw: Option<Vec<Option<String>>>,
 	/// The functional role of this IP
 	pub role__n: Option<Vec<Option<String>>>,
@@ -25509,9 +26592,11 @@ pub struct IpamIpAddressesListQuery {
 	pub role__niew: Option<Vec<Option<String>>>,
 	/// The functional role of this IP
 	pub role__nisw: Option<Vec<Option<String>>>,
-	/// Service (ID)
+	/// The functional role of this IP
+	pub role__regex: Option<Vec<Option<String>>>,
+	/// Application Service (ID)
 	pub service_id: Option<Vec<i64>>,
-	/// Service (ID)
+	/// Application Service (ID)
 	pub service_id__n: Option<Vec<i64>>,
 	/// The operational status of this IP
 	pub status: Option<Vec<String>>,
@@ -25522,6 +26607,8 @@ pub struct IpamIpAddressesListQuery {
 	pub status__ie: Option<Vec<String>>,
 	/// The operational status of this IP
 	pub status__iew: Option<Vec<String>>,
+	/// The operational status of this IP
+	pub status__iregex: Option<Vec<String>>,
 	/// The operational status of this IP
 	pub status__isw: Option<Vec<String>>,
 	/// The operational status of this IP
@@ -25534,6 +26621,8 @@ pub struct IpamIpAddressesListQuery {
 	pub status__niew: Option<Vec<String>>,
 	/// The operational status of this IP
 	pub status__nisw: Option<Vec<String>>,
+	/// The operational status of this IP
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -25784,12 +26873,14 @@ pub struct IpamIpRangesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub end_address: Option<Vec<String>>,
 	pub family: Option<f64>,
 	pub id: Option<Vec<i64>>,
@@ -25844,6 +26935,8 @@ pub struct IpamIpRangesListQuery {
 	/// Operational status of this range
 	pub status__iew: Option<Vec<String>>,
 	/// Operational status of this range
+	pub status__iregex: Option<Vec<String>>,
+	/// Operational status of this range
 	pub status__isw: Option<Vec<String>>,
 	/// Operational status of this range
 	pub status__n: Option<Vec<String>>,
@@ -25855,6 +26948,8 @@ pub struct IpamIpRangesListQuery {
 	pub status__niew: Option<Vec<String>>,
 	/// Operational status of this range
 	pub status__nisw: Option<Vec<String>>,
+	/// Operational status of this range
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -26150,12 +27245,14 @@ pub struct IpamPrefixesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub family: Option<f64>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
@@ -26235,6 +27332,8 @@ pub struct IpamPrefixesListQuery {
 	/// Operational status of this prefix
 	pub status__iew: Option<Vec<String>>,
 	/// Operational status of this prefix
+	pub status__iregex: Option<Vec<String>>,
+	/// Operational status of this prefix
 	pub status__isw: Option<Vec<String>>,
 	/// Operational status of this prefix
 	pub status__n: Option<Vec<String>>,
@@ -26246,6 +27345,8 @@ pub struct IpamPrefixesListQuery {
 	pub status__niew: Option<Vec<String>>,
 	/// Operational status of this prefix
 	pub status__nisw: Option<Vec<String>>,
+	/// Operational status of this prefix
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -26586,12 +27687,14 @@ pub struct IpamRirsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -26615,12 +27718,14 @@ pub struct IpamRirsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -26632,12 +27737,14 @@ pub struct IpamRirsListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -26846,12 +27953,14 @@ pub struct IpamRolesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -26874,12 +27983,14 @@ pub struct IpamRolesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -26891,12 +28002,14 @@ pub struct IpamRolesListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -27112,12 +28225,14 @@ pub struct IpamRouteTargetsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Exporting L2VPN (identifier)
 	pub exporting_l2vpn: Option<Vec<Option<i64>>>,
 	/// Exporting L2VPN (identifier)
@@ -27172,12 +28287,14 @@ pub struct IpamRouteTargetsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -27404,12 +28521,14 @@ pub struct IpamServiceTemplatesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -27432,17 +28551,25 @@ pub struct IpamServiceTemplatesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	pub ordering: Option<String>,
 	pub port: Option<f64>,
+	pub port__empty: Option<f64>,
+	pub port__gt: Option<f64>,
+	pub port__gte: Option<f64>,
+	pub port__lt: Option<f64>,
+	pub port__lte: Option<f64>,
+	pub port__n: Option<f64>,
 	/// * `tcp` - TCP
 	/// * `udp` - UDP
 	/// * `sctp` - SCTP
@@ -27461,7 +28588,7 @@ pub enum IpamServiceTemplatesListResponse {
 	Http200(PaginatedServiceTemplateList),
 	Other(Response)
 }
-/// Get a list of service template objects.
+/// Get a list of application service template objects.
 pub fn ipam_service_templates_list(state: &ThanixClient, query: IpamServiceTemplatesListQuery) -> Result<IpamServiceTemplatesListResponse, Error> {
 	let qstring = serde_qs::to_string(&query).unwrap();
 	let qstring_clean = remove_square_braces(&qstring);
@@ -27483,7 +28610,7 @@ pub enum IpamServiceTemplatesBulkUpdateResponse {
 	Http200(Vec<ServiceTemplate>),
 	Other(Response)
 }
-/// Put a list of service template objects.
+/// Put a list of application service template objects.
 pub fn ipam_service_templates_bulk_update(state: &ThanixClient, body: Vec<ServiceTemplateRequest>) -> Result<IpamServiceTemplatesBulkUpdateResponse, Error> {
 
 	let mut r#request = state.client.put(format!("{}/api/ipam/service-templates/", state.base_url))
@@ -27504,7 +28631,7 @@ pub enum IpamServiceTemplatesCreateResponse {
 	Http201(ServiceTemplate),
 	Other(Response)
 }
-/// Post a list of service template objects.
+/// Post a list of application service template objects.
 pub fn ipam_service_templates_create(state: &ThanixClient, body: WritableServiceTemplateRequest) -> Result<IpamServiceTemplatesCreateResponse, Error> {
 
 	let mut r#request = state.client.post(format!("{}/api/ipam/service-templates/", state.base_url))
@@ -27525,7 +28652,7 @@ pub enum IpamServiceTemplatesBulkDestroyResponse {
 	Http204,
 	Other(Response)
 }
-/// Delete a list of service template objects.
+/// Delete a list of application service template objects.
 pub fn ipam_service_templates_bulk_destroy(state: &ThanixClient, body: Vec<ServiceTemplateRequest>) -> Result<IpamServiceTemplatesBulkDestroyResponse, Error> {
 
 	let mut r#request = state.client.delete(format!("{}/api/ipam/service-templates/", state.base_url))
@@ -27545,7 +28672,7 @@ pub enum IpamServiceTemplatesBulkPartialUpdateResponse {
 	Http200(Vec<ServiceTemplate>),
 	Other(Response)
 }
-/// Patch a list of service template objects.
+/// Patch a list of application service template objects.
 pub fn ipam_service_templates_bulk_partial_update(state: &ThanixClient, body: Vec<ServiceTemplateRequest>) -> Result<IpamServiceTemplatesBulkPartialUpdateResponse, Error> {
 
 	let mut r#request = state.client.patch(format!("{}/api/ipam/service-templates/", state.base_url))
@@ -27566,7 +28693,7 @@ pub enum IpamServiceTemplatesRetrieveResponse {
 	Http200(ServiceTemplate),
 	Other(Response)
 }
-/// Get a service template object.
+/// Get a application service template object.
 pub fn ipam_service_templates_retrieve(state: &ThanixClient, id: i64) -> Result<IpamServiceTemplatesRetrieveResponse, Error> {
 
 	let mut r#request = state.client.get(format!("{}/api/ipam/service-templates/{id}/", state.base_url))
@@ -27586,7 +28713,7 @@ pub enum IpamServiceTemplatesUpdateResponse {
 	Http200(ServiceTemplate),
 	Other(Response)
 }
-/// Put a service template object.
+/// Put a application service template object.
 pub fn ipam_service_templates_update(state: &ThanixClient, body: WritableServiceTemplateRequest, id: i64) -> Result<IpamServiceTemplatesUpdateResponse, Error> {
 
 	let mut r#request = state.client.put(format!("{}/api/ipam/service-templates/{id}/", state.base_url))
@@ -27607,7 +28734,7 @@ pub enum IpamServiceTemplatesDestroyResponse {
 	Http204,
 	Other(Response)
 }
-/// Delete a service template object.
+/// Delete a application service template object.
 pub fn ipam_service_templates_destroy(state: &ThanixClient, id: i64) -> Result<IpamServiceTemplatesDestroyResponse, Error> {
 
 	let mut r#request = state.client.delete(format!("{}/api/ipam/service-templates/{id}/", state.base_url))
@@ -27626,7 +28753,7 @@ pub enum IpamServiceTemplatesPartialUpdateResponse {
 	Http200(ServiceTemplate),
 	Other(Response)
 }
-/// Patch a service template object.
+/// Patch a application service template object.
 pub fn ipam_service_templates_partial_update(state: &ThanixClient, body: PatchedWritableServiceTemplateRequest, id: i64) -> Result<IpamServiceTemplatesPartialUpdateResponse, Error> {
 
 	let mut r#request = state.client.patch(format!("{}/api/ipam/service-templates/{id}/", state.base_url))
@@ -27667,12 +28794,14 @@ pub struct IpamServicesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub device: Option<Vec<String>>,
 	pub device_id: Option<Vec<i64>>,
 	pub fhrpgroup: Option<Vec<String>>,
@@ -27707,12 +28836,14 @@ pub struct IpamServicesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -27724,9 +28855,15 @@ pub struct IpamServicesListQuery {
 	pub parent_object_id__lt: Option<Vec<i64>>,
 	pub parent_object_id__lte: Option<Vec<i64>>,
 	pub parent_object_id__n: Option<Vec<i64>>,
-	pub parent_object_type: Option<i64>,
-	pub parent_object_type__n: Option<i64>,
+	pub parent_object_type: Option<String>,
+	pub parent_object_type__n: Option<String>,
 	pub port: Option<f64>,
+	pub port__empty: Option<f64>,
+	pub port__gt: Option<f64>,
+	pub port__gte: Option<f64>,
+	pub port__lt: Option<f64>,
+	pub port__lte: Option<f64>,
+	pub port__n: Option<f64>,
 	/// * `tcp` - TCP
 	/// * `udp` - UDP
 	/// * `sctp` - SCTP
@@ -27747,7 +28884,7 @@ pub enum IpamServicesListResponse {
 	Http200(PaginatedServiceList),
 	Other(Response)
 }
-/// Get a list of service objects.
+/// Get a list of application service objects.
 pub fn ipam_services_list(state: &ThanixClient, query: IpamServicesListQuery) -> Result<IpamServicesListResponse, Error> {
 	let qstring = serde_qs::to_string(&query).unwrap();
 	let qstring_clean = remove_square_braces(&qstring);
@@ -27769,7 +28906,7 @@ pub enum IpamServicesBulkUpdateResponse {
 	Http200(Vec<Service>),
 	Other(Response)
 }
-/// Put a list of service objects.
+/// Put a list of application service objects.
 pub fn ipam_services_bulk_update(state: &ThanixClient, body: Vec<ServiceRequest>) -> Result<IpamServicesBulkUpdateResponse, Error> {
 
 	let mut r#request = state.client.put(format!("{}/api/ipam/services/", state.base_url))
@@ -27790,7 +28927,7 @@ pub enum IpamServicesCreateResponse {
 	Http201(Service),
 	Other(Response)
 }
-/// Post a list of service objects.
+/// Post a list of application service objects.
 pub fn ipam_services_create(state: &ThanixClient, body: WritableServiceRequest) -> Result<IpamServicesCreateResponse, Error> {
 
 	let mut r#request = state.client.post(format!("{}/api/ipam/services/", state.base_url))
@@ -27811,7 +28948,7 @@ pub enum IpamServicesBulkDestroyResponse {
 	Http204,
 	Other(Response)
 }
-/// Delete a list of service objects.
+/// Delete a list of application service objects.
 pub fn ipam_services_bulk_destroy(state: &ThanixClient, body: Vec<ServiceRequest>) -> Result<IpamServicesBulkDestroyResponse, Error> {
 
 	let mut r#request = state.client.delete(format!("{}/api/ipam/services/", state.base_url))
@@ -27831,7 +28968,7 @@ pub enum IpamServicesBulkPartialUpdateResponse {
 	Http200(Vec<Service>),
 	Other(Response)
 }
-/// Patch a list of service objects.
+/// Patch a list of application service objects.
 pub fn ipam_services_bulk_partial_update(state: &ThanixClient, body: Vec<ServiceRequest>) -> Result<IpamServicesBulkPartialUpdateResponse, Error> {
 
 	let mut r#request = state.client.patch(format!("{}/api/ipam/services/", state.base_url))
@@ -27852,7 +28989,7 @@ pub enum IpamServicesRetrieveResponse {
 	Http200(Service),
 	Other(Response)
 }
-/// Get a service object.
+/// Get a application service object.
 pub fn ipam_services_retrieve(state: &ThanixClient, id: i64) -> Result<IpamServicesRetrieveResponse, Error> {
 
 	let mut r#request = state.client.get(format!("{}/api/ipam/services/{id}/", state.base_url))
@@ -27872,7 +29009,7 @@ pub enum IpamServicesUpdateResponse {
 	Http200(Service),
 	Other(Response)
 }
-/// Put a service object.
+/// Put a application service object.
 pub fn ipam_services_update(state: &ThanixClient, body: WritableServiceRequest, id: i64) -> Result<IpamServicesUpdateResponse, Error> {
 
 	let mut r#request = state.client.put(format!("{}/api/ipam/services/{id}/", state.base_url))
@@ -27893,7 +29030,7 @@ pub enum IpamServicesDestroyResponse {
 	Http204,
 	Other(Response)
 }
-/// Delete a service object.
+/// Delete a application service object.
 pub fn ipam_services_destroy(state: &ThanixClient, id: i64) -> Result<IpamServicesDestroyResponse, Error> {
 
 	let mut r#request = state.client.delete(format!("{}/api/ipam/services/{id}/", state.base_url))
@@ -27912,7 +29049,7 @@ pub enum IpamServicesPartialUpdateResponse {
 	Http200(Service),
 	Other(Response)
 }
-/// Patch a service object.
+/// Patch a application service object.
 pub fn ipam_services_partial_update(state: &ThanixClient, body: PatchedWritableServiceRequest, id: i64) -> Result<IpamServicesPartialUpdateResponse, Error> {
 
 	let mut r#request = state.client.patch(format!("{}/api/ipam/services/{id}/", state.base_url))
@@ -27946,12 +29083,14 @@ pub struct IpamVlanGroupsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -27975,12 +29114,14 @@ pub struct IpamVlanGroupsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -28005,12 +29146,14 @@ pub struct IpamVlanGroupsListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -28272,12 +29415,14 @@ pub struct IpamVlanTranslationPoliciesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -28300,12 +29445,14 @@ pub struct IpamVlanTranslationPoliciesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -28520,12 +29667,14 @@ pub struct IpamVlanTranslationRulesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -28782,12 +29931,14 @@ pub struct IpamVlansListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Group
 	pub group: Option<Vec<String>>,
 	/// Group
@@ -28803,8 +29954,7 @@ pub struct IpamVlansListQuery {
 	pub id__lt: Option<Vec<i64>>,
 	pub id__lte: Option<Vec<i64>>,
 	pub id__n: Option<Vec<i64>>,
-	/// Assigned interface
-	pub interface_id: Option<String>,
+	pub interface_id: Option<i64>,
 	/// L2VPN
 	pub l2vpn: Option<Vec<Option<i64>>>,
 	/// L2VPN
@@ -28828,12 +29978,14 @@ pub struct IpamVlansListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -28850,6 +30002,8 @@ pub struct IpamVlansListQuery {
 	/// Customer/service VLAN designation (for Q-in-Q/IEEE 802.1ad)
 	pub qinq_role__iew: Option<Vec<Option<String>>>,
 	/// Customer/service VLAN designation (for Q-in-Q/IEEE 802.1ad)
+	pub qinq_role__iregex: Option<Vec<Option<String>>>,
+	/// Customer/service VLAN designation (for Q-in-Q/IEEE 802.1ad)
 	pub qinq_role__isw: Option<Vec<Option<String>>>,
 	/// Customer/service VLAN designation (for Q-in-Q/IEEE 802.1ad)
 	pub qinq_role__n: Option<Vec<Option<String>>>,
@@ -28861,6 +30015,8 @@ pub struct IpamVlansListQuery {
 	pub qinq_role__niew: Option<Vec<Option<String>>>,
 	/// Customer/service VLAN designation (for Q-in-Q/IEEE 802.1ad)
 	pub qinq_role__nisw: Option<Vec<Option<String>>>,
+	/// Customer/service VLAN designation (for Q-in-Q/IEEE 802.1ad)
+	pub qinq_role__regex: Option<Vec<Option<String>>>,
 	/// Q-in-Q SVLAN (ID)
 	pub qinq_svlan_id: Option<Vec<Option<i64>>>,
 	/// Q-in-Q SVLAN (ID)
@@ -28906,6 +30062,8 @@ pub struct IpamVlansListQuery {
 	/// Operational status of this VLAN
 	pub status__iew: Option<Vec<String>>,
 	/// Operational status of this VLAN
+	pub status__iregex: Option<Vec<String>>,
+	/// Operational status of this VLAN
 	pub status__isw: Option<Vec<String>>,
 	/// Operational status of this VLAN
 	pub status__n: Option<Vec<String>>,
@@ -28917,6 +30075,8 @@ pub struct IpamVlansListQuery {
 	pub status__niew: Option<Vec<String>>,
 	/// Operational status of this VLAN
 	pub status__nisw: Option<Vec<String>>,
+	/// Operational status of this VLAN
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -28941,8 +30101,7 @@ pub struct IpamVlansListQuery {
 	pub vid__lt: Option<Vec<i64>>,
 	pub vid__lte: Option<Vec<i64>>,
 	pub vid__n: Option<Vec<i64>>,
-	/// Assigned VM interface
-	pub vminterface_id: Option<String>,
+	pub vminterface_id: Option<i64>,
 
 }
 #[derive(Debug)]
@@ -29146,12 +30305,14 @@ pub struct IpamVrfsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub enforce_unique: Option<bool>,
 	/// Export target (name)
 	pub export_target: Option<Vec<String>>,
@@ -29191,12 +30352,14 @@ pub struct IpamVrfsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -29208,12 +30371,14 @@ pub struct IpamVrfsListQuery {
 	pub rd__ic: Option<Vec<String>>,
 	pub rd__ie: Option<Vec<String>>,
 	pub rd__iew: Option<Vec<String>>,
+	pub rd__iregex: Option<Vec<String>>,
 	pub rd__isw: Option<Vec<String>>,
 	pub rd__n: Option<Vec<String>>,
 	pub rd__nic: Option<Vec<String>>,
 	pub rd__nie: Option<Vec<String>>,
 	pub rd__niew: Option<Vec<String>>,
 	pub rd__nisw: Option<Vec<String>>,
+	pub rd__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -29751,12 +30916,14 @@ pub struct TenancyContactGroupsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -29779,12 +30946,14 @@ pub struct TenancyContactGroupsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -29804,12 +30973,14 @@ pub struct TenancyContactGroupsListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -30018,12 +31189,14 @@ pub struct TenancyContactRolesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -30046,12 +31219,14 @@ pub struct TenancyContactRolesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -30063,12 +31238,14 @@ pub struct TenancyContactRolesListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -30269,12 +31446,14 @@ pub struct TenancyContactsListQuery {
 	pub address__ic: Option<Vec<String>>,
 	pub address__ie: Option<Vec<String>>,
 	pub address__iew: Option<Vec<String>>,
+	pub address__iregex: Option<Vec<String>>,
 	pub address__isw: Option<Vec<String>>,
 	pub address__n: Option<Vec<String>>,
 	pub address__nic: Option<Vec<String>>,
 	pub address__nie: Option<Vec<String>>,
 	pub address__niew: Option<Vec<String>>,
 	pub address__nisw: Option<Vec<String>>,
+	pub address__regex: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -30288,23 +31467,27 @@ pub struct TenancyContactsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub email: Option<Vec<String>>,
 	pub email__empty: Option<bool>,
 	pub email__ic: Option<Vec<String>>,
 	pub email__ie: Option<Vec<String>>,
 	pub email__iew: Option<Vec<String>>,
+	pub email__iregex: Option<Vec<String>>,
 	pub email__isw: Option<Vec<String>>,
 	pub email__n: Option<Vec<String>>,
 	pub email__nic: Option<Vec<String>>,
 	pub email__nie: Option<Vec<String>>,
 	pub email__niew: Option<Vec<String>>,
 	pub email__nisw: Option<Vec<String>>,
+	pub email__regex: Option<Vec<String>>,
 	pub group: Option<Vec<String>>,
 	pub group__n: Option<Vec<String>>,
 	pub group_id: Option<Vec<String>>,
@@ -30330,24 +31513,28 @@ pub struct TenancyContactsListQuery {
 	pub link__ic: Option<Vec<String>>,
 	pub link__ie: Option<Vec<String>>,
 	pub link__iew: Option<Vec<String>>,
+	pub link__iregex: Option<Vec<String>>,
 	pub link__isw: Option<Vec<String>>,
 	pub link__n: Option<Vec<String>>,
 	pub link__nic: Option<Vec<String>>,
 	pub link__nie: Option<Vec<String>>,
 	pub link__niew: Option<Vec<String>>,
 	pub link__nisw: Option<Vec<String>>,
+	pub link__regex: Option<Vec<String>>,
 	pub modified_by_request: Option<String>,
 	pub name: Option<Vec<String>>,
 	pub name__empty: Option<bool>,
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -30357,12 +31544,14 @@ pub struct TenancyContactsListQuery {
 	pub phone__ic: Option<Vec<String>>,
 	pub phone__ie: Option<Vec<String>>,
 	pub phone__iew: Option<Vec<String>>,
+	pub phone__iregex: Option<Vec<String>>,
 	pub phone__isw: Option<Vec<String>>,
 	pub phone__n: Option<Vec<String>>,
 	pub phone__nic: Option<Vec<String>>,
 	pub phone__nie: Option<Vec<String>>,
 	pub phone__niew: Option<Vec<String>>,
 	pub phone__nisw: Option<Vec<String>>,
+	pub phone__regex: Option<Vec<String>>,
 	/// Search
 	pub q: Option<String>,
 	pub tag: Option<Vec<String>>,
@@ -30374,12 +31563,14 @@ pub struct TenancyContactsListQuery {
 	pub title__ic: Option<Vec<String>>,
 	pub title__ie: Option<Vec<String>>,
 	pub title__iew: Option<Vec<String>>,
+	pub title__iregex: Option<Vec<String>>,
 	pub title__isw: Option<Vec<String>>,
 	pub title__n: Option<Vec<String>>,
 	pub title__nic: Option<Vec<String>>,
 	pub title__nie: Option<Vec<String>>,
 	pub title__niew: Option<Vec<String>>,
 	pub title__nisw: Option<Vec<String>>,
+	pub title__regex: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 
 }
@@ -30588,12 +31779,14 @@ pub struct TenancyTenantGroupsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -30616,12 +31809,14 @@ pub struct TenancyTenantGroupsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -30641,12 +31836,14 @@ pub struct TenancyTenantGroupsListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -30865,12 +32062,14 @@ pub struct TenancyTenantsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub group: Option<Vec<String>>,
 	pub group__n: Option<Vec<String>>,
 	pub group_id: Option<Vec<String>>,
@@ -30897,12 +32096,14 @@ pub struct TenancyTenantsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -30914,12 +32115,14 @@ pub struct TenancyTenantsListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -31140,12 +32343,14 @@ pub struct UsersGroupsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -31160,12 +32365,14 @@ pub struct UsersGroupsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// Notification group (ID)
 	pub notification_group_id: Option<Vec<i64>>,
 	/// Notification group (ID)
@@ -31383,12 +32590,14 @@ pub struct UsersPermissionsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub enabled: Option<bool>,
 	/// Group (name)
 	pub group: Option<Vec<String>>,
@@ -31412,22 +32621,26 @@ pub struct UsersPermissionsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	pub object_type: Option<String>,
 	pub object_type__ic: Option<String>,
 	pub object_type__ie: Option<String>,
 	pub object_type__iew: Option<String>,
+	pub object_type__iregex: Option<String>,
 	pub object_type__isw: Option<String>,
 	pub object_type__n: Option<String>,
 	pub object_type__nic: Option<String>,
 	pub object_type__nie: Option<String>,
 	pub object_type__niew: Option<String>,
 	pub object_type__nisw: Option<String>,
+	pub object_type__regex: Option<String>,
 	pub object_type_id: Option<Vec<i64>>,
 	pub object_type_id__n: Option<Vec<i64>>,
 	pub object_types: Option<Vec<i64>>,
@@ -31644,12 +32857,14 @@ pub struct UsersTokensListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub expires: Option<String>,
 	pub expires__gte: Option<String>,
 	pub expires__lte: Option<String>,
@@ -31665,12 +32880,14 @@ pub struct UsersTokensListQuery {
 	pub key__ic: Option<Vec<String>>,
 	pub key__ie: Option<Vec<String>>,
 	pub key__iew: Option<Vec<String>>,
+	pub key__iregex: Option<Vec<String>>,
 	pub key__isw: Option<Vec<String>>,
 	pub key__n: Option<Vec<String>>,
 	pub key__nic: Option<Vec<String>>,
 	pub key__nie: Option<Vec<String>>,
 	pub key__niew: Option<Vec<String>>,
 	pub key__nisw: Option<Vec<String>>,
+	pub key__regex: Option<Vec<String>>,
 	pub last_used: Option<Vec<String>>,
 	pub last_used__empty: Option<bool>,
 	pub last_used__gt: Option<Vec<String>>,
@@ -31920,23 +33137,27 @@ pub struct UsersUsersListQuery {
 	pub email__ic: Option<Vec<String>>,
 	pub email__ie: Option<Vec<String>>,
 	pub email__iew: Option<Vec<String>>,
+	pub email__iregex: Option<Vec<String>>,
 	pub email__isw: Option<Vec<String>>,
 	pub email__n: Option<Vec<String>>,
 	pub email__nic: Option<Vec<String>>,
 	pub email__nie: Option<Vec<String>>,
 	pub email__niew: Option<Vec<String>>,
 	pub email__nisw: Option<Vec<String>>,
+	pub email__regex: Option<Vec<String>>,
 	pub first_name: Option<Vec<String>>,
 	pub first_name__empty: Option<bool>,
 	pub first_name__ic: Option<Vec<String>>,
 	pub first_name__ie: Option<Vec<String>>,
 	pub first_name__iew: Option<Vec<String>>,
+	pub first_name__iregex: Option<Vec<String>>,
 	pub first_name__isw: Option<Vec<String>>,
 	pub first_name__n: Option<Vec<String>>,
 	pub first_name__nic: Option<Vec<String>>,
 	pub first_name__nie: Option<Vec<String>>,
 	pub first_name__niew: Option<Vec<String>>,
 	pub first_name__nisw: Option<Vec<String>>,
+	pub first_name__regex: Option<Vec<String>>,
 	/// Group (name)
 	pub group: Option<Vec<String>>,
 	/// Group (name)
@@ -31967,12 +33188,14 @@ pub struct UsersUsersListQuery {
 	pub last_name__ic: Option<Vec<String>>,
 	pub last_name__ie: Option<Vec<String>>,
 	pub last_name__iew: Option<Vec<String>>,
+	pub last_name__iregex: Option<Vec<String>>,
 	pub last_name__isw: Option<Vec<String>>,
 	pub last_name__n: Option<Vec<String>>,
 	pub last_name__nic: Option<Vec<String>>,
 	pub last_name__nie: Option<Vec<String>>,
 	pub last_name__niew: Option<Vec<String>>,
 	pub last_name__nisw: Option<Vec<String>>,
+	pub last_name__regex: Option<Vec<String>>,
 	/// Number of results to return per page.
 	pub limit: Option<i64>,
 	/// Notification group (ID)
@@ -31994,12 +33217,14 @@ pub struct UsersUsersListQuery {
 	pub username__ic: Option<Vec<String>>,
 	pub username__ie: Option<Vec<String>>,
 	pub username__iew: Option<Vec<String>>,
+	pub username__iregex: Option<Vec<String>>,
 	pub username__isw: Option<Vec<String>>,
 	pub username__n: Option<Vec<String>>,
 	pub username__nic: Option<Vec<String>>,
 	pub username__nie: Option<Vec<String>>,
 	pub username__niew: Option<Vec<String>>,
 	pub username__nisw: Option<Vec<String>>,
+	pub username__regex: Option<Vec<String>>,
 
 }
 #[derive(Debug)]
@@ -32213,12 +33438,14 @@ pub struct VirtualizationClusterGroupsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -32241,12 +33468,14 @@ pub struct VirtualizationClusterGroupsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -32258,12 +33487,14 @@ pub struct VirtualizationClusterGroupsListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -32472,12 +33703,14 @@ pub struct VirtualizationClusterTypesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -32500,12 +33733,14 @@ pub struct VirtualizationClusterTypesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -32517,12 +33752,14 @@ pub struct VirtualizationClusterTypesListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -32741,12 +33978,14 @@ pub struct VirtualizationClustersListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Parent group (slug)
 	pub group: Option<Vec<String>>,
 	/// Parent group (slug)
@@ -32781,12 +34020,14 @@ pub struct VirtualizationClustersListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -32823,12 +34064,14 @@ pub struct VirtualizationClustersListQuery {
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -33069,12 +34312,14 @@ pub struct VirtualizationInterfacesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub enabled: Option<bool>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
@@ -33104,12 +34349,14 @@ pub struct VirtualizationInterfacesListQuery {
 	pub mac_address__ic: Option<Vec<String>>,
 	pub mac_address__ie: Option<Vec<String>>,
 	pub mac_address__iew: Option<Vec<String>>,
+	pub mac_address__iregex: Option<Vec<String>>,
 	pub mac_address__isw: Option<Vec<String>>,
 	pub mac_address__n: Option<Vec<String>>,
 	pub mac_address__nic: Option<Vec<String>>,
 	pub mac_address__nie: Option<Vec<String>>,
 	pub mac_address__niew: Option<Vec<String>>,
 	pub mac_address__nisw: Option<Vec<String>>,
+	pub mac_address__regex: Option<Vec<String>>,
 	/// 802.1Q Mode
 	pub mode: Option<Vec<Option<String>>>,
 	/// 802.1Q Mode
@@ -33120,6 +34367,8 @@ pub struct VirtualizationInterfacesListQuery {
 	pub mode__ie: Option<Vec<Option<String>>>,
 	/// 802.1Q Mode
 	pub mode__iew: Option<Vec<Option<String>>>,
+	/// 802.1Q Mode
+	pub mode__iregex: Option<Vec<Option<String>>>,
 	/// 802.1Q Mode
 	pub mode__isw: Option<Vec<Option<String>>>,
 	/// 802.1Q Mode
@@ -33132,6 +34381,8 @@ pub struct VirtualizationInterfacesListQuery {
 	pub mode__niew: Option<Vec<Option<String>>>,
 	/// 802.1Q Mode
 	pub mode__nisw: Option<Vec<Option<String>>>,
+	/// 802.1Q Mode
+	pub mode__regex: Option<Vec<Option<String>>>,
 	pub modified_by_request: Option<String>,
 	pub mtu: Option<Vec<i64>>,
 	pub mtu__empty: Option<bool>,
@@ -33145,12 +34396,14 @@ pub struct VirtualizationInterfacesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -33405,12 +34658,14 @@ pub struct VirtualizationVirtualDisksListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -33433,12 +34688,14 @@ pub struct VirtualizationVirtualDisksListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -33706,12 +34963,14 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Device
 	pub device: Option<Vec<Option<String>>>,
 	/// Device
@@ -33758,12 +35017,14 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	pub mac_address__ic: Option<Vec<String>>,
 	pub mac_address__ie: Option<Vec<String>>,
 	pub mac_address__iew: Option<Vec<String>>,
+	pub mac_address__iregex: Option<Vec<String>>,
 	pub mac_address__isw: Option<Vec<String>>,
 	pub mac_address__n: Option<Vec<String>>,
 	pub mac_address__nic: Option<Vec<String>>,
 	pub mac_address__nie: Option<Vec<String>>,
 	pub mac_address__niew: Option<Vec<String>>,
 	pub mac_address__nisw: Option<Vec<String>>,
+	pub mac_address__regex: Option<Vec<String>>,
 	pub memory: Option<Vec<i64>>,
 	pub memory__empty: Option<bool>,
 	pub memory__gt: Option<Vec<i64>>,
@@ -33777,24 +35038,22 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
 	pub ordering: Option<String>,
-	/// Platform (slug)
 	pub platform: Option<Vec<String>>,
-	/// Platform (slug)
 	pub platform__n: Option<Vec<String>>,
-	/// Platform (ID)
-	pub platform_id: Option<Vec<Option<i64>>>,
-	/// Platform (ID)
-	pub platform_id__n: Option<Vec<Option<i64>>>,
+	pub platform_id: Option<Vec<String>>,
+	pub platform_id__n: Option<Vec<String>>,
 	/// Primary IPv4 (address)
 	pub primary_ip4: Option<Vec<String>>,
 	/// Primary IPv4 (address)
@@ -33826,12 +35085,14 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	pub serial__ic: Option<Vec<String>>,
 	pub serial__ie: Option<Vec<String>>,
 	pub serial__iew: Option<Vec<String>>,
+	pub serial__iregex: Option<Vec<String>>,
 	pub serial__isw: Option<Vec<String>>,
 	pub serial__n: Option<Vec<String>>,
 	pub serial__nic: Option<Vec<String>>,
 	pub serial__nie: Option<Vec<String>>,
 	pub serial__niew: Option<Vec<String>>,
 	pub serial__nisw: Option<Vec<String>>,
+	pub serial__regex: Option<Vec<String>>,
 	/// Site (slug)
 	pub site: Option<Vec<String>>,
 	/// Site (slug)
@@ -33849,12 +35110,14 @@ pub struct VirtualizationVirtualMachinesListQuery {
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -34117,12 +35380,14 @@ pub struct VpnIkePoliciesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -34148,24 +35413,28 @@ pub struct VpnIkePoliciesListQuery {
 	pub mode__ic: Option<Vec<Option<String>>>,
 	pub mode__ie: Option<Vec<Option<String>>>,
 	pub mode__iew: Option<Vec<Option<String>>>,
+	pub mode__iregex: Option<Vec<Option<String>>>,
 	pub mode__isw: Option<Vec<Option<String>>>,
 	pub mode__n: Option<Vec<Option<String>>>,
 	pub mode__nic: Option<Vec<Option<String>>>,
 	pub mode__nie: Option<Vec<Option<String>>>,
 	pub mode__niew: Option<Vec<Option<String>>>,
 	pub mode__nisw: Option<Vec<Option<String>>>,
+	pub mode__regex: Option<Vec<Option<String>>>,
 	pub modified_by_request: Option<String>,
 	pub name: Option<Vec<String>>,
 	pub name__empty: Option<bool>,
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -34174,12 +35443,14 @@ pub struct VpnIkePoliciesListQuery {
 	pub preshared_key__ic: Option<String>,
 	pub preshared_key__ie: Option<String>,
 	pub preshared_key__iew: Option<String>,
+	pub preshared_key__iregex: Option<String>,
 	pub preshared_key__isw: Option<String>,
 	pub preshared_key__n: Option<String>,
 	pub preshared_key__nic: Option<String>,
 	pub preshared_key__nie: Option<String>,
 	pub preshared_key__niew: Option<String>,
 	pub preshared_key__nisw: Option<String>,
+	pub preshared_key__regex: Option<String>,
 	/// Search
 	pub q: Option<String>,
 	pub tag: Option<Vec<String>>,
@@ -34191,12 +35462,14 @@ pub struct VpnIkePoliciesListQuery {
 	pub version__ic: Option<Vec<i64>>,
 	pub version__ie: Option<Vec<i64>>,
 	pub version__iew: Option<Vec<i64>>,
+	pub version__iregex: Option<Vec<i64>>,
 	pub version__isw: Option<Vec<i64>>,
 	pub version__n: Option<Vec<i64>>,
 	pub version__nic: Option<Vec<i64>>,
 	pub version__nie: Option<Vec<i64>>,
 	pub version__niew: Option<Vec<i64>>,
 	pub version__nisw: Option<Vec<i64>>,
+	pub version__regex: Option<Vec<i64>>,
 
 }
 #[derive(Debug)]
@@ -34392,23 +35665,27 @@ pub struct VpnIkeProposalsListQuery {
 	pub authentication_algorithm__ic: Option<Vec<Option<String>>>,
 	pub authentication_algorithm__ie: Option<Vec<Option<String>>>,
 	pub authentication_algorithm__iew: Option<Vec<Option<String>>>,
+	pub authentication_algorithm__iregex: Option<Vec<Option<String>>>,
 	pub authentication_algorithm__isw: Option<Vec<Option<String>>>,
 	pub authentication_algorithm__n: Option<Vec<Option<String>>>,
 	pub authentication_algorithm__nic: Option<Vec<Option<String>>>,
 	pub authentication_algorithm__nie: Option<Vec<Option<String>>>,
 	pub authentication_algorithm__niew: Option<Vec<Option<String>>>,
 	pub authentication_algorithm__nisw: Option<Vec<Option<String>>>,
+	pub authentication_algorithm__regex: Option<Vec<Option<String>>>,
 	pub authentication_method: Option<Vec<String>>,
 	pub authentication_method__empty: Option<bool>,
 	pub authentication_method__ic: Option<Vec<String>>,
 	pub authentication_method__ie: Option<Vec<String>>,
 	pub authentication_method__iew: Option<Vec<String>>,
+	pub authentication_method__iregex: Option<Vec<String>>,
 	pub authentication_method__isw: Option<Vec<String>>,
 	pub authentication_method__n: Option<Vec<String>>,
 	pub authentication_method__nic: Option<Vec<String>>,
 	pub authentication_method__nie: Option<Vec<String>>,
 	pub authentication_method__niew: Option<Vec<String>>,
 	pub authentication_method__nisw: Option<Vec<String>>,
+	pub authentication_method__regex: Option<Vec<String>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -34422,23 +35699,27 @@ pub struct VpnIkeProposalsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub encryption_algorithm: Option<Vec<String>>,
 	pub encryption_algorithm__empty: Option<bool>,
 	pub encryption_algorithm__ic: Option<Vec<String>>,
 	pub encryption_algorithm__ie: Option<Vec<String>>,
 	pub encryption_algorithm__iew: Option<Vec<String>>,
+	pub encryption_algorithm__iregex: Option<Vec<String>>,
 	pub encryption_algorithm__isw: Option<Vec<String>>,
 	pub encryption_algorithm__n: Option<Vec<String>>,
 	pub encryption_algorithm__nic: Option<Vec<String>>,
 	pub encryption_algorithm__nie: Option<Vec<String>>,
 	pub encryption_algorithm__niew: Option<Vec<String>>,
 	pub encryption_algorithm__nisw: Option<Vec<String>>,
+	pub encryption_algorithm__regex: Option<Vec<String>>,
 	/// Diffie-Hellman group ID
 	pub group: Option<Vec<i64>>,
 	/// Diffie-Hellman group ID
@@ -34447,6 +35728,8 @@ pub struct VpnIkeProposalsListQuery {
 	pub group__ie: Option<Vec<i64>>,
 	/// Diffie-Hellman group ID
 	pub group__iew: Option<Vec<i64>>,
+	/// Diffie-Hellman group ID
+	pub group__iregex: Option<Vec<i64>>,
 	/// Diffie-Hellman group ID
 	pub group__isw: Option<Vec<i64>>,
 	/// Diffie-Hellman group ID
@@ -34459,6 +35742,8 @@ pub struct VpnIkeProposalsListQuery {
 	pub group__niew: Option<Vec<i64>>,
 	/// Diffie-Hellman group ID
 	pub group__nisw: Option<Vec<i64>>,
+	/// Diffie-Hellman group ID
+	pub group__regex: Option<Vec<i64>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -34489,12 +35774,14 @@ pub struct VpnIkeProposalsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -34716,12 +36003,14 @@ pub struct VpnIpsecPoliciesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -34748,12 +36037,14 @@ pub struct VpnIpsecPoliciesListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -34767,6 +36058,8 @@ pub struct VpnIpsecPoliciesListQuery {
 	/// Diffie-Hellman group for Perfect Forward Secrecy
 	pub pfs_group__iew: Option<Vec<Option<i64>>>,
 	/// Diffie-Hellman group for Perfect Forward Secrecy
+	pub pfs_group__iregex: Option<Vec<Option<i64>>>,
+	/// Diffie-Hellman group for Perfect Forward Secrecy
 	pub pfs_group__isw: Option<Vec<Option<i64>>>,
 	/// Diffie-Hellman group for Perfect Forward Secrecy
 	pub pfs_group__n: Option<Vec<Option<i64>>>,
@@ -34778,6 +36071,8 @@ pub struct VpnIpsecPoliciesListQuery {
 	pub pfs_group__niew: Option<Vec<Option<i64>>>,
 	/// Diffie-Hellman group for Perfect Forward Secrecy
 	pub pfs_group__nisw: Option<Vec<Option<i64>>>,
+	/// Diffie-Hellman group for Perfect Forward Secrecy
+	pub pfs_group__regex: Option<Vec<Option<i64>>>,
 	/// Search
 	pub q: Option<String>,
 	pub tag: Option<Vec<String>>,
@@ -34988,12 +36283,14 @@ pub struct VpnIpsecProfilesListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -35031,24 +36328,28 @@ pub struct VpnIpsecProfilesListQuery {
 	pub mode__ic: Option<Vec<String>>,
 	pub mode__ie: Option<Vec<String>>,
 	pub mode__iew: Option<Vec<String>>,
+	pub mode__iregex: Option<Vec<String>>,
 	pub mode__isw: Option<Vec<String>>,
 	pub mode__n: Option<Vec<String>>,
 	pub mode__nic: Option<Vec<String>>,
 	pub mode__nie: Option<Vec<String>>,
 	pub mode__niew: Option<Vec<String>>,
 	pub mode__nisw: Option<Vec<String>>,
+	pub mode__regex: Option<Vec<String>>,
 	pub modified_by_request: Option<String>,
 	pub name: Option<Vec<String>>,
 	pub name__empty: Option<bool>,
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -35255,12 +36556,14 @@ pub struct VpnIpsecProposalsListQuery {
 	pub authentication_algorithm__ic: Option<Vec<Option<String>>>,
 	pub authentication_algorithm__ie: Option<Vec<Option<String>>>,
 	pub authentication_algorithm__iew: Option<Vec<Option<String>>>,
+	pub authentication_algorithm__iregex: Option<Vec<Option<String>>>,
 	pub authentication_algorithm__isw: Option<Vec<Option<String>>>,
 	pub authentication_algorithm__n: Option<Vec<Option<String>>>,
 	pub authentication_algorithm__nic: Option<Vec<Option<String>>>,
 	pub authentication_algorithm__nie: Option<Vec<Option<String>>>,
 	pub authentication_algorithm__niew: Option<Vec<Option<String>>>,
 	pub authentication_algorithm__nisw: Option<Vec<Option<String>>>,
+	pub authentication_algorithm__regex: Option<Vec<Option<String>>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -35274,23 +36577,27 @@ pub struct VpnIpsecProposalsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub encryption_algorithm: Option<Vec<Option<String>>>,
 	pub encryption_algorithm__empty: Option<bool>,
 	pub encryption_algorithm__ic: Option<Vec<Option<String>>>,
 	pub encryption_algorithm__ie: Option<Vec<Option<String>>>,
 	pub encryption_algorithm__iew: Option<Vec<Option<String>>>,
+	pub encryption_algorithm__iregex: Option<Vec<Option<String>>>,
 	pub encryption_algorithm__isw: Option<Vec<Option<String>>>,
 	pub encryption_algorithm__n: Option<Vec<Option<String>>>,
 	pub encryption_algorithm__nic: Option<Vec<Option<String>>>,
 	pub encryption_algorithm__nie: Option<Vec<Option<String>>>,
 	pub encryption_algorithm__niew: Option<Vec<Option<String>>>,
 	pub encryption_algorithm__nisw: Option<Vec<Option<String>>>,
+	pub encryption_algorithm__regex: Option<Vec<Option<String>>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -35321,12 +36628,14 @@ pub struct VpnIpsecProposalsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -35866,12 +37175,14 @@ pub struct VpnL2VpnsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	/// Export target (name)
 	pub export_target: Option<Vec<String>>,
 	/// Export target (name)
@@ -35917,12 +37228,14 @@ pub struct VpnL2VpnsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -35934,23 +37247,27 @@ pub struct VpnL2VpnsListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub status: Option<Vec<String>>,
 	pub status__empty: Option<bool>,
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -35972,12 +37289,14 @@ pub struct VpnL2VpnsListQuery {
 	pub type__ic: Option<Vec<String>>,
 	pub type__ie: Option<Vec<String>>,
 	pub type__iew: Option<Vec<String>>,
+	pub type__iregex: Option<Vec<String>>,
 	pub type__isw: Option<Vec<String>>,
 	pub type__n: Option<Vec<String>>,
 	pub type__nic: Option<Vec<String>>,
 	pub type__nie: Option<Vec<String>>,
 	pub type__niew: Option<Vec<String>>,
 	pub type__nisw: Option<Vec<String>>,
+	pub type__regex: Option<Vec<String>>,
 	pub updated_by_request: Option<String>,
 
 }
@@ -36192,12 +37511,14 @@ pub struct VpnTunnelGroupsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -36220,12 +37541,14 @@ pub struct VpnTunnelGroupsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -36237,12 +37560,14 @@ pub struct VpnTunnelGroupsListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -36486,12 +37811,14 @@ pub struct VpnTunnelTerminationsListQuery {
 	pub role__ic: Option<Vec<String>>,
 	pub role__ie: Option<Vec<String>>,
 	pub role__iew: Option<Vec<String>>,
+	pub role__iregex: Option<Vec<String>>,
 	pub role__isw: Option<Vec<String>>,
 	pub role__n: Option<Vec<String>>,
 	pub role__nic: Option<Vec<String>>,
 	pub role__nie: Option<Vec<String>>,
 	pub role__niew: Option<Vec<String>>,
 	pub role__nisw: Option<Vec<String>>,
+	pub role__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -36735,23 +38062,27 @@ pub struct VpnTunnelsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub encapsulation: Option<Vec<String>>,
 	pub encapsulation__empty: Option<bool>,
 	pub encapsulation__ic: Option<Vec<String>>,
 	pub encapsulation__ie: Option<Vec<String>>,
 	pub encapsulation__iew: Option<Vec<String>>,
+	pub encapsulation__iregex: Option<Vec<String>>,
 	pub encapsulation__isw: Option<Vec<String>>,
 	pub encapsulation__n: Option<Vec<String>>,
 	pub encapsulation__nic: Option<Vec<String>>,
 	pub encapsulation__nie: Option<Vec<String>>,
 	pub encapsulation__niew: Option<Vec<String>>,
 	pub encapsulation__nisw: Option<Vec<String>>,
+	pub encapsulation__regex: Option<Vec<String>>,
 	/// Tunnel group (slug)
 	pub group: Option<Vec<String>>,
 	/// Tunnel group (slug)
@@ -36790,12 +38121,14 @@ pub struct VpnTunnelsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -36807,12 +38140,14 @@ pub struct VpnTunnelsListQuery {
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -37044,12 +38379,14 @@ pub struct WirelessWirelessLanGroupsListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub id: Option<Vec<i64>>,
 	pub id__empty: Option<bool>,
 	pub id__gt: Option<Vec<i64>>,
@@ -37072,12 +38409,14 @@ pub struct WirelessWirelessLanGroupsListQuery {
 	pub name__ic: Option<Vec<String>>,
 	pub name__ie: Option<Vec<String>>,
 	pub name__iew: Option<Vec<String>>,
+	pub name__iregex: Option<Vec<String>>,
 	pub name__isw: Option<Vec<String>>,
 	pub name__n: Option<Vec<String>>,
 	pub name__nic: Option<Vec<String>>,
 	pub name__nie: Option<Vec<String>>,
 	pub name__niew: Option<Vec<String>>,
 	pub name__nisw: Option<Vec<String>>,
+	pub name__regex: Option<Vec<String>>,
 	/// The initial index from which to return the results.
 	pub offset: Option<i64>,
 	/// Which field to use when ordering the results.
@@ -37093,12 +38432,14 @@ pub struct WirelessWirelessLanGroupsListQuery {
 	pub slug__ic: Option<Vec<String>>,
 	pub slug__ie: Option<Vec<String>>,
 	pub slug__iew: Option<Vec<String>>,
+	pub slug__iregex: Option<Vec<String>>,
 	pub slug__isw: Option<Vec<String>>,
 	pub slug__n: Option<Vec<String>>,
 	pub slug__nic: Option<Vec<String>>,
 	pub slug__nie: Option<Vec<String>>,
 	pub slug__niew: Option<Vec<String>>,
 	pub slug__nisw: Option<Vec<String>>,
+	pub slug__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -37299,34 +38640,40 @@ pub struct WirelessWirelessLansListQuery {
 	pub auth_cipher__ic: Option<Vec<Option<String>>>,
 	pub auth_cipher__ie: Option<Vec<Option<String>>>,
 	pub auth_cipher__iew: Option<Vec<Option<String>>>,
+	pub auth_cipher__iregex: Option<Vec<Option<String>>>,
 	pub auth_cipher__isw: Option<Vec<Option<String>>>,
 	pub auth_cipher__n: Option<Vec<Option<String>>>,
 	pub auth_cipher__nic: Option<Vec<Option<String>>>,
 	pub auth_cipher__nie: Option<Vec<Option<String>>>,
 	pub auth_cipher__niew: Option<Vec<Option<String>>>,
 	pub auth_cipher__nisw: Option<Vec<Option<String>>>,
+	pub auth_cipher__regex: Option<Vec<Option<String>>>,
 	pub auth_psk: Option<Vec<String>>,
 	pub auth_psk__empty: Option<bool>,
 	pub auth_psk__ic: Option<Vec<String>>,
 	pub auth_psk__ie: Option<Vec<String>>,
 	pub auth_psk__iew: Option<Vec<String>>,
+	pub auth_psk__iregex: Option<Vec<String>>,
 	pub auth_psk__isw: Option<Vec<String>>,
 	pub auth_psk__n: Option<Vec<String>>,
 	pub auth_psk__nic: Option<Vec<String>>,
 	pub auth_psk__nie: Option<Vec<String>>,
 	pub auth_psk__niew: Option<Vec<String>>,
 	pub auth_psk__nisw: Option<Vec<String>>,
+	pub auth_psk__regex: Option<Vec<String>>,
 	pub auth_type: Option<Vec<Option<String>>>,
 	pub auth_type__empty: Option<bool>,
 	pub auth_type__ic: Option<Vec<Option<String>>>,
 	pub auth_type__ie: Option<Vec<Option<String>>>,
 	pub auth_type__iew: Option<Vec<Option<String>>>,
+	pub auth_type__iregex: Option<Vec<Option<String>>>,
 	pub auth_type__isw: Option<Vec<Option<String>>>,
 	pub auth_type__n: Option<Vec<Option<String>>>,
 	pub auth_type__nic: Option<Vec<Option<String>>>,
 	pub auth_type__nie: Option<Vec<Option<String>>>,
 	pub auth_type__niew: Option<Vec<Option<String>>>,
 	pub auth_type__nisw: Option<Vec<Option<String>>>,
+	pub auth_type__regex: Option<Vec<Option<String>>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -37340,12 +38687,14 @@ pub struct WirelessWirelessLansListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub group: Option<Vec<String>>,
 	pub group__n: Option<Vec<String>>,
 	pub group_id: Option<Vec<String>>,
@@ -37409,23 +38758,27 @@ pub struct WirelessWirelessLansListQuery {
 	pub ssid__ic: Option<Vec<String>>,
 	pub ssid__ie: Option<Vec<String>>,
 	pub ssid__iew: Option<Vec<String>>,
+	pub ssid__iregex: Option<Vec<String>>,
 	pub ssid__isw: Option<Vec<String>>,
 	pub ssid__n: Option<Vec<String>>,
 	pub ssid__nic: Option<Vec<String>>,
 	pub ssid__nie: Option<Vec<String>>,
 	pub ssid__niew: Option<Vec<String>>,
 	pub ssid__nisw: Option<Vec<String>>,
+	pub ssid__regex: Option<Vec<String>>,
 	pub status: Option<Vec<String>>,
 	pub status__empty: Option<bool>,
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
@@ -37640,34 +38993,40 @@ pub struct WirelessWirelessLinksListQuery {
 	pub auth_cipher__ic: Option<Vec<Option<String>>>,
 	pub auth_cipher__ie: Option<Vec<Option<String>>>,
 	pub auth_cipher__iew: Option<Vec<Option<String>>>,
+	pub auth_cipher__iregex: Option<Vec<Option<String>>>,
 	pub auth_cipher__isw: Option<Vec<Option<String>>>,
 	pub auth_cipher__n: Option<Vec<Option<String>>>,
 	pub auth_cipher__nic: Option<Vec<Option<String>>>,
 	pub auth_cipher__nie: Option<Vec<Option<String>>>,
 	pub auth_cipher__niew: Option<Vec<Option<String>>>,
 	pub auth_cipher__nisw: Option<Vec<Option<String>>>,
+	pub auth_cipher__regex: Option<Vec<Option<String>>>,
 	pub auth_psk: Option<Vec<String>>,
 	pub auth_psk__empty: Option<bool>,
 	pub auth_psk__ic: Option<Vec<String>>,
 	pub auth_psk__ie: Option<Vec<String>>,
 	pub auth_psk__iew: Option<Vec<String>>,
+	pub auth_psk__iregex: Option<Vec<String>>,
 	pub auth_psk__isw: Option<Vec<String>>,
 	pub auth_psk__n: Option<Vec<String>>,
 	pub auth_psk__nic: Option<Vec<String>>,
 	pub auth_psk__nie: Option<Vec<String>>,
 	pub auth_psk__niew: Option<Vec<String>>,
 	pub auth_psk__nisw: Option<Vec<String>>,
+	pub auth_psk__regex: Option<Vec<String>>,
 	pub auth_type: Option<Vec<Option<String>>>,
 	pub auth_type__empty: Option<bool>,
 	pub auth_type__ic: Option<Vec<Option<String>>>,
 	pub auth_type__ie: Option<Vec<Option<String>>>,
 	pub auth_type__iew: Option<Vec<Option<String>>>,
+	pub auth_type__iregex: Option<Vec<Option<String>>>,
 	pub auth_type__isw: Option<Vec<Option<String>>>,
 	pub auth_type__n: Option<Vec<Option<String>>>,
 	pub auth_type__nic: Option<Vec<Option<String>>>,
 	pub auth_type__nie: Option<Vec<Option<String>>>,
 	pub auth_type__niew: Option<Vec<Option<String>>>,
 	pub auth_type__nisw: Option<Vec<Option<String>>>,
+	pub auth_type__regex: Option<Vec<Option<String>>>,
 	pub created: Option<Vec<String>>,
 	pub created__empty: Option<Vec<String>>,
 	pub created__gt: Option<Vec<String>>,
@@ -37681,12 +39040,14 @@ pub struct WirelessWirelessLinksListQuery {
 	pub description__ic: Option<Vec<String>>,
 	pub description__ie: Option<Vec<String>>,
 	pub description__iew: Option<Vec<String>>,
+	pub description__iregex: Option<Vec<String>>,
 	pub description__isw: Option<Vec<String>>,
 	pub description__n: Option<Vec<String>>,
 	pub description__nic: Option<Vec<String>>,
 	pub description__nie: Option<Vec<String>>,
 	pub description__niew: Option<Vec<String>>,
 	pub description__nisw: Option<Vec<String>>,
+	pub description__regex: Option<Vec<String>>,
 	pub distance: Option<Vec<f64>>,
 	pub distance__empty: Option<bool>,
 	pub distance__gt: Option<Vec<f64>>,
@@ -37731,23 +39092,27 @@ pub struct WirelessWirelessLinksListQuery {
 	pub ssid__ic: Option<Vec<String>>,
 	pub ssid__ie: Option<Vec<String>>,
 	pub ssid__iew: Option<Vec<String>>,
+	pub ssid__iregex: Option<Vec<String>>,
 	pub ssid__isw: Option<Vec<String>>,
 	pub ssid__n: Option<Vec<String>>,
 	pub ssid__nic: Option<Vec<String>>,
 	pub ssid__nie: Option<Vec<String>>,
 	pub ssid__niew: Option<Vec<String>>,
 	pub ssid__nisw: Option<Vec<String>>,
+	pub ssid__regex: Option<Vec<String>>,
 	pub status: Option<Vec<String>>,
 	pub status__empty: Option<bool>,
 	pub status__ic: Option<Vec<String>>,
 	pub status__ie: Option<Vec<String>>,
 	pub status__iew: Option<Vec<String>>,
+	pub status__iregex: Option<Vec<String>>,
 	pub status__isw: Option<Vec<String>>,
 	pub status__n: Option<Vec<String>>,
 	pub status__nic: Option<Vec<String>>,
 	pub status__nie: Option<Vec<String>>,
 	pub status__niew: Option<Vec<String>>,
 	pub status__nisw: Option<Vec<String>>,
+	pub status__regex: Option<Vec<String>>,
 	pub tag: Option<Vec<String>>,
 	pub tag__n: Option<Vec<String>>,
 	pub tag_id: Option<Vec<i64>>,
